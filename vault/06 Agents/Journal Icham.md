@@ -4,9 +4,16 @@ Icham
 
 ## État actuel
 
-2026-09-12 : deuxième tour grill-me discuté. Icham demande nos recommandations sur la sortie utile et le parcours déjà prévu ; préférence explicite pour la vitesse sans sacrifier la précision, sans seuil chiffré. Cible V1 proposée, pas encore adoptée : compte rendu automatique court, classe et une propriété vérifiable au départ ; enrichissement ensuite. Priorité au texte utile, première livraison fonctionnelle rapidement et pas de plafond budgétaire fixé actuellement. Discussion avant implémentation maintenue ; aucun environnement installé, modèle chargé ou entraînement lancé.
+2026-09-12 : [[Plan de session Icham - première version TSLM]] détaillé à la demande d'Icham. Cadrage puis, après accord, V0 technique intégrable, V1 évaluée sur validation et amélioration/gel. La proposition de périmètre Q8 n'est pas encore validée. Priorité au texte utile, première livraison fonctionnelle rapide et vitesse sans sacrifier la précision ; aucun plafond budgétaire fixé actuellement. Discussion avant implémentation maintenue ; aucun environnement installé, modèle chargé ou entraînement lancé.
 
 ## Dernière passation
+
+- Demande actuelle : « quel est le plan pour notre session […] détaille tout ». Plan proposé avec décisions, responsabilités, dépendances, tests d'acceptation, livraisons et conditions d'arrêt. Pas une demande de commencer le code ni une approbation implicite du périmètre.
+- Distinction ajoutée : V0 = preuve d'apprentissage/reload et interface réelle pour Safoan, qualité non validée ; V1 = candidate entraînée/sélectionnée et décrite sur validation ; test final indépendant seulement après gel. Aucun de ces jalons techniques n'est annoncé atteint.
+- Vérifications de cette rédaction : vault récupéré par `git pull --ff-only`, déjà à jour à `b69b4f0`. `entire status` fonctionne ; `entire search 'PIPE TSLM choix modèle entraînement' --json --compact --limit 5 --repo IchamRaison/ehl-hackathon-zurich` retourne `not authenticated`, suggère `entire login`. Pas d'historique distant exploité ; plan fondé sur notes et échanges, pas sur des checkpoints supposés. README officiel OpenTSLM relu en ligne, aucune installation.
+- Dépôt code observé à `a5049d1`, avec fichiers d'outillage non suivis apparus depuis le précédent tour ; préservés et exclus des commits documentaires. Prochaine action : examiner le plan avec Icham, arrêter les décisions ouvertes puis obtenir son accord distinct avant implémentation.
+
+## Deuxième tour : recommandations encore à valider
 
 - Q5 : Icham demande ce qu'on peut viser concrètement, sans choisir lui-même un texte cible. Recommandation : deux à quatre phrases, verdict borné au domaine expérimental et une propriété du signal mesurable ; plusieurs propriétés ensuite si leur exactitude est démontrée. Les exemples de sortie restent fictifs, pas des prédictions réalisées. Pas de localisation, cause physique, volume perdu ou réparation déduits de cette tâche.
 - Q6 : Icham demande conseil et rappel du plan. [[Plan directeur agents]] §1/5 et [[Contrats techniques]] §3–5 prévoient import/sélection d'un clip, audio/spectrogramme, inférence puis classe et texte court ; le modèle conversationnel généraliste est exclu par défaut. Recommandation : garder ce parcours en une passe pour la V1, sans ajout de chat ni de questions libres.

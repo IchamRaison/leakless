@@ -14,7 +14,7 @@ Icham
 
 ## À lancer — pas encore vérifié
 
-- [ ] Icham : valider la cible V1 proposée pendant grill-me (compte rendu court, classe et propriété vérifiable, qualité avant latence), puis préciser apprentissage et critères de sélection. Implémentation toujours différée à sa demande. Détails dans [[Journal Icham]].
+- [ ] Icham : discuter/valider [[Plan de session Icham - première version TSLM]], finir les choix ML et convenir du démarrage. V0 technique et V1 évaluée distinguées ; aucune implémentation autorisée par la seule demande de plan. Détails dans [[Journal Icham]].
 - [ ] G0 Nevil : audit complet, groupes, labels et split défendable.
 - [ ] Après G0, Icham/équipe : figer problème et classes ; arbitrer comparaison baseline + mesures/gabarit et test d'utilité proposés dans [[Challenge du cadrage de Nevil]].
 - [ ] G1 Tous : fixture réelle et contrats gelés.
@@ -23,6 +23,15 @@ Icham
 - [ ] G3 Safoan : audio/spectrogramme et vraie inférence de bout en bout.
 - [ ] G4 Nevil : évaluation finale commune après gel des modèles.
 - [ ] G5 Équipe : checkpoint livré, reproduction, pitch/démo et soumission vérifiée.
+
+## Entire — finaliser l’onboarding du poste Icham
+
+- [x] CLI 0.10.6, 12 skills, hooks actualisés et checkpoints Codex lisibles.
+- [ ] Connexion utilisateur avec `entire login`.
+- [ ] Approbation des trois nouveaux hooks via `/hooks` dans Codex.
+- [ ] Décider de la publication des conversations, puis vérifier recherche/indexation si autorisée.
+
+Voir [[Entire - installation et vérification]].
 
 ## À confirmer — responsable opérationnel à nommer par Icham
 

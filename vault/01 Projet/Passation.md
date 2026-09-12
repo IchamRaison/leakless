@@ -2,9 +2,13 @@
 
 Icham
 
+## Entire — état vérifié sur Linux
+
+CLI 0.10.6 et 12 skills installés, disponibles pour Hermes et les agents du projet ; capture Codex et lecture de trois checkpoints constatées. Compte Entire non connecté, trois nouveaux hooks Codex à approuver via `/hooks`, historique distant non publié/vérifié. Code poussé au commit 916986f. Détails et prochaines étapes : [[Entire - installation et vérification]].
+
 ## Dernier échange — 2026-09-12
 
-Entretien grill-me, Q5–Q7 : Icham demande une recommandation concrète pour le texte et un rappel du parcours prévu ; il souhaite la réponse la plus rapide possible en conservant la précision, sans délai chiffré fixé. Le plan prévoit un compte rendu court après analyse d'un clip, pas un chat libre. Proposition à valider : première version réelle rechargeable/appelable, classe et une propriété acoustique vérifiable au départ, puis enrichissement selon les résultats ; qualité de classification et exactitude descriptive avant optimisation de latence. Aucun changement de contrat adopté ; écart binaire/trois classes toujours ouvert. Discussion uniquement, aucun lancement ML/GPU. Réponses, preuves et prochaine question de validation dans [[Journal Icham]].
+Icham demande le déroulé détaillé de sa session : [[Plan de session Icham - première version TSLM]] proposé, sans démarrage technique. Il distingue cadrage, V0 technique rechargeable/intégrable, V1 évaluée sur validation puis gel/test final avec Nevil. La proposition classe + une propriété vérifiable et compte rendu sans chat reste à valider ; demander le plan ne vaut pas accord à Q8 ni autorisation d'implémenter. Classes, propriété, stratégie d'adaptation, critères et allocation runtime restent à finaliser. Aucun lancement ML/GPU. Réponses et preuves dans [[Journal Icham]].
 
 ## Cadrage précédent
 
@@ -41,7 +45,7 @@ Prise en main documentaire d'Icham terminée ; jalons techniques encore à véri
 
 Source dataset https://zenodo.org/records/18631450 consultée ; archive fuite listée avec 500 WAV. Source annonce 1 000 clips au total sur trois catégories, licence CC BY 4.0. Le reste de l'audit est à faire. Mesures sur site expérimental, pas preuve chez des clients. Voir [[PIPE - proposition ML et démo]].
 
-Dépôts privés créés et poussés : code https://github.com/IchamRaison/ehl-hackathon-zurich ; notes https://github.com/IchamRaison/ehl-hackathon-zurich-vault. Bootstrap Entire au commit 373d13f ; activé manual-commit, télémétrie et push automatique de sessions désactivés. Capture effective d'une session non vérifiée.
+Dépôts privés créés et poussés : code https://github.com/IchamRaison/ehl-hackathon-zurich ; notes https://github.com/IchamRaison/ehl-hackathon-zurich-vault. Bootstrap Entire au commit 373d13f ; activé manual-commit, télémétrie et push automatique de sessions désactivés. Capture Codex locale désormais constatée ; publication/indexation distante non vérifiées. Voir [[Entire - installation et vérification]].
 
 ## Inconnues et risques
 
