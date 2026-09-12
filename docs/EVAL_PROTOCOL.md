@@ -205,25 +205,27 @@ error visible. Deduplication by removal remains available as an ablation.
 
 ## 7ter. AMENDMENT — 2026-09-12, group-aware evaluation
 
-> Added **after `split_v1` was frozen and before any result exists.** Team decision: `split_v1`
-> stays as it is — the seed was fixed before any result, no seed search was run, and no group
-> leaks across folds. Rebalancing group sizes *now*, purely to make the folds look tidier, would
-> be split engineering. **The split is not adapted to the dependency between clips; the protocol
-> is.**
+> Added before any result exists. The rule below was written for `split_v1` and **still holds
+> for `split_v2`**, which replaced it (see §7ter-F): the split is not tuned to the dependency
+> between clips, the protocol is. Rebalancing group sizes to make folds look tidier would be
+> split engineering; fixing a demonstrated leakage hole, with no result in existence, is not.
 
 ### A. Clips are not independent observations
 
-The unit of independence in this dataset is the **group**, not the clip. A group is one recording
-session; its clips are consecutive seconds or repetitions of it, correlated 8× to 14× above
-chance (`DATASET_AUDIT.md` §1.8). Treating 1000 clips as 1000 observations overstates the
-evidence by roughly a factor of three, and much more on the non-leak side.
+The unit of independence in this dataset is the **group**, not the clip. A group is a
+**dependency cluster** — clips linked by identical bytes, near-identical audio, shared
+acquisition metadata, or a shared physical condition. It is *not* a demonstrated recording
+session: the source publishes no site, pipe, campaign or timestamp identifier, so no session can
+be reconstructed. Calling a group a session asserted more than the data supports, and is
+corrected here. Treating 1000 clips as 1000 observations still overstates the evidence by roughly
+a factor of five on `split_v2`, and much more on the non-leak side.
 
 > ### The honest N is the number of groups, not the number of clips.
 
-| Fold | Clips *non-leak* | **Independent groups** |
+| Fold | Clips *non-leak* | **Independent groups** (`split_v2`) |
 |---|---|---|
-| val | 100 | **9** |
-| test | 100 | **11** |
+| val | 100 | **8** — one group carries 80 of them |
+| test | 96 | **11** — one group carries 61 of them |
 
 ### B. Every score is reported three ways, always together
 
@@ -253,15 +255,38 @@ The abstention threshold (§5) is calibrated so that **no single group can drive
 
 ### E. Stated limitation, carried in every report and in the pitch
 
-> **Validation non-leak rests on 9 independent groups; test non-leak on 11. One validation group
-> carries 74 of its 100 clips.** Any non-leak figure is an estimate over single-digit independent
-> units, and it is presented as such.
+> **Validation non-leak rests on 8 independent groups; test non-leak on 11. One validation group
+> carries 80 of its 100 clips; one test group carries 61 of its 96.** Any non-leak figure is an
+> estimate over single-digit to low-double-digit independent units, and it is presented as such.
 
-### F. `split_v1` is frozen
+### F. ~~`split_v1` is frozen~~ → **`split_v1` is INVALID. `split_v2` is the split.**
 
-`manifests/split_v1.csv`, seed 20260912, sha256 `89f0624a4543fb18…`. It is **not modified after
-the first result**, for any reason. Baseline, RMS-only control and TSLM all run on these exact
-folds. A future split is a *new version* with its own audit, never an edit of this one.
+**Corrected 2026-09-12, before any result existed.** `split_v1` let 30 physical conditions cross
+folds (92 clips): its leakage check required a metadata field that is missing for 348 of the 500
+leak clips, so it covered only 18 % of them. Root cause and repair:
+[`SPLIT_V2_AUDIT.md`](SPLIT_V2_AUDIT.md).
+
+`manifests/split_v2.csv`, seed 20260912, sha256 `7a8716a352844342…`. Baseline, RMS-only control
+and TSLM all run on these exact folds. It is **not modified after the first result**, for any
+reason. A future split is a *new version* with its own audit, never an edit of this one.
+
+`split_v1` is kept unmodified as a historical artifact and must not be trained or compared on.
+
+### G. A leakage check publishes its COVERAGE, not just its result
+
+The v1 failure was not a wrong number, it was a number without a denominator:
+`condition_overlap = 0` was true over 18 % of the clips and read as if it covered all of them.
+
+> **Every invariant is reported as `violations / clips on which it could be evaluated`.**
+> A missing metadata field is an *uncertainty to constrain*, never a *filter that excludes the
+> clip from the check*.
+
+### H. The verifier reconstructs; it does not read the answer
+
+`scripts/eval/verify_split_invariants.py` reads only `clip_id` and `fold`, ignores `group_id`,
+and recomputes every dependency from the audio and the filenames. Its regression test is that it
+**fails on `split_v1`** (exit 1, three invariants violated) and passes on `split_v2`. A checker
+that shares a predicate with the code it checks cannot find that predicate's bug.
 
 ---
 

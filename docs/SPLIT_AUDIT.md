@@ -1,4 +1,16 @@
-# SPLIT_AUDIT — vérification du split groupé figé `split_v1`
+# SPLIT_AUDIT — vérification du split groupé figé `split_v1` ⛔ CADUC
+
+> # 🔴 CE DOCUMENT DÉCRIT UN SPLIT INVALIDE.
+>
+> `split_v1` laissait **30 conditions physiques traverser les folds (92 clips)**, ainsi que
+> 10 paires de quasi-doublons et 5 conditions non-leak. Son contrôle `condition_overlap = 0`
+> ne couvrait que **18 %** des clips leak parce qu'il exigeait un champ absent 348 fois sur 500.
+>
+> **Remplacé par [`SPLIT_V2_AUDIT.md`](SPLIT_V2_AUDIT.md) et `manifests/split_v2.csv`.**
+> Tout ce qui suit est conservé pour que l'erreur reste inspectable. **Aucune de ses conclusions
+> ne doit être citée**, en particulier « leakage-clean », « condition_overlap = 0 » et
+> « deux implémentations indépendantes ».
+
 
 > 2026-09-12. Le split est **figé et versionné**. Aucun WAV, aucune donnée audio n'entre dans le
 > dépôt. **Aucun entraînement, aucune annotation générée, aucune conversion TimeNet, aucun appel

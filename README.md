@@ -38,9 +38,9 @@ Full decoded brief: [`docs/HACKATHON_BRIEF.md`](docs/HACKATHON_BRIEF.md)
 |---|---|
 | Subject | ✅ **Option B — LeakLess software-only**, validated by the team (conditional on the dataset audit, now passed) — see [`docs/HACKATHON_OPTIONS.md`](docs/HACKATHON_OPTIONS.md) |
 | Nebius compute voucher | ✅ **operational** — H100 80GB HBM3, CUDA 13.0, `nvidia-smi` verified, GPU idle |
-| Dataset | ✅ **audited — GO (conditional)** — 1000 WAV counted, 306 leakage-clean groups, [`docs/DATASET_AUDIT.md`](docs/DATASET_AUDIT.md) §13 |
+| Dataset | ✅ **audited — GO (conditional)** — 1000 WAV counted; grouping corrected in `split_v2` (185 dependency clusters), [`docs/DATASET_AUDIT.md`](docs/DATASET_AUDIT.md) §13 |
 | TimeNet | ✅ cloned and working locally (CLI operational) |
-| Split | ✅ **frozen** — `manifests/split_v1.csv`, seed 20260912, all overlap checks at 0 — [`docs/SPLIT_AUDIT.md`](docs/SPLIT_AUDIT.md) |
+| Split | ✅ **`split_v2`** — `manifests/split_v2.csv`, seed 20260912, five leakage invariants verified by independent reconstruction — [`docs/SPLIT_V2_AUDIT.md`](docs/SPLIT_V2_AUDIT.md).<br>🔴 `split_v1` **invalid and superseded** (30 physical conditions crossed folds), kept unmodified as a historical artifact. |
 | Training | ❌ **nothing launched, deliberately** |
 | Code | ⏳ `scripts/ingest/build_groups.py` implemented — audit, grouping, **frozen split manifest**. No training, no TimeNet conversion, no generated annotation. |
 | Submission deadline / format | ❌ **unknown** — to be confirmed with organisers |
@@ -62,7 +62,8 @@ no `.rar` and no derived series is tracked by Git.
 | [`docs/EVAL_PROTOCOL.md`](docs/EVAL_PROTOCOL.md) | The evaluation rules, including the hard no-random-split rule |
 | [`docs/DATASET_CARD.md`](docs/DATASET_CARD.md) | Real data versus generated data, kept strictly separate |
 | [`docs/DATASET_AUDIT.md`](docs/DATASET_AUDIT.md) | **Zenodo dataset audit** (FR) — verified counts, duplicates, group key, measured leakage risks, decision |
-| [`docs/SPLIT_AUDIT.md`](docs/SPLIT_AUDIT.md) | **Frozen split audit** (FR) — fold counts, group sizes, overlap checks, manifest hashes |
+| [`docs/SPLIT_V2_AUDIT.md`](docs/SPLIT_V2_AUDIT.md) | **Split v2 audit** (FR) — root cause of the v1 failure, the repair, falsification tests, fold counts |
+| [`docs/SPLIT_AUDIT.md`](docs/SPLIT_AUDIT.md) | ⛔ **Caduc** — describes the invalid `split_v1`, kept so the error stays inspectable |
 | [`docs/CLAIM_LEDGER.md`](docs/CLAIM_LEDGER.md) | Permitted claims, forbidden claims, claims to verify |
 
 ---

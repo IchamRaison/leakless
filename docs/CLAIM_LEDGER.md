@@ -25,16 +25,16 @@ Supporting claims, equally permitted:
 | "Pressure and flow rate are recorded for the leak class only, which makes the filename metadata a near-perfect label leak." | measured, `DATASET_AUDIT.md` §1.5 — 469/500 vs 0/500 |
 | "No duplicate and no near-duplicate crosses a class boundary." | measured, `DATASET_AUDIT.md` §1.6-1.7 |
 | "The binary task is exactly balanced, 500 leak / 500 non-leak, over 306 groups." | counted, `DATASET_AUDIT.md` §4.2 |
-| "A 60/20/20 grouped split is achievable with no group split across folds." | `DATASET_AUDIT.md` §12 — feasibility, no split written |
+| "A grouped split with no dependency crossing folds is achievable." | `SPLIT_V2_AUDIT.md` §6 — verified by independent reconstruction on `split_v2` |
 | "Leak clips are ~11 dB louder than no-leak clips; over the whole dataset, RMS alone separates them with a descriptive AUC of 0.857 at group level." | measured, `DATASET_AUDIT.md` §11 — **a description of the confound, computed with nothing held out. Never a performance, never a threshold.** |
 | "Signal distributions show measurable differences associated with the provided labels." | measured, `DATASET_AUDIT.md` §11 — the wording is deliberate: see the forbidden claim below |
 | "Our split is grouped by condition, session and device as far as the metadata allows, and we document where it does not." | `EVAL_PROTOCOL.md` §2-3 |
 | "We measure and report the gap between a naive random split and a grouped split." | `EVAL_PROTOCOL.md` §4 |
 | "The textual descriptions are generated from labels and computed measurements, and are not expert annotations." | `DATASET_CARD.md` §4 |
 | "We compare the model against a baseline on held-out data." | challenge requirement, `EVAL_PROTOCOL.md` §5 |
-| "Baseline, RMS-only control and TSLM run on exactly the same frozen folds." | `manifests/split_v1.csv`, seed 20260912, `SPLIT_AUDIT.md` |
-| "Our metrics are group-aware: the independent unit is the recording session, not the clip." | `EVAL_PROTOCOL.md` §7ter |
-| "Validation non-leak rests on 9 independent groups, test non-leak on 11." | `SPLIT_AUDIT.md` §4 |
+| "Baseline, RMS-only control and TSLM run on exactly the same frozen folds." | `manifests/split_v2.csv`, seed 20260912, `SPLIT_V2_AUDIT.md` |
+| "Our metrics are group-aware: the independent unit is the dependency cluster, not the clip." | `EVAL_PROTOCOL.md` §7ter |
+| "Validation non-leak rests on 8 dependency clusters, test non-leak on 11; the largest carries 80 % and 64 % of its fold." | `SPLIT_V2_AUDIT.md` §7.3 |
 | "We evaluate the classifier separately from the generated text." | `EVAL_PROTOCOL.md` §6 |
 | "Abstention is thresholded on validation data." | `EVAL_PROTOCOL.md` §5 |
 | "No hardware was used or tested in this work." | factual, and stated in `README.md` |
@@ -65,7 +65,12 @@ Saying any of these would be false, unprovable, or both — regardless of how go
 | Any score stated clip-level only, or group-level only | Both are required, together, with the group count. `EVAL_PROTOCOL.md` §7ter-B. |
 | A confidence interval bootstrapped over clips | Clips inside a group are not independent. Resample groups. §7ter-C. |
 | "Validation non-leak gives us 100 observations." | It gives **9 independent groups**, one carrying 74 of the 100 clips. §7ter-E. |
-| Any change to `split_v1` after the first result | Frozen: seed 20260912, sha256 `89f0624a4543fb18…`. A new split is a new version with its own audit. §7ter-F. |
+| Any use of `split_v1` at all | **`split_v1` is INVALID**: 30 physical conditions crossed folds (92 clips), plus 10 near-duplicate pairs and 5 non-leak conditions. Kept only as a historical artifact. `SPLIT_V2_AUDIT.md`. |
+| "`split_v1` was leakage-clean" / "condition_overlap = 0" | The check covered 18 % of leak clips. The number was true and meaningless. |
+| "Two independent implementations agree" — about `verify_manifest.py` | It copied the faulty predicate and read `group_id` from the manifest it was checking. Not independent. |
+| Any change to `split_v2` after the first result | Seed 20260912, sha256 `7a8716a352844342…`. A new split is a new version with its own audit. §7ter-F. |
+| Calling a group "a recording session" | No site, pipe, campaign or timestamp identifier exists in the source. They are **dependency clusters**. |
+| A leakage check reported without its coverage | The v1 failure in one line: a 0 with no denominator. §7ter-G. |
 | "The RMS AUC of 0.857 is our baseline / our control / the bar to beat." | **0.857 is descriptive only** — computed on the whole dataset, nothing held out. It describes the confound; it is **not a performance threshold** and no model result may be compared against it. The control is a separate quantity, evaluated on the held-out grouped split. |
 | "Our model beats 0.857." | Compares a held-out score against a number measured on all the data. Two different quantities. |
 | An RMS-only control computed on amplitude-normalised audio | Normalisation deletes the very information the control exists to measure. The control runs on the **original un-normalised signal**. `EVAL_PROTOCOL.md` §7bis-A. |

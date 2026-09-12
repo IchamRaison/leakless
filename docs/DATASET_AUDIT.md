@@ -1,8 +1,12 @@
 # DATASET_AUDIT — audit du dataset acoustique Zenodo 18631450
 
-> Réalisé le 2026-09-12. **Aucun split définitif, aucune baseline, aucun entraînement, aucune
-> annotation générée.** Le seul but est de répondre à une question : *un split groupé sans
-> leakage évident est-il possible sur ce dataset ?*
+> Réalisé le 2026-09-12. **Aucune baseline, aucun entraînement, aucune annotation générée.**
+> Le seul but est de répondre à une question : *un split groupé sans leakage est-il possible sur
+> ce dataset ?*
+>
+> ⚠️ **Les §10 et §12 sont caducs** : ils décrivent le groupage de `split_v1`, qui s'est révélé
+> invalide. Le split actif est `split_v2` — voir [`SPLIT_V2_AUDIT.md`](SPLIT_V2_AUDIT.md). Les
+> §1 à §9 (volumétrie, doublons, métadonnées, confound de niveau) restent valides.
 >
 > Les fichiers audio vivent **hors du dépôt**. Rien de ce qui est décrit ici n'ajoute un `.wav`
 > ou un `.rar` à Git.
@@ -393,7 +397,13 @@ d'amplitude et contrôle « RMS seul » — avant toute mesure de performance.
 
 ---
 
-## 10. Résolution du dilemme L5 — device dans la clé, conditions bi-device fusionnées
+## 10. Résolution du dilemme L5 — device dans la clé, conditions bi-device fusionnées ⛔ CADUC
+
+> 🔴 **Cette résolution était incomplète.** Elle ne fusionnait que les 16 conditions dont les
+> quatre champs étaient renseignés, alors que 68 conditions sont vues par les deux devices dès
+> qu'on n'exige plus la région (absente 348 fois sur 500). 30 d'entre elles traversaient les
+> folds de `split_v1`. Corrigé dans [`SPLIT_V2_AUDIT.md`](SPLIT_V2_AUDIT.md) §5.1, arête `E4`.
+
 
 *Ajouté le 2026-09-12, après la décision d'équipe de valider la direction LeakLess software-only.*
 
@@ -492,7 +502,13 @@ donnant pas les noms de fichiers au modèle ; L9 ne se contrôle pas, il se mesu
 
 ---
 
-## 12. Faisabilité d'un split groupé 60/20/20
+## 12. Faisabilité d'un split groupé 60/20/20 ⛔ CADUC
+
+> 🔴 **Les chiffres de cette section décrivent le groupage invalide de `split_v1`.** La clé de
+> groupe employée laissait 30 conditions physiques traverser les folds. Cause racine et
+> remplacement : [`SPLIT_V2_AUDIT.md`](SPLIT_V2_AUDIT.md). Les chiffres actuels sont ceux de
+> `split_v2` : 185 groupes, 598/208/194 clips.
+
 
 *Faisabilité uniquement. **Aucun split n'a été écrit ni figé.*** Tâche binaire, groupes entiers,
 clé finale de 306 groupes.
