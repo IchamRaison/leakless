@@ -56,6 +56,120 @@ Schéma machine : [`schemas/prediction_run.schema.json`](../schemas/prediction_r
 
 ---
 
+## 1bis. Obtenir `probability_leak` depuis un TSLM
+
+C'est le point qui décide de la qualité de toute la comparaison, alors autant
+être précis.
+
+### La méthode
+
+Un TSLM produit du texte. Il ne faut **pas** lui faire écrire un pourcentage :
+un nombre généré par un décodeur n'est pas une probabilité, c'est un token qui
+ressemble à un nombre. La probabilité se lit dans les **log-probabilités**, pas
+dans la sortie.
+
+À la position où le modèle décide de la classe, relever les log-probabilités des
+deux continuations (`leak` et `no leak`, ou les tokens que ton prompt impose),
+puis softmax sur ces deux valeurs uniquement :
+
+```
+p(leak) = exp(logp_leak) / (exp(logp_leak) + exp(logp_no_leak))
+```
+
+Si la classe tient sur plusieurs tokens, sommer les log-probabilités de la
+séquence de chaque classe, puis softmax sur les deux sommes. Normaliser par la
+longueur seulement si les deux libellés ont un nombre de tokens différent, et
+le déclarer dans `threshold_rule`.
+
+### Pourquoi une sortie dure 0/1 casserait la mesure
+
+Mesuré chez nous, en remplaçant le score continu de C1 par sa décision seuillée :
+
+| | clip AUC | PR-AUC | cluster AUC |
+|---|---|---|---|
+| score continu | 0,902 | 0,878 | 0,927 |
+| sortie dure 0/1 | 0,856 | 0,842 | 0,856 |
+| **perte** | **−0,046** | **−0,036** | **−0,071** |
+
+> ### Cette perte est plus grande que l'écart qu'on cherche à mesurer.
+> C2b − C1 vaut −0,055 en clip AUC. Un TSLM qui rendrait du 0/1 serait pénalisé
+> d'un montant comparable à l'effet étudié, et la comparaison ne voudrait plus
+> rien dire. **Une probabilité continue n'est pas un raffinement, c'est la
+> condition pour que le run soit exploitable.**
+
+`check_run.py --inspect` te le dit avant l'envoi.
+
+### Calibration
+
+**Elle n'est pas nécessaire.** ROC AUC, PR AUC et l'agrégation par cluster sont
+invariants à toute transformation monotone : une probabilité non calibrée donne
+exactement les mêmes valeurs. Seul le **score de Brier** en souffre, et nous le
+publions en le disant.
+
+Déclare simplement `"threshold_rule": "aucun seuil appliqué — probabilités
+brutes non calibrées"`. C'est suffisant, et c'est honnête.
+
+### Vérifier avant d'envoyer
+
+```bash
+# fabriquer le squelette : les 402 clip_id sont déjà remplis, dans le bon format
+python3 scripts/eval/check_run.py --template mon_run/
+
+# vérifier la conformité, sans qu'aucune métrique ne soit calculée
+python3 scripts/eval/check_run.py --run mon_run/ --inspect
+```
+
+Le second dit oui ou non, et s'il dit non il dit pourquoi et sur combien de clips
+il a regardé. Il ne calcule **aucune** métrique : la conformité et l'évaluation
+sont deux choses séparées, et tu n'as pas besoin de voir la seconde pour livrer.
+
+---
+
+## 1ter. Une mise en garde sur la sélection de configurations
+
+La validation compte **208 clips, mais seulement 42 clusters de dépendance, dont
+8 du côté non-leak**. Un cluster, pas un clip, est l'unité indépendante.
+
+> Comparer beaucoup de configurations sur 8 unités non-leak surajuste la
+> validation, et le test le paiera.
+
+Deux demandes concrètes, ni l'une ni l'autre coûteuse :
+
+1. **Limite le nombre de configurations comparées** et garde-en la trace.
+2. **Note combien tu en as essayé** dans `metadata.json`, champ libre, par
+   exemple `"n_configs_compared": 6`. Ça ne change rien à l'évaluation, ça change
+   ce qu'on a le droit d'affirmer sur l'écart validation → test.
+
+Le train a la même structure : 598 clips mais 102 clusters, dont 24 non-leak.
+
+---
+
+## 1quater. Les transformations de stress, à l'identique
+
+Pour que tes T1/T2/T3 soient **exactement** les nôtres, applique nos fonctions au
+signal brut, avec le générateur déterministe par clip :
+
+```python
+import sys; sys.path.insert(0, "scripts/temporal")
+from stress import TRANSFORMS, clip_rng
+
+# raw = le signal brut du clip, 8000 échantillons, AVANT ton preprocessing
+stressed = TRANSFORMS["T2"]["fn"](raw, clip_rng("T2", clip_id))
+```
+
+`clip_rng(nom, clip_id)` dérive une graine du couple : même clip, même
+transformation, même résultat, sur n'importe quelle machine. Si tu tires ta
+propre permutation, tes T2 ne seront pas nos T2 et les invariants publiés ne
+s'appliqueront plus.
+
+T2 utilise des blocs de **250 échantillons (31,25 ms)** — 8000 est divisible par
+250, donc aucun échantillon ne reste à sa place.
+
+Livre un dossier de run par transformation, avec un `run_id` distinct
+(`tslm-v1-T1`, etc.), et passe `--tslm-run-id tslm-v1` au rapport final.
+
+---
+
 ## 2. Ce qui est refusé, et pourquoi
 
 Le validateur s'arrête au premier manquement. Chaque refus correspond à une

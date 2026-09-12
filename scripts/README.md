@@ -17,6 +17,7 @@ already-extracted dataset from a path outside the repository.
 | `eval/baseline_logreg.py` | Spectral descriptors + logistic regression on normalised audio, same frozen folds | ✅ active |
 | `eval/harness/` | **Temporal Evidence Harness** — split chokepoint, run contract, group-aware metrics, paired cluster bootstrap, frozen C0-C3 features | ✅ active |
 | `eval/run_controls.py` | Produces C0-C3 prediction runs in the same contract shape as the TSLM (`--shuffle-labels` for the negative control) | ✅ active |
+| `eval/check_run.py` | **Vérification de conformité pour Hicham** — `--template` génère le squelette aux 402 clip_id, `--run --inspect` valide et diagnostique la distribution. Ne calcule aucune métrique. | ✅ active |
 | `eval/evaluate_predictions.py` | **The only evaluation path.** Any run dir in, clip + cluster metrics and paired comparisons out | ✅ active |
 | `eval/build_final_report.py` | Generates `artifacts/final_evaluation/` — no number is copied by hand | ✅ active |
 | `temporal/stress.py` | T0-T3 transforms and their measured invariants | ✅ active |
