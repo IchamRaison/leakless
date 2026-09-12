@@ -1,0 +1,186 @@
+{
+  "freeze_id": "protocol-freeze-v1",
+  "frozen_commit": "5a3054cd5469783048ce90656b82bcd60a81bd98",
+  "frozen_branch": "nevil/temporal-evidence",
+  "frozen_at_utc": "2026-09-12T21:22:57Z",
+  "review": "/review GREEN (9 tours Codex) sur 915e577..5a3054c",
+  "reason": "Geler le protocole AVANT d'inspecter ou d'intégrer tout nouveau résultat TSLM, pour que l'expérience ne puisse pas être adaptée après avoir vu la performance du modèle.",
+  "prior_tslm_smoke_test_inspected": true,
+  "new_final_tslm_results_inspected_before_freeze": false,
+  "tslm_inspection_note": "Avant le gel, seule la V0 smoke-test de Hicham avait été inspectée : 8 clips train, 40 steps, un exemple qualitatif de validation. C'était un test technique de la chaîne d'entraînement, sans predictions.csv final, sans benchmark held-out final et sans comparaison TSLM vs C1/C2b ; rien de ce qu'elle montrait n'a servi à adapter le protocole. Le contenu des HEAD distants consignés dans remote_heads_at_freeze_not_inspected, dont feat/icham-tslm, feat/icham-quality-eval et feat/vincent-baseline-v1, n'a pas été inspecté.",
+  "remote_heads_at_freeze_not_inspected": {
+    "feat/icham-quality-eval": "16a6df043771a8a2bb2b8c7b68d24b2f3f085b93",
+    "feat/icham-tslm": "b4c8059f997d87f9aab86cfb994780ffdb84984d",
+    "feat/safoan-app": "4dd7b8868b8e44297e0c838edfe3aa055c9e6ad8",
+    "feat/sensor-replay": "81c987f583972f68399db0f3e4ef9a7b73bd393c",
+    "feat/vincent-baseline-v1": "fc837f7b05c4ab7dd8a9eabd420daf65b49db9d4",
+    "main": "916986f245f753e173e4db37654f460aa1993a07",
+    "nevil/setup": "1289095fccd5f7c7c0553e22894e1fdf378d9856",
+    "nevil/temporal-evidence": "5a3054cd5469783048ce90656b82bcd60a81bd98"
+  },
+  "split": {
+    "filename": "split_v2.csv",
+    "sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896"
+  },
+  "added_by_freeze_commit": [
+    "scripts/eval/verify_protocol_freeze.py"
+  ],
+  "guarded_files": {
+    "artifacts/final_evaluation/stress_provenance.json": "d565e3277577c285e5230fc05dd73a47705d42ba1a2c48e86ae7c62b0bf1a361",
+    "docs/C2B_HYPOTHESIS.md": "50ba9065cd281587ef86a8c1cd2a6bb2ba006f18cb712990c7dcd59fafcb5f99",
+    "docs/EVAL_PROTOCOL.md": "9189373d7a6b4d3ecd0d25dc1a84e5b22f0b06dbf53aaad5ab17641e597709d7",
+    "docs/MODEL_EVAL_CONTRACT.md": "95a6f84b659dd02f6bc8a88bb5a347b07f96595854723fa18a81ef2f51364c4d",
+    "docs/SPLIT_V2_AUDIT.md": "a7111d38433661a2aa00f0f396beac28f9df3a81b7fa0b63e3dd60ea7f75c3b7",
+    "manifests/split_v2.csv": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+    "manifests/split_v2.meta.json": "8f5069a6acc3988a5e333f0f81b6a2c51c45700b7ec3890f14e70c46dee46e15",
+    "manifests/split_v2_audit.csv": "1a3bd3c18ad6d886d42ecc85ba3a5cceaa45a9084102fc112b53e66782e29d61",
+    "schemas/prediction_run.schema.json": "d15624618796af2a603525300d6412bb6b296c7d26dd28e0c733155fc89a26d1",
+    "scripts/eval/build_final_report.py": "db9e82d71e94040ea8f9a5c519a0129a39eb954f0c431fe0b17b3dacdff68ab7",
+    "scripts/eval/check_run.py": "096c2f27d1283e68518d6ac73328b394eb4d5821a7c62807ebdaf3360961a213",
+    "scripts/eval/evaluate_predictions.py": "d5f7c7106fec0b3fe5829af39855d778c2fc6d12f23e13a2bbfae5b74283a123",
+    "scripts/eval/harness/__init__.py": "513c964ce3530abe82a6cc8549a1aa520852536dbbde237a8615f96319e6c93c",
+    "scripts/eval/harness/contract.py": "c6a1ea831fc403b65c3200a64bf107028b316abe399a0fc11f88f22791af71d8",
+    "scripts/eval/harness/features.py": "23fad34e5d8515de4e01879b965775d913572e9e6a27103b9e04f1c81a8e53b8",
+    "scripts/eval/harness/metrics.py": "f8a362079cc91554b4edcf7d763d0a81d5e1dcac93eddbe818bd07fa9a3f6efc",
+    "scripts/eval/harness/split_loader.py": "54ee8349b4dffc1cf59ca285e48a07c7940198a3b781b0d587c1c090f8f5304d",
+    "scripts/eval/run_controls.py": "50e43093fd125b3b275ef039c31ef77fc620f71b0b6c2d368cffbb4592d06d31",
+    "scripts/eval/verify_protocol_freeze.py": "28b72b567c8afd7a8711817ad73c95f20274ba369eee07c10adc53c158dbb275",
+    "scripts/eval/verify_split_invariants.py": "11c68c47cc04a5d4469a9be14e6ce91a1a31f33fd93839c3d49cd89f8fa76b1f",
+    "scripts/ingest/build_split_v2.py": "ab06c02a7450c543373a8cec030e05c3861f75541cbc36241e0c50da7aa78927",
+    "scripts/temporal/build_stress_timef.py": "1eecd23fc5092db2b688e739298b7670c667af83f9f9458af20f69ca6fc9b1d8",
+    "scripts/temporal/stress.py": "1a5bb34983799c7af9b849e895958aabc9dc34621cefac660d40b86323999fdb",
+    "scripts/temporal/stress_provenance.py": "01b744a60af4a70e2e41687b32ffb8969bd2900fff712d480fee19538ec69992",
+    "scripts/timenet/build_timef.py": "e78aa1bd28791baa40d9582a45019e28e3c8e2f2a302206956ddf37d6e2d1435",
+    "scripts/timenet/leakless_acoustic/__init__.py": "86d34241bc70fe2207bd9db69fdcea1b74bd488822a8b93b897cc047a544dd22",
+    "scripts/timenet/leakless_acoustic/connector.py": "670db629b62102cdfb4d6a98aaaa3a52807b4b37b6055a8705a0f4fe0fde94e4",
+    "scripts/timenet/leakless_acoustic/dataset.yaml": "4b17c7d58aba365bc8f3080549711b9da50894e718cf5d27788535333db86320",
+    "tests/run_tests.py": "1914bef011051a41dbad20622e13f8c2029fbb483b41ee95adb856a8f4c01ed1"
+  },
+  "frozen_control_runs": {
+    "c0": {
+      "predictions_sha256": "89eaf5bf1389fa903673e61640cb10b544c124590f89dd8bedda11d2d062b714",
+      "identity": {
+        "training_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+        "model_definition_commit": "2f61695072e0f16205d6a7047243c59600eb2792",
+        "model_fingerprint": "0e0df6066534d7c2d00b6e404ca30ffc013cde6c721004a1e01f7b139c569934",
+        "selected_C": 0.01,
+        "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
+        "split_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896"
+      }
+    },
+    "c1": {
+      "predictions_sha256": "41549d4482ac2ae82058a2f9383a86e084028dda0caeb8f87775c363fe0dae5b",
+      "identity": {
+        "training_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+        "model_definition_commit": "2f61695072e0f16205d6a7047243c59600eb2792",
+        "model_fingerprint": "0beae6c0c214e60e632936be9ab940a1aa56f00c76e03c7eed0c38f0f5a47572",
+        "selected_C": 0.01,
+        "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
+        "split_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896"
+      }
+    },
+    "c2": {
+      "predictions_sha256": "7eee3b3e1f6c86c74e7a677296d31333d5bd33dba31d53a613028118e6d19159",
+      "identity": {
+        "training_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+        "model_definition_commit": "2f61695072e0f16205d6a7047243c59600eb2792",
+        "model_fingerprint": "a98070a45f853ddf5808a114cb79763977bc7ed3befa566547e3eeba5c5bedd8",
+        "selected_C": 0.1,
+        "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
+        "split_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896"
+      }
+    },
+    "c2b": {
+      "predictions_sha256": "46b4b0d3da3b73f6e8cd2b2d2b5bec46287c15a192a0de03fb622f6cb286d8cc",
+      "identity": {
+        "training_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+        "model_definition_commit": "355f0743fb306da50897c0720e6fab5ecf947c52",
+        "model_fingerprint": "89f23a4f9773537302c6edc69a5f8bff2de9cf9d78c02ba576c9ae465cb39fc9",
+        "selected_C": 0.1,
+        "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
+        "split_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896"
+      }
+    },
+    "c3": {
+      "predictions_sha256": "f21eb4fc281b7f49d6c46025dd57a4950f24de9175853b94f1b325e79809a39f",
+      "identity": {
+        "training_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+        "model_definition_commit": "2f61695072e0f16205d6a7047243c59600eb2792",
+        "model_fingerprint": "1d9ddaceeb03b152a0d7d48b899a540f7490df984483a5fa869e68095604955d",
+        "selected_C": 0.01,
+        "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
+        "split_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896"
+      }
+    },
+    "c2b-T1": {
+      "predictions_sha256": "41f68a34fb6b2888b53061f783d34531ced5b5df1646487bc14d5cb76cd0a1bd",
+      "identity": {
+        "training_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+        "model_definition_commit": "355f0743fb306da50897c0720e6fab5ecf947c52",
+        "model_fingerprint": "89f23a4f9773537302c6edc69a5f8bff2de9cf9d78c02ba576c9ae465cb39fc9",
+        "selected_C": 0.1,
+        "threshold_rule": "seuil recalculé sur le fold de validation de ce run transformé (argmax du macro-F1 cluster-level) ; les métriques dépendantes du seuil ne sont pas utilisées pour les conclusions de sensibilité temporelle",
+        "split_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+        "stress_transform": "T1",
+        "base_run_id": "c2b",
+        "retrained": false
+      }
+    },
+    "c2b-T2": {
+      "predictions_sha256": "8df89603f46ce336283a15fcf8b59213fb02c2a094f05bcb29f879da12bfa3a9",
+      "identity": {
+        "training_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+        "model_definition_commit": "355f0743fb306da50897c0720e6fab5ecf947c52",
+        "model_fingerprint": "89f23a4f9773537302c6edc69a5f8bff2de9cf9d78c02ba576c9ae465cb39fc9",
+        "selected_C": 0.1,
+        "threshold_rule": "seuil recalculé sur le fold de validation de ce run transformé (argmax du macro-F1 cluster-level) ; les métriques dépendantes du seuil ne sont pas utilisées pour les conclusions de sensibilité temporelle",
+        "split_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+        "stress_transform": "T2",
+        "base_run_id": "c2b",
+        "retrained": false
+      }
+    },
+    "c2b-T3": {
+      "predictions_sha256": "69f910502acae71a0236a294ddd9f15feb1d13285c25675b68754aad98be3ec0",
+      "identity": {
+        "training_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+        "model_definition_commit": "355f0743fb306da50897c0720e6fab5ecf947c52",
+        "model_fingerprint": "89f23a4f9773537302c6edc69a5f8bff2de9cf9d78c02ba576c9ae465cb39fc9",
+        "selected_C": 0.1,
+        "threshold_rule": "seuil recalculé sur le fold de validation de ce run transformé (argmax du macro-F1 cluster-level) ; les métriques dépendantes du seuil ne sont pas utilisées pour les conclusions de sensibilité temporelle",
+        "split_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+        "stress_transform": "T3",
+        "base_run_id": "c2b",
+        "retrained": false
+      }
+    }
+  },
+  "frozen_rules": {
+    "controls": "C0 RMS brut, C1 enveloppe, C2 spectral, C2b temporel peu profond (défini en 355f074), C3 baseline historique ; définitions dans scripts/eval/harness/features.py ; régression logistique, StandardScaler ajusté sur train, C dans (0.01, 0.1, 1.0, 10.0) choisi sur val au niveau cluster.",
+    "data_discipline": "train pour l'ajustement, val pour C et le seuil (argmax du macro-F1 cluster-level), test pour la mesure seulement ; pick_threshold refuse fold='test'.",
+    "aggregation": "médiane des probabilités par cluster de dépendance.",
+    "bootstrap": "2000 tirages de clusters, graine 20260912, appariés entre modèles comparés ; verdicts qualitatifs : compatible with improvement / inconclusive / compatible with degradation.",
+    "stress_transforms": "T0 identité, T1 inversion, T2 permutation de blocs de 250 échantillons, T3 randomisation de phase ; appliqués au signal brut.",
+    "stress_rng": "graine = sha256(utf-8 de f'{20260912}\\x1f{nom}\\x1f{clip_id}'), 8 premiers octets big-endian ; schéma version 2.",
+    "stress_interpretation": "sensibilité des prédictions à la perturbation, jamais pertinence physique causale ; transformations non démontrées comme préservant l'étiquette.",
+    "stress_metrics": "indépendantes du seuil uniquement : AUC clip et cluster, Δ AUC apparié, corrélation des probabilités avec T0, distribution de Δp, sur test.",
+    "prediction_run_contract": "metadata.json + predictions.csv (clip_id, probability_leak) couvrant val et test ; 19 colonnes interdites ; split_sha256 gelé ; seuil recalculé par le moteur.",
+    "provenance": "model_definition_commit, training_commit (capturé à l'ajustement, hexadécimal 7-40), execution_commit ; model_fingerprint pour un modèle non sérialisé.",
+    "tslm_stress_identity": "run de stress refusé sauf retrained=false, même training_commit, même model_definition_commit (tout ou rien), même nature de modèle, même checkpoint sérialisé ou même empreinte ; base T0 obligatoire.",
+    "final_evaluation": "scripts/eval/build_final_report.py avec les runs de contrôle gelés, le run TSLM de référence (--tslm-run-id) et ses runs de stress."
+  },
+  "allowed_after_freeze": [
+    "ingérer un run TSLM conforme au contrat (aucun fichier gardé modifié)",
+    "corriger un défaut d'implémentation démontré, par amendement implementation-bugfix dans protocol/AMENDMENTS.json",
+    "mettre à jour les textes jury / UI à partir des résultats nouvellement mesurés (fichiers non gardés)"
+  ],
+  "forbidden_after_freeze": [
+    "modifier les contrôles à cause de la performance du TSLM",
+    "modifier le split",
+    "modifier les transformations de stress",
+    "modifier les règles de bootstrap",
+    "régler un seuil sur le test",
+    "ajouter une nouvelle baseline après avoir vu les résultats TSLM",
+    "affaiblir les exigences de provenance pour accepter un run"
+  ]
+}
