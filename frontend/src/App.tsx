@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 
 const DemoExperience = lazy(() => import("./demo/DemoExperience"));
 const MonitorReplay = lazy(() => import("./demo/MonitorReplay"));
@@ -11,10 +11,14 @@ const isMonitor = () => location.hash === "#monitor";
 
 export function App() {
   const [monitor, setMonitor] = useState(isMonitor);
+  const wasMonitor = useRef(isMonitor());
   useEffect(() => {
+    // Only a switch between views resets scroll; in-page anchors (#signal…) keep the browser's jump.
     const change = () => {
-      setMonitor(isMonitor());
-      if (!isMonitor()) window.scrollTo(0, 0);
+      const next = isMonitor();
+      if (wasMonitor.current && !next) window.scrollTo(0, 0);
+      wasMonitor.current = next;
+      setMonitor(next);
     };
     window.addEventListener("hashchange", change);
     return () => window.removeEventListener("hashchange", change);
