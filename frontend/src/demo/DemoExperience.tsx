@@ -40,6 +40,12 @@ export default function DemoExperience() {
   const request = useRef<AbortController | null>(null);
   const cache = useRef(new Map<string, Loaded>());
   const buildingPanel = useRef<HTMLDivElement>(null);
+  // This view loads lazily, after the browser's own jump to #signal, #evidence or #inspect.
+  useEffect(() => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    const target = id && id !== "demo" ? document.getElementById(id) : null;
+    target?.scrollIntoView();
+  }, []);
   useEffect(() => {
     request.current?.abort();
     const controller = new AbortController();
