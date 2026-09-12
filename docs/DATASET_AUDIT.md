@@ -227,18 +227,30 @@ son `_1`).
 
 ### 4.2 Nombre de groupes uniques et tailles
 
-| | Clé métadonnées seule | **Clé finale (après fusion audio)** |
-|---|---|---|
-| Groupes | 327 | **322** |
-| min / médiane / max | 1 / 2 / 74 | **1 / 2 / 74** |
-| moyenne | 3,06 | 3,11 |
-| Groupes multi-classes | — | **0** |
+| | Clé métadonnées seule | Après fusion audio | **Clé finale (+ fusion bi-device, §10)** |
+|---|---|---|---|
+| Groupes | 327 | 322 | **306** |
+| min / médiane / max | 1 / 2 / 74 | 1 / 2 / 74 | **1 / 2 / 74** |
+| moyenne | 3,06 | 3,11 | 3,27 |
+| Groupes multi-classes | — | 0 | **0** |
 
-| Classe | Groupes | min | médiane | max | plus gros groupe |
+| Classe | Groupes (clé finale) | min | médiane | max | plus gros groupe |
 |---|---|---|---|---|---|
-| leak | **271** | 1 | 2 | 9 | 1,8 % de la classe |
+| leak | **255** | 1 | 2 | 12 | 2,4 % de la classe |
 | no leak | **18** | 1 | 10 | **74** | **19,2 % de la classe** |
 | noise | **33** | 2 | 3 | 7 | 6,1 % de la classe |
+
+**Vue binaire** — la source décrit les 114 clips de bruit comme portant des *« detailed no-leak
+labels »*. En tâche *leak* vs *non-leak* :
+
+| | Clips | Groupes |
+|---|---|---|
+| leak | **500** | 255 |
+| non-leak (386 + 114) | **500** | 51 |
+
+> Le dataset est **exactement équilibré, 500 / 500**, en tâche binaire. `EVAL_PROTOCOL.md` §5
+> justifie le macro-F1 par un déséquilibre 500/386/114 : cet argument ne tient que pour la
+> tâche à trois classes.
 
 > ⚠️ **Le problème est concentré sur la classe *no leak* : 386 clips pour seulement 18 groupes,
 > dont deux de 74 clips.** C'est le facteur limitant de tout ce qui suit.
@@ -324,21 +336,12 @@ interprétation.*
 | **L2** | **Fenêtres consécutives.** 88/124 enregistrements *no leak* couvrent plusieurs secondes | **démontré** | Deux secondes voisines du même enregistrement à cheval sur le split. | `w0-w1` exclu de la clé. |
 | **L3** | **Répétitions d'une même session** (`_N`), corrélation ×12 à ×14 | **démontré** | Même session des deux côtés. | `_N` exclu de la clé. |
 | **L4** | **Doublons octet-identiques** — 36 paires, dont 6 à cheval sur deux clés | **démontré** | Le même fichier en train et en test. | Fusion union-find par MD5 **avant** tout split. |
-| **L5** | **Même condition physique, deux devices** — 16 conditions sur 27 | **démontré** | Le même événement physique de part et d'autre du split, via deux instruments. | **Dilemme non résolu, voir ci-dessous.** |
+| **L5** | **Même condition physique, deux devices** — 16 conditions sur 27 | **démontré** | Le même événement physique de part et d'autre du split, via deux instruments. | **Tranché en §10** : fusion ciblée des 16 conditions concernées. |
 | **L6** | **Granularité *no leak*** : 18 groupes, un de 74 clips | **démontré** | Pas un leakage : une instabilité. Le score *no leak* dépend de quelques groupes. | Reporter des intervalles par groupe, pas un chiffre unique. |
 | **L7** | Similarité inter-classe résiduelle (1 paire à 0,64) | **observé** | Marginal. | Mentionné, non traité. |
 | **L8** | Bruits issus d'un site public (`dlmeasure.com`), distribution inconnue | **non vérifié** | La classe *noise* pourrait être triviale à séparer pour une raison extrinsèque. | À vérifier avant toute conclusion sur la robustesse au bruit. |
 
-### Le dilemme L5, énoncé sans le trancher
-
-| Option | Effet | Coût |
-|---|---|---|
-| **Device DANS la clé** (322 groupes) | 16 conditions physiques se retrouvent à cheval sur deux groupes → leakage de condition | Granularité préservée |
-| **Device HORS de la clé** (242 groupes) | Chaque condition physique reste entière | *no leak* chute à **10 groupes**, dont un de 104 clips (26,9 %) — l'évaluation devient très instable |
-
-> Ce choix doit être fait **explicitement, et documenté**, pas subi. Il n'est pas tranché ici :
-> il dépend du protocole retenu (`docs/EVAL_PROTOCOL.md` §2.5 demande de réserver un device
-> entier pour le test — ce que l'option « device hors de la clé » rend impossible).
+### Le dilemme L5 — voir §10, il est tranché
 
 ---
 
@@ -359,8 +362,10 @@ interprétation.*
 
 1. **La classe *no leak* n'offre que 18 groupes**, dont deux à 74 clips. Tout score *no leak*
    doit être accompagné du nombre de groupes du test, sous peine d'être ininterprétable.
-2. **Le dilemme device (L5) n'est pas résolu.** Tant qu'il ne l'est pas, aucun chiffre définitif
-   ne doit être publié.
+2. ~~**Le dilemme device (L5) n'est pas résolu.**~~ **Tranché en §10** : les 16 conditions
+   bi-device sont fusionnées (67 clips, 6,7 % du dataset). Le hold-out device devient une
+   évaluation *secondaire*, sur 87 *leak* + 107 *non-leak* hydrophone, et **sans aucun clip de
+   bruit** — la classe *noise* est captée à 100 % au noise logger.
 3. **7,2 % du dataset est de la duplication exacte**, et 6 paires portent des étiquettes
    contradictoires. La curation amont n'est pas irréprochable ; le dire nous-mêmes vaut mieux
    que de le voir découvert.
@@ -371,14 +376,173 @@ interprétation.*
    groupage de manière conservatrice, ce qui est sûr ; elle ne doit pas être présentée au jury
    comme un fait établi.
 
+6. **Un raccourci de niveau sonore traverse tout le dataset** (§11, risque **L9**). C'est la
+   réserve la plus lourde, et elle est postérieure à la première version de cet audit.
+
 **Ce que cet audit n'établit pas** : que la tâche est apprenable, qu'une baseline atteint un
 score utile, que le signal temporel apporte quoi que ce soit. Aucune baseline n'a été entraînée.
-Aucun split définitif n'a été produit. Ces questions restent ouvertes.
+Aucun split définitif n'a été écrit. Ces questions restent ouvertes.
 
 ---
 
 ## 9. Prochaine étape unique
 
-Trancher le **dilemme L5** — device dans la clé ou hors de la clé — puis figer les groupes dans
-un manifeste versionné (le manifeste seul, **jamais les WAV**). Tout le reste en dépend : split,
-baseline, ablation, démo.
+~~Trancher le dilemme L5.~~ **Fait — §10.** Étape suivante : figer les groupes dans un manifeste
+versionné (le manifeste seul, **jamais les WAV**), puis traiter **L9** — normalisation
+d'amplitude et contrôle « RMS seul » — avant toute mesure de performance.
+
+---
+
+## 10. Résolution du dilemme L5 — device dans la clé, conditions bi-device fusionnées
+
+*Ajouté le 2026-09-12, après la décision d'équipe de valider la direction LeakLess software-only.*
+
+Le dilemme était posé comme un choix binaire. Il n'en est pas un : **le conflit ne porte que sur
+67 clips, soit 6,7 % du dataset.**
+
+| Option | Groupes | Défaut |
+|---|---|---|
+| Device hors de la clé | 242 | *no leak* tombe à 10 groupes, dont un de 104 clips |
+| Device dans la clé, sans fusion | 322 | 16 conditions physiques à cheval sur deux groupes |
+| **Device dans la clé + fusion des 16 conditions bi-device** | **306** | **le coût réel : 16 fusions, 67 clips** |
+
+**Décision : troisième option.** Le device reste dans la clé — il sépare des sessions réelles et
+préserve la granularité — mais les 16 conditions captées par les deux instruments sont fusionnées
+par union-find. Le même événement physique ne peut plus se retrouver des deux côtés du split.
+
+Implémenté dans `build_groups.py` (comportement par défaut ; `--no-merge-cross-device` pour
+mesurer le coût de l'option inverse).
+
+### Conséquence sur le hold-out device
+
+`EVAL_PROTOCOL.md` §2.5 demande de réserver un device entier pour le test. C'est possible, mais
+ce n'est **pas** le split principal — c'est une évaluation secondaire, et elle a deux limites
+mesurées :
+
+| | |
+|---|---|
+| Hydrophone en test | 107 *leak* + 107 *non-leak* |
+| Après exclusion des 20 clips hydrophone des conditions bi-device | **87 *leak* + 107 *non-leak*** |
+| **Clips de bruit disponibles en hydrophone** | **0** — la classe *noise* est captée à 100 % au noise logger |
+
+> Le hold-out device ne peut donc **pas** tester la robustesse au bruit environnemental. Les deux
+> évaluations — split groupé et hold-out device — répondent à deux questions distinctes et
+> doivent être rapportées séparément.
+
+---
+
+## 11. Étiquettes vérifiées depuis le contenu des fichiers — et le raccourci qu'elles cachent
+
+> ⚠️ **Ce qui suit n'est pas une baseline.** Rien n'est entraîné, rien n'est ajusté, aucune donnée
+> n'est tenue à l'écart. Ce sont des **statistiques descriptives sur la totalité du dataset**,
+> destinées à répondre à une seule question : les étiquettes correspondent-elles à quelque chose
+> d'audible ? Les AUC ci-dessous **ne peuvent pas être citées comme une performance.**
+>
+> Reproduction : `build_groups.py --descriptors`.
+
+### 11.1 Descripteurs par classe (médiane, Q1–Q3)
+
+| Descripteur | leak | no leak | noise |
+|---|---|---|---|
+| **Niveau RMS (dBFS)** | **−11,7** (−14,4 … −8,1) | **−23,1** (−27,4 … −17,9) | −16,8 (−18,7 … −13,7) |
+| Centroïde spectral (Hz) | 516 (385 … 752) | 501 (434 … 597) | 875 (625 … 1069) |
+| Ratio d'énergie > 1 kHz | 0,060 | 0,073 | 0,276 |
+| Taux de passages par zéro | 0,115 | 0,121 | 0,176 |
+
+### 11.2 Séparation par descripteur unique, agrégée **par groupe**
+
+AUC calculée sur les médianes de groupe (255 groupes *leak* contre 51 *non-leak*), pour éviter la
+pseudo-réplication des clips d'une même session :
+
+| Descripteur | AUC descriptive | Lecture |
+|---|---|---|
+| **Niveau RMS** | **0,857** | ⚠️ **un seul scalaire — le volume — sépare la tâche binaire** |
+| Centroïde spectral | 0,312 | séparation inverse (0,688 dans l'autre sens), portée par la classe *noise* |
+| Ratio > 1 kHz | 0,281 | idem |
+| Taux de passages par zéro | 0,261 | idem |
+
+### 11.3 Ce que cela démontre, et ce que cela coûte
+
+✅ **Les étiquettes ne sont pas vides.** Elles correspondent à une différence acoustique réelle et
+mesurable. Le critère 2 du GO/NO-GO est satisfait.
+
+🔴 **Mais la différence dominante est un écart de niveau sonore de ~11 dB.** Les enregistrements
+*leak* sont systématiquement plus forts que les *no leak*. C'est un artefact de protocole
+d'acquisition — capteur posé près d'une fuite active contre capteur posé sur une conduite
+silencieuse — pas une signature de fuite.
+
+> ### Nouveau risque **L9 — raccourci de niveau sonore**
+>
+> | | |
+> |---|---|
+> | Statut | **démontré** (§11.2) |
+> | Mécanisme | Le niveau RMS seul atteint une AUC descriptive de 0,857 au niveau groupe |
+> | Conséquence | Un TSLM peut obtenir un score élevé en mesurant le volume. Le score serait réel, la capacité annoncée serait fausse. Et l'amplitude WAV **n'est pas calibrée** : rien ne garantit que cet écart survive à un autre matériel. |
+> | Contrôle exigé | **(a)** normalisation d'amplitude par clip, appliquée identiquement à toutes les classes ; **(b)** un contrôle « RMS seul » publié à côté de tout résultat. Un modèle qui ne bat pas 0,857 sur le split groupé n'apporte rien. |
+
+C'est, de tout cet audit, le point le plus important pour la suite : **L1 se contrôle en ne
+donnant pas les noms de fichiers au modèle ; L9 ne se contrôle pas, il se mesure et se publie.**
+
+---
+
+## 12. Faisabilité d'un split groupé 60/20/20
+
+*Faisabilité uniquement. **Aucun split n'a été écrit ni figé.*** Tâche binaire, groupes entiers,
+clé finale de 306 groupes.
+
+| Fold | Clips | *leak* | *non-leak* | Groupes *leak* | Groupes *non-leak* |
+|---|---|---|---|---|---|
+| train | 600 | 300 | 300 | 153 | 31 |
+| validation | 200 | 100 | 100 | 51 | 9 |
+| test | 200 | 100 | 100 | 51 | 11 |
+
+- **0 groupe coupé** entre deux folds.
+- Les proportions cibles sont atteintes **exactement**, conséquence directe de l'équilibre
+  500 / 500 et de la finesse de la classe *leak*.
+- ⚠️ **Le test *non-leak* reste grossier** : ses 100 clips proviennent de 11 groupes, dont un de
+  43 clips (43 % du fold). La taille d'échantillon *effective* est bien inférieure à 100.
+
+> Conséquence à appliquer sans exception : **tout score *non-leak* doit être publié avec le
+> nombre de groupes du test**, et accompagné d'une dispersion inter-groupes — jamais d'un chiffre
+> unique.
+
+---
+
+## 13. GO / NO-GO — avant tout entraînement
+
+| # | Critère | Constat | Verdict |
+|---|---|---|---|
+| 1 | **Comptes de classes réels** | 500 / 386 / 114 comptés = annoncé. Binaire : **500 / 500 exact** | ✅ |
+| 2 | **Étiquettes vérifiées depuis les fichiers** | Séparation acoustique réelle et mesurée (§11) — **mais dominée par le niveau sonore** | ⚠️ **oui, sous condition L9** |
+| 3 | **Couverture du parsing des métadonnées** | **1000 / 1000**, une seule expression régulière, 0 échec | ✅ |
+| 4 | **Nombre et taille des groupes indépendants** | **306 groupes** (255 *leak*, 51 *non-leak*), médiane 2, max 74 | ⚠️ **fin côté *leak*, grossier côté *non-leak*** |
+| 5 | **Cas ambigus / collisions** | **97,2 %** non ambigus ; 16 clés dégénérées, 12 clips reliés par doublon, **0 nom non parsable**, **0 groupe multi-classes** | ✅ |
+| 6 | **Doublons / enregistrements dépendants** | 36 paires identiques (7,2 %), **0 inter-classe** ; dépendances de session mesurées ×8 à ×14 et neutralisées par la clé | ✅ **identifiés et contrôlés** |
+| 7 | **Split groupé tenable** | 60/20/20 exact, **0 groupe coupé** ; hold-out device possible en secondaire, sans bruit | ✅ **avec réserve de granularité** |
+
+### Verdict
+
+> # 🟢 **GO — conditionnel**
+
+Les sept critères sont franchis. Deux conditions doivent être en place **avant** que le premier
+chiffre de performance ne soit produit — pas après :
+
+1. **Normalisation d'amplitude par clip**, identique pour toutes les classes, **et** publication
+   d'un contrôle « RMS seul » (AUC descriptive 0,857) à côté de chaque résultat. Sans ce
+   contrôle, aucun score n'est interprétable (L9).
+2. **Aucune métadonnée de nom de fichier ne doit atteindre le modèle** — ni en entrée, ni dans un
+   prompt, ni dans une description générée. Pression et débit valent 93,8 % de rappel à eux
+   seuls (L1).
+
+Et deux règles de publication, qui découlent de l'audit :
+
+3. Tout score *non-leak* est accompagné du **nombre de groupes du test** et de leur dispersion.
+4. Le hold-out device est rapporté **séparément** du split groupé, en précisant qu'il ne contient
+   aucun clip de bruit environnemental.
+
+### Ce que ce GO ne couvre pas
+
+Il autorise la **préparation** : conversion TimeNet, génération d'annotations ancrées sur des
+propriétés de signal mesurables, entraînement. Il ne dit rien de l'apprenabilité de la tâche, et
+il n'autorise **aucune** affirmation de performance : `CLAIM_LEDGER.md` reste la référence, et
+les entrées ⏳ qui y figurent n'ont pas bougé.

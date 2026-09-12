@@ -1,7 +1,9 @@
 # HACKATHON_OPTIONS — three candidate directions
 
-> 2026-09-12. **No decision is taken in this document.** It exists so the team can choose on
-> comparable grounds instead of on enthusiasm.
+> 2026-09-12. **Decision taken — see the last section.** The three options below are kept as
+> written *before* the choice, so the reasoning can be re-read against what actually happened.
+> The risk lines describing the dataset as unaudited are historical: the audit has since been
+> done ([`DATASET_AUDIT.md`](DATASET_AUDIT.md)).
 >
 > ⚠️ **One parameter is missing and it changes every line below: the deadline.** The official
 > PDF and the Discord brief give no date and no hour. The phrase *"credits to keep building
@@ -86,7 +88,7 @@ with the decision, not after it.
 
 1. **Confirm the deadline, pitch length and submission format** with the organisers — it is
    the input that decides between B and the rest.
-2. **Activate the Nebius voucher** — critical path. No GPU, no TSLM, no submission.
+2. ~~**Activate the Nebius voucher**~~ — ✅ **done**: H100 80GB HBM3, CUDA 13.0, GPU idle.
 3. **Check whether Llama / Gemma are gated** on HuggingFace; line up a non-gated fallback.
 4. **Agree who does what with Hicham** — Nevil appears nowhere in either repository.
 
@@ -96,4 +98,29 @@ does data preparation, evaluation and the demo UI.
 
 ---
 
-## Recommended option pending team validation.
+## DÉCISION — 2026-09-12
+
+> ### ✅ **Option B retenue — LeakLess software-only**, validée par Hicham *sous condition* que
+> ### l'audit confirme des étiquettes exploitables et un split défendable entre groupes.
+
+**La condition est levée** : [`DATASET_AUDIT.md`](DATASET_AUDIT.md) §13 conclut à un **GO
+conditionnel** — 1000 clips vérifiés, 1000/1000 noms parsés, 306 groupes sans classe mêlée,
+split 60/20/20 réalisable sans couper un seul groupe.
+
+Cadre acté avec l'équipe :
+
+| | |
+|---|---|
+| TimeNet | utilisé |
+| TSLM | entraînement réel |
+| Descriptions textuelles | ancrées **uniquement** sur des propriétés de signal mesurables |
+| Comparaison | TSLM contre baseline, **exactement les mêmes splits** |
+| Présentation du dataset | mesures sur un **site d'entraînement expérimental** |
+| Revendication terrain / client | **aucune** |
+
+Deux conditions issues de l'audit s'ajoutent et ne sont pas négociables : normalisation
+d'amplitude + contrôle « RMS seul » publié (risque L9), et aucune métadonnée de nom de fichier
+en entrée du modèle (risque L1). Détail : `EVAL_PROTOCOL.md` §7bis.
+
+**Compute** : Nebius opérationnel — H100 80 Go HBM3, CUDA 13.0, `nvidia-smi` vérifié, GPU au
+repos. La ligne « GPU sur le chemin critique » des options ci-dessus n'est plus bloquante.

@@ -204,6 +204,77 @@ def spectral_correlation_pairs(root: str, clips: list[Clip], threshold: float):
     return pairs, C
 
 
+def signal_descriptors(root: str, clips: list[Clip]) -> dict:
+    """Descripteurs physiques simples, par clip puis agrégés par groupe.
+
+    ⚠️ CE N'EST PAS UNE BASELINE. Rien n'est entraîné, rien n'est ajusté, aucun
+    split n'est utilisé. On calcule des statistiques descriptives sur la
+    totalité du dataset pour répondre à une seule question : les étiquettes
+    correspondent-elles à quelque chose d'audible, ou sont-elles vides ?
+
+    Les AUC rapportées sont calculées sur TOUT le dataset et agrégées par
+    groupe pour éviter la pseudo-réplication. Elles ne peuvent PAS être citées
+    comme une performance : aucune donnée n'est tenue à l'écart.
+    """
+    try:
+        import numpy as np
+    except ImportError:
+        return {"erreur": "numpy absent"}
+
+    rows = []
+    for c in clips:
+        with wave.open(os.path.join(root, FOLDERS[c.cls], c.filename)) as w:
+            x = np.frombuffer(w.readframes(w.getnframes()), dtype="<i2").astype(np.float64)
+        x = x - x.mean()
+        spec = np.abs(np.fft.rfft(x * np.hanning(len(x)))) ** 2
+        freqs = np.fft.rfftfreq(len(x), 1 / 8000)
+        total = spec.sum() + 1e-12
+        rows.append({
+            "cls": c.cls,
+            "group": c.group,
+            "rms_dbfs": 20 * np.log10(np.sqrt((x ** 2).mean()) / 32768 + 1e-12),
+            "centroide_hz": float((freqs * spec).sum() / total),
+            "ratio_hf_1k": float(spec[freqs >= 1000].sum() / total),
+            "taux_passages_zero": float(np.mean(np.abs(np.diff(np.sign(x))) > 0)),
+        })
+
+    feats = ["rms_dbfs", "centroide_hz", "ratio_hf_1k", "taux_passages_zero"]
+    out: dict = {"avertissement": "descriptif, calculé sur tout le dataset — PAS une performance"}
+
+    for f in feats:
+        out.setdefault("par_classe", {})[f] = {}
+        for cls in list(FOLDERS) + ["no_leak_binaire"]:
+            if cls == "no_leak_binaire":
+                v = np.array([r[f] for r in rows if r["cls"] != "leak"])
+            else:
+                v = np.array([r[f] for r in rows if r["cls"] == cls])
+            out["par_classe"][f][cls] = {
+                "mediane": round(float(np.median(v)), 3),
+                "q1": round(float(np.percentile(v, 25)), 3),
+                "q3": round(float(np.percentile(v, 75)), 3),
+            }
+
+    # AUC au niveau du GROUPE (médiane du groupe), tâche binaire leak vs reste.
+    by_group: dict[str, list] = collections.defaultdict(list)
+    for r in rows:
+        by_group[r["group"]].append(r)
+    out["auc_descriptive_par_groupe"] = {}
+    for f in feats:
+        pos = [np.median([r[f] for r in v]) for v in by_group.values()
+               if v[0]["cls"] == "leak"]
+        neg = [np.median([r[f] for r in v]) for v in by_group.values()
+               if v[0]["cls"] != "leak"]
+        # AUC = P(pos > neg), estimée par comptage direct des paires.
+        pos_a, neg_a = np.array(pos), np.array(neg)
+        wins = (pos_a[:, None] > neg_a[None, :]).sum() + 0.5 * (pos_a[:, None] == neg_a[None, :]).sum()
+        out["auc_descriptive_par_groupe"][f] = round(float(wins / (len(pos) * len(neg))), 3)
+    out["auc_descriptive_par_groupe"]["n_groupes_leak"] = sum(
+        1 for v in by_group.values() if v[0]["cls"] == "leak")
+    out["auc_descriptive_par_groupe"]["n_groupes_non_leak"] = sum(
+        1 for v in by_group.values() if v[0]["cls"] != "leak")
+    return out
+
+
 def describe(sizes: list[int]) -> dict:
     return {
         "n_groupes": len(sizes),
@@ -222,6 +293,11 @@ def main() -> None:
     ap.add_argument("--json", help="écrit le rapport machine ici (hors dépôt)")
     ap.add_argument("--near-dup", type=float, default=0.8,
                     help="seuil de corrélation spectrale pour les quasi-doublons")
+    ap.add_argument("--no-merge-cross-device", action="store_true",
+                    help="ne pas fusionner les conditions vues par les deux devices "
+                         "(laisse le même événement physique à cheval sur deux groupes)")
+    ap.add_argument("--descriptors", action="store_true",
+                    help="statistiques descriptives de signal par classe — PAS une baseline")
     args = ap.parse_args()
 
     clips = load_clips(args.data_root)
@@ -278,8 +354,43 @@ def main() -> None:
             uf.union(v[0].group, other.group)
     for i, j, _ in pairs:
         uf.union(clips[i].group, clips[j].group)
+
+    # 5b. Même condition physique captée par deux devices = un seul événement.
+    # Le device reste dans la clé (il sépare des sessions réelles et préserve la
+    # granularité), mais les conditions vues par les DEUX instruments sont
+    # fusionnées : sinon le même événement physique se retrouve de part et
+    # d'autre du split. Coût mesuré : 16 conditions, 67 clips (6,7 % du dataset).
+    by_condition = collections.defaultdict(list)
+    for c in clips:
+        if c.cls == "leak" and NA not in (c.material, c.region, c.pressure, c.flow):
+            by_condition[(c.material, c.region, c.pressure, c.flow)].append(c)
+    cross_device = [m for m in by_condition.values() if len({x.device for x in m}) > 1]
+
+    if not args.no_merge_cross_device:
+        for members in cross_device:
+            for other in members[1:]:
+                uf.union(members[0].group, other.group)
+
     for c in clips:
         c.group = uf.find(c.group)
+    report["fusion_bi_device"] = {
+        "active": not args.no_merge_cross_device,
+        "conditions_fusionnees": len(cross_device),
+        "clips_concernes": sum(len(m) for m in cross_device),
+        "clips_a_exclure_du_holdout_device": sorted(
+            x.filename for m in cross_device for x in m if x.device == "hydrophone"),
+    }
+    # Identifiant de groupe stable : hash de la liste triée de ses membres.
+    # Indépendant de l'ordre de parcours, donc comparable d'une exécution à
+    # l'autre et citable dans un rapport.
+    members = collections.defaultdict(list)
+    for c in clips:
+        members[c.group].append(c.filename)
+    stable = {g: "g" + hashlib.sha1("\n".join(sorted(v)).encode()).hexdigest()[:10]
+              for g, v in members.items()}
+    for c in clips:
+        c.group = stable[c.group]
+
     final = collections.Counter(c.group for c in clips)
     report["cle_finale"] = describe(list(final.values()))
     report["cle_finale"]["par_classe"] = {
@@ -287,6 +398,19 @@ def main() -> None:
     }
     mixed = [g for g in final if len({c.cls for c in clips if c.group == g}) > 1]
     report["cle_finale"]["groupes_multi_classes"] = len(mixed)
+
+    # Vue binaire : la source décrit les clips de bruit comme portant des
+    # « detailed no-leak labels ». leak vs (no leak + noise).
+    def binary(c: Clip) -> str:
+        return "leak" if c.cls == "leak" else "no_leak"
+
+    report["tache_binaire"] = {
+        "clips": dict(collections.Counter(binary(c) for c in clips)),
+        "groupes": {k: len({c.group for c in clips if binary(c) == k})
+                    for k in ("leak", "no_leak")},
+        "groupes_multi_classes_binaires": sum(
+            1 for g in final if len({binary(c) for c in clips if c.group == g}) > 1),
+    }
 
     # 6. Ambiguïtés ----------------------------------------------------------
     # Un clip est « non ambigu » si son nom parse, si sa clé n'est pas reliée à
@@ -339,6 +463,23 @@ def main() -> None:
         }
         for cls in FOLDERS
     }
+
+    # 8. Hold-out device : évaluation secondaire, pas le split principal ------
+    excl = set(report["fusion_bi_device"]["clips_a_exclure_du_holdout_device"])
+    report["holdout_device"] = {
+        "commentaire": "évaluation secondaire de généralisation inter-instrument, "
+                       "distincte du split groupé principal",
+        "hydrophone_en_test": dict(collections.Counter(
+            c.cls for c in clips if c.device == "hydrophone")),
+        "apres_exclusion_des_conditions_bi_device": dict(collections.Counter(
+            c.cls for c in clips
+            if c.device == "hydrophone" and c.filename not in excl)),
+        "classe_noise_disponible_en_hydrophone": sum(
+            1 for c in clips if c.cls == "noise" and c.device == "hydrophone"),
+    }
+
+    if args.descriptors:
+        report["descripteurs_signal"] = signal_descriptors(args.data_root, clips)
 
     print(json.dumps(report, indent=2, ensure_ascii=False))
     if args.json:

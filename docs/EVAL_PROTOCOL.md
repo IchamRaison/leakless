@@ -148,6 +148,44 @@ scrutiny. We have done this before, and it is the most defensible thing we can b
 
 ---
 
+## 7bis. AMENDMENT — 2026-09-12, after the dataset audit
+
+> Added **before any training run**, and **before any performance number exists**. Justified by
+> measurements recorded in [`DATASET_AUDIT.md`](DATASET_AUDIT.md) §11. Nothing in this amendment
+> relaxes a rule; it adds two.
+
+**A. Loudness is a confound, and it is measured.** Leak clips are ~11 dB louder than no-leak
+clips. The RMS level alone reaches a **descriptive AUC of 0.857** at group level (255 leak groups
+vs 51 non-leak groups, whole dataset, nothing held out).
+
+Therefore, as a contract:
+
+- **Per-clip amplitude normalisation**, applied identically to every class, before any model input.
+- **An "RMS only" control is published next to every reported score.** A model that does not beat
+  0.857 on the grouped split has added nothing over measuring volume.
+- WAV amplitude is uncalibrated. **Nothing guarantees this gap survives a different recording
+  chain**, which is exactly why the control travels with the result.
+
+**B. The binary task is balanced 500 / 500.** The source labels the 114 environmental-noise clips
+as no-leak. §5 above justifies macro-F1 by a 500/386/114 imbalance — that argument holds for the
+three-class task only. For leak vs non-leak, report macro-F1 *and* the per-group dispersion,
+never accuracy alone.
+
+**C. Group counts travel with every score.** The non-leak side has 51 groups; a 20 % test fold
+draws them from 11 groups, one of which carries 43 % of the fold. Any non-leak score published
+without its group count is uninterpretable.
+
+**D. Device hold-out is a secondary evaluation, reported separately** — 87 leak + 107 non-leak
+hydrophone clips, and **zero environmental-noise clips**. It cannot test noise robustness.
+
+**E. Deviation from §2.2, stated explicitly.** §2.2 says identical files are *removed*. The audit
+**merges** their groups instead of deleting the files: 36 identical pairs exist, 6 of which carry
+contradictory metadata, and deleting one side of those would silently pick which label is right.
+Merging keeps every clip, guarantees duplicates never straddle a fold, and leaves the curation
+error visible. Deduplication by removal remains available as an ablation.
+
+---
+
 ## 8. Pre-registered failure criteria
 
 Fixed now, so that they cannot be adjusted later:

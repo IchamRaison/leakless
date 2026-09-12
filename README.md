@@ -36,9 +36,9 @@ Full decoded brief: [`docs/HACKATHON_BRIEF.md`](docs/HACKATHON_BRIEF.md)
 
 | Item | State |
 |---|---|
-| Subject | ⏳ **not decided** — see [`docs/HACKATHON_OPTIONS.md`](docs/HACKATHON_OPTIONS.md) |
-| Nebius compute voucher | ⏳ procedure documented, **not yet activated** |
-| Dataset | ✅ **audited** — 3 archives downloaded outside the repo, 1000 WAV counted, [`docs/DATASET_AUDIT.md`](docs/DATASET_AUDIT.md) → *viable with reservations* |
+| Subject | ✅ **Option B — LeakLess software-only**, validated by the team (conditional on the dataset audit, now passed) — see [`docs/HACKATHON_OPTIONS.md`](docs/HACKATHON_OPTIONS.md) |
+| Nebius compute voucher | ✅ **operational** — H100 80GB HBM3, CUDA 13.0, `nvidia-smi` verified, GPU idle |
+| Dataset | ✅ **audited — GO (conditional)** — 1000 WAV counted, 306 leakage-clean groups, [`docs/DATASET_AUDIT.md`](docs/DATASET_AUDIT.md) §13 |
 | TimeNet | ✅ cloned and working locally (CLI operational) |
 | Training | ❌ **nothing launched, deliberately** |
 | Code | ⏳ `scripts/ingest/build_groups.py` implemented (audit + grouping, no split, no training). Everything else is scaffolding. |
