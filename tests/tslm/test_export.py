@@ -9,7 +9,7 @@ import sys
 import tempfile
 from types import SimpleNamespace
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 import numpy as np
 
@@ -58,6 +58,22 @@ class ExportChecks(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     export_run.export(args)
                 self.assertFalse(args.output.exists())
+
+    def test_changed_audit_mapping_rejected_before_model_load(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            audit = root / "split_v2_audit.csv"
+            original = (ROOT / "manifests/split_v2_audit.csv").read_bytes()
+            audit.write_bytes(original + b"\n")
+            self.assertNotEqual(export_run.sha256_file(audit), export_run.FROZEN_AUDIT_SHA256)
+            args = argparse.Namespace(output=root / "new-run", run_id="fixture",
+                                      code_revision="a" * 40, manifests=root)
+            predictor = Mock()
+            with patch.dict(sys.modules, {"pipe.tslm.predict": SimpleNamespace(Predictor=predictor)}):
+                with self.assertRaisesRegex(ValueError, "split_v2_audit.csv divergent"):
+                    export_run.export(args)
+            predictor.assert_not_called()
+            self.assertFalse(args.output.exists())
 
     def test_frozen_provenance_requires_real_count_matching_reload_and_scoring(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -128,12 +144,15 @@ class ExportChecks(unittest.TestCase):
             root = Path(directory)
             (root / "odd.wav").write_bytes(b"300")
             (root / "even.wav").write_bytes(b"200")
+            (root / "split_v2_audit.csv").write_text("fixture audit mapping\n")
+            audit_sha256 = export_run.sha256_file(root / "split_v2_audit.csv")
             for transform in ("T0", "T2"):
                 args = argparse.Namespace(output=root / transform, run_id=f"fixture-{transform}",
                                           checkpoint=root, reload_report=root / "reload.json",
                                           manifests=root, data_root=root, transform=transform, device="cpu",
                                           code_revision="a" * 40)
                 with patch.dict(sys.modules, fake_modules), \
+                        patch.object(export_run, "FROZEN_AUDIT_SHA256", audit_sha256), \
                         patch.object(export_run.split_loader, "load_split", return_value=split), \
                         patch.object(export_run, "frozen_provenance", return_value={"n_configs_compared": 3}), \
                         patch.object(export_run.subprocess, "run") as controller, patch("builtins.print"):
@@ -150,6 +169,8 @@ class ExportChecks(unittest.TestCase):
                 metadata = json.loads((args.output / "metadata.json").read_text())
                 self.assertEqual(metadata["transform"], transform)
                 self.assertEqual(metadata["export_commit"], "a" * 40)
+                self.assertEqual(metadata["split_audit_filename"], "split_v2_audit.csv")
+                self.assertEqual(metadata["split_audit_sha256"], audit_sha256)
                 self.assertIn("scripts/timenet/leakless_acoustic/connector.py", metadata["source_sha256"])
             self.assertEqual(len(waveform_calls), 402)
 

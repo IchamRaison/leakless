@@ -19,6 +19,9 @@ from stress import SEED_SCHEME, STRESS_SEED, TRANSFORMS, clip_rng  # noqa: E402
 
 HARNESS_COMMIT = "6dfdf63580bc15ce6a1cf0817b9da3569553aca1"
 STRESS_SHA256 = "7c37e001d270655d2e54ba2087e8b8e476da8cc42948f92bd83c669773ac6350"
+# Même valeur gelée que prepare.MANIFEST_HASHES ; pas d'import du pipeline
+# TimeF/libarchive pour cette vérification de conformité avant chargement GPU.
+FROZEN_AUDIT_SHA256 = "1a3bd3c18ad6d886d42ecc85ba3a5cceaa45a9084102fc112b53e66782e29d61"
 
 
 def sha256_file(path):
@@ -82,6 +85,9 @@ def export(args):
         raise ValueError("run_id doit être non vide et limité à A-Z a-z 0-9 . _ -")
     if len(args.code_revision) != 40 or any(c not in "0123456789abcdef" for c in args.code_revision):
         raise ValueError("code-revision doit être le SHA Git complet du code transféré (40 caractères hex)")
+    audit_sha256 = sha256_file(args.manifests / "split_v2_audit.csv")
+    if audit_sha256 != FROZEN_AUDIT_SHA256:
+        raise ValueError("Mapping clip_id vers WAV modifié : SHA256 de split_v2_audit.csv divergent")
     split = split_loader.load_split(args.manifests)
     ids = sorted(c.clip_id for c in split.clips if c.fold in ("val", "test"))
     if len(ids) != 402 or len(set(ids)) != 402:
@@ -127,6 +133,7 @@ def export(args):
     metadata = {"run_id": args.run_id, "model_name": "AcousticQwenSP / Qwen3.5-4B V1",
                 "checkpoint": str(checkpoint), **provenance,
                 "split_filename": split_loader.FROZEN_SPLIT_NAME, "split_sha256": split.sha256,
+                "split_audit_filename": "split_v2_audit.csv", "split_audit_sha256": audit_sha256,
                 "timestamp": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                 "threshold_rule": "aucun seuil appliqué — probabilités brutes non calibrées ; "
                                   "sommes des log-probabilités des continuations complètes ; "

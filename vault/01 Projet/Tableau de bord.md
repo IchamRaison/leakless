@@ -18,12 +18,15 @@ Icham
 ## En cours et à vérifier
 
 - [x] Icham autorise l'implémentation V1 complète jusqu'à T0/T1–T3 ; runtime H100 et données existantes revérifiés. [[V1 ML - exécution]].
-- [ ] En cours : scoring continu, scripts de campagne/reload/export et tests ; trois checkpoints annoncés aux époques 2/4/8, sélection validation seule. Aucun entraînement V1 lancé au démarrage documenté.
+- [x] Scoring continu implémenté, huit tests CPU et contrôle H100 sur quatre clips train réussis ; aucune évaluation de qualité. [[V1 ML - exécution]].
+- [x] Scripts de campagne/reload/export publiés et transférés à `1199789f` ; 18 tests CPU réussis dans le runtime reconstruit.
+- [ ] Campagne V1 en cours sur H100 : train complet, trois checkpoints 2/4/8, sélection validation seule ; gel/reload et exports restent à faire. [[V1 ML - exécution]].
 - [x] Réserve de graine T2/T3 résolue par Nevil : SHA-256 officiel depuis `b23601a`, version reprise `6dfdf63`. Contrôle interprocessus et exécution des stress encore à réaliser.
 
 - [x] Cadrage explicite Icham : appareil en écoute continue et alertes automatiques, remplacement du scénario d'import manuel. [[Plan surveillance continue]] rédigé ; aucune nouvelle implémentation.
 - [ ] Valider le plan continu : capteur/flux, destinataire, délai visé, fausses alertes tolérées, responsable matériel et périmètre replay/réel.
 - [ ] Safoan/Icham : flux/replay horodaté, santé de surveillance, événements persistants et tableau d'alertes ; extension de contrat à convenir.
+- [x] Plan technique du chantier parallèle rédigé : [[Plan simulateur de capteur]], source locale cadencée et tests de défauts sans GPU. Implémentation et raccordement applicatif non réalisés.
 - [ ] Nevil/responsable matériel : acquisitions continues annotées, sessions séparées et métriques événementielles ; aucune preuve opérationnelle déduite des clips.
 - [x] Icham : environnement Python/CUDA isolé ; calcul et backward H100 réussis. [[V0 ML - exécution]].
 - [x] Icham : reprises sélectives Nevil `1289095` / contrat Safoan `4dd7b88` ; données/TimeNet rejoués sur H100.

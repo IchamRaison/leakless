@@ -1,0 +1,141 @@
+{
+  "purpose": "train_only_scoring_sanity_not_model_selection_or_final_evaluation",
+  "folds_read_for_signals": [
+    "train"
+  ],
+  "cache_files_read": [
+    "train.npz"
+  ],
+  "model_version": "pipe-qwen3.5-4b-v0-a968405f",
+  "checkpoint_code_revision": "a968405f3c3e505582c3dcd8be0248d1075431c1",
+  "base_model": "Qwen/Qwen3.5-4B",
+  "base_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "preprocessing_version": "rms-hann256-hop128-band4-log1p-v1",
+  "scoring_spec": {
+    "version": "class-continuation-logprob-sum-softmax-v1",
+    "class_continuations": [
+      "leak;",
+      "no_leak;"
+    ],
+    "class_token_ids": [
+      [
+        273,
+        570,
+        26
+      ],
+      [
+        2083,
+        11414,
+        570,
+        26
+      ]
+    ],
+    "class_token_counts": [
+      3,
+      4
+    ],
+    "aggregation": "sum",
+    "length_normalization": false,
+    "class_terminator": ";",
+    "includes_eos": false,
+    "includes_description": false,
+    "calibration": "none"
+  },
+  "checkpoint_checksums_sha256": "24f27afedfb3e26f853ff0029d8648e03ee08b46b50b906b1775ec69c96a46fe",
+  "train_cache_sha256": "7f87d024f7b627d50e641e19bbf552c568ac23122ef93f4a2308c3f8b8fb61b8",
+  "manifest_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+  "script_sha256": "dd1a6e85e6f8669750c02b931e3f5f426329ef77759558f65ee443d38bfff336",
+  "samples": [
+    {
+      "clip_id": "c0128b879694e",
+      "fold": "train",
+      "input_sha256": "d3f2d2e689172b7848d5334318253188a61b5185c96961af015633d816719f78",
+      "probabilities": {
+        "wav": 0.6226695893576818,
+        "waveform": 0.6226695893576818,
+        "series": 0.6226695893576818,
+        "repeat": 0.6226695893576818,
+        "manual_softmax": 0.6226695893576818
+      },
+      "class_logprobs": [
+        -0.47508543349920274,
+        -0.975980233020664
+      ],
+      "max_timef_cache_feature_difference": 1.1920928955078125e-07,
+      "max_probability_difference": 0.0,
+      "all_routes_elapsed_seconds": 1.2205395029995998
+    },
+    {
+      "clip_id": "c02543903a0da",
+      "fold": "train",
+      "input_sha256": "cee51fcf3881ab21ea6e6378277dfcfa91bce8292b98b88ebfd07f75a098106e",
+      "probabilities": {
+        "wav": 0.5928581356660408,
+        "waveform": 0.5928581356660408,
+        "series": 0.5928581356660408,
+        "repeat": 0.5928581356660408,
+        "manual_softmax": 0.5928581356660408
+      },
+      "class_logprobs": [
+        -0.5239773363422273,
+        -0.8997707894012592
+      ],
+      "max_timef_cache_feature_difference": 5.960464477539063e-08,
+      "max_probability_difference": 0.0,
+      "all_routes_elapsed_seconds": 0.6785054040010436
+    },
+    {
+      "clip_id": "c04206cc802ff",
+      "fold": "train",
+      "input_sha256": "95016f4f333c8ed25a3d75c757d191216cb55546ba239b3c219b5d4d23865332",
+      "probabilities": {
+        "wav": 0.4689209984293968,
+        "waveform": 0.4689209984293968,
+        "series": 0.4689209984293968,
+        "repeat": 0.4689209984293968,
+        "manual_softmax": 0.4689209984293968
+      },
+      "class_logprobs": [
+        -0.7585201233880525,
+        -0.6340436417721094
+      ],
+      "max_timef_cache_feature_difference": 1.1920928955078125e-07,
+      "max_probability_difference": 0.0,
+      "all_routes_elapsed_seconds": 0.6761330799999996
+    },
+    {
+      "clip_id": "c04498a7ed239",
+      "fold": "train",
+      "input_sha256": "b1ee421cf2c3b2ee1497e419f8a3b153bfdb4146598349fe8542f7db0b54e2d4",
+      "probabilities": {
+        "wav": 0.6794342114116854,
+        "waveform": 0.6794342114116854,
+        "series": 0.6794342114116854,
+        "repeat": 0.6794342114116854,
+        "manual_softmax": 0.6794342114116854
+      },
+      "class_logprobs": [
+        -0.3880357415026765,
+        -1.1392086273897917
+      ],
+      "max_timef_cache_feature_difference": 1.1920928955078125e-07,
+      "max_probability_difference": 0.0,
+      "all_routes_elapsed_seconds": 0.6762108510010876
+    }
+  ],
+  "invalid_inputs_rejected": [
+    "invalid_wav",
+    "constant_signal",
+    "metadata_in_model_input"
+  ],
+  "tokenization_boundary_verified": true,
+  "probability_tolerance": 1e-06,
+  "max_feature_difference": 1.1920928955078125e-07,
+  "train_distribution_diagnostic_only": {
+    "n_unique": 4,
+    "min": 0.4689209984293968,
+    "max": 0.6794342114116854,
+    "n_exact_zero_or_one": 0
+  },
+  "elapsed_seconds": 12.495550902000105
+}

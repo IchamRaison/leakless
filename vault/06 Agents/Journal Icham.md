@@ -4,6 +4,10 @@ Icham
 
 ## État actuel
 
+Campagne V1 lancée et progression réelle vérifiée après les 18 tests CPU : run `qwen-v1-1199789f-001`, code d'entraînement publié `1199789f`, préinscription avant résultats et trois seuls checkpoints 2/4/8. PID distant observé `32101`, handle d'exécution root `58387` ; revérifier le processus avant toute reprise. Aucun cache/WAV test ni métrique finale. Chemins/commande/critère dans [[V1 ML - exécution]].
+
+Étape scoring vérifiée à `4456c31` : huit tests CPU, puis contrôles réels sur quatre clips train ; frontières de tokens 3/4 et voies d'entrée concordantes. Campagne/export implémentés à `1199789f`, code transféré par archive et empreintes comparées ; tests complets avant lancement. Rapport et chemins dans [[V1 ML - exécution]]. Aucun export ni métrique finale à ce jalon.
+
 Icham autorise désormais l'exécution complète V1/T0/stress. Runtime et données revérifiés ; développement des scores et scripts en cours. Campagne préannoncée : trois checkpoints 2/4/8 époques, train complet, sélection validation seule ; détail et prochaine action dans [[V1 ML - exécution]]. Correctif Nevil SHA-256 publié à `6dfdf63` : T2/T3 pourront utiliser cette version officielle. Aucun entraînement V1 encore lancé à ce jalon ; les paragraphes suivants décrivent les décisions préparatoires.
 
 ## Démarrage V1 autorisé
