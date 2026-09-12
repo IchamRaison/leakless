@@ -2,9 +2,13 @@
 
 Icham
 
-## Dernière reprise — 2026-09-12
+## Dernier échange — 2026-09-12
 
-Icham s'est identifié dans la session et a demandé la lecture complète du vault. Les 34 fichiers Markdown, réglages Obsidian et 22 pages du PDF ont été lus ; rôle ML/intégration repris. Aucun entraînement ni test produit exécuté pendant cette lecture. Preuves et prochaine action I0 dans [[Journal Icham]].
+Icham demande de challenger le cadrage humain proposé par Nevil. Analyse dans [[Challenge du cadrage de Nevil]] : distinguer classification, description vérifiable et utilité pour le technicien ; comparer au système simple Random Forest + mesures + gabarit ; ne pas adopter trois classes sans audit de provenance. Recommandations à discuter, aucun contrat modifié ni expérience exécutée. Prochaine action : retour G0 de Nevil et cadrage du cas utilisateur avant entraînement destiné aux résultats ; I0 runtime peut avancer en parallèle. Lecture complète précédente et preuves dans [[Journal Icham]].
+
+## Reprise Safoan — 2026-09-12
+
+Branche `feat/safoan-app` créée depuis `3ea769d` et publiée. Entire 0.10.6 installé sur le Mac de Safoan, hooks Git valides et hooks Codex installés ; approbation via `/hooks` encore requise. Capture réelle non vérifiée. Aucun code application démarré. Détails et prochaine action S0 : [[Journal Safoan]].
 
 ## Nom proposé
 

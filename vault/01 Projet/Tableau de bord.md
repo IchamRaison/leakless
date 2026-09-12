@@ -10,9 +10,12 @@ Icham
 - [x] Plan directeur, contrats, protocole et fiches agents rédigés.
 - [x] Icham : lecture complète du vault et des 22 pages du PDF ; état des dépôts inspecté, preuves dans [[Journal Icham]].
 
+- [x] Safoan : branche `feat/safoan-app` publiée ; Entire installé et hooks Git vérifiés. Approbation des hooks Codex et capture réelle encore à faire : [[Journal Safoan]].
+
 ## À lancer — pas encore vérifié
 
 - [ ] G0 Nevil : audit complet, groupes, labels et split défendable.
+- [ ] Après G0, Icham/équipe : figer problème et classes ; arbitrer comparaison baseline + mesures/gabarit et test d'utilité proposés dans [[Challenge du cadrage de Nevil]].
 - [ ] G1 Tous : fixture réelle et contrats gelés.
 - [ ] G2 Icham : runtime, entraînement court, checkpoint et reload.
 - [ ] Vincent : baseline entraînée sur développement, tests et export.

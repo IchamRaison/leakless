@@ -4,9 +4,15 @@ Icham
 
 ## État actuel
 
-2026-09-12 : Icham s'est identifié comme responsable de cette session. Prise en main documentaire terminée : les 34 fichiers Markdown du vault, les réglages Obsidian et les 22 pages du PDF ont été lus. Périmètre repris : TSLM, environnement Python et intégration finale. Aucun runtime ML installé ou entraînement lancé pendant cette reprise.
+2026-09-12 : analyse du cadrage de Nevil terminée à la demande d'Icham ; recommandations dans [[Challenge du cadrage de Nevil]], pas encore arbitrées. Aucun changement de contrat, entraînement ou essai utilisateur exécuté. Périmètre repris : TSLM, environnement Python et intégration finale.
 
 ## Dernière passation
+
+- Vault distant intégré jusqu'à `f6eed23`, y compris la reprise de Safoan, avant cette édition. Source Zenodo relue en ligne : majorité des bruits venant de dlmeasure.com, minorité du site expérimental ; audit physique des archives non refait. Références OpenTSLM et Jacovi/Goldberg consultées pour distinguer résultats publiés, exactitude descriptive et fidélité d'une explication.
+- Résultat de l'analyse : recommandation de conserver le protocole binaire courant, clarifier la séparation prompt/cibles et comparer la valeur du langage à une baseline enrichie par les mêmes mesures. Aucun message envoyé aux coéquipiers, aucune adoption de trois classes ou d'un nouveau nom.
+- Prochaine action : examiner G0 de Nevil, confronter le problème à un cas réel du professionnel et arbitrer les propositions avant entraînement destiné aux résultats ; I0 runtime reste indépendant.
+
+## Preuves de la prise en main précédente
 
 - Références inspectées : vault `main` à `07708b13e57bdb62be9c9dce3d3cee398ba9e6af` ; code `main` à `3ea769d7ed2631dd96e08aa3853584a497841b0a`.
 - Commandes exécutées : `git pull --ff-only` dans les deux dépôts (déjà à jour), `git status --short --branch`, `git ls-files` ; lecture des notes ; `pdftotext -layout` et rendu `pdftoppm -scale-to 1440 -png` du PDF, puis inspection des 22 pages.
@@ -16,6 +22,10 @@ Icham
 - Prochaine action : démarrer I0 de [[Agent Icham - ML]] par l'inventaire Python/GPU et la lecture de la révision OpenTSLM ; établir les accès/base disponibles. Compte, crédit et plafond opérationnel à confirmer avant création d'une instance payante. Dépendance I1 : exemple réel de développement et transformation TimeNet fournis par Nevil.
 
 ## Historique
+
+### 2026-09-12 — Challenge du cadrage de Nevil
+
+Icham transmet l'analyse Why/How/What de Nevil et demande une critique. Relecture des contrats et du protocole, vérification des sources publiques et rédaction des objections/test proposé. L'audit G0 reste prioritaire ; aucune performance, utilité terrain ou validation de nouvelle interface annoncée. Contributions distantes de Safoan conservées.
 
 ### 2026-09-12 — Lecture complète et reprise du rôle Icham
 
