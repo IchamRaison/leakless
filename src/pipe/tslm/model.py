@@ -28,7 +28,7 @@ class AcousticQwenSP(OpenTSLMSP):
         )
         if info["missing_keys"] or info.get("mismatched_keys") or info.get("error_msgs"):
             raise RuntimeError(f"Poids Qwen incomplets : {info}")
-        self.loading_info = info
+        self.loading_info = {key: sorted(value) if isinstance(value, set) else value for key, value in info.items()}
         self.llm.requires_grad_(False)
         self.llm.config.use_cache = False
         self.encoder = TransformerCNNEncoder().to(device)

@@ -6,7 +6,6 @@ import hashlib
 import json
 import os
 from pathlib import Path, PurePosixPath
-import tempfile
 from urllib.parse import quote
 from urllib.request import urlopen
 
@@ -59,13 +58,16 @@ def download_archives(data_dir: Path) -> dict:
         payload = dest.read_bytes()
         if hashlib.md5(payload).hexdigest() != md5:
             raise ValueError(f"Archive existante invalide : {name} ; conservée pour inspection")
-        total, count = 0, 0
+        total, count, ignored = 0, 0, []
         # Extraction contrôlée ; ne pas confier les chemins de l'archive à extractall.
         with libarchive.file_reader(str(dest)) as entries:
             for entry in entries:
                 path = safe_member_path(entry.pathname, extract_dir)
                 if entry.isdir:
                     continue
+                if entry.isfile and path.name == "desktop.ini":
+                    ignored.append(entry.pathname)
+                    continue  # Métadonnée Windows, conservée dans l'archive originale.
                 if not entry.isfile or path.suffix.lower() != ".wav":
                     raise ValueError("Entrée non WAV ou lien dans l'archive")
                 chunks, size = [], 0
@@ -85,7 +87,8 @@ def download_archives(data_dir: Path) -> dict:
                     with path.open("xb") as output:
                         output.write(wav_bytes)
                 count += 1
-        receipt[name] = {"md5": md5, "sha256": hashlib.sha256(payload).hexdigest(), "wav_count": count}
+        receipt[name] = {"md5": md5, "sha256": hashlib.sha256(payload).hexdigest(),
+                         "wav_count": count, "ignored_metadata": ignored}
         print(json.dumps({"archive": name, **receipt[name]}), flush=True)
     return receipt
 
@@ -111,15 +114,19 @@ def load_manifest(manifest_dir: Path) -> list[dict]:
     return rows
 
 
-def write_timef(refs: list[dict], target: Path):
-    if (target / "manifest.json").exists():
-        return
-    if target.exists() and any(target.iterdir()):
+def write_timef(refs: list[dict], target: Path) -> Path:
+    connector = CONNECTOR()
+    metadata = connector.metadata()
+    version_dir = target / metadata.dataset_id / str(metadata.dataset_version)
+    if (version_dir / "manifest.json").exists():
+        return version_dir
+    if version_dir.exists() and any(version_dir.iterdir()):
         raise ValueError("Dossier TimeF incomplet existant ; choisir un nouveau chemin")
-    dataset = CONNECTOR().convert(refs)
+    dataset = connector.convert(refs)
     writer = TimeFWriter(root=target, dataset=dataset)
     writer.write()
     writer.close()
+    return version_dir
 
 
 def prepare(data_dir: Path, manifest_dir: Path, output: Path) -> dict:
@@ -139,8 +146,7 @@ def prepare(data_dir: Path, manifest_dir: Path, output: Path) -> dict:
     output.mkdir(parents=True, exist_ok=True)
     first = sorted((r for r in rows if r["fold"] == "train"), key=lambda r: r["clip_id"])[0]
     # Prouver un exemple réel avant de convertir le reste.
-    single_dir = output / "timef-one"
-    write_timef([first], single_dir)
+    single_dir = write_timef([first], output / "timef-one")
     with TimeFReader(DatasetVersion.open_local(single_dir)) as reader:
         reader.verify()
         record = next(reader.iter_records())
@@ -156,8 +162,7 @@ def prepare(data_dir: Path, manifest_dir: Path, output: Path) -> dict:
                         "dominant_band_hz": measured_band(series),
                         "max_roundtrip_error": float(np.max(np.abs(observed - expected)))}
         print(json.dumps({"first_example_verified": first_report}), flush=True)
-    timef_dir = output / "timef"
-    write_timef(rows, timef_dir)
+    timef_dir = write_timef(rows, output / "timef")
     cache = {fold: {"ids": [], "series": []} for fold in ("train", "val", "test")}
     with TimeFReader(DatasetVersion.open_local(timef_dir)) as reader:
         reader.verify()
