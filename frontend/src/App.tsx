@@ -1,4 +1,11 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import {
+  lazy,
+  Suspense,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 
 const DemoExperience = lazy(() => import("./demo/DemoExperience"));
 const MonitorReplay = lazy(() => import("./demo/MonitorReplay"));
@@ -12,21 +19,38 @@ const isMonitor = () => location.hash === "#monitor";
 export function App() {
   const [monitor, setMonitor] = useState(isMonitor);
   const wasMonitor = useRef(isMonitor());
+  const demoScroll = useRef(0);
+  const firstRender = useRef(true);
   useEffect(() => {
-    // Only a switch between views resets scroll; in-page anchors (#signal…) keep the browser's jump.
+    // Only a switch between views touches scroll; in-page anchors (#signal…) keep the browser's jump.
     const change = () => {
       const next = isMonitor();
-      if (wasMonitor.current && !next) window.scrollTo(0, 0);
+      if (!wasMonitor.current && next) demoScroll.current = window.scrollY;
       wasMonitor.current = next;
       setMonitor(next);
     };
     window.addEventListener("hashchange", change);
     return () => window.removeEventListener("hashchange", change);
   }, []);
+  useLayoutEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+    if (monitor)
+      document
+        .querySelectorAll<HTMLAudioElement>(".demo-view audio")
+        .forEach((audio) => audio.pause());
+    // The demo stays mounted while the monitor is shown: selection, recordings and uploads survive.
+    window.scrollTo(0, monitor ? 0 : demoScroll.current);
+  }, [monitor]);
   const notes = NotesLayer && new URLSearchParams(location.search).has("notes");
   return (
     <Suspense fallback={<div className="app-loading">Loading LeakLess…</div>}>
-      {monitor ? <MonitorReplay /> : <DemoExperience />}
+      <div className="demo-view" hidden={monitor}>
+        <DemoExperience />
+      </div>
+      {monitor && <MonitorReplay />}
       {notes && NotesLayer && (
         <Suspense fallback={null}>
           <NotesLayer />

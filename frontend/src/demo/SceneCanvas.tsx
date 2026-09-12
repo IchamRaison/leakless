@@ -79,7 +79,8 @@ export function SceneCanvas({
     renderer.setAnimationLoop((now) => {
       const delta = Math.min((now - previous) / 1000, 0.05);
       previous = now;
-      if (document.hidden) return;
+      // Skip frames while the tab or the whole view is hidden (e.g. demo kept mounted behind #monitor).
+      if (document.hidden || node.getClientRects().length === 0) return;
       controls.autoRotate = !pause.current && !motion.matches;
       controls.update(delta);
       content.frame?.();
