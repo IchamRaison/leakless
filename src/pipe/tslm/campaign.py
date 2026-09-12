@@ -57,6 +57,36 @@ def epoch_batches(count, batch_size, seed, epoch):
     return [order[start:start + batch_size] for start in range(0, count, batch_size)]
 
 
+def train_epoch(model, optimizer, samples, config, epoch):
+    """Une époque, mêmes lots/gradients que V1 ; sélection et logs restent à l'appelant."""
+    import torch
+    from opentslm.time_series_datasets.util import extend_time_series_to_match_patch_size_and_aggregate as collate
+
+    model.train()
+    model.llm.eval()
+    for indices in epoch_batches(len(samples), config["batch_size"], config["seed"], epoch):
+        batch = collate([{**samples[i]} for i in indices], normalize=False)
+        optimizer.zero_grad(set_to_none=True)
+        loss = model.compute_loss(batch)
+        if not torch.isfinite(loss):
+            raise RuntimeError("Loss non finie ; campagne arrêtée")
+        loss.backward()
+        gradients = {}
+        for name, module in (("encoder", model.encoder), ("projector", model.projector)):
+            parameters = list(module.parameters())
+            if any(p.grad is None or not torch.isfinite(p.grad).all() for p in parameters):
+                raise RuntimeError(f"Gradients invalides : {name}")
+            norm = torch.sqrt(sum(p.grad.float().square().sum() for p in parameters)).item()
+            if norm <= 0:
+                raise RuntimeError(f"Gradient nul : {name}")
+            gradients[name] = norm
+        torch.nn.utils.clip_grad_norm_([p for p in model.parameters() if p.requires_grad],
+                                      config["gradient_clip"], error_if_nonfinite=True)
+        optimizer.step()
+        yield {"epoch": epoch, "batch_samples": len(indices), "loss": loss.item(),
+               "gradient_norms": gradients}
+
+
 def diagnostic_rows(rows, count=8):
     if count < 2 or count % 2 or any(row["fold"] != "val" for row in rows):
         raise ValueError("Diagnostic pair, uniquement sur validation")
@@ -192,33 +222,12 @@ def main():
     reports, losses, first_gradients, step = [], [], {}, 0
     with (args.output / "training.jsonl").open("x") as log:
         for epoch in range(1, max(config["candidate_epochs"]) + 1):
-            model.train()
-            model.llm.eval()
-            for indices in epoch_batches(len(samples), config["batch_size"], config["seed"], epoch):
-                batch = collate([{**samples[i]} for i in indices], normalize=False)
-                optimizer.zero_grad(set_to_none=True)
-                loss = model.compute_loss(batch)
-                if not torch.isfinite(loss):
-                    raise RuntimeError("Loss non finie ; campagne arrêtée")
-                loss.backward()
-                gradients = {}
-                for name, module in (("encoder", model.encoder), ("projector", model.projector)):
-                    parameters = list(module.parameters())
-                    if any(p.grad is None or not torch.isfinite(p.grad).all() for p in parameters):
-                        raise RuntimeError(f"Gradients invalides : {name}")
-                    norm = torch.sqrt(sum(p.grad.float().square().sum() for p in parameters)).item()
-                    if norm <= 0:
-                        raise RuntimeError(f"Gradient nul : {name}")
-                    gradients[name] = norm
+            for result in train_epoch(model, optimizer, samples, config, epoch):
                 if step == 0:
-                    first_gradients = gradients
-                torch.nn.utils.clip_grad_norm_([p for p in model.parameters() if p.requires_grad],
-                                               config["gradient_clip"], error_if_nonfinite=True)
-                optimizer.step()
+                    first_gradients = result["gradient_norms"]
                 step += 1
-                losses.append(loss.item())
-                record = {"step": step, "epoch": epoch, "batch_samples": len(indices),
-                          "loss": loss.item(), "gradient_norms": gradients,
+                losses.append(result["loss"])
+                record = {"step": step, **result,
                           "elapsed_seconds": time.monotonic() - started}
                 log.write(json.dumps(record) + "\n")
                 log.flush()
