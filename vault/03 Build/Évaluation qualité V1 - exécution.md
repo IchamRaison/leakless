@@ -4,7 +4,7 @@ Icham
 
 ## État courant
 
-Les six étapes de [[Protocole évaluation]] ont été exécutées : **évaluation CPU des neuf runs et audit texte 402/402 terminés, code retour 0 ; revue indépendante et publication de la synthèse en cours.** Code/protocole publié avant résultats `c27a43fdd4de73ccc09f5f4bc02acd87c89f58f6`, branche isolée `feat/icham-quality-eval`, worktree `/home/animus/ehl-hackathon-zurich-quality-eval`, base `b4c8059`. Les chantiers ML et simulateur existants sont préservés.
+Les six étapes de [[Protocole évaluation]] sont **terminées, vérifiées indépendamment et publiées** : neuf runs CPU, huit comparaisons appariées, audit texte 402/402, verdict et preuves. Livraison `c8dcb9d1428f692529ad75eb24adafbe3ea42fcd`, SHA distant confirmé sur `feat/icham-quality-eval`. [Rapport complet et liens vers tous les artefacts](https://github.com/IchamRaison/ehl-hackathon-zurich/blob/c8dcb9d1428f692529ad75eb24adafbe3ea42fcd/docs/QUALITY_EVAL_V1.md). Code/protocole publié avant résultats `c27a43fdd4de73ccc09f5f4bc02acd87c89f58f6`, worktree `/home/animus/ehl-hackathon-zurich-quality-eval`, base `b4c8059`. Les chantiers ML et simulateur existants sont préservés ; aucun calcul restant pour ce plan.
 
 ## Résultats mesurés — modèle inchangé
 
@@ -16,7 +16,14 @@ Stress, AUC clip/groupe : T1 `0,652/0,824`, T2 `0,612/0,700`, T3 `0,541/0,536`. 
 
 Textes : validation **202/208 bandes correctes (97,1 %), 27/208 désaccords classe/score** ; test **184/194 bandes correctes (94,8 %), 36/194 désaccords (18,6 %)**. Format valide partout, aucune erreur d'exécution ni abstention ; dix bandes test erronées conservées. Latence texte test après chauffe : médiane 705 ms, p95 819 ms sur H100, pas un benchmark de flux ni du score seul. Audit brut `text-audit/raw.jsonl`, SHA `eb7c25ee…` ; chargement 9,23 s, une chauffe exclue. Le texte décrit une bande parmi quatre, pas une cause physique.
 
-**Lecture provisoire : prototype fonctionnel, mais détecteur trop faible et texte pas toujours cohérent avec le score pour promettre une surveillance fiable.** Aucun poids/prompt/score modifié après ces résultats. Écart entre l'ancien diagnostic validation de sélection et l'export T0 en cours d'explication en lecture seule ; il ne justifiera pas une resélection.
+**Verdict : prototype fonctionnel, mais détecteur trop faible et texte pas toujours cohérent avec le score pour promettre une surveillance fiable.** Aucun objectif métier chiffré d'acceptation n'avait été fixé : cette appréciation s'appuie sur les erreurs observées, pas sur un seuil d'acceptation préinscrit. Aucun poids/prompt/score modifié après ces résultats.
+
+## Revue finale et limite de reproductibilité
+
+- Revue numérique indépendante : 396 valeurs recalculées depuis CSV/split contre scikit-learn 1.7.2, 68 IC reproduits (36 IC test des runs + 32 appariés), seuils validation exacts, huit comparaisons concordantes. Aucun écart au-delà de l'arrondi six décimales.
+- Revue des 402 sorties : ordre, couverture, compteurs et latences recalculés depuis le brut, toutes les empreintes concordantes. Les dix bandes erronées test contredisent aussi les observations DSP du payload, sans abstention. Exemple premier dans l'ordre fixé : `c1534fe458cda`, texte 1000–2000 Hz contre DSP 0–1000 Hz.
+- Les 16 fichiers de résultats sont SHA256 identiques entre H100 et copie locale (`OUTPUT_SHA256SUMS`). Bundle et poids recontrôlés après exécution, inchangés. Rapport relu indépendamment, chiffres/liens/limites vérifiés.
+- **Parité campagne → livraison imparfaite** : mêmes poids/code/config et 208 validations, mais AUC groupée 0,963235 dans `development.json` original contre 0,985294 dans T0. Les 208 probabilités diffèrent, 192 au-delà de `1e-6`, écart absolu médian 0,0000104996, moyen 0,00942138, maximum 0,0623688. Ce n'est ni un effet de seuil ni un arrondi. Cache TimeF pendant la campagne versus WAV directement prétraité à la livraison : différence de chemins identifiée, cause numérique précise non isolée. Cette divergence précédait notre évaluation ; le rechargement WAV reproduit bien sa propre référence. Les résultats publiés mesurent les exports livrés figés ; ils ne prouvent pas la parité exhaustive avec les scores de sélection. Original `development.json` conservé avec SHA `104a24b2…`, aucune resélection/correction rétroactive.
 
 ## Règles et preuves avant résultats
 
@@ -53,4 +60,4 @@ RF Vincent : branche `feat/vincent-baseline-v1` à `fc837f7b05c4ab7dd8a9eabd420d
 
 ## Prochaine action
 
-Terminer la revue indépendante des nombres/provenances et rédiger/publier le verdict avec tous les artefacts. Pas de nouveau calcul GPU nécessaire. Toute future V2 demandera un protocole distinct ; ce test désormais consulté n'est plus vierge.
+Discuter avec Icham d'une V2 et de son protocole de développement, sans relancer cette évaluation ni modifier les exports livrés. La cause précise de l'écart cache/WAV reste un diagnostic de développement à entreprendre séparément ; ce n'est pas un blocage du verdict sur les exports gelés. Le test consulté n'est plus vierge ; généralisation terrain et surveillance continue demandent des acquisitions nouvelles. RF Vincent ajoutable uniquement avec ses fichiers originaux vérifiés. Aucun entraînement, service ou job d'audit en cours ; instance H100 laissée allumée.

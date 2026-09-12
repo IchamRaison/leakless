@@ -4,7 +4,19 @@ Icham
 
 ## État actuel
 
-Évaluation complète terminée : neuf runs CPU, huit comparaisons appariées, 402 textes H100, tous les processus code 0. AUC test T0 clip/groupe 0,665/0,861 ; 25/98 fuites manquées, 43/96 fausses alertes ; C1 0,902/0,927. Textes test 184/194 bandes correctes, 36/194 désaccords classe/score, aucune abstention/erreur runtime. Revue indépendante et publication en cours : [[Évaluation qualité V1 - exécution]]. GPU 0 Mio / 0 %, instance allumée. Les résultats test ne motivent aucun réglage.
+Évaluation complète terminée, revue indépendante réussie et publication `c8dcb9d` vérifiée : neuf runs CPU, huit comparaisons appariées, 402 textes H100, tous les processus code 0. AUC test T0 clip/groupe 0,665/0,861 ; 25/98 fuites manquées, 43/96 fausses alertes ; C1 0,902/0,927. Textes test 184/194 bandes correctes, 36/194 désaccords classe/score. [[Évaluation qualité V1 - exécution]] lie rapport et preuves. GPU 0 Mio / 0 %, instance allumée. Aucun travail d'évaluation restant ; toute V2 demande un protocole distinct, ce test n'est plus vierge.
+
+## Publication du verdict — 2026-09-12
+
+`docs/QUALITY_EVAL_V1.md` et tous les artefacts publiés à `c8dcb9d1428f692529ad75eb24adafbe3ea42fcd` sur `feat/icham-quality-eval`, SHA Git distant confirmé. Préinscription et code exécuté `c27a43fd` demeurent antérieurs aux résultats. Revue indépendante : 396 valeurs contre sklearn, 68 IC bootstrap, seuils validation exacts, huit comparaisons et compteurs/latences des 402 textes concordants. Les 16 fichiers report/contrôles/audit sont identiques H100/local par SHA256 ; modèle/poids/exports immuables, derniers checks GPU 0 Mio / 0 %.
+
+Limite découverte et documentée sans correction : AUC validation de campagne 0,963235 versus export 0,985294, probabilités différentes sur 208/208 (192 dépassent 1e-6, écart maximal 0,0623688). Mêmes poids/IDs/groupes ; chemins cache TimeF et WAV distincts, cause numérique précise non isolée. L'écart précédait le nouveau harness, aucune resélection ni modification des sorties. Original `development.json` copié, SHA `104a24b2…`. Les métriques publiées sont celles des exports réellement livrés ; ne pas les confondre avec les diagnostics de sélection. La nouvelle note datasets d'un chantier parallèle (`cd48e1e`) a été conservée et intégrée avant finalisation des notes.
+
+## 2026-09-12 — Recherche de datasets complémentaires
+
+Lecture complète du vault source puis recherche de sources primaires. La shortlist est publiée dans [[Datasets utiles pour PIPE]]. Résultat : conserver Zenodo 18631450 comme benchmark principal ; prioriser Aghashahi/Mendeley (280 signaux de banc, hydrophone 8 kHz, CC BY 4.0) comme hold-out acoustique externe et Hong Kong/Mendeley (réseau réel, environ 90 sites, plusieurs modalités, CC BY 4.0) comme test de transfert. Yorkshire/Wessex sont plus utiles pour la chronologie/priorisation d'alertes que pour entraîner l'audio ; NTNU et le dataset slovaque sont des auxiliaires hydrauliques.
+
+Aucun fichier téléchargé, aucune métrique calculée et aucun modèle modifié. Les formats exacts, sessions, licences par ressource et splits restent à auditer. Prochaine action concrète : auditer localement Aghashahi, puis Hong Kong si le temps le permet, sans régler le checkpoint V1 sur ces données.
 
 ## Évaluation réelle — 2026-09-12
 

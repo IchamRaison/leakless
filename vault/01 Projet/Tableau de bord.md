@@ -12,17 +12,20 @@ Icham
 - [x] Icham : SSH distant et présence d'une H100 80 Go vérifiés ; inventaire initial puis V0 exécutée dans [[Journal Icham]].
 - [x] Livrables Nevil retrouvés sur `nevil/setup` : audit des trois archives, scripts et `split_v2` ; SHA-256 du manifeste vérifié, exécution de l'audit non reproduite ici.
 - [x] Icham : lecture complète du vault et des 22 pages du PDF ; état des dépôts inspecté, preuves dans [[Journal Icham]].
+- [x] Recherche de datasets complémentaires documentée : hold-out acoustique Aghashahi, transfert Hong Kong, données d'événements Yorkshire/Wessex et séries hydrauliques auxiliaires. [[Datasets utiles pour PIPE]]
 
 - [x] Safoan : branche `feat/safoan-app` publiée ; Entire installé et hooks Git vérifiés. Approbation des hooks Codex et capture réelle encore à faire : [[Journal Safoan]].
 
 ## En cours et à vérifier
 
-- [x] Nouvel objectif actif : exécution du plan qualité V1 lancée en worktree isolé ; références/fichiers et intégrité revérifiés. [[Évaluation qualité V1 - exécution]].
+- [x] Plan qualité V1 complet exécuté en worktree isolé, sans modification du modèle ; [[Évaluation qualité V1 - exécution]].
 - [x] Préinscription/code `c27a43fd` publiés, 32 tests runtime cible réussis, 1 000 MD5/formats WAV et huit SHA de runs vérifiés.
 - [x] Cinq contrôles fixes reproduits sans nouvelle recherche TSLM ; comparaison RF Vincent conditionnelle faute d'export accessible.
+- [ ] Auditer localement Aghashahi puis Hong Kong avant tout usage ; vérifier licence, formats, sessions et split externe. Ne pas fusionner au train/V1 gelé.
 - [x] Évaluation CPU neuf runs et huit comparaisons appariées terminées ; AUC T0 clip/groupe 0,665/0,861, pas de gain établi face à C1. [[Évaluation qualité V1 - exécution]].
 - [x] Audit texte 208 val + 194 test terminé : bandes test 184/194 correctes, 36/194 désaccords classe/score, format 194/194 ; aucun changement du modèle.
-- [ ] Revue indépendante et publication du verdict/preuves en cours ; aucun job GPU restant.
+- [x] Revue indépendante terminée : 396 valeurs, 68 IC et tous les compteurs texte concordants ; rapport/preuves publiés `c8dcb9d`, branche `feat/icham-quality-eval`, SHA distant vérifié.
+- [ ] Décider d'une V2/protocole distinct ; limite cache/WAV de campagne à diagnostiquer sur développement, pas de réglage rétroactif sur test.
 - [x] Icham a levé l'exclusivité Nevil puis lancé l'objectif d'évaluation complète. [[Protocole évaluation]].
 - [x] Icham autorise l'implémentation V1 complète jusqu'à T0/T1–T3 ; runtime H100 et données existantes revérifiés. [[V1 ML - exécution]].
 - [x] Scoring continu implémenté, huit tests CPU et contrôle H100 sur quatre clips train réussis ; aucune évaluation de qualité. [[V1 ML - exécution]].
@@ -53,7 +56,7 @@ Icham
 - [x] G2 mécanique Icham : runtime, entraînement court, checkpoint complet et reload neuf hors ligne, puis environnement reconstruit. [[V0 ML - exécution]].
 - [ ] Vincent : baseline entraînée sur développement, tests et export.
 - [ ] G3 Safoan : audio/spectrogramme et vraie inférence de bout en bout.
-- [x] G4 Icham : évaluation finale V1 via le harness existant exécutée après gel ; résultats mesurés, pas une validation de fiabilité opérationnelle. Publication/revue en cours.
+- [x] G4 Icham : évaluation finale V1 exécutée après gel, vérifiée et publiée ; résultats mesurés insuffisants pour promettre une fiabilité opérationnelle.
 - [ ] G5 Équipe : checkpoint livré, reproduction, pitch/démo et soumission vérifiée.
 
 ## Entire — finaliser l’onboarding du poste Icham
