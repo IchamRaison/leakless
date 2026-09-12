@@ -14,6 +14,7 @@ Icham
 
 ## À lancer — pas encore vérifié
 
+- [ ] Icham : répondre au premier tour grill-me sur le ML (contribution, nouveauté, échéance, budget) ; inventaire local réalisé, détails dans [[Journal Icham]].
 - [ ] G0 Nevil : audit complet, groupes, labels et split défendable.
 - [ ] Après G0, Icham/équipe : figer problème et classes ; arbitrer comparaison baseline + mesures/gabarit et test d'utilité proposés dans [[Challenge du cadrage de Nevil]].
 - [ ] G1 Tous : fixture réelle et contrats gelés.

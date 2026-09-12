@@ -4,9 +4,17 @@ Icham
 
 ## État actuel
 
-2026-09-12 : reprise du chantier ML demandée ; préalable `grill-me` installé et vérifié sur le poste d'Icham. Aucun entretien via ce skill, changement de contrat ou entraînement lancé. Prochaine action : I0 de [[Agent Icham - ML]], environnement et accès au modèle.
+2026-09-12 : entretien `grill-me` demandé explicitement sur le périmètre ML. Premier tour en attente des réponses d'Icham ; aucune recommandation encore adoptée. Inventaire local en lecture seule effectué ; aucun environnement installé, modèle chargé ou entraînement lancé.
 
 ## Dernière passation
+
+- Entretien : quatre décisions initiales, priorité de la contribution (classification/robustesse/restitution), ambition de nouveauté, échéance d'une version intégrable, budget de calcul. Les décisions dépendantes (base exacte, adaptation, sorties et déploiement) viendront après réponses et vérification des faits nécessaires.
+- Recherche de faits déléguée au sous-agent `ml_runtime_facts` conformément à `/home/animus/.codex/skills/grilling/SKILL.md`. Commandes en lecture seule : `python3 --version`, `importlib.util.find_spec`, inspection des préfixes Python et des dossiers `.venv`/`venv`, `free -h`, `command -v nvidia-smi`, `lspci`, inventaire `rg --files` et lectures Git.
+- Constat local : Python `/usr/bin/python3` 3.13.5 ; aucun venv actif/projet à la racine ; torch et transformers absents de cet interpréteur, NumPy présent. RAM 7,6 GiB dont environ 1,1 GiB disponibles au relevé. `nvidia-smi` absent ; seul contrôleur graphique listé Intel HD Graphics 520. Aucun accès GPU distant déduit de ces observations.
+- Dépôt code inspecté à `3385f5a`, propre ; pas de code TSLM, manifeste Python, notebook, WAV ou checkpoint dans le checkout. Références Git déjà connues seulement, sans nouvelle vérification du distant du code ; `origin/nevil/setup` reste connu à `c47dc96` avec trois scripts non implémentés. Compte/crédit/quotas Nebius non inspectés.
+- Prochaine action : réponses au premier tour, puis exploration des décisions débloquées. L'implémentation attend la compréhension partagée demandée par le skill ; la continuité documentaire du vault reste assurée selon la règle d'Icham.
+
+## Installation du skill — étape précédente
 
 - Source indiquée par Icham : https://www.aihero.dev/skills-grill-me ; dépôt amont https://github.com/mattpocock/skills, révision figée `3cca18b368ae95cdbdebbff572ccafa662551015`.
 - Installation effectuée via le skill système `skill-installer` : `python3 /home/animus/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py --repo mattpocock/skills --ref 3cca18b368ae95cdbdebbff572ccafa662551015 --path skills/productivity/grill-me skills/productivity/grilling --dest /home/animus/.codex/skills`.

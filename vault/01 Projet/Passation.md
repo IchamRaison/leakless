@@ -4,7 +4,7 @@ Icham
 
 ## Dernier échange — 2026-09-12
 
-Icham demande de reprendre son chantier ML, puis d'installer `grill-me` avant toute autre action. Installation locale terminée et fichiers vérifiés, avec sa dépendance `grilling`, depuis `mattpocock/skills` révision `3cca18b`. Détails et commande reproductible dans [[Journal Icham]]. Aucun entretien grill-me ni test ML lancé ; prochaine action : reprendre I0 (environnement, accès au modèle et premier chargement).
+Icham invoque explicitement `grill-me` sur son chantier ML. Premier tour en attente de réponses : priorité de la contribution ML, ambition de nouveauté, échéance d'une version intégrable et plafond de calcul. Aucun choix proposé n'est adopté à ce stade. Inventaire local délégué en lecture seule conformément au skill : Python 3.13.5, pas de torch/transformers dans cet interpréteur, aucun GPU NVIDIA identifié et aucun artefact ML dans le checkout. Nebius n'a pas été vérifié. Preuves dans [[Journal Icham]]. Prochaine action : recueillir les réponses et poursuivre l'entretien avant implémentation.
 
 ## Cadrage précédent
 
