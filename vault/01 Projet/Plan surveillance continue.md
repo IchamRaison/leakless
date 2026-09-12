@@ -10,6 +10,8 @@ Le cap produit est confirmé par cette demande ; **les choix techniques et jalon
 
 Problème : surveiller un signal de canalisation et avertir lorsqu'un événement compatible avec une fuite persiste, avec des éléments vérifiables pour l'examiner. L'objectif final est bien la détection automatique ; tant que la fiabilité n'est pas validée, la sortie du prototype est une suspicion, pas la confirmation physique d'une fuite.
 
+**Plan consolidé après la consigne Nevil :** première livraison de notre partie = V1 figée + export T0 conforme ; Nevil réalise l'évaluation finale. La boucle continue et la collecte matérielle avancent en parallèle, sans bloquer cet export. Le séquencement proposé est précisé en §5 ; il n'autorise pas encore l'exécution.
+
 ## 1. Deux niveaux de livraison
 
 - **Prochain jalon hackathon proposé** : un canal, flux horodaté rejoué automatiquement, modèle réellement entraîné, suivi d'événement, alerte et historique dans l'application. Inférence calculée pendant le replay, source enregistrée explicitement signalée. Si un flux compatible d'appareil est disponible, le raccorder après vérification.
@@ -22,7 +24,7 @@ Un assemblage de WAV isolés reste un scénario artificiel. Il peut tester le lo
 - V0 Qwen 3.5-4B/OpenTSLM-SP, checkpoint autonome, preprocessing unique et interface `Prediction` : [[V0 ML - exécution]]. Elle classe un extrait, pas un événement suivi dans le temps.
 - TimeNet/TimeF pour préparation et traçabilité des données d'apprentissage ; même transformation numérique en inférence. Pas d'obligation ajoutée d'écrire un dataset TimeF à chaque fenêtre live.
 - Split v2 et groupes existants, sans redistribution pour améliorer un score. Dataset actuel : 1 000 clips d'une seconde, pas une chronologie continue vérifiée.
-- Moteur et contrôles Nevil `08562e3`, à relire/tester et intégrer ; baseline Vincent si livrée. Ses tests T1–T3 sont des perturbations de clips, pas une évaluation du cycle de vie des alertes.
+- Contrat et contrôles Nevil `08562e3` : produire des exports compatibles ; Nevil possède le moteur final. L'intégration de tout son harness dans la branche ML n'est pas requise pour livrer. Baseline Vincent si livrée. Les tests T1–T3 sont des perturbations de clips, pas une évaluation du cycle de vie des alertes.
 - Audio/spectrogramme et affichage Safoan : ils deviennent les pièces justificatives d'une alerte. L'import manuel reste un outil de diagnostic, pas l'interaction principale.
 
 ## 3. Architecture proposée
@@ -65,13 +67,15 @@ Ajouter un état de santé distinct de l'état d'alerte : démarrage, flux frais
 
 ### C — Entraîner et choisir un détecteur V1 sur fenêtres
 
-Icham + Nevil : définir/tester le calcul de score de classe, sans confiance fabriquée. Raccorder l'export Nevil ; absence de calibration indiquée dans la provenance, pas présentée comme certitude terrain. Convenir avec Nevil d'un parcours de développement validation seule, sans exécuter le moteur final pendant les réglages. Pour la livraison T0 demandée, respecter exactement la population val/test du v2 gelé, y compris son choix binaire avec bruit ; aucune exclusion ou vue différente décidée par l'agent ML. Une analyse site seul ou du bruit séparé reste une question distincte à convenir, pas un remplacement silencieux de ce benchmark.
+**C1 — Score et contrat.** Définir/tester une probabilité de classe issue du TSLM, actuellement absente de V0. Aucun verdict converti arbitrairement en 0/1, ni pourcentage demandé à la génération. Méthode/version et absence de calibration documentées ; mêmes entrées numériques sans labels cachés. Préparer le mapping `clip_id` du manifeste, distinct du `sample_id` de l'API, et un contrôle d'export sur développement avant toute inférence test. Conserver le contrat Safoan en concertation, sans faire de son UI une dépendance.
 
-**Consigne Nevil transmise par Icham après rédaction du plan** : livrer seulement `metadata.json` et `predictions.csv` (`clip_id,probability_leak`) pour T0, puis si possible trois runs T1/T2/T3 avec exactement le même checkpoint figé et sans réentraînement. Nevil applique les seuils/agrégations et calcule toutes les métriques finales ; Icham contrôle uniquement intégrité, couverture, format et provenance de l'export. Contrat : `docs/MODEL_EVAL_CONTRACT.md` à `08562e3`. Les diagnostics d'entraînement/validation restent séparés ; pas de sélection après consultation des résultats test.
+**C2 — V1 sur développement.** Convenir du suivi train/validation avec Nevil, sans lancer son moteur final qui parcourt aussi le test. Garder le v2 et le binaire avec bruit pour cette livraison : 598 train, 208 validation, 194 test. Mesurer le point de départ sur développement, puis entraîner sur le train complet. Qwen 3.5-4B conservé ; encodeur/projecteur en premier, un petit nombre de configurations choisies sur validation. Contrôler classification, fidélité de description, invalidités, temps/mémoire et reproductibilité ; LoRA ou autre représentation seulement si un échec identifié le justifie. Tests/mesures de développement distincts de toute métrique finale. Une autre vue de données reste une expérience séparée à convenir, pas un remplacement de T0.
 
-Mesurer V0, puis entraîner sur tout le train retenu. Garder Qwen 3.5-4B, adapter d'abord encodeur/projecteur ; un petit nombre de configurations sélectionnées sur validation. LoRA, représentation plus riche ou modèle léger seulement si une limite observée le justifie. Comparer aux contrôles C0–C3 et à la baseline disponible, sans assimiler C3 à la Random Forest de Vincent.
+**C3 — Gel et T0.** Figer poids, preprocessing et méthode de score ; enregistrer hashes/configuration/révision et vérifier un reload neuf. Exporter `metadata.json` au schéma du harness et `predictions.csv` avec exactement `clip_id,probability_leak`, une ligne pour chacun des 402 clips val/test. Pas de fold, label, device, pressure, flow, descriptions ou autres colonnes. Aucun seuil appliqué. Contrôler valeurs finies/bornes, unicité/couverture, provenance et identité du checkpoint ; ne pas remplacer les échecs par des probabilités fictives. Livrer T0 dès qu'il est conforme, sans attendre les stress ni l'application. Nevil applique seuils/agrégations et calcule toutes les métriques finales : `docs/MODEL_EVAL_CONTRACT.md` à `08562e3`. Ne pas produire un `metrics.json` final côté ML.
 
-**Sortie :** V1 rechargée, performances validation et coût d'inférence mesurés, export reproductible. Aucun tuning sur les résultats test déjà publiés de Nevil ; aucune qualité continue déduite de la classification des clips.
+**C4 — Stress facultatifs après livraison principale.** T1 inversion, T2 permutation de blocs de 250 échantillons (31,25 ms à 8 kHz), T3 randomisation de phase ; implémentations/artefacts officiels Nevil, provenance conservée. Même checkpoint, preprocessing et calcul de score qu'en T0 ; aucun réentraînement, adaptation ou choix de configuration sur T1–T3. Un run identifiable par transformation, chacun au format de livraison convenu. Sensibilité temporelle uniquement, pas métrique de surveillance continue.
+
+**Sortie C :** checkpoint V1 autonome, export T0 vérifié et livré, puis stress éventuels. Les résultats finaux sont attendus de Nevil ; aucun tuning sur son test déjà exposé ni nouvelle sélection après la remise. Un résultat final faible sera rapporté ; une nouvelle campagne demanderait un protocole distinct, pas une optimisation répétée sur ce test.
 
 ### D — Passer des scores aux événements
 
@@ -107,12 +111,15 @@ Nevil, modèles Icham/Vincent : geler modèle, preprocessing et politique d'aler
 
 ## 5. Ordre de travail et répartition
 
-1. A : capteur/flux et critères ; commencer F sans attendre la V1.
-2. B et C en parallèle : Safoan construit la surveillance sur V0 ; Icham améliore le détecteur ; Nevil sécurise données/évaluation ; Vincent fournit le comparateur.
-3. D puis E : suivi d'événement et compte rendu intégrés ; premiers réglages réels seulement lorsque F fournit du développement continu.
-4. G : gel, évaluation finale, répétition et livraison ; poursuite terrain ensuite si les preuves restent insuffisantes.
+**Volet prioritaire Icham — livraison ML autonome :** C1 score/export testable → C2 V1 sur train/validation → C3 gel/reload/T0 remis à Nevil → C4 stress si possible. La H100, les données et la chaîne TimeNet sont déjà disponibles ; capteur réel, frontend fini ou import complet du harness ne sont pas des prérequis de cette livraison.
 
-Périmètre proposé pour le prochain bloc : contrat d'un canal, replay déclaré, score réel, première V1, événements et dashboard. Pas de nouveau boîtier, flotte distribuée, application mobile, achat matériel ni commande de vanne ajoutés par ce plan. Le responsable matériel, les objectifs chiffrés, le délai hackathon et le budget opérationnel restent à confirmer.
+**Volet produit en parallèle :** A critères/capteur + F acquisitions, et B replay/appareil→fenêtres→V0 pour Safoan avec interfaces convenues. Construire ensuite D/E (événements, santé et dashboard), mesurer le débit soutenu et remplacer V0 par le checkpoint V1 figé. Une alerte persistante, une disparition et une coupure doivent être traitées sans scénario qui injecte la bonne réponse. Diagnostics de texte sur développement ; évaluation finale de texte/événements à organiser avec Nevil, hors CSV T0.
+
+**Convergence :** Nevil produit les résultats du benchmark T0/T1–T3 à partir de nos fichiers ; l'équipe relie ces preuves à la bonne version de modèle dans la démo. G pour les résultats continus réels seulement si les acquisitions F le permettent. Sinon : démonstration fonctionnelle en replay + benchmark sur clips présentés séparément. Pas de réglage du modèle ou de politique d'alerte sur le test final pour embellir la démo.
+
+Répartition : Icham modèle/score/exports et support d'intégration ; Nevil contrat, validation et métriques finales, données/stress ; Safoan flux, UI et alertes ; Vincent baseline et export comparable. Capteur/collecte et contraintes opérationnelles : Icham avec responsable matériel à identifier. Aucun changement de propriétaire de code sans concertation.
+
+**Prochain bloc proposé pour notre session : C1 à C3, jusqu'à T0 livrable.** T1–T3 viennent ensuite sans retarder T0. Pas de nouveau boîtier, flotte distribuée, application mobile, achat matériel ni commande de vanne. Objectifs de délai/fausses alertes, responsable matériel, deadline hackathon et budget opérationnel restent à confirmer en parallèle ; aucun délai de réalisation garanti avant mesure.
 
 ## Références et limites
 

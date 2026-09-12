@@ -28,7 +28,8 @@ Icham
 - [x] Livraison Nevil `nevil/temporal-evidence` (`08562e3`) retrouvée et lue : contrat d'export, moteur d'évaluation, C0–C3, T0–T3, rapports. Tests/résultats non reproduits ici ; branche non intégrée. [[Journal Icham#Vérification des nouveaux livrables Nevil]].
 - [x] Consigne de livraison Nevil transmise : Icham fournit seulement les prédictions T0 et leur provenance ; Nevil exécute l'évaluation finale. [[Journal Icham#Consigne de livraison T0 et stress — Nevil]].
 - [ ] Icham : score de classe vérifié, V1 figée puis export T0 conforme sur les 402 clips val/test v2 ; contrôles de contrat sans scoring final. T1/T2/T3 ensuite si possible, même checkpoint, aucun réentraînement.
-- [ ] Icham/Nevil : raccorder les scores TSLM au contrat d'évaluation, définir un parcours validation seule, garder les contrôles du texte et aligner le périmètre bruit avant V1. Ne pas reconstruire un second moteur de métriques.
+- [ ] Icham/Nevil : convenir du suivi de développement validation seule ; T0 respecte le binaire/v2 gelé avec bruit, pas de nouvelle vue implicite. Diagnostics texte séparés, métriques finales chez Nevil ; aucune intégration complète du harness requise pour exporter.
+- [ ] Prochain bloc Icham proposé : C1 score/export → C2 V1 → C3 gel/reload/T0 ; T1–T3 ensuite si possible. Application/flux et collecte en parallèle, pas prérequis de T0. [[Plan surveillance continue]].
 - [ ] G0 Nevil/Icham : revue commune de l'audit et du `split_v2` publiés, avec leurs réserves et alignement du protocole. Ne pas utiliser `split_v1` (invalide).
 - [ ] Après G0, Icham/équipe : figer problème et classes ; arbitrer comparaison baseline + mesures/gabarit et test d'utilité proposés dans [[Challenge du cadrage de Nevil]].
 - [ ] G1 Tous : fixture réelle et contrats gelés.

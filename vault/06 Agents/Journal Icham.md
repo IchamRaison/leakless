@@ -4,6 +4,8 @@ Icham
 
 ## État actuel
 
+Plan consolidé proposé après la demande « Refaisons le plan avec ces nouvelles infos » : priorité de notre session au score, à la V1 puis au gel/reload et à l'export T0 pour Nevil ; stress optionnels ensuite. Produit continu et collecte en parallèle, sans attente matérielle imposée au benchmark. [[Plan surveillance continue]] §4 C1–C4 / §5 remplace l'ancien séquencement.
+
 Consigne finale reçue via Icham : livrer les probabilités T0 (puis stress optionnels) au harness de Nevil, ne pas produire nos propres métriques finales. Contrat relu, aucun export encore créé ; le calcul de score reste à ajouter à la V0.
 
 2026-09-12 : Icham corrige le scénario produit vers un appareil écoutant en permanence avec alertes automatiques. [[Plan surveillance continue]] rédigé, ancien parcours manuel marqué historique ; V0 conservée comme brique par fenêtre. Architecture continue, critères métier et collecte réelle proposés, non implémentés. Prochaine action : valider flux/capteur et critères, puis replay/V1 en parallèle ; pas de training lancé par cette demande de plan.
@@ -11,6 +13,13 @@ Consigne finale reçue via Icham : livrer les probabilités T0 (puis stress opti
 2026-09-12 : étapes 1 à 5 V0 réalisées avec Qwen 3.5-4B. TimeNet/v2 vérifiés sur les 1 000 WAV ; 40 étapes sur 8 groupes train, gradients/poids prouvés ; bundle autonome rechargé hors ligne et environnement reconstruit. Fonction Prediction et preuves dans `docs/TSLM_V0.md`. Qualité/application non validées. Passation détaillée : [[V0 ML - exécution]].
 
 Nouvelle dépendance découverte : Nevil a déjà publié un moteur d'évaluation sur `nevil/temporal-evidence`. Prochaine étape proposée : le réutiliser et convenir du raccordement des scores, sans lancer automatiquement une V1 ni un scoring test.
+
+## Consolidation du plan après le contrat Nevil
+
+- Cap produit inchangé : appareil en écoute continue et alertes. Rôle ML recentré sur un checkpoint figé et les fichiers demandés, pas sur un second moteur de métriques finales ou l'attente de toute la chaîne matérielle.
+- Plan révisé dans la note existante, pas de nouveau plan concurrent : C1 score/provenance et contrat, C2 train 598 / validation 208 avec suivi de développement, C3 gel/reload/export des 402 clips val/test, C4 stress T1–T3 facultatifs sans réentraînement. T0 livré avant les stress ; identité des exemples et règle de score figées. Les 194 clips test ne servent pas aux réglages.
+- Périmètre de session proposé : C1–C3. Safoan poursuit flux/replay et événements sur V0 puis V1 ; Nevil gère évaluation finale et besoins data ; Vincent le comparateur. Capture continue/critères d'alerte en parallèle avec un responsable matériel à identifier. Aucune disponibilité de matériel ou de captures longues inventée.
+- Source vault récupérée par `git pull --ff-only`, déjà à jour à `1bec840`. Relecture de passation/tableau/continuité et plan courant ; changements documentaires seulement. Aucun training, génération de CSV, stress, test final, action GPU ou message aux collaborateurs. Les choix techniques détaillés restent proposés à Icham.
 
 ## Consigne de livraison T0 et stress — Nevil
 
