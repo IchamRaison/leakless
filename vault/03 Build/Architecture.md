@@ -2,13 +2,13 @@
 
 Icham
 
-Statut : architecture cible pour PIPE, non encore implémentée. Voir [[Plan directeur agents]].
+Statut : chaîne ML V0 implémentée et testée avec TimeNet/OpenTSLM-SP/Qwen 3.5-4B ; application/baseline finale restent des chantiers séparés. [[V0 ML - exécution]] décrit ce qui est réellement vérifié ; le reste de cette note reste l'architecture cible.
 
 ## Chaîne de données
 
 WAV source + provenance → manifeste audité et split groupé → TimeNet/TimeF → transformation déterministe partagée → deux branches ML.
 
-Branche TSLM : séries d'énergie fréquentielle évoluant dans le temps → encodeur temporel/projecteur OpenTSLM-SP → modèle de langage → classe et observations.
+Branche TSLM V0 réelle : quatre bandes d'énergie `[4,64]` → encodeur temporel/projecteur OpenTSLM-SP adaptés → décodeur Qwen 3.5-4B gelé → classe et une description. Mesures DSP exposées séparément du texte généré. Bibliothèque `pipe.tslm`, détails/versions et limites dans [[V0 ML - exécution]].
 
 Branche baseline : statistiques agrégées de ces mêmes séries → Random Forest → classe et scores.
 

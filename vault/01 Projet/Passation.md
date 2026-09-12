@@ -8,7 +8,7 @@ CLI 0.10.6 et 12 skills installés ; capture Codex locale constatée. La recherc
 
 ## Dernier échange — 2026-09-12
 
-Icham rappelle que les datasets ont déjà été identifiés. Correction importante après recherche Entire et `git fetch origin` : Nevil a publié l'audit des 1 000 WAV et `split_v2` sur `nevil/setup` (`3efa08f`). `split_v1` est invalide et ne doit pas servir ; manifeste v2 présent, SHA-256 vérifié, audit/invariants rapportés mais non réexécutés ici. Pas de conversion TimeNet ni entraînement dans cette livraison. Reprendre ces artefacts, pas recommencer la recherche de source ; revue commune requise, notamment bruit inclus dans le négatif v2 versus protocole du vault. H100 accessible en SSH déjà vérifiée ; aucun nouveau calcul distant ou code ML lancé. Détails, liens et limites : [[Journal Icham]].
+**V0 mécanique réalisée jusqu'à l'étape 5**, avec Qwen 3.5-4B demandé en remplacement de Llama : 1 000 WAV via TimeNet, v2 vérifié, vrai batch GPU, 40 étapes sur 8 groupes train, poids temporels modifiés et Qwen gelé vérifié. Checkpoint autonome rechargé hors ligne dans un processus neuf puis dans un environnement reconstruit du lockfile ; même prédiction sur le clip validation fixé, erreurs contrôlées. Modèle `pipe-qwen3.5-4b-v0-a968405f`, fonction `Predictor.predict(wav_bytes)` livrable à Safoan, guide `docs/TSLM_V0.md` sur `feat/icham-tslm`. **Qualité non validée, application non intégrée, aucun score final annoncé.** Preuves, checksum et prochaine action : [[V0 ML - exécution]].
 
 ## Cadrage précédent
 
@@ -16,7 +16,7 @@ Icham demande une critique structurelle, la première réponse étant trop méth
 
 ## Reprise Safoan — 2026-09-12
 
-Branche `feat/safoan-app` créée depuis `3ea769d` et publiée. Entire 0.10.6 installé sur le Mac de Safoan, hooks Git valides et hooks Codex installés ; approbation via `/hooks` encore requise. Capture réelle non vérifiée. Aucun code application démarré. Détails et prochaine action S0 : [[Journal Safoan]].
+Livraison `feat/safoan-app` à `4dd7b88` : application/API et contrat Prediction présents, imports/audio/visualisation implémentés sur sa branche ; endpoint modèle encore indisponible volontairement. Code de l'API lu, tests application non rejoués par Icham. Suivi personnel : [[Journal Safoan]].
 
 ## Nom proposé
 
@@ -26,7 +26,7 @@ Nevil propose le nom LeakLess et confirme le cadrage software-only acoustique, s
 
 Direction de travail : PIPE, assistant d'analyse acoustique de fuites avec TimeNet, TSLM réellement entraîné, baseline et démo audio/spectrogramme. Icham a demandé un plan détaillé pour les quatre agents. La direction est organisée ; la faisabilité data/ML reste à valider aux portes G0/G2 de [[Plan directeur agents]].
 
-Documentation et répartition prêtes. Aucun modèle PIPE entraîné ni score PIPE vérifié. Le checkout principal inspecté reste consacré à l'outillage et aux notes ; `origin/nevil/setup` est désormais à `3efa08f`, avec audit, scripts de groupage/vérification et manifestes v2, non intégrés au checkout principal. Les artefacts ont été lus, pas rejoués sur les WAV. Une conversion TimeNet des données acoustiques n'est pas livrée dans cette branche. L'agent n'a ni provisionné de GPU ni lancé d'entraînement ; il a seulement vérifié la machine fournie par Icham.
+Un TSLM adapté fonctionne mécaniquement : [[V0 ML - exécution]], qualité non évaluée. Le rapport baseline de Nevil (`1289095`) reste un résultat séparé non reproduit par Icham ; aucune comparaison finale n'est déduite de la V0. `split_v1` invalide, v2 uniquement. Machine fournie par Icham, aucun nouveau GPU provisionné ; l'instance n'a pas été arrêtée.
 
 ## Lire pour reprendre sans le chat
 
