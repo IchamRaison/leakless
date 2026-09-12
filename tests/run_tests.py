@@ -377,6 +377,44 @@ def stress_t2_permutes_the_whole_clip():
 # C2b — validation du design. AUCUNE métrique val/test ici (commit A).
 # --------------------------------------------------------------------------- #
 @test
+def stress_runs_are_kept_out_of_the_control_ladder():
+    """Un run de stress n'est pas un échelon de l'échelle : il ne doit pas s'y glisser.
+
+    Il porte `stress_transform` dans sa provenance ; le rapport final s'en sert
+    pour le ranger à part et ne jamais le comparer au TSLM.
+    """
+    if not OPTS["runs_dir"]:
+        raise SkipTest("pas de --runs-dir")
+    base = Path(OPTS["runs_dir"])
+    for rid in ("c2b-T1", "c2b-T2", "c2b-T3"):
+        d = base / rid
+        if not d.exists():
+            raise SkipTest(f"{rid} absent")
+        meta = json.loads((d / "metadata.json").read_text())
+        assert meta.get("stress_transform") == rid.rsplit("-", 1)[1]
+        assert meta.get("retrained") is False, "un run de stress ne doit pas être réentraîné"
+    ladder = json.loads((d / "metadata.json").read_text())["control_level"]
+    assert ladder == "C2b"
+    # le run de base, lui, ne porte pas de stress_transform
+    assert "stress_transform" not in json.loads(
+        (base / "c2b" / "metadata.json").read_text())
+
+
+@test
+def stress_runs_share_the_base_model():
+    """Même checkpoint et même hyperparamètre que le run T0 : aucun réentraînement."""
+    if not OPTS["runs_dir"]:
+        raise SkipTest("pas de --runs-dir")
+    base = Path(OPTS["runs_dir"])
+    if not (base / "c2b-T2").exists():
+        raise SkipTest("runs de stress absents")
+    c0 = json.loads((base / "c2b" / "metadata.json").read_text())["selected_C"]
+    for rid in ("c2b-T1", "c2b-T2", "c2b-T3"):
+        ck = json.loads((base / rid / "metadata.json").read_text())["checkpoint"]
+        assert f"C={c0}" in ck, (rid, ck, c0)
+
+
+@test
 def c2b_has_exactly_six_features():
     """4 à 6 descripteurs maximum : pas de pêche aux descripteurs."""
     assert len(features.C2B_NAMES) == 6
