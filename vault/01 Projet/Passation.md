@@ -4,7 +4,7 @@ Icham
 
 ## Dernier échange — 2026-09-12
 
-Icham invoque explicitement `grill-me` sur son chantier ML. Premier tour en attente de réponses : priorité de la contribution ML, ambition de nouveauté, échéance d'une version intégrable et plafond de calcul. Aucun choix proposé n'est adopté à ce stade. Inventaire local délégué en lecture seule conformément au skill : Python 3.13.5, pas de torch/transformers dans cet interpréteur, aucun GPU NVIDIA identifié et aucun artefact ML dans le checkout. Nebius n'a pas été vérifié. Preuves dans [[Journal Icham]]. Prochaine action : recueillir les réponses et poursuivre l'entretien avant implémentation.
+Premier tour grill-me répondu : Icham privilégie les informations textuelles utiles et, si le temps manque, un résultat fonctionnel et défendable. Il veut le meilleur modèle concret, sans définir encore le critère de qualité. Pas d'heure de livraison imposée ; première version fonctionnelle rapidement pour les dépendances, recommandation de livraison précoce validée. Pas de limite budgétaire fixée pour l'instant. Icham demande explicitement de continuer à discuter avant toute implémentation. Prochain tour : contenu du texte, interaction attendue et latence acceptable. Inventaire local et réponses dans [[Journal Icham]] ; aucun lancement ML/GPU.
 
 ## Cadrage précédent
 

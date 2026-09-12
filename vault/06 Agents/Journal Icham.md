@@ -4,15 +4,19 @@ Icham
 
 ## État actuel
 
-2026-09-12 : entretien `grill-me` demandé explicitement sur le périmètre ML. Premier tour en attente des réponses d'Icham ; aucune recommandation encore adoptée. Inventaire local en lecture seule effectué ; aucun environnement installé, modèle chargé ou entraînement lancé.
+2026-09-12 : premier tour grill-me répondu. Priorité au texte utile, première livraison fonctionnelle rapidement et pas de plafond budgétaire fixé actuellement. « Meilleur modèle » reste à définir par les sorties et critères attendus. Icham demande explicitement de discuter avant implémentation ; aucun environnement installé, modèle chargé ou entraînement lancé.
 
 ## Dernière passation
 
-- Entretien : quatre décisions initiales, priorité de la contribution (classification/robustesse/restitution), ambition de nouveauté, échéance d'une version intégrable, budget de calcul. Les décisions dépendantes (base exacte, adaptation, sorties et déploiement) viendront après réponses et vérification des faits nécessaires.
+- Q1 : priorité explicitement choisie, transformer le signal en informations textuelles utiles. Si manque de temps, privilégier un résultat fonctionnel et défendable.
+- Q2 : ambition déclarée, faire le meilleur modèle concrètement. Pas de demande explicite de nouvelle architecture ; les critères de qualité et arbitrages restent ouverts.
+- Q3 : pas d'heure spécifique ; première version fonctionnelle rapidement pour construire les dépendances. Icham valide la recommandation du premier tour : livrer dès qu'un checkpoint recharge et prédit réellement, améliorer par versions et réserver le dernier tiers du temps disponible à l'évaluation/intégration.
+- Q4 : pas de limite budgétaire pour l'instant. Aucun plafond chiffré ni allocation cloud précise décidé ; aucune dépense engagée. Ne pas présenter ce choix comme une activation de crédit ou une autorisation de lancer une machine pendant la discussion.
+- Deuxième tour prévu : texte exact à produire, compte rendu fixe ou questions utilisateur, délai de réponse visé. Base précise, paramètres et déploiement dépendent de ces réponses et des ressources effectivement accessibles.
 - Recherche de faits déléguée au sous-agent `ml_runtime_facts` conformément à `/home/animus/.codex/skills/grilling/SKILL.md`. Commandes en lecture seule : `python3 --version`, `importlib.util.find_spec`, inspection des préfixes Python et des dossiers `.venv`/`venv`, `free -h`, `command -v nvidia-smi`, `lspci`, inventaire `rg --files` et lectures Git.
 - Constat local : Python `/usr/bin/python3` 3.13.5 ; aucun venv actif/projet à la racine ; torch et transformers absents de cet interpréteur, NumPy présent. RAM 7,6 GiB dont environ 1,1 GiB disponibles au relevé. `nvidia-smi` absent ; seul contrôleur graphique listé Intel HD Graphics 520. Aucun accès GPU distant déduit de ces observations.
 - Dépôt code inspecté à `3385f5a`, propre ; pas de code TSLM, manifeste Python, notebook, WAV ou checkpoint dans le checkout. Références Git déjà connues seulement, sans nouvelle vérification du distant du code ; `origin/nevil/setup` reste connu à `c47dc96` avec trois scripts non implémentés. Compte/crédit/quotas Nebius non inspectés.
-- Prochaine action : réponses au premier tour, puis exploration des décisions débloquées. L'implémentation attend la compréhension partagée demandée par le skill ; la continuité documentaire du vault reste assurée selon la règle d'Icham.
+- Prochaine action : réponses au deuxième tour ; respecter la demande explicite d'Icham de ne pas implémenter avant discussion. La continuité documentaire du vault reste assurée.
 
 ## Installation du skill — étape précédente
 
