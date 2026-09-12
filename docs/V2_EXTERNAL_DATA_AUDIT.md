@@ -6,7 +6,22 @@ Audit du 12 septembre 2026, sources publiques et petits échantillons seulement.
 
 **Aghashahi est réellement accessible sans compte** et son sous-ensemble hydrophone peut être préparé sans rééchantillonnage. L'inventaire réel contient **120 signaux étiquetés + 2 bruits ambiants**, pas 280 hydrophones. L'adaptateur de préparation est implémenté ; ses sept tests synthétiques CPU passent. Le contrôle des noms/tailles a également été appliqué au répertoire central ZIP réel, sans télécharger toute l'archive.
 
-**Pas encore exécuté :** téléchargement intégral, vérification locale de son SHA-256 complet, préparation des 3 600 fenêtres, audit des doublons entre corpus et gel du manifeste final. Le code ne calcule aucun score. Une préparation réussie ne prouvera ni indépendance de sessions ni fiabilité terrain.
+**Mise à jour réelle, 13 septembre :** archive intégrale et convertisseur vérifiés,
+préparation des 3 600 fenêtres primaires et 60 bruits terminée depuis `aaab4af`.
+Artefacts : `/home/hicham/pipe-v0/data/external/aghashahi-v1` ; reçus dans
+`docs/evidence/tslm-v2/external-preparation/`. Aucun score de modèle calculé.
+
+Audit exhaustif de recouvrement terminé depuis `41dd8b2` : 122 000 paires
+(1 000 WAV historiques × 122 enregistrements externes), 232 001 décalages entiers
+par paire dans les trente secondes conservées. **Aucun candidat à
+`|Pearson| >= 0.995`, aucune paire/fenêtre non évaluable, aucun doublon exact.**
+Gain, composante continue et inversion de polarité sont couverts ; filtrage,
+rééchantillonnage et décalages fractionnaires ne le sont pas. Ce résultat n'est
+pas une preuve d'indépendance des sessions. Aucune exclusion automatique.
+Rapport : `docs/evidence/tslm-v2/external-overlap-001/summary.json`, SHA
+`5a1a4f090706a74fe7ec65d43017a76fb5841cd5464035294b85e10c5f8233fd`.
+Il reste à figer le manifeste d'évaluation explicite et le modèle/seuil avant
+l'inférence externe ; les sections d'audit initial ci-dessous restent historiques.
 
 Hong Kong est également public, mais présente un confondant important : **28 des 40 fichiers hydrophone fuite sont à 4 096 Hz ; les 40 non-fuite et les 12 autres fuite sont à 8 092 Hz**. Ces valeurs viennent des 80 en-têtes WAV, pas d'une supposition à partir de la page. Ce jeu ne remplace pas automatiquement Aghashahi comme confirmation primaire.
 
