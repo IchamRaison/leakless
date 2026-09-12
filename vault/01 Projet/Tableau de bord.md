@@ -25,7 +25,22 @@ Icham
 - [x] Évaluation CPU neuf runs et huit comparaisons appariées terminées ; AUC T0 clip/groupe 0,665/0,861, pas de gain établi face à C1. [[Évaluation qualité V1 - exécution]].
 - [x] Audit texte 208 val + 194 test terminé : bandes test 184/194 correctes, 36/194 désaccords classe/score, format 194/194 ; aucun changement du modèle.
 - [x] Revue indépendante terminée : 396 valeurs, 68 IC et tous les compteurs texte concordants ; rapport/preuves publiés `c8dcb9d`, branche `feat/icham-quality-eval`, SHA distant vérifié.
-- [ ] Décider d'une V2/protocole distinct ; limite cache/WAV de campagne à diagnostiquer sur développement, pas de réglage rétroactif sur test.
+- [x] Plan V2 proposé à la demande d'Icham, sans commencer : [[Plan V2 - fiabilité et parité des scores]].
+- [x] Objectif d'implémentation V2 autorisé ; worktree isolé, SSH/H100 et intégrité V1 revérifiés. [[V2 ML - exécution]].
+- [x] Préflight CPU V2 sur 209 entrées : cache/TimeF/arrondi float32 identiques, chemin WAV direct différent ; outil/preuves `e22366f`, cinq tests ML réussis.
+- [x] Cause V2 démontrée par traces et reload : passage float32 TimeF ; correctif versionné `aaab4af`, 806 entrées canoniques et 54 tests runtime réussis.
+- [x] Aghashahi téléchargé/vérifié/préparé ; audit exhaustif de recouvrement terminé, zéro candidat sur 122 000 paires au seuil fixé, limites explicites. Aucun score externe.
+- [x] Seconde cause démontrée : dépendance numérique de l'encodeur au lot ; intervention par clip exacte sur vingt contextes, hooks restaurés et poids inchangés. [[V2 ML - exécution]].
+- [x] Second correctif opt-in publié `0b1399e`, 77 tests runtime passent, nouvelle référence mêmes poids V1 créée.
+- [x] Nouveau gate 209 et reload neuf PASS, écart maximal zéro ; reçu `parity-gate-reload-002`, SHA `fb44fbb8…`. Ancien gate FAILED conservé.
+- [x] Compatibilité V1 `0b1399e` vérifiée sur les quatre témoins, scores historiques exacts ; aucun export V1 modifié.
+- [x] Diagnostic 598 train terminé : sonde exacte TimeNet/C1 et autopsie supervision/gradients ; A/C retenues, B omise faute de justification. [[V2 ML - exécution]].
+- [x] Manifeste externe vérifié/figé `84007801…`, 3 600 fenêtres primaires ; aucun score externe.
+- [ ] Vérifier nouveau code/cache commun A/C, puis gates complets 209 et reloads A/C avant les six fits comparatifs.
+- [x] Objectif final utilisateur ajouté : évolution d'événement/investigation et benchmark gabarit → Qwen sur mesures → TSLM sur séries. [[Plan V2 - fiabilité et parité des scores#7. Objectif final — démontrer la valeur du TSLM]].
+- [ ] Construire et évaluer ce benchmark final sur des événements/historiques/contextes réservés ; ne pas confondre campagne A/C et preuve d'utilité du TSLM.
+- [x] Reprise dans clone sain `/home/animus/ehl-hackathon-zurich-v2-recovery`, `e9c8ddd` publié ; ancien Git endommagé conservé, aucun reset/destruction.
+- [ ] Après parité : cohérence de restitution, diagnostic train et campagne V2 bornée ; confirmation sur de nouvelles données réservées, pas sur le test V1 déjà consulté.
 - [x] Icham a levé l'exclusivité Nevil puis lancé l'objectif d'évaluation complète. [[Protocole évaluation]].
 - [x] Icham autorise l'implémentation V1 complète jusqu'à T0/T1–T3 ; runtime H100 et données existantes revérifiés. [[V1 ML - exécution]].
 - [x] Scoring continu implémenté, huit tests CPU et contrôle H100 sur quatre clips train réussis ; aucune évaluation de qualité. [[V1 ML - exécution]].

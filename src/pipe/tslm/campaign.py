@@ -58,19 +58,42 @@ def epoch_batches(count, batch_size, seed, epoch):
 
 
 def train_epoch(model, optimizer, samples, config, epoch):
-    """Une époque, mêmes lots/gradients que V1 ; sélection et logs restent à l'appelant."""
+    """Une époque ; accumulation V2 optionnelle pondérée par tokens supervisés."""
     import torch
     from opentslm.time_series_datasets.util import extend_time_series_to_match_patch_size_and_aggregate as collate
 
+    microbatch_size = config.get("microbatch_size")
+    if "microbatch_size" in config and (type(microbatch_size) is not int
+                                        or not 1 <= microbatch_size <= config["batch_size"]):
+        raise ValueError("microbatch_size doit être un entier entre 1 et batch_size")
     model.train()
     model.llm.eval()
     for indices in epoch_batches(len(samples), config["batch_size"], config["seed"], epoch):
-        batch = collate([{**samples[i]} for i in indices], normalize=False)
-        optimizer.zero_grad(set_to_none=True)
-        loss = model.compute_loss(batch)
-        if not torch.isfinite(loss):
-            raise RuntimeError("Loss non finie ; campagne arrêtée")
-        loss.backward()
+        if microbatch_size is None:
+            # Chemin V1 inchangé, notamment aucun nouveau besoin de tokenisation.
+            batch = collate([{**samples[i]} for i in indices], normalize=False)
+            optimizer.zero_grad(set_to_none=True)
+            loss = model.compute_loss(batch)
+            if not torch.isfinite(loss):
+                raise RuntimeError("Loss non finie ; campagne arrêtée")
+            loss.backward()
+        else:
+            counts = [len(model.tokenizer.encode(samples[i]["answer"] + model.get_eos_token(),
+                                                add_special_tokens=False)) for i in indices]
+            if any(count == 0 for count in counts):
+                raise ValueError("Chaque réponse doit fournir des tokens supervisés")
+            total_tokens, weighted_loss = sum(counts), 0.0
+            optimizer.zero_grad(set_to_none=True)
+            for start in range(0, len(indices), microbatch_size):
+                chunk = indices[start:start + microbatch_size]
+                batch = collate([{**samples[i]} for i in chunk], normalize=False)
+                loss = model.compute_loss(batch)
+                if not torch.isfinite(loss):
+                    raise RuntimeError("Loss non finie ; campagne arrêtée")
+                weight = sum(counts[start:start + microbatch_size]) / total_tokens
+                (loss * weight).backward()
+                weighted_loss += loss.item() * weight
+                del loss, batch  # Ne pas conserver le graphe d'un microbatch au suivant.
         gradients = {}
         for name, module in (("encoder", model.encoder), ("projector", model.projector)):
             parameters = list(module.parameters())
@@ -83,8 +106,12 @@ def train_epoch(model, optimizer, samples, config, epoch):
         torch.nn.utils.clip_grad_norm_([p for p in model.parameters() if p.requires_grad],
                                       config["gradient_clip"], error_if_nonfinite=True)
         optimizer.step()
-        yield {"epoch": epoch, "batch_samples": len(indices), "loss": loss.item(),
-               "gradient_norms": gradients}
+        record = {"epoch": epoch, "batch_samples": len(indices),
+                  "loss": loss.item() if microbatch_size is None else weighted_loss,
+                  "gradient_norms": gradients}
+        if microbatch_size is not None:
+            record.update(microbatch_size=microbatch_size, supervised_tokens=total_tokens)
+        yield record
 
 
 def diagnostic_rows(rows, count=8):

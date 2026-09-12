@@ -199,12 +199,18 @@ def prepare_development(data_root: Path, manifest_dir: Path, timef_dir: Path, ou
 
     Aucun test décodé, pas de réécriture des caches historiques. La conversion
     float32 est celle apprise en V1 ; seule son identité explicite est nouvelle.
+    Les mesures et textes d'amplitude sont conservés pour le cache commun A/C ;
+    leur présence n'active pas la variante C dans un modèle ou une campagne.
     """
+    from pipe.tslm.preprocessing import (AMPLITUDE_EVIDENCE_VERSION,
+        amplitude_features, amplitude_from_normalized, amplitude_text)
+
     rows = {r["clip_id"]: r for r in load_manifest(manifest_dir) if r["fold"] in ("train", "val")}
     with (manifest_dir / "split_v2_audit.csv").open() as stream:
         expected_md5 = {r["clip_id"]: r["md5"] for r in csv.DictReader(stream)}
     output.mkdir(parents=True, exist_ok=False)
-    cache = {fold: {"ids": [], "series": []} for fold in ("train", "val")}
+    cache = {fold: {"ids": [], "series": [], "amplitude_features": [], "amplitude_text": []}
+             for fold in ("train", "val")}
     seen = set()
     with TimeFReader(DatasetVersion.open_local(timef_dir)) as reader:
         for record in reader.iter_records(record_ids=sorted(rows), with_annotations=False):
@@ -219,23 +225,40 @@ def prepare_development(data_root: Path, manifest_dir: Path, timef_dir: Path, ou
             np.testing.assert_array_equal(observed, _normalise(waveform).astype(np.float32))
             series = preprocess_audio(waveform, 8000, version=CANONICAL_VERSION)
             np.testing.assert_array_equal(series, band_series(observed))
+            raw_features = amplitude_features(waveform, 8000)
+            timef_features = amplitude_from_normalized(observed)
+            np.testing.assert_array_equal(raw_features, timef_features)
+            raw_text, timef_text = amplitude_text(raw_features), amplitude_text(timef_features)
+            if raw_text != timef_text:
+                raise ValueError("Texte des mesures C1 différent entre WAV canonique et TimeF")
             cache[rows[cid]["fold"]]["ids"].append(cid)
             cache[rows[cid]["fold"]]["series"].append(series)
+            cache[rows[cid]["fold"]]["amplitude_features"].append(raw_features)
+            cache[rows[cid]["fold"]]["amplitude_text"].append(raw_text)
             seen.add(cid)
     if seen != set(rows):
         raise ValueError("Enregistrements de développement manquants")
     for fold, item in cache.items():
         with (output / f"{fold}.npz").open("xb") as stream:
             np.savez_compressed(stream, ids=np.asarray(item["ids"]), series=np.stack(item["series"]),
-                                preprocessing_version=CANONICAL_VERSION)
+                                preprocessing_version=CANONICAL_VERSION,
+                                amplitude_features=np.stack(item["amplitude_features"]),
+                                amplitude_text=np.asarray(item["amplitude_text"]),
+                                amplitude_evidence_version=AMPLITUDE_EVIDENCE_VERSION)
     report = {"protocol": PROTOCOL, "preprocessing_version": CANONICAL_VERSION,
               "manifest_sha256": MANIFEST_HASHES["split_v2.csv"], "records": len(rows),
               "fold_counts": {fold: len(item["ids"]) for fold, item in cache.items()},
               "test_audio_or_cache_opened": False, "canonical_vs_timef_exact": True,
+              "amplitude_evidence_version": AMPLITUDE_EVIDENCE_VERSION,
+              "amplitude_records_verified": len(seen),
+              "amplitude_features_raw_vs_timef_exact": True,
+              "amplitude_text_raw_vs_timef_exact": True,
               "timef_manifest_sha256": hashlib.sha256((timef_dir / "manifest.json").read_bytes()).hexdigest(),
               "cache_sha256": {fold: hashlib.sha256((output / f"{fold}.npz").read_bytes()).hexdigest() for fold in cache},
               "source_sha256": {name: hashlib.sha256(Path(__file__).with_name(name).read_bytes()).hexdigest()
                                 for name in ("prepare.py", "preprocessing.py")}}
+    feature_source = Path(__file__).resolve().parents[3] / "scripts/eval/harness/features.py"
+    report["source_sha256"]["features.py"] = hashlib.sha256(feature_source.read_bytes()).hexdigest()
     with (output / "preparation.json").open("x") as stream:
         json.dump(report, stream, indent=2, allow_nan=False)
         stream.write("\n")

@@ -1,0 +1,6240 @@
+{
+  "TimeNet256": {
+    "n_features": 256,
+    "folds": [
+      {
+        "n_clips": 98,
+        "n_clusters": 34,
+        "n_clusters_leak": 26,
+        "n_clusters_non_leak": 8,
+        "n_clips_leak": 73,
+        "n_clips_non_leak": 25,
+        "threshold": 0.5,
+        "aggregation": "median",
+        "clip_level": {
+          "roc_auc": 0.619726,
+          "pr_auc": 0.772332,
+          "macro_f1": 0.501677,
+          "balanced_accuracy": 0.559726,
+          "leak_recall": 0.479452,
+          "false_positive_rate": 0.36,
+          "brier": 0.371981,
+          "tp": 35,
+          "fp": 9,
+          "fn": 38,
+          "tn": 16
+        },
+        "cluster_level": {
+          "roc_auc": 0.711538,
+          "pr_auc": 0.872635,
+          "macro_f1": 0.477868,
+          "balanced_accuracy": 0.543269,
+          "leak_recall": 0.461538,
+          "false_positive_rate": 0.375,
+          "brier": 0.308448,
+          "tp": 12,
+          "fp": 3,
+          "fn": 14,
+          "tn": 5
+        },
+        "fold_id": 0,
+        "n_fit_clips": 500,
+        "group_roc_auc_full": 0.7115384615384616,
+        "clip_roc_auc_full": 0.6197260273972602
+      },
+      {
+        "n_clips": 225,
+        "n_clusters": 34,
+        "n_clusters_leak": 26,
+        "n_clusters_non_leak": 8,
+        "n_clips_leak": 89,
+        "n_clips_non_leak": 136,
+        "threshold": 0.5,
+        "aggregation": "median",
+        "clip_level": {
+          "roc_auc": 0.530073,
+          "pr_auc": 0.440289,
+          "macro_f1": 0.484353,
+          "balanced_accuracy": 0.503635,
+          "leak_recall": 0.595506,
+          "false_positive_rate": 0.588235,
+          "brier": 0.390572,
+          "tp": 53,
+          "fp": 80,
+          "fn": 36,
+          "tn": 56
+        },
+        "cluster_level": {
+          "roc_auc": 0.586538,
+          "pr_auc": 0.778475,
+          "macro_f1": 0.575,
+          "balanced_accuracy": 0.596154,
+          "leak_recall": 0.692308,
+          "false_positive_rate": 0.5,
+          "brier": 0.236164,
+          "tp": 18,
+          "fp": 4,
+          "fn": 8,
+          "tn": 4
+        },
+        "fold_id": 1,
+        "n_fit_clips": 373,
+        "group_roc_auc_full": 0.5865384615384616,
+        "clip_roc_auc_full": 0.5300727032385988
+      },
+      {
+        "n_clips": 275,
+        "n_clusters": 34,
+        "n_clusters_leak": 26,
+        "n_clusters_non_leak": 8,
+        "n_clips_leak": 132,
+        "n_clips_non_leak": 143,
+        "threshold": 0.5,
+        "aggregation": "median",
+        "clip_level": {
+          "roc_auc": 0.533905,
+          "pr_auc": 0.503867,
+          "macro_f1": 0.48939,
+          "balanced_accuracy": 0.48951,
+          "leak_recall": 0.454545,
+          "false_positive_rate": 0.475524,
+          "brier": 0.371253,
+          "tp": 60,
+          "fp": 68,
+          "fn": 72,
+          "tn": 75
+        },
+        "cluster_level": {
+          "roc_auc": 0.610577,
+          "pr_auc": 0.824011,
+          "macro_f1": 0.453571,
+          "balanced_accuracy": 0.524038,
+          "leak_recall": 0.423077,
+          "false_positive_rate": 0.375,
+          "brier": 0.311417,
+          "tp": 11,
+          "fp": 3,
+          "fn": 15,
+          "tn": 5
+        },
+        "fold_id": 2,
+        "n_fit_clips": 323,
+        "group_roc_auc_full": 0.6105769230769231,
+        "clip_roc_auc_full": 0.533905488450943
+      }
+    ],
+    "mean_group_roc_auc": 0.6362179487179488,
+    "mean_clip_roc_auc": 0.5612347396956007,
+    "predictions_by_fold": [
+      {
+        "clip_id": "c05d8158c3707",
+        "inner_fold": 0,
+        "probability_leak": 0.00781678780913353
+      },
+      {
+        "clip_id": "c064b4d3a7013",
+        "inner_fold": 0,
+        "probability_leak": 0.07228980958461761
+      },
+      {
+        "clip_id": "c07c975f95b7e",
+        "inner_fold": 0,
+        "probability_leak": 0.3378177583217621
+      },
+      {
+        "clip_id": "c10d8db301dc4",
+        "inner_fold": 0,
+        "probability_leak": 1.0
+      },
+      {
+        "clip_id": "c112f81c56ca1",
+        "inner_fold": 0,
+        "probability_leak": 0.9256421327590942
+      },
+      {
+        "clip_id": "c13b609dbac9e",
+        "inner_fold": 0,
+        "probability_leak": 0.22882646322250366
+      },
+      {
+        "clip_id": "c1683ed31e294",
+        "inner_fold": 0,
+        "probability_leak": 0.3756099343299866
+      },
+      {
+        "clip_id": "c186eb3b4bb13",
+        "inner_fold": 0,
+        "probability_leak": 0.7423733472824097
+      },
+      {
+        "clip_id": "c1a8f1d23de2c",
+        "inner_fold": 0,
+        "probability_leak": 0.20858201384544373
+      },
+      {
+        "clip_id": "c1e54ae43a9f6",
+        "inner_fold": 0,
+        "probability_leak": 0.9522295594215393
+      },
+      {
+        "clip_id": "c1f6f5dc288b2",
+        "inner_fold": 0,
+        "probability_leak": 0.9999463558197021
+      },
+      {
+        "clip_id": "c20b154e99c77",
+        "inner_fold": 0,
+        "probability_leak": 0.0006598481559194624
+      },
+      {
+        "clip_id": "c239d96cc7621",
+        "inner_fold": 0,
+        "probability_leak": 0.00426210043951869
+      },
+      {
+        "clip_id": "c2417970779b9",
+        "inner_fold": 0,
+        "probability_leak": 0.9993066787719727
+      },
+      {
+        "clip_id": "c255805e4789f",
+        "inner_fold": 0,
+        "probability_leak": 0.6404271125793457
+      },
+      {
+        "clip_id": "c272ce4cb0a81",
+        "inner_fold": 0,
+        "probability_leak": 0.13367806375026703
+      },
+      {
+        "clip_id": "c27615e885482",
+        "inner_fold": 0,
+        "probability_leak": 0.7219570279121399
+      },
+      {
+        "clip_id": "c2c13a3c5c847",
+        "inner_fold": 0,
+        "probability_leak": 0.11693330109119415
+      },
+      {
+        "clip_id": "c30617b58ed2d",
+        "inner_fold": 0,
+        "probability_leak": 0.9777162671089172
+      },
+      {
+        "clip_id": "c31dfc36d9429",
+        "inner_fold": 0,
+        "probability_leak": 0.16770854592323303
+      },
+      {
+        "clip_id": "c32e9ddbcf512",
+        "inner_fold": 0,
+        "probability_leak": 0.4908018708229065
+      },
+      {
+        "clip_id": "c332cd97e3344",
+        "inner_fold": 0,
+        "probability_leak": 0.19459782540798187
+      },
+      {
+        "clip_id": "c33b9ec7b16e8",
+        "inner_fold": 0,
+        "probability_leak": 0.0002827138523571193
+      },
+      {
+        "clip_id": "c3bd3873e11c7",
+        "inner_fold": 0,
+        "probability_leak": 2.900762774515897e-05
+      },
+      {
+        "clip_id": "c42044c6c967e",
+        "inner_fold": 0,
+        "probability_leak": 0.0046471781097352505
+      },
+      {
+        "clip_id": "c475678ae6ef8",
+        "inner_fold": 0,
+        "probability_leak": 0.30085819959640503
+      },
+      {
+        "clip_id": "c4c44b6b5ad5b",
+        "inner_fold": 0,
+        "probability_leak": 0.0545213520526886
+      },
+      {
+        "clip_id": "c4e7f6b33ed4c",
+        "inner_fold": 0,
+        "probability_leak": 0.9633708000183105
+      },
+      {
+        "clip_id": "c4ef9953000c4",
+        "inner_fold": 0,
+        "probability_leak": 0.8784905672073364
+      },
+      {
+        "clip_id": "c4f0131614c87",
+        "inner_fold": 0,
+        "probability_leak": 0.33949434757232666
+      },
+      {
+        "clip_id": "c538ffa19559f",
+        "inner_fold": 0,
+        "probability_leak": 0.41397809982299805
+      },
+      {
+        "clip_id": "c5405732725d3",
+        "inner_fold": 0,
+        "probability_leak": 0.9999945163726807
+      },
+      {
+        "clip_id": "c561239dda450",
+        "inner_fold": 0,
+        "probability_leak": 0.9983921647071838
+      },
+      {
+        "clip_id": "c58521959ee09",
+        "inner_fold": 0,
+        "probability_leak": 0.0008481243276037276
+      },
+      {
+        "clip_id": "c5c25beb01fd8",
+        "inner_fold": 0,
+        "probability_leak": 0.10412638634443283
+      },
+      {
+        "clip_id": "c63e2c213d4c3",
+        "inner_fold": 0,
+        "probability_leak": 0.5457068085670471
+      },
+      {
+        "clip_id": "c6cfb8b366b9b",
+        "inner_fold": 0,
+        "probability_leak": 0.004352274350821972
+      },
+      {
+        "clip_id": "c6d2dba66c5bf",
+        "inner_fold": 0,
+        "probability_leak": 0.5134056210517883
+      },
+      {
+        "clip_id": "c6ed234a13629",
+        "inner_fold": 0,
+        "probability_leak": 0.0027424527797847986
+      },
+      {
+        "clip_id": "c70e042ff2fb4",
+        "inner_fold": 0,
+        "probability_leak": 0.004231217782944441
+      },
+      {
+        "clip_id": "c721366fe8a44",
+        "inner_fold": 0,
+        "probability_leak": 0.8254007697105408
+      },
+      {
+        "clip_id": "c73eef6098927",
+        "inner_fold": 0,
+        "probability_leak": 0.9680343270301819
+      },
+      {
+        "clip_id": "c749d0ec0a4da",
+        "inner_fold": 0,
+        "probability_leak": 0.9871609210968018
+      },
+      {
+        "clip_id": "c74f741f43ba0",
+        "inner_fold": 0,
+        "probability_leak": 0.007154418155550957
+      },
+      {
+        "clip_id": "c75ff7781df3f",
+        "inner_fold": 0,
+        "probability_leak": 0.8945574760437012
+      },
+      {
+        "clip_id": "c7788ae6ad436",
+        "inner_fold": 0,
+        "probability_leak": 0.9386756420135498
+      },
+      {
+        "clip_id": "c79d76b0a85c9",
+        "inner_fold": 0,
+        "probability_leak": 0.6216717958450317
+      },
+      {
+        "clip_id": "c8104a15f00d7",
+        "inner_fold": 0,
+        "probability_leak": 1.3744860552833416e-05
+      },
+      {
+        "clip_id": "c8289c334c228",
+        "inner_fold": 0,
+        "probability_leak": 0.031228184700012207
+      },
+      {
+        "clip_id": "c852aee3c1dab",
+        "inner_fold": 0,
+        "probability_leak": 0.8596670031547546
+      },
+      {
+        "clip_id": "c86336a54b952",
+        "inner_fold": 0,
+        "probability_leak": 0.35266539454460144
+      },
+      {
+        "clip_id": "c883d3972e62d",
+        "inner_fold": 0,
+        "probability_leak": 0.3421170115470886
+      },
+      {
+        "clip_id": "c8d19965fb166",
+        "inner_fold": 0,
+        "probability_leak": 0.19569455087184906
+      },
+      {
+        "clip_id": "c8f1e38ca2320",
+        "inner_fold": 0,
+        "probability_leak": 0.5326967239379883
+      },
+      {
+        "clip_id": "c8f8340030ca2",
+        "inner_fold": 0,
+        "probability_leak": 0.6769008636474609
+      },
+      {
+        "clip_id": "c95340245af0b",
+        "inner_fold": 0,
+        "probability_leak": 0.6031433939933777
+      },
+      {
+        "clip_id": "c9ab733ae4c2a",
+        "inner_fold": 0,
+        "probability_leak": 0.41117623448371887
+      },
+      {
+        "clip_id": "c9c22a3a7bbb1",
+        "inner_fold": 0,
+        "probability_leak": 0.6487334966659546
+      },
+      {
+        "clip_id": "ca231577fb9d2",
+        "inner_fold": 0,
+        "probability_leak": 3.7444271583808586e-05
+      },
+      {
+        "clip_id": "ca72bf20e16e1",
+        "inner_fold": 0,
+        "probability_leak": 0.03898744657635689
+      },
+      {
+        "clip_id": "cab1fabf80cc0",
+        "inner_fold": 0,
+        "probability_leak": 0.8033839464187622
+      },
+      {
+        "clip_id": "cac54aa1d814e",
+        "inner_fold": 0,
+        "probability_leak": 0.004984414204955101
+      },
+      {
+        "clip_id": "cb1836abaeda9",
+        "inner_fold": 0,
+        "probability_leak": 0.011946083977818489
+      },
+      {
+        "clip_id": "cb1b6d00cc612",
+        "inner_fold": 0,
+        "probability_leak": 0.9100161194801331
+      },
+      {
+        "clip_id": "cbc4c8ad3580b",
+        "inner_fold": 0,
+        "probability_leak": 0.14396005868911743
+      },
+      {
+        "clip_id": "cbefbc2bfab6d",
+        "inner_fold": 0,
+        "probability_leak": 0.7612930536270142
+      },
+      {
+        "clip_id": "cc0bb75701548",
+        "inner_fold": 0,
+        "probability_leak": 0.3437879681587219
+      },
+      {
+        "clip_id": "cc3ea9de7c014",
+        "inner_fold": 0,
+        "probability_leak": 0.03282419219613075
+      },
+      {
+        "clip_id": "cc907703b5ee8",
+        "inner_fold": 0,
+        "probability_leak": 0.9773468375205994
+      },
+      {
+        "clip_id": "cc96f393f9909",
+        "inner_fold": 0,
+        "probability_leak": 0.08751679956912994
+      },
+      {
+        "clip_id": "cca73bdc5fabd",
+        "inner_fold": 0,
+        "probability_leak": 0.6037417650222778
+      },
+      {
+        "clip_id": "ccaebe2671432",
+        "inner_fold": 0,
+        "probability_leak": 0.5064262747764587
+      },
+      {
+        "clip_id": "cccd7093a14f3",
+        "inner_fold": 0,
+        "probability_leak": 0.000375724135665223
+      },
+      {
+        "clip_id": "ccee26aeeb116",
+        "inner_fold": 0,
+        "probability_leak": 0.11032092571258545
+      },
+      {
+        "clip_id": "cd1d69cf431ed",
+        "inner_fold": 0,
+        "probability_leak": 0.07281520962715149
+      },
+      {
+        "clip_id": "cd3e24c8fddaa",
+        "inner_fold": 0,
+        "probability_leak": 0.025701627135276794
+      },
+      {
+        "clip_id": "cd57a1dedb807",
+        "inner_fold": 0,
+        "probability_leak": 0.8008447289466858
+      },
+      {
+        "clip_id": "cd5c4ed20c428",
+        "inner_fold": 0,
+        "probability_leak": 0.7287000417709351
+      },
+      {
+        "clip_id": "cd7dbf2e752b0",
+        "inner_fold": 0,
+        "probability_leak": 0.13481134176254272
+      },
+      {
+        "clip_id": "cd8911748e7db",
+        "inner_fold": 0,
+        "probability_leak": 0.5064491629600525
+      },
+      {
+        "clip_id": "cdaeac1be16b4",
+        "inner_fold": 0,
+        "probability_leak": 2.7234111257712357e-05
+      },
+      {
+        "clip_id": "cdb43ef923ce5",
+        "inner_fold": 0,
+        "probability_leak": 0.6985722184181213
+      },
+      {
+        "clip_id": "cdbd5104a19f9",
+        "inner_fold": 0,
+        "probability_leak": 0.9992586970329285
+      },
+      {
+        "clip_id": "cde2fefb4bce3",
+        "inner_fold": 0,
+        "probability_leak": 0.7540584802627563
+      },
+      {
+        "clip_id": "ce083251e3ac8",
+        "inner_fold": 0,
+        "probability_leak": 0.6282958388328552
+      },
+      {
+        "clip_id": "ce552fe86d7ad",
+        "inner_fold": 0,
+        "probability_leak": 0.10675840079784393
+      },
+      {
+        "clip_id": "ce5879bae43e3",
+        "inner_fold": 0,
+        "probability_leak": 0.13562551140785217
+      },
+      {
+        "clip_id": "ce5db6f4b0065",
+        "inner_fold": 0,
+        "probability_leak": 0.7930423021316528
+      },
+      {
+        "clip_id": "ce5f08be3057b",
+        "inner_fold": 0,
+        "probability_leak": 4.6230006773839705e-06
+      },
+      {
+        "clip_id": "ce771af614f4e",
+        "inner_fold": 0,
+        "probability_leak": 0.2945208251476288
+      },
+      {
+        "clip_id": "ce9e94229ff8d",
+        "inner_fold": 0,
+        "probability_leak": 0.9269089698791504
+      },
+      {
+        "clip_id": "ce9f8e682dd05",
+        "inner_fold": 0,
+        "probability_leak": 0.9104102253913879
+      },
+      {
+        "clip_id": "cf0203b39f111",
+        "inner_fold": 0,
+        "probability_leak": 0.7934052348136902
+      },
+      {
+        "clip_id": "cf63fc929563a",
+        "inner_fold": 0,
+        "probability_leak": 0.003437043633311987
+      },
+      {
+        "clip_id": "cfc0e625fbb0d",
+        "inner_fold": 0,
+        "probability_leak": 0.5173560380935669
+      },
+      {
+        "clip_id": "cfe96ddf1bb64",
+        "inner_fold": 0,
+        "probability_leak": 0.18102580308914185
+      },
+      {
+        "clip_id": "cfea1368453c6",
+        "inner_fold": 0,
+        "probability_leak": 0.4744947552680969
+      },
+      {
+        "clip_id": "cffc7c8347bce",
+        "inner_fold": 0,
+        "probability_leak": 1.087246459974267e-06
+      },
+      {
+        "clip_id": "c04206cc802ff",
+        "inner_fold": 1,
+        "probability_leak": 0.5248851180076599
+      },
+      {
+        "clip_id": "c050246533b34",
+        "inner_fold": 1,
+        "probability_leak": 0.4327625036239624
+      },
+      {
+        "clip_id": "c05d66d9aed9d",
+        "inner_fold": 1,
+        "probability_leak": 0.8696047067642212
+      },
+      {
+        "clip_id": "c062288ccfbf0",
+        "inner_fold": 1,
+        "probability_leak": 0.9977044463157654
+      },
+      {
+        "clip_id": "c06568d1b9f0f",
+        "inner_fold": 1,
+        "probability_leak": 0.946315586566925
+      },
+      {
+        "clip_id": "c07e9a820a771",
+        "inner_fold": 1,
+        "probability_leak": 0.8634558320045471
+      },
+      {
+        "clip_id": "c08a67eff0015",
+        "inner_fold": 1,
+        "probability_leak": 0.7989176511764526
+      },
+      {
+        "clip_id": "c0961e1ade67e",
+        "inner_fold": 1,
+        "probability_leak": 0.0014057838125154376
+      },
+      {
+        "clip_id": "c09f5a9f2c37e",
+        "inner_fold": 1,
+        "probability_leak": 0.007286604028195143
+      },
+      {
+        "clip_id": "c0cb708e68599",
+        "inner_fold": 1,
+        "probability_leak": 0.5857741236686707
+      },
+      {
+        "clip_id": "c0f537ec98725",
+        "inner_fold": 1,
+        "probability_leak": 0.03850754350423813
+      },
+      {
+        "clip_id": "c0f921fc0a408",
+        "inner_fold": 1,
+        "probability_leak": 0.010928289033472538
+      },
+      {
+        "clip_id": "c10dbbe1fe88e",
+        "inner_fold": 1,
+        "probability_leak": 0.1277824342250824
+      },
+      {
+        "clip_id": "c11831df929ff",
+        "inner_fold": 1,
+        "probability_leak": 0.9492899775505066
+      },
+      {
+        "clip_id": "c122a79440158",
+        "inner_fold": 1,
+        "probability_leak": 0.8607339262962341
+      },
+      {
+        "clip_id": "c14279feb46c4",
+        "inner_fold": 1,
+        "probability_leak": 0.9986559152603149
+      },
+      {
+        "clip_id": "c168e7b1c5768",
+        "inner_fold": 1,
+        "probability_leak": 0.5825570225715637
+      },
+      {
+        "clip_id": "c18a6a959b315",
+        "inner_fold": 1,
+        "probability_leak": 0.33860158920288086
+      },
+      {
+        "clip_id": "c18ded00027e1",
+        "inner_fold": 1,
+        "probability_leak": 0.8448165655136108
+      },
+      {
+        "clip_id": "c1ab4f5e70960",
+        "inner_fold": 1,
+        "probability_leak": 0.9786624312400818
+      },
+      {
+        "clip_id": "c1be97c617ebf",
+        "inner_fold": 1,
+        "probability_leak": 0.9878436326980591
+      },
+      {
+        "clip_id": "c1d63f2fac16f",
+        "inner_fold": 1,
+        "probability_leak": 0.7977029085159302
+      },
+      {
+        "clip_id": "c1dea85a5c168",
+        "inner_fold": 1,
+        "probability_leak": 0.09579087048768997
+      },
+      {
+        "clip_id": "c1f4f90ceab92",
+        "inner_fold": 1,
+        "probability_leak": 0.9988971948623657
+      },
+      {
+        "clip_id": "c1fb776519059",
+        "inner_fold": 1,
+        "probability_leak": 0.740045964717865
+      },
+      {
+        "clip_id": "c211a8d93216b",
+        "inner_fold": 1,
+        "probability_leak": 0.7447203397750854
+      },
+      {
+        "clip_id": "c22636298a23e",
+        "inner_fold": 1,
+        "probability_leak": 0.6589231491088867
+      },
+      {
+        "clip_id": "c27bcc7508126",
+        "inner_fold": 1,
+        "probability_leak": 0.8000256419181824
+      },
+      {
+        "clip_id": "c299b5b4aae15",
+        "inner_fold": 1,
+        "probability_leak": 0.6002825498580933
+      },
+      {
+        "clip_id": "c2a95223c7bb8",
+        "inner_fold": 1,
+        "probability_leak": 0.782301664352417
+      },
+      {
+        "clip_id": "c2b8185b115a8",
+        "inner_fold": 1,
+        "probability_leak": 0.8038022518157959
+      },
+      {
+        "clip_id": "c2b9686ec0b66",
+        "inner_fold": 1,
+        "probability_leak": 0.9992374181747437
+      },
+      {
+        "clip_id": "c2bae7438d26f",
+        "inner_fold": 1,
+        "probability_leak": 0.6986874938011169
+      },
+      {
+        "clip_id": "c2c0781b810b9",
+        "inner_fold": 1,
+        "probability_leak": 0.4966140687465668
+      },
+      {
+        "clip_id": "c2c5757d3818f",
+        "inner_fold": 1,
+        "probability_leak": 0.9492669105529785
+      },
+      {
+        "clip_id": "c2dfdb38d147e",
+        "inner_fold": 1,
+        "probability_leak": 0.16784712672233582
+      },
+      {
+        "clip_id": "c2f249a637ac4",
+        "inner_fold": 1,
+        "probability_leak": 0.7808709740638733
+      },
+      {
+        "clip_id": "c2fe894a582ae",
+        "inner_fold": 1,
+        "probability_leak": 0.34313708543777466
+      },
+      {
+        "clip_id": "c2ffeffaf5c54",
+        "inner_fold": 1,
+        "probability_leak": 0.47359296679496765
+      },
+      {
+        "clip_id": "c30025926aa4b",
+        "inner_fold": 1,
+        "probability_leak": 0.5356888175010681
+      },
+      {
+        "clip_id": "c320c859a0212",
+        "inner_fold": 1,
+        "probability_leak": 0.2419932782649994
+      },
+      {
+        "clip_id": "c33454b6946ab",
+        "inner_fold": 1,
+        "probability_leak": 0.9257049560546875
+      },
+      {
+        "clip_id": "c341e4bf862ad",
+        "inner_fold": 1,
+        "probability_leak": 0.8713592886924744
+      },
+      {
+        "clip_id": "c36eda6b94106",
+        "inner_fold": 1,
+        "probability_leak": 0.0004136503266636282
+      },
+      {
+        "clip_id": "c37c7984c0c4f",
+        "inner_fold": 1,
+        "probability_leak": 0.7449652552604675
+      },
+      {
+        "clip_id": "c37f2b3fca106",
+        "inner_fold": 1,
+        "probability_leak": 0.3580285608768463
+      },
+      {
+        "clip_id": "c3a54e1228375",
+        "inner_fold": 1,
+        "probability_leak": 0.3282841444015503
+      },
+      {
+        "clip_id": "c3b228fa8030d",
+        "inner_fold": 1,
+        "probability_leak": 0.9413132667541504
+      },
+      {
+        "clip_id": "c3ba3126429f6",
+        "inner_fold": 1,
+        "probability_leak": 0.9165089726448059
+      },
+      {
+        "clip_id": "c3d97dffa787c",
+        "inner_fold": 1,
+        "probability_leak": 0.7994323372840881
+      },
+      {
+        "clip_id": "c4009fed4726f",
+        "inner_fold": 1,
+        "probability_leak": 0.873637855052948
+      },
+      {
+        "clip_id": "c404a4d0bccf9",
+        "inner_fold": 1,
+        "probability_leak": 1.0
+      },
+      {
+        "clip_id": "c41d8f7392b73",
+        "inner_fold": 1,
+        "probability_leak": 0.960753858089447
+      },
+      {
+        "clip_id": "c423c0ee36b07",
+        "inner_fold": 1,
+        "probability_leak": 0.8762713670730591
+      },
+      {
+        "clip_id": "c424eaa6fb66d",
+        "inner_fold": 1,
+        "probability_leak": 0.8236446380615234
+      },
+      {
+        "clip_id": "c43d5de714166",
+        "inner_fold": 1,
+        "probability_leak": 0.6601348519325256
+      },
+      {
+        "clip_id": "c4531f3f68c3d",
+        "inner_fold": 1,
+        "probability_leak": 0.00026148257893510163
+      },
+      {
+        "clip_id": "c45d6fd044845",
+        "inner_fold": 1,
+        "probability_leak": 0.11080179363489151
+      },
+      {
+        "clip_id": "c46568b3af1b0",
+        "inner_fold": 1,
+        "probability_leak": 0.9666253924369812
+      },
+      {
+        "clip_id": "c483b56484ea5",
+        "inner_fold": 1,
+        "probability_leak": 0.03929775953292847
+      },
+      {
+        "clip_id": "c48771c3d97f5",
+        "inner_fold": 1,
+        "probability_leak": 0.7053123116493225
+      },
+      {
+        "clip_id": "c48dec7ba6c91",
+        "inner_fold": 1,
+        "probability_leak": 0.8460301160812378
+      },
+      {
+        "clip_id": "c4a7854f53842",
+        "inner_fold": 1,
+        "probability_leak": 0.8675711750984192
+      },
+      {
+        "clip_id": "c4ae8944ab2a9",
+        "inner_fold": 1,
+        "probability_leak": 0.07338769733905792
+      },
+      {
+        "clip_id": "c4ce67f4b6dcb",
+        "inner_fold": 1,
+        "probability_leak": 0.941725492477417
+      },
+      {
+        "clip_id": "c4d60c890e072",
+        "inner_fold": 1,
+        "probability_leak": 0.9466667175292969
+      },
+      {
+        "clip_id": "c4ea61abbc908",
+        "inner_fold": 1,
+        "probability_leak": 0.7105880379676819
+      },
+      {
+        "clip_id": "c4ebb971b1567",
+        "inner_fold": 1,
+        "probability_leak": 0.16456644237041473
+      },
+      {
+        "clip_id": "c51bc0f90becd",
+        "inner_fold": 1,
+        "probability_leak": 0.768173098564148
+      },
+      {
+        "clip_id": "c51eb51347f21",
+        "inner_fold": 1,
+        "probability_leak": 0.9277037382125854
+      },
+      {
+        "clip_id": "c52fdf1f29a5d",
+        "inner_fold": 1,
+        "probability_leak": 0.9683047533035278
+      },
+      {
+        "clip_id": "c53c233dacf3e",
+        "inner_fold": 1,
+        "probability_leak": 0.113274946808815
+      },
+      {
+        "clip_id": "c5478ba2d5a89",
+        "inner_fold": 1,
+        "probability_leak": 0.012499818578362465
+      },
+      {
+        "clip_id": "c54d3b50ef138",
+        "inner_fold": 1,
+        "probability_leak": 0.28040382266044617
+      },
+      {
+        "clip_id": "c5882dca3e0a9",
+        "inner_fold": 1,
+        "probability_leak": 5.84926747251302e-05
+      },
+      {
+        "clip_id": "c5969ebc6bfcb",
+        "inner_fold": 1,
+        "probability_leak": 0.31897881627082825
+      },
+      {
+        "clip_id": "c5a4c13d780fb",
+        "inner_fold": 1,
+        "probability_leak": 0.5859800577163696
+      },
+      {
+        "clip_id": "c5b4522e17477",
+        "inner_fold": 1,
+        "probability_leak": 0.9999973773956299
+      },
+      {
+        "clip_id": "c5c5903c1822a",
+        "inner_fold": 1,
+        "probability_leak": 0.020365817472338676
+      },
+      {
+        "clip_id": "c5d3608b6230d",
+        "inner_fold": 1,
+        "probability_leak": 0.13695605099201202
+      },
+      {
+        "clip_id": "c5dbb83749d5b",
+        "inner_fold": 1,
+        "probability_leak": 0.9690178036689758
+      },
+      {
+        "clip_id": "c5eb4472b1b2e",
+        "inner_fold": 1,
+        "probability_leak": 0.8830196261405945
+      },
+      {
+        "clip_id": "c5f033e45aca1",
+        "inner_fold": 1,
+        "probability_leak": 0.0024436283856630325
+      },
+      {
+        "clip_id": "c5f29eeabae8a",
+        "inner_fold": 1,
+        "probability_leak": 0.009621812961995602
+      },
+      {
+        "clip_id": "c5fa0219bdd8d",
+        "inner_fold": 1,
+        "probability_leak": 0.5248851180076599
+      },
+      {
+        "clip_id": "c5ffdab287421",
+        "inner_fold": 1,
+        "probability_leak": 0.15717987716197968
+      },
+      {
+        "clip_id": "c6236482dc10c",
+        "inner_fold": 1,
+        "probability_leak": 0.940444827079773
+      },
+      {
+        "clip_id": "c6450add89e89",
+        "inner_fold": 1,
+        "probability_leak": 0.7205703854560852
+      },
+      {
+        "clip_id": "c656d7aa59416",
+        "inner_fold": 1,
+        "probability_leak": 0.0005907608428969979
+      },
+      {
+        "clip_id": "c65ba20f1031b",
+        "inner_fold": 1,
+        "probability_leak": 0.8607339262962341
+      },
+      {
+        "clip_id": "c65dafe1ee595",
+        "inner_fold": 1,
+        "probability_leak": 0.7702080011367798
+      },
+      {
+        "clip_id": "c66f70dea6bb1",
+        "inner_fold": 1,
+        "probability_leak": 0.8991080522537231
+      },
+      {
+        "clip_id": "c682e47ff5af3",
+        "inner_fold": 1,
+        "probability_leak": 0.9335054755210876
+      },
+      {
+        "clip_id": "c69396caf286c",
+        "inner_fold": 1,
+        "probability_leak": 0.16878663003444672
+      },
+      {
+        "clip_id": "c6a98309679be",
+        "inner_fold": 1,
+        "probability_leak": 0.7717875242233276
+      },
+      {
+        "clip_id": "c6ae27e754276",
+        "inner_fold": 1,
+        "probability_leak": 0.7132616639137268
+      },
+      {
+        "clip_id": "c6bff6053fa0b",
+        "inner_fold": 1,
+        "probability_leak": 0.7449652552604675
+      },
+      {
+        "clip_id": "c6c8a300c1128",
+        "inner_fold": 1,
+        "probability_leak": 0.008379755541682243
+      },
+      {
+        "clip_id": "c6d2716b85053",
+        "inner_fold": 1,
+        "probability_leak": 0.4111044704914093
+      },
+      {
+        "clip_id": "c6d60068469f4",
+        "inner_fold": 1,
+        "probability_leak": 0.9995484948158264
+      },
+      {
+        "clip_id": "c6d78327e132f",
+        "inner_fold": 1,
+        "probability_leak": 0.9995484948158264
+      },
+      {
+        "clip_id": "c6da2e34dbe22",
+        "inner_fold": 1,
+        "probability_leak": 0.858862578868866
+      },
+      {
+        "clip_id": "c6dde94ea69dc",
+        "inner_fold": 1,
+        "probability_leak": 0.8781817555427551
+      },
+      {
+        "clip_id": "c6df9c056c634",
+        "inner_fold": 1,
+        "probability_leak": 0.6728682518005371
+      },
+      {
+        "clip_id": "c7118401c58b1",
+        "inner_fold": 1,
+        "probability_leak": 0.9689725041389465
+      },
+      {
+        "clip_id": "c745afb819609",
+        "inner_fold": 1,
+        "probability_leak": 0.4308309257030487
+      },
+      {
+        "clip_id": "c76e9459c1403",
+        "inner_fold": 1,
+        "probability_leak": 1.0
+      },
+      {
+        "clip_id": "c775d0e90fc9a",
+        "inner_fold": 1,
+        "probability_leak": 0.8913359642028809
+      },
+      {
+        "clip_id": "c7ad362fcc94d",
+        "inner_fold": 1,
+        "probability_leak": 0.6227917671203613
+      },
+      {
+        "clip_id": "c7df0ab24b41f",
+        "inner_fold": 1,
+        "probability_leak": 0.0739179253578186
+      },
+      {
+        "clip_id": "c7e51fcee8c07",
+        "inner_fold": 1,
+        "probability_leak": 0.6976491808891296
+      },
+      {
+        "clip_id": "c7e6cce7e9114",
+        "inner_fold": 1,
+        "probability_leak": 0.42743366956710815
+      },
+      {
+        "clip_id": "c7f06e1c2f5ea",
+        "inner_fold": 1,
+        "probability_leak": 0.027852103114128113
+      },
+      {
+        "clip_id": "c7f73e03a7c75",
+        "inner_fold": 1,
+        "probability_leak": 0.8024280667304993
+      },
+      {
+        "clip_id": "c80c03ca8d522",
+        "inner_fold": 1,
+        "probability_leak": 0.3357531726360321
+      },
+      {
+        "clip_id": "c80de9b64db85",
+        "inner_fold": 1,
+        "probability_leak": 0.9392163753509521
+      },
+      {
+        "clip_id": "c82b1ee194183",
+        "inner_fold": 1,
+        "probability_leak": 0.9441118240356445
+      },
+      {
+        "clip_id": "c833445fa2bb6",
+        "inner_fold": 1,
+        "probability_leak": 0.20517712831497192
+      },
+      {
+        "clip_id": "c8419de8ca9cc",
+        "inner_fold": 1,
+        "probability_leak": 0.910296618938446
+      },
+      {
+        "clip_id": "c86807311a1d3",
+        "inner_fold": 1,
+        "probability_leak": 0.5391224026679993
+      },
+      {
+        "clip_id": "c86859a40b920",
+        "inner_fold": 1,
+        "probability_leak": 0.31266021728515625
+      },
+      {
+        "clip_id": "c86c33e2a1b2d",
+        "inner_fold": 1,
+        "probability_leak": 0.0008146126638166606
+      },
+      {
+        "clip_id": "c88dfa84df965",
+        "inner_fold": 1,
+        "probability_leak": 0.9954551458358765
+      },
+      {
+        "clip_id": "c89cb224bcb40",
+        "inner_fold": 1,
+        "probability_leak": 0.034572191536426544
+      },
+      {
+        "clip_id": "c8a3d82b06360",
+        "inner_fold": 1,
+        "probability_leak": 7.741571153019322e-07
+      },
+      {
+        "clip_id": "c8b1af5e2da91",
+        "inner_fold": 1,
+        "probability_leak": 0.7795995473861694
+      },
+      {
+        "clip_id": "c8b7ec1ee29c4",
+        "inner_fold": 1,
+        "probability_leak": 0.6724069118499756
+      },
+      {
+        "clip_id": "c8d37b4ba189b",
+        "inner_fold": 1,
+        "probability_leak": 0.9769221544265747
+      },
+      {
+        "clip_id": "c8d535525cf9d",
+        "inner_fold": 1,
+        "probability_leak": 0.6168636679649353
+      },
+      {
+        "clip_id": "c8d802984e871",
+        "inner_fold": 1,
+        "probability_leak": 0.32337528467178345
+      },
+      {
+        "clip_id": "c8e4146e3a0e9",
+        "inner_fold": 1,
+        "probability_leak": 0.3272812068462372
+      },
+      {
+        "clip_id": "c8ed223ec41db",
+        "inner_fold": 1,
+        "probability_leak": 0.9079189300537109
+      },
+      {
+        "clip_id": "c8f34320f5bde",
+        "inner_fold": 1,
+        "probability_leak": 0.8533478379249573
+      },
+      {
+        "clip_id": "c91fb50f4819b",
+        "inner_fold": 1,
+        "probability_leak": 0.026814140379428864
+      },
+      {
+        "clip_id": "c9340312e6037",
+        "inner_fold": 1,
+        "probability_leak": 0.9657655954360962
+      },
+      {
+        "clip_id": "c93f64081ea7c",
+        "inner_fold": 1,
+        "probability_leak": 0.7868531346321106
+      },
+      {
+        "clip_id": "c941c8e5932f1",
+        "inner_fold": 1,
+        "probability_leak": 0.1251557320356369
+      },
+      {
+        "clip_id": "c95079e715e90",
+        "inner_fold": 1,
+        "probability_leak": 0.9987208247184753
+      },
+      {
+        "clip_id": "c954d8c15dced",
+        "inner_fold": 1,
+        "probability_leak": 0.5472750663757324
+      },
+      {
+        "clip_id": "c974636289026",
+        "inner_fold": 1,
+        "probability_leak": 0.11639321595430374
+      },
+      {
+        "clip_id": "c97e8c72149a6",
+        "inner_fold": 1,
+        "probability_leak": 0.09359850734472275
+      },
+      {
+        "clip_id": "c99c85e0af482",
+        "inner_fold": 1,
+        "probability_leak": 0.9713184237480164
+      },
+      {
+        "clip_id": "c9c6b1e4bb816",
+        "inner_fold": 1,
+        "probability_leak": 0.3580285608768463
+      },
+      {
+        "clip_id": "ca21b4eb5ddf2",
+        "inner_fold": 1,
+        "probability_leak": 0.05183698236942291
+      },
+      {
+        "clip_id": "ca284c3204ae3",
+        "inner_fold": 1,
+        "probability_leak": 0.3052884638309479
+      },
+      {
+        "clip_id": "ca2a5550fdad4",
+        "inner_fold": 1,
+        "probability_leak": 0.3268355429172516
+      },
+      {
+        "clip_id": "ca3a0d82b36b7",
+        "inner_fold": 1,
+        "probability_leak": 0.9795340299606323
+      },
+      {
+        "clip_id": "ca46fdc0b22e0",
+        "inner_fold": 1,
+        "probability_leak": 0.9995478987693787
+      },
+      {
+        "clip_id": "ca59a841b7f2d",
+        "inner_fold": 1,
+        "probability_leak": 0.9549068212509155
+      },
+      {
+        "clip_id": "ca69d6f75a350",
+        "inner_fold": 1,
+        "probability_leak": 0.23440946638584137
+      },
+      {
+        "clip_id": "ca93fd0490325",
+        "inner_fold": 1,
+        "probability_leak": 0.842035174369812
+      },
+      {
+        "clip_id": "ca9b4ed28fea4",
+        "inner_fold": 1,
+        "probability_leak": 0.08334454894065857
+      },
+      {
+        "clip_id": "caa63a441d079",
+        "inner_fold": 1,
+        "probability_leak": 0.7305352091789246
+      },
+      {
+        "clip_id": "caac9ec800d60",
+        "inner_fold": 1,
+        "probability_leak": 0.04542137682437897
+      },
+      {
+        "clip_id": "cab28f3852b2e",
+        "inner_fold": 1,
+        "probability_leak": 0.2356441617012024
+      },
+      {
+        "clip_id": "cab4e25cbfda2",
+        "inner_fold": 1,
+        "probability_leak": 0.2385191023349762
+      },
+      {
+        "clip_id": "cacc67a2bbb12",
+        "inner_fold": 1,
+        "probability_leak": 0.0003493156982585788
+      },
+      {
+        "clip_id": "cb04fbe5f43f1",
+        "inner_fold": 1,
+        "probability_leak": 0.8798068165779114
+      },
+      {
+        "clip_id": "cb08d7195d6bf",
+        "inner_fold": 1,
+        "probability_leak": 0.0015795737272128463
+      },
+      {
+        "clip_id": "cb106b3ab62f1",
+        "inner_fold": 1,
+        "probability_leak": 0.8499085307121277
+      },
+      {
+        "clip_id": "cb2f440b9e0e4",
+        "inner_fold": 1,
+        "probability_leak": 0.9731202721595764
+      },
+      {
+        "clip_id": "cb7aba874ee7e",
+        "inner_fold": 1,
+        "probability_leak": 0.41547149419784546
+      },
+      {
+        "clip_id": "cb7bc59e020dc",
+        "inner_fold": 1,
+        "probability_leak": 0.38933366537094116
+      },
+      {
+        "clip_id": "cb853e3044c69",
+        "inner_fold": 1,
+        "probability_leak": 0.03270769491791725
+      },
+      {
+        "clip_id": "cb98d272d0c33",
+        "inner_fold": 1,
+        "probability_leak": 0.18110784888267517
+      },
+      {
+        "clip_id": "cba905278e156",
+        "inner_fold": 1,
+        "probability_leak": 0.25835105776786804
+      },
+      {
+        "clip_id": "cbb530c2d8793",
+        "inner_fold": 1,
+        "probability_leak": 0.10509715974330902
+      },
+      {
+        "clip_id": "cbb6672364ebd",
+        "inner_fold": 1,
+        "probability_leak": 0.7914433479309082
+      },
+      {
+        "clip_id": "cbb8d96a5e4a5",
+        "inner_fold": 1,
+        "probability_leak": 0.6986874938011169
+      },
+      {
+        "clip_id": "cbc6e435e35e0",
+        "inner_fold": 1,
+        "probability_leak": 0.9663621187210083
+      },
+      {
+        "clip_id": "cbc8435b0f4df",
+        "inner_fold": 1,
+        "probability_leak": 0.08726038783788681
+      },
+      {
+        "clip_id": "cbd3cf96abb92",
+        "inner_fold": 1,
+        "probability_leak": 0.9997496008872986
+      },
+      {
+        "clip_id": "cbe3166361dfa",
+        "inner_fold": 1,
+        "probability_leak": 0.08308666199445724
+      },
+      {
+        "clip_id": "cbf8e88236347",
+        "inner_fold": 1,
+        "probability_leak": 0.008041627705097198
+      },
+      {
+        "clip_id": "cc1480284d1c3",
+        "inner_fold": 1,
+        "probability_leak": 0.8549901247024536
+      },
+      {
+        "clip_id": "cc19c94f8b994",
+        "inner_fold": 1,
+        "probability_leak": 0.6878193020820618
+      },
+      {
+        "clip_id": "cc2ac1af869fa",
+        "inner_fold": 1,
+        "probability_leak": 0.8901010751724243
+      },
+      {
+        "clip_id": "cc32544a5e4f3",
+        "inner_fold": 1,
+        "probability_leak": 0.6090272068977356
+      },
+      {
+        "clip_id": "cc41a6007b781",
+        "inner_fold": 1,
+        "probability_leak": 0.8913359642028809
+      },
+      {
+        "clip_id": "cc49c5ba7938b",
+        "inner_fold": 1,
+        "probability_leak": 0.05242680385708809
+      },
+      {
+        "clip_id": "cc5ddb79c589a",
+        "inner_fold": 1,
+        "probability_leak": 0.9800136089324951
+      },
+      {
+        "clip_id": "cc6a1078eb7bc",
+        "inner_fold": 1,
+        "probability_leak": 0.741784393787384
+      },
+      {
+        "clip_id": "cc6c187a579d4",
+        "inner_fold": 1,
+        "probability_leak": 0.8800838589668274
+      },
+      {
+        "clip_id": "cc75ae24f5c96",
+        "inner_fold": 1,
+        "probability_leak": 0.45968562364578247
+      },
+      {
+        "clip_id": "cc77af487b65d",
+        "inner_fold": 1,
+        "probability_leak": 0.940444827079773
+      },
+      {
+        "clip_id": "cc8764f092ba1",
+        "inner_fold": 1,
+        "probability_leak": 0.8969480395317078
+      },
+      {
+        "clip_id": "cc908db347b35",
+        "inner_fold": 1,
+        "probability_leak": 0.17354042828083038
+      },
+      {
+        "clip_id": "cc9cff18c1a4d",
+        "inner_fold": 1,
+        "probability_leak": 0.05418244004249573
+      },
+      {
+        "clip_id": "cca3bdbd296af",
+        "inner_fold": 1,
+        "probability_leak": 0.48928505182266235
+      },
+      {
+        "clip_id": "ccad7760ce5c3",
+        "inner_fold": 1,
+        "probability_leak": 0.9648301601409912
+      },
+      {
+        "clip_id": "cce35479c8094",
+        "inner_fold": 1,
+        "probability_leak": 0.9913430213928223
+      },
+      {
+        "clip_id": "cce7aca319a5a",
+        "inner_fold": 1,
+        "probability_leak": 0.9491431713104248
+      },
+      {
+        "clip_id": "cd22957c58990",
+        "inner_fold": 1,
+        "probability_leak": 0.9818422794342041
+      },
+      {
+        "clip_id": "cd2d1d38e28fe",
+        "inner_fold": 1,
+        "probability_leak": 1.9170209270669147e-05
+      },
+      {
+        "clip_id": "cd48fd26263ca",
+        "inner_fold": 1,
+        "probability_leak": 0.7339807748794556
+      },
+      {
+        "clip_id": "cd685547804d1",
+        "inner_fold": 1,
+        "probability_leak": 0.008117460645735264
+      },
+      {
+        "clip_id": "cd6dedbfd7d31",
+        "inner_fold": 1,
+        "probability_leak": 0.10708457231521606
+      },
+      {
+        "clip_id": "cd723d66f367b",
+        "inner_fold": 1,
+        "probability_leak": 0.999998927116394
+      },
+      {
+        "clip_id": "cd75f0c255d24",
+        "inner_fold": 1,
+        "probability_leak": 0.3753945827484131
+      },
+      {
+        "clip_id": "cd77404571b67",
+        "inner_fold": 1,
+        "probability_leak": 0.9492669105529785
+      },
+      {
+        "clip_id": "cd953dc82ace5",
+        "inner_fold": 1,
+        "probability_leak": 0.33019182085990906
+      },
+      {
+        "clip_id": "cd9b94bdc892b",
+        "inner_fold": 1,
+        "probability_leak": 0.13032089173793793
+      },
+      {
+        "clip_id": "cd9b9fe203a4a",
+        "inner_fold": 1,
+        "probability_leak": 1.0719864462771511e-07
+      },
+      {
+        "clip_id": "cdafc13bac8e8",
+        "inner_fold": 1,
+        "probability_leak": 0.258992999792099
+      },
+      {
+        "clip_id": "cdda6f156a595",
+        "inner_fold": 1,
+        "probability_leak": 0.971324622631073
+      },
+      {
+        "clip_id": "cdeff059d9cc1",
+        "inner_fold": 1,
+        "probability_leak": 0.9700523018836975
+      },
+      {
+        "clip_id": "ce1beb3d64f57",
+        "inner_fold": 1,
+        "probability_leak": 0.952358067035675
+      },
+      {
+        "clip_id": "ce3c1bbc4dd9c",
+        "inner_fold": 1,
+        "probability_leak": 0.4861805737018585
+      },
+      {
+        "clip_id": "ce3e303f06b4a",
+        "inner_fold": 1,
+        "probability_leak": 0.9971053004264832
+      },
+      {
+        "clip_id": "ce5812e80dc76",
+        "inner_fold": 1,
+        "probability_leak": 0.7720360159873962
+      },
+      {
+        "clip_id": "ce8e3e604efc2",
+        "inner_fold": 1,
+        "probability_leak": 0.373911052942276
+      },
+      {
+        "clip_id": "ceadd661714f4",
+        "inner_fold": 1,
+        "probability_leak": 0.9083677530288696
+      },
+      {
+        "clip_id": "ceae8d33d3df9",
+        "inner_fold": 1,
+        "probability_leak": 0.8913854360580444
+      },
+      {
+        "clip_id": "ceb7930de201b",
+        "inner_fold": 1,
+        "probability_leak": 0.33632799983024597
+      },
+      {
+        "clip_id": "cecee97a5f68b",
+        "inner_fold": 1,
+        "probability_leak": 0.740045964717865
+      },
+      {
+        "clip_id": "cedb58b88ad47",
+        "inner_fold": 1,
+        "probability_leak": 0.9857032895088196
+      },
+      {
+        "clip_id": "cf380ea25a6e8",
+        "inner_fold": 1,
+        "probability_leak": 0.03558211028575897
+      },
+      {
+        "clip_id": "cf4c7a3c10ff8",
+        "inner_fold": 1,
+        "probability_leak": 0.9342113733291626
+      },
+      {
+        "clip_id": "cf5d0f60ed9c7",
+        "inner_fold": 1,
+        "probability_leak": 0.22566913068294525
+      },
+      {
+        "clip_id": "cf7132f496056",
+        "inner_fold": 1,
+        "probability_leak": 0.02966035157442093
+      },
+      {
+        "clip_id": "cf9cb173ecb0c",
+        "inner_fold": 1,
+        "probability_leak": 0.35513928532600403
+      },
+      {
+        "clip_id": "cfa176d0021b2",
+        "inner_fold": 1,
+        "probability_leak": 0.0004140008823014796
+      },
+      {
+        "clip_id": "cfa95a14b4d7d",
+        "inner_fold": 1,
+        "probability_leak": 0.968367874622345
+      },
+      {
+        "clip_id": "cfbf0b917b01c",
+        "inner_fold": 1,
+        "probability_leak": 0.5251628756523132
+      },
+      {
+        "clip_id": "cfdc594e4e897",
+        "inner_fold": 1,
+        "probability_leak": 0.6043509244918823
+      },
+      {
+        "clip_id": "c0128b879694e",
+        "inner_fold": 2,
+        "probability_leak": 0.7987468838691711
+      },
+      {
+        "clip_id": "c02543903a0da",
+        "inner_fold": 2,
+        "probability_leak": 0.031058011576533318
+      },
+      {
+        "clip_id": "c04498a7ed239",
+        "inner_fold": 2,
+        "probability_leak": 0.807310163974762
+      },
+      {
+        "clip_id": "c04baf7fef3e6",
+        "inner_fold": 2,
+        "probability_leak": 0.9982990622520447
+      },
+      {
+        "clip_id": "c05f4f069b542",
+        "inner_fold": 2,
+        "probability_leak": 0.33640897274017334
+      },
+      {
+        "clip_id": "c063306a756e0",
+        "inner_fold": 2,
+        "probability_leak": 0.2333751916885376
+      },
+      {
+        "clip_id": "c067add6c95ef",
+        "inner_fold": 2,
+        "probability_leak": 0.25396403670310974
+      },
+      {
+        "clip_id": "c06ccf39a495b",
+        "inner_fold": 2,
+        "probability_leak": 0.16189511120319366
+      },
+      {
+        "clip_id": "c0805b0f448be",
+        "inner_fold": 2,
+        "probability_leak": 0.6242120265960693
+      },
+      {
+        "clip_id": "c089e36733958",
+        "inner_fold": 2,
+        "probability_leak": 0.9316774010658264
+      },
+      {
+        "clip_id": "c0911d89cc12e",
+        "inner_fold": 2,
+        "probability_leak": 0.1627792865037918
+      },
+      {
+        "clip_id": "c0a9746b5d9ae",
+        "inner_fold": 2,
+        "probability_leak": 0.06176503002643585
+      },
+      {
+        "clip_id": "c0c6081270402",
+        "inner_fold": 2,
+        "probability_leak": 0.025698300451040268
+      },
+      {
+        "clip_id": "c0d7da724a381",
+        "inner_fold": 2,
+        "probability_leak": 0.09083156287670135
+      },
+      {
+        "clip_id": "c0e232e8abefd",
+        "inner_fold": 2,
+        "probability_leak": 0.028241969645023346
+      },
+      {
+        "clip_id": "c10f28ad85eb4",
+        "inner_fold": 2,
+        "probability_leak": 0.029644368216395378
+      },
+      {
+        "clip_id": "c1269b91604b3",
+        "inner_fold": 2,
+        "probability_leak": 0.39515069127082825
+      },
+      {
+        "clip_id": "c128d061d7c0f",
+        "inner_fold": 2,
+        "probability_leak": 0.0004292833327781409
+      },
+      {
+        "clip_id": "c132422b849a7",
+        "inner_fold": 2,
+        "probability_leak": 0.9237784147262573
+      },
+      {
+        "clip_id": "c1499c35cbab2",
+        "inner_fold": 2,
+        "probability_leak": 0.7723989486694336
+      },
+      {
+        "clip_id": "c150583d1dbbe",
+        "inner_fold": 2,
+        "probability_leak": 0.003884019097313285
+      },
+      {
+        "clip_id": "c1564ac4f839d",
+        "inner_fold": 2,
+        "probability_leak": 0.0041489023715257645
+      },
+      {
+        "clip_id": "c163826f414a4",
+        "inner_fold": 2,
+        "probability_leak": 0.9989427924156189
+      },
+      {
+        "clip_id": "c172f3caf0939",
+        "inner_fold": 2,
+        "probability_leak": 0.00920225027948618
+      },
+      {
+        "clip_id": "c17c3c87dbd77",
+        "inner_fold": 2,
+        "probability_leak": 0.1840670257806778
+      },
+      {
+        "clip_id": "c189aa961829b",
+        "inner_fold": 2,
+        "probability_leak": 0.04444361850619316
+      },
+      {
+        "clip_id": "c18d59fc1c422",
+        "inner_fold": 2,
+        "probability_leak": 0.9907633662223816
+      },
+      {
+        "clip_id": "c18e2198c3457",
+        "inner_fold": 2,
+        "probability_leak": 0.6519418954849243
+      },
+      {
+        "clip_id": "c1a020e75d17e",
+        "inner_fold": 2,
+        "probability_leak": 0.9986321330070496
+      },
+      {
+        "clip_id": "c1a8c60507b53",
+        "inner_fold": 2,
+        "probability_leak": 0.9999964237213135
+      },
+      {
+        "clip_id": "c1aa75bc3586d",
+        "inner_fold": 2,
+        "probability_leak": 0.968792200088501
+      },
+      {
+        "clip_id": "c1d9472c3c5b1",
+        "inner_fold": 2,
+        "probability_leak": 0.00030951350345276296
+      },
+      {
+        "clip_id": "c1e5a1a35b9a6",
+        "inner_fold": 2,
+        "probability_leak": 0.841812789440155
+      },
+      {
+        "clip_id": "c1ed5bae3fcd5",
+        "inner_fold": 2,
+        "probability_leak": 0.0239704679697752
+      },
+      {
+        "clip_id": "c1fc6c093dcc4",
+        "inner_fold": 2,
+        "probability_leak": 0.2904375195503235
+      },
+      {
+        "clip_id": "c20c972efdcce",
+        "inner_fold": 2,
+        "probability_leak": 0.8162155747413635
+      },
+      {
+        "clip_id": "c21382c66a1e0",
+        "inner_fold": 2,
+        "probability_leak": 0.9762699007987976
+      },
+      {
+        "clip_id": "c2149f5a4bc9e",
+        "inner_fold": 2,
+        "probability_leak": 5.964636784483446e-06
+      },
+      {
+        "clip_id": "c21fec37cf71a",
+        "inner_fold": 2,
+        "probability_leak": 0.15871931612491608
+      },
+      {
+        "clip_id": "c22b434ae486d",
+        "inner_fold": 2,
+        "probability_leak": 0.9932283759117126
+      },
+      {
+        "clip_id": "c24b6690dc003",
+        "inner_fold": 2,
+        "probability_leak": 0.16008387506008148
+      },
+      {
+        "clip_id": "c24bf7667eff5",
+        "inner_fold": 2,
+        "probability_leak": 0.018159078434109688
+      },
+      {
+        "clip_id": "c265367c30825",
+        "inner_fold": 2,
+        "probability_leak": 0.7847787141799927
+      },
+      {
+        "clip_id": "c277454df54af",
+        "inner_fold": 2,
+        "probability_leak": 0.09481393545866013
+      },
+      {
+        "clip_id": "c27cee2838d7a",
+        "inner_fold": 2,
+        "probability_leak": 0.07766469568014145
+      },
+      {
+        "clip_id": "c27f20596e4e6",
+        "inner_fold": 2,
+        "probability_leak": 0.9187478423118591
+      },
+      {
+        "clip_id": "c29147b0882e2",
+        "inner_fold": 2,
+        "probability_leak": 0.339645117521286
+      },
+      {
+        "clip_id": "c2a910ad7f603",
+        "inner_fold": 2,
+        "probability_leak": 0.33095455169677734
+      },
+      {
+        "clip_id": "c2b209108b35d",
+        "inner_fold": 2,
+        "probability_leak": 0.8458132743835449
+      },
+      {
+        "clip_id": "c2c65e7f132d3",
+        "inner_fold": 2,
+        "probability_leak": 0.5387490391731262
+      },
+      {
+        "clip_id": "c2d3366744da6",
+        "inner_fold": 2,
+        "probability_leak": 0.7677566409111023
+      },
+      {
+        "clip_id": "c2d54c2c7191b",
+        "inner_fold": 2,
+        "probability_leak": 0.09343606233596802
+      },
+      {
+        "clip_id": "c2e20fedcad53",
+        "inner_fold": 2,
+        "probability_leak": 0.8672597408294678
+      },
+      {
+        "clip_id": "c2e7509679ef5",
+        "inner_fold": 2,
+        "probability_leak": 0.01430530659854412
+      },
+      {
+        "clip_id": "c2ebcb34181f8",
+        "inner_fold": 2,
+        "probability_leak": 0.09352593123912811
+      },
+      {
+        "clip_id": "c2f625de9294d",
+        "inner_fold": 2,
+        "probability_leak": 0.957001805305481
+      },
+      {
+        "clip_id": "c3147be2ea41d",
+        "inner_fold": 2,
+        "probability_leak": 0.4941957890987396
+      },
+      {
+        "clip_id": "c314af95e5f64",
+        "inner_fold": 2,
+        "probability_leak": 0.9844948649406433
+      },
+      {
+        "clip_id": "c32debd0f41e6",
+        "inner_fold": 2,
+        "probability_leak": 0.9419618248939514
+      },
+      {
+        "clip_id": "c357b15613e8b",
+        "inner_fold": 2,
+        "probability_leak": 0.18040400743484497
+      },
+      {
+        "clip_id": "c357e8e39d7f0",
+        "inner_fold": 2,
+        "probability_leak": 0.9813060164451599
+      },
+      {
+        "clip_id": "c362698ae79b5",
+        "inner_fold": 2,
+        "probability_leak": 0.29958581924438477
+      },
+      {
+        "clip_id": "c36359baaaf59",
+        "inner_fold": 2,
+        "probability_leak": 0.36832961440086365
+      },
+      {
+        "clip_id": "c3694d0758433",
+        "inner_fold": 2,
+        "probability_leak": 5.964636784483446e-06
+      },
+      {
+        "clip_id": "c3a2f1d312087",
+        "inner_fold": 2,
+        "probability_leak": 0.4811617136001587
+      },
+      {
+        "clip_id": "c3a78958bcf50",
+        "inner_fold": 2,
+        "probability_leak": 0.4881678521633148
+      },
+      {
+        "clip_id": "c3babd01aea3e",
+        "inner_fold": 2,
+        "probability_leak": 0.9234198331832886
+      },
+      {
+        "clip_id": "c3c559ca31f61",
+        "inner_fold": 2,
+        "probability_leak": 0.009868932887911797
+      },
+      {
+        "clip_id": "c3cd9a1ae0e6b",
+        "inner_fold": 2,
+        "probability_leak": 0.8805450797080994
+      },
+      {
+        "clip_id": "c3f4ad6feaae7",
+        "inner_fold": 2,
+        "probability_leak": 0.050862520933151245
+      },
+      {
+        "clip_id": "c405b5009dfcc",
+        "inner_fold": 2,
+        "probability_leak": 0.41959673166275024
+      },
+      {
+        "clip_id": "c4194701114cb",
+        "inner_fold": 2,
+        "probability_leak": 0.550735592842102
+      },
+      {
+        "clip_id": "c4223cfd6c9a7",
+        "inner_fold": 2,
+        "probability_leak": 0.4336024224758148
+      },
+      {
+        "clip_id": "c422b4e502ef8",
+        "inner_fold": 2,
+        "probability_leak": 0.9852209687232971
+      },
+      {
+        "clip_id": "c4241382283c1",
+        "inner_fold": 2,
+        "probability_leak": 0.3953382968902588
+      },
+      {
+        "clip_id": "c42980f8ee1d2",
+        "inner_fold": 2,
+        "probability_leak": 0.6894970536231995
+      },
+      {
+        "clip_id": "c45ef1394ce7d",
+        "inner_fold": 2,
+        "probability_leak": 0.886370062828064
+      },
+      {
+        "clip_id": "c46349e666c00",
+        "inner_fold": 2,
+        "probability_leak": 0.002256115199998021
+      },
+      {
+        "clip_id": "c46a2f827cb8e",
+        "inner_fold": 2,
+        "probability_leak": 0.14984233677387238
+      },
+      {
+        "clip_id": "c483c2ee8d383",
+        "inner_fold": 2,
+        "probability_leak": 0.34044185280799866
+      },
+      {
+        "clip_id": "c48422d0520de",
+        "inner_fold": 2,
+        "probability_leak": 0.08032435178756714
+      },
+      {
+        "clip_id": "c4aa6a51658e8",
+        "inner_fold": 2,
+        "probability_leak": 0.9122197031974792
+      },
+      {
+        "clip_id": "c4ab5e59c0389",
+        "inner_fold": 2,
+        "probability_leak": 0.9910290241241455
+      },
+      {
+        "clip_id": "c4b2e80648cd5",
+        "inner_fold": 2,
+        "probability_leak": 0.0007229028269648552
+      },
+      {
+        "clip_id": "c4b8ccff15ae0",
+        "inner_fold": 2,
+        "probability_leak": 0.5368529558181763
+      },
+      {
+        "clip_id": "c4bf6a97e2cae",
+        "inner_fold": 2,
+        "probability_leak": 0.7043012380599976
+      },
+      {
+        "clip_id": "c4dd83943373a",
+        "inner_fold": 2,
+        "probability_leak": 0.009868932887911797
+      },
+      {
+        "clip_id": "c4e93daa7ff67",
+        "inner_fold": 2,
+        "probability_leak": 0.9999856948852539
+      },
+      {
+        "clip_id": "c4f10806e3732",
+        "inner_fold": 2,
+        "probability_leak": 0.19170859456062317
+      },
+      {
+        "clip_id": "c5024ce133721",
+        "inner_fold": 2,
+        "probability_leak": 0.9344088435173035
+      },
+      {
+        "clip_id": "c51565ea58fe0",
+        "inner_fold": 2,
+        "probability_leak": 0.9803709983825684
+      },
+      {
+        "clip_id": "c515a9a248c2c",
+        "inner_fold": 2,
+        "probability_leak": 0.974262535572052
+      },
+      {
+        "clip_id": "c51b7eba14bd6",
+        "inner_fold": 2,
+        "probability_leak": 0.22437900304794312
+      },
+      {
+        "clip_id": "c5221e555e452",
+        "inner_fold": 2,
+        "probability_leak": 0.38237327337265015
+      },
+      {
+        "clip_id": "c5252a01e683d",
+        "inner_fold": 2,
+        "probability_leak": 0.968792200088501
+      },
+      {
+        "clip_id": "c52ebd5ec2893",
+        "inner_fold": 2,
+        "probability_leak": 0.6886505484580994
+      },
+      {
+        "clip_id": "c54cff5549618",
+        "inner_fold": 2,
+        "probability_leak": 0.9627587795257568
+      },
+      {
+        "clip_id": "c55ae3a3fe08f",
+        "inner_fold": 2,
+        "probability_leak": 0.9455330967903137
+      },
+      {
+        "clip_id": "c577bdb8f8808",
+        "inner_fold": 2,
+        "probability_leak": 0.5278597474098206
+      },
+      {
+        "clip_id": "c5bbf50ad83e0",
+        "inner_fold": 2,
+        "probability_leak": 0.9237784147262573
+      },
+      {
+        "clip_id": "c5e24e8064171",
+        "inner_fold": 2,
+        "probability_leak": 0.5870993137359619
+      },
+      {
+        "clip_id": "c611e16457512",
+        "inner_fold": 2,
+        "probability_leak": 0.7341035008430481
+      },
+      {
+        "clip_id": "c64160dd826c1",
+        "inner_fold": 2,
+        "probability_leak": 0.8282374739646912
+      },
+      {
+        "clip_id": "c641e51be72f8",
+        "inner_fold": 2,
+        "probability_leak": 0.9762699007987976
+      },
+      {
+        "clip_id": "c64243712bd02",
+        "inner_fold": 2,
+        "probability_leak": 0.975970983505249
+      },
+      {
+        "clip_id": "c64539ba804e2",
+        "inner_fold": 2,
+        "probability_leak": 0.4078020453453064
+      },
+      {
+        "clip_id": "c65bf9aed92aa",
+        "inner_fold": 2,
+        "probability_leak": 0.20727896690368652
+      },
+      {
+        "clip_id": "c662ad24aa34b",
+        "inner_fold": 2,
+        "probability_leak": 0.17072179913520813
+      },
+      {
+        "clip_id": "c6793f133fb84",
+        "inner_fold": 2,
+        "probability_leak": 0.40174025297164917
+      },
+      {
+        "clip_id": "c6912ec3ca658",
+        "inner_fold": 2,
+        "probability_leak": 0.88753342628479
+      },
+      {
+        "clip_id": "c69a2a157ba8e",
+        "inner_fold": 2,
+        "probability_leak": 0.14984233677387238
+      },
+      {
+        "clip_id": "c6a681c8dfaaf",
+        "inner_fold": 2,
+        "probability_leak": 0.6801194548606873
+      },
+      {
+        "clip_id": "c6bb81385b39c",
+        "inner_fold": 2,
+        "probability_leak": 0.001212182454764843
+      },
+      {
+        "clip_id": "c6c96e4e5fca9",
+        "inner_fold": 2,
+        "probability_leak": 0.5393759608268738
+      },
+      {
+        "clip_id": "c6df118b5b0dd",
+        "inner_fold": 2,
+        "probability_leak": 0.0036339263897389174
+      },
+      {
+        "clip_id": "c6ecd66d0712f",
+        "inner_fold": 2,
+        "probability_leak": 0.26985251903533936
+      },
+      {
+        "clip_id": "c6eefb3ad7424",
+        "inner_fold": 2,
+        "probability_leak": 0.3190937042236328
+      },
+      {
+        "clip_id": "c6fa86dd717c5",
+        "inner_fold": 2,
+        "probability_leak": 0.0027127645444124937
+      },
+      {
+        "clip_id": "c705697213775",
+        "inner_fold": 2,
+        "probability_leak": 0.3333163559436798
+      },
+      {
+        "clip_id": "c71017ee629b0",
+        "inner_fold": 2,
+        "probability_leak": 0.12402985990047455
+      },
+      {
+        "clip_id": "c710479c9da31",
+        "inner_fold": 2,
+        "probability_leak": 0.07205551117658615
+      },
+      {
+        "clip_id": "c722b58050aed",
+        "inner_fold": 2,
+        "probability_leak": 7.843385537853464e-05
+      },
+      {
+        "clip_id": "c72960a21f1bd",
+        "inner_fold": 2,
+        "probability_leak": 0.8068000078201294
+      },
+      {
+        "clip_id": "c75a6f1fb9d12",
+        "inner_fold": 2,
+        "probability_leak": 0.08862926065921783
+      },
+      {
+        "clip_id": "c760afca314ee",
+        "inner_fold": 2,
+        "probability_leak": 0.5848719477653503
+      },
+      {
+        "clip_id": "c79fef86e0ef4",
+        "inner_fold": 2,
+        "probability_leak": 0.9824295043945312
+      },
+      {
+        "clip_id": "c7b06db61af9a",
+        "inner_fold": 2,
+        "probability_leak": 0.5294820666313171
+      },
+      {
+        "clip_id": "c7bbbb99ecc43",
+        "inner_fold": 2,
+        "probability_leak": 0.75095534324646
+      },
+      {
+        "clip_id": "c7c7bafde0b29",
+        "inner_fold": 2,
+        "probability_leak": 0.757398784160614
+      },
+      {
+        "clip_id": "c7d0533ff4148",
+        "inner_fold": 2,
+        "probability_leak": 0.8996493220329285
+      },
+      {
+        "clip_id": "c7dc507b66608",
+        "inner_fold": 2,
+        "probability_leak": 0.9900668859481812
+      },
+      {
+        "clip_id": "c7e04ab2dd189",
+        "inner_fold": 2,
+        "probability_leak": 0.09248919785022736
+      },
+      {
+        "clip_id": "c7f3f9946e92f",
+        "inner_fold": 2,
+        "probability_leak": 0.9999178647994995
+      },
+      {
+        "clip_id": "c812ba0ae791b",
+        "inner_fold": 2,
+        "probability_leak": 0.38663026690483093
+      },
+      {
+        "clip_id": "c82f40b6adf5c",
+        "inner_fold": 2,
+        "probability_leak": 0.9373724460601807
+      },
+      {
+        "clip_id": "c83e4c9ff2b59",
+        "inner_fold": 2,
+        "probability_leak": 0.005528795067220926
+      },
+      {
+        "clip_id": "c8570a876ecbe",
+        "inner_fold": 2,
+        "probability_leak": 0.6806299686431885
+      },
+      {
+        "clip_id": "c8666274626ed",
+        "inner_fold": 2,
+        "probability_leak": 0.08093945682048798
+      },
+      {
+        "clip_id": "c8748a4c7ffc7",
+        "inner_fold": 2,
+        "probability_leak": 0.0006676252232864499
+      },
+      {
+        "clip_id": "c87fec72e724a",
+        "inner_fold": 2,
+        "probability_leak": 0.9919158816337585
+      },
+      {
+        "clip_id": "c8a7e32978d46",
+        "inner_fold": 2,
+        "probability_leak": 0.8086677193641663
+      },
+      {
+        "clip_id": "c8c938430e85c",
+        "inner_fold": 2,
+        "probability_leak": 0.9941710829734802
+      },
+      {
+        "clip_id": "c8d48dd85a19f",
+        "inner_fold": 2,
+        "probability_leak": 0.9897220730781555
+      },
+      {
+        "clip_id": "c8fd6dd25e265",
+        "inner_fold": 2,
+        "probability_leak": 0.5523476600646973
+      },
+      {
+        "clip_id": "c8febabd06638",
+        "inner_fold": 2,
+        "probability_leak": 0.45483630895614624
+      },
+      {
+        "clip_id": "c904486cd13fd",
+        "inner_fold": 2,
+        "probability_leak": 1.0321008492297779e-09
+      },
+      {
+        "clip_id": "c9090ce314855",
+        "inner_fold": 2,
+        "probability_leak": 0.42364418506622314
+      },
+      {
+        "clip_id": "c9255e1d09808",
+        "inner_fold": 2,
+        "probability_leak": 0.007300303317606449
+      },
+      {
+        "clip_id": "c929c87aa1b42",
+        "inner_fold": 2,
+        "probability_leak": 0.005970861297100782
+      },
+      {
+        "clip_id": "c945fefa7c7c7",
+        "inner_fold": 2,
+        "probability_leak": 0.8236693143844604
+      },
+      {
+        "clip_id": "c9525342ac0bb",
+        "inner_fold": 2,
+        "probability_leak": 0.9991284012794495
+      },
+      {
+        "clip_id": "c977205a20157",
+        "inner_fold": 2,
+        "probability_leak": 0.002777976216748357
+      },
+      {
+        "clip_id": "c97894a44afd8",
+        "inner_fold": 2,
+        "probability_leak": 0.021467875689268112
+      },
+      {
+        "clip_id": "c97e2fbf49b5d",
+        "inner_fold": 2,
+        "probability_leak": 0.08032435178756714
+      },
+      {
+        "clip_id": "c9800a2902967",
+        "inner_fold": 2,
+        "probability_leak": 2.325454033780261e-06
+      },
+      {
+        "clip_id": "c9b180fd6c818",
+        "inner_fold": 2,
+        "probability_leak": 0.001032382482662797
+      },
+      {
+        "clip_id": "c9da56ced9783",
+        "inner_fold": 2,
+        "probability_leak": 0.22607924044132233
+      },
+      {
+        "clip_id": "c9e89eab2ddf2",
+        "inner_fold": 2,
+        "probability_leak": 0.4989389181137085
+      },
+      {
+        "clip_id": "c9eaed9c635c2",
+        "inner_fold": 2,
+        "probability_leak": 0.6008477807044983
+      },
+      {
+        "clip_id": "c9eec73b47d50",
+        "inner_fold": 2,
+        "probability_leak": 0.6037590503692627
+      },
+      {
+        "clip_id": "c9f8a8c9ec27a",
+        "inner_fold": 2,
+        "probability_leak": 0.6458721160888672
+      },
+      {
+        "clip_id": "ca060cc57486c",
+        "inner_fold": 2,
+        "probability_leak": 0.7368087768554688
+      },
+      {
+        "clip_id": "ca218cedcfb92",
+        "inner_fold": 2,
+        "probability_leak": 0.0008544049924239516
+      },
+      {
+        "clip_id": "ca26346853052",
+        "inner_fold": 2,
+        "probability_leak": 0.8673678636550903
+      },
+      {
+        "clip_id": "ca41b92332b26",
+        "inner_fold": 2,
+        "probability_leak": 8.657177386339754e-05
+      },
+      {
+        "clip_id": "ca4405e0d5291",
+        "inner_fold": 2,
+        "probability_leak": 0.32833948731422424
+      },
+      {
+        "clip_id": "ca462d40cc1f5",
+        "inner_fold": 2,
+        "probability_leak": 0.014619117602705956
+      },
+      {
+        "clip_id": "ca6c409dcee37",
+        "inner_fold": 2,
+        "probability_leak": 0.34196266531944275
+      },
+      {
+        "clip_id": "ca785ee839f07",
+        "inner_fold": 2,
+        "probability_leak": 0.1921979933977127
+      },
+      {
+        "clip_id": "ca78aa8b431d7",
+        "inner_fold": 2,
+        "probability_leak": 0.840200662612915
+      },
+      {
+        "clip_id": "ca7a143288c49",
+        "inner_fold": 2,
+        "probability_leak": 0.5475066900253296
+      },
+      {
+        "clip_id": "ca92e7e3c8a65",
+        "inner_fold": 2,
+        "probability_leak": 0.9890543222427368
+      },
+      {
+        "clip_id": "caaa128b22094",
+        "inner_fold": 2,
+        "probability_leak": 0.6458721160888672
+      },
+      {
+        "clip_id": "cab2078e0f2fe",
+        "inner_fold": 2,
+        "probability_leak": 0.32144564390182495
+      },
+      {
+        "clip_id": "cacceda6bcc68",
+        "inner_fold": 2,
+        "probability_leak": 0.18957236409187317
+      },
+      {
+        "clip_id": "caeff31a64b96",
+        "inner_fold": 2,
+        "probability_leak": 0.0033493279479444027
+      },
+      {
+        "clip_id": "cb0587d80e43d",
+        "inner_fold": 2,
+        "probability_leak": 0.9953749775886536
+      },
+      {
+        "clip_id": "cb17c6ebae98e",
+        "inner_fold": 2,
+        "probability_leak": 0.41035643219947815
+      },
+      {
+        "clip_id": "cb336e382f080",
+        "inner_fold": 2,
+        "probability_leak": 0.6333552002906799
+      },
+      {
+        "clip_id": "cb440af43a10e",
+        "inner_fold": 2,
+        "probability_leak": 0.6661883592605591
+      },
+      {
+        "clip_id": "cb446f02203f5",
+        "inner_fold": 2,
+        "probability_leak": 0.006185885984450579
+      },
+      {
+        "clip_id": "cb8afa5be487c",
+        "inner_fold": 2,
+        "probability_leak": 0.9946520328521729
+      },
+      {
+        "clip_id": "cb8c5084de71f",
+        "inner_fold": 2,
+        "probability_leak": 0.18955078721046448
+      },
+      {
+        "clip_id": "cb8ea5ba6ee8e",
+        "inner_fold": 2,
+        "probability_leak": 0.7630541324615479
+      },
+      {
+        "clip_id": "cb95ebb6d026f",
+        "inner_fold": 2,
+        "probability_leak": 0.029650934040546417
+      },
+      {
+        "clip_id": "cba8f28afe0e4",
+        "inner_fold": 2,
+        "probability_leak": 0.9366504549980164
+      },
+      {
+        "clip_id": "cbae7a05a27b2",
+        "inner_fold": 2,
+        "probability_leak": 0.05979292839765549
+      },
+      {
+        "clip_id": "cbaf78df6bfc2",
+        "inner_fold": 2,
+        "probability_leak": 0.0013594584306702018
+      },
+      {
+        "clip_id": "cbc5cc1b6c0d8",
+        "inner_fold": 2,
+        "probability_leak": 0.9404934644699097
+      },
+      {
+        "clip_id": "cbd60eac36500",
+        "inner_fold": 2,
+        "probability_leak": 0.3595242202281952
+      },
+      {
+        "clip_id": "cbecea70bcb8a",
+        "inner_fold": 2,
+        "probability_leak": 0.8086677193641663
+      },
+      {
+        "clip_id": "cc06c773ce585",
+        "inner_fold": 2,
+        "probability_leak": 0.002151546999812126
+      },
+      {
+        "clip_id": "cc0a344f25360",
+        "inner_fold": 2,
+        "probability_leak": 0.3566645681858063
+      },
+      {
+        "clip_id": "cc0e7fee58f57",
+        "inner_fold": 2,
+        "probability_leak": 0.18992844223976135
+      },
+      {
+        "clip_id": "cc2a75613d283",
+        "inner_fold": 2,
+        "probability_leak": 0.7195152044296265
+      },
+      {
+        "clip_id": "cc31d113a490a",
+        "inner_fold": 2,
+        "probability_leak": 0.3181079924106598
+      },
+      {
+        "clip_id": "cc3569a105921",
+        "inner_fold": 2,
+        "probability_leak": 0.9311811923980713
+      },
+      {
+        "clip_id": "cc5cb8c05644e",
+        "inner_fold": 2,
+        "probability_leak": 0.584789514541626
+      },
+      {
+        "clip_id": "cc5f3dafedb58",
+        "inner_fold": 2,
+        "probability_leak": 0.5233701467514038
+      },
+      {
+        "clip_id": "cc84f37cac49e",
+        "inner_fold": 2,
+        "probability_leak": 0.021467875689268112
+      },
+      {
+        "clip_id": "cc90b947e39a9",
+        "inner_fold": 2,
+        "probability_leak": 0.801682710647583
+      },
+      {
+        "clip_id": "cc969d2b9dc97",
+        "inner_fold": 2,
+        "probability_leak": 0.9887980818748474
+      },
+      {
+        "clip_id": "cca4243c89f2a",
+        "inner_fold": 2,
+        "probability_leak": 0.6801194548606873
+      },
+      {
+        "clip_id": "cca777cc24de2",
+        "inner_fold": 2,
+        "probability_leak": 0.8741401433944702
+      },
+      {
+        "clip_id": "cca8472440c45",
+        "inner_fold": 2,
+        "probability_leak": 0.19051462411880493
+      },
+      {
+        "clip_id": "ccb9684ea6243",
+        "inner_fold": 2,
+        "probability_leak": 0.9356380701065063
+      },
+      {
+        "clip_id": "ccbc5a8b2af49",
+        "inner_fold": 2,
+        "probability_leak": 1.0321008492297779e-09
+      },
+      {
+        "clip_id": "ccc211654bba2",
+        "inner_fold": 2,
+        "probability_leak": 0.11433979868888855
+      },
+      {
+        "clip_id": "ccc6068b5b0a2",
+        "inner_fold": 2,
+        "probability_leak": 0.21531988680362701
+      },
+      {
+        "clip_id": "cccdbbb49e736",
+        "inner_fold": 2,
+        "probability_leak": 0.19095493853092194
+      },
+      {
+        "clip_id": "ccce218c0e70d",
+        "inner_fold": 2,
+        "probability_leak": 0.3566645681858063
+      },
+      {
+        "clip_id": "cce6baf614bfa",
+        "inner_fold": 2,
+        "probability_leak": 0.33820104598999023
+      },
+      {
+        "clip_id": "cce8f01ad51b8",
+        "inner_fold": 2,
+        "probability_leak": 0.629543662071228
+      },
+      {
+        "clip_id": "ccf8e76bfe498",
+        "inner_fold": 2,
+        "probability_leak": 0.9898144006729126
+      },
+      {
+        "clip_id": "cd098874a6b8e",
+        "inner_fold": 2,
+        "probability_leak": 0.9813823699951172
+      },
+      {
+        "clip_id": "cd11be05a39dc",
+        "inner_fold": 2,
+        "probability_leak": 0.9999998807907104
+      },
+      {
+        "clip_id": "cd2883c705292",
+        "inner_fold": 2,
+        "probability_leak": 0.8679407835006714
+      },
+      {
+        "clip_id": "cd2f212742960",
+        "inner_fold": 2,
+        "probability_leak": 0.009475561790168285
+      },
+      {
+        "clip_id": "cd44051294456",
+        "inner_fold": 2,
+        "probability_leak": 0.8336712718009949
+      },
+      {
+        "clip_id": "cd4d040029f85",
+        "inner_fold": 2,
+        "probability_leak": 0.4183196723461151
+      },
+      {
+        "clip_id": "cd56be4657cb9",
+        "inner_fold": 2,
+        "probability_leak": 0.8156413435935974
+      },
+      {
+        "clip_id": "cd6f5fae74ad6",
+        "inner_fold": 2,
+        "probability_leak": 0.10009683668613434
+      },
+      {
+        "clip_id": "cd77bfd264abc",
+        "inner_fold": 2,
+        "probability_leak": 0.9986756443977356
+      },
+      {
+        "clip_id": "cd7ccdb024821",
+        "inner_fold": 2,
+        "probability_leak": 0.9025734663009644
+      },
+      {
+        "clip_id": "cd84219c979bd",
+        "inner_fold": 2,
+        "probability_leak": 0.7065837383270264
+      },
+      {
+        "clip_id": "cd8a933a9f809",
+        "inner_fold": 2,
+        "probability_leak": 0.017222894355654716
+      },
+      {
+        "clip_id": "cd8f4f46d9cf9",
+        "inner_fold": 2,
+        "probability_leak": 0.41333848237991333
+      },
+      {
+        "clip_id": "cd98d6235a267",
+        "inner_fold": 2,
+        "probability_leak": 0.13394075632095337
+      },
+      {
+        "clip_id": "cdaa3659f139a",
+        "inner_fold": 2,
+        "probability_leak": 1.5918491271804669e-06
+      },
+      {
+        "clip_id": "cdabbb10d3783",
+        "inner_fold": 2,
+        "probability_leak": 0.7656905055046082
+      },
+      {
+        "clip_id": "cdda15a414f8b",
+        "inner_fold": 2,
+        "probability_leak": 0.3953382968902588
+      },
+      {
+        "clip_id": "cdfeedc28a277",
+        "inner_fold": 2,
+        "probability_leak": 0.029662741348147392
+      },
+      {
+        "clip_id": "ce05b73f8fce2",
+        "inner_fold": 2,
+        "probability_leak": 0.004769856575876474
+      },
+      {
+        "clip_id": "ce084472188f4",
+        "inner_fold": 2,
+        "probability_leak": 0.07117000222206116
+      },
+      {
+        "clip_id": "ce301c7d88abe",
+        "inner_fold": 2,
+        "probability_leak": 0.6175422668457031
+      },
+      {
+        "clip_id": "ce375fd85d539",
+        "inner_fold": 2,
+        "probability_leak": 0.7093092203140259
+      },
+      {
+        "clip_id": "ce419a5dd5696",
+        "inner_fold": 2,
+        "probability_leak": 0.1512528955936432
+      },
+      {
+        "clip_id": "ce461f134c0c0",
+        "inner_fold": 2,
+        "probability_leak": 0.8082436919212341
+      },
+      {
+        "clip_id": "ce49d4559826a",
+        "inner_fold": 2,
+        "probability_leak": 0.07505907863378525
+      },
+      {
+        "clip_id": "ce542643f6982",
+        "inner_fold": 2,
+        "probability_leak": 0.20741185545921326
+      },
+      {
+        "clip_id": "ce64c6fe56b6f",
+        "inner_fold": 2,
+        "probability_leak": 0.08582786470651627
+      },
+      {
+        "clip_id": "ce6e8406e4611",
+        "inner_fold": 2,
+        "probability_leak": 0.7645067572593689
+      },
+      {
+        "clip_id": "ce739a13228a2",
+        "inner_fold": 2,
+        "probability_leak": 0.9363781213760376
+      },
+      {
+        "clip_id": "ce7890384071e",
+        "inner_fold": 2,
+        "probability_leak": 0.7641538381576538
+      },
+      {
+        "clip_id": "ce888f1dcc998",
+        "inner_fold": 2,
+        "probability_leak": 0.3082810044288635
+      },
+      {
+        "clip_id": "ce8e858b4feb5",
+        "inner_fold": 2,
+        "probability_leak": 0.0010451249545440078
+      },
+      {
+        "clip_id": "ce8ec2b9eb1e6",
+        "inner_fold": 2,
+        "probability_leak": 0.16896894574165344
+      },
+      {
+        "clip_id": "ce90e1bba068b",
+        "inner_fold": 2,
+        "probability_leak": 0.11789833754301071
+      },
+      {
+        "clip_id": "ce914b2fa714b",
+        "inner_fold": 2,
+        "probability_leak": 0.3302396535873413
+      },
+      {
+        "clip_id": "ce99fd42b092c",
+        "inner_fold": 2,
+        "probability_leak": 0.8937194347381592
+      },
+      {
+        "clip_id": "ce9fd92c4a590",
+        "inner_fold": 2,
+        "probability_leak": 0.18017645180225372
+      },
+      {
+        "clip_id": "cea1a896ed055",
+        "inner_fold": 2,
+        "probability_leak": 0.9998030066490173
+      },
+      {
+        "clip_id": "ceb33347ccde5",
+        "inner_fold": 2,
+        "probability_leak": 0.534016489982605
+      },
+      {
+        "clip_id": "ceb7bd6af5bb2",
+        "inner_fold": 2,
+        "probability_leak": 0.6066322922706604
+      },
+      {
+        "clip_id": "cece6c73e4c2c",
+        "inner_fold": 2,
+        "probability_leak": 0.01430530659854412
+      },
+      {
+        "clip_id": "cefc3c34b023a",
+        "inner_fold": 2,
+        "probability_leak": 0.9322150349617004
+      },
+      {
+        "clip_id": "cf076bc271b4d",
+        "inner_fold": 2,
+        "probability_leak": 0.32214614748954773
+      },
+      {
+        "clip_id": "cf0cec714c72c",
+        "inner_fold": 2,
+        "probability_leak": 0.1714835911989212
+      },
+      {
+        "clip_id": "cf18efa6f8140",
+        "inner_fold": 2,
+        "probability_leak": 0.015791362151503563
+      },
+      {
+        "clip_id": "cf3c65fad2914",
+        "inner_fold": 2,
+        "probability_leak": 0.26743707060813904
+      },
+      {
+        "clip_id": "cf49b0d124b71",
+        "inner_fold": 2,
+        "probability_leak": 0.320860892534256
+      },
+      {
+        "clip_id": "cf5b0b2b7b49e",
+        "inner_fold": 2,
+        "probability_leak": 0.015338239260017872
+      },
+      {
+        "clip_id": "cf6854f88121d",
+        "inner_fold": 2,
+        "probability_leak": 0.9104681015014648
+      },
+      {
+        "clip_id": "cf6ef9ac3c7d2",
+        "inner_fold": 2,
+        "probability_leak": 0.9932651519775391
+      },
+      {
+        "clip_id": "cf707df74d074",
+        "inner_fold": 2,
+        "probability_leak": 0.1921979933977127
+      },
+      {
+        "clip_id": "cf7a6821aa59d",
+        "inner_fold": 2,
+        "probability_leak": 0.9868112206459045
+      },
+      {
+        "clip_id": "cf7b9a4168a3a",
+        "inner_fold": 2,
+        "probability_leak": 1.0
+      },
+      {
+        "clip_id": "cf916a496c467",
+        "inner_fold": 2,
+        "probability_leak": 4.779074629368552e-07
+      },
+      {
+        "clip_id": "cfb09e0398315",
+        "inner_fold": 2,
+        "probability_leak": 0.9496597051620483
+      },
+      {
+        "clip_id": "cfb359dcca238",
+        "inner_fold": 2,
+        "probability_leak": 0.43746334314346313
+      },
+      {
+        "clip_id": "cfec080e3b840",
+        "inner_fold": 2,
+        "probability_leak": 0.17072179913520813
+      },
+      {
+        "clip_id": "cfee4f9fd8787",
+        "inner_fold": 2,
+        "probability_leak": 0.9216634035110474
+      },
+      {
+        "clip_id": "cff534b9287cd",
+        "inner_fold": 2,
+        "probability_leak": 0.25739598274230957
+      },
+      {
+        "clip_id": "cff7b80d1e412",
+        "inner_fold": 2,
+        "probability_leak": 0.018634166568517685
+      },
+      {
+        "clip_id": "cffe7e7913ec3",
+        "inner_fold": 2,
+        "probability_leak": 0.9703173637390137
+      }
+    ]
+  },
+  "C1_fixed": {
+    "n_features": 9,
+    "folds": [
+      {
+        "n_clips": 98,
+        "n_clusters": 34,
+        "n_clusters_leak": 26,
+        "n_clusters_non_leak": 8,
+        "n_clips_leak": 73,
+        "n_clips_non_leak": 25,
+        "threshold": 0.5,
+        "aggregation": "median",
+        "clip_level": {
+          "roc_auc": 0.85863,
+          "pr_auc": 0.944968,
+          "macro_f1": 0.806869,
+          "balanced_accuracy": 0.798904,
+          "leak_recall": 0.917808,
+          "false_positive_rate": 0.32,
+          "brier": 0.134327,
+          "tp": 67,
+          "fp": 8,
+          "fn": 6,
+          "tn": 17
+        },
+        "cluster_level": {
+          "roc_auc": 0.951923,
+          "pr_auc": 0.984948,
+          "macro_f1": 0.871698,
+          "balanced_accuracy": 0.855769,
+          "leak_recall": 0.961538,
+          "false_positive_rate": 0.25,
+          "brier": 0.086623,
+          "tp": 25,
+          "fp": 2,
+          "fn": 1,
+          "tn": 6
+        },
+        "fold_id": 0,
+        "n_fit_clips": 500,
+        "group_roc_auc_full": 0.9519230769230769,
+        "clip_roc_auc_full": 0.8586301369863014
+      },
+      {
+        "n_clips": 225,
+        "n_clusters": 34,
+        "n_clusters_leak": 26,
+        "n_clusters_non_leak": 8,
+        "n_clips_leak": 89,
+        "n_clips_non_leak": 136,
+        "threshold": 0.5,
+        "aggregation": "median",
+        "clip_level": {
+          "roc_auc": 0.949025,
+          "pr_auc": 0.916248,
+          "macro_f1": 0.873148,
+          "balanced_accuracy": 0.88541,
+          "leak_recall": 0.932584,
+          "false_positive_rate": 0.161765,
+          "brier": 0.100609,
+          "tp": 83,
+          "fp": 22,
+          "fn": 6,
+          "tn": 114
+        },
+        "cluster_level": {
+          "roc_auc": 0.918269,
+          "pr_auc": 0.962981,
+          "macro_f1": 0.857343,
+          "balanced_accuracy": 0.8125,
+          "leak_recall": 1.0,
+          "false_positive_rate": 0.375,
+          "brier": 0.075658,
+          "tp": 26,
+          "fp": 3,
+          "fn": 0,
+          "tn": 5
+        },
+        "fold_id": 1,
+        "n_fit_clips": 373,
+        "group_roc_auc_full": 0.9182692307692307,
+        "clip_roc_auc_full": 0.9490251156642432
+      },
+      {
+        "n_clips": 275,
+        "n_clusters": 34,
+        "n_clusters_leak": 26,
+        "n_clusters_non_leak": 8,
+        "n_clips_leak": 132,
+        "n_clips_non_leak": 143,
+        "threshold": 0.5,
+        "aggregation": "median",
+        "clip_level": {
+          "roc_auc": 0.882019,
+          "pr_auc": 0.844416,
+          "macro_f1": 0.810887,
+          "balanced_accuracy": 0.811772,
+          "leak_recall": 0.833333,
+          "false_positive_rate": 0.20979,
+          "brier": 0.128861,
+          "tp": 110,
+          "fp": 30,
+          "fn": 22,
+          "tn": 113
+        },
+        "cluster_level": {
+          "roc_auc": 0.942308,
+          "pr_auc": 0.977953,
+          "macro_f1": 0.957233,
+          "balanced_accuracy": 0.9375,
+          "leak_recall": 1.0,
+          "false_positive_rate": 0.125,
+          "brier": 0.099745,
+          "tp": 26,
+          "fp": 1,
+          "fn": 0,
+          "tn": 7
+        },
+        "fold_id": 2,
+        "n_fit_clips": 323,
+        "group_roc_auc_full": 0.9423076923076923,
+        "clip_roc_auc_full": 0.8820194956558592
+      }
+    ],
+    "mean_group_roc_auc": 0.9375,
+    "mean_clip_roc_auc": 0.8965582494354679,
+    "predictions_by_fold": [
+      {
+        "clip_id": "c05d8158c3707",
+        "inner_fold": 0,
+        "probability_leak": 0.7577307965413662
+      },
+      {
+        "clip_id": "c064b4d3a7013",
+        "inner_fold": 0,
+        "probability_leak": 0.8924695815588477
+      },
+      {
+        "clip_id": "c07c975f95b7e",
+        "inner_fold": 0,
+        "probability_leak": 0.9991441653620139
+      },
+      {
+        "clip_id": "c10d8db301dc4",
+        "inner_fold": 0,
+        "probability_leak": 0.7215115839492033
+      },
+      {
+        "clip_id": "c112f81c56ca1",
+        "inner_fold": 0,
+        "probability_leak": 0.9994545118305526
+      },
+      {
+        "clip_id": "c13b609dbac9e",
+        "inner_fold": 0,
+        "probability_leak": 0.7546289063214532
+      },
+      {
+        "clip_id": "c1683ed31e294",
+        "inner_fold": 0,
+        "probability_leak": 0.545959317548842
+      },
+      {
+        "clip_id": "c186eb3b4bb13",
+        "inner_fold": 0,
+        "probability_leak": 0.7261198994093627
+      },
+      {
+        "clip_id": "c1a8f1d23de2c",
+        "inner_fold": 0,
+        "probability_leak": 0.5405209350010909
+      },
+      {
+        "clip_id": "c1e54ae43a9f6",
+        "inner_fold": 0,
+        "probability_leak": 0.046615960651387574
+      },
+      {
+        "clip_id": "c1f6f5dc288b2",
+        "inner_fold": 0,
+        "probability_leak": 0.9956031287488404
+      },
+      {
+        "clip_id": "c20b154e99c77",
+        "inner_fold": 0,
+        "probability_leak": 0.9970612399527393
+      },
+      {
+        "clip_id": "c239d96cc7621",
+        "inner_fold": 0,
+        "probability_leak": 0.7578696641090524
+      },
+      {
+        "clip_id": "c2417970779b9",
+        "inner_fold": 0,
+        "probability_leak": 0.0002739898418937821
+      },
+      {
+        "clip_id": "c255805e4789f",
+        "inner_fold": 0,
+        "probability_leak": 0.5788155372518097
+      },
+      {
+        "clip_id": "c272ce4cb0a81",
+        "inner_fold": 0,
+        "probability_leak": 0.711130267119046
+      },
+      {
+        "clip_id": "c27615e885482",
+        "inner_fold": 0,
+        "probability_leak": 0.6774807900076298
+      },
+      {
+        "clip_id": "c2c13a3c5c847",
+        "inner_fold": 0,
+        "probability_leak": 0.5531521896395885
+      },
+      {
+        "clip_id": "c30617b58ed2d",
+        "inner_fold": 0,
+        "probability_leak": 0.9982941002863093
+      },
+      {
+        "clip_id": "c31dfc36d9429",
+        "inner_fold": 0,
+        "probability_leak": 0.8667092388527626
+      },
+      {
+        "clip_id": "c32e9ddbcf512",
+        "inner_fold": 0,
+        "probability_leak": 0.9249232745158477
+      },
+      {
+        "clip_id": "c332cd97e3344",
+        "inner_fold": 0,
+        "probability_leak": 0.13304254625570833
+      },
+      {
+        "clip_id": "c33b9ec7b16e8",
+        "inner_fold": 0,
+        "probability_leak": 0.242879408066187
+      },
+      {
+        "clip_id": "c3bd3873e11c7",
+        "inner_fold": 0,
+        "probability_leak": 0.45046238768072466
+      },
+      {
+        "clip_id": "c42044c6c967e",
+        "inner_fold": 0,
+        "probability_leak": 0.12686533027785277
+      },
+      {
+        "clip_id": "c475678ae6ef8",
+        "inner_fold": 0,
+        "probability_leak": 0.78840270955032
+      },
+      {
+        "clip_id": "c4c44b6b5ad5b",
+        "inner_fold": 0,
+        "probability_leak": 0.998969925061569
+      },
+      {
+        "clip_id": "c4e7f6b33ed4c",
+        "inner_fold": 0,
+        "probability_leak": 0.7712533964359556
+      },
+      {
+        "clip_id": "c4ef9953000c4",
+        "inner_fold": 0,
+        "probability_leak": 0.525398218233227
+      },
+      {
+        "clip_id": "c4f0131614c87",
+        "inner_fold": 0,
+        "probability_leak": 0.9993500333986307
+      },
+      {
+        "clip_id": "c538ffa19559f",
+        "inner_fold": 0,
+        "probability_leak": 0.9993440998656195
+      },
+      {
+        "clip_id": "c5405732725d3",
+        "inner_fold": 0,
+        "probability_leak": 0.9992405103434986
+      },
+      {
+        "clip_id": "c561239dda450",
+        "inner_fold": 0,
+        "probability_leak": 0.44161638311861584
+      },
+      {
+        "clip_id": "c58521959ee09",
+        "inner_fold": 0,
+        "probability_leak": 0.4569685438421801
+      },
+      {
+        "clip_id": "c5c25beb01fd8",
+        "inner_fold": 0,
+        "probability_leak": 4.545832057309349e-05
+      },
+      {
+        "clip_id": "c63e2c213d4c3",
+        "inner_fold": 0,
+        "probability_leak": 0.624677684527562
+      },
+      {
+        "clip_id": "c6cfb8b366b9b",
+        "inner_fold": 0,
+        "probability_leak": 0.44917657393011734
+      },
+      {
+        "clip_id": "c6d2dba66c5bf",
+        "inner_fold": 0,
+        "probability_leak": 0.9990463899650857
+      },
+      {
+        "clip_id": "c6ed234a13629",
+        "inner_fold": 0,
+        "probability_leak": 0.75289627126732
+      },
+      {
+        "clip_id": "c70e042ff2fb4",
+        "inner_fold": 0,
+        "probability_leak": 0.4546740430841445
+      },
+      {
+        "clip_id": "c721366fe8a44",
+        "inner_fold": 0,
+        "probability_leak": 0.8371571369100924
+      },
+      {
+        "clip_id": "c73eef6098927",
+        "inner_fold": 0,
+        "probability_leak": 0.9992508586909328
+      },
+      {
+        "clip_id": "c749d0ec0a4da",
+        "inner_fold": 0,
+        "probability_leak": 0.550072797021371
+      },
+      {
+        "clip_id": "c74f741f43ba0",
+        "inner_fold": 0,
+        "probability_leak": 0.42430162883233535
+      },
+      {
+        "clip_id": "c75ff7781df3f",
+        "inner_fold": 0,
+        "probability_leak": 0.29456935100133436
+      },
+      {
+        "clip_id": "c7788ae6ad436",
+        "inner_fold": 0,
+        "probability_leak": 0.9993916364720631
+      },
+      {
+        "clip_id": "c79d76b0a85c9",
+        "inner_fold": 0,
+        "probability_leak": 0.8489604241004983
+      },
+      {
+        "clip_id": "c8104a15f00d7",
+        "inner_fold": 0,
+        "probability_leak": 0.30123795978257445
+      },
+      {
+        "clip_id": "c8289c334c228",
+        "inner_fold": 0,
+        "probability_leak": 6.9043784321012594e-06
+      },
+      {
+        "clip_id": "c852aee3c1dab",
+        "inner_fold": 0,
+        "probability_leak": 0.9979987457926168
+      },
+      {
+        "clip_id": "c86336a54b952",
+        "inner_fold": 0,
+        "probability_leak": 0.6947526598969294
+      },
+      {
+        "clip_id": "c883d3972e62d",
+        "inner_fold": 0,
+        "probability_leak": 0.3194251786076493
+      },
+      {
+        "clip_id": "c8d19965fb166",
+        "inner_fold": 0,
+        "probability_leak": 0.5946564814972918
+      },
+      {
+        "clip_id": "c8f1e38ca2320",
+        "inner_fold": 0,
+        "probability_leak": 0.6663601497337885
+      },
+      {
+        "clip_id": "c8f8340030ca2",
+        "inner_fold": 0,
+        "probability_leak": 0.9993423436751836
+      },
+      {
+        "clip_id": "c95340245af0b",
+        "inner_fold": 0,
+        "probability_leak": 0.5007073981434781
+      },
+      {
+        "clip_id": "c9ab733ae4c2a",
+        "inner_fold": 0,
+        "probability_leak": 0.9971837471702902
+      },
+      {
+        "clip_id": "c9c22a3a7bbb1",
+        "inner_fold": 0,
+        "probability_leak": 0.86160652941555
+      },
+      {
+        "clip_id": "ca231577fb9d2",
+        "inner_fold": 0,
+        "probability_leak": 0.1085795581816683
+      },
+      {
+        "clip_id": "ca72bf20e16e1",
+        "inner_fold": 0,
+        "probability_leak": 0.6165363361807235
+      },
+      {
+        "clip_id": "cab1fabf80cc0",
+        "inner_fold": 0,
+        "probability_leak": 0.4971044973161938
+      },
+      {
+        "clip_id": "cac54aa1d814e",
+        "inner_fold": 0,
+        "probability_leak": 0.9152896157445762
+      },
+      {
+        "clip_id": "cb1836abaeda9",
+        "inner_fold": 0,
+        "probability_leak": 0.3684402474699638
+      },
+      {
+        "clip_id": "cb1b6d00cc612",
+        "inner_fold": 0,
+        "probability_leak": 0.9994591700874814
+      },
+      {
+        "clip_id": "cbc4c8ad3580b",
+        "inner_fold": 0,
+        "probability_leak": 0.5673546857046459
+      },
+      {
+        "clip_id": "cbefbc2bfab6d",
+        "inner_fold": 0,
+        "probability_leak": 0.75611873703589
+      },
+      {
+        "clip_id": "cc0bb75701548",
+        "inner_fold": 0,
+        "probability_leak": 0.9882225944227493
+      },
+      {
+        "clip_id": "cc3ea9de7c014",
+        "inner_fold": 0,
+        "probability_leak": 0.5972985178210208
+      },
+      {
+        "clip_id": "cc907703b5ee8",
+        "inner_fold": 0,
+        "probability_leak": 0.9967405123816858
+      },
+      {
+        "clip_id": "cc96f393f9909",
+        "inner_fold": 0,
+        "probability_leak": 0.9960844919028287
+      },
+      {
+        "clip_id": "cca73bdc5fabd",
+        "inner_fold": 0,
+        "probability_leak": 0.7608744825063751
+      },
+      {
+        "clip_id": "ccaebe2671432",
+        "inner_fold": 0,
+        "probability_leak": 0.792157572263665
+      },
+      {
+        "clip_id": "cccd7093a14f3",
+        "inner_fold": 0,
+        "probability_leak": 0.9785650089686144
+      },
+      {
+        "clip_id": "ccee26aeeb116",
+        "inner_fold": 0,
+        "probability_leak": 0.7253327098782546
+      },
+      {
+        "clip_id": "cd1d69cf431ed",
+        "inner_fold": 0,
+        "probability_leak": 0.3432604111554803
+      },
+      {
+        "clip_id": "cd3e24c8fddaa",
+        "inner_fold": 0,
+        "probability_leak": 0.9953463035374518
+      },
+      {
+        "clip_id": "cd57a1dedb807",
+        "inner_fold": 0,
+        "probability_leak": 0.9994200095390441
+      },
+      {
+        "clip_id": "cd5c4ed20c428",
+        "inner_fold": 0,
+        "probability_leak": 0.23323742583322202
+      },
+      {
+        "clip_id": "cd7dbf2e752b0",
+        "inner_fold": 0,
+        "probability_leak": 0.5194245566037137
+      },
+      {
+        "clip_id": "cd8911748e7db",
+        "inner_fold": 0,
+        "probability_leak": 0.9995887810710306
+      },
+      {
+        "clip_id": "cdaeac1be16b4",
+        "inner_fold": 0,
+        "probability_leak": 0.9994025178484737
+      },
+      {
+        "clip_id": "cdb43ef923ce5",
+        "inner_fold": 0,
+        "probability_leak": 0.018220810258123832
+      },
+      {
+        "clip_id": "cdbd5104a19f9",
+        "inner_fold": 0,
+        "probability_leak": 0.22163556311947527
+      },
+      {
+        "clip_id": "cde2fefb4bce3",
+        "inner_fold": 0,
+        "probability_leak": 0.5857132100371855
+      },
+      {
+        "clip_id": "ce083251e3ac8",
+        "inner_fold": 0,
+        "probability_leak": 0.7220629363485321
+      },
+      {
+        "clip_id": "ce552fe86d7ad",
+        "inner_fold": 0,
+        "probability_leak": 0.9754095933364179
+      },
+      {
+        "clip_id": "ce5879bae43e3",
+        "inner_fold": 0,
+        "probability_leak": 0.9992358152143065
+      },
+      {
+        "clip_id": "ce5db6f4b0065",
+        "inner_fold": 0,
+        "probability_leak": 0.8792587339453011
+      },
+      {
+        "clip_id": "ce5f08be3057b",
+        "inner_fold": 0,
+        "probability_leak": 0.6338922662445842
+      },
+      {
+        "clip_id": "ce771af614f4e",
+        "inner_fold": 0,
+        "probability_leak": 0.9992226570933104
+      },
+      {
+        "clip_id": "ce9e94229ff8d",
+        "inner_fold": 0,
+        "probability_leak": 0.9984733304734646
+      },
+      {
+        "clip_id": "ce9f8e682dd05",
+        "inner_fold": 0,
+        "probability_leak": 0.9990965502530447
+      },
+      {
+        "clip_id": "cf0203b39f111",
+        "inner_fold": 0,
+        "probability_leak": 0.8674743758651475
+      },
+      {
+        "clip_id": "cf63fc929563a",
+        "inner_fold": 0,
+        "probability_leak": 0.6759545587737682
+      },
+      {
+        "clip_id": "cfc0e625fbb0d",
+        "inner_fold": 0,
+        "probability_leak": 0.9818712463487372
+      },
+      {
+        "clip_id": "cfe96ddf1bb64",
+        "inner_fold": 0,
+        "probability_leak": 0.5083826490152391
+      },
+      {
+        "clip_id": "cfea1368453c6",
+        "inner_fold": 0,
+        "probability_leak": 0.8097247308837693
+      },
+      {
+        "clip_id": "cffc7c8347bce",
+        "inner_fold": 0,
+        "probability_leak": 0.6139134588153493
+      },
+      {
+        "clip_id": "c04206cc802ff",
+        "inner_fold": 1,
+        "probability_leak": 0.00035790972880377254
+      },
+      {
+        "clip_id": "c050246533b34",
+        "inner_fold": 1,
+        "probability_leak": 0.22709834692099018
+      },
+      {
+        "clip_id": "c05d66d9aed9d",
+        "inner_fold": 1,
+        "probability_leak": 0.2995874507105005
+      },
+      {
+        "clip_id": "c062288ccfbf0",
+        "inner_fold": 1,
+        "probability_leak": 0.921204673991504
+      },
+      {
+        "clip_id": "c06568d1b9f0f",
+        "inner_fold": 1,
+        "probability_leak": 0.9874152783798594
+      },
+      {
+        "clip_id": "c07e9a820a771",
+        "inner_fold": 1,
+        "probability_leak": 0.4711541659086646
+      },
+      {
+        "clip_id": "c08a67eff0015",
+        "inner_fold": 1,
+        "probability_leak": 0.934364072911989
+      },
+      {
+        "clip_id": "c0961e1ade67e",
+        "inner_fold": 1,
+        "probability_leak": 0.0016820323011009536
+      },
+      {
+        "clip_id": "c09f5a9f2c37e",
+        "inner_fold": 1,
+        "probability_leak": 1.4416103087097501e-07
+      },
+      {
+        "clip_id": "c0cb708e68599",
+        "inner_fold": 1,
+        "probability_leak": 0.5200362028158965
+      },
+      {
+        "clip_id": "c0f537ec98725",
+        "inner_fold": 1,
+        "probability_leak": 0.0009403296325175827
+      },
+      {
+        "clip_id": "c0f921fc0a408",
+        "inner_fold": 1,
+        "probability_leak": 0.6910028373742585
+      },
+      {
+        "clip_id": "c10dbbe1fe88e",
+        "inner_fold": 1,
+        "probability_leak": 0.999545103084867
+      },
+      {
+        "clip_id": "c11831df929ff",
+        "inner_fold": 1,
+        "probability_leak": 0.9380967811313335
+      },
+      {
+        "clip_id": "c122a79440158",
+        "inner_fold": 1,
+        "probability_leak": 0.1506178773279127
+      },
+      {
+        "clip_id": "c14279feb46c4",
+        "inner_fold": 1,
+        "probability_leak": 0.7941392564294414
+      },
+      {
+        "clip_id": "c168e7b1c5768",
+        "inner_fold": 1,
+        "probability_leak": 0.05816189987802683
+      },
+      {
+        "clip_id": "c18a6a959b315",
+        "inner_fold": 1,
+        "probability_leak": 0.00022215791984507032
+      },
+      {
+        "clip_id": "c18ded00027e1",
+        "inner_fold": 1,
+        "probability_leak": 0.0009083961771219726
+      },
+      {
+        "clip_id": "c1ab4f5e70960",
+        "inner_fold": 1,
+        "probability_leak": 0.9998953775420012
+      },
+      {
+        "clip_id": "c1be97c617ebf",
+        "inner_fold": 1,
+        "probability_leak": 0.9716831141641535
+      },
+      {
+        "clip_id": "c1d63f2fac16f",
+        "inner_fold": 1,
+        "probability_leak": 0.9995717945017984
+      },
+      {
+        "clip_id": "c1dea85a5c168",
+        "inner_fold": 1,
+        "probability_leak": 0.00017243046520353363
+      },
+      {
+        "clip_id": "c1f4f90ceab92",
+        "inner_fold": 1,
+        "probability_leak": 0.00824511791384646
+      },
+      {
+        "clip_id": "c1fb776519059",
+        "inner_fold": 1,
+        "probability_leak": 0.1249310614644915
+      },
+      {
+        "clip_id": "c211a8d93216b",
+        "inner_fold": 1,
+        "probability_leak": 0.674979166920712
+      },
+      {
+        "clip_id": "c22636298a23e",
+        "inner_fold": 1,
+        "probability_leak": 0.5480523522230896
+      },
+      {
+        "clip_id": "c27bcc7508126",
+        "inner_fold": 1,
+        "probability_leak": 0.9994113407892424
+      },
+      {
+        "clip_id": "c299b5b4aae15",
+        "inner_fold": 1,
+        "probability_leak": 0.8447983063147314
+      },
+      {
+        "clip_id": "c2a95223c7bb8",
+        "inner_fold": 1,
+        "probability_leak": 0.6105890336267873
+      },
+      {
+        "clip_id": "c2b8185b115a8",
+        "inner_fold": 1,
+        "probability_leak": 0.8552621835974715
+      },
+      {
+        "clip_id": "c2b9686ec0b66",
+        "inner_fold": 1,
+        "probability_leak": 0.9014098324531755
+      },
+      {
+        "clip_id": "c2bae7438d26f",
+        "inner_fold": 1,
+        "probability_leak": 0.013954172479571533
+      },
+      {
+        "clip_id": "c2c0781b810b9",
+        "inner_fold": 1,
+        "probability_leak": 0.3362678806428139
+      },
+      {
+        "clip_id": "c2c5757d3818f",
+        "inner_fold": 1,
+        "probability_leak": 0.0984862949611946
+      },
+      {
+        "clip_id": "c2dfdb38d147e",
+        "inner_fold": 1,
+        "probability_leak": 0.0035586166852152913
+      },
+      {
+        "clip_id": "c2f249a637ac4",
+        "inner_fold": 1,
+        "probability_leak": 0.8021773221171873
+      },
+      {
+        "clip_id": "c2fe894a582ae",
+        "inner_fold": 1,
+        "probability_leak": 0.4081148674740747
+      },
+      {
+        "clip_id": "c2ffeffaf5c54",
+        "inner_fold": 1,
+        "probability_leak": 0.8606400038857427
+      },
+      {
+        "clip_id": "c30025926aa4b",
+        "inner_fold": 1,
+        "probability_leak": 0.9995525605734077
+      },
+      {
+        "clip_id": "c320c859a0212",
+        "inner_fold": 1,
+        "probability_leak": 0.0003992549335907557
+      },
+      {
+        "clip_id": "c33454b6946ab",
+        "inner_fold": 1,
+        "probability_leak": 0.435643035303677
+      },
+      {
+        "clip_id": "c341e4bf862ad",
+        "inner_fold": 1,
+        "probability_leak": 0.98455055317848
+      },
+      {
+        "clip_id": "c36eda6b94106",
+        "inner_fold": 1,
+        "probability_leak": 0.6758373847060047
+      },
+      {
+        "clip_id": "c37c7984c0c4f",
+        "inner_fold": 1,
+        "probability_leak": 0.23513605173355986
+      },
+      {
+        "clip_id": "c37f2b3fca106",
+        "inner_fold": 1,
+        "probability_leak": 0.00025886244385117034
+      },
+      {
+        "clip_id": "c3a54e1228375",
+        "inner_fold": 1,
+        "probability_leak": 0.045928235386550775
+      },
+      {
+        "clip_id": "c3b228fa8030d",
+        "inner_fold": 1,
+        "probability_leak": 0.974129292698545
+      },
+      {
+        "clip_id": "c3ba3126429f6",
+        "inner_fold": 1,
+        "probability_leak": 0.3373152419700816
+      },
+      {
+        "clip_id": "c3d97dffa787c",
+        "inner_fold": 1,
+        "probability_leak": 0.9648914438399873
+      },
+      {
+        "clip_id": "c4009fed4726f",
+        "inner_fold": 1,
+        "probability_leak": 0.0027519783759477577
+      },
+      {
+        "clip_id": "c404a4d0bccf9",
+        "inner_fold": 1,
+        "probability_leak": 0.6010753395482156
+      },
+      {
+        "clip_id": "c41d8f7392b73",
+        "inner_fold": 1,
+        "probability_leak": 0.9992827256452562
+      },
+      {
+        "clip_id": "c423c0ee36b07",
+        "inner_fold": 1,
+        "probability_leak": 0.03477190048111226
+      },
+      {
+        "clip_id": "c424eaa6fb66d",
+        "inner_fold": 1,
+        "probability_leak": 0.4773493176838238
+      },
+      {
+        "clip_id": "c43d5de714166",
+        "inner_fold": 1,
+        "probability_leak": 0.3993574076558903
+      },
+      {
+        "clip_id": "c4531f3f68c3d",
+        "inner_fold": 1,
+        "probability_leak": 0.4481297012683328
+      },
+      {
+        "clip_id": "c45d6fd044845",
+        "inner_fold": 1,
+        "probability_leak": 0.9686496058552044
+      },
+      {
+        "clip_id": "c46568b3af1b0",
+        "inner_fold": 1,
+        "probability_leak": 0.23279976448132875
+      },
+      {
+        "clip_id": "c483b56484ea5",
+        "inner_fold": 1,
+        "probability_leak": 0.5015966930790163
+      },
+      {
+        "clip_id": "c48771c3d97f5",
+        "inner_fold": 1,
+        "probability_leak": 0.9961068975145824
+      },
+      {
+        "clip_id": "c48dec7ba6c91",
+        "inner_fold": 1,
+        "probability_leak": 0.613312940330467
+      },
+      {
+        "clip_id": "c4a7854f53842",
+        "inner_fold": 1,
+        "probability_leak": 0.11527350012137266
+      },
+      {
+        "clip_id": "c4ae8944ab2a9",
+        "inner_fold": 1,
+        "probability_leak": 0.9492187274691231
+      },
+      {
+        "clip_id": "c4ce67f4b6dcb",
+        "inner_fold": 1,
+        "probability_leak": 0.42516335475916506
+      },
+      {
+        "clip_id": "c4d60c890e072",
+        "inner_fold": 1,
+        "probability_leak": 0.0752504829441113
+      },
+      {
+        "clip_id": "c4ea61abbc908",
+        "inner_fold": 1,
+        "probability_leak": 0.7509232048036247
+      },
+      {
+        "clip_id": "c4ebb971b1567",
+        "inner_fold": 1,
+        "probability_leak": 0.21601674415758232
+      },
+      {
+        "clip_id": "c51bc0f90becd",
+        "inner_fold": 1,
+        "probability_leak": 0.9809215209029093
+      },
+      {
+        "clip_id": "c51eb51347f21",
+        "inner_fold": 1,
+        "probability_leak": 0.0030965404449920645
+      },
+      {
+        "clip_id": "c52fdf1f29a5d",
+        "inner_fold": 1,
+        "probability_leak": 0.7940705460798999
+      },
+      {
+        "clip_id": "c53c233dacf3e",
+        "inner_fold": 1,
+        "probability_leak": 0.3447155806191105
+      },
+      {
+        "clip_id": "c5478ba2d5a89",
+        "inner_fold": 1,
+        "probability_leak": 4.1055367816956867e-07
+      },
+      {
+        "clip_id": "c54d3b50ef138",
+        "inner_fold": 1,
+        "probability_leak": 0.38927171193468657
+      },
+      {
+        "clip_id": "c5882dca3e0a9",
+        "inner_fold": 1,
+        "probability_leak": 0.24455076696895264
+      },
+      {
+        "clip_id": "c5969ebc6bfcb",
+        "inner_fold": 1,
+        "probability_leak": 0.9995043854653762
+      },
+      {
+        "clip_id": "c5a4c13d780fb",
+        "inner_fold": 1,
+        "probability_leak": 0.9626648028681056
+      },
+      {
+        "clip_id": "c5b4522e17477",
+        "inner_fold": 1,
+        "probability_leak": 0.06518832245556912
+      },
+      {
+        "clip_id": "c5c5903c1822a",
+        "inner_fold": 1,
+        "probability_leak": 0.659662328330911
+      },
+      {
+        "clip_id": "c5d3608b6230d",
+        "inner_fold": 1,
+        "probability_leak": 0.8537924792208139
+      },
+      {
+        "clip_id": "c5dbb83749d5b",
+        "inner_fold": 1,
+        "probability_leak": 0.6686872933794791
+      },
+      {
+        "clip_id": "c5eb4472b1b2e",
+        "inner_fold": 1,
+        "probability_leak": 0.05153044286164229
+      },
+      {
+        "clip_id": "c5f033e45aca1",
+        "inner_fold": 1,
+        "probability_leak": 0.003776310031258101
+      },
+      {
+        "clip_id": "c5f29eeabae8a",
+        "inner_fold": 1,
+        "probability_leak": 0.00881391808716862
+      },
+      {
+        "clip_id": "c5fa0219bdd8d",
+        "inner_fold": 1,
+        "probability_leak": 0.00035790972880377254
+      },
+      {
+        "clip_id": "c5ffdab287421",
+        "inner_fold": 1,
+        "probability_leak": 0.9993928617365845
+      },
+      {
+        "clip_id": "c6236482dc10c",
+        "inner_fold": 1,
+        "probability_leak": 0.029760925205256385
+      },
+      {
+        "clip_id": "c6450add89e89",
+        "inner_fold": 1,
+        "probability_leak": 0.12480437371505844
+      },
+      {
+        "clip_id": "c656d7aa59416",
+        "inner_fold": 1,
+        "probability_leak": 0.0770478149765597
+      },
+      {
+        "clip_id": "c65ba20f1031b",
+        "inner_fold": 1,
+        "probability_leak": 0.1506178773279127
+      },
+      {
+        "clip_id": "c65dafe1ee595",
+        "inner_fold": 1,
+        "probability_leak": 0.03663970631399902
+      },
+      {
+        "clip_id": "c66f70dea6bb1",
+        "inner_fold": 1,
+        "probability_leak": 0.0004584243578294754
+      },
+      {
+        "clip_id": "c682e47ff5af3",
+        "inner_fold": 1,
+        "probability_leak": 0.778508543492307
+      },
+      {
+        "clip_id": "c69396caf286c",
+        "inner_fold": 1,
+        "probability_leak": 0.9701505943532064
+      },
+      {
+        "clip_id": "c6a98309679be",
+        "inner_fold": 1,
+        "probability_leak": 0.34643589992186563
+      },
+      {
+        "clip_id": "c6ae27e754276",
+        "inner_fold": 1,
+        "probability_leak": 0.3596502552174389
+      },
+      {
+        "clip_id": "c6bff6053fa0b",
+        "inner_fold": 1,
+        "probability_leak": 0.23513605173355986
+      },
+      {
+        "clip_id": "c6c8a300c1128",
+        "inner_fold": 1,
+        "probability_leak": 0.9996312736153556
+      },
+      {
+        "clip_id": "c6d2716b85053",
+        "inner_fold": 1,
+        "probability_leak": 0.29108473003706203
+      },
+      {
+        "clip_id": "c6d60068469f4",
+        "inner_fold": 1,
+        "probability_leak": 1.0364520673122569e-05
+      },
+      {
+        "clip_id": "c6d78327e132f",
+        "inner_fold": 1,
+        "probability_leak": 1.0364520673122569e-05
+      },
+      {
+        "clip_id": "c6da2e34dbe22",
+        "inner_fold": 1,
+        "probability_leak": 0.08162618040416351
+      },
+      {
+        "clip_id": "c6dde94ea69dc",
+        "inner_fold": 1,
+        "probability_leak": 0.00028555924938899476
+      },
+      {
+        "clip_id": "c6df9c056c634",
+        "inner_fold": 1,
+        "probability_leak": 0.8422132351350389
+      },
+      {
+        "clip_id": "c7118401c58b1",
+        "inner_fold": 1,
+        "probability_leak": 0.15544857144949165
+      },
+      {
+        "clip_id": "c745afb819609",
+        "inner_fold": 1,
+        "probability_leak": 0.026698877932543403
+      },
+      {
+        "clip_id": "c76e9459c1403",
+        "inner_fold": 1,
+        "probability_leak": 0.03178368485987957
+      },
+      {
+        "clip_id": "c775d0e90fc9a",
+        "inner_fold": 1,
+        "probability_leak": 0.0953624371884321
+      },
+      {
+        "clip_id": "c7ad362fcc94d",
+        "inner_fold": 1,
+        "probability_leak": 0.037015475228408555
+      },
+      {
+        "clip_id": "c7df0ab24b41f",
+        "inner_fold": 1,
+        "probability_leak": 0.07399440913449612
+      },
+      {
+        "clip_id": "c7e51fcee8c07",
+        "inner_fold": 1,
+        "probability_leak": 0.1322166402358952
+      },
+      {
+        "clip_id": "c7e6cce7e9114",
+        "inner_fold": 1,
+        "probability_leak": 0.15354000931175596
+      },
+      {
+        "clip_id": "c7f06e1c2f5ea",
+        "inner_fold": 1,
+        "probability_leak": 0.0013243000091626624
+      },
+      {
+        "clip_id": "c7f73e03a7c75",
+        "inner_fold": 1,
+        "probability_leak": 0.6490375751808691
+      },
+      {
+        "clip_id": "c80c03ca8d522",
+        "inner_fold": 1,
+        "probability_leak": 0.9980288268525173
+      },
+      {
+        "clip_id": "c80de9b64db85",
+        "inner_fold": 1,
+        "probability_leak": 0.9916259540180655
+      },
+      {
+        "clip_id": "c82b1ee194183",
+        "inner_fold": 1,
+        "probability_leak": 0.317153403714305
+      },
+      {
+        "clip_id": "c833445fa2bb6",
+        "inner_fold": 1,
+        "probability_leak": 0.0006145737687631905
+      },
+      {
+        "clip_id": "c8419de8ca9cc",
+        "inner_fold": 1,
+        "probability_leak": 0.8804905781449358
+      },
+      {
+        "clip_id": "c86807311a1d3",
+        "inner_fold": 1,
+        "probability_leak": 0.47570758858302703
+      },
+      {
+        "clip_id": "c86859a40b920",
+        "inner_fold": 1,
+        "probability_leak": 0.9997063458147862
+      },
+      {
+        "clip_id": "c86c33e2a1b2d",
+        "inner_fold": 1,
+        "probability_leak": 0.7755452842500834
+      },
+      {
+        "clip_id": "c88dfa84df965",
+        "inner_fold": 1,
+        "probability_leak": 0.8853534721168957
+      },
+      {
+        "clip_id": "c89cb224bcb40",
+        "inner_fold": 1,
+        "probability_leak": 0.6477747611825163
+      },
+      {
+        "clip_id": "c8a3d82b06360",
+        "inner_fold": 1,
+        "probability_leak": 0.5715741818279249
+      },
+      {
+        "clip_id": "c8b1af5e2da91",
+        "inner_fold": 1,
+        "probability_leak": 0.23465955262065769
+      },
+      {
+        "clip_id": "c8b7ec1ee29c4",
+        "inner_fold": 1,
+        "probability_leak": 0.9998584926011678
+      },
+      {
+        "clip_id": "c8d37b4ba189b",
+        "inner_fold": 1,
+        "probability_leak": 0.7142507203500493
+      },
+      {
+        "clip_id": "c8d535525cf9d",
+        "inner_fold": 1,
+        "probability_leak": 0.9867941936423729
+      },
+      {
+        "clip_id": "c8d802984e871",
+        "inner_fold": 1,
+        "probability_leak": 0.0017368787752550384
+      },
+      {
+        "clip_id": "c8e4146e3a0e9",
+        "inner_fold": 1,
+        "probability_leak": 0.8344334509322712
+      },
+      {
+        "clip_id": "c8ed223ec41db",
+        "inner_fold": 1,
+        "probability_leak": 0.018855879142101527
+      },
+      {
+        "clip_id": "c8f34320f5bde",
+        "inner_fold": 1,
+        "probability_leak": 0.9564716607206172
+      },
+      {
+        "clip_id": "c91fb50f4819b",
+        "inner_fold": 1,
+        "probability_leak": 0.7263308093619525
+      },
+      {
+        "clip_id": "c9340312e6037",
+        "inner_fold": 1,
+        "probability_leak": 0.8821039254320446
+      },
+      {
+        "clip_id": "c93f64081ea7c",
+        "inner_fold": 1,
+        "probability_leak": 0.14839299681333495
+      },
+      {
+        "clip_id": "c941c8e5932f1",
+        "inner_fold": 1,
+        "probability_leak": 0.6166416048240996
+      },
+      {
+        "clip_id": "c95079e715e90",
+        "inner_fold": 1,
+        "probability_leak": 0.7098288918120671
+      },
+      {
+        "clip_id": "c954d8c15dced",
+        "inner_fold": 1,
+        "probability_leak": 0.08877535170916766
+      },
+      {
+        "clip_id": "c974636289026",
+        "inner_fold": 1,
+        "probability_leak": 0.0009111506190584475
+      },
+      {
+        "clip_id": "c97e8c72149a6",
+        "inner_fold": 1,
+        "probability_leak": 0.4914017446497837
+      },
+      {
+        "clip_id": "c99c85e0af482",
+        "inner_fold": 1,
+        "probability_leak": 0.9140196232940877
+      },
+      {
+        "clip_id": "c9c6b1e4bb816",
+        "inner_fold": 1,
+        "probability_leak": 0.00025886244385117034
+      },
+      {
+        "clip_id": "ca21b4eb5ddf2",
+        "inner_fold": 1,
+        "probability_leak": 0.7044141554847015
+      },
+      {
+        "clip_id": "ca284c3204ae3",
+        "inner_fold": 1,
+        "probability_leak": 0.9712660389738579
+      },
+      {
+        "clip_id": "ca2a5550fdad4",
+        "inner_fold": 1,
+        "probability_leak": 0.3292169445443027
+      },
+      {
+        "clip_id": "ca3a0d82b36b7",
+        "inner_fold": 1,
+        "probability_leak": 0.9992312739605166
+      },
+      {
+        "clip_id": "ca46fdc0b22e0",
+        "inner_fold": 1,
+        "probability_leak": 0.9904328202042871
+      },
+      {
+        "clip_id": "ca59a841b7f2d",
+        "inner_fold": 1,
+        "probability_leak": 0.6243693756730027
+      },
+      {
+        "clip_id": "ca69d6f75a350",
+        "inner_fold": 1,
+        "probability_leak": 0.7057184177388947
+      },
+      {
+        "clip_id": "ca93fd0490325",
+        "inner_fold": 1,
+        "probability_leak": 0.8501687572286366
+      },
+      {
+        "clip_id": "ca9b4ed28fea4",
+        "inner_fold": 1,
+        "probability_leak": 0.45083636637619384
+      },
+      {
+        "clip_id": "caa63a441d079",
+        "inner_fold": 1,
+        "probability_leak": 0.3831128814897493
+      },
+      {
+        "clip_id": "caac9ec800d60",
+        "inner_fold": 1,
+        "probability_leak": 0.984951558510721
+      },
+      {
+        "clip_id": "cab28f3852b2e",
+        "inner_fold": 1,
+        "probability_leak": 0.9542239507494072
+      },
+      {
+        "clip_id": "cab4e25cbfda2",
+        "inner_fold": 1,
+        "probability_leak": 0.2973046125866928
+      },
+      {
+        "clip_id": "cacc67a2bbb12",
+        "inner_fold": 1,
+        "probability_leak": 0.43651397103053197
+      },
+      {
+        "clip_id": "cb04fbe5f43f1",
+        "inner_fold": 1,
+        "probability_leak": 0.9986346664089697
+      },
+      {
+        "clip_id": "cb08d7195d6bf",
+        "inner_fold": 1,
+        "probability_leak": 0.0013260646670550417
+      },
+      {
+        "clip_id": "cb106b3ab62f1",
+        "inner_fold": 1,
+        "probability_leak": 0.81950527210411
+      },
+      {
+        "clip_id": "cb2f440b9e0e4",
+        "inner_fold": 1,
+        "probability_leak": 0.9771243501746169
+      },
+      {
+        "clip_id": "cb7aba874ee7e",
+        "inner_fold": 1,
+        "probability_leak": 0.22604006608233884
+      },
+      {
+        "clip_id": "cb7bc59e020dc",
+        "inner_fold": 1,
+        "probability_leak": 0.9858387426263715
+      },
+      {
+        "clip_id": "cb853e3044c69",
+        "inner_fold": 1,
+        "probability_leak": 0.9991937027622824
+      },
+      {
+        "clip_id": "cb98d272d0c33",
+        "inner_fold": 1,
+        "probability_leak": 0.36813502664264797
+      },
+      {
+        "clip_id": "cba905278e156",
+        "inner_fold": 1,
+        "probability_leak": 0.051292349080147764
+      },
+      {
+        "clip_id": "cbb530c2d8793",
+        "inner_fold": 1,
+        "probability_leak": 0.9492776147248372
+      },
+      {
+        "clip_id": "cbb6672364ebd",
+        "inner_fold": 1,
+        "probability_leak": 0.006126604778491011
+      },
+      {
+        "clip_id": "cbb8d96a5e4a5",
+        "inner_fold": 1,
+        "probability_leak": 0.013954172479571533
+      },
+      {
+        "clip_id": "cbc6e435e35e0",
+        "inner_fold": 1,
+        "probability_leak": 0.7535464809987178
+      },
+      {
+        "clip_id": "cbc8435b0f4df",
+        "inner_fold": 1,
+        "probability_leak": 0.9991610249329489
+      },
+      {
+        "clip_id": "cbd3cf96abb92",
+        "inner_fold": 1,
+        "probability_leak": 0.5854064326002498
+      },
+      {
+        "clip_id": "cbe3166361dfa",
+        "inner_fold": 1,
+        "probability_leak": 0.1900701693367302
+      },
+      {
+        "clip_id": "cbf8e88236347",
+        "inner_fold": 1,
+        "probability_leak": 0.9148914363895908
+      },
+      {
+        "clip_id": "cc1480284d1c3",
+        "inner_fold": 1,
+        "probability_leak": 0.27116334176242163
+      },
+      {
+        "clip_id": "cc19c94f8b994",
+        "inner_fold": 1,
+        "probability_leak": 0.8536496107894298
+      },
+      {
+        "clip_id": "cc2ac1af869fa",
+        "inner_fold": 1,
+        "probability_leak": 0.7571667993122532
+      },
+      {
+        "clip_id": "cc32544a5e4f3",
+        "inner_fold": 1,
+        "probability_leak": 0.39398586777451994
+      },
+      {
+        "clip_id": "cc41a6007b781",
+        "inner_fold": 1,
+        "probability_leak": 0.0953624371884321
+      },
+      {
+        "clip_id": "cc49c5ba7938b",
+        "inner_fold": 1,
+        "probability_leak": 0.0007623067337596718
+      },
+      {
+        "clip_id": "cc5ddb79c589a",
+        "inner_fold": 1,
+        "probability_leak": 0.7914106937042593
+      },
+      {
+        "clip_id": "cc6a1078eb7bc",
+        "inner_fold": 1,
+        "probability_leak": 0.8642620785295814
+      },
+      {
+        "clip_id": "cc6c187a579d4",
+        "inner_fold": 1,
+        "probability_leak": 0.20982589411738845
+      },
+      {
+        "clip_id": "cc75ae24f5c96",
+        "inner_fold": 1,
+        "probability_leak": 0.67046390229119
+      },
+      {
+        "clip_id": "cc77af487b65d",
+        "inner_fold": 1,
+        "probability_leak": 0.029760925205256385
+      },
+      {
+        "clip_id": "cc8764f092ba1",
+        "inner_fold": 1,
+        "probability_leak": 0.0020223759134769424
+      },
+      {
+        "clip_id": "cc908db347b35",
+        "inner_fold": 1,
+        "probability_leak": 0.7136067871728784
+      },
+      {
+        "clip_id": "cc9cff18c1a4d",
+        "inner_fold": 1,
+        "probability_leak": 0.01882122484578336
+      },
+      {
+        "clip_id": "cca3bdbd296af",
+        "inner_fold": 1,
+        "probability_leak": 0.3804047566570854
+      },
+      {
+        "clip_id": "ccad7760ce5c3",
+        "inner_fold": 1,
+        "probability_leak": 0.7781826080020041
+      },
+      {
+        "clip_id": "cce35479c8094",
+        "inner_fold": 1,
+        "probability_leak": 0.42363860963181055
+      },
+      {
+        "clip_id": "cce7aca319a5a",
+        "inner_fold": 1,
+        "probability_leak": 0.9978810804190584
+      },
+      {
+        "clip_id": "cd22957c58990",
+        "inner_fold": 1,
+        "probability_leak": 0.8366647250015834
+      },
+      {
+        "clip_id": "cd2d1d38e28fe",
+        "inner_fold": 1,
+        "probability_leak": 0.4889472647649327
+      },
+      {
+        "clip_id": "cd48fd26263ca",
+        "inner_fold": 1,
+        "probability_leak": 0.4285690974335629
+      },
+      {
+        "clip_id": "cd685547804d1",
+        "inner_fold": 1,
+        "probability_leak": 0.6864710384798666
+      },
+      {
+        "clip_id": "cd6dedbfd7d31",
+        "inner_fold": 1,
+        "probability_leak": 0.00788297076429575
+      },
+      {
+        "clip_id": "cd723d66f367b",
+        "inner_fold": 1,
+        "probability_leak": 0.9919813728385796
+      },
+      {
+        "clip_id": "cd75f0c255d24",
+        "inner_fold": 1,
+        "probability_leak": 0.9988865018010287
+      },
+      {
+        "clip_id": "cd77404571b67",
+        "inner_fold": 1,
+        "probability_leak": 0.0984862949611946
+      },
+      {
+        "clip_id": "cd953dc82ace5",
+        "inner_fold": 1,
+        "probability_leak": 0.8872056273501615
+      },
+      {
+        "clip_id": "cd9b94bdc892b",
+        "inner_fold": 1,
+        "probability_leak": 0.9785474587672691
+      },
+      {
+        "clip_id": "cd9b9fe203a4a",
+        "inner_fold": 1,
+        "probability_leak": 0.49357758108400923
+      },
+      {
+        "clip_id": "cdafc13bac8e8",
+        "inner_fold": 1,
+        "probability_leak": 0.09177178804641554
+      },
+      {
+        "clip_id": "cdda6f156a595",
+        "inner_fold": 1,
+        "probability_leak": 0.9878628073373185
+      },
+      {
+        "clip_id": "cdeff059d9cc1",
+        "inner_fold": 1,
+        "probability_leak": 0.4593874066939476
+      },
+      {
+        "clip_id": "ce1beb3d64f57",
+        "inner_fold": 1,
+        "probability_leak": 0.0819618069928622
+      },
+      {
+        "clip_id": "ce3c1bbc4dd9c",
+        "inner_fold": 1,
+        "probability_leak": 0.1754174801002053
+      },
+      {
+        "clip_id": "ce3e303f06b4a",
+        "inner_fold": 1,
+        "probability_leak": 0.014983951240623466
+      },
+      {
+        "clip_id": "ce5812e80dc76",
+        "inner_fold": 1,
+        "probability_leak": 0.1283771381619796
+      },
+      {
+        "clip_id": "ce8e3e604efc2",
+        "inner_fold": 1,
+        "probability_leak": 0.002742077660793953
+      },
+      {
+        "clip_id": "ceadd661714f4",
+        "inner_fold": 1,
+        "probability_leak": 0.8142262171240212
+      },
+      {
+        "clip_id": "ceae8d33d3df9",
+        "inner_fold": 1,
+        "probability_leak": 0.8876535916835504
+      },
+      {
+        "clip_id": "ceb7930de201b",
+        "inner_fold": 1,
+        "probability_leak": 0.9892851243181996
+      },
+      {
+        "clip_id": "cecee97a5f68b",
+        "inner_fold": 1,
+        "probability_leak": 0.1249310614644915
+      },
+      {
+        "clip_id": "cedb58b88ad47",
+        "inner_fold": 1,
+        "probability_leak": 0.9718403684246751
+      },
+      {
+        "clip_id": "cf380ea25a6e8",
+        "inner_fold": 1,
+        "probability_leak": 0.0007789720454713053
+      },
+      {
+        "clip_id": "cf4c7a3c10ff8",
+        "inner_fold": 1,
+        "probability_leak": 0.9888964526025965
+      },
+      {
+        "clip_id": "cf5d0f60ed9c7",
+        "inner_fold": 1,
+        "probability_leak": 0.8736901300688527
+      },
+      {
+        "clip_id": "cf7132f496056",
+        "inner_fold": 1,
+        "probability_leak": 0.026633757851770457
+      },
+      {
+        "clip_id": "cf9cb173ecb0c",
+        "inner_fold": 1,
+        "probability_leak": 0.0008956330179934192
+      },
+      {
+        "clip_id": "cfa176d0021b2",
+        "inner_fold": 1,
+        "probability_leak": 0.0431139745636465
+      },
+      {
+        "clip_id": "cfa95a14b4d7d",
+        "inner_fold": 1,
+        "probability_leak": 0.00041828632550566455
+      },
+      {
+        "clip_id": "cfbf0b917b01c",
+        "inner_fold": 1,
+        "probability_leak": 0.744790843564067
+      },
+      {
+        "clip_id": "cfdc594e4e897",
+        "inner_fold": 1,
+        "probability_leak": 0.38905718879171014
+      },
+      {
+        "clip_id": "c0128b879694e",
+        "inner_fold": 2,
+        "probability_leak": 0.00538109755234773
+      },
+      {
+        "clip_id": "c02543903a0da",
+        "inner_fold": 2,
+        "probability_leak": 0.5613323050938758
+      },
+      {
+        "clip_id": "c04498a7ed239",
+        "inner_fold": 2,
+        "probability_leak": 0.48243504284635313
+      },
+      {
+        "clip_id": "c04baf7fef3e6",
+        "inner_fold": 2,
+        "probability_leak": 0.7589105206935682
+      },
+      {
+        "clip_id": "c05f4f069b542",
+        "inner_fold": 2,
+        "probability_leak": 5.632134358422721e-05
+      },
+      {
+        "clip_id": "c063306a756e0",
+        "inner_fold": 2,
+        "probability_leak": 3.0817773460120956e-05
+      },
+      {
+        "clip_id": "c067add6c95ef",
+        "inner_fold": 2,
+        "probability_leak": 0.5510257532430856
+      },
+      {
+        "clip_id": "c06ccf39a495b",
+        "inner_fold": 2,
+        "probability_leak": 0.716108145234099
+      },
+      {
+        "clip_id": "c0805b0f448be",
+        "inner_fold": 2,
+        "probability_leak": 0.43062772308301717
+      },
+      {
+        "clip_id": "c089e36733958",
+        "inner_fold": 2,
+        "probability_leak": 0.6607032930613969
+      },
+      {
+        "clip_id": "c0911d89cc12e",
+        "inner_fold": 2,
+        "probability_leak": 0.6873394630576641
+      },
+      {
+        "clip_id": "c0a9746b5d9ae",
+        "inner_fold": 2,
+        "probability_leak": 0.386692527849284
+      },
+      {
+        "clip_id": "c0c6081270402",
+        "inner_fold": 2,
+        "probability_leak": 0.4158672075613747
+      },
+      {
+        "clip_id": "c0d7da724a381",
+        "inner_fold": 2,
+        "probability_leak": 0.6592144038208412
+      },
+      {
+        "clip_id": "c0e232e8abefd",
+        "inner_fold": 2,
+        "probability_leak": 0.01599387022775095
+      },
+      {
+        "clip_id": "c10f28ad85eb4",
+        "inner_fold": 2,
+        "probability_leak": 0.8195823159340292
+      },
+      {
+        "clip_id": "c1269b91604b3",
+        "inner_fold": 2,
+        "probability_leak": 0.668926323346029
+      },
+      {
+        "clip_id": "c128d061d7c0f",
+        "inner_fold": 2,
+        "probability_leak": 0.015577989284280717
+      },
+      {
+        "clip_id": "c132422b849a7",
+        "inner_fold": 2,
+        "probability_leak": 0.7600366567963022
+      },
+      {
+        "clip_id": "c1499c35cbab2",
+        "inner_fold": 2,
+        "probability_leak": 0.5823081327160798
+      },
+      {
+        "clip_id": "c150583d1dbbe",
+        "inner_fold": 2,
+        "probability_leak": 0.4775245619357499
+      },
+      {
+        "clip_id": "c1564ac4f839d",
+        "inner_fold": 2,
+        "probability_leak": 0.6652617112423349
+      },
+      {
+        "clip_id": "c163826f414a4",
+        "inner_fold": 2,
+        "probability_leak": 9.76895540434186e-05
+      },
+      {
+        "clip_id": "c172f3caf0939",
+        "inner_fold": 2,
+        "probability_leak": 1.765879948861033e-05
+      },
+      {
+        "clip_id": "c17c3c87dbd77",
+        "inner_fold": 2,
+        "probability_leak": 0.40891732429307054
+      },
+      {
+        "clip_id": "c189aa961829b",
+        "inner_fold": 2,
+        "probability_leak": 0.5310889603652198
+      },
+      {
+        "clip_id": "c18d59fc1c422",
+        "inner_fold": 2,
+        "probability_leak": 0.9827476310399245
+      },
+      {
+        "clip_id": "c18e2198c3457",
+        "inner_fold": 2,
+        "probability_leak": 0.5545591287827791
+      },
+      {
+        "clip_id": "c1a020e75d17e",
+        "inner_fold": 2,
+        "probability_leak": 0.7720779976145351
+      },
+      {
+        "clip_id": "c1a8c60507b53",
+        "inner_fold": 2,
+        "probability_leak": 0.017945397043416633
+      },
+      {
+        "clip_id": "c1aa75bc3586d",
+        "inner_fold": 2,
+        "probability_leak": 0.6245194047743278
+      },
+      {
+        "clip_id": "c1d9472c3c5b1",
+        "inner_fold": 2,
+        "probability_leak": 0.46241109777266165
+      },
+      {
+        "clip_id": "c1e5a1a35b9a6",
+        "inner_fold": 2,
+        "probability_leak": 0.5020195510573129
+      },
+      {
+        "clip_id": "c1ed5bae3fcd5",
+        "inner_fold": 2,
+        "probability_leak": 0.010680468259481261
+      },
+      {
+        "clip_id": "c1fc6c093dcc4",
+        "inner_fold": 2,
+        "probability_leak": 0.6895439193277396
+      },
+      {
+        "clip_id": "c20c972efdcce",
+        "inner_fold": 2,
+        "probability_leak": 0.07451773286618626
+      },
+      {
+        "clip_id": "c21382c66a1e0",
+        "inner_fold": 2,
+        "probability_leak": 0.028609505663273097
+      },
+      {
+        "clip_id": "c2149f5a4bc9e",
+        "inner_fold": 2,
+        "probability_leak": 0.10641983067430465
+      },
+      {
+        "clip_id": "c21fec37cf71a",
+        "inner_fold": 2,
+        "probability_leak": 0.9940662921368885
+      },
+      {
+        "clip_id": "c22b434ae486d",
+        "inner_fold": 2,
+        "probability_leak": 0.5697850563244227
+      },
+      {
+        "clip_id": "c24b6690dc003",
+        "inner_fold": 2,
+        "probability_leak": 0.5766403503380847
+      },
+      {
+        "clip_id": "c24bf7667eff5",
+        "inner_fold": 2,
+        "probability_leak": 0.5556259076407978
+      },
+      {
+        "clip_id": "c265367c30825",
+        "inner_fold": 2,
+        "probability_leak": 0.6075492478427633
+      },
+      {
+        "clip_id": "c277454df54af",
+        "inner_fold": 2,
+        "probability_leak": 0.9809559108581285
+      },
+      {
+        "clip_id": "c27cee2838d7a",
+        "inner_fold": 2,
+        "probability_leak": 0.5562093656849764
+      },
+      {
+        "clip_id": "c27f20596e4e6",
+        "inner_fold": 2,
+        "probability_leak": 0.6262079874410077
+      },
+      {
+        "clip_id": "c29147b0882e2",
+        "inner_fold": 2,
+        "probability_leak": 0.5531381771273407
+      },
+      {
+        "clip_id": "c2a910ad7f603",
+        "inner_fold": 2,
+        "probability_leak": 0.0027437019783393087
+      },
+      {
+        "clip_id": "c2b209108b35d",
+        "inner_fold": 2,
+        "probability_leak": 0.9996485751935342
+      },
+      {
+        "clip_id": "c2c65e7f132d3",
+        "inner_fold": 2,
+        "probability_leak": 0.9994977102243997
+      },
+      {
+        "clip_id": "c2d3366744da6",
+        "inner_fold": 2,
+        "probability_leak": 0.04675449078847359
+      },
+      {
+        "clip_id": "c2d54c2c7191b",
+        "inner_fold": 2,
+        "probability_leak": 0.571938159619804
+      },
+      {
+        "clip_id": "c2e20fedcad53",
+        "inner_fold": 2,
+        "probability_leak": 0.9997530320099398
+      },
+      {
+        "clip_id": "c2e7509679ef5",
+        "inner_fold": 2,
+        "probability_leak": 0.012924807520020004
+      },
+      {
+        "clip_id": "c2ebcb34181f8",
+        "inner_fold": 2,
+        "probability_leak": 0.005436657408542245
+      },
+      {
+        "clip_id": "c2f625de9294d",
+        "inner_fold": 2,
+        "probability_leak": 0.6401711691305332
+      },
+      {
+        "clip_id": "c3147be2ea41d",
+        "inner_fold": 2,
+        "probability_leak": 0.002255441759165447
+      },
+      {
+        "clip_id": "c314af95e5f64",
+        "inner_fold": 2,
+        "probability_leak": 0.9384629117434422
+      },
+      {
+        "clip_id": "c32debd0f41e6",
+        "inner_fold": 2,
+        "probability_leak": 0.9710178957442555
+      },
+      {
+        "clip_id": "c357b15613e8b",
+        "inner_fold": 2,
+        "probability_leak": 0.7054455069565781
+      },
+      {
+        "clip_id": "c357e8e39d7f0",
+        "inner_fold": 2,
+        "probability_leak": 0.6657244811870828
+      },
+      {
+        "clip_id": "c362698ae79b5",
+        "inner_fold": 2,
+        "probability_leak": 0.7098193024944842
+      },
+      {
+        "clip_id": "c36359baaaf59",
+        "inner_fold": 2,
+        "probability_leak": 0.002811515722229777
+      },
+      {
+        "clip_id": "c3694d0758433",
+        "inner_fold": 2,
+        "probability_leak": 0.10641983067430465
+      },
+      {
+        "clip_id": "c3a2f1d312087",
+        "inner_fold": 2,
+        "probability_leak": 0.4567981448918785
+      },
+      {
+        "clip_id": "c3a78958bcf50",
+        "inner_fold": 2,
+        "probability_leak": 0.5831695621062494
+      },
+      {
+        "clip_id": "c3babd01aea3e",
+        "inner_fold": 2,
+        "probability_leak": 0.5967152222268965
+      },
+      {
+        "clip_id": "c3c559ca31f61",
+        "inner_fold": 2,
+        "probability_leak": 8.380386531164626e-06
+      },
+      {
+        "clip_id": "c3cd9a1ae0e6b",
+        "inner_fold": 2,
+        "probability_leak": 0.01323658377855889
+      },
+      {
+        "clip_id": "c3f4ad6feaae7",
+        "inner_fold": 2,
+        "probability_leak": 5.261721977815817e-06
+      },
+      {
+        "clip_id": "c405b5009dfcc",
+        "inner_fold": 2,
+        "probability_leak": 0.5829391871447611
+      },
+      {
+        "clip_id": "c4194701114cb",
+        "inner_fold": 2,
+        "probability_leak": 0.01492468299987222
+      },
+      {
+        "clip_id": "c4223cfd6c9a7",
+        "inner_fold": 2,
+        "probability_leak": 0.5315752964248524
+      },
+      {
+        "clip_id": "c422b4e502ef8",
+        "inner_fold": 2,
+        "probability_leak": 0.5487313299338455
+      },
+      {
+        "clip_id": "c4241382283c1",
+        "inner_fold": 2,
+        "probability_leak": 0.48374969828466885
+      },
+      {
+        "clip_id": "c42980f8ee1d2",
+        "inner_fold": 2,
+        "probability_leak": 0.0007505357092458763
+      },
+      {
+        "clip_id": "c45ef1394ce7d",
+        "inner_fold": 2,
+        "probability_leak": 0.03528391145957553
+      },
+      {
+        "clip_id": "c46349e666c00",
+        "inner_fold": 2,
+        "probability_leak": 5.4514218161712e-06
+      },
+      {
+        "clip_id": "c46a2f827cb8e",
+        "inner_fold": 2,
+        "probability_leak": 3.2925826072580085e-05
+      },
+      {
+        "clip_id": "c483c2ee8d383",
+        "inner_fold": 2,
+        "probability_leak": 0.6822922392717538
+      },
+      {
+        "clip_id": "c48422d0520de",
+        "inner_fold": 2,
+        "probability_leak": 0.011749973773818105
+      },
+      {
+        "clip_id": "c4aa6a51658e8",
+        "inner_fold": 2,
+        "probability_leak": 0.5989587491658453
+      },
+      {
+        "clip_id": "c4ab5e59c0389",
+        "inner_fold": 2,
+        "probability_leak": 0.17436264980394084
+      },
+      {
+        "clip_id": "c4b2e80648cd5",
+        "inner_fold": 2,
+        "probability_leak": 0.2908960345155329
+      },
+      {
+        "clip_id": "c4b8ccff15ae0",
+        "inner_fold": 2,
+        "probability_leak": 0.4717661463292586
+      },
+      {
+        "clip_id": "c4bf6a97e2cae",
+        "inner_fold": 2,
+        "probability_leak": 0.3074113129869233
+      },
+      {
+        "clip_id": "c4dd83943373a",
+        "inner_fold": 2,
+        "probability_leak": 8.380386531164626e-06
+      },
+      {
+        "clip_id": "c4e93daa7ff67",
+        "inner_fold": 2,
+        "probability_leak": 0.014215025258648482
+      },
+      {
+        "clip_id": "c4f10806e3732",
+        "inner_fold": 2,
+        "probability_leak": 0.6346603738765846
+      },
+      {
+        "clip_id": "c5024ce133721",
+        "inner_fold": 2,
+        "probability_leak": 0.17608978496225094
+      },
+      {
+        "clip_id": "c51565ea58fe0",
+        "inner_fold": 2,
+        "probability_leak": 0.6247297262550661
+      },
+      {
+        "clip_id": "c515a9a248c2c",
+        "inner_fold": 2,
+        "probability_leak": 0.7977891859949924
+      },
+      {
+        "clip_id": "c51b7eba14bd6",
+        "inner_fold": 2,
+        "probability_leak": 0.48966390280180994
+      },
+      {
+        "clip_id": "c5221e555e452",
+        "inner_fold": 2,
+        "probability_leak": 0.4128315956265088
+      },
+      {
+        "clip_id": "c5252a01e683d",
+        "inner_fold": 2,
+        "probability_leak": 0.6245194047743278
+      },
+      {
+        "clip_id": "c52ebd5ec2893",
+        "inner_fold": 2,
+        "probability_leak": 0.7643134243809381
+      },
+      {
+        "clip_id": "c54cff5549618",
+        "inner_fold": 2,
+        "probability_leak": 0.6104998445753038
+      },
+      {
+        "clip_id": "c55ae3a3fe08f",
+        "inner_fold": 2,
+        "probability_leak": 0.7862946579484174
+      },
+      {
+        "clip_id": "c577bdb8f8808",
+        "inner_fold": 2,
+        "probability_leak": 0.7490884382615525
+      },
+      {
+        "clip_id": "c5bbf50ad83e0",
+        "inner_fold": 2,
+        "probability_leak": 0.7600366567963022
+      },
+      {
+        "clip_id": "c5e24e8064171",
+        "inner_fold": 2,
+        "probability_leak": 0.004024391995464601
+      },
+      {
+        "clip_id": "c611e16457512",
+        "inner_fold": 2,
+        "probability_leak": 0.9866669907014206
+      },
+      {
+        "clip_id": "c64160dd826c1",
+        "inner_fold": 2,
+        "probability_leak": 0.9868520155287694
+      },
+      {
+        "clip_id": "c641e51be72f8",
+        "inner_fold": 2,
+        "probability_leak": 0.028609505663273097
+      },
+      {
+        "clip_id": "c64243712bd02",
+        "inner_fold": 2,
+        "probability_leak": 0.04444271444273767
+      },
+      {
+        "clip_id": "c64539ba804e2",
+        "inner_fold": 2,
+        "probability_leak": 4.36623491993175e-05
+      },
+      {
+        "clip_id": "c65bf9aed92aa",
+        "inner_fold": 2,
+        "probability_leak": 0.5145459033326903
+      },
+      {
+        "clip_id": "c662ad24aa34b",
+        "inner_fold": 2,
+        "probability_leak": 0.005734437611059184
+      },
+      {
+        "clip_id": "c6793f133fb84",
+        "inner_fold": 2,
+        "probability_leak": 0.04587283798010591
+      },
+      {
+        "clip_id": "c6912ec3ca658",
+        "inner_fold": 2,
+        "probability_leak": 0.5241781595545206
+      },
+      {
+        "clip_id": "c69a2a157ba8e",
+        "inner_fold": 2,
+        "probability_leak": 3.2925826072580085e-05
+      },
+      {
+        "clip_id": "c6a681c8dfaaf",
+        "inner_fold": 2,
+        "probability_leak": 0.01140513188290558
+      },
+      {
+        "clip_id": "c6bb81385b39c",
+        "inner_fold": 2,
+        "probability_leak": 0.9455020720783609
+      },
+      {
+        "clip_id": "c6c96e4e5fca9",
+        "inner_fold": 2,
+        "probability_leak": 0.6008136325144995
+      },
+      {
+        "clip_id": "c6df118b5b0dd",
+        "inner_fold": 2,
+        "probability_leak": 0.745512681586638
+      },
+      {
+        "clip_id": "c6ecd66d0712f",
+        "inner_fold": 2,
+        "probability_leak": 0.6809225570711676
+      },
+      {
+        "clip_id": "c6eefb3ad7424",
+        "inner_fold": 2,
+        "probability_leak": 0.5982069882307732
+      },
+      {
+        "clip_id": "c6fa86dd717c5",
+        "inner_fold": 2,
+        "probability_leak": 0.7958060218885793
+      },
+      {
+        "clip_id": "c705697213775",
+        "inner_fold": 2,
+        "probability_leak": 0.991866094147401
+      },
+      {
+        "clip_id": "c71017ee629b0",
+        "inner_fold": 2,
+        "probability_leak": 0.0065460196253138295
+      },
+      {
+        "clip_id": "c710479c9da31",
+        "inner_fold": 2,
+        "probability_leak": 0.6790483519629746
+      },
+      {
+        "clip_id": "c722b58050aed",
+        "inner_fold": 2,
+        "probability_leak": 0.4995340609267306
+      },
+      {
+        "clip_id": "c72960a21f1bd",
+        "inner_fold": 2,
+        "probability_leak": 0.6526964101776915
+      },
+      {
+        "clip_id": "c75a6f1fb9d12",
+        "inner_fold": 2,
+        "probability_leak": 0.011267903864021638
+      },
+      {
+        "clip_id": "c760afca314ee",
+        "inner_fold": 2,
+        "probability_leak": 0.0187899422659918
+      },
+      {
+        "clip_id": "c79fef86e0ef4",
+        "inner_fold": 2,
+        "probability_leak": 0.8130441754305536
+      },
+      {
+        "clip_id": "c7b06db61af9a",
+        "inner_fold": 2,
+        "probability_leak": 0.6343784510750325
+      },
+      {
+        "clip_id": "c7bbbb99ecc43",
+        "inner_fold": 2,
+        "probability_leak": 2.5202935751351988e-05
+      },
+      {
+        "clip_id": "c7c7bafde0b29",
+        "inner_fold": 2,
+        "probability_leak": 0.7320494142363175
+      },
+      {
+        "clip_id": "c7d0533ff4148",
+        "inner_fold": 2,
+        "probability_leak": 0.7109009726065765
+      },
+      {
+        "clip_id": "c7dc507b66608",
+        "inner_fold": 2,
+        "probability_leak": 0.5730974252872217
+      },
+      {
+        "clip_id": "c7e04ab2dd189",
+        "inner_fold": 2,
+        "probability_leak": 0.012698634046097144
+      },
+      {
+        "clip_id": "c7f3f9946e92f",
+        "inner_fold": 2,
+        "probability_leak": 0.9996905777780087
+      },
+      {
+        "clip_id": "c812ba0ae791b",
+        "inner_fold": 2,
+        "probability_leak": 0.9795985862576048
+      },
+      {
+        "clip_id": "c82f40b6adf5c",
+        "inner_fold": 2,
+        "probability_leak": 0.737466992570129
+      },
+      {
+        "clip_id": "c83e4c9ff2b59",
+        "inner_fold": 2,
+        "probability_leak": 0.5600351987869081
+      },
+      {
+        "clip_id": "c8570a876ecbe",
+        "inner_fold": 2,
+        "probability_leak": 0.4326449180854842
+      },
+      {
+        "clip_id": "c8666274626ed",
+        "inner_fold": 2,
+        "probability_leak": 0.00038101547303162094
+      },
+      {
+        "clip_id": "c8748a4c7ffc7",
+        "inner_fold": 2,
+        "probability_leak": 0.671421839418589
+      },
+      {
+        "clip_id": "c87fec72e724a",
+        "inner_fold": 2,
+        "probability_leak": 0.6234186455408673
+      },
+      {
+        "clip_id": "c8a7e32978d46",
+        "inner_fold": 2,
+        "probability_leak": 5.7230809745414634e-05
+      },
+      {
+        "clip_id": "c8c938430e85c",
+        "inner_fold": 2,
+        "probability_leak": 0.5466822749441644
+      },
+      {
+        "clip_id": "c8d48dd85a19f",
+        "inner_fold": 2,
+        "probability_leak": 0.6067259686403652
+      },
+      {
+        "clip_id": "c8fd6dd25e265",
+        "inner_fold": 2,
+        "probability_leak": 0.06286523868477875
+      },
+      {
+        "clip_id": "c8febabd06638",
+        "inner_fold": 2,
+        "probability_leak": 0.6270314731306914
+      },
+      {
+        "clip_id": "c904486cd13fd",
+        "inner_fold": 2,
+        "probability_leak": 0.0584023358478183
+      },
+      {
+        "clip_id": "c9090ce314855",
+        "inner_fold": 2,
+        "probability_leak": 0.6530396251635712
+      },
+      {
+        "clip_id": "c9255e1d09808",
+        "inner_fold": 2,
+        "probability_leak": 0.675373833364665
+      },
+      {
+        "clip_id": "c929c87aa1b42",
+        "inner_fold": 2,
+        "probability_leak": 0.5397692968578591
+      },
+      {
+        "clip_id": "c945fefa7c7c7",
+        "inner_fold": 2,
+        "probability_leak": 0.0034400301645577274
+      },
+      {
+        "clip_id": "c9525342ac0bb",
+        "inner_fold": 2,
+        "probability_leak": 0.6600005921178277
+      },
+      {
+        "clip_id": "c977205a20157",
+        "inner_fold": 2,
+        "probability_leak": 8.079901575092142e-05
+      },
+      {
+        "clip_id": "c97894a44afd8",
+        "inner_fold": 2,
+        "probability_leak": 1.0357357358133303e-05
+      },
+      {
+        "clip_id": "c97e2fbf49b5d",
+        "inner_fold": 2,
+        "probability_leak": 0.011749973773818105
+      },
+      {
+        "clip_id": "c9800a2902967",
+        "inner_fold": 2,
+        "probability_leak": 2.848406770481329e-05
+      },
+      {
+        "clip_id": "c9b180fd6c818",
+        "inner_fold": 2,
+        "probability_leak": 0.8418156638257344
+      },
+      {
+        "clip_id": "c9da56ced9783",
+        "inner_fold": 2,
+        "probability_leak": 1.2221133322523738e-05
+      },
+      {
+        "clip_id": "c9e89eab2ddf2",
+        "inner_fold": 2,
+        "probability_leak": 0.9985683352594366
+      },
+      {
+        "clip_id": "c9eaed9c635c2",
+        "inner_fold": 2,
+        "probability_leak": 0.7814819171983092
+      },
+      {
+        "clip_id": "c9eec73b47d50",
+        "inner_fold": 2,
+        "probability_leak": 0.016381100062651546
+      },
+      {
+        "clip_id": "c9f8a8c9ec27a",
+        "inner_fold": 2,
+        "probability_leak": 0.0007540012201503506
+      },
+      {
+        "clip_id": "ca060cc57486c",
+        "inner_fold": 2,
+        "probability_leak": 0.11762481301174749
+      },
+      {
+        "clip_id": "ca218cedcfb92",
+        "inner_fold": 2,
+        "probability_leak": 0.8091493702516467
+      },
+      {
+        "clip_id": "ca26346853052",
+        "inner_fold": 2,
+        "probability_leak": 0.29136504595389023
+      },
+      {
+        "clip_id": "ca41b92332b26",
+        "inner_fold": 2,
+        "probability_leak": 0.3858705893103729
+      },
+      {
+        "clip_id": "ca4405e0d5291",
+        "inner_fold": 2,
+        "probability_leak": 0.6502391625818366
+      },
+      {
+        "clip_id": "ca462d40cc1f5",
+        "inner_fold": 2,
+        "probability_leak": 0.00804650244001573
+      },
+      {
+        "clip_id": "ca6c409dcee37",
+        "inner_fold": 2,
+        "probability_leak": 0.6739162034765898
+      },
+      {
+        "clip_id": "ca785ee839f07",
+        "inner_fold": 2,
+        "probability_leak": 0.4927083897904798
+      },
+      {
+        "clip_id": "ca78aa8b431d7",
+        "inner_fold": 2,
+        "probability_leak": 0.24502178797913715
+      },
+      {
+        "clip_id": "ca7a143288c49",
+        "inner_fold": 2,
+        "probability_leak": 4.867076891152144e-06
+      },
+      {
+        "clip_id": "ca92e7e3c8a65",
+        "inner_fold": 2,
+        "probability_leak": 0.6195345787326099
+      },
+      {
+        "clip_id": "caaa128b22094",
+        "inner_fold": 2,
+        "probability_leak": 0.0007540012201503506
+      },
+      {
+        "clip_id": "cab2078e0f2fe",
+        "inner_fold": 2,
+        "probability_leak": 0.40557970411839306
+      },
+      {
+        "clip_id": "cacceda6bcc68",
+        "inner_fold": 2,
+        "probability_leak": 0.41555916090369305
+      },
+      {
+        "clip_id": "caeff31a64b96",
+        "inner_fold": 2,
+        "probability_leak": 0.6758792333644364
+      },
+      {
+        "clip_id": "cb0587d80e43d",
+        "inner_fold": 2,
+        "probability_leak": 0.5218334148547172
+      },
+      {
+        "clip_id": "cb17c6ebae98e",
+        "inner_fold": 2,
+        "probability_leak": 7.128734379162346e-06
+      },
+      {
+        "clip_id": "cb336e382f080",
+        "inner_fold": 2,
+        "probability_leak": 0.9995942042960744
+      },
+      {
+        "clip_id": "cb440af43a10e",
+        "inner_fold": 2,
+        "probability_leak": 0.6380904804007207
+      },
+      {
+        "clip_id": "cb446f02203f5",
+        "inner_fold": 2,
+        "probability_leak": 0.05150451071703646
+      },
+      {
+        "clip_id": "cb8afa5be487c",
+        "inner_fold": 2,
+        "probability_leak": 0.8100823654041988
+      },
+      {
+        "clip_id": "cb8c5084de71f",
+        "inner_fold": 2,
+        "probability_leak": 0.03628062022356846
+      },
+      {
+        "clip_id": "cb8ea5ba6ee8e",
+        "inner_fold": 2,
+        "probability_leak": 0.8606703029963804
+      },
+      {
+        "clip_id": "cb95ebb6d026f",
+        "inner_fold": 2,
+        "probability_leak": 0.25095593130080424
+      },
+      {
+        "clip_id": "cba8f28afe0e4",
+        "inner_fold": 2,
+        "probability_leak": 0.7443581866529475
+      },
+      {
+        "clip_id": "cbae7a05a27b2",
+        "inner_fold": 2,
+        "probability_leak": 0.2875103166800556
+      },
+      {
+        "clip_id": "cbaf78df6bfc2",
+        "inner_fold": 2,
+        "probability_leak": 0.2844038450526394
+      },
+      {
+        "clip_id": "cbc5cc1b6c0d8",
+        "inner_fold": 2,
+        "probability_leak": 0.37568101187974234
+      },
+      {
+        "clip_id": "cbd60eac36500",
+        "inner_fold": 2,
+        "probability_leak": 0.009256239949058605
+      },
+      {
+        "clip_id": "cbecea70bcb8a",
+        "inner_fold": 2,
+        "probability_leak": 5.7230809745414634e-05
+      },
+      {
+        "clip_id": "cc06c773ce585",
+        "inner_fold": 2,
+        "probability_leak": 0.4221166499449316
+      },
+      {
+        "clip_id": "cc0a344f25360",
+        "inner_fold": 2,
+        "probability_leak": 0.0024316095028439418
+      },
+      {
+        "clip_id": "cc0e7fee58f57",
+        "inner_fold": 2,
+        "probability_leak": 0.00012374157775498496
+      },
+      {
+        "clip_id": "cc2a75613d283",
+        "inner_fold": 2,
+        "probability_leak": 0.9997322109985265
+      },
+      {
+        "clip_id": "cc31d113a490a",
+        "inner_fold": 2,
+        "probability_leak": 0.59017485157256
+      },
+      {
+        "clip_id": "cc3569a105921",
+        "inner_fold": 2,
+        "probability_leak": 0.9933502313659297
+      },
+      {
+        "clip_id": "cc5cb8c05644e",
+        "inner_fold": 2,
+        "probability_leak": 0.6933038455501667
+      },
+      {
+        "clip_id": "cc5f3dafedb58",
+        "inner_fold": 2,
+        "probability_leak": 0.008060828648498032
+      },
+      {
+        "clip_id": "cc84f37cac49e",
+        "inner_fold": 2,
+        "probability_leak": 1.0357357358133303e-05
+      },
+      {
+        "clip_id": "cc90b947e39a9",
+        "inner_fold": 2,
+        "probability_leak": 0.46390260560214963
+      },
+      {
+        "clip_id": "cc969d2b9dc97",
+        "inner_fold": 2,
+        "probability_leak": 0.6645038053741485
+      },
+      {
+        "clip_id": "cca4243c89f2a",
+        "inner_fold": 2,
+        "probability_leak": 0.01140513188290558
+      },
+      {
+        "clip_id": "cca777cc24de2",
+        "inner_fold": 2,
+        "probability_leak": 0.16720745292411932
+      },
+      {
+        "clip_id": "cca8472440c45",
+        "inner_fold": 2,
+        "probability_leak": 0.5717475311195942
+      },
+      {
+        "clip_id": "ccb9684ea6243",
+        "inner_fold": 2,
+        "probability_leak": 0.0009271248036882685
+      },
+      {
+        "clip_id": "ccbc5a8b2af49",
+        "inner_fold": 2,
+        "probability_leak": 0.0584023358478183
+      },
+      {
+        "clip_id": "ccc211654bba2",
+        "inner_fold": 2,
+        "probability_leak": 0.13505089068259152
+      },
+      {
+        "clip_id": "ccc6068b5b0a2",
+        "inner_fold": 2,
+        "probability_leak": 0.9006622900731761
+      },
+      {
+        "clip_id": "cccdbbb49e736",
+        "inner_fold": 2,
+        "probability_leak": 0.6440853423973755
+      },
+      {
+        "clip_id": "ccce218c0e70d",
+        "inner_fold": 2,
+        "probability_leak": 0.0024316095028439418
+      },
+      {
+        "clip_id": "cce6baf614bfa",
+        "inner_fold": 2,
+        "probability_leak": 1.7874294133650063e-08
+      },
+      {
+        "clip_id": "cce8f01ad51b8",
+        "inner_fold": 2,
+        "probability_leak": 0.32978525101221007
+      },
+      {
+        "clip_id": "ccf8e76bfe498",
+        "inner_fold": 2,
+        "probability_leak": 0.5586408417005077
+      },
+      {
+        "clip_id": "cd098874a6b8e",
+        "inner_fold": 2,
+        "probability_leak": 0.7159404545408986
+      },
+      {
+        "clip_id": "cd11be05a39dc",
+        "inner_fold": 2,
+        "probability_leak": 0.369441214754516
+      },
+      {
+        "clip_id": "cd2883c705292",
+        "inner_fold": 2,
+        "probability_leak": 0.041863537614651634
+      },
+      {
+        "clip_id": "cd2f212742960",
+        "inner_fold": 2,
+        "probability_leak": 0.750713901768976
+      },
+      {
+        "clip_id": "cd44051294456",
+        "inner_fold": 2,
+        "probability_leak": 0.846423928643822
+      },
+      {
+        "clip_id": "cd4d040029f85",
+        "inner_fold": 2,
+        "probability_leak": 0.7240003310941251
+      },
+      {
+        "clip_id": "cd56be4657cb9",
+        "inner_fold": 2,
+        "probability_leak": 0.8840918159885646
+      },
+      {
+        "clip_id": "cd6f5fae74ad6",
+        "inner_fold": 2,
+        "probability_leak": 0.6616590943240571
+      },
+      {
+        "clip_id": "cd77bfd264abc",
+        "inner_fold": 2,
+        "probability_leak": 0.618220477630226
+      },
+      {
+        "clip_id": "cd7ccdb024821",
+        "inner_fold": 2,
+        "probability_leak": 0.6451141621133891
+      },
+      {
+        "clip_id": "cd84219c979bd",
+        "inner_fold": 2,
+        "probability_leak": 0.7159276689196764
+      },
+      {
+        "clip_id": "cd8a933a9f809",
+        "inner_fold": 2,
+        "probability_leak": 0.004253437571015958
+      },
+      {
+        "clip_id": "cd8f4f46d9cf9",
+        "inner_fold": 2,
+        "probability_leak": 0.8749372137256834
+      },
+      {
+        "clip_id": "cd98d6235a267",
+        "inner_fold": 2,
+        "probability_leak": 3.2029796343152713e-06
+      },
+      {
+        "clip_id": "cdaa3659f139a",
+        "inner_fold": 2,
+        "probability_leak": 0.0011590248273383973
+      },
+      {
+        "clip_id": "cdabbb10d3783",
+        "inner_fold": 2,
+        "probability_leak": 0.6035967627538743
+      },
+      {
+        "clip_id": "cdda15a414f8b",
+        "inner_fold": 2,
+        "probability_leak": 0.48374969828466885
+      },
+      {
+        "clip_id": "cdfeedc28a277",
+        "inner_fold": 2,
+        "probability_leak": 0.45382434380269915
+      },
+      {
+        "clip_id": "ce05b73f8fce2",
+        "inner_fold": 2,
+        "probability_leak": 0.5291155225810855
+      },
+      {
+        "clip_id": "ce084472188f4",
+        "inner_fold": 2,
+        "probability_leak": 0.0007291892014942085
+      },
+      {
+        "clip_id": "ce301c7d88abe",
+        "inner_fold": 2,
+        "probability_leak": 0.9996237447794771
+      },
+      {
+        "clip_id": "ce375fd85d539",
+        "inner_fold": 2,
+        "probability_leak": 0.07781218378048053
+      },
+      {
+        "clip_id": "ce419a5dd5696",
+        "inner_fold": 2,
+        "probability_leak": 0.7810364478733086
+      },
+      {
+        "clip_id": "ce461f134c0c0",
+        "inner_fold": 2,
+        "probability_leak": 0.2327108533709359
+      },
+      {
+        "clip_id": "ce49d4559826a",
+        "inner_fold": 2,
+        "probability_leak": 0.5755034978893254
+      },
+      {
+        "clip_id": "ce542643f6982",
+        "inner_fold": 2,
+        "probability_leak": 0.9852599984878795
+      },
+      {
+        "clip_id": "ce64c6fe56b6f",
+        "inner_fold": 2,
+        "probability_leak": 0.42235883976867644
+      },
+      {
+        "clip_id": "ce6e8406e4611",
+        "inner_fold": 2,
+        "probability_leak": 0.0004785388477450294
+      },
+      {
+        "clip_id": "ce739a13228a2",
+        "inner_fold": 2,
+        "probability_leak": 0.5900666550974063
+      },
+      {
+        "clip_id": "ce7890384071e",
+        "inner_fold": 2,
+        "probability_leak": 0.4850740347251797
+      },
+      {
+        "clip_id": "ce888f1dcc998",
+        "inner_fold": 2,
+        "probability_leak": 0.7155528709032933
+      },
+      {
+        "clip_id": "ce8e858b4feb5",
+        "inner_fold": 2,
+        "probability_leak": 4.212550726362679e-06
+      },
+      {
+        "clip_id": "ce8ec2b9eb1e6",
+        "inner_fold": 2,
+        "probability_leak": 1.752944992402951e-06
+      },
+      {
+        "clip_id": "ce90e1bba068b",
+        "inner_fold": 2,
+        "probability_leak": 0.6450224960101976
+      },
+      {
+        "clip_id": "ce914b2fa714b",
+        "inner_fold": 2,
+        "probability_leak": 0.6484560384798228
+      },
+      {
+        "clip_id": "ce99fd42b092c",
+        "inner_fold": 2,
+        "probability_leak": 0.7807848722778147
+      },
+      {
+        "clip_id": "ce9fd92c4a590",
+        "inner_fold": 2,
+        "probability_leak": 0.6209778501052797
+      },
+      {
+        "clip_id": "cea1a896ed055",
+        "inner_fold": 2,
+        "probability_leak": 0.6226603683366678
+      },
+      {
+        "clip_id": "ceb33347ccde5",
+        "inner_fold": 2,
+        "probability_leak": 2.8382927910816813e-06
+      },
+      {
+        "clip_id": "ceb7bd6af5bb2",
+        "inner_fold": 2,
+        "probability_leak": 0.690761038463565
+      },
+      {
+        "clip_id": "cece6c73e4c2c",
+        "inner_fold": 2,
+        "probability_leak": 0.012924807520020004
+      },
+      {
+        "clip_id": "cefc3c34b023a",
+        "inner_fold": 2,
+        "probability_leak": 0.06793516559286593
+      },
+      {
+        "clip_id": "cf076bc271b4d",
+        "inner_fold": 2,
+        "probability_leak": 0.07154783642718829
+      },
+      {
+        "clip_id": "cf0cec714c72c",
+        "inner_fold": 2,
+        "probability_leak": 0.01968044248208871
+      },
+      {
+        "clip_id": "cf18efa6f8140",
+        "inner_fold": 2,
+        "probability_leak": 1.4772638872660751e-05
+      },
+      {
+        "clip_id": "cf3c65fad2914",
+        "inner_fold": 2,
+        "probability_leak": 9.675777912704533e-06
+      },
+      {
+        "clip_id": "cf49b0d124b71",
+        "inner_fold": 2,
+        "probability_leak": 0.5722729874329584
+      },
+      {
+        "clip_id": "cf5b0b2b7b49e",
+        "inner_fold": 2,
+        "probability_leak": 1.2320629586068267e-05
+      },
+      {
+        "clip_id": "cf6854f88121d",
+        "inner_fold": 2,
+        "probability_leak": 0.9995245660470397
+      },
+      {
+        "clip_id": "cf6ef9ac3c7d2",
+        "inner_fold": 2,
+        "probability_leak": 0.5369742352704503
+      },
+      {
+        "clip_id": "cf707df74d074",
+        "inner_fold": 2,
+        "probability_leak": 0.4927083897904798
+      },
+      {
+        "clip_id": "cf7a6821aa59d",
+        "inner_fold": 2,
+        "probability_leak": 0.6135081371119963
+      },
+      {
+        "clip_id": "cf7b9a4168a3a",
+        "inner_fold": 2,
+        "probability_leak": 0.5201919579100551
+      },
+      {
+        "clip_id": "cf916a496c467",
+        "inner_fold": 2,
+        "probability_leak": 0.01756639318039253
+      },
+      {
+        "clip_id": "cfb09e0398315",
+        "inner_fold": 2,
+        "probability_leak": 0.999507553079763
+      },
+      {
+        "clip_id": "cfb359dcca238",
+        "inner_fold": 2,
+        "probability_leak": 0.8024079559546634
+      },
+      {
+        "clip_id": "cfec080e3b840",
+        "inner_fold": 2,
+        "probability_leak": 0.005734437611059184
+      },
+      {
+        "clip_id": "cfee4f9fd8787",
+        "inner_fold": 2,
+        "probability_leak": 0.2106904898196906
+      },
+      {
+        "clip_id": "cff534b9287cd",
+        "inner_fold": 2,
+        "probability_leak": 0.988725470133274
+      },
+      {
+        "clip_id": "cff7b80d1e412",
+        "inner_fold": 2,
+        "probability_leak": 0.0020268428276328213
+      },
+      {
+        "clip_id": "cffe7e7913ec3",
+        "inner_fold": 2,
+        "probability_leak": 0.0034029667341324305
+      }
+    ]
+  }
+}

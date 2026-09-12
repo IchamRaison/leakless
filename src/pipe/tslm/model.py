@@ -16,16 +16,22 @@ from transformers import AutoTokenizer, Qwen3_5ForCausalLM
 CLASS_CONTINUATIONS = ("leak;", "no_leak;")
 SCORING_VERSION = "class-continuation-logprob-sum-softmax-v1"
 CANONICAL_SCORING_VERSION = "class-continuation-logprob-sum-softmax-single-clip-v2"
+AMPLITUDE_SCORING_VERSION = "class-continuation-logprob-sum-softmax-single-clip-c1text-v2"
 
 
 class AcousticQwenSP(OpenTSLMSP):
     single_clip_acoustic_encoding = False
+    amplitude_evidence = False
 
-    def __init__(self, base_dir: str | Path, device: str = "cuda", *, single_clip_acoustic_encoding: bool = False):
-        if type(single_clip_acoustic_encoding) is not bool:
+    def __init__(self, base_dir: str | Path, device: str = "cuda", *, single_clip_acoustic_encoding: bool = False,
+                 amplitude_evidence: bool = False):
+        if type(single_clip_acoustic_encoding) is not bool or type(amplitude_evidence) is not bool:
             raise ValueError("Politique d'encodage booléenne explicite requise")
+        if amplitude_evidence and not single_clip_acoustic_encoding:
+            raise ValueError("Les mesures d'amplitude C exigent l'encodage canonique par clip")
         TimeSeriesLLM.__init__(self, device)
         self.single_clip_acoustic_encoding = single_clip_acoustic_encoding
+        self.amplitude_evidence = amplitude_evidence
         self.tokenizer = AutoTokenizer.from_pretrained(base_dir, local_files_only=True,
                                                        trust_remote_code=False, padding_side="right")
         if self.tokenizer.pad_token is None:
@@ -74,6 +80,28 @@ class AcousticQwenSP(OpenTSLMSP):
         ids = targets.input_ids.to(self.device)
         answer_mask = targets.attention_mask.to(self.device)
         embeddings = self.llm.get_input_embeddings()(ids)
+        if self.single_clip_acoustic_encoding:
+            # Prompts C de longueurs variables : pas de trou de padding entre
+            # le vrai dernier token du prompt et la première cible de classe.
+            # Le padding est ajouté seulement APRÈS la réponse entière.
+            sequences, labels, attention = [], [], []
+            for prefix, prefix_mask, answer, answer_ids, target_mask in zip(
+                    inputs, mask, embeddings, ids, answer_mask):
+                prefix = prefix[prefix_mask.bool()]
+                answer, answer_ids = answer[target_mask.bool()], answer_ids[target_mask.bool()]
+                if not len(prefix) or not len(answer_ids):
+                    raise ValueError("Prompt et réponse non vides requis")
+                sequences.append(torch.cat((prefix, answer), dim=0))
+                labels.append(torch.cat((torch.full((len(prefix),), -100, dtype=torch.long,
+                                                    device=ids.device), answer_ids)))
+                attention.append(torch.ones(len(prefix) + len(answer_ids), dtype=mask.dtype, device=mask.device))
+            return self.llm(
+                inputs_embeds=torch.nn.utils.rnn.pad_sequence(sequences, batch_first=True),
+                attention_mask=torch.nn.utils.rnn.pad_sequence(attention, batch_first=True),
+                labels=torch.nn.utils.rnn.pad_sequence(labels, batch_first=True, padding_value=-100),
+                use_cache=False, return_dict=True,
+            ).loss
+        # V1 conserve son assemblage historique, y compris sa politique de lot.
         labels = ids.masked_fill(answer_mask == 0, -100)
         prefix_labels = torch.full(mask.shape, -100, device=self.device, dtype=torch.long)
         return self.llm(
@@ -83,11 +111,14 @@ class AcousticQwenSP(OpenTSLMSP):
             use_cache=False, return_dict=True,
         ).loss
 
-    @staticmethod
-    def _validate_inference_batch(batch):
+    def _validate_inference_batch(self, batch):
         if not batch or any(set(sample) != {"pre_prompt", "post_prompt", "time_series", "time_series_text"}
                             for sample in batch):
             raise ValueError("Champs d'inférence non autorisés (answer/label/métadonnées interdits)")
+        if self.amplitude_evidence:
+            from pipe.tslm.preprocessing import AMPLITUDE_TEXT_PREFIX
+            if any(AMPLITUDE_TEXT_PREFIX not in sample["pre_prompt"] for sample in batch):
+                raise ValueError("Preuves d'amplitude absentes du prompt du modèle C")
 
     def scoring_spec(self) -> dict:
         """Contrat exact : tokenisation séparée, sans espace initial, BOS ni EOS.
@@ -111,6 +142,12 @@ class AcousticQwenSP(OpenTSLMSP):
                 "includes_description": False, "calibration": "none"}
         if self.single_clip_acoustic_encoding:
             spec["acoustic_batching"] = "one_clip_four_channels"
+        if self.amplitude_evidence:
+            from pipe.tslm.preprocessing import amplitude_spec
+            if not self.single_clip_acoustic_encoding:
+                raise ValueError("Scoring C incompatible avec la politique de lot legacy")
+            spec["version"] = AMPLITUDE_SCORING_VERSION
+            spec["amplitude_evidence"] = amplitude_spec()
         return spec
 
     @torch.inference_mode()

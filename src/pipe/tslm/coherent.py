@@ -49,6 +49,7 @@ def _source_fingerprints():
     if spec is None or spec.origin is None:
         raise ValueError("Source du connecteur acoustique introuvable")
     sources["scripts/timenet/leakless_acoustic/connector.py"] = Path(spec.origin)
+    sources["scripts/eval/harness/features.py"] = Path(__file__).resolve().parents[3] / "scripts/eval/harness/features.py"
     return {name: _sha256(path) for name, path in sources.items()}
 
 
@@ -118,12 +119,13 @@ class CoherentPredictor:
     """Backend privé et verrou unique ; aucun changement implicite de Predictor V1."""
     def __init__(self, checkpoint, decision, validation_evidence, device="cuda"):
         from pipe.tslm.predict import OUTPUT_PATTERN, PredictionError, Predictor, preprocess_for_model
-        from pipe.tslm.predict import extend_time_series_to_match_patch_size_and_aggregate, model_input
-        from pipe.tslm.preprocessing import decode_wav, measured_band
+        from pipe.tslm.predict import extend_time_series_to_match_patch_size_and_aggregate, model_input_for_model
+        from pipe.tslm.preprocessing import amplitude_features, decode_wav, measured_band
 
         self._error_type, self._pattern = PredictionError, OUTPUT_PATTERN
         self._decode, self._measure, self._preprocess = decode_wav, measured_band, preprocess_for_model
-        self._collate, self._model_input = extend_time_series_to_match_patch_size_and_aggregate, model_input
+        self._collate, self._make_input = extend_time_series_to_match_patch_size_and_aggregate, model_input_for_model
+        self._amplitude = amplitude_features
         try:
             artifact = _read_object(decision)
             expected = decision_artifact(checkpoint, validation_evidence, artifact.get("decision_version"))
@@ -156,10 +158,12 @@ class CoherentPredictor:
         """
         return self._predict(waveform, sample_rate, waveform_input=True)
 
-    def _generate_waveform_text(self, series):
+    def _generate_waveform_text(self, series, waveform, sample_rate):
         """Mince adaptateur vers la génération existante, mêmes arguments que V1."""
         import torch
-        batch = self._collate([self._model_input(series)], normalize=False)
+        evidence = self._amplitude(waveform, sample_rate) if self._backend.metadata.get("amplitude_evidence", False) else None
+        batch = self._collate([self._make_input(series, self._backend.metadata,
+                                              amplitude_features=evidence)], normalize=False)
         try:
             # Même validation minimale du retour que predict_audio ; conserver
             # les erreurs de type/index plutôt que les transformer en succès.
@@ -211,7 +215,7 @@ class CoherentPredictor:
             self._backend.model.generate = capture
             try:
                 if waveform_input:
-                    self._generate_waveform_text(series)
+                    self._generate_waveform_text(series, waveform, sample_rate)
                 else:
                     audit["raw_api_payload"] = self._backend.predict(raw_input).model_dump(mode="json")
             except Exception as exc:

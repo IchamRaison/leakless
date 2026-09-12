@@ -1,10 +1,50 @@
 # Journal Icham
 
+## 13 septembre — reprise et objectif final explicite
+
+Icham demande de reprendre et d'ajouter au vault la valeur attendue au-delà d'une classe/bande DSP : évolution d'événement, contexte réellement disponible et investigation interactive. Ajout au plan final avec benchmark gabarit / Qwen sur mesures / TSLM sur séries, sans présumer la supériorité de ce dernier. La campagne actuelle A/C ne remplace pas ce benchmark. Les demandes de statut et l'interruption précédentes n'avaient pas publié cette mise à jour ; reprise après lecture de l'état réel et intégration distante du vault. Ponytail : réutilisation du harness, des mesures C1 et de la boucle d'entraînement, pas de nouveau moteur.
+
+Diagnostic terminé : sonde groupée sur 598 train, AUC moyenne TimeNet 0,636218 vs C1 0,937500 ; huit clips de supervision sans pas d'optimiseur montrent une perte essentiellement de classe à ce checkpoint. A/C retenues, B omise ; nouveaux codes cache amplitude/texte, packing causal et accumulation token-pondérée préparés, tests ML complets encore requis avant nouveaux gates A/C. Aucun entraînement TSLM V2. Manifeste externe réellement figé, SHA `840078010f4023a045a039167f079ef178f6b0cb56f7f280fd2a5760aad1616b`, 3 600 fenêtres primaires, aucun score. [[V2 ML - exécution]] contient les artefacts et la prochaine action.
+
+## 13 septembre — parité complète enfin vérifiée
+
+Correction `0b1399e` : premier gate 209 et processus neuf terminés avec écart maximal zéro, cinq contrôles vrais. Reçu PASS SHA `fb44fbb893f7bd17457b1499bc609d4836d764ac9a9cc9de52f77da6d0a9877c`. Les deux causes numériques sont traitées sans relever `1e-6` ni retirer les lots 2/4. Prochaine étape : diagnostic train et comparaison bornée, pas une AUC améliorée présumée. Compatibilité V1 supplémentaire lancée, restitution waveform et boucle d'époque partagée testées (62 tests TSLM runtime au total). [[V2 ML - exécution]].
+
+## 13 septembre — deuxième cause de divergence démontrée
+
+Mise à jour suivante : correctif publié `0b1399e`, 77 tests runtime réussis, nouvelle référence distincte créée, gate complet `parity-gate-002` lancé ; pas encore PASS/reload. Audit de recouvrement terminé : 122 000 paires × 232 001 offsets, aucun candidat au seuil fixé, aucun non-évaluable, aucune exclusion ni inférence externe. Rapport SHA `5a1a4f090706a74fe7ec65d43017a76fb5841cd5464035294b85e10c5f8233fd`.
+
+Trace contrôlée réelle `ab54940924330b1d0a43e3bb31d98a24f5e8b8b9`, vingt contextes reprenant les voisins exacts du gate : divergence dès l'encodeur, amplifiée après conversion BF16. L'assemblage original appelé par clip supprime exactement toutes les différences d'étages/scores ; poids inchangés et hooks restaurés. Rapport SHA `6992b4ca07caab47487ac606012d542654bae0253fbf43c7c7a78548e97f08a2`.
+
+Correction opt-in versionnée écrite et relue indépendamment : politique singleton partagée entre apprentissage/inférence, gradients conservés, V1 inchangée. Tests runtime et nouveau gate complet/reload restent à exécuter ; aucun entraînement ni gain de qualité annoncé. Audit de recouvrement exhaustif externe lancé à `41dd8b2`, sans score modèle. État et chemins : [[V2 ML - exécution]].
+
 Icham
 
 ## État actuel
 
-Évaluation complète terminée, revue indépendante réussie et publication `c8dcb9d` vérifiée : neuf runs CPU, huit comparaisons appariées, 402 textes H100, tous les processus code 0. AUC test T0 clip/groupe 0,665/0,861 ; 25/98 fuites manquées, 43/96 fausses alertes ; C1 0,902/0,927. Textes test 184/194 bandes correctes, 36/194 désaccords classe/score. [[Évaluation qualité V1 - exécution]] lie rapport et preuves. GPU 0 Mio / 0 %, instance allumée. Aucun travail d'évaluation restant ; toute V2 demande un protocole distinct, ce test n'est plus vierge.
+Objectif utilisateur actif d'implémentation du [[Plan V2 - fiabilité et parité des scores]], cap final complété le 13 septembre. **Les deux causes sont corrigées et la référence `0b1399e` a passé le gate/reload complet ; diagnostic train terminé, A/C préparées mais à revérifier avant entraînement.** Checkout actif `/home/animus/ehl-hackathon-zurich-v2-recovery`, ancien Git endommagé conservé. [[V2 ML - exécution]] donne les preuves, limites et prochaine action ; sections suivantes historiques.
+
+## V2 — le contrôle complet découvre un deuxième défaut
+
+`parity-gate-001` terminé avec exit 1 : cinq chemins d'entrée exacts et trois APIs concordantes sur 209/209, lots 1 direct/inversé identiques ; lots 2/4 divergents, dispersion maximale `0.062458740766542675` sur `cf591447e4f2d`. Aucun seuil choisi ni AUC calculée, aucune tolérance changée. Code amont épinglé relu : encodage/projection de 4×N signaux avant BF16, décodeur déjà par clip. Trace avec voisins exacts et intervention temporaire par clip en préparation ; cause fine encore à prouver. Revue indépendante : calcul de tolérance correct ; reçu de préparation complète lié au consommateur train en plus de la revalidation des 598 WAV prévue, six tests CPU réussis. Aucun PASS déclaré ni apprentissage lancé pour contourner le défaut.
+
+## V2 — correction causale et reprise saine, 13 septembre
+
+Les quatre cas fixés reproduisent exactement les scores cache/TimeF/conversion float32, dont écart maximal historique `0.06236880493195146` avec WAV direct. Trois répétitions, adaptateurs/hook transparents et processus neuf : delta zéro. Correctif opt-in v2, comportement V1 préservé ; nouveaux caches 598 train +208 val exactement vérifiés contre TimeF, référence séparée mêmes poids sans réentraînement. 54 tests dans runtime ML passent. Préparation Aghashahi réelle : 3 600 fenêtres primaires +60 bruits séparés, SHA sources/reçus, aucun score. Recouvrement/sessions à auditer.
+
+Incident local : HEAD `0ce656…` vide et vingt objets Git vides, fin de reflog NUL, disque non plein ; cause inconnue. Clone indépendant depuis distant sain `aaab4af`, contrôle connectivité réussi, conservation intégrale de l'ancien checkout/dépôt. Gate/code/preuves publiés depuis clone sain `e9c8ddd`; aucune suppression/réinitialisation d'autre chantier. Gate209/interfaces/lots1/2/4/ordre lancé surH100, sortie `quality-v2-001/parity-gate-001`. Ne pas entraîner avant son PASS avec reload distinct ; l'outil ne calcule pas d'AUC.
+
+## V2 — première divergence numérique localisée
+
+Préflight réel sur 208 validations + contrôle train fixé : TimeF exactement égal à la waveform normalisée convertie float32, et cache = bandes TimeF = bandes après conversion float32 sur 209/209. Chemin WAV direct différent sur 209/209, écart maximal des bandes `2.384185791015625e-7`. Pas d'AUC calculée et pas encore de causalité établie pour le score. Rapport SHA `2e7ea200…`, source de l'outil dans sa provenance ; outil complet et preuves commit `e22366f`. Cinq tests CPU passent dans le runtime ML, puis lancement trace GPU quatre cas fixés sous poids V1 inchangés. Aucun signal/cache test lu. Ponytail appliqué : réutilisation du collator/scoring/TimeNet existants, pas de second moteur de prédiction.
+
+## Démarrage V2 — 2026-09-12
+
+Plan lu entièrement, vault récupéré avant édition, `using-entire` et recherche de cause sans résultat. Nouveau worktree créé depuis `16a6df043771a8a2bb2b8c7b68d24b2f3f085b93`, autres chantiers préservés. Bundle historique SHA `b95569c5…`/poids `183a1b1c…` inchangés, GPU 0 Mio / 0 %. Inspection de l'API TimeF réelle pour filtrer les IDs de développement sans valeurs test. Trois responsabilités séparées : diagnostic sans modification du modèle, restitution nouvelle sans altérer l'API V1, audit d'un holdout externe sans scores. Questions à Icham sur critères continus et acquisitions annotées ; pas de prétendue preuve terrain ni nouveau provisionnement.
+
+## Planification de la fiabilisation V2 — 2026-09-12
+
+Lecture du vault après récupération des modifications, rapport et code existants seulement. `using-entire` puis recherche ciblée retrouvent le contrat `9135754`, pas de transcription causale ; hypothèses identifiées comme telles. Deux relectures indépendantes, sans calcul ni GPU. Plan : tester répétabilité/entrées/collator/logits pour localiser l'écart, corriger causalement et vérifier les 208 validations à la tolérance existante `1e-6`, sans tolérance relevée ni AUC optimisée. Score/seuil devient la seule décision exposée ; descriptions DSP contrôlées avec brut conservé, sans attribuer au modèle le gain d'un gabarit. Proposition V2 : trois variantes au plus, CV groupée interne aux 598 train avec composants acoustiques réinitialisés, 208 val pour seuil final, nouveau holdout indépendant. Pas de resélection rétroactive ni nouvelle architecture présumée nécessaire. Aucun SSH, entraînement, test, téléchargement ou métrique lancés ; seuls les documents du plan et leur miroir changent.
 
 ## Publication du verdict — 2026-09-12
 

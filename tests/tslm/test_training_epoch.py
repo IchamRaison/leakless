@@ -94,6 +94,77 @@ class TrainingEpochChecks(unittest.TestCase):
                         list(train_epoch(self.model, optimizer, self.samples, self.config, 1))
                     step.assert_not_called()
 
+    def test_microbatches_weight_response_tokens_not_clips_or_prompt_length(self):
+        torch = self.torch
+        samples = [{"index": i, "value": float(i + 1), "answer": "a" * (i % 3 + 1),
+                    "pre_prompt": "signal " * (i + 1)} for i in range(9)]
+        config = {**self.config, "batch_size": 8, "gradient_clip": 1e9}
+
+        def run(size):
+            model = copy.deepcopy(self.model).double()
+            encoded, batch_sizes = [], []
+
+            def encode(text, *, add_special_tokens):
+                self.assertFalse(add_special_tokens)
+                encoded.append(text)
+                return list(text)
+
+            model.tokenizer = SimpleNamespace(encode=encode)
+            model.get_eos_token = lambda: "!"
+
+            def compute_loss(batch):
+                batch_sizes.append(len(batch))
+                model.seen.extend(sample["index"] for sample in batch)
+                terms = []
+                for sample in batch:
+                    x = torch.tensor([[sample["value"]]], dtype=torch.float64)
+                    prediction = model.llm(model.projector(model.encoder(x))).reshape(())
+                    n_tokens = len(sample["answer"] + "!")
+                    terms.append((prediction - torch.arange(n_tokens, dtype=torch.float64)).square())
+                return torch.cat(terms).mean()
+
+            model.compute_loss = compute_loss
+            optimizer = self.optimizer(model)
+            selected_config = config if size is None else {**config, "microbatch_size": size}
+            with patch.dict(sys.modules, {"opentslm.time_series_datasets.util": self.collator}), \
+                    patch.object(optimizer, "step", wraps=optimizer.step) as step, \
+                    patch.object(optimizer, "zero_grad", wraps=optimizer.zero_grad) as zero:
+                records = list(train_epoch(model, optimizer, samples, selected_config, 1))
+                self.assertEqual(step.call_count, 2)
+                self.assertEqual(zero.call_count, 2)
+            return model, records, encoded, batch_sizes
+
+        reference, expected, _, full_batches = run(None)
+        self.assertEqual(full_batches, [8, 1])
+        for size in (1, 3, 8):
+            with self.subTest(microbatch_size=size):
+                model, records, encoded, batch_sizes = run(size)
+                self.assertEqual(model.seen, reference.seen)
+                self.assertEqual(encoded, [samples[i]["answer"] + "!" for i in model.seen])
+                self.assertEqual(max(batch_sizes), size)
+                for record, wanted, indices in zip(records, expected, epoch_batches(9, 8, 19, 1)):
+                    self.assertEqual(record["batch_samples"], wanted["batch_samples"])
+                    self.assertEqual(record["supervised_tokens"], sum(len(samples[i]["answer"] + "!")
+                                                                      for i in indices))
+                    self.assertAlmostEqual(record["loss"], wanted["loss"], places=12)
+                    for component in ("encoder", "projector"):
+                        self.assertAlmostEqual(record["gradient_norms"][component],
+                                               wanted["gradient_norms"][component], places=6)
+                for name, value in model.state_dict().items():
+                    torch.testing.assert_close(value, reference.state_dict()[name], rtol=1e-12, atol=1e-12)
+                self.assertTrue(all(p.grad is None for p in model.llm.parameters()))
+
+    def test_invalid_microbatch_setting_is_rejected_before_step(self):
+        for size in (None, 0, -1, 3, True, "1"):
+            with self.subTest(microbatch_size=size), \
+                    patch.dict(sys.modules, {"opentslm.time_series_datasets.util": self.collator}):
+                optimizer = self.optimizer(self.model)
+                with patch.object(optimizer, "step", wraps=optimizer.step) as step:
+                    with self.assertRaisesRegex(ValueError, "microbatch_size"):
+                        list(train_epoch(self.model, optimizer, self.samples,
+                                         {**self.config, "microbatch_size": size}, 1))
+                    step.assert_not_called()
+
 
 if __name__ == "__main__":
     unittest.main()

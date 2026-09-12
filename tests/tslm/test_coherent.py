@@ -71,14 +71,20 @@ class CoherentChecks(unittest.TestCase):
         self.measure = Mock(return_value="0-1000")
         self.collate = Mock(return_value=[{"numeric_fixture": True}])
         self.model_input = Mock(return_value={"numeric_fixture": True})
+        self.amplitude = Mock(return_value=np.arange(9, dtype=np.float64))
+        def make_input(series, metadata, amplitude_features=None):
+            if metadata.get("amplitude_evidence", False):
+                return self.model_input(series, amplitude_features=amplitude_features)
+            assert amplitude_features is None
+            return self.model_input(series)
         self.factory = Mock(return_value=self.backend)
         self.modules = {
             "pipe.tslm.predict": SimpleNamespace(Predictor=self.factory, PredictionError=FakeError,
                 OUTPUT_PATTERN=pattern, preprocess_for_model=self.preprocess,
                 extend_time_series_to_match_patch_size_and_aggregate=self.collate,
-                model_input=self.model_input),
+                model_input_for_model=make_input),
             "pipe.tslm.preprocessing": SimpleNamespace(decode_wav=Mock(return_value="decoded waveform"),
-                                                        measured_band=self.measure),
+                measured_band=self.measure, amplitude_features=self.amplitude),
             "torch": SimpleNamespace(cuda=SimpleNamespace(OutOfMemoryError=FakeOutOfMemory))}
         module_patch = patch.dict(sys.modules, self.modules)
         module_patch.start()
@@ -219,6 +225,18 @@ class CoherentChecks(unittest.TestCase):
         changed = little.copy()
         changed[0] = np.nextafter(changed[0], np.inf)
         self.assertNotEqual(digest, coherent._waveform_identity(changed, 8000))
+
+    def test_waveform_generation_uses_the_same_opt_in_amplitude_policy(self):
+        service = self.service()
+        self.backend.metadata["amplitude_evidence"] = True  # Double privé, pas mutation d'un vrai bundle.
+        waveform = np.linspace(-.7, .9, 8000)
+        result = service.predict_waveform(waveform)
+        snapshot, rate = self.backend.score_waveform.call_args.args
+        self.assertIs(self.amplitude.call_args.args[0], snapshot)
+        self.assertEqual(self.amplitude.call_args.args[1], rate)
+        self.assertIs(self.model_input.call_args.kwargs["amplitude_features"], self.amplitude.return_value)
+        self.assertEqual(result["prediction"], "leak")
+        self.assertEqual(result["description_source"], "llm_checked_against_dsp")
 
     def test_waveform_errors_and_text_fallbacks_preserve_audit_and_release_lock(self):
         service = self.service()

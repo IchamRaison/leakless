@@ -8,6 +8,8 @@ Icham
 
 PIPE vise un appareil qui écoute les canalisations en continu et produit des alertes avec preuves acoustiques consultables. V1 entraînée/rechargée, exports T0–T3 publiés et évaluation complète exécutée par Icham. Résultat : détecteur encore insuffisant, sans gain démontré face au contrôle C1 ; descriptions de bandes globalement correctes mais parfois incohérentes avec le score. [[Évaluation qualité V1 - exécution]]. Surveillance et fiabilité terrain non validées.
 
+**Objectif final précisé par Icham le 13 septembre :** aider à comprendre et investiguer l'évolution d'un événement, au-delà de « fuite ou pas fuite ». Démontrer séparément l'apport du langage et celui de l'accès aux séries, en comparant classifieur + DSP + gabarit, classifieur + mesures/contexte + Qwen, et TSLM. Ce sont des capacités à construire et tester, pas des résultats actuels. [[Plan V2 - fiabilité et parité des scores#7. Objectif final — démontrer la valeur du TSLM]].
+
 ## Votre mission
 
 - [[Agent Icham - ML]] : modèle, entraînement et intégration finale.

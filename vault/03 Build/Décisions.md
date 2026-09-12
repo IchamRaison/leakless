@@ -2,6 +2,14 @@
 
 Icham
 
+## 2026-09-13 — Valeur finale du langage et des séries à démontrer séparément
+
+Icham demande explicitement d'ajouter cet objectif au vault et de reprendre V2 : comprendre l'évolution d'un événement, exploiter les signaux/contextes réellement disponibles et permettre une investigation interactive. Un score + bande DSP + phrase fixe ne démontrent pas l'intérêt d'un TSLM. Le benchmark final comparera trois approches, sans présumer laquelle doit gagner : classifieur/DSP/gabarit ; classifieur/mesures/contexte/Qwen ; TSLM/séries/contexte. [[Plan V2 - fiabilité et parité des scores#7. Objectif final — démontrer la valeur du TSLM]].
+
+Les étapes V2 de fiabilité/détection continuent ; leur campagne A/C ne remplace pas ce benchmark. Si Qwen sur mesures fait aussi bien que le TSLM, aucune valeur propre de l'accès aux séries n'est démontrée. Si le gabarit fait aussi bien, pas de valeur du langage démontrée non plus. Aucune nouvelle modalité, collecte privée ou installation n'est implicitement autorisée.
+
+Choix technique de campagne après diagnostic train : A et C seulement, B omise faute de preuve que le texte domine la perte au checkpoint audité. C ajoute neuf descripteurs C1 mesurés au prompt, sans remplacer les quatre séries ni ajouter labels/métadonnées. Recette commune proposée : quatre époques, seed fixe, lots effectifs de huit avec microbatches de un ; préinscription et nouveaux gates A/C requis avant les six fits comparatifs. Preuves et limites : [[V2 ML - exécution]].
+
 ## 2026-09-12 — Répartition confirmée pour la livraison au harness
 
 Message de Nevil transmis par Icham : la partie ML livre les probabilités T0 et leur provenance selon le contrat à `08562e3`, **pas les métriques finales**. Nevil possède l'évaluation sur le split gelé. T1/T2/T3 seulement après T0 si possible, checkpoint identique, aucun réentraînement. Le contrôle d'export (format, couverture, bornes, hash/provenance) ne doit pas être confondu avec le calcul de performances sur test. Voir [[Protocole évaluation]]. Cette instruction prépare une livraison future ; aucun run nouveau autorisé par « regarde ce que Nevil m'a dit ».

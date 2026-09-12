@@ -58,11 +58,14 @@ class TrainDiagnosticChecks(unittest.TestCase):
                     "source_sha256": {"model.py": diagnostic.sha256_file(source)}}}
             preparation = {"preprocessing_version": "canonical-fixture", "records": 806,
                 "fold_counts": {"train": 598, "val": 208}, "canonical_vs_timef_exact": True,
+                "amplitude_records_verified": 806, "amplitude_features_raw_vs_timef_exact": True,
+                "amplitude_text_raw_vs_timef_exact": True, "amplitude_evidence_version": "c1-amplitude-text-6sig-v1",
                 "test_audio_or_cache_opened": False,
                 "manifest_sha256": diagnostic.split_loader.FROZEN_SPLIT_SHA256,
                 "cache_sha256": report["provenance"]["cache_sha256"], "timef_manifest_sha256": "c" * 64,
                 "source_sha256": {name: diagnostic.sha256_file(ROOT / "src/pipe/tslm" / name)
                                   for name in ("prepare.py", "preprocessing.py")}}
+            preparation["source_sha256"]["features.py"] = diagnostic.sha256_file(diagnostic.SOURCE_PATHS["features.py"])
             (path / "preparation.json").write_text(json.dumps(preparation))
             receipt = path / "report.json"
             def verify(value):

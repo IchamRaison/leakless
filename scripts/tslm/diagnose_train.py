@@ -33,6 +33,7 @@ PARITY_CHECKS = ("canonical_inputs_exact", "bundle_unchanged",
 SOURCE_PATHS = {name: ROOT / "src/pipe/tslm" / name
                 for name in ("model.py", "predict.py", "preprocessing.py")}
 SOURCE_PATHS["connector.py"] = ROOT / "scripts/timenet/leakless_acoustic/connector.py"
+SOURCE_PATHS["features.py"] = ROOT / "scripts/eval/harness/features.py"
 
 
 def verify_parity(report_path, prepared, version, *, source_paths=SOURCE_PATHS):
@@ -51,13 +52,20 @@ def verify_parity(report_path, prepared, version, *, source_paths=SOURCE_PATHS):
     if (preparation.get("preprocessing_version") != version or preparation.get("records") != 806
             or preparation.get("fold_counts") != {"train": 598, "val": 208}
             or preparation.get("canonical_vs_timef_exact") is not True
+            or preparation.get("amplitude_records_verified") != 806
+            or preparation.get("amplitude_features_raw_vs_timef_exact") is not True
+            or preparation.get("amplitude_text_raw_vs_timef_exact") is not True
             or preparation.get("test_audio_or_cache_opened") is not False
             or preparation.get("manifest_sha256") != p["manifest_sha256"]
             or preparation.get("cache_sha256") != p["cache_sha256"]
             or preparation.get("timef_manifest_sha256") != p["timef_manifest_sha256"]
+            or preparation.get("source_sha256", {}).get("features.py") != sha256_file(SOURCE_PATHS["features.py"])
             or any(preparation.get("source_sha256", {}).get(name) != sha256_file(ROOT / "src/pipe/tslm" / name)
                    for name in ("prepare.py", "preprocessing.py"))):
         raise ValueError("Reçu de préparation canonique complet absent ou périmé")
+    from pipe.tslm.preprocessing import AMPLITUDE_EVIDENCE_VERSION
+    if preparation.get("amplitude_evidence_version") != AMPLITUDE_EVIDENCE_VERSION:
+        raise ValueError("Reçu d'amplitude d'une autre définition")
     return p
 
 

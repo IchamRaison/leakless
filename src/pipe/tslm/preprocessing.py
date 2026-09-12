@@ -10,6 +10,8 @@ from leakless_acoustic.connector import _normalise
 
 VERSION = "rms-hann256-hop128-band4-log1p-v1"
 CANONICAL_VERSION = "rms-f32-hann256-hop128-band4-log1p-v2"
+AMPLITUDE_EVIDENCE_VERSION = "c1-amplitude-text-6sig-v1"
+AMPLITUDE_TEXT_PREFIX = "\nMeasured normalized-amplitude statistics (C1; six significant digits): "
 SAMPLE_RATE = 8000
 N_SAMPLES = 8000
 FFT_SIZE = 256
@@ -101,9 +103,49 @@ def target_text(label: str, series: np.ndarray) -> str:
     return f"{label}; Greatest mean spectral energy: {measured_band(series)} Hz."
 
 
-def model_input(series: np.ndarray) -> dict:
+def amplitude_spec() -> dict:
+    """Contrat C pur ; runtime C : ajouter scripts/eval au PYTHONPATH."""
+    from harness.features import C1_NAMES
+    return {"version": AMPLITUDE_EVIDENCE_VERSION, "features": list(C1_NAMES),
+            "representation": "prompt_text", "float_format": ".6g",
+            "source": "harness.features.c1_envelope"}
+
+
+def amplitude_from_normalized(values: np.ndarray) -> np.ndarray:
+    """Les 9 descripteurs officiels sur les valeurs float32 réellement stockées TimeF."""
+    from harness.features import c1_envelope
+    x = np.asarray(values)
+    if x.dtype != np.float32 or x.shape != (N_SAMPLES,) or not np.isfinite(x).all():
+        raise ValueError("Valeurs TimeF normalisées float32 finies de forme (8000,) requises")
+    result = c1_envelope(x.astype(np.float64))
+    if result.shape != (9,) or result.dtype != np.float64 or not np.isfinite(result).all():
+        raise ValueError("Neuf descripteurs C1 float64 finis requis")
+    return result
+
+
+def amplitude_features(waveform: np.ndarray, sample_rate: int = SAMPLE_RATE) -> np.ndarray:
+    """Même round-trip float32 que TimeF, pas d'estimateur de normalisation appris."""
+    x = np.asarray(waveform)
+    if (sample_rate != SAMPLE_RATE or x.shape != (N_SAMPLES,) or x.dtype.kind not in "fiu"
+            or not np.isfinite(x).all()):
+        raise ValueError("Waveform finie (8000,) à 8000 Hz requise")
+    return amplitude_from_normalized(_normalise(x).astype(np.float32))
+
+
+def amplitude_text(features) -> str:
+    """Rendu déterministe à six chiffres significatifs, aucun label ni contexte dataset."""
+    values = np.asarray(features)
+    names = amplitude_spec()["features"]
+    if (len(names) != 9 or values.shape != (9,) or values.dtype.kind not in "fiu"
+            or not np.isfinite(values).all() or any(not np.isfinite(float(v)) for v in values)):
+        raise ValueError("Neuf mesures d'amplitude numériques finies requises")
+    return AMPLITUDE_TEXT_PREFIX + "; ".join(f"{name}={float(value):.6g}" for name, value in zip(names, values))
+
+
+def model_input(series: np.ndarray, amplitude_features=None) -> dict:
     """Liste blanche : aucun ID, chemin, mesure cible, label ou answer."""
     if series.shape != (4, 64) or not np.isfinite(series).all():
         raise ValueError("Entrée OpenTSLM (4,64) finie requise")
-    return {"pre_prompt": PRE_PROMPT, "time_series_text": list(CHANNEL_NAMES),
+    prompt = PRE_PROMPT if amplitude_features is None else PRE_PROMPT + amplitude_text(amplitude_features)
+    return {"pre_prompt": prompt, "time_series_text": list(CHANNEL_NAMES),
             "time_series": series.copy(), "post_prompt": POST_PROMPT}

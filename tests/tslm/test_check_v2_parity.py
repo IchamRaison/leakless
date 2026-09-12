@@ -1,6 +1,8 @@
 """Tests CPU du gate, sans modèle ni métrique sur des données réelles."""
 import copy
+import hashlib
 import importlib.util
+import io
 import json
 from pathlib import Path
 import sys
@@ -8,6 +10,7 @@ import tempfile
 from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
+import wave
 
 import numpy as np
 
@@ -25,7 +28,8 @@ def fixture_report(pid=1):
         "cache_sha256", "historical_cache_sha256", "checkpoint_checksums_sha256", "temporal_sha256",
         "timef_manifest_sha256", "source_sha256", "runtime", "scoring_spec", "state_sha256")}
     provenance.update(process={"hostname": "same-host", "pid": pid}, clip_ids=["val"],
-                      seed=gate.SEED, score_atol=gate.SCORE_ATOL, threshold_diagnostic_only=None)
+                      seed=gate.SEED, score_atol=gate.SCORE_ATOL, threshold_diagnostic_only=None,
+                      amplitude_evidence=False, amplitude_evidence_version=None, amplitude_tokens={})
     return {"schema": gate.SCHEMA, "all_checks_pass": False,
             "checks": {key: key != "fresh_process_verified" for key in gate.CHECKS},
             "provenance": provenance, "records": [{"clip_id": "val", "exact": True}],
@@ -75,6 +79,132 @@ class V2ParityGateChecks(unittest.TestCase):
             gate.score_batches([*ids, ids[0]], series, score_batch)
         with self.assertRaises(ValueError):
             gate.score_batches(ids, series, lambda arrays: [float("nan")] * len(arrays))
+
+    def test_c_amplitude_cache_and_text_are_checked_before_model_and_preserved_in_batches(self):
+        # Le vrai prepare_inputs et les vrais calculs C sur deux WAV synthétiques.
+        # Doubles uniquement pour les lecteurs/installations TimeF et ML absents.
+        def normalise(x):
+            centered = np.asarray(x, dtype=np.float64) - np.mean(x)
+            return centered / np.sqrt(np.mean(centered ** 2))
+        connector = SimpleNamespace(_normalise=normalise,
+            __file__=str(ROOT / "scripts/timenet/leakless_acoustic/connector.py"))
+        spec = importlib.util.spec_from_file_location("gate_amplitude_preprocessing",
+                                                     ROOT / "src/pipe/tslm/preprocessing.py")
+        preprocessing = importlib.util.module_from_spec(spec)
+        with patch.dict(sys.modules, {"leakless_acoustic.connector": connector}):
+            spec.loader.exec_module(preprocessing)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for name in ("checkpoint", "prepared", "historical", "timef", "audio"):
+                (root / name).mkdir()
+            metadata = {"preprocessing_version": preprocessing.CANONICAL_VERSION,
+                        "amplitude_evidence": True, "single_clip_acoustic_encoding": True,
+                        "amplitude_evidence_version": preprocessing.AMPLITUDE_EVIDENCE_VERSION}
+            (root / "checkpoint/metadata.json").write_text(json.dumps(metadata))
+            (root / "checkpoint/checksums.json").write_text("{}")
+            (root / "checkpoint/temporal.pt").write_bytes(b"synthetic weights never loaded")
+            (root / "timef/manifest.json").write_text("{}")
+            clips = [SimpleNamespace(clip_id="train", fold="train"),
+                     SimpleNamespace(clip_id="val", fold="val"),
+                     SimpleNamespace(clip_id="unread-test", fold="test")]
+            split = SimpleNamespace(clips=clips, sha256="f" * 64,
+                fold=lambda fold: [c for c in clips if c.fold == fold],
+                path_of=lambda cid: f"{cid}.wav")
+            selected, records, md5 = ["val", "train"], {}, {"unread-test": "0" * 32}
+            for index, cid in enumerate(("train", "val")):
+                waveform = np.random.default_rng(index + 70).integers(-12000, 12000, 8000).astype("<i2")
+                buffer = io.BytesIO()
+                with wave.open(buffer, "wb") as writer:
+                    writer.setnchannels(1)
+                    writer.setsampwidth(2)
+                    writer.setframerate(8000)
+                    writer.writeframes(waveform.tobytes())
+                raw = buffer.getvalue()
+                (root / f"audio/{cid}.wav").write_bytes(raw)
+                md5[cid] = hashlib.md5(raw).hexdigest()
+                normalized = normalise(waveform).astype(np.float32)
+                records[cid] = SimpleNamespace(record_id=cid,
+                    time_series=[SimpleNamespace(to_numpy=lambda x=normalized: x)])
+                series = preprocessing.band_series(normalized)
+                amplitude = preprocessing.amplitude_from_normalized(normalized)
+                np.savez_compressed(root / f"prepared/{cid}.npz", ids=np.array([cid]),
+                    series=series[None], preprocessing_version=preprocessing.CANONICAL_VERSION,
+                    amplitude_features=amplitude[None],
+                    amplitude_text=np.array([preprocessing.amplitude_text(amplitude)]),
+                    amplitude_evidence_version=preprocessing.AMPLITUDE_EVIDENCE_VERSION)
+                np.savez_compressed(root / f"historical/{cid}.npz", ids=np.array([cid]),
+                    series=series[None], preprocessing_version=preprocessing.VERSION)
+
+            class Reader:
+                def __init__(self, version): pass
+                def __enter__(self): return self
+                def __exit__(self, *args): pass
+                def iter_records(self, record_ids, with_annotations):
+                    self_case.assertEqual(record_ids, selected)
+                    self_case.assertIs(with_annotations, False)
+                    return iter(records[cid] for cid in record_ids)
+
+            self_case = self
+            def load_cache(prepared, fold, rows, version):
+                with np.load(prepared / f"{fold}.npz", allow_pickle=False) as cached:
+                    self.assertEqual(str(cached["preprocessing_version"]), version)
+                    self.assertEqual(set(cached["ids"]), {r["clip_id"] for r in rows})
+                    return dict(zip(cached["ids"].tolist(), cached["series"]))
+            predict = SimpleNamespace(__file__=str(ROOT / "src/pipe/tslm/predict.py"),
+                preprocess_for_model=lambda x, sr, meta: preprocessing.preprocess_audio(
+                    x, sr, version=meta["preprocessing_version"]))
+            model = SimpleNamespace(__file__=str(ROOT / "src/pipe/tslm/model.py"))
+            tslm = SimpleNamespace(model=model, predict=predict, preprocessing=preprocessing)
+            dependencies = {"leakless_acoustic": SimpleNamespace(connector=connector),
+                "pipe": SimpleNamespace(tslm=tslm), "pipe.tslm": tslm,
+                "pipe.tslm.campaign": SimpleNamespace(load_cache=load_cache),
+                "timenet.reader.reader": SimpleNamespace(TimeFReader=Reader),
+                "timenet.registry.version": SimpleNamespace(DatasetVersion=SimpleNamespace(open_local=lambda p: p))}
+            args = SimpleNamespace(checkpoint=root / "checkpoint", prepared=root / "prepared",
+                historical_prepared=root / "historical", timef_version=root / "timef",
+                data_root=root / "audio", manifests=root, threshold=None)
+            with patch.dict(sys.modules, dependencies), \
+                    patch.object(gate.split_loader, "load_split", return_value=split), \
+                    patch.object(gate, "selected_ids", return_value=selected), \
+                    patch.object(gate, "load_expected_audio_md5", return_value=md5):
+                inputs, checked, provenance = gate.prepare_inputs(args)
+                self.assertTrue(all(row["exact"] and row["amplitude"]["text_exact"] for row in checked))
+                self.assertEqual(provenance["source_sha256"]["features.py"], hashlib.sha256(
+                    (ROOT / "scripts/eval/harness/features.py").read_bytes()).hexdigest())
+                calls = []
+                def score_batch(entries):
+                    for series, amplitude in entries:
+                        cid = next(cid for cid in selected if series is inputs[cid][2])
+                        self.assertIs(amplitude, inputs[cid][3])
+                        np.testing.assert_array_equal(amplitude,
+                            preprocessing.amplitude_features(inputs[cid][1], 8000))
+                        calls.append(cid)
+                    return [.4] * len(entries)  # Double mécanique, jamais un modèle.
+                gate.score_batches(selected, {cid: values[2:] for cid, values in inputs.items()}, score_batch)
+                self.assertEqual(calls.count("train"), 6)
+                self.assertEqual(calls.count("val"), 6)
+                path = root / "prepared/train.npz"
+                with np.load(path, allow_pickle=False) as cached:
+                    original = {name: cached[name].copy() for name in cached.files}
+                for field in ("amplitude_features", "amplitude_text"):
+                    altered = {name: value.copy() for name, value in original.items()}
+                    if field == "amplitude_features":
+                        altered[field][0, 0] += 1
+                    else:
+                        altered[field][0] = "tampered"
+                    np.savez_compressed(path, **altered)
+                    output = root / f"failed-{field}"
+                    with patch.object(gate, "run_scores") as scorer:
+                        status = gate.main(["--checkpoint", str(args.checkpoint), "--prepared", str(args.prepared),
+                            "--historical-prepared", str(args.historical_prepared), "--timef-version", str(args.timef_version),
+                            "--data-root", str(args.data_root), "--manifests", str(root), "--output", str(output)])
+                        self.assertEqual(status, 1)
+                        scorer.assert_not_called()
+                    receipt = json.loads((output / "report.json").read_text())
+                    self.assertFalse(receipt["checks"]["canonical_inputs_exact"])
+                    self.assertEqual(receipt["error"]["stage"], "prepare_inputs")
+                    np.savez_compressed(path, **original)
+            self.assertFalse((root / "audio/unread-test.wav").exists())
 
     def test_fixed_tolerance_pairwise_and_threshold_not_chosen(self):
         report = fixture_report()

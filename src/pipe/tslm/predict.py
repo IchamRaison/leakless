@@ -12,7 +12,8 @@ from opentslm.time_series_datasets.util import extend_time_series_to_match_patch
 
 from pipe.contracts import Observation, Prediction
 from pipe.tslm.model import AcousticQwenSP
-from pipe.tslm.preprocessing import CANONICAL_VERSION, VERSION, decode_wav, measured_band, model_input, preprocess_audio
+from pipe.tslm.preprocessing import (AMPLITUDE_EVIDENCE_VERSION, CANONICAL_VERSION, VERSION,
+    amplitude_features as measure_amplitude_features, decode_wav, measured_band, model_input, preprocess_audio)
 
 OUTPUT_PATTERN = re.compile(
     r"(leak|no_leak);\s*(Greatest mean spectral energy: (?:0-1000|1000-2000|2000-3000|3000-4000) Hz\.)"
@@ -36,6 +37,27 @@ def preprocess_for_model(waveform: np.ndarray, sample_rate: int, metadata: dict)
     return preprocess_audio(waveform, sample_rate, version=metadata.get("preprocessing_version", VERSION))
 
 
+def _amplitude_enabled(metadata: dict) -> bool:
+    enabled = metadata.get("amplitude_evidence", False)
+    if type(enabled) is not bool:
+        raise ValueError("amplitude_evidence doit être un booléen explicite")
+    if enabled and (metadata.get("amplitude_evidence_version") != AMPLITUDE_EVIDENCE_VERSION
+                    or metadata.get("single_clip_acoustic_encoding") is not True
+                    or metadata.get("preprocessing_version") != CANONICAL_VERSION):
+        raise ValueError("Métadonnées C incompatibles : version amplitude et chaîne canonique requises")
+    if not enabled and metadata.get("amplitude_evidence_version") is not None:
+        raise ValueError("Version d'amplitude déclarée sur un modèle sans amplitude")
+    return enabled
+
+
+def model_input_for_model(series: np.ndarray, metadata: dict, amplitude_features=None) -> dict:
+    """Frontière A/C : les mesures sont obligatoires pour C, interdites pour A/V1."""
+    enabled = _amplitude_enabled(metadata)
+    if enabled != (amplitude_features is not None):
+        raise ValueError("Mesures d'amplitude manquantes pour C ou ajoutées à un modèle A/V1")
+    return model_input(series, amplitude_features=amplitude_features)
+
+
 def predict_audio(model: AcousticQwenSP, raw: bytes, metadata: dict) -> Prediction:
     started = time.monotonic()
     try:
@@ -43,9 +65,11 @@ def predict_audio(model: AcousticQwenSP, raw: bytes, metadata: dict) -> Predicti
         if np.std(waveform) == 0:
             raise PredictionError("silent_audio", "Signal constant : aucune énergie acoustique exploitable")
         series = preprocess_for_model(waveform, 8000, metadata)
+        amplitude = measure_amplitude_features(waveform, 8000) if _amplitude_enabled(metadata) else None
+        example = model_input_for_model(series, metadata, amplitude_features=amplitude)
     except ValueError as exc:
         raise PredictionError("unsupported_audio", str(exc)) from exc
-    batch = extend_time_series_to_match_patch_size_and_aggregate([model_input(series)], normalize=False)
+    batch = extend_time_series_to_match_patch_size_and_aggregate([example], normalize=False)
     try:
         text = model.generate(batch, max_new_tokens=metadata["max_new_tokens"], max_time=15.0)[0].strip()
     except torch.cuda.OutOfMemoryError as exc:
@@ -83,11 +107,13 @@ class Predictor:
             self.metadata = json.loads((root / "metadata.json").read_text())
             if self.metadata["preprocessing_version"] not in (VERSION, CANONICAL_VERSION):
                 raise ValueError("Version de prétraitement incompatible")
+            amplitude_evidence = _amplitude_enabled(self.metadata)
             required = {"metadata.json", "temporal.pt", "base/config.json", "base/tokenizer_config.json"}
             if not required.issubset(checksums) or not any(name.endswith(".safetensors") for name in checksums):
                 raise ValueError("Checkpoint incomplet")
             self.model = AcousticQwenSP(root / "base", device=device,
-                single_clip_acoustic_encoding=self.metadata.get("single_clip_acoustic_encoding", False))
+                single_clip_acoustic_encoding=self.metadata.get("single_clip_acoustic_encoding", False),
+                amplitude_evidence=amplitude_evidence)
             temporal = torch.load(root / "temporal.pt", map_location=device, weights_only=True)
             self.model.encoder.load_state_dict(temporal["encoder_state"], strict=True)
             self.model.projector.load_state_dict(temporal["projector_state"], strict=True)
@@ -122,14 +148,16 @@ class Predictor:
             series = preprocess_for_model(waveform, sample_rate, self.metadata)
             if np.std(waveform) == 0:
                 raise PredictionError("silent_audio", "Signal constant : aucune énergie acoustique exploitable")
+            amplitude = measure_amplitude_features(waveform, sample_rate) if _amplitude_enabled(self.metadata) else None
         except ValueError as exc:
             raise PredictionError("unsupported_audio", str(exc)) from exc
-        return self.score_series(series)
+        return self.score_series(series, amplitude_features=amplitude)
 
-    def score_series(self, series: np.ndarray) -> float:
+    def score_series(self, series: np.ndarray, *, amplitude_features=None) -> float:
         """Scorer une entrée déjà prétraitée (4,64), sans ID/label/métadonnée."""
         try:
-            batch = extend_time_series_to_match_patch_size_and_aggregate([model_input(series)], normalize=False)
+            example = model_input_for_model(series, self.metadata, amplitude_features=amplitude_features)
+            batch = extend_time_series_to_match_patch_size_and_aggregate([example], normalize=False)
         except ValueError as exc:
             raise PredictionError("unsupported_audio", str(exc)) from exc
         if not self._lock.acquire(blocking=False):

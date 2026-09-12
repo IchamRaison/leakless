@@ -57,11 +57,24 @@ def prepare_inputs(args):
     expected_md5 = load_expected_audio_md5(args.manifests)
     if set(expected_md5) != {c.clip_id for c in split.clips}:
         raise ValueError("Empreintes audio incomplètes")
-    caches, historical = {}, {}
+    use_amplitude = metadata.get("amplitude_evidence", False)
+    if type(use_amplitude) is not bool:
+        raise ValueError("Politique d'entrée booléenne requise")
+    caches, historical, amplitudes, amplitude_texts = {}, {}, {}, {}
     for fold in ("train", "val"):
         rows = [{"clip_id": c.clip_id, "fold": fold} for c in split.fold(fold)]
         caches.update(load_cache(args.prepared, fold, rows, preprocessing.CANONICAL_VERSION))
         historical.update(load_cache(args.historical_prepared, fold, rows, preprocessing.VERSION))
+        if use_amplitude:
+            with np.load(args.prepared / f"{fold}.npz", allow_pickle=False) as cache:
+                if str(cache["amplitude_evidence_version"]) != preprocessing.AMPLITUDE_EVIDENCE_VERSION:
+                    raise ValueError("Version des mesures d'amplitude du cache incompatible")
+                values, texts = cache["amplitude_features"], cache["amplitude_text"]
+                if (values.shape != (len(rows), 9) or values.dtype != np.float64
+                        or texts.shape != (len(rows),) or not np.isfinite(values).all()):
+                    raise ValueError("Mesures/texte d'amplitude du cache incompatibles")
+                amplitudes.update(zip(cache["ids"].tolist(), values))
+                amplitude_texts.update(zip(cache["ids"].tolist(), texts.tolist()))
     timef = {}
     with TimeFReader(DatasetVersion.open_local(args.timef_version)) as reader:
         # Filtrage avant lecture des signaux ; ni tasks, ni verify(), ni test.
@@ -87,7 +100,20 @@ def prepare_inputs(args):
                   "explicit_canonical": preprocessing.preprocess_audio(
                       waveform, 8000, version=preprocessing.CANONICAL_VERSION)}
         route_check = compare_routes(routes)
-        inputs[cid] = (raw, waveform, canonical)
+        amplitude = None
+        if use_amplitude:
+            amplitude_routes = {"canonical": preprocessing.amplitude_features(waveform, 8000),
+                                "canonical_cache": amplitudes[cid],
+                                "timef": preprocessing.amplitude_from_normalized(timef[cid])}
+            amplitude_check = compare_routes(amplitude_routes)
+            texts = {name: preprocessing.amplitude_text(value) for name, value in amplitude_routes.items()}
+            texts["serialized_cache"] = amplitude_texts[cid]
+            amplitude_check["texts"] = texts
+            amplitude_check["text_exact"] = len(set(texts.values())) == 1
+            route_check["amplitude"] = amplitude_check
+            route_check["exact"] &= amplitude_check["exact"] and amplitude_check["text_exact"]
+            amplitude = amplitudes[cid]
+        inputs[cid] = (raw, waveform, canonical, amplitude)
         records.append({"clip_id": cid, "input_sha256": hashlib.sha256(raw).hexdigest(),
                         "waveform": array_info(waveform), "timef": array_info(timef[cid]),
                         **route_check})
@@ -95,11 +121,14 @@ def prepare_inputs(args):
                "diagnose_parity.py": Path(__file__).with_name("diagnose_parity.py"),
                "model.py": Path(model.__file__), "predict.py": Path(predict.__file__),
                "preprocessing.py": Path(preprocessing.__file__),
-               "connector.py": Path(connector.__file__)}
+               "connector.py": Path(connector.__file__),
+               "features.py": ROOT / "scripts/eval/harness/features.py"}
     provenance = {"created_at": datetime.now(timezone.utc).isoformat(),
                   "process": {"hostname": platform.node(), "pid": os.getpid()},
                   "seed": SEED, "score_atol": SCORE_ATOL,
                   "preprocessing_version": preprocessing.CANONICAL_VERSION,
+                  "amplitude_evidence": use_amplitude,
+                  "amplitude_evidence_version": metadata.get("amplitude_evidence_version"),
                   "historical_preprocessing_version": preprocessing.VERSION,
                   "clip_ids": ids, "fixed_train_clip_id": TRAIN_CASE,
                   "manifest_sha256": split.sha256,
@@ -177,7 +206,8 @@ def verify_reference(report, reference):
                 "clip_ids", "manifest_sha256", "cache_sha256", "historical_cache_sha256",
                 "checkpoint_checksums_sha256", "temporal_sha256", "timef_manifest_sha256",
                 "source_sha256", "runtime", "scoring_spec", "state_sha256",
-                "threshold_diagnostic_only")
+                "threshold_diagnostic_only", "amplitude_evidence", "amplitude_evidence_version",
+                "amplitude_tokens")
     for key in identity:
         if current[key] != previous[key]:
             raise ValueError(f"Identité de référence différente : {key}")
@@ -210,8 +240,8 @@ def verify_reference(report, reference):
 def run_scores(args, inputs, provenance):
     import torch
     from opentslm.time_series_datasets.util import extend_time_series_to_match_patch_size_and_aggregate as collate
-    from pipe.tslm.predict import Predictor
-    from pipe.tslm.preprocessing import model_input
+    from pipe.tslm.predict import Predictor, model_input_for_model
+    from pipe.tslm.preprocessing import amplitude_text
     from pipe.tslm.train import tensor_state_hash
 
     random.seed(SEED)
@@ -240,21 +270,34 @@ def run_scores(args, inputs, provenance):
         raise ValueError("Spécification des scores différente du bundle")
     components = {"encoder": model.encoder, "projector": model.projector, "llm": model.llm}
     provenance["state_sha256"] = {name: tensor_state_hash(part) for name, part in components.items()}
-    scores = {}
-    for index, (cid, (raw, waveform, series)) in enumerate(inputs.items()):
-        scores[cid] = {"series": predictor.score_series(series),
+    scores, token_checks = {}, {}
+    for index, (cid, (raw, waveform, series, amplitude)) in enumerate(inputs.items()):
+        if amplitude is not None:
+            # Les mesures et le texte sont déjà comparés entre les trois routes.
+            # Empreinte du fragment isolé, pas des tokens du chat complet
+            # entrelacés avec les embeddings acoustiques.
+            text = amplitude_text(amplitude)
+            ids = model.tokenizer.encode(text, add_special_tokens=False)
+            if not ids:
+                raise ValueError("Mesures d'amplitude sans tokens")
+            token_checks[cid] = {"scope": "isolated_amplitude_text_not_full_chat_prompt", "n_tokens": len(ids),
+                "text_sha256": hashlib.sha256(text.encode()).hexdigest(),
+                "tokens_sha256": hashlib.sha256(json.dumps(ids).encode()).hexdigest()}
+        scores[cid] = {"series": predictor.score_series(series, amplitude_features=amplitude),
                        "waveform": predictor.score_waveform(waveform, 8000),
                        "wav_bytes": predictor.score(raw)}
         if index % 20 == 0:
             print(json.dumps({"stage": "adapters", "completed": index + 1, "total": len(inputs)}), flush=True)
 
-    def score_batch(series):
-        examples = [model_input(item) for item in series]
+    def score_batch(entries):
+        examples = [model_input_for_model(series, predictor.metadata, amplitude_features=amplitude)
+                    for series, amplitude in entries]
         if any(set(x) != {"pre_prompt", "post_prompt", "time_series", "time_series_text"} for x in examples):
             raise ValueError("Métadonnée ou label dans l'entrée modèle")
         return model.score_probability_leak(collate(examples, normalize=False))
 
-    batches = score_batches(list(inputs), {cid: values[2] for cid, values in inputs.items()}, score_batch)
+    provenance["amplitude_tokens"] = token_checks
+    batches = score_batches(list(inputs), {cid: values[2:] for cid, values in inputs.items()}, score_batch)
     for name, values in batches.items():
         for cid, value in values.items():
             scores[cid][name] = value
