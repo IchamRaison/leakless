@@ -262,8 +262,8 @@
 }
 .demo-app .map-fullscreen {
   position: absolute;
-  top: 8px;
-  right: 18px;
+  left: 14px;
+  bottom: 2px;
 }
 .building-caption {
   display: flex;
