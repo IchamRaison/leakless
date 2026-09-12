@@ -33,7 +33,9 @@ it("keeps the browser's anchor jump for in-page links and resets scroll only whe
   expect(
     await screen.findByText(/Replay, not a live feed\./),
   ).toBeInTheDocument();
-  expect(scrollTo).not.toHaveBeenCalled();
+  // Entering the monitor starts it at the top; leaving restores the demo position (0 here).
+  expect(scrollTo).toHaveBeenCalledTimes(1);
   await goTo("#demo");
-  expect(scrollTo).toHaveBeenCalledWith(0, 0);
+  expect(scrollTo).toHaveBeenLastCalledWith(0, 0);
+  expect(scrollTo).toHaveBeenCalledTimes(2);
 });
