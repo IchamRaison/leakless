@@ -237,15 +237,28 @@ def c2b_shallow_temporal(raw: np.ndarray) -> np.ndarray:
     return np.array([ac_peak, mod_peak_hz_log, *bands, flux])
 
 
+# Commit où chaque définition a été figée. C'est le `model_definition_commit` des
+# runs : il désigne le CODE des descripteurs, pas le moment de l'ajustement
+# (`training_commit`) ni celui de l'exécution (`execution_commit`). Un test
+# vérifie que la fonction de chaque échelon est identique, octet pour octet, à
+# sa version dans ce commit.
+DEFINITION_COMMIT_C0_C3 = "2f61695072e0f16205d6a7047243c59600eb2792"
+DEFINITION_COMMIT_C2B = "355f0743fb306da50897c0720e6fab5ecf947c52"
+
 LADDER = {
     "C0": {"fn": c0_rms_raw, "names": C0_NAMES, "audio": "raw",
+           "definition_commit": DEFINITION_COMMIT_C0_C3,
            "description": "niveau RMS absolu, signal brut — raccourci d'acquisition"},
     "C1": {"fn": c1_envelope, "names": C1_NAMES, "audio": "normalised",
+           "definition_commit": DEFINITION_COMMIT_C0_C3,
            "description": "forme d'amplitude seule, aucune information fréquentielle"},
     "C2": {"fn": c2_spectral, "names": C2_NAMES, "audio": "normalised",
+           "definition_commit": DEFINITION_COMMIT_C0_C3,
            "description": "spectre agrégé, invariant à l'ordre, sans phase"},
     "C2b": {"fn": c2b_shallow_temporal, "names": C2B_NAMES, "audio": "normalised",
+            "definition_commit": DEFINITION_COMMIT_C2B,
             "description": "structure temporelle peu profonde — enveloppe, modulation, flux"},
     "C3": {"fn": c3_legacy_baseline, "names": C3_NAMES, "audio": "normalised",
+           "definition_commit": DEFINITION_COMMIT_C0_C3,
            "description": "baseline historique — mélange C1 + C2 + taux de passages par zéro"},
 }

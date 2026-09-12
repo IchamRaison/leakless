@@ -2,9 +2,10 @@
 
 > ### Ce ne sont PAS des augmentations préservant l'étiquette.
 > Rien ne garantit qu'un clip inversé dans le temps reste acoustiquement une fuite.
-> Ce sont des **tests de stress** : ils servent à savoir si un modèle réagit à
-> l'organisation temporelle, pas à agrandir le jeu d'entraînement. Un modèle dont
-> le score ne bouge pas sous T1/T2/T3 n'utilise pas l'ordre des échantillons.
+> Ce sont des **tests de stress** : ils mesurent si les prédictions d'un modèle
+> sont sensibles à l'organisation temporelle, pas à agrandir le jeu d'entraînement.
+> Un score qui bouge montre une sensibilité à la perturbation, pas la pertinence
+> physique causale de l'information détruite.
 
     T0  original
     T1  inversion temporelle   — distribution d'amplitude et |FFT| préservées,
@@ -87,6 +88,7 @@ TRANSFORMS = {
 # Schéma de dérivation de graine. Documenté ici parce qu'un tiers doit pouvoir
 # le réimplémenter à l'identique dans un autre langage si besoin.
 SEED_SCHEME = "sha256(utf-8, séparateur U+001F, 8 premiers octets, big-endian)"
+SEED_SCHEME_VERSION = 2   # 1 = hash() salé par processus, SUPERSEDED ; 2 = sha256 depuis b23601a
 SEED_SEPARATOR = "\x1f"          # UNIT SEPARATOR : ne peut apparaître dans un clip_id
 SEED_DIGEST_BYTES = 8             # 64 bits
 

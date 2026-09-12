@@ -377,44 +377,6 @@ def stress_t2_permutes_the_whole_clip():
 # C2b — validation du design. AUCUNE métrique val/test ici (commit A).
 # --------------------------------------------------------------------------- #
 @test
-def stress_runs_are_kept_out_of_the_control_ladder():
-    """Un run de stress n'est pas un échelon de l'échelle : il ne doit pas s'y glisser.
-
-    Il porte `stress_transform` dans sa provenance ; le rapport final s'en sert
-    pour le ranger à part et ne jamais le comparer au TSLM.
-    """
-    if not OPTS["runs_dir"]:
-        raise SkipTest("pas de --runs-dir")
-    base = Path(OPTS["runs_dir"])
-    for rid in ("c2b-T1", "c2b-T2", "c2b-T3"):
-        d = base / rid
-        if not d.exists():
-            raise SkipTest(f"{rid} absent")
-        meta = json.loads((d / "metadata.json").read_text())
-        assert meta.get("stress_transform") == rid.rsplit("-", 1)[1]
-        assert meta.get("retrained") is False, "un run de stress ne doit pas être réentraîné"
-    ladder = json.loads((d / "metadata.json").read_text())["control_level"]
-    assert ladder == "C2b"
-    # le run de base, lui, ne porte pas de stress_transform
-    assert "stress_transform" not in json.loads(
-        (base / "c2b" / "metadata.json").read_text())
-
-
-@test
-def stress_runs_share_the_base_model():
-    """Même checkpoint et même hyperparamètre que le run T0 : aucun réentraînement."""
-    if not OPTS["runs_dir"]:
-        raise SkipTest("pas de --runs-dir")
-    base = Path(OPTS["runs_dir"])
-    if not (base / "c2b-T2").exists():
-        raise SkipTest("runs de stress absents")
-    c0 = json.loads((base / "c2b" / "metadata.json").read_text())["selected_C"]
-    for rid in ("c2b-T1", "c2b-T2", "c2b-T3"):
-        ck = json.loads((base / rid / "metadata.json").read_text())["checkpoint"]
-        assert f"C={c0}" in ck, (rid, ck, c0)
-
-
-@test
 def c2b_has_exactly_six_features():
     """4 à 6 descripteurs maximum : pas de pêche aux descripteurs."""
     assert len(features.C2B_NAMES) == 6
@@ -738,6 +700,302 @@ def c0_reproduces_published_rms_auc():
     r = json.load(open(m))
     auc = r["runs"]["c0"]["folds"]["test"]["clip_level"]["roc_auc"]
     assert abs(auc - 0.8779) < 0.002, f"C0 clip AUC = {auc}, publié 0.878"
+
+
+# --------------------------------------------------------------------------- #
+# RAPPORT FINAL ET PROVENANCE — M1 / M2 / M3
+# --------------------------------------------------------------------------- #
+import run_controls  # noqa: E402
+import build_final_report  # noqa: E402
+from evaluate_predictions import evaluate_run  # noqa: E402
+
+LADDER_IDS = ("c0", "c1", "c2", "c2b", "c3")
+FAKE_TRAINING_COMMIT = "feedfacefeed" + "0" * 28
+
+
+def _md_sections(md: str) -> dict:
+    """Découpe le markdown par titre `## N.` -> texte de la section."""
+    out, cur = {}, None
+    for line in md.splitlines():
+        if line.startswith("## "):
+            cur = line[3:].split(".", 1)[0].strip()
+            out[cur] = []
+        elif cur is not None:
+            out[cur].append(line)
+    return {k: "\n".join(v) for k, v in out.items()}
+
+
+def _table_run_ids(section: str) -> list[str]:
+    """run_id en première colonne de chaque ligne de tableau, dans l'ordre."""
+    ids = []
+    for line in section.splitlines():
+        if line.startswith("| `"):
+            ids.append(line.split("`")[1])
+    return ids
+
+
+def _assert_ladder_sections(md: str) -> dict:
+    sec = _md_sections(md)
+    for k in ("2", "3", "4", "7"):
+        assert k in sec, f"section §{k} absente du rapport"
+    # §2 : un tableau, §3 : test + validation, §4 : IC — les cinq contrôles, rien d'autre.
+    assert _table_run_ids(sec["2"]) == list(LADDER_IDS), _table_run_ids(sec["2"])
+    assert _table_run_ids(sec["3"]) == list(LADDER_IDS) * 2, _table_run_ids(sec["3"])
+    assert _table_run_ids(sec["4"]) == list(LADDER_IDS), _table_run_ids(sec["4"])
+    for k in ("2", "3", "4"):
+        assert "-T1" not in sec[k] and "-T2" not in sec[k] and "-T3" not in sec[k], \
+            f"un run de stress s'est glissé dans §{k}"
+    return sec
+
+
+def _synthetic_runs(root: Path, split) -> list[Path]:
+    """Cinq contrôles, trois runs de stress de c2b, un contrôle négatif.
+
+    Métadonnées produites par les MÊMES fonctions que run_controls.py. Un run de
+    stress porte un nom hors convention (`c2b_phase_stress`) : le rapport doit le
+    rattacher par `base_run_id`, pas par son nom.
+    """
+    rng = np.random.default_rng(7)
+    y = {c.clip_id: c.label for c in split.clips}
+    dirs = []
+    fp = "ab" * 32
+    for i, rid in enumerate(LADDER_IDS + ("c1-shuffled",)):
+        control = {"c2b": "C2b"}.get(rid, rid[:2].upper())
+        probs = {cid: float(np.clip(0.5 + (0.1 + 0.05 * i) * (2 * lab - 1)
+                                    + rng.normal(0, 0.2), 0, 1)) for cid, lab in y.items()}
+        prov = {"model_definition_commit": features.LADDER[control]["definition_commit"],
+                "training_worktree_dirty": False, "execution_commit": FAKE_TRAINING_COMMIT,
+                "execution_worktree_dirty": False, "model_fingerprint": fp if rid == "c2b" else rid}
+        d = contract.write_run(root / rid, run_id=rid, model_name=f"{control} fixture",
+                               checkpoint="aucun checkpoint sérialisé", split=split,
+                               training_commit=FAKE_TRAINING_COMMIT,
+                               threshold_rule="argmax val", probabilities=probs,
+                               extra={"control_level": control, "selected_C": 0.1, **prov})
+        dirs.append(d)
+        if rid == "c2b":
+            base_probs, base_prov = probs, prov
+    for tname, rid in (("T1", "c2b-T1"), ("T2", "c2b-T2"), ("T3", "c2b_phase_stress")):
+        f = run_controls.stress_run_fields("C2b", tname, 0.1, "c2b", base_prov)
+        probs = {k: float(np.clip(v + rng.normal(0, 0.1), 0, 1)) for k, v in base_probs.items()}
+        dirs.append(contract.write_run(root / rid, run_id=rid, model_name=f["model_name"],
+                                       checkpoint=f["checkpoint"], split=split,
+                                       training_commit=FAKE_TRAINING_COMMIT,
+                                       threshold_rule=f["threshold_rule"],
+                                       probabilities=probs, extra=f["extra"]))
+    return dirs
+
+
+@test
+def final_report_render_keeps_only_c0_to_c3_in_the_ladder():
+    """M1 — le markdown GÉNÉRÉ : échelle §2-§4 par liste blanche, stress seulement en §7."""
+    split = split_loader.load_split(ROOT / "manifests")
+    with tempfile.TemporaryDirectory() as t:
+        tmp = Path(t)
+        dirs = _synthetic_runs(tmp / "runs", split)
+        out = tmp / "report"
+        r = subprocess.run([sys.executable, str(ROOT / "scripts/eval/build_final_report.py"),
+                            "--runs", *map(str, dirs), "--out", str(out),
+                            "--manifests", str(ROOT / "manifests"),
+                            "--stress-report", str(_fixture_invariants(tmp))],
+                           capture_output=True, text=True, cwd=ROOT)
+        assert r.returncode == 0, r.stderr[-2000:]
+        md = (out / "FINAL_EVALUATION.md").read_text()
+        sec = _assert_ladder_sections(md)
+        assert "c1-shuffled" not in sec["2"] + sec["3"] + sec["4"]
+        # §7 : les trois runs de stress, y compris celui au nom hors convention.
+        rows = [l for l in sec["7"].splitlines() if l.startswith("| `c2b`")]
+        variants = [l.split("|")[2].strip() for l in rows]
+        assert variants == ["**T0** original", "T1", "T2", "T3"], variants
+        # §2 : le training_commit est celui DÉCLARÉ par le run, pas HEAD.
+        assert FAKE_TRAINING_COMMIT[:12] in sec["2"]
+        head = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True,
+                              text=True, cwd=ROOT).stdout.strip()
+        assert head[:12] not in sec["2"], "le rapport a recalculé un commit d'ajustement"
+        # M2 : aucune métrique dépendante du seuil dans la section stress.
+        stress_table = "\n".join(l for l in sec["7"].splitlines() if l.startswith("| "))
+        assert "F1" not in stress_table and "exactitude" not in stress_table.lower()
+        m = json.loads((out / "metrics.json").read_text())
+        assert m["control_ladder"] == list(LADDER_IDS)
+        for k, v in m["stress_comparisons"].items():
+            assert not any("macro_f1" in key for key in v), (k, list(v))
+        assert set(m["stress_prediction_shift"]) == {"c2b-T1", "c2b-T2", "c2b_phase_stress"}
+
+
+def _fixture_invariants(tmp: Path) -> Path:
+    inv = {"manifest_dir": "x", "n_clips": 1000, "transforms": {
+        n: {"description": stress.TRANSFORMS[n]["description"], "n_records": 1000,
+            "n_clusters": 185, "fft_magnitude_relative_deviation_median": 0.0,
+            "amplitude_histogram_identical_all": True,
+            "clip_fold_label_cluster_mapping_violations": 0} for n in stress.TRANSFORMS}}
+    p = tmp / "inv.json"
+    p.write_text(json.dumps(inv))
+    return p
+
+
+@test
+def stress_run_metadata_states_what_actually_happens():
+    """M2/M3 — seuil, checkpoint et `retrained` décrivent le comportement réel."""
+    f = run_controls.stress_run_fields("C2b", "T2", 0.1, "c2b", {"model_fingerprint": "x"})
+    rule = f["threshold_rule"]
+    assert "recalculé sur le fold de validation de ce run transformé" in rule
+    assert "ne sont pas utilisées pour les conclusions de sensibilité temporelle" in rule
+    assert "hérité" not in rule and "T0" not in rule
+    ck = f["checkpoint"]
+    assert ck.startswith("aucun checkpoint sérialisé")
+    assert "355f074" in ck and "réajustée de façon déterministe sur T0/train" in ck
+    assert "jamais ajustée sur T2" in ck
+    assert "même checkpoint" not in ck and "NON réentraîné" not in ck
+    e = f["extra"]
+    assert e["retrained"] is False and e["retrained_meaning"] == "not retrained on stressed data"
+    assert e["fit_data"] == "T0/train" and e["stress_transform"] == "T2"
+    assert e["base_run_id"] == "c2b"
+
+
+@test
+def engine_threshold_of_a_stressed_run_comes_from_its_own_validation():
+    """M2 — le moteur fait ce que la règle déclarée dit : val du run, pas celle de T0."""
+    with tempfile.TemporaryDirectory() as t:
+        tmp = Path(t)
+        split = fixture_split(tmp)
+        rng = np.random.default_rng(3)
+        base = {c.clip_id: float(rng.uniform()) for c in split.clips}
+        stressed = {k: float(np.clip(v * 0.5 + 0.4 * rng.uniform(), 0, 1)) for k, v in base.items()}
+        rb = contract.load_run(write_preds(tmp / "b", split, base), split, require_frozen_sha=False)
+        rs = contract.load_run(write_preds(tmp / "s", split, stressed), split,
+                               require_frozen_sha=False)
+        from evaluate_predictions import vectors
+        for run in (rb, rs):
+            yv, sv, gv, _ = vectors(split, run, "val")
+            expected = round(float(metrics.pick_threshold(yv, sv, gv)), 6)
+            assert evaluate_run(split, run)["threshold_recomputed_on_val"] == expected
+        assert (evaluate_run(split, rb)["threshold_recomputed_on_val"]
+                != evaluate_run(split, rs)["threshold_recomputed_on_val"]), \
+            "fixture sans pouvoir discriminant : les deux seuils coïncident"
+
+
+@test
+def refit_is_deterministic_and_the_fingerprint_identifies_the_model():
+    """M3 — sans checkpoint, deux ajustements identiques donnent le même modèle, octet pour octet."""
+    rng = np.random.default_rng(11)
+    n = 240
+    folds = np.array(["train"] * 140 + ["val"] * 60 + ["test"] * 40)
+    g = np.array([f"g{i // 4}" for i in range(n)])
+    y = np.array([int(gg[1:]) % 2 for gg in g])
+    X = rng.normal(size=(n, 3)) + y[:, None] * 0.8
+    ids = np.array([f"c{i}" for i in range(n)])
+    runs = []
+    for _ in range(2):
+        probs, C, _, clf, _, scaler = run_controls.fit_control(
+            "C2b", ids, X, y, g, folds, shuffle_labels=False)
+        runs.append((probs, run_controls.model_fingerprint("C2b", C, scaler, clf)))
+    assert runs[0] == runs[1], "réajustement non déterministe"
+    X2 = X.copy()
+    X2[0, 0] += 1e-9
+    _, C, _, clf, _, scaler = run_controls.fit_control(
+        "C2b", ids, X2, y, g, folds, shuffle_labels=False)
+    assert run_controls.model_fingerprint("C2b", C, scaler, clf) != runs[0][1], \
+        "l'empreinte ne distingue pas deux modèles différents"
+
+
+@test
+def report_refuses_a_stress_run_that_is_not_the_base_model():
+    """M3 — sentinelle : autre empreinte, autre commit d'ajustement ou réentraînement -> refus."""
+    base = {"training_commit": "a" * 40, "model_fingerprint": "f" * 64, "checkpoint": "x"}
+    ok = {"training_commit": "a" * 40, "model_fingerprint": "f" * 64, "retrained": False,
+          "checkpoint": "autre libellé"}
+    build_final_report.check_stress_provenance("c2b", base, "c2b-T2", ok)
+    for bad in ({**ok, "model_fingerprint": "e" * 64}, {**ok, "training_commit": "b" * 40},
+                {**ok, "retrained": True}, {k: v for k, v in ok.items() if k != "retrained"}):
+        must_raise(ValueError, build_final_report.check_stress_provenance,
+                   "c2b", base, "c2b-T2", bad)
+    # Sans empreinte (TSLM) : le checkpoint doit être le même.
+    tb = {"training_commit": "a" * 40, "checkpoint": "gs://x/step-1"}
+    build_final_report.check_stress_provenance(
+        "t", tb, "t-T1", {**tb, "retrained": False})
+    must_raise(ValueError, build_final_report.check_stress_provenance,
+               "t", tb, "t-T1", {**tb, "retrained": False, "checkpoint": "gs://x/step-2"})
+
+
+@test
+def model_definition_commits_match_git_history():
+    """M3 — chaque échelon est identique à sa version dans le commit déclaré, absente du parent."""
+    import inspect
+    if shutil.which("git") is None:
+        raise SkipTest("git indisponible")
+    assert features.LADDER["C2b"]["definition_commit"] == \
+        "355f0743fb306da50897c0720e6fab5ecf947c52"
+    for k, spec in features.LADDER.items():
+        src = inspect.getsource(spec["fn"])
+        at = subprocess.run(["git", "show", f"{spec['definition_commit']}:scripts/eval/harness/features.py"],
+                            capture_output=True, text=True, cwd=ROOT)
+        if at.returncode != 0:
+            raise SkipTest("historique Git incomplet (clone superficiel ?)")
+        assert src in at.stdout, f"{k} : la définition a changé depuis {spec['definition_commit'][:7]}"
+        parent = subprocess.run(["git", "show", f"{spec['definition_commit']}^:scripts/eval/harness/features.py"],
+                                capture_output=True, text=True, cwd=ROOT).stdout
+        assert src not in parent, f"{k} : existait déjà avant {spec['definition_commit'][:7]}"
+
+
+@test
+def stress_runs_share_the_base_model():
+    """[runs] M3 — mêmes empreinte, commit d'ajustement et définition que le run T0."""
+    if not OPTS["runs_dir"]:
+        raise SkipTest("pas de --runs-dir")
+    base = Path(OPTS["runs_dir"])
+    if not (base / "c2b-T2").exists():
+        raise SkipTest("runs de stress absents")
+    b = json.loads((base / "c2b" / "metadata.json").read_text())
+    assert "stress_transform" not in b
+    assert b["model_definition_commit"] == features.DEFINITION_COMMIT_C2B
+    assert b["training_worktree_dirty"] is False, "run de base produit sur un worktree modifié"
+    for rid in ("c2b-T1", "c2b-T2", "c2b-T3"):
+        m = json.loads((base / rid / "metadata.json").read_text())
+        assert m["stress_transform"] == rid.rsplit("-", 1)[1] and m["base_run_id"] == "c2b"
+        assert m["model_fingerprint"] == b["model_fingerprint"], rid
+        assert m["training_commit"] == b["training_commit"], rid
+        assert m["model_definition_commit"] == b["model_definition_commit"], rid
+        assert m["threshold_rule"] == run_controls.STRESS_THRESHOLD_RULE, rid
+        assert m["retrained"] is False and m["retrained_meaning"] == "not retrained on stressed data"
+        build_final_report.check_stress_provenance("c2b", b, rid, m)
+
+
+@test
+def stress_artifact_hash_detects_any_byte_change():
+    """Manifeste de provenance : l'empreinte d'un jeu change au moindre octet ou renommage."""
+    import stress_provenance
+    with tempfile.TemporaryDirectory() as t:
+        d = Path(t) / "T2"
+        (d / "records").mkdir(parents=True)
+        (d / "records" / "a.parquet").write_bytes(b"\x00\x01\x02")
+        (d / "manifest.json").write_text("{}")
+        h0, n = stress_provenance.artifact_sha256(d)
+        assert n == 2 and h0 == stress_provenance.artifact_sha256(d)[0]
+        (d / "records" / "a.parquet").write_bytes(b"\x00\x01\x03")
+        h1, _ = stress_provenance.artifact_sha256(d)
+        (d / "records" / "a.parquet").rename(d / "records" / "b.parquet")
+        h2, _ = stress_provenance.artifact_sha256(d)
+        assert len({h0, h1, h2}) == 3
+
+
+@test
+def committed_stress_manifest_matches_artifacts_on_disk():
+    """[data] le manifeste commité décrit bien les jeux présents sur disque."""
+    man = ROOT / "artifacts/final_evaluation/stress_provenance.json"
+    if not OPTS["runs_dir"] or not man.exists():
+        raise SkipTest("pas de --runs-dir ou manifeste absent")
+    root = Path(OPTS["runs_dir"]).parent / "timef-stress"
+    if not root.exists():
+        raise SkipTest("jeux de stress absents")
+    import stress_provenance
+    m = json.loads(man.read_text())
+    assert sorted(m["transforms"]) == ["T0", "T1", "T2", "T3"]
+    for name, e in m["transforms"].items():
+        assert e["artifact_sha256"] == stress_provenance.artifact_sha256(root / name)[0], name
+        assert e["split_sha256"] == split_loader.FROZEN_SPLIT_SHA256
+        assert e["stress_seed"] == stress.STRESS_SEED and e["seed_scheme_version"] == 2
+        assert e["n_records"] == e["n_records_at_generation"] == 1000
+        assert e["generator_commit"] is None and e["generator_commit_note"]
+
 
 
 class SkipTest(Exception):

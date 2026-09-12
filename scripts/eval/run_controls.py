@@ -23,6 +23,7 @@ Usage :
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import subprocess
 import sys
@@ -41,19 +42,78 @@ C_GRID = (0.01, 0.1, 1.0, 10.0)   # gelé
 SHUFFLE_SEED = 20260912           # gelé
 
 
-def git_commit() -> str:
+# Trois notions de commit, à ne pas confondre :
+#   model_definition_commit  où les descripteurs ont été figés (features.LADDER)
+#   training_commit          HEAD au moment de l'AJUSTEMENT, capturé juste avant
+#                            le fit et transporté tel quel dans chaque run qui en
+#                            dérive ; jamais recalculé ensuite, ni par le rapport
+#   execution_commit         HEAD au moment où le run est écrit
+# Ici l'ajustement et l'écriture ont lieu dans le même processus : les deux
+# derniers coïncident. Ils restent séparés parce qu'un checkpoint de TSLM, lui,
+# peut être entraîné à un commit et exécuté sous stress à un autre.
+STRESS_THRESHOLD_RULE = (
+    "seuil recalculé sur le fold de validation de ce run transformé (argmax du "
+    "macro-F1 cluster-level) ; les métriques dépendantes du seuil ne sont pas "
+    "utilisées pour les conclusions de sensibilité temporelle")
+RETRAINED_MEANING = "not retrained on stressed data"
+
+
+def git_state() -> tuple[str, bool]:
+    """(HEAD, worktree modifié ?). Les fichiers non suivis sont ignorés."""
     try:
-        return subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True,
+        head = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True,
                               text=True, check=True).stdout.strip()
+        dirty = bool(subprocess.run(["git", "status", "--porcelain", "--untracked-files=no"],
+                                    capture_output=True, text=True, check=True).stdout.strip())
+        return head, dirty
     except Exception:
-        return "unknown"
+        return "unknown", True
+
+
+def model_fingerprint(control: str, C: float, scaler, clf) -> str:
+    """Empreinte du modèle ajusté : paramètres exacts, octet pour octet.
+
+    Deux runs portant la même empreinte ont été prédits par le même scaler et la
+    même régression logistique. C'est ce qui permet de vérifier, sans checkpoint
+    sérialisé, qu'un run de stress utilise le modèle du run T0.
+    """
+    h = hashlib.sha256()
+    h.update(f"{control}\x1f{C!r}\x1f".encode("utf-8"))
+    for arr in (scaler.mean_, scaler.scale_, clf.coef_, clf.intercept_):
+        h.update(np.ascontiguousarray(arr, dtype="<f8").tobytes())
+    return h.hexdigest()
+
+
+def stress_run_fields(control: str, tname: str, C: float, base_run_id: str,
+                      provenance: dict) -> dict:
+    """Métadonnées d'un run de stress. Isolé pour être testé sans données."""
+    defc = features.LADDER[control]["definition_commit"]
+    return {
+        "model_name": f"{control} sous {tname} — {TRANSFORMS[tname]['description']}",
+        "checkpoint": (f"aucun checkpoint sérialisé : définition figée {defc[:7]}, "
+                       f"logreg(C={C}) réajustée de façon déterministe sur T0/train, "
+                       f"jamais ajustée sur {tname}"),
+        "threshold_rule": STRESS_THRESHOLD_RULE,
+        "extra": {
+            "control_level": control,
+            "stress_transform": tname,
+            "base_run_id": base_run_id,
+            "retrained": False,
+            "retrained_meaning": RETRAINED_MEANING,
+            "fit_data": "T0/train",
+            "hyperparameter_selected_on": "T0/val",
+            "stress_applied_at": "évaluation uniquement",
+            "selected_C": C,
+            **provenance,
+        },
+    }
 
 
 def build_matrix(split, data_root: Path, control: str, transform: str = "T0"):
     """Descripteurs de tous les clips, éventuellement après un stress temporel.
 
-    `transform` s'applique au signal BRUT, avant l'extraction. Le modèle n'est
-    jamais réentraîné dessus : on mesure comment un modèle entraîné sur l'original
+    `transform` s'applique au signal BRUT, avant l'extraction. Aucun modèle n'est
+    ajusté sur ces descripteurs : on mesure comment le modèle ajusté sur T0/train
     réagit à une organisation temporelle perturbée.
     """
     fn = features.LADDER[control]["fn"]
@@ -111,33 +171,52 @@ def main() -> None:
     ap.add_argument("--runs-dir", required=True, help="dossier de runs, HORS dépôt")
     ap.add_argument("--controls", nargs="+", default=["C0", "C1", "C2", "C3"])
     ap.add_argument("--stress-transforms", nargs="*", default=[],
-                    help="applique T1/T2/T3 à l'audio et réutilise le modèle entraîné "
-                         "sur T0/train, SANS réentraînement")
+                    help="applique T1/T2/T3 à l'audio et y applique le modèle ajusté "
+                         "sur T0/train dans ce même processus ; rien n'est ajusté sur "
+                         "les données transformées")
+    ap.add_argument("--allow-dirty", action="store_true",
+                    help="autorise un worktree modifié ; le run le déclare alors "
+                         "(training_worktree_dirty=true) et son commit ne le reproduit pas")
     ap.add_argument("--shuffle-labels", action="store_true",
                     help="contrôle négatif : étiquettes permutées par cluster, "
                          "on attend un résultat proche du hasard")
     args = ap.parse_args()
 
     split = split_loader.load_split(args.manifests)
-    commit = git_commit()
+    _, dirty = git_state()
+    if dirty and not args.allow_dirty:
+        sys.exit("worktree modifié : le commit enregistré ne reproduirait pas ce run. "
+                 "Commiter d'abord, ou passer --allow-dirty (le run le déclarera).")
     summary = []
 
     for control in args.controls:
         if control not in features.LADDER:
             sys.exit(f"contrôle inconnu : {control}")
         ids, X, y, g, folds = build_matrix(split, Path(args.data_root), control)
+        # training_commit capturé ICI, juste avant l'ajustement, puis transporté.
+        training_commit, training_dirty = git_state()
         probs, C, threshold, clf, y_fit, scaler = fit_control(
             control, ids, X, y, g, folds, shuffle_labels=args.shuffle_labels)
+        fingerprint = model_fingerprint(control, C, scaler, clf)
 
         suffix = "-shuffled" if args.shuffle_labels else ""
         run_id = f"{control.lower()}{suffix}"
         spec = features.LADDER[control]
+        execution_commit, execution_dirty = git_state()
+        provenance = {
+            "model_definition_commit": spec["definition_commit"],
+            "training_worktree_dirty": training_dirty,
+            "execution_commit": execution_commit,
+            "execution_worktree_dirty": execution_dirty,
+            "model_fingerprint": fingerprint,
+        }
         run_dir = contract.write_run(
             Path(args.runs_dir) / run_id,
             run_id=run_id,
             model_name=f"{control} — {spec['description']}" + (" [ÉTIQUETTES PERMUTÉES]" if suffix else ""),
-            checkpoint=f"logreg(C={C})",
-            training_commit=commit,
+            checkpoint=(f"aucun checkpoint sérialisé : logreg(C={C}) ajustée de façon "
+                        f"déterministe sur T0/train"),
+            training_commit=training_commit,
             split=split,
             threshold_rule="argmax du macro-F1 cluster-level sur la validation ; "
                            "le test n'intervient dans aucun choix",
@@ -151,6 +230,9 @@ def main() -> None:
                 "selected_C": C,
                 "threshold": round(float(threshold), 6),
                 "negative_control_shuffled_labels": bool(suffix),
+                "fit_data": "T0/train",
+                "hyperparameter_selected_on": "T0/val",
+                **provenance,
             },
         )
         summary.append({"control": control, "run_dir": str(run_dir), "C": C,
@@ -158,8 +240,9 @@ def main() -> None:
                         "n_features": len(spec["names"])})
         print(f"{run_id:<16} -> {run_dir}")
 
-        # Stress temporel : MÊME scaler, MÊME modèle, descripteurs recalculés sur
-        # l'audio transformé. Aucun réentraînement — c'est tout l'intérêt.
+        # Stress temporel : le scaler et la régression logistique ajustés ci-dessus
+        # sur T0/train, dans ce processus, sont appliqués aux descripteurs
+        # recalculés sur l'audio transformé. Rien n'est ajusté sur T1/T2/T3.
         for tname in args.stress_transforms:
             if tname == "T0":
                 continue
@@ -167,22 +250,27 @@ def main() -> None:
             assert list(ids_t) == list(ids), "l'ordre des clips a changé sous transformation"
             probs_t = {cid: float(p) for cid, p in
                        zip(ids_t, clf.predict_proba(scaler.transform(Xt))[:, 1])}
+            assert model_fingerprint(control, C, scaler, clf) == fingerprint
             rid = f"{run_id}-{tname}"
+            stress_exec, stress_exec_dirty = git_state()
+            fields = stress_run_fields(control, tname, C, run_id, {
+                **provenance,
+                "execution_commit": stress_exec,
+                "execution_worktree_dirty": stress_exec_dirty,
+            })
             d = contract.write_run(
                 Path(args.runs_dir) / rid, run_id=rid,
-                model_name=f"{control} sous {tname} — {TRANSFORMS[tname]['description']}",
-                checkpoint=f"logreg(C={C}) entraîné sur T0/train, NON réentraîné",
-                training_commit=commit, split=split,
-                threshold_rule="hérité de T0 : seuil choisi sur la validation de T0",
+                model_name=fields["model_name"], checkpoint=fields["checkpoint"],
+                training_commit=training_commit, split=split,
+                threshold_rule=fields["threshold_rule"],
                 probabilities=probs_t,
-                extra={"control_level": control, "stress_transform": tname,
-                       "retrained": False, "audio": spec["audio"],
+                extra={**fields["extra"], "audio": spec["audio"],
                        "features": list(spec["names"])})
             summary.append({"control": control, "transform": tname, "run_dir": str(d)})
             print(f"{rid:<16} -> {d}")
 
     print(json.dumps({"runs": summary, "split_sha256": split.sha256,
-                      "commit": commit}, indent=2, ensure_ascii=False))
+                      "execution_commit": git_state()[0]}, indent=2, ensure_ascii=False))
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@
 """Construit les variantes TimeF T0 à T3 et vérifie leurs invariants.
 
 Le TSLM n'est PAS évalué ici : nous ne possédons pas son checkpoint. Ce script
-prépare les jeux et **prouve** ce que chaque transformation préserve ou détruit,
+prépare les jeux et **mesure** ce que chaque transformation préserve ou détruit,
 pour que le test de sensibilité temporelle soit exécutable dès que Hicham peut
 faire tourner son modèle dessus.
 
@@ -35,6 +35,20 @@ sys.path.insert(0, str(_HERE))
 sys.path.insert(0, str(_HERE.parent / "timenet"))
 
 from stress import TRANSFORMS, clip_rng, invariants  # noqa: E402
+from stress_provenance import transform_provenance  # noqa: E402
+
+
+def _git_state() -> tuple[str | None, bool | None]:
+    import subprocess
+    try:
+        head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=_HERE, capture_output=True,
+                              text=True, check=True).stdout.strip()
+        dirty = bool(subprocess.run(["git", "status", "--porcelain", "--untracked-files=no"],
+                                    cwd=_HERE, capture_output=True, text=True,
+                                    check=True).stdout.strip())
+        return head, dirty
+    except Exception:
+        return None, None
 
 
 def main() -> None:
@@ -61,6 +75,11 @@ def main() -> None:
     if args.limit:
         refs = refs[: args.limit]
 
+    # Commit générateur capturé avant la génération, pas relevé après coup.
+    generator_commit, generator_dirty = _git_state()
+    import hashlib
+    split_sha256 = hashlib.sha256(
+        (Path(manifest_dir) / "split_v2.csv").read_bytes()).hexdigest()
     baseline = {r["clip_id"]: (r["fold"], r["label"], r["group_id"]) for r in refs}
     report: dict = {"manifest_dir": manifest_dir, "n_clips": len(refs), "transforms": {}}
 
@@ -116,6 +135,10 @@ def main() -> None:
             "clip_fold_label_cluster_mapping_violations": len(mapping_violations),
             "n_clusters": len({r["group_id"] for r in refs}),
             "clips_par_fold": dict(collections.Counter(r["fold"] for r in refs)),
+            "provenance": transform_provenance(
+                name, out_dir, split_sha256=split_sha256, generator_commit=generator_commit,
+                generator_worktree_dirty=generator_dirty,
+                n_records_at_generation=len(dataset.records)),
         }
         r = report["transforms"][name]
         print(f"{name}  {r['description']}")

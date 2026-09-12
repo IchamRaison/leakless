@@ -45,6 +45,14 @@ def vectors(split, run, fold: str):
     return y, s, g, ids
 
 
+# Champs de provenance recopiés tels quels depuis metadata.json. Le moteur ne
+# les recalcule jamais : un commit lu ici est celui que le run a déclaré.
+PROVENANCE_FIELDS = ("model_definition_commit", "training_worktree_dirty",
+                     "execution_commit", "execution_worktree_dirty", "model_fingerprint",
+                     "fit_data", "control_level", "stress_transform", "base_run_id",
+                     "retrained", "retrained_meaning")
+
+
 def evaluate_run(split, run) -> dict:
     yv, sv, gv, _ = vectors(split, run, "val")
     threshold = metrics.pick_threshold(yv, sv, gv)      # validation SEULEMENT
@@ -59,6 +67,7 @@ def evaluate_run(split, run) -> dict:
         "threshold_rule": run.metadata.get("threshold_rule"),
         "threshold_recomputed_on_val": round(float(threshold), 6),
         "threshold_declared_by_run": run.metadata.get("threshold"),
+        "provenance": {k: run.metadata[k] for k in PROVENANCE_FIELDS if k in run.metadata},
         "contract_checks": [{"name": c.name, "passed": c.passed, "coverage": c.coverage}
                             for c in run.checks],
         "folds": {},

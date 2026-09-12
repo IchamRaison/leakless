@@ -29,7 +29,66 @@ sys.path.insert(0, str(Path(__file__).parent))
 from evaluate_predictions import compare, evaluate_run, vectors  # noqa: E402,F401
 from harness import contract, metrics, split_loader  # noqa: E402
 
+# Liste blanche EXPLICITE de l'échelle de contrôles. Seuls ces run_id entrent dans
+# les tableaux §2 à §4 : un run de stress, un contrôle négatif ou tout autre run
+# n'y apparaît jamais, quel que soit son nom.
 CONTROL_ORDER = ["c0", "c1", "c2", "c2b", "c3"]
+
+# Sous stress, le seuil est recalculé sur la validation du run transformé. Les
+# métriques qui en dépendent ne servent donc à aucune conclusion de sensibilité
+# temporelle : elles sont retirées des comparaisons de stress.
+STRESS_CLAIM_METRICS = ("clip_roc_auc", "cluster_roc_auc")
+THRESHOLD_DEPENDENT = ("clip_macro_f1", "cluster_macro_f1")
+STRESS_VERDICT = {
+    "compatible with improvement": "compatible with degradation under stress",
+    "compatible with degradation": "compatible with improvement under stress",
+    "inconclusive": "inconclusive",
+}
+
+
+def control_ladder(reports: dict) -> dict:
+    """Les runs de l'échelle, dans l'ordre C0 C1 C2 C2b C3. Rien d'autre."""
+    return {rid: reports[rid] for rid in CONTROL_ORDER if rid in reports}
+
+
+def stress_base_id(run_id: str, metadata: dict) -> str:
+    """Run T0 dont dérive un run de stress : déclaré, sinon convention `<base>-Tn`."""
+    return metadata.get("base_run_id") or run_id.rsplit("-", 1)[0]
+
+
+def check_stress_provenance(base_id: str, base_meta: dict, rid: str, meta: dict) -> None:
+    """Refuse un run de stress qui ne dérive pas du modèle du run T0.
+
+    Avec une empreinte de modèle (contrôles) : elle doit être identique. Sans
+    empreinte (checkpoint de TSLM) : même checkpoint et même training_commit.
+    """
+    if meta.get("retrained") is not False:
+        raise ValueError(f"{rid} : `retrained` doit valoir false (not retrained on stressed data)")
+    if meta.get("training_commit") != base_meta.get("training_commit"):
+        raise ValueError(f"{rid} : training_commit {meta.get('training_commit')} différent "
+                         f"de celui de {base_id} ({base_meta.get('training_commit')})")
+    fa, fb = base_meta.get("model_fingerprint"), meta.get("model_fingerprint")
+    if fa or fb:
+        if fa != fb:
+            raise ValueError(f"{rid} : empreinte de modèle différente de {base_id} — "
+                             f"ce n'est pas le même modèle ajusté")
+    elif meta.get("checkpoint") != base_meta.get("checkpoint"):
+        raise ValueError(f"{rid} : checkpoint différent de {base_id}")
+
+
+def prediction_shift(split, base_run, stress_run, fold: str = "test") -> dict:
+    """Déplacement des probabilités sous stress, clip à clip. Indépendant du seuil."""
+    import numpy as np
+    ids = sorted(c.clip_id for c in split.clips if c.fold == fold)
+    a = np.array([base_run.probabilities[i] for i in ids])
+    b = np.array([stress_run.probabilities[i] for i in ids])
+    d = b - a
+    q1, q3 = np.percentile(d, [25, 75])
+    return {"fold": fold, "n_clips": len(ids),
+            "pearson_r_with_T0": round(float(np.corrcoef(a, b)[0, 1]), 6),
+            "delta_p_median": round(float(np.median(d)), 6),
+            "delta_p_q1": round(float(q1), 6), "delta_p_q3": round(float(q3), 6),
+            "abs_delta_p_median": round(float(np.median(np.abs(d))), 6)}
 
 
 def fmt(x, nd=3):
@@ -74,28 +133,35 @@ def comparison_table(comps: dict) -> str:
     return "\n".join(lines)
 
 
-def stress_score_table(reports: dict, stress_runs: list[str], comps: dict) -> str:
-    """Scores mesurés sous stress, et leur écart apparié au run non stressé."""
+def stress_score_table(reports: dict, stress_runs: dict, comps: dict,
+                       shifts: dict) -> str:
+    """Scores sous stress : métriques indépendantes du seuil uniquement."""
     if not stress_runs:
         return ""
-    bases = sorted({r.rsplit("-", 1)[0] for r in stress_runs})
-    lines = ["| modèle | variante | clip AUC | cluster AUC | Δ clip AUC vs T0 | IC95 | lecture |",
-             "|---|---|---|---|---|---|---|"]
+    lines = ["| modèle | variante | clip AUC | cluster AUC | Δ clip AUC (stress − T0) | IC95 "
+             "| lecture | corrélation des probabilités avec T0 | Δp médiane [Q1, Q3] "
+             "| \\|Δp\\| médiane |",
+             "|---|---|---|---|---|---|---|---|---|---|"]
+    bases = sorted({b for b, _ in stress_runs.values()})
     for base in bases:
         b = reports[base]["folds"]["test"]
         lines.append(f"| `{base}` | **T0** original | {fmt(b['clip_level']['roc_auc'])} | "
-                     f"{fmt(b['cluster_level']['roc_auc'])} | — | — | référence |")
-        for rid in sorted(r for r in stress_runs if r.startswith(base + "-")):
+                     f"{fmt(b['cluster_level']['roc_auc'])} | — | — | référence | 1.000 | — | — |")
+        for rid in sorted(r for r, (bb, _) in stress_runs.items() if bb == base):
             t = reports[rid]["folds"]["test"]
-            key = f"{base}_vs_{rid}"
-            d = comps.get(key, {}).get("clip_roc_auc")
+            d = comps.get(f"{base}_vs_{rid}", {}).get("clip_roc_auc")
+            sh = shifts.get(rid)
+            # comps porte T0 − stress : le signe est inversé pour lire stress − T0.
             delta = f"{-d['delta_observe']:+.3f}" if d else "—"
             ci = f"[{-d['ci95_high']:+.3f}, {-d['ci95_low']:+.3f}]" if d else "—"
-            lect = d["lecture"].replace("improvement", "dégradation sous stress") if d else "—"
-            lect = lect.replace("compatible with dégradation sous stress",
-                                "dégradation lisible") if d else "—"
-            lines.append(f"| `{base}` | {rid.rsplit('-', 1)[1]} | {fmt(t['clip_level']['roc_auc'])} | "
-                         f"{fmt(t['cluster_level']['roc_auc'])} | {delta} | {ci} | {lect} |")
+            lect = STRESS_VERDICT[d["lecture"]] if d else "—"
+            corr = fmt(sh["pearson_r_with_T0"]) if sh else "—"
+            dp = (f"{sh['delta_p_median']:+.3f} [{sh['delta_p_q1']:+.3f}, "
+                  f"{sh['delta_p_q3']:+.3f}]") if sh else "—"
+            adp = fmt(sh["abs_delta_p_median"]) if sh else "—"
+            lines.append(f"| `{base}` | {stress_runs[rid][1]} | {fmt(t['clip_level']['roc_auc'])} | "
+                         f"{fmt(t['cluster_level']['roc_auc'])} | {delta} | {ci} | {lect} | "
+                         f"{corr} | {dp} | {adp} |")
     return "\n".join(lines)
 
 
@@ -103,8 +169,12 @@ def build_markdown(result: dict, comps: dict, tslm: str | None, stress: dict | N
                    repo_commit: str, reports: dict | None = None,
                    stress_comps: dict | None = None) -> str:
     sp = result["split"]
-    runs = result["runs"]
-    has_tslm = tslm is not None and tslm in runs
+    reports = reports if reports is not None else result["runs"]
+    # §2 à §4 : UNIQUEMENT l'échelle de contrôles, par liste blanche.
+    ladder = control_ladder(reports)
+    has_tslm = tslm is not None and tslm in reports
+    n_test = next(iter(ladder.values()))["folds"]["test"] if ladder else \
+        next(iter(reports.values()))["folds"]["test"]
 
     parts = [
         "# FINAL_EVALUATION — évaluation sur le split gelé",
@@ -122,31 +192,41 @@ def build_markdown(result: dict, comps: dict, tslm: str | None, stress: dict | N
         f"| SHA256 | `{sp['sha256']}` |",
         f"| Clips | {sp['n_clips']} |",
         f"| Clusters de dépendance | {sp['n_clusters']} |",
-        f"| Commit du dépôt | `{repo_commit}` |",
+        f"| Commit de génération du rapport | `{repo_commit}` |",
         f"| Règle d'agrégation | {result['aggregation_rule']} des probabilités du cluster (gelée) |",
         f"| Bootstrap | {result['bootstrap']['draws']} tirages, graine "
         f"{result['bootstrap']['seed']}, unité : {result['bootstrap']['unit']} |",
         "| Source | Zenodo 18631450, CC BY 4.0 — site d'entraînement expérimental de Dongguan |",
         "",
-        "## 2. Identité des modèles",
+        "## 2. Identité des modèles — échelle de contrôles",
         "",
-        "| run | modèle | checkpoint | commit d'entraînement | horodatage |",
-        "|---|---|---|---|---|",
+        "Trois commits distincts, tous lus dans `metadata.json` et jamais recalculés ici : "
+        "**définition** (où les descripteurs ont été figés), **ajustement** (`training_commit`, "
+        "HEAD capturé juste avant le fit), **exécution** (HEAD à l'écriture du run). Aucun "
+        "contrôle n'a de checkpoint sérialisé : la régression logistique est réajustée de "
+        "façon déterministe sur T0/train à chaque exécution.",
+        "",
+        "| run | modèle | checkpoint | commit de définition | commit d'ajustement "
+        "| commit d'exécution | horodatage |",
+        "|---|---|---|---|---|---|---|",
     ]
-    for rid in sorted(runs, key=lambda r: (CONTROL_ORDER.index(r) if r in CONTROL_ORDER else 99, r)):
-        r = runs[rid]
+    for rid, r in ladder.items():
+        pv = r.get("provenance", {})
+        dirty = " ⚠️ worktree modifié" if pv.get("training_worktree_dirty") else ""
         parts.append(f"| `{rid}` | {r['model_name']} | `{r['checkpoint']}` | "
-                     f"`{str(r['training_commit'])[:12]}` | {r['timestamp']} |")
+                     f"`{str(pv.get('model_definition_commit', '—'))[:12]}` | "
+                     f"`{str(r['training_commit'])[:12]}`{dirty} | "
+                     f"`{str(pv.get('execution_commit', '—'))[:12]}` | {r['timestamp']} |")
 
     parts += [
         "",
         "## 3. Échelle de contrôles et résultats — TEST",
         "",
-        metric_table(runs, "test"),
+        metric_table(ladder, "test"),
         "",
         "### Validation (pour information — c'est là que le seuil est choisi)",
         "",
-        metric_table(runs, "val"),
+        metric_table(ladder, "val"),
         "",
         "## 4. Incertitude — bootstrap sur les clusters",
         "",
@@ -154,7 +234,7 @@ def build_markdown(result: dict, comps: dict, tslm: str | None, stress: dict | N
         "rééchantillonnerait à l'intérieur de sessions quasi identiques et produirait des "
         "intervalles bien trop étroits.",
         "",
-        ci_table(runs, "test"),
+        ci_table(ladder, "test"),
         "",
         "## 5. Différences appariées",
         "",
@@ -165,8 +245,8 @@ def build_markdown(result: dict, comps: dict, tslm: str | None, stress: dict | N
         comparison_table(comps),
         "",
         f"> ⚠️ **Aucune significativité statistique n'est revendiquée.** Le test compte "
-        f"{runs[next(iter(runs))]['folds']['test']['n_clusters']} clusters indépendants, "
-        f"dont {runs[next(iter(runs))]['folds']['test']['n_clusters_non_leak']} du côté "
+        f"{n_test['n_clusters']} clusters indépendants, "
+        f"dont {n_test['n_clusters_non_leak']} du côté "
         f"*non-leak*. Les verdicts sont qualitatifs.",
         "",
         "## 6. Résultat TSLM",
@@ -174,9 +254,15 @@ def build_markdown(result: dict, comps: dict, tslm: str | None, stress: dict | N
     ]
 
     if has_tslm:
-        t = runs[tslm]["folds"]["test"]
+        t = reports[tslm]["folds"]["test"]
         parts += [
-            f"Run `{tslm}` — {runs[tslm]['model_name']}",
+            f"Run `{tslm}` — {reports[tslm]['model_name']} — checkpoint "
+            f"`{reports[tslm]['checkpoint']}`, commit d'entraînement "
+            f"`{str(reports[tslm]['training_commit'])[:12]}`",
+            "",
+            metric_table({tslm: reports[tslm]}, "test"),
+            "",
+            ci_table({tslm: reports[tslm]}, "test"),
             "",
             f"- clip : AUC {fmt(t['clip_level']['roc_auc'])}, "
             f"macro-F1 {fmt(t['clip_level']['macro_f1'])}, Brier {fmt(t['clip_level']['brier'])}",
@@ -212,30 +298,40 @@ def build_markdown(result: dict, comps: dict, tslm: str | None, stress: dict | N
                 f"{s['clip_fold_label_cluster_mapping_violations']} |")
         parts += [
             "",
-            "> Ce ne sont **pas** des augmentations préservant l'étiquette. Un modèle dont le "
-            "score ne bouge pas sous T1/T2/T3 n'utilise pas l'ordre temporel.",
+            "> Ces transformations ne sont **pas** des augmentations physiques démontrées "
+            "comme préservant l'étiquette. Elles mesurent la sensibilité des prédictions à "
+            "l'organisation temporelle, pas la pertinence physique causale de celle-ci.",
         ]
-        table = stress_score_table(reports or {}, result.get("stress_runs", []),
-                                   stress_comps or {})
+        table = stress_score_table(reports or {}, result.get("stress_run_bases", {}),
+                                   stress_comps or {}, result.get("stress_prediction_shift", {}))
         if table:
             parts += [
                 "",
                 "### Scores mesurés sous stress",
                 "",
-                "Même modèle, **aucun réentraînement** : ajusté sur T0/train, réappliqué tel "
-                "quel aux descripteurs recalculés sur l'audio transformé. Les écarts sont "
-                "appariés, sur les mêmes tirages de clusters.",
+                "Même définition de modèle figée, réajustée de façon déterministe sur T0/train "
+                "dans le même processus ; **jamais ajustée sur les données stressées**. Les "
+                "transformations ne s'appliquent qu'à l'évaluation. Aucun checkpoint n'est "
+                "sérialisé : l'identité du modèle est vérifiée par son empreinte "
+                "(`model_fingerprint`), identique entre le run T0 et ses runs de stress.",
+                "",
+                "Seules des métriques **indépendantes du seuil** figurent ici : AUC, corrélation "
+                "des probabilités avec T0 et distribution de Δp, sur le test. Le seuil d'un run "
+                "stressé est recalculé sur sa propre validation transformée ; les métriques qui "
+                "en dépendent (macro-F1, exactitude) ne servent à aucune conclusion de "
+                "sensibilité temporelle.",
                 "",
                 table,
                 "",
-                "> Le signe est orienté « dégradation sous stress » : un Δ négatif signifie que "
-                "la transformation fait perdre de la performance au modèle, donc qu'il utilisait "
-                "l'information détruite.",
+                "> Δ clip AUC et Δp sont orientés **stress − T0**, appariés sur les mêmes tirages "
+                "de clusters. Un Δ négatif signifie que la discrimination baisse sous la "
+                "transformation : les prédictions sont sensibles à cette perturbation. Cela "
+                "n'établit pas que l'information détruite est physiquement pertinente.",
             ]
         if not has_tslm:
             parts.append("")
-            parts.append("🕐 **TSLM non évalué sous stress** : nous ne possédons pas son "
-                         "checkpoint. Les jeux et le protocole l'attendent.")
+            parts.append("🕐 **TSLM non évalué sous stress** : son checkpoint sérialisé n'est "
+                         "pas en notre possession. Les jeux et le protocole l'attendent.")
     else:
         parts.append("_(aucun rapport de stress fourni)_")
 
@@ -282,7 +378,7 @@ def build_markdown(result: dict, comps: dict, tslm: str | None, stress: dict | N
         "validation terrain, aucun matériel testé.",
         "- ❌ « Le modèle localise la fuite. » — le jeu ne supporte pas la localisation.",
         "- ❌ « L'écart est statistiquement significatif. » — "
-        f"{runs[next(iter(runs))]['folds']['test']['n_clusters']} clusters.",
+        f"{n_test['n_clusters']} clusters.",
         "- ❌ Un score sans son nombre de clusters.",
         "- ❌ Un intervalle de confiance bootstrapé sur les clips.",
         "- ❌ Toute utilisation de `split_v1`, invalide.",
@@ -343,17 +439,23 @@ def main() -> None:
         for a, b in itertools.combinations(ids, 2):
             comps[f"{a}_vs_{b}"] = compare(split, runs, a, b)
 
-    # Chaque run de stress est comparé, en apparié, au run non stressé dont il
-    # dérive (`c2b-T2` -> `c2b`). Le modèle est le même : on mesure l'effet de la
-    # transformation, pas celui d'un autre modèle.
-    stress_comps = {}
+    # Chaque run de stress est comparé, en apparié, au run T0 dont il dérive, après
+    # vérification que c'est bien le même modèle ajusté. Seules les métriques
+    # indépendantes du seuil sont conservées.
+    stress_comps, stress_bases, shifts = {}, {}, {}
     all_runs = {**runs, **stress_runs}
     for rid, run in sorted(stress_runs.items()):
-        base = run.metadata.get("control_level", "").lower()
-        base_id = rid.rsplit("-", 1)[0]
-        if base_id in runs:
-            stress_comps[f"{base_id}_vs_{rid}"] = compare(split, all_runs, base_id, rid)
-        del base
+        base_id = stress_base_id(rid, run.metadata)
+        if base_id not in runs:
+            continue
+        check_stress_provenance(base_id, runs[base_id].metadata, rid, run.metadata)
+        stress_bases[rid] = (base_id, run.metadata["stress_transform"])
+        c = compare(split, all_runs, base_id, rid)
+        for k in THRESHOLD_DEPENDENT:
+            c.pop(k, None)
+        c["excluded_threshold_dependent_metrics"] = list(THRESHOLD_DEPENDENT)
+        stress_comps[f"{base_id}_vs_{rid}"] = c
+        shifts[rid] = prediction_shift(split, runs[base_id], run)
 
     result = {
         "split": {"filename": split_loader.FROZEN_SPLIT_NAME, "sha256": split.sha256,
@@ -362,9 +464,13 @@ def main() -> None:
         "aggregation_rule": metrics.AGGREGATION,
         "bootstrap": {"draws": metrics.BOOTSTRAP_DRAWS, "seed": metrics.BOOTSTRAP_SEED,
                       "unit": "cluster de dépendance"},
+        "control_ladder": list(control_ladder(reports)),
         "runs": reports,
         "stress_runs": sorted(stress_runs),
+        "stress_run_bases": stress_bases,
+        "stress_claim_metrics": [*STRESS_CLAIM_METRICS, "pearson_r_with_T0", "delta_p"],
         "stress_comparisons": stress_comps,
+        "stress_prediction_shift": shifts,
         "tslm_run_id": tslm,
     }
 
