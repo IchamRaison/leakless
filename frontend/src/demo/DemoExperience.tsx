@@ -163,13 +163,13 @@ export default function DemoExperience() {
                   className="quiet-button"
                   aria-label={
                     paused
-                      ? "Resume presentation rotation"
-                      : "Pause presentation rotation"
+                      ? "Resume presentation motion"
+                      : "Pause presentation motion"
                   }
                   onClick={() => setPaused(!paused)}
                 >
                   {paused ? <Play size={12} /> : <Pause size={12} />}
-                  {paused ? "Resume" : "Pause"} rotation
+                  {paused ? "Resume" : "Pause"} motion
                 </button>
                 <FullscreenButton target={buildingPanel} label="building" />
               </span>
@@ -191,7 +191,8 @@ export default function DemoExperience() {
             <p className="association-note">
               N1–N4 are illustrative positions. They do not locate leaks.
               <br />
-              No sensor coordinates come from the dataset.
+              No sensor coordinates come from the dataset. Water flow is
+              illustrative, not measured.
             </p>
           </div>
         </section>

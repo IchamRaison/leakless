@@ -15,10 +15,14 @@ export function BuildingScene({
   paused: boolean;
 }) {
   const selection = useRef(selected);
+  const motion = useRef(!paused);
   const labels = useRef<(HTMLButtonElement | null)[]>([]);
   useEffect(() => {
     selection.current = selected;
   }, [selected]);
+  useEffect(() => {
+    motion.current = !paused;
+  }, [paused]);
   const build = useCallback<SceneBuilder>((scene, camera) => {
     camera.position.set(6.6, 3.5, 7.9);
     scene.add(new THREE.AmbientLight(0xc9d3dc, 1.8));
@@ -113,27 +117,54 @@ export function BuildingScene({
     const grid = new THREE.GridHelper(18, 30, "#32483f", "#22352e");
     grid.position.y = bottom;
     scene.add(grid);
+    // Illustrative water: translucent pipes, a filled core and droplets moving
+    // in the supply direction. Not measured flow; no leak is ever drawn.
+    const flows: { from: THREE.Vector3; to: THREE.Vector3; count: number }[] =
+      [];
     const tube = (start: number[], end: number[]) => {
       const a = new THREE.Vector3(...start),
         b = new THREE.Vector3(...end),
         direction = b.clone().sub(a);
-      const mesh = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.035, 0.035, direction.length(), 8),
-        new THREE.MeshStandardMaterial({
-          color: "#617a70",
-          metalness: 0.55,
-          roughness: 0.5,
-        }),
+      const length = direction.length();
+      const place = (mesh: THREE.Mesh) => {
+        mesh.position.copy(a.clone().add(b).multiplyScalar(0.5));
+        mesh.quaternion.setFromUnitVectors(
+          new THREE.Vector3(0, 1, 0),
+          direction.clone().normalize(),
+        );
+        group.add(mesh);
+      };
+      place(
+        new THREE.Mesh(
+          new THREE.CylinderGeometry(0.035, 0.035, length, 10),
+          new THREE.MeshStandardMaterial({
+            color: "#7d948a",
+            metalness: 0.4,
+            roughness: 0.35,
+            transparent: true,
+            opacity: 0.38,
+            depthWrite: false,
+          }),
+        ),
       );
-      mesh.position.copy(a.add(b).multiplyScalar(0.5));
-      mesh.quaternion.setFromUnitVectors(
-        new THREE.Vector3(0, 1, 0),
-        direction.normalize(),
+      place(
+        new THREE.Mesh(
+          new THREE.CylinderGeometry(0.022, 0.022, length, 8),
+          new THREE.MeshBasicMaterial({
+            color: "#3f86a6",
+            transparent: true,
+            opacity: 0.55,
+          }),
+        ),
       );
-      group.add(mesh);
+      flows.push({
+        from: a,
+        to: b,
+        count: Math.max(4, Math.round(length * 4)),
+      });
     };
+    tube([2.5, bottom, 2], [0.22, bottom, 0]);
     tube([0.22, bottom, 0], [0.22, 2.4, 0]);
-    tube([0.22, bottom, 0], [2.5, bottom, 2]);
     const points = measurementPoints.map((id, i) => {
       const y = bottom + i + 0.75;
       const x = i % 2 ? 0.95 : -0.8;
@@ -148,8 +179,43 @@ export function BuildingScene({
       group.add(marker);
       return { id, position, marker, material };
     });
+    const dropletCount = flows.reduce((sum, flow) => sum + flow.count, 0);
+    const droplets = new THREE.InstancedMesh(
+      new THREE.SphereGeometry(0.03, 10, 8),
+      new THREE.MeshBasicMaterial({
+        color: "#dff7ff",
+        transparent: true,
+        opacity: 0.95,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      }),
+      dropletCount,
+    );
+    group.add(droplets);
+    const still = matchMedia("(prefers-reduced-motion: reduce)");
+    const place = new THREE.Object3D();
+    let phase = 0;
+    let last = performance.now();
+    const flow = () => {
+      const now = performance.now();
+      if (motion.current && !still.matches)
+        phase += Math.min((now - last) / 1000, 0.05) * 0.45;
+      last = now;
+      let index = 0;
+      for (const { from, to, count } of flows) {
+        const length = from.distanceTo(to);
+        for (let k = 0; k < count; k++) {
+          const t = (k / count + (phase / length) * 1.2) % 1;
+          place.position.lerpVectors(from, to, t);
+          place.updateMatrix();
+          droplets.setMatrixAt(index++, place.matrix);
+        }
+      }
+      droplets.instanceMatrix.needsUpdate = true;
+    };
     return {
       frame: () => {
+        flow();
         camera.updateMatrixWorld();
         points.forEach(({ id, position, marker, material }, i) => {
           const active = selection.current === id;
