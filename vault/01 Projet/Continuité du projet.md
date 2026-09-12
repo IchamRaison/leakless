@@ -35,6 +35,12 @@ Le lecteur doit pouvoir répondre rapidement à ces questions :
 
 Distinguer explicitement prévu, implémenté, testé et vérifié. Mentionner les fichiers, commandes, commits ou URLs nécessaires à la reprise. Ne jamais inventer une preuve, recopier des secrets ou présenter un test non exécuté comme réussi.
 
+## Partage du vault
+
+Dépôt dédié : https://github.com/IchamRaison/ehl-hackathon-zurich-vault
+
+Le dépôt dédié est la référence pour les notes partagées. Dossier local : `/home/animus/ehl-hackathon-zurich-vault`. Avant chaque mise à jour, récupérer et intégrer les changements des collaborateurs. Mettre à jour et pousser ce dépôt après les avancées significatives. La copie `vault/` du dépôt code est un miroir à actualiser explicitement, jamais une source à recopier aveuglément sur les modifications de l’équipe. Il n’y a pas de synchronisation automatique en arrière-plan.
+
 ## Portée
 
 Cette règle concerne ce projet. Elle est aussi rappelée dans `AGENTS.md` à la racine du dépôt pour les agents qui le consultent. Elle ne constitue pas une synchronisation automatique en arrière-plan.

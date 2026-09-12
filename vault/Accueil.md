@@ -29,5 +29,7 @@ Règle permanente : tenir ce vault à jour après chaque avancée significative 
 ## Espace de travail
 
 - Dépôt privé : https://github.com/IchamRaison/ehl-hackathon-zurich
-- Le vault se trouve dans `vault/` du dépôt.
+- Vault seul à partager : https://github.com/IchamRaison/ehl-hackathon-zurich-vault
+- Ouvrir la racine du dépôt vault dans Obsidian. Une copie existe dans `vault/` du dépôt code.
+- Le dépôt vault est la référence pour les notes partagées ; aucune synchronisation automatique entre dépôts.
 - Ne jamais mettre de clés API, données personnelles ou mots de passe dans les notes.

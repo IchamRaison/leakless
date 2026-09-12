@@ -18,7 +18,7 @@ Préparer le Temporal AI Challenge (ASL × Aionic × Nebius) : TimeNet, entraîn
 
 ## Dernier changement
 
-Exploration de problèmes documentée dans [[Idées]], avec sources consultées : diagnostic hydraulique UCI, compte rendu ECG PTB-XL, triage de télémétrie spatiale. Recommandation provisoire industrie ou santé ; aucune sélection par Icham. Risques de fuite et de données anonymisées signalés pour SMAP/MSL. Aucun benchmark exécuté.
+Icham s’intéresse à la détection de fuites d’eau : un membre du groupe possède une entreprise dans ce domaine. Piste à cadrer avec lui, sans dataset encore validé. Le banc hydraulique UCI ne constitue pas une preuve de détection de fuites de canalisations. Vault séparé pour le partage d’équipe : https://github.com/IchamRaison/ehl-hackathon-zurich-vault ; voir [[Continuité du projet]].
 
 ## En cours et limites
 
@@ -29,8 +29,8 @@ Exploration de problèmes documentée dans [[Idées]], avec sources consultées 
 
 ## Prochaine action concrète
 
-Comparer quelques pistes sur l’utilité, l’accès aux données ouvertes, les annotations disponibles et la faisabilité d’un entraînement court. Choisir ensuite une tâche, une baseline et un split sans fuite ; vérifier les accès TimeNet et Nebius.
+Demander au membre du groupe le type de fuites recherché, les instruments et signaux enregistrés, et la décision qui prend le plus de temps. Chercher ensuite un dataset ouvert correspondant ; vérifier les accès TimeNet et Nebius.
 
 ## Reprendre localement
 
-Depuis `/home/animus/ehl-hackathon-zurich`, vérifier `git status`, puis lire [[Tableau de bord]]. Ouvrir le sous-dossier `vault/` comme vault Obsidian et commencer par [[Accueil]].
+Pour les notes, travailler dans `/home/animus/ehl-hackathon-zurich-vault`, vérifier `git status` et intégrer les changements distants. Ouvrir ce dossier comme vault Obsidian et commencer par [[Accueil]]. Le code reste dans `/home/animus/ehl-hackathon-zurich`.

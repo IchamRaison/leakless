@@ -1,5 +1,7 @@
 # Project continuity
 
+Shared notes now live in the dedicated repository `https://github.com/IchamRaison/ehl-hackathon-zurich-vault`, locally `/home/animus/ehl-hackathon-zurich-vault`. Treat that repository as the source of truth: integrate collaborators’ remote edits before updating it, push relevant note updates there, then refresh this repository’s `vault/` mirror explicitly. Never overwrite team edits with a stale mirror. No automatic sync is configured.
+
 The user requires the Obsidian vault in `vault/` to stay continuously up to date throughout this project. It must let another person or agent understand current progress and resume work without reading chat history.
 
 Before working, read `vault/Accueil.md`, `vault/01 Projet/Passation.md`, and `vault/01 Projet/Tableau de bord.md`. Follow `vault/01 Projet/Continuité du projet.md`.

@@ -2,7 +2,7 @@
 
 ## Statut
 
-Exploration demandée par Icham. Aucune piste choisie, aucun entraînement lancé. Recommandation provisoire : diagnostic de composant hydraulique pour une démonstration industrielle ; ECG si priorité santé. Faisabilité GPU et compatibilité du dataset avec les checkpoints à tester.
+Piste privilégiée par Icham : aide à la détection de fuites d’eau, avec un membre du groupe qui possède une entreprise du secteur. Besoin précis et dataset encore non validés ; aucun entraînement lancé. Le dataset de banc hydraulique ci-dessous ne doit pas être confondu avec des données de canalisations d’eau.
 
 ## 1. Assistant de diagnostic hydraulique
 
@@ -49,4 +49,4 @@ Sources : https://github.com/OpenTSLM/TimeNet ; https://github.com/OpenTSLM/Open
 
 ## Prochaine décision
 
-Choisir industrie ou santé avec Icham, puis inspecter un petit échantillon et valider le split et l’accès au modèle avant de lancer un entraînement.
+Cadrer la piste eau avec le membre du groupe : types de réseaux/fuites, instruments et enregistrements, décision métier difficile. Ne promettre ni localisation ni prédiction sans données et annotations adaptées.
