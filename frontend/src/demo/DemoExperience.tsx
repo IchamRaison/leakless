@@ -273,6 +273,12 @@ export default function DemoExperience() {
           </div>
           <span className="example-label" id="demo-recording-label">
             Demo recording:
+            {!measurement && (
+              <span className="example-hint">
+                {" "}
+                select a measurement point first
+              </span>
+            )}
           </span>
           <div
             className="example-selector"

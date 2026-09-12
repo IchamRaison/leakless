@@ -329,6 +329,9 @@
 .example-label {
   margin-bottom: 9px;
 }
+.example-hint {
+  color: #c4b997;
+}
 .outline-tag {
   border: 1px solid #71867250;
   padding: 6px 9px;
