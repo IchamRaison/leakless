@@ -66,7 +66,7 @@ it("replays measured values from the real recordings without alerts or scores", 
   expect(await screen.findByRole("alert")).toHaveTextContent(
     "integrity check failed",
   );
-  expect(screen.getByText("None generated")).toBeInTheDocument();
+  expect(screen.getByText("N/A · replay only")).toBeInTheDocument();
   expect(
     screen.getByRole("group", { name: /Illustrative pipe network/ }),
   ).toBeInTheDocument();

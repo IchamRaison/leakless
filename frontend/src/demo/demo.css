@@ -1612,3 +1612,12 @@
     margin-bottom: 0;
   }
 }
+.tslm-definition {
+  margin: -8px 0 18px;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #a3b49f;
+}
+.point-panel-note {
+  margin-bottom: 6px;
+}

@@ -134,19 +134,16 @@ export default function DemoExperience() {
               Water damage <br />
               becomes visible late.
               <br />
-              <em>
-                The signal can <br />
-                change earlier.
-              </em>
+              <em>Can acoustic signals help decide when to inspect?</em>
             </h1>
             <p className="hero-subtitle">
               LeakLess helps facilities teams inspect unusual acoustic signals
               before deciding where to investigate.
             </p>
             <p className="prototype-note">
-              Experimental prototype — no field validation.
+              This prototype tests leak-associated acoustic discrimination.
               <br />
-              Early warning lead time has not been demonstrated.
+              Early-warning lead time is not demonstrated. No field validation.
             </p>
             <div className="hero-who">
               <span>FOR</span>
@@ -360,6 +357,10 @@ export default function DemoExperience() {
                 <em>inspection?</em>
               </h2>
               <ModelReadout />
+              <p className="tslm-definition">
+                TSLM = Time-Series Language Model. Trained on temporal acoustic
+                features; final held-out evaluation not yet integrated.
+              </p>
               <div className="decision-note">
                 <span className="small-rule" />
                 <p>

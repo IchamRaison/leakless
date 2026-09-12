@@ -204,9 +204,9 @@ export function BuildingScene({
     const still = matchMedia("(prefers-reduced-motion: reduce)");
     const place = new THREE.Object3D();
     // Halo around the selected point: size follows the selected recording's measured level.
-    // One fixed colour whatever the dataset label; it never encodes leak or no-leak.
+    // One neutral pale-blue colour whatever the dataset label; it never encodes leak or no-leak.
     const haloMaterial = new THREE.MeshBasicMaterial({
-      color: "#b9f5b2",
+      color: "#dbe8f2",
       transparent: true,
       opacity: 0,
       depthWrite: false,
@@ -248,7 +248,7 @@ export function BuildingScene({
         halo.visible = level != null;
         points.forEach(({ id, position, marker, material }, i) => {
           const active = selection.current === id;
-          material.color.set(active ? "#b9f5b2" : "#8dada0");
+          material.color.set(active ? "#eef5fa" : "#8dada0");
           marker.scale.setScalar(active ? 1.6 : 1);
           if (active && level != null) {
             halo.position.copy(position);

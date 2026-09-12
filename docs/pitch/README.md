@@ -39,7 +39,7 @@ du projet en action, sans parcourir la landing.
 2. Panneau → **REC 02** : vrai enregistrement, forme d'onde, label du dataset,
    « No physical association between this point and the recording ».
 3. **Inspect this recording** → Monitor avec REC 02 au premier plan,
-   « Alerts: None generated », TSLM · NOT EVALUATED YET, **Listen** au besoin.
+   « Alerts: N/A · replay only », TSLM · NOT EVALUATED YET, **Listen** au besoin.
 4. **Overview** : retour avec la même sélection ; 03 → Fullscreen sur la
    Temporal Signal Map si le temps le permet.
 5. S'il reste du temps : 06 → **Load a recording** avec le WAV du bureau.

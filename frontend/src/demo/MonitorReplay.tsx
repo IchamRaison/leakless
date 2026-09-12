@@ -179,7 +179,7 @@ export default function MonitorReplay() {
           </div>
           <div>
             <dt>Alerts</dt>
-            <dd>None generated</dd>
+            <dd>N/A · replay only</dd>
           </div>
           <div>
             <dt>Model output</dt>

@@ -43,6 +43,9 @@ export function PointPanel({
     <aside className="point-panel" aria-label="Illustrative measurement point">
       <span className="point-panel-kicker">Illustrative measurement point</span>
       <strong className="point-panel-id">{measurement}</strong>
+      <p className="point-panel-note">
+        No physical association between this point and the recording.
+      </p>
       <span className="point-panel-kicker">Experimental recording replay</span>
       <div
         className="point-panel-recs"
@@ -60,9 +63,6 @@ export function PointPanel({
           </button>
         ))}
       </div>
-      <p className="point-panel-note">
-        No physical association between this point and the recording.
-      </p>
       {error ? (
         <div className="point-panel-state" role="alert">
           <span>{error}</span>

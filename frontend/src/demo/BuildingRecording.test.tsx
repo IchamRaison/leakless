@@ -116,6 +116,6 @@ it("opens the monitor with the requested recording in front and lets markers cha
   ).toHaveClass("is-focused");
   expect(leak).not.toHaveClass("is-focused");
   expect(location.hash).toBe("#monitor/rec-03");
-  expect(screen.getByText("None generated")).toBeInTheDocument();
+  expect(screen.getByText("N/A · replay only")).toBeInTheDocument();
   expect(document.querySelector(".monitor audio")).not.toHaveAttribute("src");
 });

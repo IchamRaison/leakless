@@ -104,7 +104,7 @@ export function TemporalSignalMap({
         <br />
         Shape changes reflect measured signal properties over time.
       </p>
-      <details className="map-method">
+      <details className="map-method" open>
         <summary>How measurements become geometry</summary>
         <p>
           Height = time in this clip. Radius = mean spectral power on a fixed
