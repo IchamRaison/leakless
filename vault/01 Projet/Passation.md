@@ -8,6 +8,8 @@ CLI 0.10.6 et 12 skills installés ; capture Codex locale constatée. La recherc
 
 ## Dernier échange — 2026-09-12
 
+**Nouvelle livraison Nevil retrouvée** : `nevil/temporal-evidence` à `08562e3` (trois commits après `1289095`), moteur commun d'évaluation, contrôles C0–C3, stress T0–T3 et contrat `metadata.json` + `predictions.csv`. Code/rapports lus, pas de tests ni de résultats reproduits lors de ce contrôle ; branche non fusionnée. Le vault distant n'avait pas de nouvelle note correspondante. **Prochaine action ML à préciser avec Nevil : réutiliser ce moteur**, raccorder un score de classe réel (V0 = `score_type=none`), permettre validation seule pendant le développement, conserver une évaluation distincte du texte et aligner le périmètre bruit. Détails et liens : [[Journal Icham#Vérification des nouveaux livrables Nevil]].
+
 **V0 mécanique réalisée jusqu'à l'étape 5**, avec Qwen 3.5-4B demandé en remplacement de Llama : 1 000 WAV via TimeNet, v2 vérifié, vrai batch GPU, 40 étapes sur 8 groupes train, poids temporels modifiés et Qwen gelé vérifié. Checkpoint autonome rechargé hors ligne dans un processus neuf puis dans un environnement reconstruit du lockfile ; même prédiction sur le clip validation fixé, erreurs contrôlées. Modèle `pipe-qwen3.5-4b-v0-a968405f`, fonction `Predictor.predict(wav_bytes)` livrable à Safoan, guide `docs/TSLM_V0.md` sur `feat/icham-tslm`. **Qualité non validée, application non intégrée, aucun score final annoncé.** Preuves, checksum et prochaine action : [[V0 ML - exécution]].
 
 ## Cadrage précédent
