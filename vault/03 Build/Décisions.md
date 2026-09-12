@@ -20,3 +20,7 @@ Le vault dédié remplace la copie du dépôt code comme référence des notes p
 ## Prochaines décisions
 
 Utiliser [[Modèle décision]] pour les choix qui engagent le projet.
+
+## 2026-09-12 — Plan ML validé, démarrage différé
+
+Icham valide [[Plan de session Icham - première version TSLM]], puis précise explicitement de ne pas commencer. Périmètre accepté : compte rendu court en une passe, classe et une propriété vérifiable initialement, V0 technique intégrable puis V1 évaluée et améliorations mesurées. Ni réservation GPU ni entraînement autorisé à ce stade. Les classes, la propriété exacte, la base et la configuration d'exécution restent conditionnelles aux vérifications prévues. Discussion GPU en cours dans [[Journal Icham]] ; une H100 n'est pas encore sélectionnée ou disponible par le seul fait d'être proposée.

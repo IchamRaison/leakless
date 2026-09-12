@@ -8,7 +8,7 @@ CLI 0.10.6 et 12 skills installés, disponibles pour Hermes et les agents du pro
 
 ## Dernier échange — 2026-09-12
 
-Icham demande le déroulé détaillé de sa session : [[Plan de session Icham - première version TSLM]] proposé, sans démarrage technique. Il distingue cadrage, V0 technique rechargeable/intégrable, V1 évaluée sur validation puis gel/test final avec Nevil. La proposition classe + une propriété vérifiable et compte rendu sans chat reste à valider ; demander le plan ne vaut pas accord à Q8 ni autorisation d'implémenter. Classes, propriété, stratégie d'adaptation, critères et allocation runtime restent à finaliser. Aucun lancement ML/GPU. Réponses et preuves dans [[Journal Icham]].
+Icham valide [[Plan de session Icham - première version TSLM]], puis réaffirme « Commence pas » : plan accepté, exécution toujours différée. Discussion actuelle sur le GPU : recommandation d'une seule H100 80 Go pour la marge d'expérimentation si accès/crédits confirmés ; L40S 48 Go alternative plausible pour une configuration compacte, pas un besoin minimal mesuré. Source OpenTSLM et tarifs publics Nebius vérifiés, détails dans [[Journal Icham]]. Aucun GPU réservé, code ML installé ou entraînement lancé. Prochaine étape : choix/disponibilité de la machine et première livraison réelle de Nevil ; les classes et réglages détaillés restent à finaliser.
 
 ## Cadrage précédent
 

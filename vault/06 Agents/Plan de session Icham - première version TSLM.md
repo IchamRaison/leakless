@@ -2,7 +2,7 @@
 
 Icham
 
-Statut au 2026-09-12 : plan détaillé demandé par Icham, proposé pour discussion. Ni validation implicite de Q8, ni autorisation d'implémentation, d'installation ou de dépense. La demande « discuter avant d'implémenter » reste active. Ce document précise la fiche [[Agent Icham - ML]], sans remplacer les contrats d'équipe ni l'audit de Nevil.
+Statut au 2026-09-12 : plan validé explicitement par Icham (« je valide »), puis démarrage explicitement différé (« Commence pas »). La validation du plan n'autorise donc pas encore l'implémentation, l'installation ou une dépense. Ce document précise la fiche [[Agent Icham - ML]], sans remplacer les contrats d'équipe ni l'audit de Nevil ; les choix techniques conditionnels restent à finaliser.
 
 ## Objectif et deux livraisons distinctes
 
@@ -18,9 +18,9 @@ La session vise V0 puis V1 si les prérequis sont disponibles. Sans données ou 
 
 Acquis : priorité au texte utile ; résultat fonctionnel et défendable en cas de temps court ; première livraison rapide puis amélioration ; vitesse sans sacrifier la précision ; aucun plafond budgétaire actuellement fixé. Ces préférences ne fixent ni métrique minimale, ni crédits réels, ni machine.
 
-À discuter et consigner ensemble :
+Périmètre validé et détails restant à consigner ensemble :
 
-- Sortie V1 : recommandation classe et une propriété acoustique vérifiable au premier jalon, puis enrichissement. Compte rendu en une passe, pas de chat libre. Proposition Q8 encore ouverte.
+- Sortie V1 : classe et une propriété acoustique vérifiable au premier jalon, puis enrichissement ; compte rendu en une passe, pas de chat libre. Périmètre accepté avec le plan, propriété exacte et schéma détaillé encore à convenir.
 - Propriété : la choisir avec Nevil parmi celles mesurables sur la représentation réellement fournie au modèle. Définir unités, règle de calcul, seuils éventuels et tolérances. Ne pas demander au modèle de reconstruire une grandeur éliminée par normalisation.
 - Classes : résoudre le contrat binaire versus la nouvelle direction à trois classes après l'audit ; recommandation du protocole courant, comparaison fuite/non-fuite du même site et challenge de bruits externes séparé. Pas de décision unilatérale pendant cette session.
 - Qualité : définir comment arbitrer classification, exactitude descriptive et latence ; ne pas choisir sur la fluidité du texte seule. Établir les règles de sélection sur validation avant les essais comparatifs.
