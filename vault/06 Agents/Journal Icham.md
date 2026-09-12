@@ -8,6 +8,7 @@ Icham
 
 ## V0 — apprentissage et rechargement vérifiés
 
+- Livraison publiée sur `feat/icham-tslm`, jusqu'à `bd59bb6` ; guide et preuves accessibles au dépôt privé. Sources runtime locales/distantes comparées par SHA-256, cinq tests repassés dans le venv reconstruit ; GPU à 0 Mio au contrôle final. Instance non arrêtée. L'objectif V0 1–5 est réalisé, pas le projet/hackathon complet.
 - Code numérique du run `a968405f3c3e505582c3dcd8be0248d1075431c1`, packaging/tests/guide `8e70a4c`, branche isolée `feat/icham-tslm`.
 - Trois archives intègres, 1 000 WAV strictement décodés ; manifeste v2 SHA `7a8716...` intact. TimeNet round-trip d'abord sur train `c0128b879694e`, erreur 2,03e-7, puis tous les clips. Invariants Nevil rejoués depuis les WAV : zéro violation, avec couvertures explicites. Aucun score test calculé.
 - Premier batch réel : loss 0,247565, gradients non nuls encodeur/projecteur. Petit diagnostic : 8 clips de 8 groupes train, 40 étapes ; toutes pertes finies, 0,48272 au premier batch / 0,03166 au dernier. Delta poids encodeur 1,81215 et projecteur 0,44250 ; hash intégral des états Qwen identique avant/après.

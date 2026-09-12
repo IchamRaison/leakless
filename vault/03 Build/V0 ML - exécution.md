@@ -59,6 +59,11 @@ Ce jalon ne signifie pas que le modèle est précis, ni que l'application ou le 
 
 ## Livraison et preuves
 
+- Branche publiée : https://github.com/IchamRaison/ehl-hackathon-zurich/tree/feat/icham-tslm
+  (`bd59bb6` après finalisation documentaire et correction du reçu de téléchargement).
+- Guide de reprise : https://github.com/IchamRaison/ehl-hackathon-zurich/blob/feat/icham-tslm/docs/TSLM_V0.md
+  Cinq tests repassés dans le venv reconstruit, sources runtime local/distant identiques
+  par SHA-256. GPU à 0 Mio utilisés au contrôle final ; instance laissée allumée.
 - Fonction : `from pipe.tslm.predict import Predictor, PredictionError`, puis
   `Predictor(checkpoint).predict(wav_bytes) -> Prediction` v0.1 Safoan inchangée.
   Charger une fois sur le backend GPU ; pas d'endpoint public créé.
