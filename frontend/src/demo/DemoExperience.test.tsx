@@ -101,16 +101,19 @@ it("loads a real-example identity through the existing API and never requests a 
     screen.getByRole("button", { name: "Select measurement N3" }),
   );
   expect(
-    await screen.findByText(`Waveform ${sample(0).sample_id}`),
-  ).toBeInTheDocument();
-  expect(
     screen.getByRole("heading", {
       name: "Selected measurement point: N3 — illustrative building position",
     }),
   ).toBeInTheDocument();
+  // A point alone never loads a recording.
+  expect(api).not.toHaveBeenCalled();
+  fireEvent.click(screen.getByRole("button", { name: /No-leak/ }));
+  expect(
+    await screen.findByText(`Waveform ${sample(0).sample_id}`),
+  ).toBeInTheDocument();
   expect(
     screen.getAllByText("Probability leak")[0].nextElementSibling,
-  ).toHaveTextContent("PENDING");
+  ).toHaveTextContent("NOT EVALUATED YET");
   expect(vi.mocked(api).mock.calls.some(([path]) => path === "/predict")).toBe(
     false,
   );
@@ -128,7 +131,17 @@ it("never ties a measurement point to a recording class", async () => {
   fireEvent.click(
     screen.getByRole("button", { name: "Select measurement N1" }),
   );
-  await screen.findByText(`Waveform ${sample(0).sample_id}`);
+  expect(api).not.toHaveBeenCalled();
+  for (const rec of ["REC 01", "REC 02", "REC 03"])
+    expect(screen.getByRole("button", { name: rec })).toHaveAttribute(
+      "aria-pressed",
+      "false",
+    );
+  expect(
+    screen.getByText(
+      "No physical association between this point and the recording.",
+    ),
+  ).toBeInTheDocument();
   fireEvent.click(screen.getByRole("button", { name: /Leak-associated/ }));
   await screen.findByText(`Waveform ${sample(1).sample_id}`);
   for (const point of ["N2", "N3", "N4"]) {
@@ -159,6 +172,7 @@ it("does not attach a late result to the new selected clip", async () => {
   fireEvent.click(
     screen.getByRole("button", { name: "Select measurement N3" }),
   );
+  fireEvent.click(screen.getByRole("button", { name: /No-leak/ }));
   await screen.findByText(`Waveform ${sample(0).sample_id}`);
   fireEvent.click(screen.getByRole("button", { name: /Leak-associated/ }));
   await waitFor(() => expect(api).toHaveBeenCalledTimes(4));
@@ -178,7 +192,9 @@ it("rejects mismatched signal identities and supports an explicit retry", async 
   fireEvent.click(
     screen.getByRole("button", { name: "Select measurement N3" }),
   );
-  expect(await screen.findByRole("alert")).toHaveTextContent("does not match");
+  fireEvent.click(screen.getByRole("button", { name: /No-leak/ }));
+  const alerts = await screen.findAllByRole("alert");
+  expect(alerts[0]).toHaveTextContent("does not match");
   expect(screen.queryByText(/Waveform /)).not.toBeInTheDocument();
   fireEvent.click(screen.getByRole("button", { name: "Retry recording" }));
   expect(

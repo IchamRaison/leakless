@@ -9,7 +9,7 @@ du projet en action, sans parcourir la landing.
   d'ensemble (répétition, copie vers Google Slides/Keynote), F plein écran,
   T remet le chrono à zéro. Clic tiers gauche = précédent.
 - Textes des slides en anglais comme le site ; chiffres repris uniquement de
-  `frontend/src/demo/evidence.ts`. TSLM affiché PENDING tant qu'aucun
+  `frontend/src/demo/evidence.ts`. TSLM affiché « NOT EVALUATED YET » tant qu'aucun
   checkpoint évalué n'existe.
 
 ## Minutage
@@ -34,11 +34,14 @@ du projet en action, sans parcourir la landing.
 
 ## Parcours démo (90 s)
 
-1. Bâtiment → **N1** : « position illustrative, ne localise pas de fuite ».
-2. 02 → **Leak-associated**, lecture 2 s, montrer waveform + spectrogramme.
-3. 03 → **Fullscreen** sur la Temporal Signal Map, Échap.
-4. Nav → **Monitor replay** : trois canaux mesurés en direct, « Alerts: None
-   generated », TSLM PENDING, **Listen** sur un canal.
+1. Bâtiment → **Fullscreen** → **N1** : « position illustrative, ne localise
+   pas de fuite ».
+2. Panneau → **REC 02** : vrai enregistrement, forme d'onde, label du dataset,
+   « No physical association between this point and the recording ».
+3. **Inspect this recording** → Monitor avec REC 02 au premier plan,
+   « Alerts: None generated », TSLM · NOT EVALUATED YET, **Listen** au besoin.
+4. **Overview** : retour avec la même sélection ; 03 → Fullscreen sur la
+   Temporal Signal Map si le temps le permet.
 5. S'il reste du temps : 06 → **Load a recording** avec le WAV du bureau.
 
 ## Replis

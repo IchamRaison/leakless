@@ -25,6 +25,11 @@ import { signalGeometry } from "./signalGeometry";
 import "./demo.css";
 
 const TICK_MS = 100;
+// "#monitor/rec-02" opens the monitor with REC 02 in front (from the building panel).
+const focusFromHash = () => {
+  const match = location.hash.match(/^#monitor\/rec-0([1-9])$/);
+  return match ? (recordings.records[Number(match[1]) - 1]?.id ?? null) : null;
+};
 const bandNames = ["Low", "Mid", "High"];
 
 /** Monitoring-style replay of the three real recordings. No alert, score or detection is produced. */
@@ -35,6 +40,7 @@ export default function MonitorReplay() {
   const [playing, setPlaying] = useState(true);
   const [clock, setClock] = useState(0);
   const [listening, setListening] = useState<string | null>(null);
+  const [focused, setFocused] = useState<string | null>(focusFromHash);
   const root = useRef<HTMLDivElement>(null);
   const audio = useRef<HTMLAudioElement>(null);
 
@@ -53,6 +59,24 @@ export default function MonitorReplay() {
         });
     return () => controller.abort();
   }, [retry]);
+
+  useEffect(() => {
+    const change = () => setFocused(focusFromHash());
+    window.addEventListener("hashchange", change);
+    return () => window.removeEventListener("hashchange", change);
+  }, []);
+  const focusedLoaded = !!(focused && channels[focused]);
+  useEffect(() => {
+    if (!focusedLoaded || !focused) return;
+    document
+      .getElementById(`channel-card-${focused}`)
+      ?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }, [focused, focusedLoaded]);
+  const focusRecording = (id: string) => {
+    setFocused(id);
+    const index = recordings.records.findIndex((record) => record.id === id);
+    history.replaceState(null, "", `#monitor/rec-0${index + 1}`);
+  };
 
   useEffect(() => {
     if (!playing) return;
@@ -140,7 +164,7 @@ export default function MonitorReplay() {
         <p className="monitor-banner" role="note">
           <strong>Replay, not a live feed.</strong> Three recorded train clips
           from the experimental dataset, each looped. Recordings are not
-          building locations. No detection model output: TSLM pending.
+          building locations. No detection model output: TSLM not evaluated yet.
         </p>
         <dl className="monitor-summary">
           <div>
@@ -159,10 +183,15 @@ export default function MonitorReplay() {
           </div>
           <div>
             <dt>Model output</dt>
-            <dd className="pending-value">PENDING</dd>
+            <dd className="pending-value">TSLM · NOT EVALUATED YET</dd>
           </div>
         </dl>
-        <PipeNetwork channels={network} playing={playing} />
+        <PipeNetwork
+          channels={network}
+          playing={playing}
+          focused={focused}
+          onFocus={focusRecording}
+        />
         <section className="monitor-grid" aria-label="Replayed channels">
           {recordings.records.map((record, index) =>
             channels[record.id] ? (
@@ -171,6 +200,7 @@ export default function MonitorReplay() {
                 index={index}
                 channel={channels[record.id]}
                 clock={clock}
+                focused={focused === record.id}
                 listening={listening === record.id}
                 onListen={() =>
                   setListening(listening === record.id ? null : record.id)
@@ -210,9 +240,11 @@ function ChannelCard({
   channel,
   index,
   clock,
+  focused,
   listening,
   onListen,
 }: {
+  focused: boolean;
   channel: LoadedExample;
   index: number;
   clock: number;
@@ -253,7 +285,12 @@ function ChannelCard({
     .join(" ");
   const position = loopTime(clock, duration) / duration;
   return (
-    <article className="monitor-card" aria-labelledby={`channel-${record.id}`}>
+    <article
+      className={focused ? "monitor-card is-focused" : "monitor-card"}
+      id={`channel-card-${record.id}`}
+      aria-labelledby={`channel-${record.id}`}
+      aria-current={focused || undefined}
+    >
       <header>
         <span className="demo-kicker">REC 0{index + 1}</span>
         <h2 id={`channel-${record.id}`}>
@@ -305,7 +342,7 @@ function ChannelCard({
       </div>
       <footer>
         <span>
-          TSLM <b className="pending-value">PENDING</b>
+          <b className="pending-value">TSLM · NOT EVALUATED YET</b>
         </span>
         <button
           className="quiet-button"

@@ -99,6 +99,11 @@ export function TemporalSignalMap({
           className="quiet-button map-fullscreen"
         />
       </div>
+      <p className="map-legend">
+        Each ring represents a short temporal window.
+        <br />
+        Shape changes reflect measured signal properties over time.
+      </p>
       <details className="map-method">
         <summary>How measurements become geometry</summary>
         <p>

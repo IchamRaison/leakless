@@ -223,8 +223,8 @@ export function InspectRecording({ paused }: { paused: boolean }) {
                 <p>
                   Measured properties only.
                   <br />
-                  No inspection recommendation is generated while the model is
-                  pending.
+                  No inspection recommendation is generated while TSLM is not
+                  evaluated yet.
                 </p>
               </div>
               <button className="quiet-button" onClick={() => void remove()}>

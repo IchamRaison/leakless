@@ -1473,3 +1473,128 @@
   font-size: 11px;
   color: #8fa18f;
 }
+/* Building fullscreen point panel: illustrative point, real recording, no physical association. */
+.point-panel {
+  display: none;
+}
+.building-panel:fullscreen .point-panel {
+  position: absolute;
+  top: 64px;
+  right: 4%;
+  width: min(360px, 40vw);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 20px;
+  background: #121c16f2;
+  border: 1px solid #b8dba533;
+  border-radius: 7px;
+  z-index: 2;
+}
+.point-panel-kicker {
+  font:
+    10px ui-monospace,
+    monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #93a695;
+}
+.point-panel-id {
+  font:
+    500 28px ui-monospace,
+    monospace;
+  color: var(--paper);
+  margin-bottom: 6px;
+}
+.point-panel-recs {
+  display: flex;
+  gap: 8px;
+}
+.demo-app .point-panel-recs button {
+  flex: 1;
+  font:
+    12px ui-monospace,
+    monospace;
+  min-height: 38px;
+}
+.demo-app .point-panel-recs button.active {
+  border-color: #99b882;
+  background: #c3dca510;
+  color: #d4e7be;
+}
+.point-panel-note {
+  font-size: 11px;
+  color: #d8c59a;
+}
+.point-panel-state {
+  font-size: 12px;
+  color: #a8baa9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.point-panel-recording {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+.point-panel-label {
+  font-size: 12px;
+  color: #a8baa9;
+}
+.point-panel-label b {
+  color: var(--paper);
+  font-weight: 500;
+}
+.point-panel-recording svg[role="img"] {
+  width: 100%;
+  height: 56px;
+  background: #1b291e;
+  border-radius: 3px;
+}
+.point-panel-recording svg[role="img"] path {
+  stroke: #b0c79a;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.point-panel-tslm {
+  font:
+    12px ui-monospace,
+    monospace;
+  color: #c4b997;
+}
+.demo-app .point-panel-inspect {
+  justify-content: space-between;
+  min-height: 40px;
+  color: var(--accent);
+  border-color: #8eab8666;
+  font-size: 12px;
+}
+/* Monitor focus: the recording chosen from the building or a marker comes to the front. */
+.monitor-card.is-focused {
+  background: #1b2a20;
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+.pipe-network .listen-point {
+  cursor: pointer;
+}
+.pipe-network .listen-point:focus-visible {
+  outline: none;
+}
+.pipe-network .listen-point:focus-visible .node,
+.pipe-network .listen-point.is-focused .node {
+  stroke-width: 6;
+  fill: #1b2a20;
+}
+.pipe-network .listen-point.is-focused text {
+  fill: var(--accent);
+}
+.map-legend {
+  margin: 4px 25px 6px;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #a7b8aa;
+}

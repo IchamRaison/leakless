@@ -5,12 +5,12 @@ export function ModelReadout() {
       <div>
         <dt>Model</dt>
         <dd>
-          TSLM <span className="pending-dot" />
+          TSLM · NOT EVALUATED YET <span className="pending-dot" />
         </dd>
       </div>
       <div>
         <dt>Probability leak</dt>
-        <dd className="pending-value">PENDING</dd>
+        <dd className="pending-value">NOT EVALUATED YET</dd>
       </div>
       <div>
         <dt>Model output</dt>

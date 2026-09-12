@@ -14,7 +14,8 @@ const NotesLayer = import.meta.env.DEV
   ? lazy(() => import("./notes/NotesLayer"))
   : null;
 
-const isMonitor = () => location.hash === "#monitor";
+const isMonitor = () =>
+  location.hash === "#monitor" || location.hash.startsWith("#monitor/");
 
 export function App() {
   const [monitor, setMonitor] = useState(isMonitor);

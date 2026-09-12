@@ -5,16 +5,22 @@ import { SceneCanvas, type SceneBuilder } from "./SceneCanvas";
 export const measurementPoints = ["N1", "N2", "N3", "N4"] as const;
 export type Measurement = (typeof measurementPoints)[number];
 
+/** Level of the selected real recording, 0–1 on a fixed scale, at a replay time in seconds. */
+export type PulseSource = ((seconds: number) => number) | null;
+
 export function BuildingScene({
   selected,
   onSelect,
   paused,
+  pulse = null,
 }: {
   selected: Measurement | null;
   onSelect: (id: Measurement) => void;
   paused: boolean;
+  pulse?: PulseSource;
 }) {
   const selection = useRef(selected);
+  const pulseSource = useRef(pulse);
   const motion = useRef(!paused);
   const labels = useRef<(HTMLButtonElement | null)[]>([]);
   useEffect(() => {
@@ -23,6 +29,9 @@ export function BuildingScene({
   useEffect(() => {
     motion.current = !paused;
   }, [paused]);
+  useEffect(() => {
+    pulseSource.current = pulse;
+  }, [pulse]);
   const build = useCallback<SceneBuilder>((scene, camera) => {
     camera.position.set(6.6, 3.5, 7.9);
     scene.add(new THREE.AmbientLight(0xc9d3dc, 1.8));
@@ -194,12 +203,30 @@ export function BuildingScene({
     group.add(droplets);
     const still = matchMedia("(prefers-reduced-motion: reduce)");
     const place = new THREE.Object3D();
+    // Halo around the selected point: size follows the selected recording's measured level.
+    // One fixed colour whatever the dataset label; it never encodes leak or no-leak.
+    const haloMaterial = new THREE.MeshBasicMaterial({
+      color: "#b9f5b2",
+      transparent: true,
+      opacity: 0,
+      depthWrite: false,
+    });
+    const halo = new THREE.Mesh(
+      new THREE.SphereGeometry(0.16, 20, 14),
+      haloMaterial,
+    );
+    halo.visible = false;
+    group.add(halo);
     let phase = 0;
+    let replay = 0;
     let last = performance.now();
     const flow = () => {
       const now = performance.now();
-      if (motion.current && !still.matches)
-        phase += Math.min((now - last) / 1000, 0.05) * 0.45;
+      if (motion.current && !still.matches) {
+        const delta = Math.min((now - last) / 1000, 0.05);
+        phase += delta * 0.45;
+        replay += delta;
+      }
       last = now;
       let index = 0;
       for (const { from, to, count } of flows) {
@@ -217,10 +244,17 @@ export function BuildingScene({
       frame: () => {
         flow();
         camera.updateMatrixWorld();
+        const level = selection.current ? pulseSource.current?.(replay) : null;
+        halo.visible = level != null;
         points.forEach(({ id, position, marker, material }, i) => {
           const active = selection.current === id;
           material.color.set(active ? "#b9f5b2" : "#8dada0");
           marker.scale.setScalar(active ? 1.6 : 1);
+          if (active && level != null) {
+            halo.position.copy(position);
+            halo.scale.setScalar(1 + level * 1.8);
+            haloMaterial.opacity = 0.12 + level * 0.33;
+          }
           const projected = position.clone().project(camera);
           const button = labels.current[i];
           if (button) {

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowDown,
   AudioLines,
@@ -20,6 +20,9 @@ import { FullscreenButton } from "./FullscreenButton";
 import { InspectRecording } from "./InspectRecording";
 import { loadExample, type LoadedExample, type Recording } from "./loadExample";
 import { ModelReadout } from "./ModelReadout";
+import { PointPanel } from "./PointPanel";
+import { LEVEL_DB, ringAt, toUnit } from "./replay";
+import { signalGeometry } from "./signalGeometry";
 import { TemporalSignalMap } from "./TemporalSignalMap";
 import { evidence } from "./evidence";
 import recordings from "./recordings.json";
@@ -82,10 +85,12 @@ export default function DemoExperience() {
     return () => controller.abort();
   }, [record, retry]);
 
-  // Points are illustrative positions, not leak locations: choosing one never picks a recording class.
-  const selectPoint = (id: Measurement) => {
-    setMeasurement(id);
-    setRecord((current) => current ?? recordings.records[0]);
+  // Points are illustrative positions, not leak locations: choosing one never picks a recording.
+  const selectPoint = (id: Measurement) => setMeasurement(id);
+  const inspectRecording = async (index: number) => {
+    if (document.fullscreenElement)
+      await document.exitFullscreen().catch(() => {});
+    location.hash = `monitor/rec-0${index + 1}`;
   };
   const reload = () => {
     cache.current.clear();
@@ -93,6 +98,15 @@ export default function DemoExperience() {
   };
   // Never render previous clip measurements under a new selection, even before effects run.
   const active = loaded?.record.id === record?.id ? loaded : null;
+  const pulse = useMemo(() => {
+    if (!active) return null;
+    const rings = signalGeometry(active.visualization);
+    const duration = active.visualization.duration_seconds;
+    return rings.length
+      ? (seconds: number) =>
+          toUnit(ringAt(rings, duration, seconds).energyDb, LEVEL_DB)
+      : null;
+  }, [active]);
 
   return (
     <div className="demo-app" id="demo">
@@ -155,7 +169,20 @@ export default function DemoExperience() {
               selected={measurement}
               onSelect={selectPoint}
               paused={paused}
+              pulse={pulse}
             />
+            {measurement && (
+              <PointPanel
+                measurement={measurement}
+                record={record}
+                active={active}
+                loading={loading}
+                error={error}
+                onChoose={setRecord}
+                onRetry={reload}
+                onInspect={(index) => void inspectRecording(index)}
+              />
+            )}
             <div className="building-caption">
               <span>
                 <i className={measurement ? "selected-dot" : ""} />
@@ -271,7 +298,11 @@ export default function DemoExperience() {
                   <h2 id="map-title">Temporal Signal Map</h2>
                 </div>
                 <span className="status-tag">
-                  {active ? "MEASURED SIGNAL" : loading ? "LOADING" : "PENDING"}
+                  {active
+                    ? "MEASURED SIGNAL"
+                    : loading
+                      ? "LOADING"
+                      : "NO RECORDING"}
                 </span>
               </div>
               {error ? (
@@ -299,7 +330,9 @@ export default function DemoExperience() {
                   <p>
                     {loading
                       ? "Checking identity and measured spectral properties."
-                      : "Choose a measurement point above. No signal values are simulated."}
+                      : measurement
+                        ? "Choose a demo recording above. No signal values are simulated."
+                        : "Choose a measurement point above. No signal values are simulated."}
                   </p>
                 </div>
               )}
@@ -310,7 +343,8 @@ export default function DemoExperience() {
                 </span>
                 <span>
                   <i className="model-key" />
-                  MODEL COLOR / STATE <small>model output · pending</small>
+                  MODEL COLOR / STATE{" "}
+                  <small>model output · not evaluated yet</small>
                 </span>
               </div>
               <p className="map-disclaimer">
@@ -331,8 +365,8 @@ export default function DemoExperience() {
                 <p>
                   A measured signal, then a human decision.
                   <br />
-                  No inspection recommendation is generated while the model is
-                  pending.
+                  No inspection recommendation is generated while TSLM is not
+                  evaluated yet.
                 </p>
               </div>
               <a href="#evidence" className="evidence-link">
@@ -427,11 +461,15 @@ export default function DemoExperience() {
                 <dl>
                   <div>
                     <dt>Clip AUC</dt>
-                    <dd>{control.clipAuc?.toFixed(3) ?? "PENDING"}</dd>
+                    <dd>
+                      {control.clipAuc?.toFixed(3) ?? "NOT EVALUATED YET"}
+                    </dd>
                   </div>
                   <div>
                     <dt>Cluster AUC</dt>
-                    <dd>{control.clusterAuc?.toFixed(3) ?? "PENDING"}</dd>
+                    <dd>
+                      {control.clusterAuc?.toFixed(3) ?? "NOT EVALUATED YET"}
+                    </dd>
                   </div>
                 </dl>
               </article>

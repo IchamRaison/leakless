@@ -31,16 +31,20 @@ const POINTS = [
 export function PipeNetwork({
   channels,
   playing,
+  focused = null,
+  onFocus,
 }: {
   channels: NetworkChannel[];
   playing: boolean;
+  focused?: string | null;
+  onFocus?: (id: string) => void;
 }) {
   return (
     <figure className={playing ? "pipe-network" : "pipe-network paused"}>
       <svg
         viewBox="0 30 1240 280"
-        role="img"
-        aria-label="Illustrative pipe network with animated water. Each channel ripple follows the measured level of its replayed recording. No leak is shown."
+        role="group"
+        aria-label="Illustrative pipe network with animated water. Each recording marker ripples with the measured level of its replayed recording. No leak is shown."
       >
         <g className="tank">
           <rect x="40" y="150" width="90" height="120" rx="16" />
@@ -71,7 +75,25 @@ export function PipeNetwork({
           const unit =
             channel.level == null ? 0 : toUnit(channel.level, LEVEL_DB);
           return (
-            <g className="listen-point" key={channel.id}>
+            <g
+              className={
+                focused === channel.id
+                  ? "listen-point is-focused"
+                  : "listen-point"
+              }
+              key={channel.id}
+              role="button"
+              tabIndex={0}
+              aria-label={`Show ${channel.name} in front`}
+              aria-pressed={focused === channel.id}
+              onClick={() => onFocus?.(channel.id)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  onFocus?.(channel.id);
+                }
+              }}
+            >
               <circle
                 className="ripple"
                 cx={x}

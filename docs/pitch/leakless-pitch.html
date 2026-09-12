@@ -249,7 +249,7 @@
         <ol>
           <li><span class="n">4</span><strong>Monitor replay</strong><span class="d">Three channels measured as they replay: level, centroid, bands.</span><span class="where">Nav → Monitor replay</span></li>
           <li><span class="n">5</span><strong>Inspect your own WAV</strong><span class="d">Any recording goes through the same checks and plots.</span><span class="where">06 → Load a recording</span></li>
-          <li class="honest"><span><b>On screen, the model reads PENDING.</b> No probability is shown until an evaluated TSLM checkpoint is wired in.</span></li>
+          <li class="honest"><span><b>On screen, TSLM reads NOT EVALUATED YET.</b> No probability is shown until an evaluated TSLM checkpoint is wired in.</span></li>
         </ol>
       </div>
       <aside class="inline-notes"><b>SAY</b><span class="say"></span></aside>
@@ -322,8 +322,8 @@
   const NOTES = [
     "Leaks inside buildings are usually found when the damage is already visible: a stain, a ceiling, a floor. By then the repair is expensive. Pipes make sound before that. Our question: can a short acoustic recording help a facilities team decide where to look, and can we prove what a model is actually using? Say clearly: research prototype, experimental data.",
     "We used a public experimental dataset: 1,000 one-second recordings, leak, no-leak and environmental noise, CC BY 4.0, processed through TimeNet and TimeF. The trap with acoustic data is leakage: clips from the same capture are nearly identical. So we grouped them into 185 dependency clusters and froze a split where no cluster crosses sides. Every model, from simple controls to the TSLM, is scored on the same 41 held-out clusters.",
-    "Switch to the site (tab already open, API running). Click N1 in the building: say it is an illustrative position, not a leak location. Pick Leak-associated, play two seconds, point at waveform and spectrogram. Open the Temporal Signal Map fullscreen: the shape comes from the measured spectrum. Nav → Monitor replay: three real recordings replayed, values measured live, alerts none, TSLM pending. If time allows, drop a WAV in section 06. Back to slides at 3:00.",
-    "The interesting result is not the highest score. Loudness alone, C0, already reaches 0.878 clip AUC. The envelope control, C1, reaches 0.902 clip and 0.927 cluster AUC. With 41 test clusters and only 11 non-leak, intervals are wide and C1 versus C0 is inconclusive. So any model we ship has to beat these controls on held-out clusters, not just look accurate. The TSLM row stays pending until it is evaluated on this split.",
+    "Switch to the site (tab already open, API running). Building fullscreen, click N1: say it is an illustrative position, not a leak location. In the panel choose REC 02: a real recording, its waveform and dataset label, no physical association with the point. Click Inspect this recording: the Monitor opens with REC 02 in front, values measured live, alerts none, TSLM not evaluated yet. Overview brings you back with the same selection. If time allows, drop a WAV in section 06. Back to slides at 3:00.",
+    "The interesting result is not the highest score. Loudness alone, C0, already reaches 0.878 clip AUC. The envelope control, C1, reaches 0.902 clip and 0.927 cluster AUC. With 41 test clusters and only 11 non-leak, intervals are wide and C1 versus C0 is inconclusive. So any model we ship has to beat these controls on held-out clusters, not just look accurate. The TSLM row stays not evaluated yet until it is evaluated on this split.",
     "We keep a ledger. Demonstrated: the dataset through TimeNet/TimeF, the leakage-aware split, the controls, and a shallow temporal control that reacts to temporal perturbations. Not demonstrated: field detection, localization, deployment, lead time, causal interpretation, and TSLM superiority. Next step is precise: evaluated TSLM checkpoint, same split, same controls.",
     "One sentence to close: LeakLess puts the signal before the decision, with the controls and limits visible. Thank the jury, name the team, invite questions."
   ];
@@ -369,7 +369,7 @@
         + (clip == null ? "" : `<i class="cluster" style="left:${pos(cluster)}%"></i><i class="clip" style="left:${pos(clip)}%"></i>`)
         + "</div>"
         + (clip == null
-          ? '<span class="val pend" role="cell">PENDING</span><span class="val pend" role="cell">PENDING</span>'
+          ? '<span class="val pend" role="cell" style="grid-column: span 2">NOT EVALUATED YET</span>'
           : `<span class="val" role="cell">${clip.toFixed(3)}</span><span class="val" role="cell">${cluster.toFixed(3)}</span>`)
         + "</div>";
     }
