@@ -231,7 +231,7 @@
           <span class="step">3 · MODELS</span>
           <span class="figure">C0–C4<small>same split</small></span>
           <h3>Controls before claims</h3>
-          <p>Loudness, envelope, static spectrum, shallow temporal and a mixed baseline, then the TSLM, all scored on the same clusters.</p>
+          <p>Loudness, envelope, static spectrum, shallow temporal and a mixed baseline are scored on the same clusters; the TSLM will be scored there once its training and evaluation are complete.</p>
         </div>
       </div>
       <aside class="inline-notes"><b>SAY</b><span class="say"></span></aside>
@@ -321,7 +321,7 @@
 <script>
   const NOTES = [
     "Leaks inside buildings are usually found when the damage is already visible: a stain, a ceiling, a floor. By then the repair is expensive. Our question: can acoustic signals help a facilities team decide when to inspect, and can we prove what a model is actually using? We have not measured any early-warning lead time. Say clearly: research prototype, experimental data.",
-    "We used a public experimental dataset: 1,000 one-second recordings, leak, no-leak and environmental noise, CC BY 4.0, processed through TimeNet and TimeF. The trap with acoustic data is leakage: clips from the same capture are nearly identical. So we grouped them into 185 dependency clusters and froze a split where no cluster crosses sides. Every model, from simple controls to the TSLM, is scored on the same 41 held-out clusters.",
+    "We used a public experimental dataset: 1,000 one-second recordings, leak, no-leak and environmental noise, CC BY 4.0, processed through TimeNet and TimeF. The trap with acoustic data is leakage: clips from the same capture are nearly identical. So we grouped them into 185 dependency clusters and froze a split where no cluster crosses sides. The controls are scored on the same 41 held-out clusters; the TSLM will be scored on that split once its training and evaluation are complete.",
     "Switch to the site (tab already open, API running). Building fullscreen, click N1: say it is an illustrative position, not a leak location. In the panel choose REC 02: a real recording, its waveform and dataset label, no physical association with the point. Click Inspect this recording: the Monitor opens with REC 02 in front, values measured live, alerts N/A because it is a replay, TSLM not evaluated yet. Overview brings you back with the same selection. If time allows, drop a WAV in section 06. Back to slides at 3:00.",
     "The interesting result is not the highest score. Loudness alone, C0, already reaches 0.878 clip AUC. The envelope control, C1, reaches 0.902 clip and 0.927 cluster AUC. With 41 test clusters and only 11 non-leak, intervals are wide and C1 versus C0 is inconclusive. So any model we ship has to beat these controls on held-out clusters, not just look accurate. The TSLM row stays not evaluated yet until it is evaluated on this split.",
     "We keep a ledger. Demonstrated: the dataset through TimeNet/TimeF, the leakage-aware split, the controls, and a shallow temporal control that reacts to temporal perturbations. Not demonstrated: field detection, localization, deployment, lead time, causal interpretation, and TSLM superiority. Next step is precise: evaluated TSLM checkpoint, same split, same controls.",

@@ -358,8 +358,8 @@ export default function DemoExperience() {
               </h2>
               <ModelReadout />
               <p className="tslm-definition">
-                TSLM = Time-Series Language Model. Trained on temporal acoustic
-                features; final held-out evaluation not yet integrated.
+                TSLM = Time-Series Language Model. Training and evaluation are
+                still in progress; no final held-out result is shown here.
               </p>
               <div className="decision-note">
                 <span className="small-rule" />
