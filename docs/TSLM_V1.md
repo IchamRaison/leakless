@@ -10,7 +10,7 @@ Les 19 tests CPU passent dans le runtime H100 reconstruit ; le score réel a ét
 vérifié sur quatre clips **train seulement**. Preuves : [evidence/tslm-v1](evidence/tslm-v1/).
 La campagne de 600 étapes est terminée ; époque 4 retenue parmi les trois candidats
 sur validation, bundle autonome rechargé dans un processus neuf avec score et texte
-identiques. **T0 conforme et prêt à publier, stress ensuite ; aucune métrique finale calculée ici.**
+identiques. **T0, T1, T2 et T3 sont exécutés et conformes ; aucune métrique finale calculée ici.**
 Exporteur renforcé : `5a29d6eb9ceca39fdce829eb22dbbfd67b25589b` ; le modèle,
 preprocessing, scoring et stress sont inchangés depuis le code d'entraînement.
 
@@ -20,12 +20,26 @@ SHA-256 de `checksums.json` : `b95569c50f5e1bbf3533bddc92530b5f285eb25dec999f839
 Les paramètres temporels retenus ont changé et le SHA intégral de Qwen gelé est
 identique avant/après ; preuves dans `training-report.json` et `reload.json`.
 
-T0 : [metadata.json](../artifacts/tslm_runs/tslm-v1/metadata.json) et
-[predictions.csv](../artifacts/tslm_runs/tslm-v1/predictions.csv), 402 IDs val/test,
-deux colonnes exactes, contrôleur conforme. SHA CSV :
-`0c4dfb3f06c379fe48ce4f7456d38c67d165c80d5e083fbb3f350e0b2732d7b8`.
-Les scores resserrés restent bruts et non calibrés ; aucun réglage n'a été effectué
-après l'inspection. La qualité finale est à établir par Nevil.
+Les quatre dossiers contiennent chacun seulement `metadata.json` et `predictions.csv`,
+402 IDs val/test et deux colonnes exactes, contrôleur conforme :
+
+| Run | Prédictions | Métadonnées |
+| --- | --- | --- |
+| T0 original | [CSV](../artifacts/tslm_runs/tslm-v1/predictions.csv) | [JSON](../artifacts/tslm_runs/tslm-v1/metadata.json) |
+| T1 inversion | [CSV](../artifacts/tslm_runs/tslm-v1-T1/predictions.csv) | [JSON](../artifacts/tslm_runs/tslm-v1-T1/metadata.json) |
+| T2 blocs 250 | [CSV](../artifacts/tslm_runs/tslm-v1-T2/predictions.csv) | [JSON](../artifacts/tslm_runs/tslm-v1-T2/metadata.json) |
+| T3 phase | [CSV](../artifacts/tslm_runs/tslm-v1-T3/predictions.csv) | [JSON](../artifacts/tslm_runs/tslm-v1-T3/metadata.json) |
+
+T0 publié à `186c45a` **avant** lancement des stress. Le bundle/reload, la méthode
+de score, les trois configurations comparées et le code de modèle sont identiques
+dans les quatre runs ; seules les transformations/identités/horodatages et
+prédictions changent. Le SHA du bundle est toujours identique après les stress.
+Les logs de conformité se trouvent dans [evidence/tslm-v1](evidence/tslm-v1/).
+
+Les scores restent bruts et non calibrés ; aucun réglage n'a été effectué après
+l'inspection du contrôleur. La qualité finale et la sensibilité temporelle sont
+à établir par Nevil, pas déduites ici. GPU revenu à 0 Mio après tous les processus ;
+instance laissée allumée, aucun service public déployé.
 
 La V0 et son bundle sont conservés. L'environnement verrouillé et les sources
 TimeNet/Qwen restent ceux de [TSLM_V0.md](TSLM_V0.md). Aucun entraînement du
