@@ -1,5 +1,7 @@
 # Continuité du projet
 
+Icham
+
 ## Règle permanente demandée par Icham
 
 Pendant tout le projet, mettre continuellement à jour ce vault. Une autre personne ou un autre agent doit pouvoir comprendre immédiatement l'avancée et reprendre le travail sans accéder à la conversation d'origine.

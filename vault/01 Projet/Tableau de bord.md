@@ -1,34 +1,36 @@
 # Tableau de bord
 
-## À faire
+Icham
 
-- [ ] Confirmer deadline et format de soumission dans [[Brief et contraintes]]
-- [ ] Vérifier les accès TimeNet et activer le bon Nebius
-- [ ] Choisir un dataset ouvert, sa licence et un split sans fuite
-- [ ] Définir baseline et métriques
-- [ ] Valider ingestion TimeNet, entraînement court et sauvegarde du checkpoint
-- [ ] Renseigner l'équipe et les rôles
-- [ ] Sélectionner une piste dans [[Idées]]
-- [ ] Définir le scénario de démo et son critère de réussite
-- [ ] Choisir la stack après un premier test technique
-- [ ] Vérifier la capture Entire avec l'agent de développement choisi
+## Prêt
 
-## En cours
+- [x] Dépôts privés code et vault créés.
+- [x] Brief, sources et piste acoustique documentés.
+- [x] Quatre rôles techniques définis.
+- [x] Plan directeur, contrats, protocole et fiches agents rédigés.
+- [x] Icham : lecture complète du vault et des 22 pages du PDF ; état des dépôts inspecté, preuves dans [[Journal Icham]].
 
-Aucune tâche démarrée.
+## À lancer — pas encore vérifié
 
-## Bloqué
+- [ ] G0 Nevil : audit complet, groupes, labels et split défendable.
+- [ ] G1 Tous : fixture réelle et contrats gelés.
+- [ ] G2 Icham : runtime, entraînement court, checkpoint et reload.
+- [ ] Vincent : baseline entraînée sur développement, tests et export.
+- [ ] G3 Safoan : audio/spectrogramme et vraie inférence de bout en bout.
+- [ ] G4 Nevil : évaluation finale commune après gel des modèles.
+- [ ] G5 Équipe : checkpoint livré, reproduction, pitch/démo et soumission vérifiée.
 
-- Aucun blocage technique établi à ce stade ; accès TimeNet/Nebius encore non vérifiés.
+## À confirmer — responsable opérationnel à nommer par Icham
 
-## Fait
+- [ ] Deadline/fuseau, durée pitch et format de dépôt.
+- [ ] Cadrage acoustique accepté par les organisateurs.
+- [ ] Accès Nebius, crédit activé, plafond et arrêt instances.
+- [ ] Accès aux poids de base et conformité licence de redistribution.
 
-- [x] Dépôt GitHub privé créé
-- [x] Entire activé ; télémétrie et push automatique des sessions désactivés
-- [x] Structure du vault créée
-- [x] Règle de continuité et note de passation ajoutées
-- [x] Brief Temporal AI reçu, sections textuelles du PDF lues et exigences documentées
+## Blocages identifiés
 
-## Règle de travail
+Aucun échec de training PIPE encore observé car il n'a pas démarré. Indépendance des données, accès modèles et conversion sont des risques ouverts, pas des tâches réussies.
 
-Une tâche terminée doit avoir une preuve : commit, test, fichier ou résultat reproductible.
+## Suivi
+
+[[Journal Icham]], [[Journal Nevil]], [[Journal Safoan]], [[Journal Vincent]]. Mettre une tâche en cours seulement quand démarrée, terminée seulement avec preuve. [[Passation]] conserve la vue globale.

@@ -1,35 +1,41 @@
 # EHL Hackathon Zurich
 
-Point d'entrée du projet. Les informations non vérifiées restent signalées comme telles.
+Icham
 
-## Reprendre le projet
+## Commencer ici
 
-Lire [[Passation]] pour comprendre immédiatement l'état actuel, les blocages et la prochaine action.
+[[Passation]] donne l'état réel. [[Plan directeur agents]] explique le projet entier et l'ordre de travail. Aucune lecture du chat n'est nécessaire.
 
-Règle permanente : tenir ce vault à jour après chaque avancée significative et avant de rendre la main, sans attendre une demande. Toute personne ou tout agent doit pouvoir reprendre sans lire le chat. Voir [[Continuité du projet]].
+PIPE : analyser de courts signaux acoustiques de canalisations avec un TSLM entraîné, montrer son résultat sur un studio audio/spectrogramme et le comparer à une baseline. Faisabilité scientifique encore à valider ; aucune performance n'est annoncée.
 
-## Maintenant
+## Votre mission
 
-1. Choisir le problème, le public et un dataset ouvert pour le Temporal AI Challenge.
-2. Vérifier les accès TimeNet et Nebius.
-3. Définir une boucle ingestion → entraînement TSLM → évaluation avec baseline → démo.
+- [[Agent Icham - ML]] : modèle, entraînement et intégration finale.
+- [[Agent Nevil - Data]] : données, TimeNet, DSP, split et évaluation.
+- [[Agent Safoan - Application]] : API, audio/spectrogramme et interaction.
+- [[Agent Vincent - Baseline]] : Random Forest, tests et exports.
 
-## Navigation
+Lire le contexte commun AVANT de commencer sa fiche. [[Équipe et répartition]] résume les responsabilités et dépendances.
 
-- [[Brief et contraintes]]
-- [[Tableau de bord]]
-- [[Idées]]
-- [[Architecture]]
-- [[Décisions]]
-- [[Expériences]]
+## Documentation commune
+
+- [[Brief et contraintes]] et [[Tableau de bord]]
+- [[Architecture]] et [[Contrats techniques]]
+- [[Protocole évaluation]]
+- [[Coordination et passation agents]] et [[Continuité du projet]]
 - [[Démo et pitch]]
-- [[Ressources]]
-- [[2026-09-12]]
+- [[Décisions]], [[Expériences]], [[Ressources]]
+- Recherche détaillée : [[PIPE - proposition ML et démo]]
 
-## Espace de travail
+## Suivi individuel
 
-- Dépôt privé : https://github.com/IchamRaison/ehl-hackathon-zurich
-- Vault seul à partager : https://github.com/IchamRaison/ehl-hackathon-zurich-vault
-- Ouvrir la racine du dépôt vault dans Obsidian. Une copie existe dans `vault/` du dépôt code.
-- Le dépôt vault est la référence pour les notes partagées ; aucune synchronisation automatique entre dépôts.
-- Ne jamais mettre de clés API, données personnelles ou mots de passe dans les notes.
+[[Journal Icham]] · [[Journal Nevil]] · [[Journal Safoan]] · [[Journal Vincent]]
+
+Chaque agent actualise ses résultats, preuves, blocages et prochaine action après une avancée significative, sans attendre qu'Icham le demande. Un travail décrit n'est pas un travail réalisé.
+
+## Accès
+
+Notes : https://github.com/IchamRaison/ehl-hackathon-zurich-vault
+Code : https://github.com/IchamRaison/ehl-hackathon-zurich
+
+Ouvrir la racine du dépôt notes comme vault Obsidian. Pas de sync automatique entre postes/dépôts. Aucun secret, donnée client ou code produit dans ce dépôt.
