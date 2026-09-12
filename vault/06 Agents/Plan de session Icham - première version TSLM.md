@@ -45,6 +45,8 @@ Sortie : environnement reproductible, modèle chargeable, liste de paramètres e
 
 Nevil fournit audit/groupes/split, un vrai exemple de développement autorisé, round-trip TimeNet/TimeF, transformation partagée [C,T], versions/normalisation, labels et propriétés de contrôle. C représente les bandes fréquentielles et T leur évolution temporelle. L'audit ne doit pas être contourné pour produire un score.
 
+Mise à jour factuelle : audit, scripts et `split_v2` sont déjà publiés sur `nevil/setup` à `3efa08f` ; `split_v1` est invalide. Reprendre cette livraison et ses réserves, ne pas demander un audit à partir de zéro. Les WAV sont hors Git sur le poste de Nevil ; pas de conversion TimeNet livrée dans la branche inspectée. Le v2 regroupe bruit et absence de fuite dans son label binaire, ce qui nécessite un alignement avec le protocole du vault avant usage. Voir [[Journal Icham]].
+
 Safoan fournit/convient de Prediction, signature d'appel, erreurs et limites d'entrée. Vincent utilise les mêmes données autorisées et le même split pour son comparateur. Leurs implémentations ne deviennent pas la propriété d'Icham.
 
 Séparer explicitement :

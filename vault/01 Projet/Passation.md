@@ -4,11 +4,11 @@ Icham
 
 ## Entire — état vérifié sur Linux
 
-CLI 0.10.6 et 12 skills installés, disponibles pour Hermes et les agents du projet ; capture Codex et lecture de trois checkpoints constatées. Compte Entire non connecté, trois nouveaux hooks Codex à approuver via `/hooks`, historique distant non publié/vérifié. Code poussé au commit 916986f. Détails et prochaines étapes : [[Entire - installation et vérification]].
+CLI 0.10.6 et 12 skills installés ; capture Codex locale constatée. La recherche distante de commits fonctionne désormais (audit/splits de Nevil retrouvés), contrairement au contrôle initial non authentifié. Cela ne prouve pas la publication des transcriptions. Trois hooks Codex restent signalés à approuver via `/hooks`. État initial : [[Entire - installation et vérification]] ; nouvelle preuve dans [[Journal Icham]].
 
 ## Dernier échange — 2026-09-12
 
-Icham fournit un accès SSH et demande uniquement de le vérifier. Connexion réussie à `hicham@89.169.123.193` : H100 80 Go visible, pilote 580.173.02, Python 3.12.3, RAM 196 GiB et disque racine avec environ 1,2 Tio libres. Vérifications distantes en lecture seule ; aucune installation ni entraînement. Plan ML validé, mais démarrage de l'implémentation toujours différé. Accès PyTorch/CUDA applicatif, poids, crédit/facturation et première livraison Nevil restent à vérifier. Preuves dans [[Journal Icham]].
+Icham rappelle que les datasets ont déjà été identifiés. Correction importante après recherche Entire et `git fetch origin` : Nevil a publié l'audit des 1 000 WAV et `split_v2` sur `nevil/setup` (`3efa08f`). `split_v1` est invalide et ne doit pas servir ; manifeste v2 présent, SHA-256 vérifié, audit/invariants rapportés mais non réexécutés ici. Pas de conversion TimeNet ni entraînement dans cette livraison. Reprendre ces artefacts, pas recommencer la recherche de source ; revue commune requise, notamment bruit inclus dans le négatif v2 versus protocole du vault. H100 accessible en SSH déjà vérifiée ; aucun nouveau calcul distant ou code ML lancé. Détails, liens et limites : [[Journal Icham]].
 
 ## Cadrage précédent
 
@@ -26,7 +26,7 @@ Nevil propose le nom LeakLess et confirme le cadrage software-only acoustique, s
 
 Direction de travail : PIPE, assistant d'analyse acoustique de fuites avec TimeNet, TSLM réellement entraîné, baseline et démo audio/spectrogramme. Icham a demandé un plan détaillé pour les quatre agents. La direction est organisée ; la faisabilité data/ML reste à valider aux portes G0/G2 de [[Plan directeur agents]].
 
-Documentation et répartition sont prêtes. Aucun modèle PIPE entraîné, score PIPE, split final ou application PIPE n'est vérifié à ce stade. Après `git pull --ff-only`, `main` du code reste à `3ea769d` avec bootstrap/Entire/docs, sans modules produit. La branche distante `nevil/setup` (`c47dc96`) contient de la documentation et trois scripts non implémentés ; elle n'est pas intégrée. Son README annonce TimeNet opérationnel sur le poste de Nevil, non reproduit ici. Aucun lancement GPU payant effectué par cette reprise.
+Documentation et répartition prêtes. Aucun modèle PIPE entraîné ni score PIPE vérifié. Le checkout principal inspecté reste consacré à l'outillage et aux notes ; `origin/nevil/setup` est désormais à `3efa08f`, avec audit, scripts de groupage/vérification et manifestes v2, non intégrés au checkout principal. Les artefacts ont été lus, pas rejoués sur les WAV. Une conversion TimeNet des données acoustiques n'est pas livrée dans cette branche. L'agent n'a ni provisionné de GPU ni lancé d'entraînement ; il a seulement vérifié la machine fournie par Icham.
 
 ## Lire pour reprendre sans le chat
 
@@ -43,7 +43,7 @@ Prise en main documentaire d'Icham terminée ; jalons techniques encore à véri
 
 ## Preuves déjà disponibles
 
-Source dataset https://zenodo.org/records/18631450 consultée ; archive fuite listée avec 500 WAV. Source annonce 1 000 clips au total sur trois catégories, licence CC BY 4.0. Le reste de l'audit est à faire. Mesures sur site expérimental, pas preuve chez des clients. Voir [[PIPE - proposition ML et démo]].
+Source dataset https://zenodo.org/records/18631450 : 500 fuite, 386 sans fuite, 114 bruits. L'audit publié de Nevil confirme 1 000 WAV mono, 8 kHz, PCM 16 bits, une seconde. `split_v2` publié : 598 train, 208 validation, 194 test, 185 groupes heuristiques ; ses invariants ne prouvent pas une indépendance de sessions réelles. Mesures expérimentales, pas preuve chez des clients. Voir [[Journal Icham]] et [[PIPE - proposition ML et démo]].
 
 Dépôts privés créés et poussés : code https://github.com/IchamRaison/ehl-hackathon-zurich ; notes https://github.com/IchamRaison/ehl-hackathon-zurich-vault. Bootstrap Entire au commit 373d13f ; activé manual-commit, télémétrie et push automatique de sessions désactivés. Capture Codex locale désormais constatée ; publication/indexation distante non vérifiées. Voir [[Entire - installation et vérification]].
 
