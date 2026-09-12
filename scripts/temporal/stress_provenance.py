@@ -34,8 +34,12 @@ from harness import split_loader  # noqa: E402
 
 def artifact_sha256(root: Path) -> tuple[str, int]:
     """SHA256 d'un dossier : chemins relatifs et contenus, dans un ordre stable."""
+    if not Path(root).is_dir():
+        raise FileNotFoundError(f"jeu de stress introuvable : {root}")
     h = hashlib.sha256()
     files = sorted(p for p in Path(root).rglob("*") if p.is_file())
+    if not files:
+        raise FileNotFoundError(f"jeu de stress vide : {root}")
     for f in files:
         rel = f.relative_to(root).as_posix().encode("utf-8")
         h.update(len(rel).to_bytes(8, "big") + rel)

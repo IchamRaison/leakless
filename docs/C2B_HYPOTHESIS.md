@@ -262,7 +262,9 @@ Ce qui est en revanche établi :
    elles n'établissent pas la pertinence physique causale de l'information
    temporelle.**
 2. **C1 reste le barreau à franchir**, et il n'a pas bougé. Un TSLM qui
-   dépasserait C2b sans dépasser C1 n'aurait rien démontré.
-3. **C2b et C3 sont indiscernables** (Δ clip AUC +0,023, IC95 traversant zéro).
-   La baseline historique n'apportait donc rien de plus qu'une représentation
-   temporelle à six descripteurs.
+   dépasserait C2b sans dépasser C1 n'aurait pas démontré d'apport au-delà du
+   raccourci d'enveloppe.
+3. **C2b et C3 ne sont pas départagés** (Δ clip AUC +0,023, IC95 [−0,154, +0,123] :
+   *inconclusive*). Ce n'est pas une preuve d'équivalence : avec 41 clusters,
+   un écart de 0,15 dans un sens comme dans l'autre reste compatible avec les
+   données.

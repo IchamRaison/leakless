@@ -20,8 +20,8 @@
 | Les transformations de stress sont reproductibles entre processus | `clip_rng` dérivait sa graine de `hash()`, salé par processus : 4 processus donnaient 4 graines. Corrigé en `b23601a` par une dérivation SHA-256 canonique, avec 11 tests dont 4 en sous-processus réels | **démontré, après correction** | les résultats T2/T3 antérieurs à `b23601a` sont SUPERSEDED ; T0 et T1 inchangés au bit près. Après remplacement du RNG, l'effet T2 régénéré est mesurable sous le protocole de stress prédéfini | `git show b23601a` |
 | Les définitions de C2b ont été figées avant toute évaluation val/test de C2b | commit `355f074` contient les six descripteurs, les bandes, les fenêtres et 10 tests unitaires, **et aucun chiffre** ; l'évaluation est dans un commit postérieur. Un test vérifie que la fonction actuelle est identique à celle de `355f074` | **démontré par l'historique Git** | les résultats de C0-C3 étaient déjà connus au moment de concevoir C2b | `git show --stat 355f074`, `tests::model_definition_commits_match_git_history` |
 | Chaque run déclare trois commits distincts, et les runs publiés se reproduisent depuis un commit propre | `model_definition_commit` (où les descripteurs sont figés), `training_commit` (HEAD capturé juste avant l'ajustement, worktree propre), `execution_commit`. Les huit runs régénérés depuis `0a22990` donnent des `predictions.csv` identiques octet pour octet aux runs antérieurs, qui avaient été produits sur un worktree non commité | **démontré** | aucun checkpoint sérialisé : l'identité du modèle ajusté repose sur `model_fingerprint` | `FINAL_EVALUATION.md` §2, message du commit `docs(provenance)` (empreintes SHA256 avant/après), `tests::stress_runs_share_the_base_model` |
-| Une structure temporelle simple ne surpasse pas le raccourci d'enveloppe | C2b − C1 : Δ clip AUC −0,055, IC95 [−0,164, +0,058] | **inconclusive** | toutes les estimations ponctuelles favorisent C1, mais 41 clusters ne permettent pas de trancher | `C2B_HYPOTHESIS.md` §Réponse |
-| La baseline historique n'apportait rien de plus qu'une représentation temporelle à 6 descripteurs | C2b − C3 : Δ clip AUC +0,023, IC95 [−0,154, +0,123] | **inconclusive**, les deux sont indiscernables | — | `comparison.json` |
+| Une structure temporelle simple n'est pas démontrée supérieure au raccourci d'enveloppe | C2b − C1 : Δ clip AUC −0,055, IC95 [−0,164, +0,058] | **inconclusive** | toutes les estimations ponctuelles favorisent C1, mais 41 clusters ne permettent pas de trancher : ni supériorité, ni infériorité, ni équivalence n'est établie | `C2B_HYPOTHESIS.md` §Réponse |
+| C2b et la baseline historique C3 ne sont pas départagés | C2b − C3 : Δ clip AUC +0,023, IC95 [−0,154, +0,123] | **inconclusive** | absence d'écart mesurable, pas preuve d'équivalence : l'intervalle admet un écart de 0,15 dans les deux sens | `comparison.json` |
 | Le split est sans fuite sur cinq invariants | `verify_split_invariants.py` : I1-I5 à 0 violation, reconstruits depuis l'audio, `group_id` ignoré | **démontré** | I4 couvre 43 % des clips, I5 39 % — les champs n'existent pas ailleurs | `docs/SPLIT_V2_AUDIT.md` §6, T1 |
 | Le vérificateur n'est pas complaisant | il **échoue** sur `split_v1` (exit 1, 3 invariants violés) et passe sur `split_v2` | **démontré** | — | `SPLIT_V2_AUDIT.md` §6, T1 |
 | Le pipeline d'évaluation rend le hasard quand la relation étiquette/signal est détruite | contrôle négatif à étiquettes permutées par cluster : clip AUC **0,475** et **0,481**, IC95 contenant 0,5 | **démontré** | c'est un test de sanité, pas une expérience de performance | `run_controls.py --shuffle-labels` |
@@ -37,7 +37,7 @@
 
 | CLAIM | EVIDENCE | STATUS | LIMITATION | DEMO ARTIFACT |
 |---|---|---|---|---|
-| **La modélisation temporelle apporte quelque chose** | comparaison appariée TSLM − C1, et TSLM − C2b | **PAS ENCORE DÉMONTRÉ** | le barreau est C1 = 0,902 / 0,927. Battre C2b (0,847 / 0,915) ne suffira pas : C2b ne bat pas C1 non plus | commande §Intégration |
+| **La modélisation temporelle apporte quelque chose** | comparaison appariée TSLM − C1, et TSLM − C2b | **PAS ENCORE DÉMONTRÉ** | le barreau est C1 = 0,902 / 0,927. Battre C2b (0,847 / 0,915) ne suffira pas : C2b n'est pas démontré supérieur à C1 (*inconclusive*) | commande §Intégration |
 | Les prédictions du TSLM sont sensibles à l'organisation temporelle | écart entre T0 et T1/T2/T3 obtenu avec le même checkpoint sérialisé du TSLM, jamais entraîné sur les données stressées ; métriques indépendantes du seuil uniquement | **PAS ENCORE DÉMONTRÉ** — jeux prêts, checkpoint non possédé | un écart nul est une réponse valide, et ce serait un résultat | `timef-stress/T{0,1,2,3}` |
 | Le TSLM dépasse une baseline sur held-out | `build_final_report.py` avec le run de Hicham | **PAS ENCORE DÉMONTRÉ** | 41 clusters : l'issue la plus probable est *inconclusive* | `FINAL_EVALUATION.md` §6 |
 
@@ -75,7 +75,8 @@
 4. On a construit un contrôle temporel peu profond (C2b) et **figé ses définitions
    dans un commit sans résultats**, avant de l'évaluer. Ses prédictions sont
    sensibles aux perturbations d'ordre temporel et de phase — sans que cela
-   établisse une pertinence physique causale — mais il **ne dépasse pas C1**. La
+   établisse une pertinence physique causale — mais il **n'est pas démontré
+   supérieur à C1** (*inconclusive*). La
    question temporelle reste donc entière, avec le bon barreau et des jeux de
    stress dont les invariants sont mesurés. **Elle attend le TSLM.**
 

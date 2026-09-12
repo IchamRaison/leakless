@@ -782,6 +782,19 @@ def _synthetic_runs(root: Path, split) -> list[Path]:
                                        training_commit=FAKE_TRAINING_COMMIT,
                                        threshold_rule=f["threshold_rule"],
                                        probabilities=probs, extra=f["extra"]))
+    tslm_probs = {cid: float(np.clip(0.5 + 0.3 * (2 * lab - 1) + rng.normal(0, 0.2), 0, 1))
+                  for cid, lab in y.items()}
+    tslm_meta = {"checkpoint": "gs://fixture/step-42", "training_commit": "c0ffee" + "0" * 34}
+    dirs.append(contract.write_run(root / "tslm-v1", run_id="tslm-v1", model_name="TSLM fixture",
+                                   split=split, threshold_rule="aucun seuil",
+                                   probabilities=tslm_probs, **tslm_meta))
+    for tname in ("T1", "T2"):
+        probs = {k: float(np.clip(v + rng.normal(0, 0.1), 0, 1)) for k, v in tslm_probs.items()}
+        dirs.append(contract.write_run(root / f"tslm-v1-{tname}", run_id=f"tslm-v1-{tname}",
+                                       model_name=f"TSLM fixture sous {tname}", split=split,
+                                       threshold_rule="aucun seuil", probabilities=probs,
+                                       extra={"stress_transform": tname, "retrained": False},
+                                       **tslm_meta))
     return dirs
 
 
@@ -795,6 +808,7 @@ def final_report_render_keeps_only_c0_to_c3_in_the_ladder():
         out = tmp / "report"
         r = subprocess.run([sys.executable, str(ROOT / "scripts/eval/build_final_report.py"),
                             "--runs", *map(str, dirs), "--out", str(out),
+                            "--tslm-run-id", "tslm-v1",
                             "--manifests", str(ROOT / "manifests"),
                             "--stress-report", str(_fixture_invariants(tmp))],
                            capture_output=True, text=True, cwd=ROOT)
@@ -802,6 +816,18 @@ def final_report_render_keeps_only_c0_to_c3_in_the_ladder():
         md = (out / "FINAL_EVALUATION.md").read_text()
         sec = _assert_ladder_sections(md)
         assert "c1-shuffled" not in sec["2"] + sec["3"] + sec["4"]
+        assert "tslm-v1" not in sec["2"] + sec["3"] + sec["4"], "le TSLM n'est pas un contrôle"
+        assert "tslm-v1" in _table_run_ids(sec["6"]), "le TSLM doit avoir ses tableaux en §6"
+        # §7 : l'identité de chaque modèle stressé suit SA provenance réelle.
+        ident = {l.split("`")[1]: l for l in sec["7"].splitlines() if l.startswith("- `")}
+        assert set(ident) == {"c2b", "tslm-v1"}, ident
+        assert "aucun checkpoint sérialisé" in ident["c2b"]
+        assert "checkpoint sérialisé `gs://fixture/step-42`" in ident["tslm-v1"]
+        assert "aucun checkpoint" not in ident["tslm-v1"].lower()
+        assert "Aucun checkpoint n'est sérialisé" not in sec["7"]
+        tslm_rows = [l.split("|")[2].strip() for l in sec["7"].splitlines()
+                     if l.startswith("| `tslm-v1`")]
+        assert tslm_rows == ["**T0** original", "T1", "T2"], tslm_rows
         # §7 : les trois runs de stress, y compris celui au nom hors convention.
         rows = [l for l in sec["7"].splitlines() if l.startswith("| `c2b`")]
         variants = [l.split("|")[2].strip() for l in rows]
@@ -818,7 +844,8 @@ def final_report_render_keeps_only_c0_to_c3_in_the_ladder():
         assert m["control_ladder"] == list(LADDER_IDS)
         for k, v in m["stress_comparisons"].items():
             assert not any("macro_f1" in key for key in v), (k, list(v))
-        assert set(m["stress_prediction_shift"]) == {"c2b-T1", "c2b-T2", "c2b_phase_stress"}
+        assert set(m["stress_prediction_shift"]) == {"c2b-T1", "c2b-T2", "c2b_phase_stress",
+                                                     "tslm-v1-T1", "tslm-v1-T2"}
 
 
 def _fixture_invariants(tmp: Path) -> Path:
@@ -909,12 +936,13 @@ def refit_is_deterministic_and_the_fingerprint_identifies_the_model():
 
 @test
 def report_refuses_a_stress_run_that_is_not_the_base_model():
-    """M3 — sentinelle : autre empreinte, autre commit d'ajustement ou réentraînement -> refus."""
+    """M3 — sentinelle : autre empreinte, autre définition, autre commit d'ajustement ou réentraînement -> refus."""
     base = {"training_commit": "a" * 40, "model_fingerprint": "f" * 64, "checkpoint": "x"}
     ok = {"training_commit": "a" * 40, "model_fingerprint": "f" * 64, "retrained": False,
           "checkpoint": "autre libellé"}
     build_final_report.check_stress_provenance("c2b", base, "c2b-T2", ok)
     for bad in ({**ok, "model_fingerprint": "e" * 64}, {**ok, "training_commit": "b" * 40},
+                {**ok, "model_definition_commit": "d" * 40},
                 {**ok, "retrained": True}, {k: v for k, v in ok.items() if k != "retrained"}):
         must_raise(ValueError, build_final_report.check_stress_provenance,
                    "c2b", base, "c2b-T2", bad)
@@ -967,6 +995,29 @@ def stress_runs_share_the_base_model():
         assert m["threshold_rule"] == run_controls.STRESS_THRESHOLD_RULE, rid
         assert m["retrained"] is False and m["retrained_meaning"] == "not retrained on stressed data"
         build_final_report.check_stress_provenance("c2b", b, rid, m)
+
+
+@test
+def prediction_shift_never_writes_nan():
+    """Une série constante rend la corrélation indéfinie : None, jamais NaN dans le JSON."""
+    split = split_loader.load_split(ROOT / "manifests")
+    Run = type("Run", (), {})
+    base, flat = Run(), Run()
+    base.probabilities = {c.clip_id: (0.2 if c.label == 0 else 0.8) for c in split.clips}
+    flat.probabilities = {c.clip_id: 0.5 for c in split.clips}
+    sh = build_final_report.prediction_shift(split, base, flat)
+    assert sh["pearson_r_with_T0"] is None
+    json.dumps(sh, allow_nan=False)
+
+
+@test
+def stress_artifact_hash_refuses_missing_or_empty_sets():
+    """Un jeu absent ou vide ne doit pas recevoir l'empreinte du vide."""
+    import stress_provenance
+    with tempfile.TemporaryDirectory() as t:
+        must_raise(FileNotFoundError, stress_provenance.artifact_sha256, Path(t) / "absent")
+        (Path(t) / "vide").mkdir()
+        must_raise(FileNotFoundError, stress_provenance.artifact_sha256, Path(t) / "vide")
 
 
 @test

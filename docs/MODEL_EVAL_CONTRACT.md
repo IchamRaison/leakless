@@ -285,8 +285,9 @@ Mesuré sur le test gelé, 41 clusters (30 *leak* / 11 *non-leak*) :
 > d'acquisition : la forme de l'enveloppe en porte davantage. Le contrôle que le
 > TSLM doit dépasser est donc **C1 (0,902 / 0,927)**, pas C0.
 >
-> Et C2b, un contrôle temporel peu profond à six descripteurs, ne dépasse pas C1
-> non plus (Δ clip AUC −0,055, IC95 traversant zéro). Battre C2b ne suffit pas.
+> Et C2b, un contrôle temporel peu profond à six descripteurs, n'est pas démontré
+> supérieur à C1 (Δ clip AUC −0,055, IC95 traversant zéro : *inconclusive*).
+> Battre C2b ne suffit donc pas.
 
 Et la formulation reste qualitative : avec 41 clusters, aucun écart n'est déclaré
 significatif. Les verdicts autorisés sont *compatible with improvement*,

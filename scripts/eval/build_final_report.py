@@ -59,11 +59,16 @@ def stress_base_id(run_id: str, metadata: dict) -> str:
 def check_stress_provenance(base_id: str, base_meta: dict, rid: str, meta: dict) -> None:
     """Refuse un run de stress qui ne dérive pas du modèle du run T0.
 
+    Toujours : `retrained` false, même model_definition_commit, même training_commit.
     Avec une empreinte de modèle (contrôles) : elle doit être identique. Sans
-    empreinte (checkpoint de TSLM) : même checkpoint et même training_commit.
+    empreinte (checkpoint de TSLM) : même checkpoint.
     """
     if meta.get("retrained") is not False:
         raise ValueError(f"{rid} : `retrained` doit valoir false (not retrained on stressed data)")
+    if meta.get("model_definition_commit") != base_meta.get("model_definition_commit"):
+        raise ValueError(f"{rid} : model_definition_commit {meta.get('model_definition_commit')} "
+                         f"différent de celui de {base_id} "
+                         f"({base_meta.get('model_definition_commit')})")
     if meta.get("training_commit") != base_meta.get("training_commit"):
         raise ValueError(f"{rid} : training_commit {meta.get('training_commit')} différent "
                          f"de celui de {base_id} ({base_meta.get('training_commit')})")
@@ -84,8 +89,10 @@ def prediction_shift(split, base_run, stress_run, fold: str = "test") -> dict:
     b = np.array([stress_run.probabilities[i] for i in ids])
     d = b - a
     q1, q3 = np.percentile(d, [25, 75])
+    # Corrélation indéfinie si l'une des deux séries est constante : None, pas NaN.
+    r = None if np.std(a) == 0 or np.std(b) == 0 else round(float(np.corrcoef(a, b)[0, 1]), 6)
     return {"fold": fold, "n_clips": len(ids),
-            "pearson_r_with_T0": round(float(np.corrcoef(a, b)[0, 1]), 6),
+            "pearson_r_with_T0": r,
             "delta_p_median": round(float(np.median(d)), 6),
             "delta_p_q1": round(float(q1), 6), "delta_p_q3": round(float(q3), 6),
             "abs_delta_p_median": round(float(np.median(np.abs(d))), 6)}
@@ -163,6 +170,31 @@ def stress_score_table(reports: dict, stress_runs: dict, comps: dict,
                          f"{fmt(t['cluster_level']['roc_auc'])} | {delta} | {ci} | {lect} | "
                          f"{corr} | {dp} | {adp} |")
     return "\n".join(lines)
+
+
+def stress_identity_lines(reports: dict, stress_bases: dict) -> list[str]:
+    """Une ligne par modèle stressé, selon SA provenance réelle.
+
+    Un contrôle n'a pas de checkpoint sérialisé ; un TSLM en a un. Le texte ne
+    doit jamais attribuer à l'un la situation de l'autre.
+    """
+    lines = []
+    for base in sorted({b for b, _ in stress_bases.values()}):
+        r = reports[base]
+        pv = r.get("provenance", {})
+        if pv.get("model_fingerprint"):
+            lines.append(
+                f"- `{base}` : **aucun checkpoint sérialisé**. Définition figée "
+                f"`{str(pv.get('model_definition_commit'))[:7]}`, régression logistique "
+                f"réajustée de façon déterministe sur T0/train dans le même processus que "
+                f"l'évaluation sous stress ; empreinte `model_fingerprint` identique entre le "
+                f"run T0 et ses runs de stress.")
+        else:
+            lines.append(
+                f"- `{base}` : checkpoint sérialisé `{r['checkpoint']}` (commit d'entraînement "
+                f"`{str(r['training_commit'])[:12]}`), identique dans chacun de ses runs de "
+                f"stress ; `retrained: false`, not retrained on stressed data.")
+    return lines
 
 
 def build_markdown(result: dict, comps: dict, tslm: str | None, stress: dict | None,
@@ -309,11 +341,11 @@ def build_markdown(result: dict, comps: dict, tslm: str | None, stress: dict | N
                 "",
                 "### Scores mesurés sous stress",
                 "",
-                "Même définition de modèle figée, réajustée de façon déterministe sur T0/train "
-                "dans le même processus ; **jamais ajustée sur les données stressées**. Les "
-                "transformations ne s'appliquent qu'à l'évaluation. Aucun checkpoint n'est "
-                "sérialisé : l'identité du modèle est vérifiée par son empreinte "
-                "(`model_fingerprint`), identique entre le run T0 et ses runs de stress.",
+                "Aucun modèle n'est ajusté ni entraîné sur les données stressées : les "
+                "transformations ne s'appliquent qu'à l'évaluation. Identité du modèle, "
+                "vérifiée pour chaque run de stress avant toute comparaison :",
+                "",
+                *stress_identity_lines(reports or {}, result.get("stress_run_bases", {})),
                 "",
                 "Seules des métriques **indépendantes du seuil** figurent ici : AUC, corrélation "
                 "des probabilités avec T0 et distribution de Δp, sur le test. Le seuil d'un run "

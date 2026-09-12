@@ -12,7 +12,7 @@
 | SHA256 | `7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896` |
 | Clips | 1000 |
 | Clusters de dépendance | 185 |
-| Commit de génération du rapport | `0a22990f6451fe6dfb5e023361cdf5509998e0f9` |
+| Commit de génération du rapport | `0df4a5bb3581027af69b2840bbf7ea86307950c7` |
 | Règle d'agrégation | median des probabilités du cluster (gelée) |
 | Bootstrap | 2000 tirages, graine 20260912, unité : cluster de dépendance |
 | Source | Zenodo 18631450, CC BY 4.0 — site d'entraînement expérimental de Dongguan |
@@ -131,7 +131,9 @@ Jeux préparés, invariants **mesurés** et non supposés :
 
 ### Scores mesurés sous stress
 
-Même définition de modèle figée, réajustée de façon déterministe sur T0/train dans le même processus ; **jamais ajustée sur les données stressées**. Les transformations ne s'appliquent qu'à l'évaluation. Aucun checkpoint n'est sérialisé : l'identité du modèle est vérifiée par son empreinte (`model_fingerprint`), identique entre le run T0 et ses runs de stress.
+Aucun modèle n'est ajusté ni entraîné sur les données stressées : les transformations ne s'appliquent qu'à l'évaluation. Identité du modèle, vérifiée pour chaque run de stress avant toute comparaison :
+
+- `c2b` : **aucun checkpoint sérialisé**. Définition figée `355f074`, régression logistique réajustée de façon déterministe sur T0/train dans le même processus que l'évaluation sous stress ; empreinte `model_fingerprint` identique entre le run T0 et ses runs de stress.
 
 Seules des métriques **indépendantes du seuil** figurent ici : AUC, corrélation des probabilités avec T0 et distribution de Δp, sur le test. Le seuil d'un run stressé est recalculé sur sa propre validation transformée ; les métriques qui en dépendent (macro-F1, exactitude) ne servent à aucune conclusion de sensibilité temporelle.
 
