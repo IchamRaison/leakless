@@ -946,6 +946,13 @@ def report_refuses_a_stress_run_that_is_not_the_base_model():
                 {**ok, "retrained": True}, {k: v for k, v in ok.items() if k != "retrained"}):
         must_raise(ValueError, build_final_report.check_stress_provenance,
                    "c2b", base, "c2b-T2", bad)
+    # model_definition_commit : tout ou rien. Déclaré sur T0 et absent du run de
+    # stress, c'est un refus, pas une tolérance.
+    based = {**base, "model_definition_commit": "d" * 40}
+    build_final_report.check_stress_provenance(
+        "c2b", based, "c2b-T2", {**ok, "model_definition_commit": "d" * 40})
+    must_raise(ValueError, build_final_report.check_stress_provenance,
+               "c2b", based, "c2b-T2", ok)
     # Sans empreinte (TSLM) : le checkpoint doit être le même.
     tb = {"training_commit": "a" * 40, "checkpoint": "gs://x/step-1"}
     build_final_report.check_stress_provenance(

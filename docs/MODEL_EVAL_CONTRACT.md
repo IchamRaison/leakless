@@ -194,6 +194,7 @@ Chaque run de stress ajoute à `metadata.json` :
   "retrained": false,
   "checkpoint": "<le même que tslm-v1>",
   "training_commit": "<le même que tslm-v1>",
+  "model_definition_commit": "<le même que tslm-v1, uniquement s'il y est déclaré>",
   "execution_commit": "<HEAD au moment de l'inférence sous stress>",
   "threshold_rule": "aucun seuil appliqué — probabilités brutes"
 }
@@ -201,7 +202,10 @@ Chaque run de stress ajoute à `metadata.json` :
 
 `retrained: false` signifie exactement **« not retrained on stressed data »** :
 le checkpoint n'a jamais vu T1, T2 ni T3. Le rapport refuse un run de stress
-dont le checkpoint ou le `training_commit` diffère de celui du run T0.
+dont le checkpoint, le `training_commit` ou le `model_definition_commit` diffère
+de celui du run T0. `model_definition_commit` reste facultatif, mais **tout ou
+rien** : s'il figure dans le run T0, chaque run de stress doit le reprendre à
+l'identique ; s'il n'y figure pas, aucun run de stress ne doit le porter.
 
 > **Le seuil sous stress.** Notre moteur recalcule le seuil sur la validation
 > *du run*, donc sur la validation transformée pour un run de stress. Les

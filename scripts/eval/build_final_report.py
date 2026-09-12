@@ -521,9 +521,15 @@ def main() -> None:
     stress = json.load(open(args.stress_report)) if args.stress_report else None
     result["stress_invariants"] = stress
     import subprocess
+    # Commit du dépôt qui contient CE script, pas du répertoire courant. Un worktree
+    # modifié est signalé : le commit seul ne désignerait pas le générateur exact.
+    here = Path(__file__).resolve().parent
     try:
-        commit = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True,
+        commit = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, cwd=here,
                                 text=True, check=True).stdout.strip()
+        if subprocess.run(["git", "status", "--porcelain", "--untracked-files=no"],
+                          capture_output=True, text=True, check=True, cwd=here).stdout.strip():
+            commit += " + modifications non commitées"
     except Exception:
         commit = "unknown"
 
