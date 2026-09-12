@@ -11,7 +11,7 @@ import torch
 from opentslm.model.llm.TimeSeriesLLM import TimeSeriesLLM
 from pipe.tslm.model import AcousticQwenSP, CLASS_CONTINUATIONS
 from pipe.tslm.predict import PredictionError, Predictor
-from pipe.tslm.preprocessing import model_input, preprocess_audio
+from pipe.tslm.preprocessing import CANONICAL_VERSION, VERSION, band_series, model_input, preprocess_audio
 
 
 class ToyTokenizer:
@@ -109,6 +109,7 @@ class ScoringChecks(unittest.TestCase):
     def test_numeric_predictor_keeps_float_audio_and_preprocessing(self):
         predictor = Predictor.__new__(Predictor)
         predictor._lock = threading.Lock()
+        predictor.metadata = {"preprocessing_version": VERSION}
         predictor.model = Mock()
         predictor.model.score_probability_leak.return_value = [.123456789]
         # Valeurs hors PCM16 : surtout aucune quantification/clipping pour T3.
@@ -128,6 +129,20 @@ class ScoringChecks(unittest.TestCase):
         for waveform in (np.zeros(8000), np.full(8000, np.nan), np.zeros(7999)):
             with self.assertRaises(PredictionError):
                 predictor.score_waveform(waveform)
+
+    def test_canonical_roundtrip_matches_timef_without_changing_v1(self):
+        from leakless_acoustic.connector import _normalise
+        from pipe.tslm.predict import preprocess_for_model
+        waveform = np.random.default_rng(19).integers(-14000, 14000, size=8000).astype(np.float64)
+        historical_cache = band_series(_normalise(waveform).astype(np.float32))
+        legacy = preprocess_audio(waveform, 8000)
+        # Reproduit le défaut avant correction : allclose n'est pas la parité.
+        self.assertFalse(np.array_equal(legacy, historical_cache))
+        canonical = preprocess_for_model(waveform, 8000, {"preprocessing_version": CANONICAL_VERSION})
+        np.testing.assert_array_equal(canonical, historical_cache)
+        np.testing.assert_array_equal(preprocess_for_model(waveform, 8000, {"preprocessing_version": VERSION}), legacy)
+        with self.assertRaises(ValueError):
+            preprocess_for_model(waveform, 8000, {"preprocessing_version": "unknown"})
 
 
 if __name__ == "__main__":

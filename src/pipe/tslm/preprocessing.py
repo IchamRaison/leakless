@@ -9,6 +9,7 @@ import numpy as np
 from leakless_acoustic.connector import _normalise
 
 VERSION = "rms-hann256-hop128-band4-log1p-v1"
+CANONICAL_VERSION = "rms-f32-hann256-hop128-band4-log1p-v2"
 SAMPLE_RATE = 8000
 N_SAMPLES = 8000
 FFT_SIZE = 256
@@ -70,13 +71,20 @@ def band_series(normalized_waveform: np.ndarray) -> np.ndarray:
     return np.pad(result, ((0, 0), (0, (-result.shape[1]) % 4)))
 
 
-def preprocess_audio(waveform: np.ndarray, sample_rate: int) -> np.ndarray:
+def preprocess_audio(waveform: np.ndarray, sample_rate: int, *, version: str = VERSION) -> np.ndarray:
+    if version not in (VERSION, CANONICAL_VERSION):
+        raise ValueError("Version de prétraitement incompatible")
     if sample_rate != SAMPLE_RATE:
         raise ValueError("V0 : fréquence autre que 8000 Hz non supportée")
     x = np.asarray(waveform)
     if x.shape != (N_SAMPLES,) or not np.isfinite(x).all():
         raise ValueError("Signal fini de forme (8000,) requis")
-    return band_series(_normalise(x))
+    normalized = _normalise(x)
+    if version == CANONICAL_VERSION:
+        # TimeF sérialise les valeurs normalisées en float32. Reproduire ce
+        # passage AVANT la FFT, pas arrondir le score ni renormaliser TimeF.
+        normalized = normalized.astype(np.float32)
+    return band_series(normalized)
 
 
 def measured_band(series: np.ndarray) -> str:

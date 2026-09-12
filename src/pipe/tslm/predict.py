@@ -12,7 +12,7 @@ from opentslm.time_series_datasets.util import extend_time_series_to_match_patch
 
 from pipe.contracts import Observation, Prediction
 from pipe.tslm.model import AcousticQwenSP
-from pipe.tslm.preprocessing import VERSION, decode_wav, measured_band, model_input, preprocess_audio
+from pipe.tslm.preprocessing import CANONICAL_VERSION, VERSION, decode_wav, measured_band, model_input, preprocess_audio
 
 OUTPUT_PATTERN = re.compile(
     r"(leak|no_leak);\s*(Greatest mean spectral energy: (?:0-1000|1000-2000|2000-3000|3000-4000) Hz\.)"
@@ -30,13 +30,19 @@ def sha256_file(path: Path) -> str:
         return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
+def preprocess_for_model(waveform: np.ndarray, sample_rate: int, metadata: dict) -> np.ndarray:
+    # Les anciens appels directs predict_audio n'avaient pas ce champ ; les
+    # bundles le requièrent dans Predictor.__init__. Leur comportement reste V1.
+    return preprocess_audio(waveform, sample_rate, version=metadata.get("preprocessing_version", VERSION))
+
+
 def predict_audio(model: AcousticQwenSP, raw: bytes, metadata: dict) -> Prediction:
     started = time.monotonic()
     try:
         waveform = decode_wav(raw)
         if np.std(waveform) == 0:
             raise PredictionError("silent_audio", "Signal constant : aucune énergie acoustique exploitable")
-        series = preprocess_audio(waveform, 8000)
+        series = preprocess_for_model(waveform, 8000, metadata)
     except ValueError as exc:
         raise PredictionError("unsupported_audio", str(exc)) from exc
     batch = extend_time_series_to_match_patch_size_and_aggregate([model_input(series)], normalize=False)
@@ -50,13 +56,14 @@ def predict_audio(model: AcousticQwenSP, raw: bytes, metadata: dict) -> Predicti
                 "Domaine expérimental ; ni localisation, ni validation terrain."]
     if not matched:
         warnings.append("Sortie générée invalide : aucune classe de remplacement inventée.")
+    preprocessing_version = metadata.get("preprocessing_version", VERSION)
     return Prediction(
         sample_id=digest[:24], input_sha256=digest, model_name="tslm",
-        model_version=metadata["model_version"], preprocessing_version=VERSION,
+        model_version=metadata["model_version"], preprocessing_version=preprocessing_version,
         prediction=matched[1] if matched else None, score_type="none",
         abstained=matched is None, abstention_reason=None if matched else "invalid_output",
         observations=[Observation(name="greatest_mean_spectral_energy_band",
-                                  value=measured_band(series), unit="Hz", method=f"DSP:{VERSION}")],
+                                  value=measured_band(series), unit="Hz", method=f"DSP:{preprocessing_version}")],
         # Texte généré conservé même invalide ; les mesures DSP restent séparées.
         description=matched[2] if matched else text,
         latency_ms=(time.monotonic() - started) * 1000, warnings=warnings, execution_mode="live",
@@ -74,7 +81,7 @@ class Predictor:
                 if not path.is_relative_to(root) or sha256_file(path) != expected:
                     raise ValueError("Intégrité du checkpoint invalide")
             self.metadata = json.loads((root / "metadata.json").read_text())
-            if self.metadata["preprocessing_version"] != VERSION:
+            if self.metadata["preprocessing_version"] not in (VERSION, CANONICAL_VERSION):
                 raise ValueError("Version de prétraitement incompatible")
             required = {"metadata.json", "temporal.pt", "base/config.json", "base/tokenizer_config.json"}
             if not required.issubset(checksums) or not any(name.endswith(".safetensors") for name in checksums):
@@ -111,7 +118,7 @@ class Predictor:
         La normalisation et le preprocessing restent exactement ceux de T0.
         """
         try:
-            series = preprocess_audio(waveform, sample_rate)
+            series = preprocess_for_model(waveform, sample_rate, self.metadata)
             if np.std(waveform) == 0:
                 raise PredictionError("silent_audio", "Signal constant : aucune énergie acoustique exploitable")
         except ValueError as exc:

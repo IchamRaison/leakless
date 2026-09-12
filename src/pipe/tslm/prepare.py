@@ -16,7 +16,7 @@ from timenet.reader.reader import TimeFReader
 from timenet.registry.version import DatasetVersion
 from timenet.writer.writer import TimeFWriter
 
-from pipe.tslm.preprocessing import VERSION, band_series, decode_wav, measured_band
+from pipe.tslm.preprocessing import CANONICAL_VERSION, VERSION, band_series, decode_wav, measured_band, preprocess_audio
 
 ARCHIVES = {
     "leak acoustic data.rar": "2ec7cef54b0cbc09adab0047761fe9b2",
@@ -194,10 +194,64 @@ def prepare(data_dir: Path, manifest_dir: Path, output: Path) -> dict:
     return report
 
 
+def prepare_development(data_root: Path, manifest_dir: Path, timef_dir: Path, output: Path) -> dict:
+    """Nouveau cache V2 : TimeF existant vérifié contre le chemin canonique WAV.
+
+    Aucun test décodé, pas de réécriture des caches historiques. La conversion
+    float32 est celle apprise en V1 ; seule son identité explicite est nouvelle.
+    """
+    rows = {r["clip_id"]: r for r in load_manifest(manifest_dir) if r["fold"] in ("train", "val")}
+    with (manifest_dir / "split_v2_audit.csv").open() as stream:
+        expected_md5 = {r["clip_id"]: r["md5"] for r in csv.DictReader(stream)}
+    output.mkdir(parents=True, exist_ok=False)
+    cache = {fold: {"ids": [], "series": []} for fold in ("train", "val")}
+    seen = set()
+    with TimeFReader(DatasetVersion.open_local(timef_dir)) as reader:
+        for record in reader.iter_records(record_ids=sorted(rows), with_annotations=False):
+            cid = record.record_id
+            if cid not in rows or cid in seen or record.subject_ids != (rows[cid]["group_id"],):
+                raise ValueError("Couverture ou groupe TimeF incompatible")
+            raw = safe_member_path(rows[cid]["path"], data_root).read_bytes()
+            if hashlib.md5(raw).hexdigest() != expected_md5[cid]:
+                raise ValueError(f"WAV modifié : {cid}")
+            observed = record.time_series[0].to_numpy()
+            waveform = decode_wav(raw)
+            np.testing.assert_array_equal(observed, _normalise(waveform).astype(np.float32))
+            series = preprocess_audio(waveform, 8000, version=CANONICAL_VERSION)
+            np.testing.assert_array_equal(series, band_series(observed))
+            cache[rows[cid]["fold"]]["ids"].append(cid)
+            cache[rows[cid]["fold"]]["series"].append(series)
+            seen.add(cid)
+    if seen != set(rows):
+        raise ValueError("Enregistrements de développement manquants")
+    for fold, item in cache.items():
+        with (output / f"{fold}.npz").open("xb") as stream:
+            np.savez_compressed(stream, ids=np.asarray(item["ids"]), series=np.stack(item["series"]),
+                                preprocessing_version=CANONICAL_VERSION)
+    report = {"protocol": PROTOCOL, "preprocessing_version": CANONICAL_VERSION,
+              "manifest_sha256": MANIFEST_HASHES["split_v2.csv"], "records": len(rows),
+              "fold_counts": {fold: len(item["ids"]) for fold, item in cache.items()},
+              "test_audio_or_cache_opened": False, "canonical_vs_timef_exact": True,
+              "timef_manifest_sha256": hashlib.sha256((timef_dir / "manifest.json").read_bytes()).hexdigest(),
+              "cache_sha256": {fold: hashlib.sha256((output / f"{fold}.npz").read_bytes()).hexdigest() for fold in cache},
+              "source_sha256": {name: hashlib.sha256(Path(__file__).with_name(name).read_bytes()).hexdigest()
+                                for name in ("prepare.py", "preprocessing.py")}}
+    with (output / "preparation.json").open("x") as stream:
+        json.dump(report, stream, indent=2, allow_nan=False)
+        stream.write("\n")
+    print(json.dumps(report), flush=True)
+    return report
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data-dir", type=Path, required=True)
     parser.add_argument("--manifest-dir", type=Path, default=Path("manifests"))
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--existing-timef", type=Path,
+                        help="Opt-in V2 : cache développement canonique, sans téléchargement ni test")
     args = parser.parse_args()
-    prepare(args.data_dir, args.manifest_dir, args.output)
+    if args.existing_timef:
+        prepare_development(args.data_dir / "extracted", args.manifest_dir, args.existing_timef, args.output)
+    else:
+        prepare(args.data_dir, args.manifest_dir, args.output)
