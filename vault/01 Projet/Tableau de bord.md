@@ -14,7 +14,7 @@ Icham
 
 ## À lancer — pas encore vérifié
 
-- [ ] Icham : poursuivre le deuxième tour grill-me (texte, interaction, latence) ; premier tour répondu, implémentation différée à sa demande. Détails dans [[Journal Icham]].
+- [ ] Icham : valider la cible V1 proposée pendant grill-me (compte rendu court, classe et propriété vérifiable, qualité avant latence), puis préciser apprentissage et critères de sélection. Implémentation toujours différée à sa demande. Détails dans [[Journal Icham]].
 - [ ] G0 Nevil : audit complet, groupes, labels et split défendable.
 - [ ] Après G0, Icham/équipe : figer problème et classes ; arbitrer comparaison baseline + mesures/gabarit et test d'utilité proposés dans [[Challenge du cadrage de Nevil]].
 - [ ] G1 Tous : fixture réelle et contrats gelés.

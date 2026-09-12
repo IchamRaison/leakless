@@ -4,7 +4,7 @@ Icham
 
 ## Dernier échange — 2026-09-12
 
-Premier tour grill-me répondu : Icham privilégie les informations textuelles utiles et, si le temps manque, un résultat fonctionnel et défendable. Il veut le meilleur modèle concret, sans définir encore le critère de qualité. Pas d'heure de livraison imposée ; première version fonctionnelle rapidement pour les dépendances, recommandation de livraison précoce validée. Pas de limite budgétaire fixée pour l'instant. Icham demande explicitement de continuer à discuter avant toute implémentation. Prochain tour : contenu du texte, interaction attendue et latence acceptable. Inventaire local et réponses dans [[Journal Icham]] ; aucun lancement ML/GPU.
+Entretien grill-me, Q5–Q7 : Icham demande une recommandation concrète pour le texte et un rappel du parcours prévu ; il souhaite la réponse la plus rapide possible en conservant la précision, sans délai chiffré fixé. Le plan prévoit un compte rendu court après analyse d'un clip, pas un chat libre. Proposition à valider : première version réelle rechargeable/appelable, classe et une propriété acoustique vérifiable au départ, puis enrichissement selon les résultats ; qualité de classification et exactitude descriptive avant optimisation de latence. Aucun changement de contrat adopté ; écart binaire/trois classes toujours ouvert. Discussion uniquement, aucun lancement ML/GPU. Réponses, preuves et prochaine question de validation dans [[Journal Icham]].
 
 ## Cadrage précédent
 
