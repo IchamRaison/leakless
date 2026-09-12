@@ -238,6 +238,33 @@
   background: #cdebb3;
   box-shadow: 0 0 12px #d9efbd;
 }
+.caption-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+/* Fullscreen (note 1): same scene, more room; the canvas follows its ResizeObserver. */
+.building-panel:fullscreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px 4%;
+  background: #101713;
+}
+.building-panel:fullscreen .building-scene {
+  flex: 1;
+  height: auto;
+  min-height: 0;
+}
+.temporal-scene:fullscreen {
+  height: 100%;
+  background: #101713;
+}
+.demo-app .map-fullscreen {
+  position: absolute;
+  top: 8px;
+  right: 18px;
+}
 .building-caption {
   display: flex;
   justify-content: space-between;

@@ -24,6 +24,7 @@ import {
   measurementPoints,
   type Measurement,
 } from "./BuildingScene";
+import { FullscreenButton } from "./FullscreenButton";
 import { InspectRecording } from "./InspectRecording";
 import { ModelReadout } from "./ModelReadout";
 import { TemporalSignalMap } from "./TemporalSignalMap";
@@ -49,6 +50,7 @@ export default function DemoExperience() {
   const [time, setTime] = useState(0);
   const request = useRef<AbortController | null>(null);
   const cache = useRef(new Map<string, Loaded>());
+  const buildingPanel = useRef<HTMLDivElement>(null);
   useEffect(() => {
     request.current?.abort();
     const controller = new AbortController();
@@ -191,7 +193,7 @@ export default function DemoExperience() {
               Inspect an acoustic signal <ArrowDown size={15} />
             </a>
           </div>
-          <div className="building-panel">
+          <div className="building-panel" ref={buildingPanel}>
             <div className="building-topline">
               <span>01 / BUILDING CONTEXT</span>
               <span>ILLUSTRATIVE SCENE</span>
@@ -208,18 +210,21 @@ export default function DemoExperience() {
                   ? `Selected measurement point · ${measurement}`
                   : "Select a measurement point"}
               </span>
-              <button
-                className="quiet-button"
-                aria-label={
-                  paused
-                    ? "Resume presentation rotation"
-                    : "Pause presentation rotation"
-                }
-                onClick={() => setPaused(!paused)}
-              >
-                {paused ? <Play size={12} /> : <Pause size={12} />}
-                {paused ? "Resume" : "Pause"} rotation
-              </button>
+              <span className="caption-actions">
+                <button
+                  className="quiet-button"
+                  aria-label={
+                    paused
+                      ? "Resume presentation rotation"
+                      : "Pause presentation rotation"
+                  }
+                  onClick={() => setPaused(!paused)}
+                >
+                  {paused ? <Play size={12} /> : <Pause size={12} />}
+                  {paused ? "Resume" : "Pause"} rotation
+                </button>
+                <FullscreenButton target={buildingPanel} label="building" />
+              </span>
             </div>
             <div className="point-selector" aria-label="Measurement points">
               {measurementPoints.map((id) => (

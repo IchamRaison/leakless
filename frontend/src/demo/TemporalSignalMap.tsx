@@ -1,6 +1,7 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import * as THREE from "three";
 import type { Visualization } from "../contracts";
+import { FullscreenButton } from "./FullscreenButton";
 import { SceneCanvas, type SceneBuilder } from "./SceneCanvas";
 import { displayEnergy, signalGeometry } from "./signalGeometry";
 
@@ -12,6 +13,7 @@ export function TemporalSignalMap({
   paused: boolean;
 }) {
   const rings = useMemo(() => signalGeometry(data), [data]);
+  const scene = useRef<HTMLDivElement>(null);
   const build = useCallback<SceneBuilder>(
     (scene, camera) => {
       camera.position.set(3.6, 1.7, 5.4);
@@ -81,7 +83,7 @@ export function TemporalSignalMap({
     );
   return (
     <>
-      <div className="temporal-scene">
+      <div className="temporal-scene" ref={scene}>
         <SceneCanvas
           build={build}
           paused={paused}
@@ -91,6 +93,11 @@ export function TemporalSignalMap({
           TIME ↑ <small>{data.duration_seconds.toFixed(2)} s</small>
         </span>
         <span className="map-measured">{rings.length} measured windows</span>
+        <FullscreenButton
+          target={scene}
+          label="Temporal Signal Map"
+          className="quiet-button map-fullscreen"
+        />
       </div>
       <details className="map-method">
         <summary>How measurements become geometry</summary>
