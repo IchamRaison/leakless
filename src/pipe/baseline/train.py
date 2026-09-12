@@ -5,6 +5,7 @@ import argparse
 import csv
 import hashlib
 import json
+import os
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
@@ -83,7 +84,7 @@ def executer(chemin_configuration, chemin_analyses=None):
                        config_sha256=empreinte(chemin_configuration), split_sha256=configuration["split_sha256"],
                        data_sha256=empreinte(base / configuration["data_path"]), commit=commit, working_tree_dirty=modifie,
                        source_sha256=hachage_code, source_files=sources, n_train=int(sum(partitions == "train")),
-                       n_validation=int(sum(masque)), final_test_evaluated=False)
+                       n_validation=int(sum(masque)), final_test_evaluated=False, training_pid=os.getpid())
     if analyses is not None:
         metadonnees.update(abstention_threshold=analyses["abstention"]["threshold"], abstention_selection_scope="validation_only",
                            analysis_options=options, analysis_config_sha256=empreinte(chemin_analyses))

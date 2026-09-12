@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://docs.timenet.ai/schemas/dataset-card-v1.schema.json
+# Dataset card for the leakless/acoustic-leak connector.
+# Source measurements come from an outdoor leak-detection TRAINING FACILITY, not from
+# customer sites. Nothing here validates any deployed product. See docs/CLAIM_LEDGER.md.
+yaml_schema_version: 1
+dataset_id: leakless/acoustic-leak
+dataset_version: 2.0.0
+name: Acoustic Leak (Dongguan training facility)
+description: >-
+  One-second acoustic clips from an outdoor water-leak detection training facility, labelled
+  leak / no-leak by the source. Each record carries one amplitude-normalised waveform and the
+  dependency-cluster it belongs to, so a grouped split cannot leak a recording session, a
+  byte-identical duplicate, or a physical condition captured by two instruments across folds.
+  Amplitude is normalised per clip by construction: the raw loudness gap between the classes is
+  a known acquisition confound and is deliberately not exposed here.
+license: CC-BY-4.0
+domains:
+  - general
+tags:
+  - acoustic
+  - classification
+  - water-distribution
+  - grouped-split

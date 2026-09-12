@@ -1,0 +1,69 @@
+{
+  "version": "split_v2",
+  "supersedes": "split_v1 (INVALIDE — 30 conditions physiques traversaient les folds)",
+  "date": "2026-09-12",
+  "source": "zenodo.org/records/18631450 (CC BY 4.0)",
+  "script": "scripts/ingest/build_split_v2.py",
+  "seed": 20260912,
+  "near_dup_threshold": 0.7,
+  "near_dup_sensibilite": {
+    "0.9": 36,
+    "0.8": 36,
+    "0.7": 54,
+    "0.6": 446,
+    "0.5": 2069
+  },
+  "procedure": "composantes connexes d'un graphe de dépendances explicite, puis échantillonnage par rejet : un tirage i.i.d. par groupe (p = 0.6/0.2/0.2), accepté en bloc si chaque classe est à ±2 % de sa cible dans chaque fold et si chaque fold porte au moins 8 groupes par classe. Aucun tri, aucun placement glouton.",
+  "contraintes": {
+    "tirage_accepte": 7535,
+    "tolerance": 0.02,
+    "groupes_min_par_fold": 8
+  },
+  "aretes": {
+    "E1_doublon_exact": {
+      "cles": 964,
+      "clips_couverts": 1000,
+      "clips_non_couverts": 0,
+      "fusions": 36,
+      "couverture": "100 % des clips"
+    },
+    "E2_quasi_doublon": {
+      "paires": 54,
+      "fusions": 12,
+      "couverture": "100 % des clips comparés deux à deux"
+    },
+    "E3_session": {
+      "cles": 327,
+      "clips_couverts": 1000,
+      "clips_non_couverts": 0,
+      "fusions": 640,
+      "couverture": "100 % des clips"
+    },
+    "E4_condition_leak_inter_device": {
+      "cles": 131,
+      "clips_couverts": 426,
+      "clips_non_couverts": 574,
+      "fusions": 119,
+      "couverture": "clips leak dont pression ET débit sont renseignés"
+    },
+    "E5_condition_non_leak_inter_device": {
+      "cles": 10,
+      "clips_couverts": 386,
+      "clips_non_couverts": 614,
+      "fusions": 8,
+      "couverture": "100 % des clips no leak"
+    }
+  },
+  "n_clips": 1000,
+  "n_groupes": 185,
+  "taille_groupes": {
+    "min": 1,
+    "mediane": 3,
+    "max": 104
+  },
+  "sha256": {
+    "split_v2.csv": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+    "split_v2_audit.csv": "1a3bd3c18ad6d886d42ecc85ba3a5cceaa45a9084102fc112b53e66782e29d61"
+  },
+  "regle": "split_v2.csv ne contient ni chemin, ni device, ni pression, ni débit. Aucune colonne de split_v2_audit.csv n'entre dans une entrée de modèle."
+}
