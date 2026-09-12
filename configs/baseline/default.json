@@ -1,0 +1,12 @@
+{
+  "data_path": "../../data/baseline/development.json",
+  "split_path": "../../data/baseline/split.json",
+  "split_sha256": "A_FOURNIR_PAR_NEVIL",
+  "output_dir": "../../artifacts/baseline/development-001",
+  "seed": 42,
+  "random_forest": {"n_estimators": 100, "max_depth": null, "min_samples_leaf": 2, "class_weight": null},
+  "feature_names": ["A_CONFIRMER_AVEC_NEVIL"],
+  "feature_version": "A_CONFIRMER_AVEC_NEVIL",
+  "preprocessing_version": "A_CONFIRMER_AVEC_NEVIL",
+  "execution_mode": "live"
+}
