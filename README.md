@@ -40,8 +40,9 @@ Full decoded brief: [`docs/HACKATHON_BRIEF.md`](docs/HACKATHON_BRIEF.md)
 | Nebius compute voucher | ✅ **operational** — H100 80GB HBM3, CUDA 13.0, `nvidia-smi` verified, GPU idle |
 | Dataset | ✅ **audited — GO (conditional)** — 1000 WAV counted, 306 leakage-clean groups, [`docs/DATASET_AUDIT.md`](docs/DATASET_AUDIT.md) §13 |
 | TimeNet | ✅ cloned and working locally (CLI operational) |
+| Split | ✅ **frozen** — `manifests/split_v1.csv`, seed 20260912, all overlap checks at 0 — [`docs/SPLIT_AUDIT.md`](docs/SPLIT_AUDIT.md) |
 | Training | ❌ **nothing launched, deliberately** |
-| Code | ⏳ `scripts/ingest/build_groups.py` implemented (audit + grouping, no split, no training). Everything else is scaffolding. |
+| Code | ⏳ `scripts/ingest/build_groups.py` implemented — audit, grouping, **frozen split manifest**. No training, no TimeNet conversion, no generated annotation. |
 | Submission deadline / format | ❌ **unknown** — to be confirmed with organisers |
 
 **Nothing has been trained. No API key exists anywhere in this repository.** The dataset
@@ -61,6 +62,7 @@ no `.rar` and no derived series is tracked by Git.
 | [`docs/EVAL_PROTOCOL.md`](docs/EVAL_PROTOCOL.md) | The evaluation rules, including the hard no-random-split rule |
 | [`docs/DATASET_CARD.md`](docs/DATASET_CARD.md) | Real data versus generated data, kept strictly separate |
 | [`docs/DATASET_AUDIT.md`](docs/DATASET_AUDIT.md) | **Zenodo dataset audit** (FR) — verified counts, duplicates, group key, measured leakage risks, decision |
+| [`docs/SPLIT_AUDIT.md`](docs/SPLIT_AUDIT.md) | **Frozen split audit** (FR) — fold counts, group sizes, overlap checks, manifest hashes |
 | [`docs/CLAIM_LEDGER.md`](docs/CLAIM_LEDGER.md) | Permitted claims, forbidden claims, claims to verify |
 
 ---

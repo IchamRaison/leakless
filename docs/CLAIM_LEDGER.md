@@ -26,7 +26,8 @@ Supporting claims, equally permitted:
 | "No duplicate and no near-duplicate crosses a class boundary." | measured, `DATASET_AUDIT.md` §1.6-1.7 |
 | "The binary task is exactly balanced, 500 leak / 500 non-leak, over 306 groups." | counted, `DATASET_AUDIT.md` §4.2 |
 | "A 60/20/20 grouped split is achievable with no group split across folds." | `DATASET_AUDIT.md` §12 — feasibility, no split written |
-| "Leak clips are ~11 dB louder than no-leak clips, and RMS alone reaches a descriptive AUC of 0.857 at group level." | measured, `DATASET_AUDIT.md` §11 — **descriptive, not a performance** |
+| "Leak clips are ~11 dB louder than no-leak clips; over the whole dataset, RMS alone separates them with a descriptive AUC of 0.857 at group level." | measured, `DATASET_AUDIT.md` §11 — **a description of the confound, computed with nothing held out. Never a performance, never a threshold.** |
+| "Signal distributions show measurable differences associated with the provided labels." | measured, `DATASET_AUDIT.md` §11 — the wording is deliberate: see the forbidden claim below |
 | "Our split is grouped by condition, session and device as far as the metadata allows, and we document where it does not." | `EVAL_PROTOCOL.md` §2-3 |
 | "We measure and report the gap between a naive random split and a grouped split." | `EVAL_PROTOCOL.md` §4 |
 | "The textual descriptions are generated from labels and computed measurements, and are not expert annotations." | `DATASET_CARD.md` §4 |
@@ -56,10 +57,14 @@ Saying any of these would be false, unprovable, or both — regardless of how go
 | "You should repair *[X]*." | We are not qualified to prescribe an intervention. |
 | "Our approach is algorithmically novel." | ML-based acoustic leak detection already exists. The contribution is the **evaluation discipline and the reusable pipeline**, not a new algorithm. |
 | "Accuracy is *[high number]*" — stated without naming the split | A number without its split is not a result. |
-| "The model detects leaks" — stated without the RMS-only control | **Measured: loudness alone reaches AUC 0.857.** A score without that control may be a volume meter. `DATASET_AUDIT.md` §11, `EVAL_PROTOCOL.md` §7bis-A. |
+| "The model detects leaks" — stated without the held-out RMS-only control | Loudness is a measured confound. A score published without a control evaluated on the same held-out grouped split may be describing a volume meter. `EVAL_PROTOCOL.md` §7bis-A. |
 | A non-leak score stated without the number of test groups | 51 non-leak groups total, a 20 % test fold draws 11, one carrying 43 % of it. |
-| "The RMS AUC of 0.857 is our baseline result." | It is descriptive, computed on the whole dataset with nothing held out. It is a **control to beat**, not a result. |
+| "The RMS AUC of 0.857 is our baseline / our control / the bar to beat." | **0.857 is descriptive only** — computed on the whole dataset, nothing held out. It describes the confound; it is **not a performance threshold** and no model result may be compared against it. The control is a separate quantity, evaluated on the held-out grouped split. |
+| "Our model beats 0.857." | Compares a held-out score against a number measured on all the data. Two different quantities. |
+| An RMS-only control computed on amplitude-normalised audio | Normalisation deletes the very information the control exists to measure. The control runs on the **original un-normalised signal**. `EVAL_PROTOCOL.md` §7bis-A. |
 | "The hydraulic test bench / LeakDB demonstrates pipe-leak detection." | One is a bench, the other is simulated. Neither is field evidence. |
+| "We verified the labels from the audio content." | **We did not, and cannot.** We measured that signal distributions differ in a way associated with the provided labels. That is a statistical association, not a confirmation that any individual clip really contains a leak. **The provenance of every label remains the source dataset's.** |
+| "Clip X is confirmed to contain a leak." | Nothing in this work can confirm the physical truth of an individual label. |
 
 ---
 
@@ -74,7 +79,7 @@ out loud until it moves up to §1, with the check that moved it.
 | "The filenames allow a clean group reconstruction." | grouping attempted, 2026-09-12 — [`DATASET_AUDIT.md`](DATASET_AUDIT.md) §4 | ⚠️ **partially settled: 97.2 % of clips get an unambiguous group, but the no-leak class yields only 18 groups and the hydrophone/logger dilemma is unresolved.** Say "97.2 %, 322 groups", never "clean". |
 | "Temporal structure carries information beyond aggregated features." | the ablation in `EVAL_PROTOCOL.md` §7 | ⏳ **may come back negative, and that is a valid result** |
 | "The model abstains under unseen noise." | inject held-out environmental noise and observe | ⏳ desired, **not guaranteed, never scripted** |
-| "The model does more than measure loudness." | beat the RMS-only control on the grouped split | ⏳ **new, and now the decisive question** — `DATASET_AUDIT.md` §11 |
+| "The model does more than measure loudness." | compare against an RMS-only control **trained and evaluated on the same held-out grouped split**, computed on the un-normalised signal | ⏳ **new, and now the decisive question** — `EVAL_PROTOCOL.md` §7bis-A |
 | "The leak/no-leak loudness gap is a property of leaks rather than of the acquisition protocol." | would need a calibrated chain, or field data | ⏳ **cannot be settled with this dataset** |
 | "Our TSLM beats the baseline." | grouped-split comparison | ⏳ |
 | "The checkpoint has not seen our evaluation data." | audit OpenTSLM's training corpus for overlap | ⏳ **critical if a fallback ECG dataset is used** |

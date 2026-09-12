@@ -1,0 +1,19 @@
+{
+  "version": "split_v1",
+  "date": "2026-09-12",
+  "source": "zenodo.org/records/18631450 (CC BY 4.0)",
+  "seed": 20260912,
+  "procedure": "groupes mélangés avec le seed, triés par taille décroissante, chacun placé dans le fold au plus grand déficit relatif pour sa classe binaire. Un seul tirage, aucune recherche de seed.",
+  "cible": {
+    "train": 0.6,
+    "val": 0.2,
+    "test": 0.2
+  },
+  "n_clips": 1000,
+  "n_groupes": 306,
+  "sha256": {
+    "split_v1.csv": "89f0624a4543fb1832d70938d5893e50ee131eecaa884e2f2d43b9fe05ca2a36",
+    "split_v1_audit.csv": "b5b2083abc2bee1b9a75b66c28734e2c7951d8f3d2f0ba67066612daa7191ba8"
+  },
+  "regle": "split_v1.csv ne contient aucune métadonnée révélant l'étiquette. Aucune colonne de split_v1_audit.csv n'entre dans une entrée de modèle."
+}

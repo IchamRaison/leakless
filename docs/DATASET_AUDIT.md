@@ -431,12 +431,16 @@ mesurées :
 
 ---
 
-## 11. Étiquettes vérifiées depuis le contenu des fichiers — et le raccourci qu'elles cachent
+## 11. Distributions de signal et étiquettes fournies — et le raccourci qu'elles cachent
 
 > ⚠️ **Ce qui suit n'est pas une baseline.** Rien n'est entraîné, rien n'est ajusté, aucune donnée
-> n'est tenue à l'écart. Ce sont des **statistiques descriptives sur la totalité du dataset**,
-> destinées à répondre à une seule question : les étiquettes correspondent-elles à quelque chose
-> d'audible ? Les AUC ci-dessous **ne peuvent pas être citées comme une performance.**
+> n'est tenue à l'écart. Ce sont des **statistiques descriptives sur la totalité du dataset**.
+> Les AUC ci-dessous **ne peuvent pas être citées comme une performance, ni servir de seuil.**
+>
+> **Formulation exacte de ce qui est établi :** *les distributions de signal présentent des
+> différences mesurables associées aux étiquettes fournies.* Rien de plus. Nous ne vérifions la
+> vérité physique d'aucune étiquette individuelle — **la provenance des étiquettes reste celle du
+> dataset source**, et aucun clip n'est « confirmé » comme contenant une fuite.
 >
 > Reproduction : `build_groups.py --descriptors`.
 
@@ -456,15 +460,17 @@ pseudo-réplication des clips d'une même session :
 
 | Descripteur | AUC descriptive | Lecture |
 |---|---|---|
-| **Niveau RMS** | **0,857** | ⚠️ **un seul scalaire — le volume — sépare la tâche binaire** |
+| **Niveau RMS** | **0,857** | ⚠️ **un seul scalaire — le volume — sépare la tâche binaire.** Descriptif : aucune donnée tenue à l'écart, **pas un seuil à battre** |
 | Centroïde spectral | 0,312 | séparation inverse (0,688 dans l'autre sens), portée par la classe *noise* |
 | Ratio > 1 kHz | 0,281 | idem |
 | Taux de passages par zéro | 0,261 | idem |
 
 ### 11.3 Ce que cela démontre, et ce que cela coûte
 
-✅ **Les étiquettes ne sont pas vides.** Elles correspondent à une différence acoustique réelle et
-mesurable. Le critère 2 du GO/NO-GO est satisfait.
+✅ **Les étiquettes ne sont pas vides.** Les distributions de signal présentent des différences
+mesurables associées aux étiquettes fournies. C'est une association statistique — pas une
+confirmation de la vérité physique d'un clip donné. Le critère 2 du GO/NO-GO est satisfait à ce
+titre, et à ce titre seulement.
 
 🔴 **Mais la différence dominante est un écart de niveau sonore de ~11 dB.** Les enregistrements
 *leak* sont systématiquement plus forts que les *no leak*. C'est un artefact de protocole
@@ -476,9 +482,10 @@ silencieuse — pas une signature de fuite.
 > | | |
 > |---|---|
 > | Statut | **démontré** (§11.2) |
-> | Mécanisme | Le niveau RMS seul atteint une AUC descriptive de 0,857 au niveau groupe |
+> | Mécanisme | Sur la totalité du dataset, rien n'étant tenu à l'écart, le niveau RMS seul sépare les classes avec une AUC descriptive de 0,857 au niveau groupe |
 > | Conséquence | Un TSLM peut obtenir un score élevé en mesurant le volume. Le score serait réel, la capacité annoncée serait fausse. Et l'amplitude WAV **n'est pas calibrée** : rien ne garantit que cet écart survive à un autre matériel. |
-> | Contrôle exigé | **(a)** normalisation d'amplitude par clip, appliquée identiquement à toutes les classes ; **(b)** un contrôle « RMS seul » publié à côté de tout résultat. Un modèle qui ne bat pas 0,857 sur le split groupé n'apporte rien. |
+> | Contrôle exigé | **(a)** normalisation d'amplitude des **entrées modèle**, identique pour toutes les classes ; **(b)** un **contrôle RMS seul évalué sur exactement le même split groupé tenu à l'écart** que la baseline et le TSLM — mêmes folds, même manifeste ; **(c)** ce contrôle est calculé sur le **signal brut, non normalisé** : le calculer sur l'audio normalisé mesurerait une information supprimée par construction et produirait un contrôle artificiellement faible. |
+> | ❌ Ce que 0,857 n'est PAS | **Un seuil.** Ce chiffre décrit le confound sur toutes les données ; aucun résultat tenu à l'écart ne peut lui être comparé — ce seraient deux quantités mesurées sur des données différentes. |
 
 C'est, de tout cet audit, le point le plus important pour la suite : **L1 se contrôle en ne
 donnant pas les noms de fichiers au modèle ; L9 ne se contrôle pas, il se mesure et se publie.**
@@ -513,7 +520,7 @@ clé finale de 306 groupes.
 | # | Critère | Constat | Verdict |
 |---|---|---|---|
 | 1 | **Comptes de classes réels** | 500 / 386 / 114 comptés = annoncé. Binaire : **500 / 500 exact** | ✅ |
-| 2 | **Étiquettes vérifiées depuis les fichiers** | Séparation acoustique réelle et mesurée (§11) — **mais dominée par le niveau sonore** | ⚠️ **oui, sous condition L9** |
+| 2 | **Distributions de signal vs étiquettes fournies** | Différences mesurables associées aux étiquettes (§11) — **mais dominées par le niveau sonore**. La provenance des étiquettes reste celle du dataset source | ⚠️ **oui, sous condition L9** |
 | 3 | **Couverture du parsing des métadonnées** | **1000 / 1000**, une seule expression régulière, 0 échec | ✅ |
 | 4 | **Nombre et taille des groupes indépendants** | **306 groupes** (255 *leak*, 51 *non-leak*), médiane 2, max 74 | ⚠️ **fin côté *leak*, grossier côté *non-leak*** |
 | 5 | **Cas ambigus / collisions** | **97,2 %** non ambigus ; 16 clés dégénérées, 12 clips reliés par doublon, **0 nom non parsable**, **0 groupe multi-classes** | ✅ |
@@ -527,9 +534,10 @@ clé finale de 306 groupes.
 Les sept critères sont franchis. Deux conditions doivent être en place **avant** que le premier
 chiffre de performance ne soit produit — pas après :
 
-1. **Normalisation d'amplitude par clip**, identique pour toutes les classes, **et** publication
-   d'un contrôle « RMS seul » (AUC descriptive 0,857) à côté de chaque résultat. Sans ce
-   contrôle, aucun score n'est interprétable (L9).
+1. **Normalisation d'amplitude des entrées modèle**, identique pour toutes les classes, **et** un
+   **contrôle RMS seul évalué sur le même split groupé tenu à l'écart**, calculé sur le signal
+   **brut non normalisé**. Sans ce contrôle, aucun score n'est interprétable (L9). Le 0,857
+   descriptif ne joue aucun rôle de seuil.
 2. **Aucune métadonnée de nom de fichier ne doit atteindre le modèle** — ni en entrée, ni dans un
    prompt, ni dans une description générée. Pression et débit valent 93,8 % de rappel à eux
    seuls (L1).

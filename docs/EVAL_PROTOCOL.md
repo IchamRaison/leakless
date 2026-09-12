@@ -155,14 +155,27 @@ scrutiny. We have done this before, and it is the most defensible thing we can b
 > relaxes a rule; it adds two.
 
 **A. Loudness is a confound, and it is measured.** Leak clips are ~11 dB louder than no-leak
-clips. The RMS level alone reaches a **descriptive AUC of 0.857** at group level (255 leak groups
-vs 51 non-leak groups, whole dataset, nothing held out).
+clips.
+
+> **The descriptive figure.** Computed over the whole dataset, with nothing held out, RMS level
+> alone reaches an AUC of **0.857** at group level (255 leak groups vs 51 non-leak groups).
+>
+> ### 🔴 This number is an OBSERVATION OF THE CONFOUND. It is NOT a performance threshold.
+> It was not measured on held-out data, so **nothing is required to "beat" it** and it must never
+> be quoted as a bar, a target, or a baseline score. Comparing a held-out model score against it
+> would compare two quantities measured on different data.
 
 Therefore, as a contract:
 
-- **Per-clip amplitude normalisation**, applied identically to every class, before any model input.
-- **An "RMS only" control is published next to every reported score.** A model that does not beat
-  0.857 on the grouped split has added nothing over measuring volume.
+- **Per-clip amplitude normalisation** of model inputs, applied identically to every class.
+- **An RMS-only control is trained and evaluated on EXACTLY the same held-out grouped split as
+  the baseline and the TSLM** — same folds, same group assignment, same manifest. That control,
+  and only that control, is the quantity a model result may be compared against.
+- ### The RMS-only control is computed on the ORIGINAL, UN-NORMALISED signal.
+  Amplitude normalisation is applied to *model inputs*. Computing the control on normalised audio
+  would measure a quantity we deleted by construction, and would produce a falsely weak control
+  that flatters every model compared to it. The two pipelines are deliberately different, and the
+  difference is the point.
 - WAV amplitude is uncalibrated. **Nothing guarantees this gap survives a different recording
   chain**, which is exactly why the control travels with the result.
 

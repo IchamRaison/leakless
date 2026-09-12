@@ -32,6 +32,7 @@ import collections
 import hashlib
 import json
 import os
+import random
 import re
 import statistics
 import sys
@@ -69,6 +70,7 @@ class Clip:
     md5: str
     parsed: bool = True
     group: str = ""
+    clip_id: str = ""
     ambiguities: list[str] = field(default_factory=list)
 
 
@@ -157,7 +159,12 @@ def load_clips(root: str) -> list[Clip]:
                 continue
             with open(os.path.join(path, name), "rb") as fh:
                 md5 = hashlib.md5(fh.read()).hexdigest()
-            clips.append(parse_clip(cls, name, md5))
+            c = parse_clip(cls, name, md5)
+            # Identifiant stable, indépendant de l'ordre de lecture et de toute
+            # exécution : hash du chemin relatif dans l'archive.
+            c.clip_id = "c" + hashlib.sha1(
+                f"{folder}/{name}".encode()).hexdigest()[:12]
+            clips.append(c)
     return clips
 
 
@@ -275,6 +282,135 @@ def signal_descriptors(root: str, clips: list[Clip]) -> dict:
     return out
 
 
+SPLIT_TARGET = {"train": 0.60, "val": 0.20, "test": 0.20}
+
+
+def assign_folds(clips: list[Clip], seed: int) -> dict[str, str]:
+    """Assigne chaque GROUPE entier à un fold. Déterministe, sans recherche.
+
+    Procédure, fixée avant d'avoir vu le moindre score :
+      1. mélange des groupes avec `seed` (documenté, unique) ;
+      2. tri stable par taille décroissante — les gros groupes, les plus durs à
+         placer, passent en premier ;
+      3. chaque groupe va au fold dont le déficit relatif est le plus grand
+         POUR SA CLASSE (tâche binaire leak / non-leak).
+
+    Aucune recherche sur plusieurs seeds : choisir le « meilleur » split parmi
+    N tirages reviendrait à optimiser le split, c'est-à-dire à choisir ses
+    données d'évaluation. On prend ce que le seed donne.
+    """
+    binary = {c.filename: ("leak" if c.cls == "leak" else "no_leak") for c in clips}
+    sizes: dict[str, int] = collections.Counter(c.group for c in clips)
+    cls_of: dict[str, str] = {}
+    for c in clips:
+        cls_of[c.group] = binary[c.filename]
+
+    groups = sorted(sizes)                      # ordre de départ déterministe
+    random.Random(seed).shuffle(groups)
+    groups.sort(key=lambda g: -sizes[g])        # tri stable : départage par le mélange
+
+    placed: dict[str, collections.Counter] = {f: collections.Counter() for f in SPLIT_TARGET}
+    assignment: dict[str, str] = {}
+    for g in groups:
+        cls = cls_of[g]
+        done = sum(placed[f][cls] for f in placed) + sizes[g]
+        fold = max(SPLIT_TARGET, key=lambda f: SPLIT_TARGET[f] - placed[f][cls] / done)
+        placed[fold][cls] += sizes[g]
+        assignment[g] = fold
+    return assignment
+
+
+def write_manifest(out_dir: str, clips: list[Clip], seed: int) -> dict:
+    """Écrit le manifeste versionné. Aucun WAV, aucune donnée audio.
+
+    Deux fichiers, séparés volontairement :
+
+    `split_v1.csv` — le contrat de split. clip_id, label, group_id, device, fold.
+        **Ne contient aucune métadonnée révélant l'étiquette.** C'est le seul
+        fichier que le code d'entraînement a besoin de lire.
+
+    `split_v1_audit.csv` — colonnes d'audit uniquement : chemin, matériau,
+        région, pression, débit, fenêtre, répétition, md5. Pression et débit ne
+        sont renseignés que pour la classe leak (risque L1) : **aucune colonne
+        de ce fichier ne doit atteindre une entrée de modèle.** Il sert à
+        rejouer l'audit et à résoudre clip_id → fichier pour lire la forme
+        d'onde.
+    """
+    import csv
+
+    os.makedirs(out_dir, exist_ok=True)
+    folds = assign_folds(clips, seed)
+    rows = sorted(clips, key=lambda c: c.clip_id)
+
+    split_path = os.path.join(out_dir, "split_v1.csv")
+    with open(split_path, "w", newline="") as fh:
+        w = csv.writer(fh, lineterminator="\n")
+        w.writerow(["clip_id", "label", "label_3c", "group_id", "device", "fold"])
+        for c in rows:
+            w.writerow([c.clip_id,
+                        "leak" if c.cls == "leak" else "no_leak",
+                        c.cls, c.group, c.device, folds[c.group]])
+
+    audit_path = os.path.join(out_dir, "split_v1_audit.csv")
+    with open(audit_path, "w", newline="") as fh:
+        w = csv.writer(fh, lineterminator="\n")
+        w.writerow(["clip_id", "path", "material", "region", "pressure_mpa",
+                    "flow_ms", "noise_category", "window", "rep", "md5",
+                    "group_id", "fold"])
+        for c in rows:
+            w.writerow([c.clip_id, f"{FOLDERS[c.cls]}/{c.filename}", c.material,
+                        c.region, c.pressure, c.flow, c.noise_category, c.window,
+                        c.rep if c.rep is not None else "", c.md5, c.group,
+                        folds[c.group]])
+
+    def sha256(path: str) -> str:
+        with open(path, "rb") as fh:
+            return hashlib.sha256(fh.read()).hexdigest()
+
+    meta = {
+        "version": "split_v1",
+        "date": "2026-09-12",
+        "source": "zenodo.org/records/18631450 (CC BY 4.0)",
+        "seed": seed,
+        "procedure": "groupes mélangés avec le seed, triés par taille décroissante, "
+                     "chacun placé dans le fold au plus grand déficit relatif pour sa "
+                     "classe binaire. Un seul tirage, aucune recherche de seed.",
+        "cible": SPLIT_TARGET,
+        "n_clips": len(clips),
+        "n_groupes": len(set(folds)),
+        "sha256": {"split_v1.csv": sha256(split_path),
+                   "split_v1_audit.csv": sha256(audit_path)},
+        "regle": "split_v1.csv ne contient aucune métadonnée révélant l'étiquette. "
+                 "Aucune colonne de split_v1_audit.csv n'entre dans une entrée de modèle.",
+    }
+    with open(os.path.join(out_dir, "split_v1.meta.json"), "w") as fh:
+        json.dump(meta, fh, indent=2, ensure_ascii=False)
+        fh.write("\n")
+    return {"folds": folds, "meta": meta,
+            "split_path": split_path, "audit_path": audit_path}
+
+
+def verify_split(clips: list[Clip], folds: dict[str, str]) -> dict:
+    """Contrôles automatiques. Chacun DOIT valoir 0."""
+    by_group = collections.defaultdict(set)
+    by_md5 = collections.defaultdict(set)
+    for c in clips:
+        by_group[c.group].add(folds[c.group])
+        by_md5[c.md5].add(folds[c.group])
+
+    by_condition = collections.defaultdict(set)
+    for c in clips:
+        if c.cls == "leak" and NA not in (c.material, c.region, c.pressure, c.flow):
+            by_condition[(c.material, c.region, c.pressure, c.flow)].add(folds[c.group])
+
+    return {
+        "group_overlap": sum(1 for v in by_group.values() if len(v) > 1),
+        "duplicate_overlap": sum(1 for v in by_md5.values() if len(v) > 1),
+        "condition_overlap": sum(1 for v in by_condition.values() if len(v) > 1),
+        "clips_sans_fold": sum(1 for c in clips if c.group not in folds),
+    }
+
+
 def describe(sizes: list[int]) -> dict:
     return {
         "n_groupes": len(sizes),
@@ -298,6 +434,10 @@ def main() -> None:
                          "(laisse le même événement physique à cheval sur deux groupes)")
     ap.add_argument("--descriptors", action="store_true",
                     help="statistiques descriptives de signal par classe — PAS une baseline")
+    ap.add_argument("--write-manifest", metavar="DIR",
+                    help="fige le manifeste versionné (CSV, aucun WAV) dans ce dossier")
+    ap.add_argument("--seed", type=int, default=20260912,
+                    help="seed du split groupé (défaut : 20260912, documenté dans le manifeste)")
     args = ap.parse_args()
 
     clips = load_clips(args.data_root)
@@ -477,6 +617,33 @@ def main() -> None:
         "classe_noise_disponible_en_hydrophone": sum(
             1 for c in clips if c.cls == "noise" and c.device == "hydrophone"),
     }
+
+    # 9. Manifeste versionné + contrôles automatiques du split ---------------
+    if args.write_manifest:
+        written = write_manifest(args.write_manifest, clips, args.seed)
+        folds = written["folds"]
+        report["manifeste"] = written["meta"]
+        report["verification_split"] = verify_split(clips, folds)
+
+        bin_of = {c.filename: ("leak" if c.cls == "leak" else "no_leak") for c in clips}
+        per_fold: dict = {}
+        for f in SPLIT_TARGET:
+            members = [c for c in clips if folds[c.group] == f]
+            gs = collections.Counter(c.group for c in members)
+            per_fold[f] = {
+                "clips": len(members),
+                "clips_par_classe_binaire": dict(collections.Counter(
+                    bin_of[c.filename] for c in members)),
+                "clips_par_classe_3": dict(collections.Counter(c.cls for c in members)),
+                "groupes": len(gs),
+                "groupes_par_classe_binaire": {
+                    k: len({c.group for c in members if bin_of[c.filename] == k})
+                    for k in ("leak", "no_leak")},
+                "taille_groupes": describe(list(gs.values())),
+                "plus_gros_groupe_pct_du_fold": round(
+                    100 * max(gs.values()) / len(members), 1),
+            }
+        report["folds"] = per_fold
 
     if args.descriptors:
         report["descripteurs_signal"] = signal_descriptors(args.data_root, clips)
