@@ -1095,3 +1095,33 @@
     flex: auto;
   }
 }
+/* Touch: 44px minimum targets. 3D markers stay compact; the N1–N4 buttons duplicate them. */
+@media (max-width: 760px), (pointer: coarse) {
+  .demo-brand,
+  .demo-topbar nav a,
+  .explore-link,
+  .evidence-link,
+  .report-link,
+  .demo-footer a,
+  .audio-and-source a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .demo-app .point-selector button,
+  .demo-app .example-selector button,
+  .demo-app .quiet-button,
+  .demo-app .load-button,
+  .demo-app .upload-drop button,
+  .demo-app .map-pending button {
+    min-height: 44px;
+  }
+  .demo-app .upload-error button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .map-method summary,
+  .clip-provenance summary {
+    padding-block: 12px;
+  }
+}
