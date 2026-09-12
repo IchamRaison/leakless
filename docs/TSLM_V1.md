@@ -6,10 +6,26 @@ Icham
 
 Code de campagne et d'export : `1199789f471acf79f7e82604e2a15acd45e0b2f7`.
 Scoring introduit à `4456c3168f22b17d81bbb0bc6c2a91e34e14bb30`.
-Les 18 tests CPU passent dans le runtime H100 reconstruit ; le score réel a été
+Les 19 tests CPU passent dans le runtime H100 reconstruit ; le score réel a été
 vérifié sur quatre clips **train seulement**. Preuves : [evidence/tslm-v1](evidence/tslm-v1/).
-La campagne V1 est lancée ; checkpoint final, reload et exports restent à vérifier.
-Cette note sera complétée avec les artefacts réellement obtenus.
+La campagne de 600 étapes est terminée ; époque 4 retenue parmi les trois candidats
+sur validation, bundle autonome rechargé dans un processus neuf avec score et texte
+identiques. **T0 conforme et prêt à publier, stress ensuite ; aucune métrique finale calculée ici.**
+Exporteur renforcé : `5a29d6eb9ceca39fdce829eb22dbbfd67b25589b` ; le modèle,
+preprocessing, scoring et stress sont inchangés depuis le code d'entraînement.
+
+Modèle `pipe-qwen3.5-4b-v1-1199789f-e4`, bundle sur la H100 :
+`/home/hicham/pipe-v0/artifacts/qwen-v1-1199789f-001/bundle`.
+SHA-256 de `checksums.json` : `b95569c50f5e1bbf3533bddc92530b5f285eb25dec999f83999f60ffd912d1ae`.
+Les paramètres temporels retenus ont changé et le SHA intégral de Qwen gelé est
+identique avant/après ; preuves dans `training-report.json` et `reload.json`.
+
+T0 : [metadata.json](../artifacts/tslm_runs/tslm-v1/metadata.json) et
+[predictions.csv](../artifacts/tslm_runs/tslm-v1/predictions.csv), 402 IDs val/test,
+deux colonnes exactes, contrôleur conforme. SHA CSV :
+`0c4dfb3f06c379fe48ce4f7456d38c67d165c80d5e083fbb3f350e0b2732d7b8`.
+Les scores resserrés restent bruts et non calibrés ; aucun réglage n'a été effectué
+après l'inspection. La qualité finale est à établir par Nevil.
 
 La V0 et son bundle sont conservés. L'environnement verrouillé et les sources
 TimeNet/Qwen restent ceux de [TSLM_V0.md](TSLM_V0.md). Aucun entraînement du

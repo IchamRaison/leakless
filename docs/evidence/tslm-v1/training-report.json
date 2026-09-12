@@ -1,0 +1,26 @@
+{
+  "purpose": "v1_selected_on_validation_final_evaluation_delegated_to_nevil",
+  "steps": 600,
+  "epochs": 8,
+  "selected_epoch": 4,
+  "n_configs_compared": 3,
+  "first_loss": 0.4852549135684967,
+  "last_loss": 0.03552025556564331,
+  "all_losses_finite": true,
+  "first_gradient_norms": {
+    "encoder": 3.7753894329071045,
+    "projector": 3.275527238845825
+  },
+  "selected_weight_delta_norms": {
+    "encoder": 3.143120288848877,
+    "projector": 0.9004685878753662
+  },
+  "frozen_llm_sha256_before": "c1b469d8d93ec5ffebd6fdd102296f1b2689d5966bc4fe3077e2f699b887267e",
+  "frozen_llm_sha256_after": "c1b469d8d93ec5ffebd6fdd102296f1b2689d5966bc4fe3077e2f699b887267e",
+  "trainable_parameters": 2441472,
+  "elapsed_seconds": 605.0983662300023,
+  "peak_memory_bytes": 53458143744,
+  "test_audio_or_cache_opened": false,
+  "frozen_manifest_contains_test_metadata": true,
+  "test_labels_not_used_for_tuning": true
+}

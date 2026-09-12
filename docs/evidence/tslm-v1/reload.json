@@ -1,0 +1,73 @@
+{
+  "fresh_process_reload": true,
+  "score_match": true,
+  "deterministic_output_match": true,
+  "input_paths_match": true,
+  "invalid_audio_rejected": true,
+  "score_atol": 1e-06,
+  "probability_leak": 0.4378403399740951,
+  "input_path_scores": {
+    "wav": 0.4378403399740951,
+    "waveform": 0.4378403399740951,
+    "series": 0.4378403399740951
+  },
+  "prediction": {
+    "schema_version": "0.1",
+    "sample_id": "daf17dc8d90df21bb484e9b0",
+    "input_sha256": "daf17dc8d90df21bb484e9b05a3f2585c4201f9426b33e5bb8f1f130d9e34f35",
+    "model_name": "tslm",
+    "model_version": "pipe-qwen3.5-4b-v1-1199789f-e4",
+    "preprocessing_version": "rms-hann256-hop128-band4-log1p-v1",
+    "prediction": "no_leak",
+    "class_scores": null,
+    "score_type": "none",
+    "abstained": false,
+    "abstention_reason": null,
+    "observations": [
+      {
+        "name": "greatest_mean_spectral_energy_band",
+        "value": "0-1000",
+        "unit": "Hz",
+        "method": "DSP:rms-hann256-hop128-band4-log1p-v1"
+      }
+    ],
+    "description": "Greatest mean spectral energy: 0-1000 Hz.",
+    "latency_ms": 826.1091229978774,
+    "warnings": [
+      "V0 mécanique, qualité non évaluée ; aucune confiance calibrée.",
+      "Domaine expérimental ; ni localisation, ni validation terrain."
+    ],
+    "execution_mode": "live"
+  },
+  "scoring_spec": {
+    "version": "class-continuation-logprob-sum-softmax-v1",
+    "class_continuations": [
+      "leak;",
+      "no_leak;"
+    ],
+    "class_token_ids": [
+      [
+        273,
+        570,
+        26
+      ],
+      [
+        2083,
+        11414,
+        570,
+        26
+      ]
+    ],
+    "class_token_counts": [
+      3,
+      4
+    ],
+    "aggregation": "sum",
+    "length_normalization": false,
+    "class_terminator": ";",
+    "includes_eos": false,
+    "includes_description": false,
+    "calibration": "none"
+  },
+  "checkpoint_checksums_sha256": "b95569c50f5e1bbf3533bddc92530b5f285eb25dec999f83999f60ffd912d1ae"
+}

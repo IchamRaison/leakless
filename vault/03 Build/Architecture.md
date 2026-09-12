@@ -55,3 +55,7 @@ Limiter taille/durée des uploads, temps de calcul et nombre d'inférences simul
 Petites données et captures corrélées ; conversion acoustique/OpenTSLM non testée ; accès aux bases HF éventuellement soumis à autorisation ; dépendances pré-release ; scores de confiance non calibrés ; bruit externe pouvant révéler le domaine plutôt que la classe.
 
 Démo de secours : replay d'un vrai résultat archivé avec hash du signal/modèle et badge REPLAY. Il ne constitue pas une inférence live. Si aucun TSLM n'a été entraîné, le livrable ne remplit pas ce volet du challenge.
+
+## Source locale de replay — réalisée séparément
+
+2026-09-12 : `scripts/replay_sensor.py` sur `feat/sensor-replay` fournit WAV validés → échéances monotones et incidents → une fenêtre en traitement et une en attente → journal local. Tests CPU et exécution réelle acquis, aucun modèle/API raccordé. [[Plan simulateur de capteur]] décrit la preuve et le prochain raccordement à convenir ; l’enveloppe reste locale, sans modification de `Prediction`.

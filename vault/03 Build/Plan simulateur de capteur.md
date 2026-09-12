@@ -4,7 +4,7 @@ Icham
 
 ## Statut et objectif
 
-2026-09-12, conversation parallèle : Icham demande un chantier technique pendant le travail de l'agent ML, puis son plan dans le vault. **Plan rédigé ; aucune implémentation ni exécution autorisée par cette seule demande.** Ce document détaille la brique source/replay de [[Plan surveillance continue]] §4 B, sans remplacer ce plan ni déplacer le chantier V1/T0.
+2026-09-12, conversation parallèle : Icham demande un chantier technique pendant le travail de l'agent ML, puis son plan dans le vault. **Mise à jour : implémentation demandée ensuite par Icham, étapes 1–4 réalisées et testées sur CPU ; étape 5 en attente de l’interface convenue avec Safoan.** Ce document détaille la brique source/replay de [[Plan surveillance continue]] §4 B, sans remplacer ce plan ni déplacer le chantier V1/T0.
 
 Objectif : disposer d'un petit programme local qui se comporte comme une source acoustique cadencée. Il émet automatiquement des fenêtres identifiées, permet de provoquer des défauts de transmission et laisse une trace vérifiable. Il doit fonctionner sans GPU, modèle, réseau ni application pour son premier jalon.
 
@@ -118,8 +118,12 @@ Prévoir timeout borné et traitement explicite de modèle indisponible/occupé,
 
 ## Passation et prochaine action
 
-- Réalisé dans cette conversation : recherche Entire sans résultat sur le simulateur, lecture des notes de surveillance/contrats/coordination, rédaction de ce plan et liens de continuité.
-- Non réalisé : code, tests, sélection de fichiers audio, nouvelle branche produit, lancement de replay, connexion à l'application ou au GPU.
-- La recherche n'établit pas l'absence de travaux non publiés de Safoan ; vérifier son périmètre avant l'intégration.
-- Prochaine action après demande d'implémentation : vérifier l'absence de doublon dans le code courant, isoler le chantier puis réaliser les étapes 1–4 sur CPU. Étape 5 conditionnée à l'interface convenue et à la disponibilité du service.
-- Ce plan ne change ni les propriétaires ni l'état d'avancement de la campagne ML. Références : [[Plan surveillance continue]], [[Architecture]], [[Contrats techniques]], [[Coordination et passation agents]].
+2026-09-12 : étapes 1–4 implémentées dans le worktree isolé `/tmp/ehl-sensor-replay`, branche `feat/sensor-replay`. Aucun fichier ML, manifeste gelé, dépendance, API ou processus GPU modifié. Script `scripts/replay_sensor.py`, tests `tests/replay/test_replay_sensor.py`, scénario sans audio `examples/replay/scenario.json`, guide `docs/REPLAY_SENSOR.md`.
+
+- **Testé :** `python3 -m unittest discover -s tests/replay -v`, deux tests regroupant cadence exacte, incidents, intégrité/format, lenteur, retard du processus, interruption, refus d’écrasement et changement de session ; réussite sous Python 3.13.
+- **Exécuté :** génération synthétique via `python3 tests/replay/test_replay_sensor.py --write-demo /tmp/ehl-sensor-demo-20260912`, puis `python3 scripts/replay_sensor.py --scenario /tmp/ehl-sensor-demo-20260912/scenario.json --output /tmp/ehl-sensor-demo-20260912/run`. Fin normale après huit secondes : cinq réceptions uniques, trois pertes de coupure, six émissions dont un doublon ignoré. Retard injecté observé 0,500202 s ; maximum hors injection 0,002864 s sur ce run seulement.
+- **Preuves :** `manifest.json` et `events.jsonl` dans ce dossier temporaire hors Git ; commandes reproductibles dans le guide. Nouvelle session `ace34de4-a1d8-4f83-b996-59f4d7cfece1`. Chronologie artificielle, signal synthétique constant, aucune métrique métier.
+- **Limites explicites :** récepteur local à durée simulée, retransmission immédiate seulement, métadonnées O(n) mais file audio bornée. Provenance train/démo déclarée par l’opérateur, pas contrôlée contre le split. Pas de sélection d’audio réel, ni raccordement applicatif, ni appel modèle.
+- **Prochaine action :** Safoan/Icham conviennent du transport et du timeout avant l’étape 5 ; un appel réel bloquant exigera un worker isolé de l’horloge source. Le travail ML reste sous la responsabilité de l’autre agent.
+
+Les sections précédentes conservent les exigences du plan ; les exemples qualifiés initialement « proposés » sont désormais réalisés pour la preuve locale, sans gel implicite d’un contrat applicatif.

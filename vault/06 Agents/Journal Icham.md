@@ -4,6 +4,10 @@ Icham
 
 ## État actuel
 
+T0 terminé et conforme : `artifacts/tslm_runs/tslm-v1/{metadata.json,predictions.csv}`, 402 IDs val/test, CSV strict et SHA comparés H100/local. Le contrôleur avertit d'une plage resserrée ; aucune modification des scores ou du modèle n'en découle. Publication de T0 avant les stress, pas de métriques finales. [[V1 ML - exécution]].
+
+V1 terminée : train `1199789f`, 600 étapes, trois candidats réellement comparés, époque 4 sélectionnée sur validation ; Qwen SHA identique, encodeur/projecteur modifiés. Bundle autonome checksum `b95569c5…`, reload frais réussi avec exporteur `5a29d6eb` (19 tests CPU), puis T0 lancé. Chemins/rapport dans [[V1 ML - exécution]]. Aucun calcul de métriques finales, aucune modification du modèle après gel.
+
 Campagne V1 lancée et progression réelle vérifiée après les 18 tests CPU : run `qwen-v1-1199789f-001`, code d'entraînement publié `1199789f`, préinscription avant résultats et trois seuls checkpoints 2/4/8. PID distant observé `32101`, handle d'exécution root `58387` ; revérifier le processus avant toute reprise. Aucun cache/WAV test ni métrique finale. Chemins/commande/critère dans [[V1 ML - exécution]].
 
 Étape scoring vérifiée à `4456c31` : huit tests CPU, puis contrôles réels sur quatre clips train ; frontières de tokens 3/4 et voies d'entrée concordantes. Campagne/export implémentés à `1199789f`, code transféré par archive et empreintes comparées ; tests complets avant lancement. Rapport et chemins dans [[V1 ML - exécution]]. Aucun export ni métrique finale à ce jalon.
