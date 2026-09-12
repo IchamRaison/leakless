@@ -10,9 +10,9 @@ Règle permanente : tenir ce vault à jour après chaque avancée significative 
 
 ## Maintenant
 
-1. Récupérer et lire le brief officiel.
-2. Choisir le problème et le public visé.
-3. Définir une première boucle de démonstration réalisable.
+1. Choisir le problème, le public et un dataset ouvert pour le Temporal AI Challenge.
+2. Vérifier les accès TimeNet et Nebius.
+3. Définir une boucle ingestion → entraînement TSLM → évaluation avec baseline → démo.
 
 ## Navigation
 

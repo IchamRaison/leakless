@@ -2,7 +2,11 @@
 
 ## À faire
 
-- [ ] Vérifier le [[Brief et contraintes]]
+- [ ] Confirmer deadline et format de soumission dans [[Brief et contraintes]]
+- [ ] Vérifier les accès TimeNet et activer le bon Nebius
+- [ ] Choisir un dataset ouvert, sa licence et un split sans fuite
+- [ ] Définir baseline et métriques
+- [ ] Valider ingestion TimeNet, entraînement court et sauvegarde du checkpoint
 - [ ] Renseigner l'équipe et les rôles
 - [ ] Sélectionner une piste dans [[Idées]]
 - [ ] Définir le scénario de démo et son critère de réussite
@@ -15,13 +19,15 @@ Aucune tâche démarrée.
 
 ## Bloqué
 
-- Lecture du brief officiel : récupération web indisponible lors du bootstrap.
+- Aucun blocage technique établi à ce stade ; accès TimeNet/Nebius encore non vérifiés.
 
 ## Fait
 
 - [x] Dépôt GitHub privé créé
 - [x] Entire activé ; télémétrie et push automatique des sessions désactivés
 - [x] Structure du vault créée
+- [x] Règle de continuité et note de passation ajoutées
+- [x] Brief Temporal AI reçu, sections textuelles du PDF lues et exigences documentées
 
 ## Règle de travail
 

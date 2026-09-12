@@ -4,7 +4,7 @@ Dernière mise à jour : 2026-09-12.
 
 ## But actuel
 
-Préparer l'espace de travail du hackathon EHL à Zurich. Le problème produit, le challenge retenu et la stack ne sont pas encore définis.
+Préparer le Temporal AI Challenge (ASL × Aionic × Nebius) : TimeNet, entraînement TSLM et évaluation avec baseline. Le problème produit, le dataset et la stack restent à choisir.
 
 ## État vérifié
 
@@ -18,17 +18,18 @@ Préparer l'espace de travail du hackathon EHL à Zurich. Le problème produit, 
 
 ## Dernier changement
 
-Icham demande une mise à jour continue du vault pour permettre une reprise immédiate par une autre personne ou un autre agent. Règle décrite dans [[Continuité du projet]] et rappelée dans `AGENTS.md`.
+Brief reçu d’Icham et recoupé avec les sections lisibles du PDF. Exigences, livrables et inconnues consignés dans [[Brief et contraintes]]. Source PDF archivée dans `assets/`. La règle de mise à jour continue reste active : [[Continuité du projet]] et `AGENTS.md`.
 
 ## En cours et limites
 
 - Aucun code produit ni test fonctionnel du produit pour le moment.
 - Capture Entire d'une session de développement non testée ; intégration Hermes non vérifiée.
-- Le brief officiel n'a pas pu être récupéré. Les contraintes de l'événement restent inconnues.
+- Deadline, format précis de soumission et accès Nebius/TimeNet à confirmer. Le bon annoncé de 1 000 USD n’est pas encore activé.
+- PDF lu via sa couche texte ; pages images non interprétées.
 
 ## Prochaine action concrète
 
-Récupérer le contenu du brief via https://tum-ai.notion.site/ehl-hackathon-zurich ou une copie fournie par Icham, puis renseigner [[Brief et contraintes]]. Choisir ensuite une piste avec un critère de réussite et un premier test de bout en bout.
+Comparer quelques pistes sur l’utilité, l’accès aux données ouvertes, les annotations disponibles et la faisabilité d’un entraînement court. Choisir ensuite une tâche, une baseline et un split sans fuite ; vérifier les accès TimeNet et Nebius.
 
 ## Reprendre localement
 
