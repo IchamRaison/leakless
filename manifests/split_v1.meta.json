@@ -3,6 +3,9 @@
   "date": "2026-09-12",
   "source": "zenodo.org/records/18631450 (CC BY 4.0)",
   "seed": 20260912,
+  "near_dup_threshold": 0.8,
+  "merge_cross_device": true,
+  "script": "scripts/ingest/build_groups.py",
   "procedure": "groupes mélangés avec le seed, triés par taille décroissante, chacun placé dans le fold au plus grand déficit relatif pour sa classe binaire. Un seul tirage, aucune recherche de seed.",
   "cible": {
     "train": 0.6,

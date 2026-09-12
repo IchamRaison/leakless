@@ -43,6 +43,16 @@ python3 scripts/ingest/build_groups.py \
 Vérifié : deux exécutions successives produisent des fichiers **identiques au bit près**. Un seed
 différent produit un split différent (contrôle négatif exécuté).
 
+**Contre-vérification indépendante** — tous les chiffres de ce document sont recalculés depuis
+l'audio et les CSV par un second script qui n'importe rien de `build_groups.py` :
+
+```bash
+python3 scripts/eval/verify_manifest.py --data-root <dossier hors dépôt>
+```
+
+33 contrôles, code de sortie 1 à la première divergence. Deux implémentations indépendantes qui
+tombent d'accord valent mieux qu'une qui se relit.
+
 | | |
 |---|---|
 | **Seed** | **20260912** — unique, fixé d'avance, inscrit dans `split_v1.meta.json` |

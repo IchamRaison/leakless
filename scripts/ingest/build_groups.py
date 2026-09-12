@@ -299,11 +299,19 @@ def assign_folds(clips: list[Clip], seed: int) -> dict[str, str]:
     N tirages reviendrait à optimiser le split, c'est-à-dire à choisir ses
     données d'évaluation. On prend ce que le seed donne.
     """
-    binary = {c.filename: ("leak" if c.cls == "leak" else "no_leak") for c in clips}
+    # Clé par clip_id, jamais par nom de fichier : deux dossiers de classes
+    # pourraient contenir le même nom, et la collision serait silencieuse.
+    binary = {c.clip_id: ("leak" if c.cls == "leak" else "no_leak") for c in clips}
     sizes: dict[str, int] = collections.Counter(c.group for c in clips)
     cls_of: dict[str, str] = {}
     for c in clips:
-        cls_of[c.group] = binary[c.filename]
+        seen = cls_of.setdefault(c.group, binary[c.clip_id])
+        if seen != binary[c.clip_id]:
+            # Un groupe à cheval sur deux classes rendrait l'équilibrage faux
+            # sans rien signaler. On refuse plutôt que de deviner.
+            raise SystemExit(
+                f"groupe {c.group} contient deux classes ({seen} et "
+                f"{binary[c.clip_id]}) — split impossible, corriger la clé de groupe")
 
     groups = sorted(sizes)                      # ordre de départ déterministe
     random.Random(seed).shuffle(groups)
@@ -320,7 +328,9 @@ def assign_folds(clips: list[Clip], seed: int) -> dict[str, str]:
     return assignment
 
 
-def write_manifest(out_dir: str, clips: list[Clip], seed: int) -> dict:
+def write_manifest(out_dir: str, clips: list[Clip], seed: int,
+                   near_dup: float, merged_cross_device: bool,
+                   near_dup_available: bool) -> dict:
     """Écrit le manifeste versionné. Aucun WAV, aucune donnée audio.
 
     Deux fichiers, séparés volontairement :
@@ -337,6 +347,14 @@ def write_manifest(out_dir: str, clips: list[Clip], seed: int) -> dict:
         d'onde.
     """
     import csv
+
+    if not near_dup_available:
+        # Sans numpy/scipy, la fusion des quasi-doublons est silencieusement
+        # sautée et le groupage change. Un manifeste est un contrat : on refuse
+        # d'en écrire un dont on ne peut pas garantir la reproductibilité.
+        raise SystemExit(
+            "numpy/scipy indisponibles : le groupage serait différent (fusion des "
+            "quasi-doublons sautée). Refus d'écrire un manifeste non reproductible.")
 
     os.makedirs(out_dir, exist_ok=True)
     folds = assign_folds(clips, seed)
@@ -372,6 +390,11 @@ def write_manifest(out_dir: str, clips: list[Clip], seed: int) -> dict:
         "date": "2026-09-12",
         "source": "zenodo.org/records/18631450 (CC BY 4.0)",
         "seed": seed,
+        # Tout paramètre qui change le groupage est enregistré ici : sans cela,
+        # deux manifestes différents auraient une provenance identique.
+        "near_dup_threshold": near_dup,
+        "merge_cross_device": merged_cross_device,
+        "script": "scripts/ingest/build_groups.py",
         "procedure": "groupes mélangés avec le seed, triés par taille décroissante, "
                      "chacun placé dans le fold au plus grand déficit relatif pour sa "
                      "classe binaire. Un seul tirage, aucune recherche de seed.",
@@ -392,22 +415,27 @@ def write_manifest(out_dir: str, clips: list[Clip], seed: int) -> dict:
 
 def verify_split(clips: list[Clip], folds: dict[str, str]) -> dict:
     """Contrôles automatiques. Chacun DOIT valoir 0."""
+    # Compter les non-affectés AVANT de déréférencer folds : sinon un clip sans
+    # fold lève KeyError ici et le contrôle ne peut jamais rapporter autre que 0.
+    orphans = [c for c in clips if c.group not in folds]
+
     by_group = collections.defaultdict(set)
     by_md5 = collections.defaultdict(set)
-    for c in clips:
-        by_group[c.group].add(folds[c.group])
-        by_md5[c.md5].add(folds[c.group])
-
     by_condition = collections.defaultdict(set)
     for c in clips:
+        f = folds.get(c.group)
+        if f is None:
+            continue
+        by_group[c.group].add(f)
+        by_md5[c.md5].add(f)
         if c.cls == "leak" and NA not in (c.material, c.region, c.pressure, c.flow):
-            by_condition[(c.material, c.region, c.pressure, c.flow)].add(folds[c.group])
+            by_condition[(c.material, c.region, c.pressure, c.flow)].add(f)
 
     return {
         "group_overlap": sum(1 for v in by_group.values() if len(v) > 1),
         "duplicate_overlap": sum(1 for v in by_md5.values() if len(v) > 1),
         "condition_overlap": sum(1 for v in by_condition.values() if len(v) > 1),
-        "clips_sans_fold": sum(1 for c in clips if c.group not in folds),
+        "clips_sans_fold": len(orphans),
     }
 
 
@@ -474,7 +502,8 @@ def main() -> None:
     }
 
     # 4. Quasi-doublons ------------------------------------------------------
-    pairs, _ = spectral_correlation_pairs(args.data_root, clips, args.near_dup)
+    pairs, corr = spectral_correlation_pairs(args.data_root, clips, args.near_dup)
+    near_dup_available = corr is not None
     near_cross_group = [(clips[i].filename, clips[j].filename, round(s, 3))
                         for i, j, s in pairs if clips[i].group != clips[j].group]
     report["quasi_doublons"] = {
@@ -620,7 +649,11 @@ def main() -> None:
 
     # 9. Manifeste versionné + contrôles automatiques du split ---------------
     if args.write_manifest:
-        written = write_manifest(args.write_manifest, clips, args.seed)
+        written = write_manifest(
+            args.write_manifest, clips, args.seed,
+            near_dup=args.near_dup,
+            merged_cross_device=not args.no_merge_cross_device,
+            near_dup_available=near_dup_available)
         folds = written["folds"]
         report["manifeste"] = written["meta"]
         report["verification_split"] = verify_split(clips, folds)
