@@ -4,6 +4,10 @@ Icham
 
 ## État actuel
 
+Icham : « laisse tomber Nevil pour l'instant […] nous-mêmes. Planifie uniquement ». Évaluation qualité reprise dans le plan côté Icham, pas exécutée : [[Protocole évaluation#Plan qualité V1 — proposé, non exécuté]]. Parcours proposé : vrais résultats T0/test complet, comparaison aux contrôles, stress puis audit de toutes les descriptions val/test séparées. Aucun calcul de métriques, accès GPU, entraînement, export nouveau ou changement du checkpoint. Relecture du harness : seuil validation macro-F1 groupé choisi séparément pour chaque run, donc pas prétendre que les stress utilisent déjà le seuil T0 fixe. Source vault récupérée à jour avant édition, miroirs actualisés explicitement.
+
+## État à la livraison ML — historique
+
 V1 et les quatre runs T0–T3 livrés sur `feat/icham-tslm` : T0 `186c45a`, stress `7c04c9a5636b2872334da17c54beb7016ffa00a3`. Chacun 402 prédictions conformes, mêmes poids/scoring, aucune métrique finale calculée ici. Entraînement, reload et exports terminés avec code 0 ; GPU 0 Mio / 0 %, instance encore allumée. Prochaine action : évaluation des fichiers par Nevil, puis support d'intégration avec Safoan, sans nouveau réglage sur test. [[V1 ML - exécution]].
 
 ## Jalons de cette exécution — historique du plus récent au plus ancien

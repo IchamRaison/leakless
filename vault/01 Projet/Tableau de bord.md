@@ -17,6 +17,8 @@ Icham
 
 ## En cours et à vérifier
 
+- [x] Icham demande de planifier une vraie évaluation par nous-mêmes, sans attendre Nevil ; ancienne exclusivité levée. [[Protocole évaluation#Plan qualité V1 — proposé, non exécuté]]. Aucun calcul lancé.
+- [ ] Après feu vert : T0/test complet, contrôles comparables, stress puis audit texte val/test séparés, checkpoint figé ; pas une démo de huit clips.
 - [x] Icham autorise l'implémentation V1 complète jusqu'à T0/T1–T3 ; runtime H100 et données existantes revérifiés. [[V1 ML - exécution]].
 - [x] Scoring continu implémenté, huit tests CPU et contrôle H100 sur quatre clips train réussis ; aucune évaluation de qualité. [[V1 ML - exécution]].
 - [x] Scripts de campagne/reload/export publiés et transférés à `1199789f` ; 18 tests CPU réussis dans le runtime reconstruit.
@@ -46,7 +48,7 @@ Icham
 - [x] G2 mécanique Icham : runtime, entraînement court, checkpoint complet et reload neuf hors ligne, puis environnement reconstruit. [[V0 ML - exécution]].
 - [ ] Vincent : baseline entraînée sur développement, tests et export.
 - [ ] G3 Safoan : audio/spectrogramme et vraie inférence de bout en bout.
-- [ ] G4 Nevil : évaluation finale commune après gel des modèles.
+- [ ] G4 Icham : évaluation finale commune via le harness existant après gel des modèles ; planifiée seulement, nouvelle consigne utilisateur.
 - [ ] G5 Équipe : checkpoint livré, reproduction, pitch/démo et soumission vérifiée.
 
 ## Entire — finaliser l’onboarding du poste Icham

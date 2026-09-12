@@ -8,6 +8,8 @@ CLI 0.10.6 et 12 skills installés ; capture Codex locale constatée. La recherc
 
 ## Dernier échange — 2026-09-12
 
+**Nouvelle consigne : nous évaluerons la qualité nous-mêmes, mais planification seulement à ce stade.** Icham indique que Nevil n'a pas encore fait l'évaluation et lève sa responsabilité exclusive. [[Protocole évaluation#Plan qualité V1 — proposé, non exécuté]] décrit détection T0 sur 194 test, comparaison appariée aux contrôles, stress déjà exportés et audit texte complet val/test séparés. Prochaine action : feu vert d'exécution, puis réutilisation du harness existant ; aucune métrique, inférence ou modification du checkpoint lancée dans ce tour. La responsabilité Nevil mentionnée dans les jalons précédents est historique ; les contraintes de gel et d'absence de tuning test restent en vigueur.
+
 **Plan ML entièrement exécuté ; T0–T3 conformes et publiés :** branche `feat/icham-tslm`, T0 à `186c45a`, stress à `7c04c9a5636b2872334da17c54beb7016ffa00a3`. Chacun des quatre dossiers `artifacts/tslm_runs/tslm-v1{,-T1,-T2,-T3}/` contient seulement `metadata.json` et `predictions.csv`, 402 clips val/test et deux colonnes exactes. [[V1 ML - exécution]] donne toutes les preuves. Modèle `pipe-qwen3.5-4b-v1-1199789f-e4`, époque 4 retenue parmi trois candidats sur validation ; Qwen gelé inchangé. Bundle `/home/hicham/pipe-v0/artifacts/qwen-v1-1199789f-001/bundle`, checksum `b95569c5…`, reload neuf et 19 tests CPU réussis. Même scoring et checkpoint pour les stress officiels `6dfdf63`, aucun réentraînement. Audit indépendant des quatre exports réussi ; GPU revenu à 0 Mio, instance laissée allumée. Prochaine action : Nevil évalue ces fichiers ; Icham assure le support d'intégration. Aucun calcul final de métriques ni adaptation après inspection du test, aucune intégration applicative revendiquée.
 
 ## Repères antérieurs — historique
@@ -42,7 +44,7 @@ Nevil propose le nom LeakLess et confirme le cadrage software-only acoustique, s
 
 ## État courant
 
-Direction de travail : PIPE, surveillance acoustique continue avec alerte automatique, TimeNet, TSLM réellement entraîné et baseline. [[Plan surveillance continue]] distingue cette ambition de la livraison ML réalisée : V1 entraînée, sélectionnée sur validation, figée et T0–T3 publiés. L'évaluation finale par Nevil, le raccordement au flux/simulateur, la logique d'événement et la validation terrain restent séparés et ne sont pas prouvés par ces clips.
+Direction de travail : PIPE, surveillance acoustique continue avec alerte automatique, TimeNet, TSLM réellement entraîné et baseline. [[Plan surveillance continue]] distingue cette ambition de la livraison ML réalisée : V1 entraînée, sélectionnée sur validation, figée et T0–T3 publiés. L'évaluation finale est désormais planifiée côté Icham, sans exécution autorisée dans ce tour. Raccordement au flux/simulateur, logique d'événement et validation terrain restent séparés et ne sont pas prouvés par ces clips.
 
 Le TSLM adapté et le score continu sont vérifiés : [[V1 ML - exécution]], sans comparaison finale calculée par Icham. Le rapport baseline de Nevil reste séparé ; aucune supériorité du TSLM n'est déduite des diagnostics de validation. `split_v1` invalide, v2 uniquement. Machine fournie par Icham, aucun nouveau GPU provisionné ; l'instance n'a pas été arrêtée.
 
