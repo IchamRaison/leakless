@@ -1343,6 +1343,8 @@
 }
 .monitor-card footer {
   display: flex;
+  flex-direction: row;
+  gap: 12px;
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
