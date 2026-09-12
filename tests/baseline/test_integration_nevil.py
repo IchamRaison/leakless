@@ -116,6 +116,10 @@ def test_preparation_ne_lit_ni_audio_ni_cache_test(tmp_path, monkeypatch):
     clips = (Clip("a", 0, "no_leak", "g1", "train"), Clip("b", 1, "leak", "g2", "val"), Clip("c", 1, "leak", "g3", "test"))
     split = Split(clips, "f" * 64, tmp_path, {c.clip_id: c.clip_id + ".wav" for c in clips})
     monkeypatch.setattr(nevil, "charger_split", lambda _: split)
+    import hashlib
+    monkeypatch.setattr(nevil, "hashes_audio", lambda _: {
+        c.clip_id: hashlib.md5((tmp_path / (c.clip_id + ".wav")).read_bytes()).hexdigest()
+        if c.fold != "test" else "0" * 32 for c in clips})
     ecrire_json(tmp_path / "preparation.json", {"protocol": nevil.PROTOCOL, "manifest_sha256": split.sha256,
                  "preprocessing_version": nevil.VERSION, "records": 1000})
     appels = []

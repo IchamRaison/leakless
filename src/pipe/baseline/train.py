@@ -59,6 +59,16 @@ def executer(chemin_configuration, chemin_analyses=None):
     options = lire_options(chemin_analyses) if chemin_analyses else None
     base = chemin_configuration.parent
     donnees, matrice, cibles, partitions = charger_developpement(base / configuration["data_path"], base / configuration["split_path"], configuration)
+    provenance_sha256 = None
+    if donnees["dataset_version"].startswith("split_v2_binary_with_noise_v0:"):
+        from .nevil import verifier_developpement
+        verifier_developpement(donnees, base / configuration["split_path"], Path(__file__).resolve().parents[3] / "manifests")
+        provenance = lire_json(base / "source_provenance.json")
+        exiger(provenance["features_sha256"] == empreinte(base / configuration["data_path"]),
+               "Features modifiées après préparation")
+        exiger(provenance["projected_split_sha256"] == configuration["split_sha256"],
+               "Projection modifiée après préparation")
+        provenance_sha256 = empreinte(base / "source_provenance.json")
     dossier = (base / configuration["output_dir"]).resolve()
     exiger(not dossier.exists(), "Le dossier de sortie existe déjà : choisir un nouveau run")
     modele = entrainer(matrice, cibles, partitions, configuration)
@@ -84,7 +94,8 @@ def executer(chemin_configuration, chemin_analyses=None):
                        config_sha256=empreinte(chemin_configuration), split_sha256=configuration["split_sha256"],
                        data_sha256=empreinte(base / configuration["data_path"]), commit=commit, working_tree_dirty=modifie,
                        source_sha256=hachage_code, source_files=sources, n_train=int(sum(partitions == "train")),
-                       n_validation=int(sum(masque)), final_test_evaluated=False, training_pid=os.getpid())
+                       n_validation=int(sum(masque)), final_test_evaluated=False, training_pid=os.getpid(),
+                       source_provenance_sha256=provenance_sha256)
     if analyses is not None:
         metadonnees.update(abstention_threshold=analyses["abstention"]["threshold"], abstention_selection_scope="validation_only",
                            analysis_options=options, analysis_config_sha256=empreinte(chemin_analyses))

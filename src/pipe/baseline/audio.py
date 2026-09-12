@@ -45,7 +45,7 @@ class PredictionError(RuntimeError):
         self.code = code
 
 
-def exemple_audio(contenu, sample_id=None):
+def _exemple_audio(contenu, sample_id, version):
     try:
         signal = preprocessing.decode_wav(contenu)
         if np.std(signal) == 0:
@@ -56,8 +56,12 @@ def exemple_audio(contenu, sample_id=None):
     hachage = hashlib.sha256(contenu).hexdigest()
     return {"sample_id": sample_id or hachage[:24], "input_sha256": hachage,
             "features": agreger(series), "feature_names": FEATURE_NAMES,
-            "feature_version": version_features(), "preprocessing_version": preprocessing.VERSION,
+            "feature_version": version, "preprocessing_version": preprocessing.VERSION,
             "execution_mode": "live"}
+
+
+def exemple_audio(contenu, sample_id=None):
+    return _exemple_audio(contenu, sample_id, version_features())
 
 
 class Predictor:
@@ -69,13 +73,16 @@ class Predictor:
             meta = self.artefact["metadata"]
             exiger(meta["execution_mode"] == "live", "Modèle synthétique interdit dans le callable réel")
             exiger(meta["feature_version"] == version_features(), "DSP incompatible avec le modèle")
-            exiger(meta["source_files"]["audio.py"] == empreinte(__file__), "Agrégation/inférence incompatible")
+            for nom in ("audio.py", "modele.py", "donnees.py"):
+                exiger(meta["source_files"][nom] == empreinte(Path(__file__).parent / nom),
+                       f"Agrégation/inférence incompatible : {nom}")
+            self.version_features = meta["feature_version"]
         except (OSError, ValueError, KeyError, TypeError) as erreur:
             raise PredictionError("model_unavailable", str(erreur)) from erreur
 
     def predict(self, wav_bytes, *, sample_id=None):
         debut = time.perf_counter()
-        exemple = exemple_audio(wav_bytes, sample_id)
+        exemple = _exemple_audio(wav_bytes, sample_id, self.version_features)
         resultat = predict_baseline(self.artefact, exemple)
         resultat["latency_ms"] = (time.perf_counter() - debut) * 1000
         resultat["warnings"] = ["Données expérimentales ; comparaison finale à valider par Nevil.",

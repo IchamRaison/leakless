@@ -93,10 +93,11 @@ def predict_baseline(artefact, exemple):
     classes = list(modele.classes_)
     exiger(len(classes) == 2 and set(classes) == {0, 1}, "Classes du modèle incompatibles")
     probabilites = modele.predict_proba(matrice)[0]
-    predictions = modele.predict(matrice)
     exiger(len(probabilites) == 2 and np.isfinite(probabilites).all(), "Scores invalides")
     exiger(bool(((probabilites >= 0) & (probabilites <= 1)).all()) and np.isclose(sum(probabilites), 1), "Distribution des scores invalide")
-    exiger(len(predictions) == 1 and predictions[0] in (0, 1), "Prédiction invalide")
+    # RandomForestClassifier.predict refait predict_proba puis argmax.
+    # Même départage des égalités, avec une seule traversée de la forêt.
+    prediction = classes[int(np.argmax(probabilites))]
     noms = {0: "no_leak", 1: "leak"}
     seuil = metadonnees.get("abstention_threshold", 0.5)
     exiger(type(seuil) in (float, int) and np.isfinite(seuil) and 0.5 <= seuil <= 1, "Seuil d'abstention invalide dans l'artefact")
@@ -104,7 +105,7 @@ def predict_baseline(artefact, exemple):
     mode = "development_fixture" if "development_fixture" in (metadonnees["execution_mode"], exemple["execution_mode"]) else "live"
     return {"schema_version": "0.1", "sample_id": exemple["sample_id"], "input_sha256": exemple["input_sha256"],
             "model_name": "baseline", "model_version": metadonnees["model_version"],
-            "preprocessing_version": metadonnees["preprocessing_version"], "prediction": None if abstention else noms[int(predictions[0])],
+            "preprocessing_version": metadonnees["preprocessing_version"], "prediction": None if abstention else noms[int(prediction)],
             "class_scores": {noms[int(classe)]: float(probabilites[indice]) for indice, classe in enumerate(classes)},
             "score_type": "raw", "abstained": abstention, "abstention_reason": "max_class_score_below_validation_threshold" if abstention else None, "observations": [], "description": None,
             "latency_ms": (time.perf_counter() - debut) * 1000,

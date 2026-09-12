@@ -18,6 +18,7 @@ from pipe.tslm.preprocessing import VERSION
 
 from .audio import FEATURE_NAMES, Predictor, agreger, exemple_audio, sources_partagees, version_features
 from .donnees import ecrire_json, empreinte, exiger, lire_json
+from .integrite import hashes_audio, verifier_audio, lire_provenance
 
 
 def charger_split(dossier):
@@ -52,6 +53,8 @@ def preparer(manifestes, prepare, racine_audio, sortie):
     sortie, prepare, racine_audio = Path(sortie), Path(prepare), Path(racine_audio)
     exiger(not sortie.exists(), "Dossier de préparation déjà présent")
     split = charger_split(manifestes)
+    hashes = hashes_audio(manifestes)
+    exiger(set(hashes) == {c.clip_id for c in split.clips}, "Couverture des empreintes audio différente du split")
     rapport = lire_json(prepare / "preparation.json")
     exiger(rapport["protocol"] == PROTOCOL and rapport["manifest_sha256"] == split.sha256
            and rapport["preprocessing_version"] == VERSION and rapport["records"] == 1000,
@@ -59,11 +62,12 @@ def preparer(manifestes, prepare, racine_audio, sortie):
     affectations = [{"sample_id": c.clip_id, "event_group_id": c.group_id,
                      "split": "validation" if c.fold == "val" else c.fold} for c in split.clips]
     lignes, erreur_max = [], 0.0
-    # Les features et étiquettes test ne sont jamais chargées dans ce pilote.
+    # Le manifeste complet sert à l'audit ; seules les features train/val sont lues.
     for fold in ("train", "val"):
         cache = lire_cache(prepare, fold, split)
         for clip in split.fold(fold):
             contenu = safe_member_path(split.path_of(clip.clip_id), racine_audio).read_bytes()
+            verifier_audio(contenu, clip.clip_id, hashes)
             exemple = exemple_audio(contenu, clip.clip_id)
             depuis_timef = np.asarray(agreger(cache[clip.clip_id]))
             direct = np.asarray(exemple["features"])
@@ -83,6 +87,7 @@ def preparer(manifestes, prepare, racine_audio, sortie):
                 "min_samples_leaf": 2, "class_weight": None}, "feature_names": FEATURE_NAMES,
                 "feature_version": version_features(), "preprocessing_version": VERSION, "execution_mode": "live"})
     provenance = {"protocol": PROTOCOL, "frozen_manifest_sha256": split.sha256,
+                  "features_sha256": empreinte(sortie / "features.json"),
                   "projected_split_sha256": empreinte(sortie / "split.json"),
                   "audit_sha256": MANIFEST_HASHES["split_v2_audit.csv"], "shared_sources_sha256": sources_partagees(),
                   "preparation_sha256": empreinte(prepare / "preparation.json"),
@@ -93,6 +98,23 @@ def preparer(manifestes, prepare, racine_audio, sortie):
                   "benchmark_eligible": False}
     ecrire_json(sortie / "source_provenance.json", provenance)
     return provenance
+
+
+def verifier_developpement(donnees, chemin_split, manifestes):
+    """Rattacher labels et affectations de développement aux sources avant tout fit."""
+    split = charger_split(manifestes)
+    attendus = [{"sample_id": c.clip_id, "event_group_id": c.group_id,
+                 "split": "validation" if c.fold == "val" else c.fold} for c in split.clips]
+    recus = lire_json(chemin_split)["assignments"]
+    exiger(sorted(recus, key=lambda x: x["sample_id"]) == sorted(attendus, key=lambda x: x["sample_id"]),
+           "La projection ne correspond pas au split v2 gelé")
+    par_id = split.by_id()
+    exiger({l["sample_id"] for l in donnees["samples"]} == {c.clip_id for c in split.clips if c.fold in ("train", "val")},
+           "Couverture développement différente du manifeste")
+    for ligne in donnees["samples"]:
+        exiger(ligne["label"] == par_id[ligne["sample_id"]].label, "Label développement différent du manifeste gelé")
+    exiger(donnees["dataset_version"] == PROTOCOL + ":" + split.sha256,
+           "Identité du dataset différente du manifeste")
 
 
 def livrer(manifestes, prepare, racine_audio, developpement, modele, sha256, sortie):
@@ -106,7 +128,7 @@ def livrer(manifestes, prepare, racine_audio, developpement, modele, sha256, sor
     exiger(meta["config_sha256"] == empreinte(developpement / "config.json")
            and meta["data_sha256"] == empreinte(developpement / "features.json")
            and meta["split_sha256"] == empreinte(developpement / "split.json"), "Développement modifié après gel")
-    provenance = lire_json(developpement / "source_provenance.json")
+    provenance = lire_provenance(developpement / "source_provenance.json", meta["source_provenance_sha256"])
     exiger(provenance["frozen_manifest_sha256"] == split.sha256
            and provenance["projected_split_sha256"] == meta["split_sha256"], "Provenance split incohérente")
     for fold, attendu in provenance["cache_sha256"].items():
@@ -115,9 +137,12 @@ def livrer(manifestes, prepare, racine_audio, developpement, modele, sha256, sor
     from .donnees import lire_json as lire
     from .modele import exemple_inference
     donnees = lire(developpement / "features.json")
+    verifier_developpement(donnees, developpement / "split.json", manifestes)
     exemples = {l["sample_id"]: exemple_inference(donnees, l) for l in donnees["samples"]}
     import json
-    reference = {p["sample_id"]: p for p in map(json.loads, (modele / "predictions.jsonl").read_text().splitlines())}
+    lignes_reference = list(map(json.loads, (modele / "predictions.jsonl").read_text().splitlines()))
+    reference = {p["sample_id"]: p for p in lignes_reference}
+    exiger(len(reference) == len(lignes_reference), "Prédictions validation répétées")
     attendus_val = {c.clip_id for c in split.fold("val")}
     exiger(set(reference) == attendus_val, "Couverture validation sauvegardée incorrecte")
     for identifiant in sorted(attendus_val):
@@ -125,10 +150,11 @@ def livrer(manifestes, prepare, racine_audio, developpement, modele, sha256, sor
         for cle in ("prediction", "class_scores", "abstained", "input_sha256"):
             exiger(recharge[cle] == reference[identifiant][cle], "Prédictions différentes après rechargement")
     resultats = []
-    for clip in split.clips:
-        if clip.fold not in ("val", "test"):
-            continue
+    hashes = hashes_audio(manifestes)
+    exiger(set(hashes) == {c.clip_id for c in split.clips}, "Couverture des empreintes audio différente du split")
+    for clip in (*split.fold("val"), *split.fold("test")):
         contenu = safe_member_path(split.path_of(clip.clip_id), Path(racine_audio)).read_bytes()
+        verifier_audio(contenu, clip.clip_id, hashes)
         resultat = predicteur.predict(contenu, sample_id=clip.clip_id).model_dump(mode="json")
         if clip.fold == "val":
             for cle in ("prediction", "class_scores", "input_sha256"):
