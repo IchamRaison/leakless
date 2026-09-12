@@ -1,8 +1,8 @@
 // Presentation copy of the authorized results. No model probabilities live here.
-// Update this single module from the scientific report; never compute evaluation in the UI.
+// Update this single module from the frozen report (tag protocol-freeze-v1); never compute evaluation in the UI.
 export const evidence = {
   source:
-    "https://github.com/IchamRaison/ehl-hackathon-zurich/tree/nevil/temporal-evidence",
+    "https://github.com/IchamRaison/ehl-hackathon-zurich/tree/protocol-freeze-v1",
   records: 1000,
   clusters: 185,
   testClusters: 41,
