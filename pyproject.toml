@@ -8,7 +8,7 @@ version = "0.0.1"
 description = "Prototype acoustique TimeNet / OpenTSLM, V0 expérimentale"
 requires-python = ">=3.12,<3.13"
 dependencies = [
-  "torch==2.8.0", "torchvision==0.23.0", "transformers>=4.51,<5",
+  "torch==2.8.0", "torchvision==0.23.0", "transformers==5.13.0",
   "numpy>=2.1", "scipy>=1.14", "pydantic>=2,<3", "libarchive-c>=5",
   "pyyaml>=6", "jsonschema>=4.18",
   "opentslm @ git+https://github.com/OpenTSLM/OpenTSLM.git@2968f4b891baab4307f7e9d0043e87677b593a30",
