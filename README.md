@@ -12,4 +12,10 @@ Entire uses manual-commit checkpoints. Telemetry and automatic pushing of sessio
 
 Agent integrations are configured for Claude Code, Codex, Copilot CLI, Cursor, Factory AI Droid, Gemini CLI, OpenCode, and Pi. Hermes session capture has not been verified.
 
+## Obsidian vault
+
+Open `vault/` as a vault in Obsidian and start with `Accueil.md`. It contains the brief checklist, tasks, research, architecture, decisions, experiments, demo preparation, daily journal, and templates. No community plugins are required.
+
+Notes and shared settings are tracked in Git. Device-specific workspaces, local plugins, trash, and secrets are excluded. Git is the sharing mechanism; automatic Obsidian Sync is not configured. Pull before editing and commit/push to share changes.
+
 Project scope and implementation are to be defined.
