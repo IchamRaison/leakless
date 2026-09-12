@@ -1,4 +1,4 @@
-"""Interface locale pour Safoan : Predictor(checkpoint).predict(wav_bytes)."""
+"""Interface Safoan predict(wav_bytes), et score brut seul pour le harness."""
 import hashlib
 import json
 from pathlib import Path
@@ -94,5 +94,46 @@ class Predictor:
             raise PredictionError("model_busy", "Une inférence est déjà en cours")
         try:
             return predict_audio(self.model, wav_bytes, self.metadata)
+        finally:
+            self._lock.release()
+
+    def score(self, wav_bytes: bytes) -> float:
+        """Score relatif non calibré, sans génération de texte ni seuil."""
+        try:
+            waveform = decode_wav(wav_bytes)
+        except ValueError as exc:
+            raise PredictionError("unsupported_audio", str(exc)) from exc
+        return self.score_waveform(waveform)
+
+    def score_waveform(self, waveform: np.ndarray, sample_rate: int = 8000) -> float:
+        """Audio brut numérique : les stress passent ici sans réencoder un WAV.
+
+        La normalisation et le preprocessing restent exactement ceux de T0.
+        """
+        try:
+            series = preprocess_audio(waveform, sample_rate)
+            if np.std(waveform) == 0:
+                raise PredictionError("silent_audio", "Signal constant : aucune énergie acoustique exploitable")
+        except ValueError as exc:
+            raise PredictionError("unsupported_audio", str(exc)) from exc
+        return self.score_series(series)
+
+    def score_series(self, series: np.ndarray) -> float:
+        """Scorer une entrée déjà prétraitée (4,64), sans ID/label/métadonnée."""
+        try:
+            batch = extend_time_series_to_match_patch_size_and_aggregate([model_input(series)], normalize=False)
+        except ValueError as exc:
+            raise PredictionError("unsupported_audio", str(exc)) from exc
+        if not self._lock.acquire(blocking=False):
+            raise PredictionError("model_busy", "Une inférence est déjà en cours")
+        try:
+            probability = self.model.score_probability_leak(batch)[0]
+            if not np.isfinite(probability) or not 0 <= probability <= 1:
+                raise PredictionError("invalid_score", "Score non fini ou hors [0,1]")
+            return probability
+        except torch.cuda.OutOfMemoryError as exc:
+            raise PredictionError("gpu_out_of_memory", "Mémoire GPU insuffisante") from exc
+        except ValueError as exc:
+            raise PredictionError("invalid_score", str(exc)) from exc
         finally:
             self._lock.release()

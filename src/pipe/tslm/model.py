@@ -13,6 +13,9 @@ from opentslm.model.projector.MLPProjector import MLPProjector
 from opentslm.model_config import ENCODER_OUTPUT_DIM
 from transformers import AutoTokenizer, Qwen3_5ForCausalLM
 
+CLASS_CONTINUATIONS = ("leak;", "no_leak;")
+SCORING_VERSION = "class-continuation-logprob-sum-softmax-v1"
+
 
 class AcousticQwenSP(OpenTSLMSP):
     def __init__(self, base_dir: str | Path, device: str = "cuda"):
@@ -66,9 +69,79 @@ class AcousticQwenSP(OpenTSLMSP):
             use_cache=False, return_dict=True,
         ).loss
 
-    def generate(self, batch, max_new_tokens=48, **kwargs):
-        if any(set(sample) != {"pre_prompt", "post_prompt", "time_series", "time_series_text"} for sample in batch):
+    @staticmethod
+    def _validate_inference_batch(batch):
+        if not batch or any(set(sample) != {"pre_prompt", "post_prompt", "time_series", "time_series_text"}
+                            for sample in batch):
             raise ValueError("Champs d'inférence non autorisés (answer/label/métadonnées interdits)")
+
+    def scoring_spec(self) -> dict:
+        """Contrat exact : tokenisation séparée, sans espace initial, BOS ni EOS.
+
+        Le point-virgule termine chaque classe ; aucune description n'est scorée.
+        Les sommes ne sont pas divisées par la longueur, même si elle diffère.
+        La probabilité est relative aux deux continuations, pas calibrée terrain.
+        """
+        token_ids = [self.tokenizer.encode(text, add_special_tokens=False)
+                     for text in CLASS_CONTINUATIONS]
+        if any(not ids or self.tokenizer.decode(ids) != text
+               for text, ids in zip(CLASS_CONTINUATIONS, token_ids)):
+            raise ValueError("Tokenisation de classe vide ou non réversible")
+        if token_ids[0] == token_ids[1]:
+            raise ValueError("Les deux classes ont la même tokenisation")
+        return {"version": SCORING_VERSION, "class_continuations": list(CLASS_CONTINUATIONS),
+                "class_token_ids": token_ids, "class_token_counts": list(map(len, token_ids)),
+                "aggregation": "sum", "length_normalization": False,
+                "class_terminator": ";", "includes_eos": False,
+                "includes_description": False, "calibration": "none"}
+
+    @torch.inference_mode()
+    def score_class_logprobs(self, batch) -> torch.Tensor:
+        """Retourne [n,2] log P(continuation | même prompt, même signal).
+
+        Les positions scorées précèdent les tokens cibles d'un cran (causal LM).
+        Le padding du prompt est retiré avant d'ajouter les continuations ; seul
+        le padding final des réponses subsiste et ne contribue jamais à la somme.
+        """
+        self._validate_inference_batch(batch)
+        if self.training:
+            raise ValueError("Appeler model.eval() avant le scoring")
+        spec = self.scoring_spec()
+        candidates = [torch.tensor(ids, device=self.device, dtype=torch.long)
+                      for ids in spec["class_token_ids"]]
+        ids = torch.nn.utils.rnn.pad_sequence(
+            candidates, batch_first=True, padding_value=self.tokenizer.pad_token_id)
+        lengths = torch.tensor([len(candidate) for candidate in candidates], device=self.device)
+        target_mask = torch.arange(ids.shape[1], device=self.device)[None, :] < lengths[:, None]
+        targets = self.llm.get_input_embeddings()(ids)
+        inputs, mask = self.pad_and_apply_batch(batch)
+        scores = []
+        # ponytail: deux candidats par clip ; batcher les clips si le débit le demande.
+        for prefix, prefix_mask in zip(inputs, mask):
+            prefix = prefix[prefix_mask.bool()]
+            prefix_length = len(prefix)
+            if not prefix_length:
+                raise ValueError("Prompt vide")
+            output = self.llm(
+                inputs_embeds=torch.cat((prefix[None].expand(2, -1, -1), targets), dim=1),
+                attention_mask=torch.cat((torch.ones((2, prefix_length), device=self.device,
+                                                      dtype=torch.long), target_mask.long()), dim=1),
+                use_cache=False, return_dict=True,
+            )
+            logits = output.logits[:, prefix_length - 1:prefix_length + ids.shape[1] - 1].float()
+            token_logprobs = torch.log_softmax(logits, dim=-1).gather(-1, ids[..., None]).squeeze(-1)
+            selected = token_logprobs.masked_fill(~target_mask, 0)
+            if not torch.isfinite(selected).all():
+                raise ValueError("Log-probabilités non finies : aucun score de remplacement")
+            scores.append(selected.double().sum(dim=-1))
+        return torch.stack(scores)
+
+    def score_probability_leak(self, batch) -> list[float]:
+        """Softmax stable à deux classes, scores continus bruts sans seuil."""
+        return torch.softmax(self.score_class_logprobs(batch), dim=-1)[:, 0].cpu().tolist()
+
+    def generate(self, batch, max_new_tokens=48, **kwargs):
+        self._validate_inference_batch(batch)
         with torch.inference_mode():
             return super().generate(batch, max_new_tokens=max_new_tokens, do_sample=False,
                                     use_cache=True, pad_token_id=self.tokenizer.pad_token_id, **kwargs)

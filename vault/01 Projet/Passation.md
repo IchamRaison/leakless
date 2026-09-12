@@ -8,6 +8,18 @@ CLI 0.10.6 et 12 skills installés ; capture Codex locale constatée. La recherc
 
 ## Dernier échange — 2026-09-12
 
+**Exécution V1 désormais autorisée par Icham et en cours :** [[V1 ML - exécution]] décrit la campagne annoncée avant résultats (train complet, trois checkpoints aux époques 2/4/8, sélection ROC-AUC de validation après médiane par groupe). Scoring et scripts en développement ; SSH/runtime/données revérifiés, aucun entraînement V1/export encore lancé. Nevil a publié le correctif SHA-256 officiel des stress (`6dfdf63`, correction `b23601a`) : l'ancienne réserve T2/T3 ci-dessous est levée en utilisant cette révision. Prochaine action : tests CPU et sanity scoring train, puis entraînement/gel/reload/T0 et stress. Les paragraphes suivants conservent le cadrage avant ce feu vert.
+
+**Plan révisé après les précisions Nevil, pas démarré :** [[Plan surveillance continue]] §4 C1–C4 et §5 conserve la priorité score → V1 train/validation → gel/reload → T0 à Nevil. Nouveau contrat et `check_run.py` lus à `913575406b39beec3ae7da77aec322cca926d034`. Proposition : log-probabilités des deux continuations, sommes brutes sans normalisation automatique par longueur ; scores non calibrés ; au plus trois configurations candidates initiales, nombre réel déclaré. Toute adaptation, y compris LoRA, répond uniquement à un diagnostic train/validation. Réutiliser le contrôleur dans un dossier neuf, sans tuning d'après son inspection val/test ; un avertissement binaire n'empêche pas son retour zéro. Nevil conserve toutes les métriques finales. Prochain bloc : C1 à C3 jusqu'à T0 livrable ; aucune implémentation, entraînement ou prédiction nouvelle dans ce tour.
+
+**Réserve T2/T3, pas blocage T0 :** `clip_rng` repose sur le `hash()` Python salé par processus. Il faut une correction coordonnée et versionnée avec Nevil ou ses signaux transformés exacts et empreintes ; ne pas prétendre reproduire les stress en appelant seulement la même fonction. T1 non concerné par cet aléa. Revue, démonstration jouet et nuances de calibration : [[Journal Icham#Revue des précisions Nevil — scores et stress]]. Aucun correctif ni message envoyé à Nevil. Flux/replay, événements et collecte continuent comme chantiers proposés en parallèle.
+
+**Consigne de livraison Nevil transmise par Icham : prédictions seules, pas de métriques finales calculées par l'agent ML.** Contrat courant relu à `9135754` (consigne initiale `08562e3`). T0 prioritaire : `metadata.json` + `predictions.csv`, exactement `clip_id,probability_leak`, couverture des 402 clips validation/test du v2 gelé ; aucun seuil appliqué ni colonne de métadonnée dataset. Après gel du checkpoint, T1/T2/T3 optionnels en inférence seule et sous la réserve ci-dessus, mêmes poids et méthode de score. Nevil possède seuils, agrégations, métriques et comparaisons finales. Les diagnostics de développement restent séparés, sans test. Manque actuel côté V0 : calcul de probabilité de classe vérifié (`score_type=none`). [[Journal Icham#Consigne de livraison T0 et stress — Nevil]].
+
+**Cadrage utilisateur corrigé : surveillance automatique continue.** Icham précise que l'appareil écoute les tuyaux et signale la fuite ; l'humain reçoit l'alerte, il ne fournit pas l'extrait. [[Plan surveillance continue]] remplace le scénario produit manuel et propose le plan complet : flux/replay, V1 sur fenêtres, suivi d'événement, dashboard, acquisition continue et évaluation opérationnelle. Cap produit confirmé ; choix détaillés proposés, pas exécutés. Les clips d'une seconde ne prouvent ni délai de détection ni fausses alertes/jour. Prochaine action après validation du plan : préciser capteur/flux et objectifs, puis boucle replay sur V0 et V1 en parallèle ; recueillir du continu annoté sans attendre. Ce tour modifie uniquement les notes, aucun entraînement/déploiement.
+
+Livraison Nevil `nevil/temporal-evidence` à `08562e3` lue, non fusionnée ; tests/rapports non reproduits par Icham. Détails : [[Journal Icham#Vérification des nouveaux livrables Nevil]]. Le raccordement par fichiers prévu ci-dessus remplace la proposition initiale d'intégrer son moteur dans notre chantier.
+
 **V0 mécanique réalisée jusqu'à l'étape 5**, avec Qwen 3.5-4B demandé en remplacement de Llama : 1 000 WAV via TimeNet, v2 vérifié, vrai batch GPU, 40 étapes sur 8 groupes train, poids temporels modifiés et Qwen gelé vérifié. Checkpoint autonome rechargé hors ligne dans un processus neuf puis dans un environnement reconstruit du lockfile ; même prédiction sur le clip validation fixé, erreurs contrôlées. Modèle `pipe-qwen3.5-4b-v0-a968405f`, fonction `Predictor.predict(wav_bytes)` livrable à Safoan, guide `docs/TSLM_V0.md` sur `feat/icham-tslm`. **Qualité non validée, application non intégrée, aucun score final annoncé.** Preuves, checksum et prochaine action : [[V0 ML - exécution]].
 
 ## Cadrage précédent
@@ -24,22 +36,22 @@ Nevil propose le nom LeakLess et confirme le cadrage software-only acoustique, s
 
 ## État courant
 
-Direction de travail : PIPE, assistant d'analyse acoustique de fuites avec TimeNet, TSLM réellement entraîné, baseline et démo audio/spectrogramme. Icham a demandé un plan détaillé pour les quatre agents. La direction est organisée ; la faisabilité data/ML reste à valider aux portes G0/G2 de [[Plan directeur agents]].
+Direction de travail : PIPE, surveillance acoustique continue avec alerte automatique, TimeNet, TSLM réellement entraîné et baseline. [[Plan surveillance continue]] fixe le nouveau parcours proposé. La preuve mécanique V0 est acquise ; V1 évaluée, flux continu, logique d'événement, intégration et validation terrain restent à réaliser.
 
 Un TSLM adapté fonctionne mécaniquement : [[V0 ML - exécution]], qualité non évaluée. Le rapport baseline de Nevil (`1289095`) reste un résultat séparé non reproduit par Icham ; aucune comparaison finale n'est déduite de la V0. `split_v1` invalide, v2 uniquement. Machine fournie par Icham, aucun nouveau GPU provisionné ; l'instance n'a pas été arrêtée.
 
 ## Lire pour reprendre sans le chat
 
-[[Plan directeur agents]] → [[Contrats techniques]] → [[Protocole évaluation]] → [[Équipe et répartition]] → sa fiche dans 06 Agents. [[Coordination et passation agents]] régit les branches et mises à jour. Les commandes et chemins PIPE proposés sont à implémenter, pas à considérer comme déjà fonctionnels.
+[[Plan surveillance continue]] → [[Contrats techniques]] → [[Protocole évaluation]] → [[Équipe et répartition]] → sa fiche dans 06 Agents. [[Plan directeur agents]] conserve l'organisation et l'ancien scénario à titre historique. [[Coordination et passation agents]] régit les branches et mises à jour. Les nouvelles interfaces de flux/événement sont à convenir, pas déjà fonctionnelles.
 
-## Répartition et premières actions
+## Répartition et prochaines actions proposées
 
-- Icham : [[Agent Icham - ML]] ; vérifier accès GPU/base, runtime et premier batch. Journal : [[Journal Icham]].
-- Nevil : [[Agent Nevil - Data]] ; auditer les trois archives et groupes ; fixture réelle et split. Journal : [[Journal Nevil]].
-- Safoan : [[Agent Safoan - Application]] ; figer Prediction avec l'équipe, afficher un vrai WAV. Journal : [[Journal Safoan]].
-- Vincent : [[Agent Vincent - Baseline]] ; script Random Forest + tests, puis entraînement sur features de Nevil. Journal : [[Journal Vincent]].
+- Icham : [[Agent Icham - ML]] ; score TSLM, V1 et budget de calcul continu, règles d'événement avec Nevil. Journal : [[Journal Icham]].
+- Nevil : [[Agent Nevil - Data]] ; validation seule, protocole bruit, données continues et métriques événementielles. Journal : [[Journal Nevil]].
+- Safoan : [[Agent Safoan - Application]] ; flux/replay sur V0, santé de surveillance, alertes et preuves, interfaces en concertation. Journal : [[Journal Safoan]].
+- Vincent : [[Agent Vincent - Baseline]] ; modèle simple et export comparable, sans confondre son livrable avec les contrôles logistiques de Nevil. Journal : [[Journal Vincent]].
 
-Prise en main documentaire d'Icham terminée ; jalons techniques encore à vérifier. Pitch/règles organisateurs sont partagés avec responsable à désigner par Icham.
+V0 mécanique terminée ; ce nouveau travail n'a pas démarré. Responsable matériel/collecte et pitch/règles organisateurs à désigner par Icham ; répartition détaillée dans [[Plan surveillance continue]].
 
 ## Preuves déjà disponibles
 
@@ -49,11 +61,11 @@ Dépôts privés créés et poussés : code https://github.com/IchamRaison/ehl-h
 
 ## Inconnues et risques
 
-- Indépendance des événements/captures, duplications et groupes à établir avant scores.
-- Accès modèles de base, compatibilité TimeNet/OpenTSLM et coût/mémoire à mesurer.
+- Sessions réelles et données continues annotées manquantes ; groupes v2 heuristiques malgré invariants vérifiés.
+- Capteur/format/montage et disponibilité du flux, objectifs de délai/fausses alertes, débit soutenu du TSLM à établir.
 - Acceptation explicite du cadrage acoustique, deadline, durée du pitch et accès/crédit Nebius à confirmer.
 - TSLM peut ne pas battre la baseline ou ne pas bénéficier de l'ordre temporel ; l'évaluation doit le montrer.
-- Capteurs du coéquipier non intégrés et pas nécessaires au MVP. Unités/grandeurs non vérifiées.
+- Capteurs du coéquipier non intégrés, unités/grandeurs non vérifiées. Replay proposé pour le prochain prototype ; matériel réel nécessaire à une validation du produit.
 
 ## Dépôts et état historique
 

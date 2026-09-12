@@ -2,7 +2,25 @@
 
 Icham
 
-Propriétaire : Nevil ; baseline fournie par Vincent ; TSLM par Icham. Statut : protocole à implémenter avant optimisation.
+Propriétaire : Nevil ; baseline fournie par Vincent ; TSLM par Icham. Statut : harness publié par Nevil ; raccordement du TSLM et suivi de développement à réaliser. Les extensions proposées ci-dessous ne remplacent pas son contrat gelé.
+
+## Livraison finale TSLM — consigne Nevil transmise par Icham
+
+Référence courante : [MODEL_EVAL_CONTRACT à 9135754](https://github.com/IchamRaison/ehl-hackathon-zurich/blob/913575406b39beec3ae7da77aec322cca926d034/docs/MODEL_EVAL_CONTRACT.md). Icham fournit T0 sous forme de deux fichiers `metadata.json` + `predictions.csv`, exactement `clip_id,probability_leak`, une ligne par clip val/test v2 (208 + 194). Population gelée inchangée, ni label/fold/métadonnées d'acquisition dans le CSV, ni seuil appliqué aux probabilités. Nevil effectue l'évaluation finale, agrégation en groupes, sélection du seuil sur validation et comparaisons ; l'agent ML ne calcule pas les métriques finales. Diagnostics de développement limités à train/validation et contrôles d'intégrité d'export restent distincts.
+
+Score proposé : sommes des log-probabilités de chaque continuation de classe, softmax sur les deux sommes, contexte/signal identiques et tokenisation/terminaison figées ; ne pas inclure l'explication. Pas de moyenne par token automatique si les longueurs diffèrent : c'est un changement de score, à déclarer et choisir sur développement seulement. Déclarer méthode et probabilités brutes non calibrées dans `threshold_rule`, sans pourcentage généré ni décision 0/1. Pas de calibration requise pour T0 ; cela ne signifie pas invariance universelle des métriques après agrégation par médiane des clips. Détails et contre-exemple dans [[Journal Icham#Revue des précisions Nevil — scores et stress]].
+
+Recherche V1 limitée proposée : au plus trois configurations initiales, liste/critère préannoncés, `n_configs_compared` réel et variantes de scoring tracées. Validation = 208 clips mais seulement 42 groupes heuristiques, dont 8 non-fuite, pas des sessions indépendantes prouvées. Train/validation seuls motivent tout changement de modèle, LoRA, représentation ou score ; aucune adaptation d'après le test ou les sorties de son inspection.
+
+Réutiliser `check_run.py --template` une seule fois dans un dossier neuf (écrasement sinon), puis `--run ... --inspect` après gel pour conformité seulement. Les 402 IDs préremplis ne remplacent pas leur mapping explicite vers les signaux. Remplacer les métadonnées d'exemple par la provenance réelle ; assurer exactement deux colonnes et 402 lignes val/test même si le contrôleur tolère davantage. L'avertissement de sortie binaire n'entraîne pas d'échec du script. L'inspection inclut le test : ne pas en faire une boucle de réglage. Aucun lancement de cet outil ni export nouveau pendant la présente revue.
+
+T1 inversion, T2 permutation des blocs de 250 échantillons à 8 kHz (31,25 ms), T3 randomisation de phase : optionnels après T0, transformations officielles Nevil avant preprocessing, même checkpoint figé et méthode de score, aucun entraînement ou réglage sur ces stress. **Réserve ouverte T2/T3 :** `clip_rng` à `9135754` utilise le `hash()` Python salé par processus. Une correction commune versionnée avec contrôle interprocessus, ou les signaux transformés exacts de Nevil avec empreintes, est nécessaire pour affirmer reproduire ses variantes ; aucun changement unilatéral. T1 et T0 non bloqués par cet aléa. T2 ne laisse aucun reste hors permutation, mais peut laisser des blocs fixes. Ne pas requantifier/écrêter les signaux transformés via un retour WAV. Le CSV ne contient pas de description ; qualité du texte et événements continus restent des évaluations séparées. La consigne n'autorise pas à traiter une série de clips comme une chronologie terrain.
+
+## Extension proposée — surveillance continue
+
+Icham confirme le cas d'usage automatique ; [[Plan surveillance continue]] distingue désormais classification de fenêtres, tests logiciels de replay et performance sur événements réels. Les métriques ci-dessous restent utiles pour les clips. Elles ne donnent pas de délai de détection ni de fausses alertes/jour.
+
+Sur acquisitions continues annotées et réservées : définir événements et appariement avant scoring, régler seuils/persistance sur développement seulement, puis rapporter rappel par événement, faux événements par appareil-heure surveillée, délai depuis apparition annotée, doublons, disponibilité et durée non surveillée. Séparer acquisitions/installations avant fenêtrage ; mêmes données et protocole de réglage pour les comparateurs. Un collage de clips ou les stress T1–T3 ne remplacent pas ces acquisitions. Ces extensions restent à convenir/implémenter avec Nevil ; ses résultats test de contrôles sont déjà publiés et ne doivent pas orienter les réglages du TSLM.
 
 ## Question testée
 

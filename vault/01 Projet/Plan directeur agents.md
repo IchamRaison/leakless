@@ -2,6 +2,8 @@
 
 Icham
 
+**Mise à jour du 2026-09-12 :** Icham précise un appareil en écoute permanente avec alertes automatiques. Le plan produit courant est [[Plan surveillance continue]]. Le scénario manuel, l'exclusion systématique du flux matériel et les jalons produit ci-dessous décrivent le plan antérieur ; ils ne priment plus sur cette clarification. Contraintes organisateurs et répartition restent applicables. État réel : [[Passation]], pas les inventaires historiques de cette note.
+
 ## 0. Lire ceci avant d'exécuter
 
 Ce vault doit suffire pour reprendre le projet sans historique de chat. PIPE est désormais la direction de travail demandée par Icham pour répartir le développement. Sa faisabilité scientifique reste soumise aux portes de validation ci-dessous. Ce document est un plan, pas un compte rendu de code exécuté.
