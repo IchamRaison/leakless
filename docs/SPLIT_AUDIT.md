@@ -162,7 +162,8 @@ côté *non-leak*, essentiellement sur une session unique.
 **Ce n'est pas un leakage** — le groupe est entier dans val, rien ne fuit vers test. C'est une
 question de **taille d'échantillon effective** : elle vaut ~9 unités indépendantes, pas 100.
 
-> ### ✅ **Décision d'équipe, 2026-09-12 : `split_v1` est conservé tel quel.**
+> ### ⛔ ~~Décision d'équipe, 2026-09-12 : `split_v1` est conservé tel quel.~~
+> ### Cette décision est **annulée** : `split_v1` s'est révélé invalide et est remplacé par `split_v2`.
 >
 > Motifs retenus : seed fixée avant tout résultat, aucune recherche de seed, aucun leakage entre
 > groupes. Modifier le split maintenant dans le seul but d'équilibrer la taille des groupes

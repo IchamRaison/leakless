@@ -1,11 +1,21 @@
 #!/usr/bin/env python3
-"""Vérificateur indépendant du manifeste `split_v1`.
+"""⛔ SUPERSEDED — ce vérificateur contrôlait `split_v1`, qui est INVALIDE. NE PAS UTILISER.
 
-**N'importe rien de `build_groups.py`.** Il repart des fichiers audio extraits et
-des CSV publiés, et recalcule tout de zéro. Le but est qu'un tiers puisse
-contrôler les chiffres de `docs/SPLIT_AUDIT.md` sans faire confiance au script
-qui les a produits — deux implémentations indépendantes qui tombent d'accord
-valent mieux qu'une qui se relit.
+    Il recopiait le prédicat fautif du script qu'il était censé contrôler, et lisait
+    les colonnes `group_id` et `fold` du manifeste qu'il validait. Il ne pouvait donc
+    structurellement pas détecter l'erreur : il a confirmé un split qui fuyait.
+
+    Remplacé par  scripts/eval/verify_split_invariants.py, qui ne lit que clip_id et
+                  fold, recalcule toute dépendance depuis l'audio, et publie la
+                  couverture de chaque invariant.
+    Détail        docs/SPLIT_V2_AUDIT.md §3 (RC3) et §5.3
+
+Vérificateur du manifeste `split_v1`.
+
+Il n'importe rien de `build_groups.py`, mais **il en recopie le prédicat fautif**
+(ligne 129 : `"NA" not in (material, region, pressure_mpa, flow_ms)`) et lit
+`group_id` et `fold` dans le manifeste qu'il valide. Ce n'était donc pas une
+implémentation indépendante, contrairement à ce que cette docstring affirmait.
 
 Usage :
   python3 scripts/eval/verify_manifest.py --data-root <dossier hors dépôt>

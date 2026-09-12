@@ -1,5 +1,16 @@
 #!/usr/bin/env python3
-"""Reconstruit des clés de groupe pour le dataset acoustique Zenodo 18631450.
+"""⛔ SUPERSEDED — ce script a produit `split_v1`, qui est INVALIDE. NE PAS UTILISER.
+
+    Raison : son invariant de fuite exigeait que les quatre champs de métadonnées
+    soient renseignés, alors que la région est absente pour 348 des 500 clips leak.
+    Il ne couvrait donc que 18 % d'entre eux, et 30 conditions physiques (92 clips)
+    traversaient les folds sans être détectées.
+
+    Remplacé par  scripts/ingest/build_split_v2.py
+    Cause racine  docs/SPLIT_V2_AUDIT.md §3
+    Conservé uniquement pour que l'erreur reste inspectable.
+
+Reconstruit des clés de groupe pour le dataset acoustique Zenodo 18631450.
 
 Objectif : mesurer si un split groupé sans leakage est possible. Ce script
 NE FAIT AUCUN SPLIT. Il parse les noms de fichiers, propose une clé de groupe
