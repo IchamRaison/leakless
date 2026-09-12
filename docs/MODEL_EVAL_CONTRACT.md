@@ -52,6 +52,18 @@ sont acceptés et ignorés. Aucune autre colonne.
 
 `config_hash` est facultatif (`null` accepté). Tout le reste est obligatoire.
 
+**Ce que désigne chaque commit.** Trois notions distinctes, à ne pas confondre :
+
+| champ | sens | obligatoire |
+|---|---|---|
+| `training_commit` | le commit checké **au moment de l'entraînement** du checkpoint, capturé à ce moment-là et recopié tel quel dans chaque run qui utilise ce checkpoint. Pas le commit du jour où tu fais l'inférence. | oui |
+| `execution_commit` | le commit checké au moment où tu produis `predictions.csv` | non, recommandé pour les runs de stress |
+| `model_definition_commit` | le commit où l'architecture ou les descripteurs ont été figés | non |
+
+Si ton worktree avait des modifications non commitées à l'entraînement, dis-le
+(`"training_worktree_dirty": true`) : le commit seul ne reproduirait pas le
+checkpoint. Le rapport lit ces champs ; il ne les recalcule jamais.
+
 Schéma machine : [`schemas/prediction_run.schema.json`](../schemas/prediction_run.schema.json).
 
 ---
@@ -173,6 +185,31 @@ T2 utilise des blocs de **250 échantillons (31,25 ms)** — 8000 est divisible 
 Livre un dossier de run par transformation, avec un `run_id` distinct
 (`tslm-v1-T1`, etc.), et passe `--tslm-run-id tslm-v1` au rapport final.
 
+Chaque run de stress ajoute à `metadata.json` :
+
+```json
+{
+  "stress_transform": "T2",
+  "base_run_id": "tslm-v1",
+  "retrained": false,
+  "checkpoint": "<le même que tslm-v1>",
+  "training_commit": "<le même que tslm-v1>",
+  "execution_commit": "<HEAD au moment de l'inférence sous stress>",
+  "threshold_rule": "aucun seuil appliqué — probabilités brutes"
+}
+```
+
+`retrained: false` signifie exactement **« not retrained on stressed data »** :
+le checkpoint n'a jamais vu T1, T2 ni T3. Le rapport refuse un run de stress
+dont le checkpoint ou le `training_commit` diffère de celui du run T0.
+
+> **Le seuil sous stress.** Notre moteur recalcule le seuil sur la validation
+> *du run*, donc sur la validation transformée pour un run de stress. Les
+> métriques qui dépendent du seuil (macro-F1, exactitude) ne servent donc à
+> **aucune** conclusion de sensibilité temporelle. Le rapport ne lit la
+> sensibilité que dans l'AUC, la corrélation des probabilités avec T0 et la
+> distribution de Δp.
+
 ---
 
 ## 2. Ce qui est refusé, et pourquoi
@@ -268,11 +305,14 @@ Quatre jeux TimeF sont prêts, mêmes `clip_id`, mêmes folds, mêmes clusters :
 | T2 | permutation de blocs de 250 échantillons (31,25 ms) | histogramme d'amplitude | l'ordre au-delà de 31,25 ms (déviation `\|FFT\|` médiane 0,70) |
 | T3 | randomisation de phase | `\|FFT\|` à 3,4e-16 | la structure de phase |
 
-Si tu peux faire tourner le checkpoint sur T1, T2 et T3 et nous rendre trois
-`predictions.csv` de plus, on obtient une réponse directe à la question du
-hackathon : **le modèle utilise-t-il l'organisation temporelle, ou seulement des
-statistiques invariantes à l'ordre ?**
+Si tu peux faire tourner **le même checkpoint sérialisé**, sans réentraînement,
+sur T1, T2 et T3 et nous rendre trois `predictions.csv` de plus, on mesure
+directement : **les prédictions du modèle sont-elles sensibles à l'organisation
+temporelle, ou restent-elles stables quand seul l'ordre est perturbé ?**
 
-> ⚠️ Ce ne sont **pas** des augmentations préservant l'étiquette. Rien ne garantit
-> qu'un clip inversé reste acoustiquement une fuite. Ce sont des tests de stress :
-> un modèle dont le score ne bouge pas sous T1/T2/T3 n'utilise pas l'ordre.
+> ⚠️ Ce ne sont **pas** des augmentations physiques démontrées comme préservant
+> l'étiquette. Rien ne garantit qu'un clip inversé reste acoustiquement une fuite.
+> Ce sont des tests de stress : un score qui bouge montre une sensibilité des
+> prédictions à la perturbation, pas la pertinence physique causale de
+> l'information détruite. Un score qui ne bouge pas montre une insensibilité à
+> *ces* perturbations, pas l'absence de toute information temporelle.

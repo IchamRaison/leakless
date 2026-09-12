@@ -1,0 +1,72 @@
+{
+  "transforms": {
+    "T0": {
+      "transform": "T0",
+      "description": "original, aucune transformation",
+      "stress_seed": 20260912,
+      "seed_scheme": "sha256(utf-8, séparateur U+001F, 8 premiers octets, big-endian)",
+      "seed_scheme_version": 2,
+      "block_samples": null,
+      "split_filename": "split_v2.csv",
+      "split_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+      "generator_commit": null,
+      "generator_worktree_dirty": null,
+      "artifact_sha256": "e27a46ad9201f358cd675918447e9e38fbfcc5b5aa9bd94bc7e8b3de5f3e5002",
+      "artifact_n_files": 6,
+      "n_records": 1000,
+      "n_records_at_generation": 1000,
+      "generator_commit_note": "non capturé à la génération : jeux produits le 2026-09-12 entre 20:24:48 et 20:25:00 (+02:00) sur un worktree à 9135754 portant le correctif RNG non encore commité (commité en b23601a à 20:27:24). Les runs C2b sous stress, régénérés depuis 0a22990, appliquent les transformations au WAV brut et ne lisent pas ces jeux."
+    },
+    "T1": {
+      "transform": "T1",
+      "description": "inversion temporelle",
+      "stress_seed": 20260912,
+      "seed_scheme": "sha256(utf-8, séparateur U+001F, 8 premiers octets, big-endian)",
+      "seed_scheme_version": 2,
+      "block_samples": null,
+      "split_filename": "split_v2.csv",
+      "split_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+      "generator_commit": null,
+      "generator_worktree_dirty": null,
+      "artifact_sha256": "6cd916a8991ae3fc79a9afb83b56a776b68e6f4223c484c47832188c97e0424e",
+      "artifact_n_files": 6,
+      "n_records": 1000,
+      "n_records_at_generation": 1000,
+      "generator_commit_note": "non capturé à la génération : jeux produits le 2026-09-12 entre 20:24:48 et 20:25:00 (+02:00) sur un worktree à 9135754 portant le correctif RNG non encore commité (commité en b23601a à 20:27:24). Les runs C2b sous stress, régénérés depuis 0a22990, appliquent les transformations au WAV brut et ne lisent pas ces jeux."
+    },
+    "T2": {
+      "transform": "T2",
+      "description": "permutation de blocs de 250 échantillons (31,25 ms)",
+      "stress_seed": 20260912,
+      "seed_scheme": "sha256(utf-8, séparateur U+001F, 8 premiers octets, big-endian)",
+      "seed_scheme_version": 2,
+      "block_samples": 250,
+      "split_filename": "split_v2.csv",
+      "split_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+      "generator_commit": null,
+      "generator_worktree_dirty": null,
+      "artifact_sha256": "478d5baa01ad2b310aba4c3f60aebf412f79c4b86aed34062d74f7baa8126781",
+      "artifact_n_files": 6,
+      "n_records": 1000,
+      "n_records_at_generation": 1000,
+      "generator_commit_note": "non capturé à la génération : jeux produits le 2026-09-12 entre 20:24:48 et 20:25:00 (+02:00) sur un worktree à 9135754 portant le correctif RNG non encore commité (commité en b23601a à 20:27:24). Les runs C2b sous stress, régénérés depuis 0a22990, appliquent les transformations au WAV brut et ne lisent pas ces jeux."
+    },
+    "T3": {
+      "transform": "T3",
+      "description": "randomisation de phase, module préservé",
+      "stress_seed": 20260912,
+      "seed_scheme": "sha256(utf-8, séparateur U+001F, 8 premiers octets, big-endian)",
+      "seed_scheme_version": 2,
+      "block_samples": null,
+      "split_filename": "split_v2.csv",
+      "split_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+      "generator_commit": null,
+      "generator_worktree_dirty": null,
+      "artifact_sha256": "b33b54bcc7fdf963b111c9b9d9d67d323a9afb95559ff8ffdb4fba3963ef16f0",
+      "artifact_n_files": 6,
+      "n_records": 1000,
+      "n_records_at_generation": 1000,
+      "generator_commit_note": "non capturé à la génération : jeux produits le 2026-09-12 entre 20:24:48 et 20:25:00 (+02:00) sur un worktree à 9135754 portant le correctif RNG non encore commité (commité en b23601a à 20:27:24). Les runs C2b sous stress, régénérés depuis 0a22990, appliquent les transformations au WAV brut et ne lisent pas ces jeux."
+    }
+  }
+}

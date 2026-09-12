@@ -323,10 +323,12 @@ def build_markdown(result: dict, comps: dict, tslm: str | None, stress: dict | N
                 "",
                 table,
                 "",
-                "> Δ clip AUC et Δp sont orientés **stress − T0**, appariés sur les mêmes tirages "
-                "de clusters. Un Δ négatif signifie que la discrimination baisse sous la "
-                "transformation : les prédictions sont sensibles à cette perturbation. Cela "
-                "n'établit pas que l'information détruite est physiquement pertinente.",
+                "> Δ clip AUC et Δp sont orientés **stress − T0**. Δ clip AUC et son IC95 sont "
+                "appariés sur les mêmes tirages de clusters ; Δp est mesuré clip à clip sur le "
+                "test, sans intervalle. Un Δ clip AUC négatif signifie que la discrimination "
+                "baisse sous la transformation : les prédictions sont sensibles à cette "
+                "perturbation. Cela n'établit pas que l'information détruite est physiquement "
+                "pertinente.",
             ]
         if not has_tslm:
             parts.append("")

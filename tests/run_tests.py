@@ -833,6 +833,16 @@ def _fixture_invariants(tmp: Path) -> Path:
 
 
 @test
+def committed_final_report_keeps_stress_runs_out_of_the_ladder():
+    """M1 — l'artefact COMMITÉ respecte la même règle que le rendu."""
+    md = (ROOT / "artifacts/final_evaluation/FINAL_EVALUATION.md").read_text()
+    sec = _assert_ladder_sections(md)
+    for t in ("T1", "T2", "T3"):
+        assert any(l.startswith("| `c2b`") and l.split("|")[2].strip() == t
+                   for l in sec["7"].splitlines()), f"c2b sous {t} absent de §7"
+
+
+@test
 def stress_run_metadata_states_what_actually_happens():
     """M2/M3 — seuil, checkpoint et `retrained` décrivent le comportement réel."""
     f = run_controls.stress_run_fields("C2b", "T2", 0.1, "c2b", {"model_fingerprint": "x"})

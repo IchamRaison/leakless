@@ -22,6 +22,7 @@ already-extracted dataset from a path outside the repository.
 | `eval/build_final_report.py` | Generates `artifacts/final_evaluation/` — no number is copied by hand | ✅ active |
 | `temporal/stress.py` | T0-T3 transforms and their measured invariants | ✅ active |
 | `temporal/build_stress_timef.py` | Writes the T0-T3 TimeF variants outside the repo and verifies mappings | ✅ active |
+| `temporal/stress_provenance.py` | Provenance manifest of the T0-T3 stress sets (artifact SHA256, seed scheme, split SHA, generator commit) without regenerating them | ✅ active |
 | `eval/split_report.py` | Run naive-random vs grouped split and report the gap — see `docs/EVAL_PROTOCOL.md` §4 | stub |
 
 Datasets live **outside** this repository (`.gitignore` blocks `data/`, `*.rar`, `*.wav`).

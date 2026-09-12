@@ -12,23 +12,22 @@
 | SHA256 | `7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896` |
 | Clips | 1000 |
 | Clusters de dépendance | 185 |
-| Commit du dépôt | `6dfdf63580bc15ce6a1cf0817b9da3569553aca1` |
+| Commit de génération du rapport | `0a22990f6451fe6dfb5e023361cdf5509998e0f9` |
 | Règle d'agrégation | median des probabilités du cluster (gelée) |
 | Bootstrap | 2000 tirages, graine 20260912, unité : cluster de dépendance |
 | Source | Zenodo 18631450, CC BY 4.0 — site d'entraînement expérimental de Dongguan |
 
-## 2. Identité des modèles
+## 2. Identité des modèles — échelle de contrôles
 
-| run | modèle | checkpoint | commit d'entraînement | horodatage |
-|---|---|---|---|---|
-| `c0` | C0 — niveau RMS absolu, signal brut — raccourci d'acquisition | `logreg(C=0.01)` | `1289095fccd5` | 2026-09-12T16:16:12+00:00 |
-| `c1` | C1 — forme d'amplitude seule, aucune information fréquentielle | `logreg(C=0.01)` | `2f61695072e0` | 2026-09-12T16:26:40+00:00 |
-| `c2` | C2 — spectre agrégé, invariant à l'ordre, sans phase | `logreg(C=0.1)` | `1289095fccd5` | 2026-09-12T16:16:13+00:00 |
-| `c2b` | C2b — structure temporelle peu profonde — enveloppe, modulation, flux | `logreg(C=0.1)` | `913575406b39` | 2026-09-12T18:25:44+00:00 |
-| `c3` | C3 — baseline historique — mélange C1 + C2 + taux de passages par zéro | `logreg(C=0.01)` | `1289095fccd5` | 2026-09-12T16:16:13+00:00 |
-| `c2b-T1` | C2b sous T1 — inversion temporelle | `logreg(C=0.1) entraîné sur T0/train, NON réentraîné` | `913575406b39` | 2026-09-12T18:25:24+00:00 |
-| `c2b-T2` | C2b sous T2 — permutation de blocs de 250 échantillons (31,25 ms) | `logreg(C=0.1) entraîné sur T0/train, NON réentraîné` | `913575406b39` | 2026-09-12T18:25:50+00:00 |
-| `c2b-T3` | C2b sous T3 — randomisation de phase, module préservé | `logreg(C=0.1) entraîné sur T0/train, NON réentraîné` | `913575406b39` | 2026-09-12T18:25:56+00:00 |
+Trois commits distincts, tous lus dans `metadata.json` et jamais recalculés ici : **définition** (où les descripteurs ont été figés), **ajustement** (`training_commit`, HEAD capturé juste avant le fit), **exécution** (HEAD à l'écriture du run). Aucun contrôle n'a de checkpoint sérialisé : la régression logistique est réajustée de façon déterministe sur T0/train à chaque exécution.
+
+| run | modèle | checkpoint | commit de définition | commit d'ajustement | commit d'exécution | horodatage |
+|---|---|---|---|---|---|---|
+| `c0` | C0 — niveau RMS absolu, signal brut — raccourci d'acquisition | `aucun checkpoint sérialisé : logreg(C=0.01) ajustée de façon déterministe sur T0/train` | `2f61695072e0` | `0a22990f6451` | `0a22990f6451` | 2026-09-12T19:23:46+00:00 |
+| `c1` | C1 — forme d'amplitude seule, aucune information fréquentielle | `aucun checkpoint sérialisé : logreg(C=0.01) ajustée de façon déterministe sur T0/train` | `2f61695072e0` | `0a22990f6451` | `0a22990f6451` | 2026-09-12T19:23:47+00:00 |
+| `c2` | C2 — spectre agrégé, invariant à l'ordre, sans phase | `aucun checkpoint sérialisé : logreg(C=0.1) ajustée de façon déterministe sur T0/train` | `2f61695072e0` | `0a22990f6451` | `0a22990f6451` | 2026-09-12T19:23:47+00:00 |
+| `c2b` | C2b — structure temporelle peu profonde — enveloppe, modulation, flux | `aucun checkpoint sérialisé : logreg(C=0.1) ajustée de façon déterministe sur T0/train` | `355f0743fb30` | `0a22990f6451` | `0a22990f6451` | 2026-09-12T19:23:55+00:00 |
+| `c3` | C3 — baseline historique — mélange C1 + C2 + taux de passages par zéro | `aucun checkpoint sérialisé : logreg(C=0.01) ajustée de façon déterministe sur T0/train` | `2f61695072e0` | `0a22990f6451` | `0a22990f6451` | 2026-09-12T19:23:48+00:00 |
 
 ## 3. Échelle de contrôles et résultats — TEST
 
@@ -39,9 +38,6 @@
 | `c2` | C2 — spectre agrégé, invariant à l'ordre,  | 0.710 | 0.711 | 0.680 | 0.214 | 0.779 | 0.776 | 194 | 41 (30/11) |
 | `c2b` | C2b — structure temporelle peu profonde —  | 0.847 | 0.829 | 0.763 | 0.160 | 0.915 | 0.814 | 194 | 41 (30/11) |
 | `c3` | C3 — baseline historique — mélange C1 + C2 | 0.824 | 0.792 | 0.758 | 0.173 | 0.900 | 0.856 | 194 | 41 (30/11) |
-| `c2b-T1` | C2b sous T1 — inversion temporelle | 0.849 | 0.837 | 0.702 | 0.159 | 0.906 | 0.767 | 194 | 41 (30/11) |
-| `c2b-T2` | C2b sous T2 — permutation de blocs de 250  | 0.751 | 0.748 | 0.604 | 0.214 | 0.785 | 0.655 | 194 | 41 (30/11) |
-| `c2b-T3` | C2b sous T3 — randomisation de phase, modu | 0.726 | 0.703 | 0.642 | 0.207 | 0.697 | 0.666 | 194 | 41 (30/11) |
 
 ### Validation (pour information — c'est là que le seuil est choisi)
 
@@ -52,9 +48,6 @@
 | `c2` | C2 — spectre agrégé, invariant à l'ordre,  | 0.777 | 0.810 | 0.673 | 0.199 | 0.783 | 0.797 | 208 | 42 (34/8) |
 | `c2b` | C2b — structure temporelle peu profonde —  | 0.870 | 0.875 | 0.773 | 0.149 | 0.665 | 0.635 | 208 | 42 (34/8) |
 | `c3` | C3 — baseline historique — mélange C1 + C2 | 0.886 | 0.895 | 0.773 | 0.155 | 0.996 | 0.963 | 208 | 42 (34/8) |
-| `c2b-T1` | C2b sous T1 — inversion temporelle | 0.864 | 0.868 | 0.783 | 0.151 | 0.625 | 0.634 | 208 | 42 (34/8) |
-| `c2b-T2` | C2b sous T2 — permutation de blocs de 250  | 0.738 | 0.701 | 0.672 | 0.212 | 0.478 | 0.634 | 208 | 42 (34/8) |
-| `c2b-T3` | C2b sous T3 — randomisation de phase, modu | 0.734 | 0.708 | 0.679 | 0.202 | 0.482 | 0.571 | 208 | 42 (34/8) |
 
 ## 4. Incertitude — bootstrap sur les clusters
 
@@ -67,9 +60,6 @@ Les intervalles rééchantillonnent des **clusters entiers**. Un bootstrap au cl
 | `c2` | [0.609, 0.819] | [0.576, 0.943] | [0.568, 0.765] |
 | `c2b` | [0.758, 0.922] | [0.811, 0.984] | [0.643, 0.849] |
 | `c3` | [0.751, 0.962] | [0.724, 1.000] | [0.656, 0.820] |
-| `c2b-T1` | [0.766, 0.930] | [0.786, 0.985] | [0.584, 0.829] |
-| `c2b-T2` | [0.611, 0.855] | [0.569, 0.954] | [0.462, 0.781] |
-| `c2b-T3` | [0.480, 0.802] | [0.474, 0.885] | [0.464, 0.714] |
 
 ## 5. Différences appariées
 
@@ -137,22 +127,24 @@ Jeux préparés, invariants **mesurés** et non supposés :
 | T2 | permutation de blocs de 250 échantillons (31,25 ms) | 1000 | 185 | 6.95e-01 | identique | 0 |
 | T3 | randomisation de phase, module préservé | 1000 | 185 | 2.79e-16 | modifié | 0 |
 
-> Ce ne sont **pas** des augmentations préservant l'étiquette. Un modèle dont le score ne bouge pas sous T1/T2/T3 n'utilise pas l'ordre temporel.
+> Ces transformations ne sont **pas** des augmentations physiques démontrées comme préservant l'étiquette. Elles mesurent la sensibilité des prédictions à l'organisation temporelle, pas la pertinence physique causale de celle-ci.
 
 ### Scores mesurés sous stress
 
-Même modèle, **aucun réentraînement** : ajusté sur T0/train, réappliqué tel quel aux descripteurs recalculés sur l'audio transformé. Les écarts sont appariés, sur les mêmes tirages de clusters.
+Même définition de modèle figée, réajustée de façon déterministe sur T0/train dans le même processus ; **jamais ajustée sur les données stressées**. Les transformations ne s'appliquent qu'à l'évaluation. Aucun checkpoint n'est sérialisé : l'identité du modèle est vérifiée par son empreinte (`model_fingerprint`), identique entre le run T0 et ses runs de stress.
 
-| modèle | variante | clip AUC | cluster AUC | Δ clip AUC vs T0 | IC95 | lecture |
-|---|---|---|---|---|---|---|
-| `c2b` | **T0** original | 0.847 | 0.915 | — | — | référence |
-| `c2b` | T1 | 0.849 | 0.906 | +0.002 | [-0.011, +0.026] | inconclusive |
-| `c2b` | T2 | 0.751 | 0.785 | -0.097 | [-0.192, -0.031] | dégradation lisible |
-| `c2b` | T3 | 0.726 | 0.697 | -0.121 | [-0.316, -0.059] | dégradation lisible |
+Seules des métriques **indépendantes du seuil** figurent ici : AUC, corrélation des probabilités avec T0 et distribution de Δp, sur le test. Le seuil d'un run stressé est recalculé sur sa propre validation transformée ; les métriques qui en dépendent (macro-F1, exactitude) ne servent à aucune conclusion de sensibilité temporelle.
 
-> Le signe est orienté « dégradation sous stress » : un Δ négatif signifie que la transformation fait perdre de la performance au modèle, donc qu'il utilisait l'information détruite.
+| modèle | variante | clip AUC | cluster AUC | Δ clip AUC (stress − T0) | IC95 | lecture | corrélation des probabilités avec T0 | Δp médiane [Q1, Q3] | \|Δp\| médiane |
+|---|---|---|---|---|---|---|---|---|---|
+| `c2b` | **T0** original | 0.847 | 0.915 | — | — | référence | 1.000 | — | — |
+| `c2b` | T1 | 0.849 | 0.906 | +0.002 | [-0.011, +0.026] | inconclusive | 0.992 | +0.001 [-0.014, +0.017] | 0.015 |
+| `c2b` | T2 | 0.751 | 0.785 | -0.097 | [-0.192, -0.031] | compatible with degradation under stress | 0.729 | +0.048 [-0.045, +0.196] | 0.125 |
+| `c2b` | T3 | 0.726 | 0.697 | -0.121 | [-0.316, -0.059] | compatible with degradation under stress | 0.705 | +0.022 [-0.077, +0.144] | 0.107 |
 
-🕐 **TSLM non évalué sous stress** : nous ne possédons pas son checkpoint. Les jeux et le protocole l'attendent.
+> Δ clip AUC et Δp sont orientés **stress − T0**. Δ clip AUC et son IC95 sont appariés sur les mêmes tirages de clusters ; Δp est mesuré clip à clip sur le test, sans intervalle. Un Δ clip AUC négatif signifie que la discrimination baisse sous la transformation : les prédictions sont sensibles à cette perturbation. Cela n'établit pas que l'information détruite est physiquement pertinente.
+
+🕐 **TSLM non évalué sous stress** : son checkpoint sérialisé n'est pas en notre possession. Les jeux et le protocole l'attendent.
 
 ## 8. Limites connues
 

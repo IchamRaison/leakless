@@ -11,17 +11,33 @@
     "seed": 20260912,
     "unit": "cluster de dépendance"
   },
+  "control_ladder": [
+    "c0",
+    "c1",
+    "c2",
+    "c2b",
+    "c3"
+  ],
   "runs": {
     "c0": {
       "run_id": "c0",
       "model_name": "C0 — niveau RMS absolu, signal brut — raccourci d'acquisition",
-      "checkpoint": "logreg(C=0.01)",
-      "training_commit": "1289095fccd5f7c7c0553e22894e1fdf378d9856",
+      "checkpoint": "aucun checkpoint sérialisé : logreg(C=0.01) ajustée de façon déterministe sur T0/train",
+      "training_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
       "config_hash": null,
-      "timestamp": "2026-09-12T16:16:12+00:00",
+      "timestamp": "2026-09-12T19:23:46+00:00",
       "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
       "threshold_recomputed_on_val": 0.536921,
       "threshold_declared_by_run": 0.536921,
+      "provenance": {
+        "model_definition_commit": "2f61695072e0f16205d6a7047243c59600eb2792",
+        "training_worktree_dirty": false,
+        "execution_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+        "execution_worktree_dirty": false,
+        "model_fingerprint": "0e0df6066534d7c2d00b6e404ca30ffc013cde6c721004a1e01f7b139c569934",
+        "fit_data": "T0/train",
+        "control_level": "C0"
+      },
       "contract_checks": [
         {
           "name": "fichiers du run présents",
@@ -207,13 +223,22 @@
     "c1": {
       "run_id": "c1",
       "model_name": "C1 — forme d'amplitude seule, aucune information fréquentielle",
-      "checkpoint": "logreg(C=0.01)",
-      "training_commit": "2f61695072e0f16205d6a7047243c59600eb2792",
+      "checkpoint": "aucun checkpoint sérialisé : logreg(C=0.01) ajustée de façon déterministe sur T0/train",
+      "training_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
       "config_hash": null,
-      "timestamp": "2026-09-12T16:26:40+00:00",
+      "timestamp": "2026-09-12T19:23:47+00:00",
       "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
       "threshold_recomputed_on_val": 0.532281,
       "threshold_declared_by_run": 0.532281,
+      "provenance": {
+        "model_definition_commit": "2f61695072e0f16205d6a7047243c59600eb2792",
+        "training_worktree_dirty": false,
+        "execution_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+        "execution_worktree_dirty": false,
+        "model_fingerprint": "0beae6c0c214e60e632936be9ab940a1aa56f00c76e03c7eed0c38f0f5a47572",
+        "fit_data": "T0/train",
+        "control_level": "C1"
+      },
       "contract_checks": [
         {
           "name": "fichiers du run présents",
@@ -399,13 +424,22 @@
     "c2": {
       "run_id": "c2",
       "model_name": "C2 — spectre agrégé, invariant à l'ordre, sans phase",
-      "checkpoint": "logreg(C=0.1)",
-      "training_commit": "1289095fccd5f7c7c0553e22894e1fdf378d9856",
+      "checkpoint": "aucun checkpoint sérialisé : logreg(C=0.1) ajustée de façon déterministe sur T0/train",
+      "training_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
       "config_hash": null,
-      "timestamp": "2026-09-12T16:16:13+00:00",
+      "timestamp": "2026-09-12T19:23:47+00:00",
       "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
       "threshold_recomputed_on_val": 0.386458,
       "threshold_declared_by_run": 0.386458,
+      "provenance": {
+        "model_definition_commit": "2f61695072e0f16205d6a7047243c59600eb2792",
+        "training_worktree_dirty": false,
+        "execution_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+        "execution_worktree_dirty": false,
+        "model_fingerprint": "a98070a45f853ddf5808a114cb79763977bc7ed3befa566547e3eeba5c5bedd8",
+        "fit_data": "T0/train",
+        "control_level": "C2"
+      },
       "contract_checks": [
         {
           "name": "fichiers du run présents",
@@ -591,13 +625,22 @@
     "c2b": {
       "run_id": "c2b",
       "model_name": "C2b — structure temporelle peu profonde — enveloppe, modulation, flux",
-      "checkpoint": "logreg(C=0.1)",
-      "training_commit": "913575406b39beec3ae7da77aec322cca926d034",
+      "checkpoint": "aucun checkpoint sérialisé : logreg(C=0.1) ajustée de façon déterministe sur T0/train",
+      "training_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
       "config_hash": null,
-      "timestamp": "2026-09-12T18:25:44+00:00",
+      "timestamp": "2026-09-12T19:23:55+00:00",
       "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
       "threshold_recomputed_on_val": 0.495914,
       "threshold_declared_by_run": 0.495914,
+      "provenance": {
+        "model_definition_commit": "355f0743fb306da50897c0720e6fab5ecf947c52",
+        "training_worktree_dirty": false,
+        "execution_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+        "execution_worktree_dirty": false,
+        "model_fingerprint": "89f23a4f9773537302c6edc69a5f8bff2de9cf9d78c02ba576c9ae465cb39fc9",
+        "fit_data": "T0/train",
+        "control_level": "C2b"
+      },
       "contract_checks": [
         {
           "name": "fichiers du run présents",
@@ -783,13 +826,22 @@
     "c3": {
       "run_id": "c3",
       "model_name": "C3 — baseline historique — mélange C1 + C2 + taux de passages par zéro",
-      "checkpoint": "logreg(C=0.01)",
-      "training_commit": "1289095fccd5f7c7c0553e22894e1fdf378d9856",
+      "checkpoint": "aucun checkpoint sérialisé : logreg(C=0.01) ajustée de façon déterministe sur T0/train",
+      "training_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
       "config_hash": null,
-      "timestamp": "2026-09-12T16:16:13+00:00",
+      "timestamp": "2026-09-12T19:23:48+00:00",
       "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
       "threshold_recomputed_on_val": 0.510207,
       "threshold_declared_by_run": 0.510207,
+      "provenance": {
+        "model_definition_commit": "2f61695072e0f16205d6a7047243c59600eb2792",
+        "training_worktree_dirty": false,
+        "execution_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+        "execution_worktree_dirty": false,
+        "model_fingerprint": "1d9ddaceeb03b152a0d7d48b899a540f7490df984483a5fa869e68095604955d",
+        "fit_data": "T0/train",
+        "control_level": "C3"
+      },
       "contract_checks": [
         {
           "name": "fichiers du run présents",
@@ -975,13 +1027,26 @@
     "c2b-T1": {
       "run_id": "c2b-T1",
       "model_name": "C2b sous T1 — inversion temporelle",
-      "checkpoint": "logreg(C=0.1) entraîné sur T0/train, NON réentraîné",
-      "training_commit": "913575406b39beec3ae7da77aec322cca926d034",
+      "checkpoint": "aucun checkpoint sérialisé : définition figée 355f074, logreg(C=0.1) réajustée de façon déterministe sur T0/train, jamais ajustée sur T1",
+      "training_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
       "config_hash": null,
-      "timestamp": "2026-09-12T18:25:24+00:00",
-      "threshold_rule": "hérité de T0 : seuil choisi sur la validation de T0",
+      "timestamp": "2026-09-12T19:24:00+00:00",
+      "threshold_rule": "seuil recalculé sur le fold de validation de ce run transformé (argmax du macro-F1 cluster-level) ; les métriques dépendantes du seuil ne sont pas utilisées pour les conclusions de sensibilité temporelle",
       "threshold_recomputed_on_val": 0.359381,
       "threshold_declared_by_run": null,
+      "provenance": {
+        "model_definition_commit": "355f0743fb306da50897c0720e6fab5ecf947c52",
+        "training_worktree_dirty": false,
+        "execution_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+        "execution_worktree_dirty": false,
+        "model_fingerprint": "89f23a4f9773537302c6edc69a5f8bff2de9cf9d78c02ba576c9ae465cb39fc9",
+        "fit_data": "T0/train",
+        "control_level": "C2b",
+        "stress_transform": "T1",
+        "base_run_id": "c2b",
+        "retrained": false,
+        "retrained_meaning": "not retrained on stressed data"
+      },
       "contract_checks": [
         {
           "name": "fichiers du run présents",
@@ -1167,13 +1232,26 @@
     "c2b-T2": {
       "run_id": "c2b-T2",
       "model_name": "C2b sous T2 — permutation de blocs de 250 échantillons (31,25 ms)",
-      "checkpoint": "logreg(C=0.1) entraîné sur T0/train, NON réentraîné",
-      "training_commit": "913575406b39beec3ae7da77aec322cca926d034",
+      "checkpoint": "aucun checkpoint sérialisé : définition figée 355f074, logreg(C=0.1) réajustée de façon déterministe sur T0/train, jamais ajustée sur T2",
+      "training_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
       "config_hash": null,
-      "timestamp": "2026-09-12T18:25:50+00:00",
-      "threshold_rule": "hérité de T0 : seuil choisi sur la validation de T0",
+      "timestamp": "2026-09-12T19:24:05+00:00",
+      "threshold_rule": "seuil recalculé sur le fold de validation de ce run transformé (argmax du macro-F1 cluster-level) ; les métriques dépendantes du seuil ne sont pas utilisées pour les conclusions de sensibilité temporelle",
       "threshold_recomputed_on_val": 0.448466,
       "threshold_declared_by_run": null,
+      "provenance": {
+        "model_definition_commit": "355f0743fb306da50897c0720e6fab5ecf947c52",
+        "training_worktree_dirty": false,
+        "execution_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+        "execution_worktree_dirty": false,
+        "model_fingerprint": "89f23a4f9773537302c6edc69a5f8bff2de9cf9d78c02ba576c9ae465cb39fc9",
+        "fit_data": "T0/train",
+        "control_level": "C2b",
+        "stress_transform": "T2",
+        "base_run_id": "c2b",
+        "retrained": false,
+        "retrained_meaning": "not retrained on stressed data"
+      },
       "contract_checks": [
         {
           "name": "fichiers du run présents",
@@ -1359,13 +1437,26 @@
     "c2b-T3": {
       "run_id": "c2b-T3",
       "model_name": "C2b sous T3 — randomisation de phase, module préservé",
-      "checkpoint": "logreg(C=0.1) entraîné sur T0/train, NON réentraîné",
-      "training_commit": "913575406b39beec3ae7da77aec322cca926d034",
+      "checkpoint": "aucun checkpoint sérialisé : définition figée 355f074, logreg(C=0.1) réajustée de façon déterministe sur T0/train, jamais ajustée sur T3",
+      "training_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
       "config_hash": null,
-      "timestamp": "2026-09-12T18:25:56+00:00",
-      "threshold_rule": "hérité de T0 : seuil choisi sur la validation de T0",
+      "timestamp": "2026-09-12T19:24:11+00:00",
+      "threshold_rule": "seuil recalculé sur le fold de validation de ce run transformé (argmax du macro-F1 cluster-level) ; les métriques dépendantes du seuil ne sont pas utilisées pour les conclusions de sensibilité temporelle",
       "threshold_recomputed_on_val": 0.527176,
       "threshold_declared_by_run": null,
+      "provenance": {
+        "model_definition_commit": "355f0743fb306da50897c0720e6fab5ecf947c52",
+        "training_worktree_dirty": false,
+        "execution_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+        "execution_worktree_dirty": false,
+        "model_fingerprint": "89f23a4f9773537302c6edc69a5f8bff2de9cf9d78c02ba576c9ae465cb39fc9",
+        "fit_data": "T0/train",
+        "control_level": "C2b",
+        "stress_transform": "T3",
+        "base_run_id": "c2b",
+        "retrained": false,
+        "retrained_meaning": "not retrained on stressed data"
+      },
       "contract_checks": [
         {
           "name": "fichiers du run présents",
@@ -1554,6 +1645,26 @@
     "c2b-T2",
     "c2b-T3"
   ],
+  "stress_run_bases": {
+    "c2b-T1": [
+      "c2b",
+      "T1"
+    ],
+    "c2b-T2": [
+      "c2b",
+      "T2"
+    ],
+    "c2b-T3": [
+      "c2b",
+      "T3"
+    ]
+  },
+  "stress_claim_metrics": [
+    "clip_roc_auc",
+    "cluster_roc_auc",
+    "pearson_r_with_T0",
+    "delta_p"
+  ],
   "stress_comparisons": {
     "c2b_vs_c2b-T1": {
       "seed": 20260912,
@@ -1565,13 +1676,6 @@
         "lecture": "inconclusive",
         "draws_effectifs": 2000
       },
-      "clip_macro_f1": {
-        "delta_observe": 0.060895,
-        "ci95_low": -0.018452,
-        "ci95_high": 0.099186,
-        "lecture": "inconclusive",
-        "draws_effectifs": 2000
-      },
       "cluster_roc_auc": {
         "delta_observe": 0.009091,
         "ci95_low": -0.039696,
@@ -1579,18 +1683,15 @@
         "lecture": "inconclusive",
         "draws_effectifs": 2000
       },
-      "cluster_macro_f1": {
-        "delta_observe": 0.047434,
-        "ci95_low": 0.0,
-        "ci95_high": 0.170469,
-        "lecture": "inconclusive",
-        "draws_effectifs": 2000
-      },
       "fold": "test",
       "a": "c2b",
       "b": "c2b-T1",
       "n_clips": 194,
-      "avertissement": "aucune significativité statistique n'est revendiquée : 41 clusters indépendants seulement"
+      "avertissement": "aucune significativité statistique n'est revendiquée : 41 clusters indépendants seulement",
+      "excluded_threshold_dependent_metrics": [
+        "clip_macro_f1",
+        "cluster_macro_f1"
+      ]
     },
     "c2b_vs_c2b-T2": {
       "seed": 20260912,
@@ -1602,13 +1703,6 @@
         "lecture": "compatible with improvement",
         "draws_effectifs": 2000
       },
-      "clip_macro_f1": {
-        "delta_observe": 0.159134,
-        "ci95_low": -0.010201,
-        "ci95_high": 0.264848,
-        "lecture": "inconclusive",
-        "draws_effectifs": 2000
-      },
       "cluster_roc_auc": {
         "delta_observe": 0.130303,
         "ci95_low": -0.009528,
@@ -1616,18 +1710,15 @@
         "lecture": "inconclusive",
         "draws_effectifs": 2000
       },
-      "cluster_macro_f1": {
-        "delta_observe": 0.159017,
-        "ci95_low": -0.070561,
-        "ci95_high": 0.394001,
-        "lecture": "inconclusive",
-        "draws_effectifs": 2000
-      },
       "fold": "test",
       "a": "c2b",
       "b": "c2b-T2",
       "n_clips": 194,
-      "avertissement": "aucune significativité statistique n'est revendiquée : 41 clusters indépendants seulement"
+      "avertissement": "aucune significativité statistique n'est revendiquée : 41 clusters indépendants seulement",
+      "excluded_threshold_dependent_metrics": [
+        "clip_macro_f1",
+        "cluster_macro_f1"
+      ]
     },
     "c2b_vs_c2b-T3": {
       "seed": 20260912,
@@ -1639,13 +1730,6 @@
         "lecture": "compatible with improvement",
         "draws_effectifs": 2000
       },
-      "clip_macro_f1": {
-        "delta_observe": 0.121137,
-        "ci95_low": 0.068736,
-        "ci95_high": 0.274929,
-        "lecture": "compatible with improvement",
-        "draws_effectifs": 2000
-      },
       "cluster_roc_auc": {
         "delta_observe": 0.218182,
         "ci95_low": 0.052074,
@@ -1653,18 +1737,44 @@
         "lecture": "compatible with improvement",
         "draws_effectifs": 2000
       },
-      "cluster_macro_f1": {
-        "delta_observe": 0.148416,
-        "ci95_low": 0.02354,
-        "ci95_high": 0.310607,
-        "lecture": "compatible with improvement",
-        "draws_effectifs": 2000
-      },
       "fold": "test",
       "a": "c2b",
       "b": "c2b-T3",
       "n_clips": 194,
-      "avertissement": "aucune significativité statistique n'est revendiquée : 41 clusters indépendants seulement"
+      "avertissement": "aucune significativité statistique n'est revendiquée : 41 clusters indépendants seulement",
+      "excluded_threshold_dependent_metrics": [
+        "clip_macro_f1",
+        "cluster_macro_f1"
+      ]
+    }
+  },
+  "stress_prediction_shift": {
+    "c2b-T1": {
+      "fold": "test",
+      "n_clips": 194,
+      "pearson_r_with_T0": 0.992138,
+      "delta_p_median": 0.001078,
+      "delta_p_q1": -0.014002,
+      "delta_p_q3": 0.017,
+      "abs_delta_p_median": 0.015471
+    },
+    "c2b-T2": {
+      "fold": "test",
+      "n_clips": 194,
+      "pearson_r_with_T0": 0.728644,
+      "delta_p_median": 0.047637,
+      "delta_p_q1": -0.045376,
+      "delta_p_q3": 0.195542,
+      "abs_delta_p_median": 0.125361
+    },
+    "c2b-T3": {
+      "fold": "test",
+      "n_clips": 194,
+      "pearson_r_with_T0": 0.704588,
+      "delta_p_median": 0.022293,
+      "delta_p_q1": -0.076797,
+      "delta_p_q3": 0.144074,
+      "abs_delta_p_median": 0.106878
     }
   },
   "tslm_run_id": null,
