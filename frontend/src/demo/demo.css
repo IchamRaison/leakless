@@ -1128,7 +1128,8 @@
   .evidence-link,
   .report-link,
   .demo-footer a,
-  .audio-and-source a {
+  .audio-and-source a,
+  .monitor-back {
     display: inline-flex;
     align-items: center;
     min-height: 44px;
