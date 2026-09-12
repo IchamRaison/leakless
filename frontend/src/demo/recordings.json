@@ -1,0 +1,39 @@
+{
+  "source": "https://zenodo.org/records/18631450",
+  "license": "CC BY 4.0",
+  "split": "split_v2.csv",
+  "splitSha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+  "association": "Illustrative building positions; no dataset sensor coordinates and no leak localization. Every point offers the same three recordings.",
+  "records": [
+    {
+      "id": "no-leak",
+      "title": "No-leak",
+      "clipId": "c0128b879694e",
+      "groupId": "gd2da168526",
+      "fold": "train",
+      "url": "/demo/c0128b879694e.wav",
+      "fileSha256": "d3f2d2e689172b7848d5334318253188a61b5185c96961af015633d816719f78",
+      "inputSha256": "2f5322ff0705985b83c72ab8fa1eacc4fa1ad6c284cb88cddd8c2e2b48391f5a"
+    },
+    {
+      "id": "leak-associated",
+      "title": "Leak-associated",
+      "clipId": "c02543903a0da",
+      "groupId": "gbcf550a5ee",
+      "fold": "train",
+      "url": "/demo/c02543903a0da.wav",
+      "fileSha256": "cee51fcf3881ab21ea6e6378277dfcfa91bce8292b98b88ebfd07f75a098106e",
+      "inputSha256": "809e1a4ba9cc935c006e2d39f0ef02dcff8b8353c71e00d0e11729db03be6ced"
+    },
+    {
+      "id": "environmental-noise",
+      "title": "Environmental noise",
+      "clipId": "c0f921fc0a408",
+      "groupId": "g9ab0cbcb70",
+      "fold": "train",
+      "url": "/demo/c0f921fc0a408.wav",
+      "fileSha256": "310edb6f9490fb5b39b8b9cdbee0c1842093cc00f20a7c40fc46cc3aa4f72358",
+      "inputSha256": "507deb805d57ff0cb6441335262b16ae0bee33c5ba11c1dd7422884800c8d834"
+    }
+  ]
+}

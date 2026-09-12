@@ -31,34 +31,34 @@ def decode_audio(raw: bytes) -> StoredAudio:
     try:
         with sf.SoundFile(BytesIO(raw)) as audio:
             if audio.format not in ("WAV", "WAVEX"):
-                raise AudioError("Le fichier doit être un véritable WAV.")
+                raise AudioError("The file must be a genuine WAV.")
             if audio.subtype not in ("PCM_16", "PCM_24", "PCM_32", "FLOAT"):
-                raise AudioError("WAV accepté : PCM 16/24/32 bits ou float32.")
+                raise AudioError("Accepted WAV: PCM 16/24/32-bit or float32.")
             if audio.channels not in (1, 2) or not 8000 <= audio.samplerate <= 192000:
-                raise AudioError("Utilisez un WAV mono ou stéréo entre 8 et 192 kHz.")
+                raise AudioError("Use a mono or stereo WAV between 8 and 192 kHz.")
             if audio.frames == 0 or audio.frames > audio.samplerate * MAX_SECONDS:
-                raise AudioError("La durée doit être supérieure à zéro et au plus 30 secondes.")
+                raise AudioError("Duration must be above zero and at most 30 seconds.")
             rate = audio.samplerate
             frames = audio.frames
             waveform = audio.read(dtype="float32", always_2d=True)
             if len(waveform) != frames:
-                raise AudioError("Le WAV est tronqué.")
+                raise AudioError("The WAV is truncated.")
     except (sf.LibsndfileError, RuntimeError) as exc:
-        raise AudioError("WAV illisible ou corrompu.") from exc
+        raise AudioError("Unreadable or corrupted WAV.") from exc
     if not np.isfinite(waveform).all():
-        raise AudioError("Le WAV contient des valeurs NaN ou infinies.")
+        raise AudioError("The WAV contains NaN or infinite values.")
     channels = waveform.shape[1]
     digest = sha256(f"{rate}:{channels}:".encode() + waveform.astype("<f4").tobytes()).hexdigest()
     warnings = []
     if not np.any(waveform):
-        warnings.append("Signal silencieux : aucune énergie acoustique mesurable.")
+        warnings.append("Silent signal: no measurable acoustic energy.")
     if np.max(np.abs(waveform)) >= 1:
-        warnings.append("Amplitude à pleine échelle ou supérieure : vérifier la saturation.")
+        warnings.append("Full-scale amplitude or above: check for clipping.")
     return StoredAudio(
         metadata=Sample(
             sample_id=digest[:24], input_sha256=digest,
             duration_seconds=len(waveform) / rate, sample_rate_hz=rate,
-            channels=channels, source="Import local · provenance non vérifiée",
+            channels=channels, source="Local upload · provenance not verified",
             execution_mode="development_fixture", warnings=warnings,
         ),
         original=raw, waveform=waveform,
@@ -96,10 +96,10 @@ def visualization(audio: StoredAudio) -> dict:
             "times": [float(times[g].mean()) for g in time_groups],
             "frequencies_hz": [float(frequencies[g].mean()) for g in freq_groups],
             "power_db": np.round(decibels, 2).tolist(),
-            "floor_db": -120, "reference": "Amplitude numérique 1, non calibrée en pression acoustique",
+            "floor_db": -120, "reference": "Digital amplitude 1, not calibrated to sound pressure",
         },
         "parameters": {"n_fft": n_fft, "hop_samples": hop, "window": "hann",
-                       "channels": "moyenne mono pour affichage", "resampling": False,
-                       "pooling": "moyenne d'énergie, au plus 256 fréquences × 400 instants"},
-        "notice": "Visualisation distincte du prétraitement ML ; ce n’est pas l’attention du modèle.",
+                       "channels": "mono mean for display", "resampling": False,
+                       "pooling": "mean power, at most 256 frequencies × 400 time steps"},
+        "notice": "Display visualisation, separate from ML preprocessing; not the model's attention.",
     }

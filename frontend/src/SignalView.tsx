@@ -42,7 +42,7 @@ export function SignalView({
     const ctx = node.getContext("2d");
     if (!ctx) return;
     const pixels = ctx.createImageData(width, height);
-    // Échelle fixe -120..0 dB ; aucune normalisation automatique par clip.
+    // Fixed −120..0 dB scale; no per-clip normalisation.
     const stops = [
       [18, 25, 35],
       [28, 72, 91],
@@ -67,15 +67,15 @@ export function SignalView({
   return (
     <div className="signal-views">
       <div className="plot-heading">
-        <h3>Forme d’onde</h3>
-        <span>Amplitude numérique · ±{peak.toFixed(1)}</span>
+        <h3>Waveform</h3>
+        <span>Digital amplitude · ±{peak.toFixed(1)}</span>
       </div>
       <div className="plot waveform">
         <svg
           viewBox="0 0 1000 120"
           preserveAspectRatio="none"
           role="img"
-          aria-label="Forme d’onde du signal importé, amplitude en fonction du temps"
+          aria-label="Waveform of the recording, amplitude over time"
         >
           <line x1="0" y1="60" x2="1000" y2="60" stroke="#deded8" />
           <path d={points} stroke="#45685c" strokeWidth="1.3" />
@@ -88,8 +88,8 @@ export function SignalView({
         <span>{formatTime(data.duration_seconds)}</span>
       </div>
       <div className="plot-heading">
-        <h3>Spectrogramme</h3>
-        <span>Fréquence (kHz) · énergie (dB)</span>
+        <h3>Spectrogram</h3>
+        <span>Frequency (kHz) · power (dB)</span>
       </div>
       <div className="spectral-layout">
         <div className="frequency-axis">
@@ -102,7 +102,7 @@ export function SignalView({
           <canvas
             ref={canvas}
             role="img"
-            aria-label="Spectrogramme du même signal ; fréquence verticale et temps horizontal"
+            aria-label="Spectrogram of the same recording; frequency vertical, time horizontal"
           />
           <div className="playhead light" style={{ left: `${position}%` }} />
         </div>
@@ -121,7 +121,7 @@ export function SignalView({
         </span>
       </div>
       <p className="fine-print">
-        {data.notice} Amplitude non calibrée en pression acoustique.
+        {data.notice} Amplitude is not calibrated to sound pressure.
       </p>
     </div>
   );

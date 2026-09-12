@@ -1,0 +1,528 @@
+import { useEffect, useRef, useState } from "react";
+import {
+  ArrowDown,
+  ArrowUpRight,
+  AudioLines,
+  Check,
+  ChevronRight,
+  ExternalLink,
+  Pause,
+  Play,
+  RotateCcw,
+  Upload,
+} from "lucide-react";
+import { api } from "../api";
+import {
+  sampleSchema,
+  visualizationSchema,
+  type Sample,
+  type Visualization,
+} from "../contracts";
+import { SignalView } from "../SignalView";
+import {
+  BuildingScene,
+  measurementPoints,
+  type Measurement,
+} from "./BuildingScene";
+import { InspectRecording } from "./InspectRecording";
+import { ModelReadout } from "./ModelReadout";
+import { TemporalSignalMap } from "./TemporalSignalMap";
+import { evidence } from "./evidence";
+import recordings from "./recordings.json";
+import "./demo.css";
+
+type Recording = (typeof recordings.records)[number];
+type Loaded = {
+  record: Recording;
+  sample: Sample;
+  visualization: Visualization;
+};
+
+export default function DemoExperience() {
+  const [measurement, setMeasurement] = useState<Measurement | null>(null);
+  const [record, setRecord] = useState<Recording | null>(null);
+  const [loaded, setLoaded] = useState<Loaded | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [retry, setRetry] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [time, setTime] = useState(0);
+  const request = useRef<AbortController | null>(null);
+  const cache = useRef(new Map<string, Loaded>());
+  useEffect(() => {
+    request.current?.abort();
+    const controller = new AbortController();
+    request.current = controller;
+    setLoaded(null);
+    setError("");
+    setTime(0);
+    setLoading(false);
+    if (!record) return () => controller.abort();
+    const current = record;
+    const cached = cache.current.get(current.id);
+    if (cached) {
+      setLoaded(cached);
+      return () => controller.abort();
+    }
+    setLoading(true);
+    async function load() {
+      try {
+        const response = await fetch(current.url, {
+          signal: controller.signal,
+        });
+        if (!response.ok)
+          throw new Error("The example recording is unavailable. Retry.");
+        const raw = await response.arrayBuffer();
+        const digest = [
+          ...new Uint8Array(await crypto.subtle.digest("SHA-256", raw)),
+        ]
+          .map((byte) => byte.toString(16).padStart(2, "0"))
+          .join("");
+        if (digest !== current.fileSha256)
+          throw new Error(
+            "Recording integrity check failed. No measurements displayed.",
+          );
+        const form = new FormData();
+        form.append(
+          "file",
+          new Blob([raw], { type: "audio/wav" }),
+          "recording.wav",
+        );
+        const sample = await api("/samples", sampleSchema, {
+          method: "POST",
+          body: form,
+          signal: controller.signal,
+        });
+        if (sample.input_sha256 !== current.inputSha256)
+          throw new Error(
+            "The decoded signal does not match the selected example.",
+          );
+        const visualization = await api(
+          `/samples/${sample.sample_id}/visualization`,
+          visualizationSchema,
+          { signal: controller.signal },
+        );
+        if (
+          visualization.input_sha256 !== sample.input_sha256 ||
+          visualization.sample_id !== sample.sample_id
+        )
+          throw new Error(
+            "The measurements do not match the selected recording.",
+          );
+        if (controller.signal.aborted) return;
+        const result = { record: current, sample, visualization };
+        cache.current.set(current.id, result);
+        setLoaded(result);
+      } catch (err) {
+        if (!controller.signal.aborted)
+          setError(
+            err instanceof Error
+              ? err.message
+              : "Could not load this recording.",
+          );
+      } finally {
+        if (!controller.signal.aborted) setLoading(false);
+      }
+    }
+    void load();
+    return () => controller.abort();
+  }, [record, retry]);
+
+  // Points are illustrative positions, not leak locations: choosing one never picks a recording class.
+  const selectPoint = (id: Measurement) => {
+    setMeasurement(id);
+    setRecord((current) => current ?? recordings.records[0]);
+  };
+  const reload = () => {
+    cache.current.clear();
+    setRetry((value) => value + 1);
+  };
+  // Never render previous clip measurements under a new selection, even before effects run.
+  const active = loaded?.record.id === record?.id ? loaded : null;
+
+  return (
+    <div className="demo-app" id="demo">
+      <header className="demo-topbar">
+        <a className="demo-brand" href="#demo">
+          <AudioLines size={21} strokeWidth={1.6} /> LEAKLESS{" "}
+          <span>RESEARCH PROTOTYPE</span>
+        </a>
+        <nav aria-label="Demo navigation">
+          <a href="#signal">Explore the signal</a>
+          <a href="#evidence">The evidence</a>
+          <a className="load-link" href="#inspect">
+            Load a recording <Upload size={14} />
+          </a>
+        </nav>
+      </header>
+      <main className="demo-main">
+        <section className="demo-hero" aria-labelledby="why-heading">
+          <div className="hero-copy">
+            <span className="demo-kicker">
+              <i /> THE SIGNAL BEFORE THE DECISION
+            </span>
+            <h1 id="why-heading">
+              Water damage <br />
+              becomes visible late.
+              <br />
+              <em>
+                The signal can <br />
+                change earlier.
+              </em>
+            </h1>
+            <p className="hero-subtitle">
+              LeakLess helps facilities teams inspect unusual acoustic signals
+              before deciding where to investigate.
+            </p>
+            <p className="prototype-note">
+              Experimental prototype — no field validation.
+              <br />
+              Early warning lead time has not been demonstrated.
+            </p>
+            <div className="hero-who">
+              <span>FOR</span>
+              <p>
+                Facilities and maintenance teams
+                <br />
+                responsible for buildings.
+              </p>
+            </div>
+            <a className="explore-link" href="#signal">
+              Inspect an acoustic signal <ArrowDown size={15} />
+            </a>
+          </div>
+          <div className="building-panel">
+            <div className="building-topline">
+              <span>01 / BUILDING CONTEXT</span>
+              <span>ILLUSTRATIVE SCENE</span>
+            </div>
+            <BuildingScene
+              selected={measurement}
+              onSelect={selectPoint}
+              paused={paused}
+            />
+            <div className="building-caption">
+              <span>
+                <i className={measurement ? "selected-dot" : ""} />
+                {measurement
+                  ? `Selected measurement point · ${measurement}`
+                  : "Select a measurement point"}
+              </span>
+              <button
+                className="quiet-button"
+                aria-label={
+                  paused
+                    ? "Resume presentation rotation"
+                    : "Pause presentation rotation"
+                }
+                onClick={() => setPaused(!paused)}
+              >
+                {paused ? <Play size={12} /> : <Pause size={12} />}
+                {paused ? "Resume" : "Pause"} rotation
+              </button>
+            </div>
+            <div className="point-selector" aria-label="Measurement points">
+              {measurementPoints.map((id) => (
+                <button
+                  key={id}
+                  aria-label={`Measurement ${id}`}
+                  aria-pressed={measurement === id}
+                  className={measurement === id ? "active" : ""}
+                  onClick={() => selectPoint(id)}
+                >
+                  {id}
+                  <ChevronRight size={12} />
+                </button>
+              ))}
+            </div>
+            <p className="association-note">
+              N1–N4 are illustrative positions. They do not locate leaks.
+              <br />
+              No sensor coordinates come from the dataset.
+            </p>
+          </div>
+        </section>
+
+        <section
+          className="signal-section"
+          id="signal"
+          aria-labelledby="signal-title"
+        >
+          <div className="demo-section-heading">
+            <div>
+              <span className="demo-kicker">02 / SELECT A SIGNAL</span>
+              <h2 id="signal-title" className="point-heading">
+                {measurement ? (
+                  <>
+                    <span className="point-label">
+                      Selected measurement point:
+                    </span>{" "}
+                    {measurement} — illustrative building position
+                  </>
+                ) : (
+                  "A point. A recording. A closer look."
+                )}
+              </h2>
+              <p>
+                {measurement
+                  ? "The point does not locate a leak. Choose a demo recording below."
+                  : "Select a point in the building to inspect a real recording."}
+              </p>
+            </div>
+            <span className="outline-tag">ILLUSTRATIVE POSITION</span>
+          </div>
+          <span className="example-label" id="demo-recording-label">
+            Demo recording:
+          </span>
+          <div
+            className="example-selector"
+            role="group"
+            aria-labelledby="demo-recording-label"
+          >
+            {recordings.records.map((example, index) => (
+              <button
+                key={example.id}
+                disabled={!measurement}
+                aria-pressed={record?.id === example.id}
+                className={record?.id === example.id ? "active" : ""}
+                onClick={() => setRecord(example)}
+              >
+                <span className="example-number">0{index + 1}</span>
+                {example.title}
+                {record?.id === example.id && <Check size={14} />}
+              </button>
+            ))}
+          </div>
+          <p className="examples-note">
+            Three experimental recordings for demonstration, not predictions.
+            The same recordings are available at every point. The model’s output
+            is binary: leak vs non-leak.
+          </p>
+
+          <div className="inspection-grid">
+            <section className="map-panel" aria-labelledby="map-title">
+              <div className="panel-heading">
+                <div>
+                  <span className="demo-kicker">03 / OBSERVE</span>
+                  <h2 id="map-title">Temporal Signal Map</h2>
+                </div>
+                <span className="status-tag">
+                  {active ? "MEASURED SIGNAL" : loading ? "LOADING" : "PENDING"}
+                </span>
+              </div>
+              {error ? (
+                <div className="map-pending" role="alert">
+                  <span>Signal unavailable</span>
+                  <p>{error}</p>
+                  <button onClick={reload}>
+                    <RotateCcw size={14} />
+                    Retry recording
+                  </button>
+                </div>
+              ) : active ? (
+                <TemporalSignalMap
+                  data={active.visualization}
+                  paused={paused}
+                />
+              ) : (
+                <div className="map-pending" role="status">
+                  <AudioLines size={42} strokeWidth={1} />
+                  <strong>
+                    {loading
+                      ? "Reading the real signal…"
+                      : "The recording gives this map its shape."}
+                  </strong>
+                  <p>
+                    {loading
+                      ? "Checking identity and measured spectral properties."
+                      : "Choose a measurement point above. No signal values are simulated."}
+                  </p>
+                </div>
+              )}
+              <div className="map-key">
+                <span>
+                  <i />
+                  GEOMETRY <small>measured signal properties</small>
+                </span>
+                <span>
+                  <i className="model-key" />
+                  MODEL COLOR / STATE <small>model output · pending</small>
+                </span>
+              </div>
+              <p className="map-disclaimer">
+                An abstract view of the acoustic signal. Not a physical water
+                simulation.
+              </p>
+            </section>
+            <aside className="decision-panel" aria-labelledby="decision-title">
+              <span className="demo-kicker">04 / INVESTIGATE</span>
+              <h2 id="decision-title">
+                Does this unusual <br />
+                signal deserve <br />
+                <em>inspection?</em>
+              </h2>
+              <p className="decision-intro">
+                When an unusual signal deserves investigation.
+              </p>
+              <ModelReadout />
+              <div className="decision-note">
+                <span className="small-rule" />
+                <p>
+                  A measured signal, then a human decision.
+                  <br />
+                  No inspection recommendation is generated while the model is
+                  pending.
+                </p>
+              </div>
+              <a href="#evidence" className="evidence-link">
+                See what we can demonstrate <ArrowDown size={14} />
+              </a>
+            </aside>
+          </div>
+
+          {active && (
+            <details className="raw-signal" open>
+              <summary>
+                <AudioLines size={16} />
+                <span>Listen to the recording. Inspect the waveform.</span>
+                <span className="raw-meta">
+                  {active.sample.duration_seconds.toFixed(2)} s ·{" "}
+                  {active.sample.sample_rate_hz / 1000} kHz ·{" "}
+                  {active.record.clipId}
+                </span>
+              </summary>
+              <div className="raw-content">
+                <div className="audio-and-source">
+                  <audio
+                    key={active.sample.sample_id}
+                    controls
+                    src={active.record.url}
+                    onTimeUpdate={(event) =>
+                      setTime(event.currentTarget.currentTime)
+                    }
+                    aria-label="Listen to selected experimental recording"
+                  />
+                  <p>
+                    Source:{" "}
+                    <a
+                      href={recordings.source}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Zenodo 18631450 <ExternalLink size={11} />
+                    </a>{" "}
+                    · {recordings.license}
+                    <br />
+                    Development example from train. No continuous monitoring.
+                  </p>
+                  <details className="clip-provenance">
+                    <summary>Clip identity & provenance</summary>
+                    <p>
+                      Dataset clip: {active.record.clipId}
+                      <br />
+                      Dependency cluster: {active.record.groupId}
+                      <br />
+                      Split: {recordings.split} / {active.record.fold}
+                    </p>
+                    <code>{active.sample.input_sha256}</code>
+                  </details>
+                </div>
+                <SignalView data={active.visualization} time={time} />
+              </div>
+            </details>
+          )}
+        </section>
+
+        <section
+          className="evidence-section"
+          id="evidence"
+          aria-labelledby="evidence-title"
+        >
+          <div className="demo-section-heading">
+            <div>
+              <span className="demo-kicker">05 / QUESTION THE RESULT</span>
+              <h2 id="evidence-title">What could the model be cheating on?</h2>
+              <p>
+                Find which information carries the decision. Not just the
+                highest score.
+              </p>
+            </div>
+            <a
+              className="report-link"
+              href={evidence.source}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Source & protocol <ArrowUpRight size={14} />
+            </a>
+          </div>
+          <div className="control-ladder">
+            {evidence.controls.map((control) => (
+              <article
+                className={`control-card ${control.id === "C1" ? "reference-control" : ""}`}
+                key={control.id}
+              >
+                <span className="control-id">
+                  {control.id}
+                  {control.id === "C1" && <small>REFERENCE</small>}
+                </span>
+                <h3>{control.name}</h3>
+                <p>{control.detail}</p>
+                <dl>
+                  <div>
+                    <dt>Clip AUC</dt>
+                    <dd>{control.clipAuc?.toFixed(3) ?? "PENDING"}</dd>
+                  </div>
+                  <div>
+                    <dt>Cluster AUC</dt>
+                    <dd>{control.clusterAuc?.toFixed(3) ?? "PENDING"}</dd>
+                  </div>
+                </dl>
+              </article>
+            ))}
+          </div>
+          <p className="evidence-caveat">
+            TEST · {evidence.testClusters} dependency clusters, including{" "}
+            {evidence.testNonLeakClusters} non-leak. Wide uncertainty intervals.
+            C1 vs C0 remains inconclusive. No TSLM superiority demonstrated.
+          </p>
+          <div className="proof-columns">
+            <section>
+              <span className="demo-kicker">WE DEMONSTRATED</span>
+              <ul>
+                {evidence.demonstrated.map((claim) => (
+                  <li key={claim}>
+                    <Check size={13} />
+                    {claim}
+                  </li>
+                ))}
+              </ul>
+            </section>
+            <section>
+              <span className="demo-kicker">WE HAVE NOT DEMONSTRATED</span>
+              <ul>
+                {evidence.notDemonstrated.map((claim) => (
+                  <li key={claim}>
+                    <span className="limit-dash">—</span>
+                    {claim}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </div>
+        </section>
+        <InspectRecording paused={paused} />
+        <footer className="demo-footer">
+          <span>
+            <AudioLines size={15} /> LEAKLESS · TEMPORAL AI
+          </span>
+          <p>
+            Experimental evidence. Explicit limits. A decision worth
+            investigating.
+          </p>
+          <a href="#demo">Back to top ↑</a>
+        </footer>
+      </main>
+    </div>
+  );
+}

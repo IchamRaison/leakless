@@ -24,7 +24,7 @@ async def lifespan(app: FastAPI):
     app.state.samples.clear()
 
 
-app = FastAPI(title="PIPE · Studio acoustique", version="0.1.0", lifespan=lifespan)
+app = FastAPI(title="LeakLess · Acoustic API", version="0.1.0", lifespan=lifespan)
 
 
 class BoundUpload:
@@ -39,7 +39,7 @@ class BoundUpload:
             return
         limit = MAX_BYTES + 64 * 1024
         content_length = dict(scope["headers"]).get(b"content-length")
-        too_large = JSONResponse({"error": {"code": "payload_too_large", "message": "Fichier limité à 8 Mio."}}, status_code=413)
+        too_large = JSONResponse({"error": {"code": "payload_too_large", "message": "File limited to 8 MiB."}}, status_code=413)
         if content_length and (not content_length.isdigit() or int(content_length) > limit):
             await too_large(scope, receive, send)
             return
@@ -84,13 +84,13 @@ async def http_error(request: Request, exc: HTTPException):
 
 @app.exception_handler(RequestValidationError)
 async def validation_error(request: Request, exc: RequestValidationError):
-    return JSONResponse({"error": {"code": "invalid_request", "message": "Requête invalide. Vérifiez les champs requis."}}, status_code=422)
+    return JSONResponse({"error": {"code": "invalid_request", "message": "Invalid request. Check the required fields."}}, status_code=422)
 
 
 def get_sample(sample_id: str):
     audio = app.state.samples.get(sample_id)
     if audio is None:
-        fail(404, "sample_not_found", "Clip introuvable. Réimportez-le si le serveur a redémarré.")
+        fail(404, "sample_not_found", "Recording not found. Upload it again if the server restarted.")
     return audio
 
 
@@ -98,7 +98,7 @@ def get_sample(sample_id: str):
 def health():
     return {"status": "ok", "schema_version": "0.1", "device": "cpu",
             "models": [{"name": name, "available": False, "version": None,
-                        "reason": "Adaptateur et poids non livrés"} for name in ("tslm", "baseline")],
+                        "reason": "Adapter and weights not delivered"} for name in ("tslm", "baseline")],
             "capabilities": {"upload": True, "visualization": True, "perturbation": False, "replay": False}}
 
 
@@ -111,18 +111,18 @@ def samples():
 async def upload(file: Annotated[UploadFile, File()]):
     try:
         if not file.filename or not file.filename.lower().endswith(".wav"):
-            fail(415, "unsupported_audio", "Choisissez un fichier .wav.")
+            fail(415, "unsupported_audio", "Choose a .wav file.")
         raw = await file.read(MAX_BYTES + 1)
     finally:
         await file.close()
     if len(raw) > MAX_BYTES:
-        fail(413, "payload_too_large", "Fichier limité à 8 Mio.")
+        fail(413, "payload_too_large", "File limited to 8 MiB.")
     try:
         audio = decode_audio(raw)
     except AudioError as exc:
         fail(422, "invalid_audio", str(exc))
     if audio.metadata.sample_id not in app.state.samples and len(app.state.samples) >= MAX_SAMPLES:
-        fail(409, "sample_limit", "16 clips maximum. Retirez un clip avant un nouvel import.")
+        fail(409, "sample_limit", "16 recordings maximum. Remove one before uploading another.")
     app.state.samples[audio.metadata.sample_id] = audio
     return audio.metadata
 
@@ -148,15 +148,15 @@ def visualize(sample_id: str):
 @app.get("/samples/{sample_id}/label")
 def label(sample_id: str):
     get_sample(sample_id)
-    fail(404, "label_unavailable", "Aucun label de démonstration autorisé pour cet import.")
+    fail(404, "label_unavailable", "No authorised demonstration label for this upload.")
 
 
 @app.post("/predict", response_model=Prediction)
 def predict(body: PredictRequest):
     get_sample(body.sample_id)
-    fail(503, "model_unavailable", "Modèle indisponible : adaptateur et poids attendus de l’équipe.")
+    fail(503, "model_unavailable", "Model unavailable: adapter and weights not delivered.")
 
 
 @app.get("/evaluation")
 def evaluation():
-    fail(404, "evaluation_unavailable", "Non évalué : aucun metrics.json de run publié n’est intégré.")
+    fail(404, "evaluation_unavailable", "Not evaluated: no published run metrics.json is integrated.")

@@ -16,23 +16,21 @@ export async function api<T>(
     if (options.signal?.aborted) throw error;
     throw new Error(
       timeout.aborted
-        ? "Le serveur met trop de temps à répondre. Réessayez."
-        : "API inaccessible. Vérifiez que le serveur local est lancé.",
+        ? "The server is taking too long to respond. Try again."
+        : "API unreachable. Check that the local server is running.",
     );
   }
   const body = await response.json().catch(() => null);
   if (!response.ok)
     throw new Error(
-      body?.error?.message ?? `Erreur du serveur (${response.status}).`,
+      body?.error?.message ?? `Server error (${response.status}).`,
     );
   const result = schema.safeParse(body);
   if (!result.success)
-    throw new Error(
-      "Réponse du serveur incompatible avec le studio. Vérifiez les versions.",
-    );
+    throw new Error("Server response does not match this interface version.");
   return result.data;
 }
 
 export function formatTime(seconds: number): string {
-  return `${seconds.toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} s`;
+  return `${seconds.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} s`;
 }
