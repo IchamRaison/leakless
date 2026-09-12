@@ -12,7 +12,7 @@
 | SHA256 | `7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896` |
 | Clips | 1000 |
 | Clusters de dépendance | 185 |
-| Commit de génération du rapport | `ea343174922ee8eb8dd369c15bab8fc0ab22d7ff` |
+| Commit de génération du rapport | `845c9545bf9030c8cb511410274bd51a27e4b680` |
 | Règle d'agrégation | median des probabilités du cluster (gelée) |
 | Bootstrap | 2000 tirages, graine 20260912, unité : cluster de dépendance |
 | Source | Zenodo 18631450, CC BY 4.0 — site d'entraînement expérimental de Dongguan |
