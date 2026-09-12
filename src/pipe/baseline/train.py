@@ -11,6 +11,7 @@ from pathlib import Path
 
 import numpy as np
 
+from .analyses import analyser, lire_options, metriques_selectives
 from .donnees import charger_developpement, ecrire_json, empreinte, exiger, lire_json, verifier_features, verifier_texte
 from .modele import entrainer, exemple_inference, metriques, predict_baseline, sauvegarder, versions
 
@@ -41,7 +42,7 @@ def exporter(predictions, dossier):
     with (dossier / "predictions.jsonl").open("w") as fichier:
         for prediction in predictions:
             fichier.write(json.dumps(prediction, ensure_ascii=False, allow_nan=False) + "\n")
-    colonnes = ["sample_id", "input_sha256", "prediction", "score_no_leak", "score_leak", "model_version", "preprocessing_version", "score_type", "execution_mode"]
+    colonnes = ["sample_id", "input_sha256", "prediction", "score_no_leak", "score_leak", "model_version", "preprocessing_version", "score_type", "execution_mode", "abstained", "abstention_reason"]
     with (dossier / "predictions.csv").open("w", newline="") as fichier:
         ecrivain = csv.DictWriter(fichier, fieldnames=colonnes)
         ecrivain.writeheader()
@@ -51,15 +52,22 @@ def exporter(predictions, dossier):
             ecrivain.writerow(ligne)
 
 
-def executer(chemin_configuration):
+def executer(chemin_configuration, chemin_analyses=None):
     chemin_configuration = Path(chemin_configuration).resolve()
     configuration = charger_configuration(chemin_configuration)
+    options = lire_options(chemin_analyses) if chemin_analyses else None
     base = chemin_configuration.parent
     donnees, matrice, cibles, partitions = charger_developpement(base / configuration["data_path"], base / configuration["split_path"], configuration)
     dossier = (base / configuration["output_dir"]).resolve()
     exiger(not dossier.exists(), "Le dossier de sortie existe déjà : choisir un nouveau run")
     modele = entrainer(matrice, cibles, partitions, configuration)
     masque = partitions == "validation"
+    analyses = None
+    if options is not None:
+        affectations = lire_json(base / configuration["split_path"])["assignments"]
+        groupes_par_id = {ligne["sample_id"]: ligne["event_group_id"] for ligne in affectations}
+        groupes = [groupes_par_id[ligne["sample_id"]] for ligne in donnees["samples"]]
+        analyses = analyser(modele, matrice, cibles, partitions, groupes, donnees["feature_names"], options, configuration["seed"])
     majoritaire = int(np.bincount(cibles[partitions == "train"], minlength=2).argmax())
     try:
         depot = Path(__file__).resolve().parents[3]
@@ -76,16 +84,21 @@ def executer(chemin_configuration):
                        data_sha256=empreinte(base / configuration["data_path"]), commit=commit, working_tree_dirty=modifie,
                        source_sha256=hachage_code, source_files=sources, n_train=int(sum(partitions == "train")),
                        n_validation=int(sum(masque)), final_test_evaluated=False)
+    if analyses is not None:
+        metadonnees.update(abstention_threshold=analyses["abstention"]["threshold"], abstention_selection_scope="validation_only",
+                           analysis_options=options, analysis_config_sha256=empreinte(chemin_analyses))
     artefact = {"model": modele, "metadata": metadonnees}
     predictions = [predict_baseline(artefact, exemple_inference(donnees, ligne)) for ligne, retenue in zip(donnees["samples"], masque) if retenue]
     # Les métriques doivent décrire exactement les sorties remises à Nevil.
-    predictions_numeriques = np.asarray([{"no_leak": 0, "leak": 1}[prediction["prediction"]] for prediction in predictions])
+    predictions_numeriques = np.asarray([{"no_leak": 0, "leak": 1, None: -1}[prediction["prediction"]] for prediction in predictions])
     hachage = sauvegarder(modele, metadonnees, dossier)
     exporter(predictions, dossier)
     rapport = {"execution_mode": donnees["execution_mode"], "benchmark_eligible": False,
                "scope": "validation_only", "final_test_evaluated": False, "model_sha256": hachage,
-               "baseline": metriques(cibles[masque], predictions_numeriques),
+               "baseline": metriques(cibles[masque], predictions_numeriques) if not np.any(predictions_numeriques == -1) else None,
                "majority_sanity_check": metriques(cibles[masque], np.full(sum(masque), majoritaire))}
+    if analyses is not None:
+        rapport.update(analyses=analyses, selective=metriques_selectives(cibles[masque], predictions_numeriques))
     ecrire_json(dossier / "metrics.json", rapport)
     ecrire_json(dossier / "run.json", {"status": "complete", "execution_mode": donnees["execution_mode"], "files": {fichier.name: empreinte(fichier) for fichier in sorted(dossier.iterdir()) if fichier.is_file()}})
     return dossier
@@ -94,9 +107,10 @@ def executer(chemin_configuration):
 def main():
     arguments = argparse.ArgumentParser(description=__doc__)
     arguments.add_argument("--config", required=True)
+    arguments.add_argument("--analyses", help="Options exploratoires, désactivées par défaut")
     options = arguments.parse_args()
     try:
-        dossier = executer(options.config)
+        dossier = executer(options.config, options.analyses)
     except (ValueError, OSError, KeyError, TypeError) as erreur:
         arguments.exit(2, f"Baseline refusée : {erreur}\n")
     print(f"Run de développement sauvegardé : {dossier}")

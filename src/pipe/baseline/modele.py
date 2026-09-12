@@ -98,12 +98,15 @@ def predict_baseline(artefact, exemple):
     exiger(bool(((probabilites >= 0) & (probabilites <= 1)).all()) and np.isclose(sum(probabilites), 1), "Distribution des scores invalide")
     exiger(len(predictions) == 1 and predictions[0] in (0, 1), "Prédiction invalide")
     noms = {0: "no_leak", 1: "leak"}
+    seuil = metadonnees.get("abstention_threshold", 0.5)
+    exiger(type(seuil) in (float, int) and np.isfinite(seuil) and 0.5 <= seuil <= 1, "Seuil d'abstention invalide dans l'artefact")
+    abstention = bool(max(probabilites) < seuil)
     mode = "development_fixture" if "development_fixture" in (metadonnees["execution_mode"], exemple["execution_mode"]) else "live"
     return {"schema_version": "0.1", "sample_id": exemple["sample_id"], "input_sha256": exemple["input_sha256"],
             "model_name": "baseline", "model_version": metadonnees["model_version"],
-            "preprocessing_version": metadonnees["preprocessing_version"], "prediction": noms[int(predictions[0])],
+            "preprocessing_version": metadonnees["preprocessing_version"], "prediction": None if abstention else noms[int(predictions[0])],
             "class_scores": {noms[int(classe)]: float(probabilites[indice]) for indice, classe in enumerate(classes)},
-            "score_type": "raw", "abstained": False, "abstention_reason": None, "observations": [], "description": None,
+            "score_type": "raw", "abstained": abstention, "abstention_reason": "max_class_score_below_validation_threshold" if abstention else None, "observations": [], "description": None,
             "latency_ms": (time.perf_counter() - debut) * 1000,
             "warnings": ["Fixture synthétique : aucune performance PIPE mesurée."] if mode == "development_fixture" else [],
             "execution_mode": mode}

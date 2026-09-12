@@ -29,7 +29,15 @@ Claude a exécuté la suite initiale : 57 tests passaient aussi de son côté. S
 
 Désaccords résolus : un échange de valeurs non déclaré ne peut pas être détecté grâce aux seuls noms de colonnes ; nous contrôlons l'ordre déclaré et documentons la limite. Le manifeste complet permet de contrôler les groupes test sans lire leurs labels. Les versions SciPy/joblib restent épinglées comme NumPy/sklearn, conformément à la recommandation de même environnement de la documentation de persistance. Le calcul d'une nouvelle prédiction refuse `replay` : afficher un résultat archivé appartient à Safoan. La configuration n'est pas libre : ses clés sont strictement contrôlées.
 
-## Ce qui reste non vérifié
+## Compléments exploratoires du 12 septembre
+
+Après la V0 : validateur de livraison sans entraînement, abstention optionnelle, CV groupée, bootstrap de groupes, proposition de features et ablation conditionnelle sur `clip_log_rms`. Commande identique avec rapport `/private/tmp/pipe-vincent-analyses-tests.xml` : **88 tests réussis en 10,78 secondes** côté Codex. Les tests supplémentaires contrôlent les groupes réellement utilisés, les dénominateurs avec abstention, la sélection macro-F1 face à une exactitude trompeuse et le rechargement de la politique sauvegardée.
+
+Claude a lu les modules et exécuté la version intermédiaire : **86 tests réussis en 10,66 secondes**, bus #309. Son objection sur l'objectif de sélection a conduit à remplacer l'exactitude par le macro-F1 parmi les réponses retenues, sous couverture minimale. Cet objectif reste à valider par Nevil ; le rappel global conserve toutes les fuites au dénominateur. Relecture de cette dernière correction demandée dans #311.
+
+Désaccord conservé et expliqué dans #310 : ne pas agréger seulement les plis ayant les deux classes ni filtrer les tirages bootstrap dégénérés pour obtenir un intervalle. Les détails et motifs restent visibles ; l'absence d'agrégat décrit la limite des données. Les analyses sont optionnelles, réservées au développement, et la sélection et la mesure sur la même validation sont explicitement signalées comme optimistes. Aucun nouveau résultat acoustique n'est revendiqué.
+
+## Limites restantes
 
 - Données acoustiques, qualité du split et absence de quasi-doublons : Nevil.
 - Accord sur le format de transport provisoire, les features et leurs versions : Nevil et consommateurs.

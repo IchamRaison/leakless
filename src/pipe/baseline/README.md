@@ -74,3 +74,39 @@ Prochaine étape : Nevil livre une petite fixture réelle et confirme ordre/vers
 - Séparation par groupes : [validation croisée de données groupées](https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data). Cette V0 consomme les splits existants, sans utiliser de splitter.
 
 Recherche et revue Codex/Claude tracées dans le bus local. Les choix ne prétendent pas maximiser le score avant d'avoir les données : priorité à une comparaison reproductible conforme à la fiche d'Icham.
+
+## Compléments exploratoires demandés après V0
+
+Nevil peut valider une livraison **sans entraînement**, avant de la transmettre :
+
+```sh
+env PYTHONPATH=src .venv/bin/python -m pipe.baseline.valider --config /tmp/pipe-fixture-v0/config.json
+```
+
+Options `--data` et `--split` pour remplacer les chemins sans modifier la configuration. Le hash attendu reste contrôlé. Sortie JSON lisible : effectifs et groupes par split, classes train/validation, colonnes attendues/reçues. Les labels test restent inconnus. Code 0 pour contrat valide, 1 pour données/configuration invalides ; erreur de syntaxe CLI traitée par argparse. Les erreurs de valeurs/forme d'une ligne donnent son sample_id. Ce validateur ne réalise pas l'audit G0 de Nevil.
+
+Les analyses sont désactivées par défaut et s'activent explicitement sur un nouveau run :
+
+```sh
+env PYTHONPATH=src OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python -m pipe.baseline.train --config /tmp/pipe-fixture-v0/config.json --analyses configs/baseline/analyses.json
+```
+
+Utiliser un dossier `output_dir` neuf si le run simple existe déjà. Aucun score de développement, même réel, n'est promu automatiquement en benchmark.
+
+- **Abstention** : seuil sur le maximum des scores bruts, choisi sur validation pour maximiser le macro-F1 parmi les réponses retenues sous contrainte de couverture minimale. Cet objectif exploratoire reprend une métrique du protocole mais ne fixe pas les coûts métier ; Nevil doit le valider et figer le point de fonctionnement avant le test. Grille/configuration explicites ; en cas d'égalité, couverture supérieure puis seuil inférieur. Le modèle principal est toujours fit sur train uniquement. Seuil sauvegardé dans l'artefact et appliqué à toute nouvelle inférence, sans champ permettant au client de le remplacer. La validation sert aussi à sélectionner ce seuil : les chiffres sont descriptifs et optimistes, `independent_evaluation=false` le signale. Le rappel global compte les abstentions sur fuite comme des non-détections.
+- **Exports sélectifs** : toutes les lignes sont conservées. Une abstention porte prediction=null, abstained=true et un motif ; les scores restent raw. Avec abstention, `metrics.json.baseline=null` évite d'afficher une métrique pleine couverture trompeuse. `selective` contient la matrice 2×3, couverture, nombre d'abstentions, exactitude retenue, métriques des réponses retenues et rappel calculé sur **toutes** les fuites. Le CSV inclut aussi abstained/abstention_reason. Sans l'option d'analyse, le run V0 pleine couverture reste disponible ; ne pas comparer des scores conditionnels à des scores pleine couverture sans indiquer leurs dénominateurs.
+- **CV groupée** : GroupKFold sur le développement uniquement, modèles clonés indépendants, sans modifier le modèle principal ou le split final. Moyenne et dispersion par pli, pas un intervalle de confiance. Si un pli perd une classe ou s'il manque des groupes, statut explicite et aucune moyenne des seuls plis réussis.
+- **Bootstrap de groupes** : tirage avec remise de groupes entiers de validation, modèle figé et sans abstention. Intervalle percentile à 95 %, graine/repetitions enregistrées. Trop peu de groupes ou perte de classe dans des répétitions : intervalle=null, motif et compte explicites. Le minimum de groupes configurable est une règle prudente, pas une preuve d'indépendance. Cet intervalle ne mesure pas l'incertitude liée au réentraînement et n'évalue pas le seuil sélectionné.
+- **Amplitude** : la forêt sur clip_log_rms utilise uniquement cette feature fournie par Nevil et les lignes train ; score sur validation. Si elle manque, statut unavailable sans substitution. Ce comparateur ne prouve pas une causalité et ne remplace pas une vraie perturbation de gain dans le DSP.
+
+Les rapports se trouvent dans `metrics.json.analyses`, explicitement `development_exploration`, avec le hash des options dans les métadonnées. L'API Prediction reste inchangée ; les rapports complémentaires attendent la validation de Nevil avant intégration à son scoring.
+
+## Proposition de features pour Nevil
+
+```sh
+env PYTHONPATH=src .venv/bin/python -m pipe.baseline.proposer_features --bands 4
+```
+
+Le résultat est une **proposition**, pas un choix de DSP. L'exemple enregistré dans `configs/baseline/proposition-features.json` utilise quatre bandes uniquement pour illustrer la liste complète. Nevil décide du vrai nombre de bandes et des paramètres après audit ; relancer avec ce nombre. Ordre : par bande croissante, mean, std, q25, q50, q75 sur l'axe temporel, puis clip_log_rms calculé sur le signal avant normalisation individuelle. Échelle PCM, réduction mono et epsilon à documenter par Nevil. Aucun calcul acoustique ajouté dans ce module. La configuration réelle par défaut reste à renseigner depuis le contrat accepté, jamais depuis cet exemple sans validation.
+
+Sources des compléments : [GroupKFold](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GroupKFold.html), [séparation des données pour ajuster un seuil](https://scikit-learn.org/stable/modules/classification_threshold.html), [tirage avec remise dans NumPy](https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.choice.html). La politique d'abstention et le bootstrap groupé ici sont notre implémentation explicite de développement, pas un mécanisme de calibration sklearn ni une validation scientifique automatique.

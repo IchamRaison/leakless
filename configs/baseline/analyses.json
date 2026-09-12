@@ -1,0 +1,8 @@
+{
+  "thresholds": [0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+  "minimum_coverage": 0.8,
+  "cv_folds": 3,
+  "bootstrap_resamples": 200,
+  "bootstrap_min_groups": 5,
+  "amplitude_feature": "clip_log_rms"
+}

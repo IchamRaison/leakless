@@ -1,0 +1,31 @@
+{
+  "status": "proposal_not_approved",
+  "band_count": 4,
+  "feature_names": [
+    "band_00_mean",
+    "band_00_std",
+    "band_00_q25",
+    "band_00_q50",
+    "band_00_q75",
+    "band_01_mean",
+    "band_01_std",
+    "band_01_q25",
+    "band_01_q50",
+    "band_01_q75",
+    "band_02_mean",
+    "band_02_std",
+    "band_02_q25",
+    "band_02_q50",
+    "band_02_q75",
+    "band_03_mean",
+    "band_03_std",
+    "band_03_q25",
+    "band_03_q50",
+    "band_03_q75",
+    "clip_log_rms"
+  ],
+  "band_aggregates": "Statistiques sur l'axe temporel des bandes du SignalExample partagé de Nevil.",
+  "clip_log_rms": "Log-RMS du signal avant normalisation individuelle ; échelle et epsilon à documenter par Nevil.",
+  "feature_version": "A_VALIDER_PAR_NEVIL",
+  "preprocessing_version": "A_VALIDER_PAR_NEVIL"
+}

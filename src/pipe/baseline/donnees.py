@@ -104,7 +104,8 @@ def charger_developpement(chemin_donnees, chemin_split, configuration):
     lignes = donnees["samples"]
     exiger(isinstance(lignes, list) and bool(lignes), "Données absentes : demander la fixture à Nevil")
     vus, hashes, partitions = set(), {}, []
-    for ligne in lignes:
+    for numero, ligne in enumerate(lignes, 1):
+        exiger(isinstance(ligne, dict), f"Ligne {numero} : objet échantillon attendu")
         exiger(set(ligne) == {"sample_id", "input_sha256", "features", "label"}, "Champs d'un échantillon invalides")
         identifiant = ligne["sample_id"]
         verifier_texte(identifiant, "sample_id")
@@ -113,7 +114,11 @@ def charger_developpement(chemin_donnees, chemin_split, configuration):
         exiger(partition in {"train", "validation"}, "Features/labels test ou quarantine interdits dans le pilote de développement")
         exiger(identifiant not in vus, "sample_id répété dans les données")
         vus.add(identifiant)
-        exiger(type(ligne["label"]) is int and ligne["label"] in (0, 1), "Labels binaires entiers 0/1 requis")
+        exiger(type(ligne["label"]) is int and ligne["label"] in (0, 1), f"Labels binaires entiers 0/1 requis : ligne {numero}, sample_id={identifiant}")
+        try:
+            verifier_matrice([ligne["features"]], len(donnees["feature_names"]))
+        except ValueError as erreur:
+            raise ValueError(f"Ligne {numero}, sample_id={identifiant} : {erreur}") from erreur
         verifier_hash(ligne["input_sha256"])
         hachage = ligne["input_sha256"]
         exiger(hachage not in hashes or hashes[hachage] == partition, "Même signal déclaré dans plusieurs splits")
