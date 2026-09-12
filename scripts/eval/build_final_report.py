@@ -64,6 +64,13 @@ def check_stress_provenance(base_id: str, base_meta: dict, rid: str, meta: dict)
     empreinte (checkpoint de TSLM) : même checkpoint.
     """
     fa, fb = base_meta.get("model_fingerprint"), meta.get("model_fingerprint")
+    for who, m in ((base_id, base_meta), (rid, meta)):
+        unserialized = (str(m.get("checkpoint") or "").startswith(contract.NO_SERIALIZED_CHECKPOINT)
+                        or m.get("control_level"))
+        if unserialized and not m.get("model_fingerprint"):
+            # Sans checkpoint sérialisé, seule l'empreinte identifie le modèle ajusté.
+            raise ValueError(f"{who} : modèle non sérialisé sans `model_fingerprint` — "
+                             f"identité invérifiable")
     if not (fa or (base_meta.get("checkpoint") and base_meta.get("training_commit"))):
         # Deux identités absentes sont égales, mais n'identifient rien.
         raise ValueError(f"{base_id} : identité du modèle absente — il faut une "

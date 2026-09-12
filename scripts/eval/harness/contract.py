@@ -38,6 +38,11 @@ FORBIDDEN_PREDICTION_COLUMNS = frozenset({
     "fold", "label", "label_3c", "y", "target", "group_id",
 })
 
+# Préfixe du champ `checkpoint` d'un run dont le modèle n'est pas sérialisé (les
+# contrôles). Un tel run ne peut prouver l'identité de son modèle que par une
+# `model_fingerprint` : le libellé seul n'identifie rien.
+NO_SERIALIZED_CHECKPOINT = "aucun checkpoint sérialisé"
+
 REQUIRED_METADATA_FIELDS = (
     "run_id", "model_name", "checkpoint", "training_commit", "split_filename",
     "split_sha256", "timestamp", "threshold_rule", "test_labels_not_used_for_tuning",

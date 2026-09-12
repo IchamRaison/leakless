@@ -99,7 +99,7 @@ def stress_run_fields(control: str, tname: str, C: float, base_run_id: str,
     defc = features.LADDER[control]["definition_commit"]
     return {
         "model_name": f"{control} sous {tname} — {TRANSFORMS[tname]['description']}",
-        "checkpoint": (f"aucun checkpoint sérialisé : définition figée {defc[:7]}, "
+        "checkpoint": (f"{contract.NO_SERIALIZED_CHECKPOINT} : définition figée {defc[:7]}, "
                        f"logreg(C={C}) réajustée de façon déterministe sur T0/train, "
                        f"jamais ajustée sur {tname}"),
         "threshold_rule": STRESS_THRESHOLD_RULE,
@@ -226,7 +226,7 @@ def main() -> None:
             Path(args.runs_dir) / run_id,
             run_id=run_id,
             model_name=f"{control} — {spec['description']}" + (" [ÉTIQUETTES PERMUTÉES]" if suffix else ""),
-            checkpoint=(f"aucun checkpoint sérialisé : logreg(C={C}) ajustée de façon "
+            checkpoint=(f"{contract.NO_SERIALIZED_CHECKPOINT} : logreg(C={C}) ajustée de façon "
                         f"déterministe sur T0/train"),
             training_commit=training_commit,
             split=split,

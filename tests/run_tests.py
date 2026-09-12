@@ -959,6 +959,14 @@ def report_refuses_a_stress_run_that_is_not_the_base_model():
         "t", tb, "t-T1", {**tb, "retrained": False})
     must_raise(ValueError, build_final_report.check_stress_provenance,
                "t", tb, "t-T1", {**tb, "retrained": False, "checkpoint": "gs://x/step-2"})
+    # Modèle non sérialisé (contrôle) sans empreinte : le libellé n'identifie rien.
+    nock = {"training_commit": "a" * 40,
+            "checkpoint": f"{contract.NO_SERIALIZED_CHECKPOINT} : logreg(C=0.1)"}
+    must_raise(ValueError, build_final_report.check_stress_provenance,
+               "c2b", nock, "c2b-T2", {**nock, "retrained": False})
+    ctl = {"training_commit": "a" * 40, "checkpoint": "logreg", "control_level": "C2b"}
+    must_raise(ValueError, build_final_report.check_stress_provenance,
+               "c2b", ctl, "c2b-T2", {**ctl, "retrained": False})
     # Identité absente des deux côtés : égale, mais invérifiable -> refus.
     for empty in (None, ""):
         for field in ("checkpoint", "training_commit"):
