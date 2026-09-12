@@ -1306,7 +1306,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  height: 90px;
+  height: 58px;
 }
 .monitor-bands > div {
   display: flex;
@@ -1318,7 +1318,8 @@
   border-radius: 3px;
 }
 .monitor-bands span {
-  background: #8fb07f;
+  background: #8fb07f99;
+  border-top: 2px solid var(--accent);
   border-radius: 2px 2px 0 0;
 }
 .monitor-bands small {
