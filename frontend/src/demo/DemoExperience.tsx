@@ -265,7 +265,7 @@ export default function DemoExperience() {
               </h2>
               <p>
                 {measurement
-                  ? "The point does not locate a leak. Choose a demo recording below."
+                  ? "The point does not locate a leak. Every point offers the same three demo recordings."
                   : "Select a point in the building to inspect a real recording."}
               </p>
             </div>
@@ -301,8 +301,7 @@ export default function DemoExperience() {
           </div>
           <p className="examples-note">
             Three experimental recordings for demonstration, not predictions.
-            The same recordings are available at every point. The model’s output
-            is binary: leak vs non-leak.
+            The model’s output is binary: leak vs non-leak.
           </p>
 
           <div className="inspection-grid">
@@ -367,9 +366,6 @@ export default function DemoExperience() {
                 signal deserve <br />
                 <em>inspection?</em>
               </h2>
-              <p className="decision-intro">
-                When an unusual signal deserves investigation.
-              </p>
               <ModelReadout />
               <div className="decision-note">
                 <span className="small-rule" />
