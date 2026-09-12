@@ -11,6 +11,8 @@ import re
 import threading
 import time
 
+import numpy as np
+
 
 def _sha256(path):
     with Path(path).open("rb") as stream:
@@ -96,14 +98,32 @@ def decision_artifact(checkpoint, validation_evidence, decision_version):
             "restoration_source_sha256": _sha256(__file__)}
 
 
+def _waveform_identity(waveform, sample_rate):
+    """Empreinte numérique, pas SHA d'un faux WAV ou du conteneur .npy.
+
+    Le passage en float64 little-endian concerne uniquement le hachage. L'entrée
+    fournie au modèle conserve ses valeurs/dtype dans une copie privée.
+    """
+    if (waveform.ndim != 1 or waveform.dtype.kind not in "fiu"
+            or not np.isfinite(waveform).all()):
+        raise ValueError("Waveform numérique réelle, finie et unidimensionnelle requise")
+    header = {"format": "pipe-waveform-f64le-v1", "sample_rate": int(sample_rate),
+              "shape": list(waveform.shape)}
+    digest = hashlib.sha256(json.dumps(header, sort_keys=True, separators=(",", ":")).encode() + b"\x00")
+    digest.update(np.ascontiguousarray(waveform, dtype="<f8").tobytes())
+    return digest.hexdigest()
+
+
 class CoherentPredictor:
     """Backend privé et verrou unique ; aucun changement implicite de Predictor V1."""
     def __init__(self, checkpoint, decision, validation_evidence, device="cuda"):
         from pipe.tslm.predict import OUTPUT_PATTERN, PredictionError, Predictor, preprocess_for_model
+        from pipe.tslm.predict import extend_time_series_to_match_patch_size_and_aggregate, model_input
         from pipe.tslm.preprocessing import decode_wav, measured_band
 
         self._error_type, self._pattern = PredictionError, OUTPUT_PATTERN
         self._decode, self._measure, self._preprocess = decode_wav, measured_band, preprocess_for_model
+        self._collate, self._model_input = extend_time_series_to_match_patch_size_and_aggregate, model_input
         try:
             artifact = _read_object(decision)
             expected = decision_artifact(checkpoint, validation_evidence, artifact.get("decision_version"))
@@ -126,18 +146,55 @@ class CoherentPredictor:
 
     def predict(self, wav_bytes):
         """Retour distinct de Prediction v0.1 ; afficher seulement les champs hors audit."""
+        return self._predict(wav_bytes, 8000, waveform_input=False)
+
+    def predict_waveform(self, waveform, sample_rate=8000):
+        """Signal numérique brut d'une seconde, sans WAV ni requantification PCM16.
+
+        Même score, seuil, DSP et règles de restitution que predict(bytes).
+        `audit.raw_api_payload` reste null : aucune API WAV n'est exécutée.
+        """
+        return self._predict(waveform, sample_rate, waveform_input=True)
+
+    def _generate_waveform_text(self, series):
+        """Mince adaptateur vers la génération existante, mêmes arguments que V1."""
+        import torch
+        batch = self._collate([self._model_input(series)], normalize=False)
+        try:
+            # Même validation minimale du retour que predict_audio ; conserver
+            # les erreurs de type/index plutôt que les transformer en succès.
+            self._backend.model.generate(batch, max_new_tokens=self._backend.metadata["max_new_tokens"],
+                                         max_time=15.0)[0].strip()
+        except torch.cuda.OutOfMemoryError as exc:
+            raise self._error_type("gpu_out_of_memory", "Mémoire GPU insuffisante") from exc
+
+    def _predict(self, raw_input, sample_rate, *, waveform_input):
         if not self._lock.acquire(blocking=False):
             raise self._error_type("model_busy", "Une inférence cohérente est déjà en cours")
         started = time.perf_counter()
         audit = {"raw_generation_returns": [], "raw_api_payload": None, "raw_error": None}
         try:
             # La voie officielle refuse déjà signal invalide/constant et défaut GPU.
-            probability = self._backend.score(wav_bytes)
+            if waveform_input:
+                try:
+                    waveform = np.array(raw_input, copy=True, order="C")
+                    input_sha = _waveform_identity(waveform, sample_rate)
+                except (TypeError, ValueError, OverflowError) as exc:
+                    raise self._error_type("unsupported_audio", str(exc)) from exc
+                probability = self._backend.score_waveform(waveform, sample_rate)
+                audit["input_identity"] = {"kind": "waveform", "scheme": "pipe-waveform-f64le-v1",
+                    "sample_rate": int(sample_rate), "shape": list(waveform.shape),
+                    "source_dtype": str(waveform.dtype), "requantized": False}
+            else:
+                probability = self._backend.score(raw_input)
+                input_sha = hashlib.sha256(raw_input).hexdigest()
             if (type(probability) not in (int, float) or not math.isfinite(probability)
                     or not 0 <= probability <= 1):
                 raise self._error_type("invalid_score", "Score non fini ou hors [0,1]")
             try:
-                series = self._preprocess(self._decode(wav_bytes), 8000, self._backend.metadata)
+                if not waveform_input:
+                    waveform = self._decode(raw_input)
+                series = self._preprocess(waveform, sample_rate, self._backend.metadata)
                 band = self._measure(series)
             except ValueError as exc:
                 raise self._error_type("unsupported_audio", str(exc)) from exc
@@ -153,7 +210,10 @@ class CoherentPredictor:
 
             self._backend.model.generate = capture
             try:
-                audit["raw_api_payload"] = self._backend.predict(wav_bytes).model_dump(mode="json")
+                if waveform_input:
+                    self._generate_waveform_text(series)
+                else:
+                    audit["raw_api_payload"] = self._backend.predict(raw_input).model_dump(mode="json")
             except Exception as exc:
                 audit["raw_error"] = {"type": type(exc).__name__, "code": getattr(exc, "code", None), "message": str(exc)}
                 # Seul un échec identifié de décodage textuel est récupérable.
@@ -181,7 +241,7 @@ class CoherentPredictor:
                     reasons.append("generated_band_disagrees_with_dsp")
                 if match[1] != decision:
                     reasons.append("generated_class_disagrees_with_score")
-            return {"schema_version": "pipe-coherent-v1", "input_sha256": hashlib.sha256(wav_bytes).hexdigest(),
+            return {"schema_version": "pipe-coherent-v1", "input_sha256": input_sha,
                     "model_version": self._backend.metadata["model_version"],
                     "preprocessing_version": self._backend.metadata["preprocessing_version"],
                     "probability_leak": float(probability), "score_type": "raw", "calibration": "none",

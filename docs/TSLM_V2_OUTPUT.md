@@ -4,10 +4,11 @@ Implémentation logicielle de la phase 3 V2, **pas un nouveau modèle entraîné
 `Predictor.predict`, `Prediction` v0.1 et les livraisons V1 restent inchangés.
 Aucun endpoint applicatif n'est remplacé ou déployé par ce module.
 
-Statut : sept tests CPU sur faux backend passent. L'inférence réelle et le lot
-d'audit attendent la parité numérique et le dispatcher canonique
-`predict.preprocess_for_model(waveform, sample_rate, metadata)` fourni par le
-correctif V2. Aucune tolérance ni performance nouvelle n'est revendiquée ici.
+Statut de ce module : dix tests CPU sur faux backend passent, y compris l'entrée
+waveform sans requantification. Ils ne remplacent pas l'inférence réelle ni le lot
+d'audit après la porte de parité. Le dispatcher canonique
+`predict.preprocess_for_model(waveform, sample_rate, metadata)` est réutilisé.
+Aucune tolérance ni performance nouvelle n'est revendiquée ici.
 
 ## Utilisation
 
@@ -22,6 +23,41 @@ service = CoherentPredictor(
 )
 result = service.predict(wav_bytes)
 ```
+
+Pour le holdout numérique préparé, sans conversion de PCM32 en PCM16 :
+
+```python
+import numpy as np
+
+recording = np.load(path_to_prepared_npy, allow_pickle=False, mmap_mode="r")
+waveform = recording[start_sample:start_sample + 8000]  # offset du manifeste gelé
+result = service.predict_waveform(waveform, sample_rate=8000)
+```
+
+`predict_waveform` reçoit les valeurs brutes, pas un chemin, un ID ou des labels.
+La frontière numérique existante exige 8000 échantillons réels et finis à 8 kHz ;
+elle refuse les signaux constants. Une copie privée protège la cohérence entre
+score, mesure et génération ; son dtype et ses valeurs ne sont pas modifiés par
+le wrapper. La normalisation appartient toujours au preprocessing du backend.
+Le texte utilise le même `model_input`, collator `normalize=False` et
+`model.generate(max_new_tokens=metadata["max_new_tokens"], max_time=15.0)` que la
+voie WAV, sans modifier les quatre sources numériques liées au gate.
+
+La voie WAV conserve son `audit.raw_api_payload` V1. Pour waveform, ce champ vaut
+**null**, puisqu'aucune API WAV n'a été appelée : aucun payload V1 n'est fabriqué.
+Le retour brut exact de la génération, ses erreurs et les comparaisons au
+score/DSP restent dans le même audit et suivent les mêmes règles de restitution.
+Une sortie textuelle invalide utilise le même gabarit explicite ; la raison
+`raw_api_abstained`, propre au payload WAV, n'existe pas pour cette voie.
+
+`input_sha256` reste le SHA des octets pour WAV. Pour waveform, il est défini par
+`pipe-waveform-f64le-v1` : SHA256 du JSON compact trié
+`{"format":"pipe-waveform-f64le-v1","sample_rate":8000,"shape":[8000]}`, suivi d'un
+octet nul et des valeurs contiguës float64 little-endian. Cette canonicalisation
+concerne **le hachage uniquement**, pas le signal transmis au modèle. L'audit
+`input_identity` déclare schéma, fréquence, forme et dtype d'origine. Ce SHA
+n'est ni celui d'un faux WAV ni celui du conteneur `.npy` : l'adaptateur de données
+conserve séparément les empreintes des fichiers sources.
 
 Le backend `Predictor` est chargé une fois et reste privé. Les requêtes du wrapper
 sont sérialisées sans modifier les verrous V1 ; une requête concurrente reçoit
@@ -134,6 +170,13 @@ Les fixtures couvrent seuil exact et frontière inclusive, classe concurrente,
 mauvaise bande, sortie invalide, décodage défaillant, erreurs de score/GPU et
 artefacts incompatibles. Le critère futur sur le lot audité sera zéro contradiction
 **affichée**, en conservant séparément la qualité du texte brut et tous les échecs.
+
+Les fixtures waveform contrôlent le passage exact de valeurs float64 dépassant
+PCM16, l'absence de décodage WAV, les sorties partagées avec le chemin WAV sur un
+faux backend, le SHA indépendant de l'endianness et les erreurs/fallbacks. Elles
+ne constituent pas une nouvelle démonstration GPU de parité. L'ajout change le
+SHA de restitution : régénérer l'artefact de décision versionné après gel du code,
+sans réajuster silencieusement le seuil.
 
 Un gabarit juste par construction ne transforme pas les erreurs du modèle en
 réussites. Cette couche n'améliore pas, à elle seule, rappel, fausses alertes,
