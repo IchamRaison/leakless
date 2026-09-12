@@ -4,6 +4,16 @@ Icham
 
 ## État actuel
 
+Icham autorise désormais l'exécution complète V1/T0/stress. Runtime et données revérifiés ; développement des scores et scripts en cours. Campagne préannoncée : trois checkpoints 2/4/8 époques, train complet, sélection validation seule ; détail et prochaine action dans [[V1 ML - exécution]]. Correctif Nevil SHA-256 publié à `6dfdf63` : T2/T3 pourront utiliser cette version officielle. Aucun entraînement V1 encore lancé à ce jalon ; les paragraphes suivants décrivent les décisions préparatoires.
+
+## Démarrage V1 autorisé
+
+- User : « Implémente tout le plan dont a parlé ». Reprise après interruption, fichier objectif V0 relu ; la V0 existante est conservée, la nouvelle demande V1 est poursuivie en complément, pas remplacée par une répétition de V0.
+- `entire status` / recherche ciblée retrouvent le commit de preuve V0 `8e70a4c`, pas de transcription lue. `git fetch origin` trouve `6dfdf63580bc15ce6a1cf0817b9da3569553aca1` ; contrat lu, scripts revus. La graine des stress est désormais SHA-256, correctif Nevil `b23601a`, pas une modification locale unilatérale. Aucun rapport de métriques finales exécuté ; les chiffres intégrés au contrat ne motivent aucun choix.
+- SSH : H100 80 Go initialement 0 Mio / 0 %, espace disque 1,2 To libre. `.venv-repro` et archives/extractions/TimeF/cache/bundle V0 présents ; versions du runtime et CUDA revérifiées. Aucun nouveau provisionnement ni arrêt de l'instance.
+- Travail parallèle borné : scoring dans model/predict + tests, campagne dans un module distinct réutilisant les helpers V0, export/reload et reprise sélective des scripts officiels. Pas de réécriture de la baseline, du moteur de métriques ou du frontend.
+- Préinscription avant tout résultat V1 : huit époques train complet, candidats 2/4/8, métrique de développement groupée sur validation uniquement, départage par époque précoce ; aucun tuning des labels/prompts après test. Voir [[V1 ML - exécution]]. Tests et entraînement encore non exécutés au présent jalon.
+
 Plan révisé après les précisions Nevil, contrat `9135754` : score continu fondé sur les log-probabilités, petite campagne train/validation, gel/reload et contrôle avec son outil existant, puis export T0. Proposition de trois configurations au plus, nombre réel déclaré ; aucun choix sur test. T2/T3 conditionnés à une reproductibilité commune ou aux artefacts exacts Nevil, car `clip_rng` emploie un hash salé par processus. T0 et produit continu/collecte non bloqués. [[Plan surveillance continue]] §4 C1–C4 / §5 ; aucune exécution ML nouvelle.
 
 Consigne finale reçue via Icham : livrer les probabilités T0 (puis stress optionnels) au harness de Nevil, ne pas produire nos propres métriques finales. Contrat relu, aucun export encore créé ; le calcul de score reste à ajouter à la V0.
