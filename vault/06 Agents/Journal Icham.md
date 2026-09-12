@@ -4,6 +4,10 @@ Icham
 
 ## État actuel
 
+Nouvel objectif actif à deux fichiers lu intégralement, repris comme lancement des six étapes d'évaluation. Worktree isolé `feat/icham-quality-eval`, code/harness/runtime/empreintes inspectés ; détails dans [[Évaluation qualité V1 - exécution]]. Avant résultats : défaut AP avec scores égaux démontré sur jouet et correction prospective isolée, seuil d'audit à pleine précision, RF Vincent conditionnelle faute d'export accessible. Aucun calcul final TSLM ni changement de modèle à ce premier jalon.
+
+## Passage à la planification — historique
+
 Icham : « laisse tomber Nevil pour l'instant […] nous-mêmes. Planifie uniquement ». Évaluation qualité reprise dans le plan côté Icham, pas exécutée : [[Protocole évaluation#Plan qualité V1 — proposé, non exécuté]]. Parcours proposé : vrais résultats T0/test complet, comparaison aux contrôles, stress puis audit de toutes les descriptions val/test séparées. Aucun calcul de métriques, accès GPU, entraînement, export nouveau ou changement du checkpoint. Relecture du harness : seuil validation macro-F1 groupé choisi séparément pour chaque run, donc pas prétendre que les stress utilisent déjà le seuil T0 fixe. Source vault récupérée à jour avant édition, miroirs actualisés explicitement.
 
 ## État à la livraison ML — historique

@@ -17,6 +17,8 @@ Icham
 
 ## En cours et à vérifier
 
+- [x] Nouvel objectif actif : exécution du plan qualité V1 lancée en worktree isolé ; références/fichiers et intégrité revérifiés. [[Évaluation qualité V1 - exécution]].
+- [ ] Préinscription/code publiés puis évaluation CPU T0/contrôles/stress, audit texte complet H100, rapport de verdict vérifié.
 - [x] Icham demande de planifier une vraie évaluation par nous-mêmes, sans attendre Nevil ; ancienne exclusivité levée. [[Protocole évaluation#Plan qualité V1 — proposé, non exécuté]]. Aucun calcul lancé.
 - [ ] Après feu vert : T0/test complet, contrôles comparables, stress puis audit texte val/test séparés, checkpoint figé ; pas une démo de huit clips.
 - [x] Icham autorise l'implémentation V1 complète jusqu'à T0/T1–T3 ; runtime H100 et données existantes revérifiés. [[V1 ML - exécution]].
