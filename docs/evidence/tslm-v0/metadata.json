@@ -1,0 +1,43 @@
+{
+  "base_model": "Qwen/Qwen3.5-4B",
+  "base_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "architecture": "OpenTSLM-SP-Qwen3.5-text",
+  "opentslm_revision": "2968f4b891baab4307f7e9d0043e87677b593a30",
+  "timenet_revision": "c39ca32b64ad0c89ea54093dbcb285c1a93eb006",
+  "protocol": "split_v2_binary_with_noise_v0",
+  "preprocessing_version": "rms-hann256-hop128-band4-log1p-v1",
+  "seed": 20260912,
+  "batch_size": 2,
+  "debug_train_samples": 8,
+  "max_steps": 40,
+  "encoder_lr": 0.0002,
+  "projector_lr": 0.0001,
+  "weight_decay": 0.01,
+  "gradient_clip": 1.0,
+  "max_new_tokens": 48,
+  "model_version": "pipe-qwen3.5-4b-v0-a968405f",
+  "code_revision": "a968405f3c3e505582c3dcd8be0248d1075431c1",
+  "manifest_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+  "training_clip_ids": [
+    "c02543903a0da",
+    "c04498a7ed239",
+    "c05d8158c3707",
+    "c062288ccfbf0",
+    "c0128b879694e",
+    "c04206cc802ff",
+    "c04baf7fef3e6",
+    "c05f4f069b542"
+  ],
+  "training_groups": [
+    "gbcf550a5ee",
+    "gdc4d4d1b74",
+    "g72971ef0cc",
+    "g71c7290dc4",
+    "gd2da168526",
+    "g07ac25f1e0",
+    "g60e6ee291d",
+    "g46286703fa"
+  ],
+  "validation_example_id": "c00c343da6afa",
+  "purpose": "debug_overfit_not_evaluation"
+}

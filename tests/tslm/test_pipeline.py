@@ -4,6 +4,7 @@ from pathlib import Path
 import tempfile
 import unittest
 import wave
+from unittest.mock import Mock
 
 import numpy as np
 
@@ -12,6 +13,49 @@ from pipe.tslm.preprocessing import decode_wav, measured_band, model_input, prep
 
 
 class PipelineChecks(unittest.TestCase):
+    def test_predict_separates_generated_text_and_dsp(self):
+        from pipe.tslm.predict import PredictionError, predict_audio
+        from pipe.tslm.model import AcousticQwenSP
+        stream = io.BytesIO()
+        values = (2000 * np.sin(2 * np.pi * 1500 * np.arange(8000) / 8000)).astype("<i2")
+        with wave.open(stream, "wb") as output:
+            output.setnchannels(1)
+            output.setsampwidth(2)
+            output.setframerate(8000)
+            output.writeframes(values.tobytes())
+        model = Mock()
+        model.generate.return_value = ["leak; Greatest mean spectral energy: 0-1000 Hz."]
+        metadata = {"model_version": "test", "max_new_tokens": 48}
+        prediction = predict_audio(model, stream.getvalue(), metadata)
+        self.assertEqual(prediction.prediction, "leak")
+        self.assertIn("0-1000", prediction.description)
+        self.assertEqual(prediction.observations[0].value, "1000-2000")
+        forwarded = model.generate.call_args.args[0][0]
+        self.assertEqual(set(forwarded), {"pre_prompt", "post_prompt", "time_series", "time_series_text"})
+        model.generate.return_value = ["La fuite est à Paris."]
+        invalid = predict_audio(model, stream.getvalue(), metadata)
+        self.assertIsNone(invalid.prediction)
+        self.assertTrue(invalid.abstained)
+        self.assertEqual(invalid.abstention_reason, "invalid_output")
+        with self.assertRaises(PredictionError):
+            predict_audio(model, b"bad", metadata)
+        # Le garde-fou est dans le vrai generate, avant tout calcul ou chargement de poids.
+        unloaded = AcousticQwenSP.__new__(AcousticQwenSP)
+        with self.assertRaises(ValueError):
+            unloaded.generate([{**forwarded, "answer": "leak"}])
+
+    def test_debug_selection_is_train_only_and_group_distinct(self):
+        from pipe.tslm.train import debug_rows
+        rows = [{"clip_id": f"c{i}", "group_id": f"g{i // 2}", "fold": fold, "label": label}
+                for i, (fold, label) in enumerate([
+                    ("test", "leak"), ("val", "no_leak"), ("train", "leak"),
+                    ("train", "leak"), ("train", "no_leak"), ("train", "no_leak")])]
+        selected = debug_rows(rows, 2)
+        self.assertEqual({r["fold"] for r in selected}, {"train"})
+        self.assertEqual(len({r["group_id"] for r in selected}), 2)
+        with self.assertRaises(ValueError):
+            debug_rows(rows, 4)
+
     def test_numeric_flow_and_target_separation(self):
         t = np.arange(8000) / 8000
         x = np.sin(2 * np.pi * 1500 * t)

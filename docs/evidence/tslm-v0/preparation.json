@@ -1,0 +1,48 @@
+{
+  "protocol": "split_v2_binary_with_noise_v0",
+  "preprocessing_version": "rms-hann256-hop128-band4-log1p-v1",
+  "archives": {
+    "leak acoustic data.rar": {
+      "md5": "2ec7cef54b0cbc09adab0047761fe9b2",
+      "sha256": "3d42060b8a5b2feb19c4ffc7a77c2f0325779f8634a26468572aee473842dc55",
+      "wav_count": 500,
+      "ignored_metadata": []
+    },
+    "no leak acoustic data.rar": {
+      "md5": "d6b9fcd8a730f33fa6c155191b32f2a2",
+      "sha256": "5bb0f298fdd171dcb199ac9b22d85bdb57c94a7daec31e71a4af66946843405f",
+      "wav_count": 386,
+      "ignored_metadata": [
+        "no leak acoustic data/desktop.ini"
+      ]
+    },
+    "environmental noise.rar": {
+      "md5": "6080966b540eeeb1b5e61a2cb1cc2639",
+      "sha256": "d42dc0d01f22ac007a813290bcd6a80c0bde381fca46e180000b3a8f27506578",
+      "wav_count": 114,
+      "ignored_metadata": []
+    }
+  },
+  "manifest_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+  "records": 1000,
+  "groups": 185,
+  "fold_counts": {
+    "train": 598,
+    "val": 208,
+    "test": 194
+  },
+  "decoded_signal_cross_fold_duplicates": 0,
+  "first_example": {
+    "clip_id": "c0128b879694e",
+    "group_id": "gd2da168526",
+    "fold": "train",
+    "shape": [
+      4,
+      64
+    ],
+    "rms": 1.0,
+    "dominant_band_hz": "0-1000",
+    "max_roundtrip_error": 2.0213252405199e-07
+  },
+  "timef_manifest_sha256": "ace99698290d2f1f53a5bc469b6fc84977e3644c3092524109f53f358d72120a"
+}

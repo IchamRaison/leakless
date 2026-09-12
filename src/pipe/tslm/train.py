@@ -41,6 +41,41 @@ def debug_rows(rows: list[dict], count: int) -> list[dict]:
     return selected
 
 
+def complete_bundle(output: Path, base_dir: Path, lockfile: Path):
+    """Ajoute licences/provenance/environnement sans toucher aux poids appris."""
+    manifest = output / "checksums.json"
+    if manifest.exists():
+        previous = json.loads(manifest.read_text())
+        if any(sha256_file(output / name) != expected for name, expected in previous.items()):
+            raise ValueError("Bundle modifié avant finalisation")
+    for source, target in ((base_dir / "LICENSE", "QWEN-LICENSE"),
+                           (base_dir / "README.md", "QWEN-MODEL-CARD.md"),
+                           (lockfile, "requirements-ml.lock")):
+        data = source.read_bytes()
+        path = output / target
+        if path.exists():
+            if path.read_bytes() != data:
+                raise ValueError(f"Fichier de livraison déjà différent : {target}")
+        else:
+            with path.open("xb") as stream:
+                stream.write(data)
+    provenance = {
+        "audio": {"title": "Self-supervised acoustic leakage detection for water distribution systems: A real-time diagnosis framework under data scarcity",
+                  "creators": ["WANG, QI", "Mei, Zhongyi", "Zhan, Fan", "Chen, Jiongxi"],
+                  "source": "https://doi.org/10.5281/zenodo.18631450", "license": "CC-BY-4.0",
+                  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+                  "reload_example": "Un WAV de validation original non modifié ; ni donnée client, ni score final."},
+        "transformations": "Normalisation RMS par clip, fenêtres Hann, quatre bandes d'énergie log1p ; cibles textuelles déterministes.",
+        "qwen": "https://huggingface.co/Qwen/Qwen3.5-4B ; QWEN-LICENSE et QWEN-MODEL-CARD.md inclus.",
+        "opentslm": "https://github.com/OpenTSLM/OpenTSLM ; bibliothèque sous MIT, révision épinglée dans metadata.json.",
+    }
+    (output / "PROVENANCE.json").write_text(json.dumps(provenance, indent=2, ensure_ascii=False) + "\n")
+    checksums = {str(path.relative_to(output)): sha256_file(path)
+                 for path in sorted(output.rglob("*")) if path.is_file() and path != manifest}
+    manifest.write_text(json.dumps(checksums, indent=2) + "\n")
+    return sha256_file(manifest)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=Path("configs/tslm/v0.json"))
@@ -50,8 +85,11 @@ def main():
     parser.add_argument("--base", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--code-revision", required=True)
+    parser.add_argument("--environment-lock", type=Path, default=Path("requirements-ml.lock"))
     args = parser.parse_args()
     config = json.loads(args.config.read_text())
+    if not args.environment_lock.is_file() or not (args.base / "LICENSE").is_file():
+        raise ValueError("Lockfile et licence de la base requis avant le training")
     if config["protocol"] != PROTOCOL or config["preprocessing_version"] != VERSION:
         raise ValueError("Configuration incompatible avec les données")
     random.seed(config["seed"])
@@ -150,10 +188,8 @@ def main():
               "peak_memory_bytes": torch.cuda.max_memory_allocated()}
     (args.output / "training-report.json").write_text(json.dumps(report, indent=2) + "\n")
     (args.output / "reload-example.wav").write_bytes(validation_audio)
-    checksums = {str(path.relative_to(args.output)): sha256_file(path)
-                 for path in sorted(args.output.rglob("*")) if path.is_file()}
-    (args.output / "checksums.json").write_text(json.dumps(checksums, indent=2) + "\n")
-    print(json.dumps({"completed": report, "checksums_sha256": sha256_file(args.output / "checksums.json")}, indent=2), flush=True)
+    digest = complete_bundle(args.output, args.base, args.environment_lock)
+    print(json.dumps({"completed": report, "checksums_sha256": digest}, indent=2), flush=True)
 
 
 if __name__ == "__main__":
