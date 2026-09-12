@@ -955,7 +955,7 @@ def report_refuses_a_stress_run_that_is_not_the_base_model():
                             "model_definition_commit": "d" * 40},
     }
     DROP = object()
-    alternatives = (DROP, None, "", "zzz")
+    alternatives = (DROP, None, "", "   ", "\t", "zzz")
     check = build_final_report.check_stress_provenance
     n_refused = 0
     for kind, base in bases.items():
@@ -972,8 +972,9 @@ def report_refuses_a_stress_run_that_is_not_the_base_model():
                     m.pop(key, None)
                 else:
                     m[key] = alt
+                blank = lambda v: v is DROP or v is None or (isinstance(v, str) and not v.strip())
                 if m.get(key, DROP) == valid.get(key, DROP) or \
-                        (key != "retrained" and m.get(key) in (None, "") and valid.get(key) in (None, "")):
+                        (key != "retrained" and blank(m.get(key, DROP)) and blank(valid.get(key, DROP))):
                     continue                                  # pas une divergence
                 label_only = not serialized and key in ("checkpoint", "control_level")
                 if label_only:
@@ -983,12 +984,24 @@ def report_refuses_a_stress_run_that_is_not_the_base_model():
                     n_refused += 1
         # Identité absente des DEUX côtés : égale, mais invérifiable.
         for key, alt in (("training_commit", None), ("training_commit", ""),
-                         *((("model_fingerprint", None),) if not serialized else ()),
-                         *((("checkpoint", None), ("checkpoint", "")) if kind == "tslm" else ())):
+                         ("training_commit", "  "), ("training_commit", "unknown"),
+                         *((("model_fingerprint", None), ("model_fingerprint", " "),
+                            ("model_fingerprint", "f" * 63)) if not serialized else ()),
+                         *((("checkpoint", None), ("checkpoint", ""), ("checkpoint", " "))
+                           if kind == "tslm" else ()),
+                         *((("model_definition_commit", "pas-un-commit"),)
+                           if "model_definition_commit" in base else ())):
             nb = {**base, key: alt}
             must_raise(ValueError, check, "base", nb, "stress", {**nb, "retrained": False})
             n_refused += 1
-    assert n_refused >= 60, n_refused
+    assert n_refused >= 80, n_refused
+    # Normalisation documentée : absent et null valent « non déclaré » des deux côtés.
+    t = bases["tslm"]
+    check("base", t, "stress", {**t, "retrained": False, "model_definition_commit": None})
+    check("base", {**t, "model_definition_commit": "  "}, "stress", {**t, "retrained": False})
+    # Un commit court est une identité valide.
+    short = {**t, "training_commit": "68bf202"}
+    check("base", short, "stress", {**short, "retrained": False})
     # Le rendu utilise la même décision : un TSLM avec empreinte reste un checkpoint sérialisé.
     assert build_final_report.has_serialized_checkpoint(bases["tslm+empreinte"])
     assert not build_final_report.has_serialized_checkpoint(bases["contrôle"])

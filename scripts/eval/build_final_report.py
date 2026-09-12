@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -56,53 +57,72 @@ def stress_base_id(run_id: str, metadata: dict) -> str:
     return metadata.get("base_run_id") or run_id.rsplit("-", 1)[0]
 
 
+_COMMIT_RE = re.compile(r"[0-9a-f]{7,40}")
+_FINGERPRINT_RE = re.compile(r"[0-9a-f]{64}")
+
+
+def declared(meta: dict, key: str) -> str | None:
+    """Valeur d'identité déclarée, ou None. Absent, null, vide et blanc sont équivalents."""
+    v = meta.get(key)
+    if v is None:
+        return None
+    v = str(v).strip()
+    return v or None
+
+
 def has_serialized_checkpoint(meta: dict) -> bool:
     """Le modèle du run est-il un checkpoint sérialisé (TSLM) ou non (contrôle) ?
 
     Décision unique, utilisée par la vérification ET par le rendu : un contrôle
     (`control_level`) ou un checkpoint préfixé NO_SERIALIZED_CHECKPOINT n'est pas
-    sérialisé ; tout autre checkpoint non vide l'est.
+    sérialisé ; tout autre checkpoint déclaré l'est.
     """
-    ck = str(meta.get("checkpoint") or "")
+    ck = declared(meta, "checkpoint") or ""
     return bool(ck) and not ck.startswith(contract.NO_SERIALIZED_CHECKPOINT) \
-        and not meta.get("control_level")
+        and not declared(meta, "control_level")
 
 
 def check_stress_provenance(base_id: str, base_meta: dict, rid: str, meta: dict) -> None:
     """Refuse un run de stress qui ne dérive pas du modèle du run T0.
 
-    Toutes les règles s'appliquent, sans branche qui en court-circuite une autre :
+    Absent, null, vide et blanc valent tous « non déclaré ». Toutes les règles
+    s'appliquent, sans branche qui en court-circuite une autre :
       1. `retrained` vaut false ;
-      2. `training_commit` non vide et identique ;
-      3. `model_definition_commit` identique, tout ou rien ;
+      2. `training_commit` déclaré, hexadécimal (7 à 40), identique ;
+      3. `model_definition_commit` tout ou rien : non déclaré des deux côtés, ou
+         déclaré, hexadécimal et identique ;
       4. même nature de modèle (sérialisé ou non) des deux côtés ;
       5. modèle sérialisé : `checkpoint` identique ;
-      6. modèle non sérialisé : `model_fingerprint` non vide et identique ;
-      7. une empreinte déclarée d'un côté doit l'être, identique, de l'autre.
+      6. modèle non sérialisé : `model_fingerprint` déclarée ;
+      7. toute empreinte déclarée : 64 hexadécimaux, et identique de l'autre côté.
     """
     def refuse(msg: str) -> None:
         raise ValueError(f"{rid} (base {base_id}) : {msg}")
 
     if meta.get("retrained") is not False:
         refuse("`retrained` doit valoir false (not retrained on stressed data)")
-    if not base_meta.get("training_commit"):
-        refuse("training_commit du run T0 absent : identité du modèle invérifiable")
-    if meta.get("training_commit") != base_meta.get("training_commit"):
-        refuse(f"training_commit {meta.get('training_commit')} ≠ "
-               f"{base_meta.get('training_commit')}")
-    if meta.get("model_definition_commit") != base_meta.get("model_definition_commit"):
-        refuse(f"model_definition_commit {meta.get('model_definition_commit')} ≠ "
-               f"{base_meta.get('model_definition_commit')}")
+    tb, ts = declared(base_meta, "training_commit"), declared(meta, "training_commit")
+    if not tb or not _COMMIT_RE.fullmatch(tb):
+        refuse(f"training_commit du run T0 absent ou invalide ({tb!r}) : identité invérifiable")
+    if ts != tb:
+        refuse(f"training_commit {ts!r} ≠ {tb!r}")
+    db, ds = declared(base_meta, "model_definition_commit"), declared(meta, "model_definition_commit")
+    if db != ds:
+        refuse(f"model_definition_commit {ds!r} ≠ {db!r} (tout ou rien)")
+    if db and not _COMMIT_RE.fullmatch(db):
+        refuse(f"model_definition_commit invalide ({db!r})")
     serialized = has_serialized_checkpoint(base_meta)
     if has_serialized_checkpoint(meta) != serialized:
         refuse("l'un des runs a un checkpoint sérialisé, l'autre non")
-    if serialized and meta.get("checkpoint") != base_meta.get("checkpoint"):
-        refuse(f"checkpoint {meta.get('checkpoint')} ≠ {base_meta.get('checkpoint')}")
-    fa, fb = base_meta.get("model_fingerprint"), meta.get("model_fingerprint")
+    if serialized and declared(meta, "checkpoint") != declared(base_meta, "checkpoint"):
+        refuse(f"checkpoint {meta.get('checkpoint')!r} ≠ {base_meta.get('checkpoint')!r}")
+    fa, fb = declared(base_meta, "model_fingerprint"), declared(meta, "model_fingerprint")
     if not serialized and not fa:
         refuse("modèle non sérialisé sans `model_fingerprint` : identité invérifiable")
-    if (fa or fb) and fa != fb:
+    if fa != fb:
         refuse("empreinte de modèle différente : ce n'est pas le même modèle ajusté")
+    if fa and not _FINGERPRINT_RE.fullmatch(fa):
+        refuse(f"model_fingerprint invalide ({fa!r})")
 
 
 def prediction_shift(split, base_run, stress_run, fold: str = "test") -> dict:

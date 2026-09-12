@@ -207,6 +207,11 @@ de celui du run T0. `model_definition_commit` reste facultatif, mais **tout ou
 rien** : s'il figure dans le run T0, chaque run de stress doit le reprendre à
 l'identique ; s'il n'y figure pas, aucun run de stress ne doit le porter.
 
+Pour ces règles, un champ absent, `null`, vide ou fait d'espaces vaut « non
+déclaré ». Les commits sont des empreintes Git hexadécimales (7 à 40
+caractères) : `"unknown"` ou `"abc123…"` rendent la comparaison de stress
+invérifiable, donc refusée.
+
 > **Le seuil sous stress.** Notre moteur recalcule le seuil sur la validation
 > *du run*, donc sur la validation transformée pour un run de stress. Les
 > métriques qui dépendent du seuil (macro-F1, exactitude) ne servent donc à
