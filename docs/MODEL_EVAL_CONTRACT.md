@@ -106,6 +106,10 @@ Elle produit `metrics.json`, `comparison.json` et `FINAL_EVALUATION.md`, avec le
 comparaisons appariées TSLM − C0, TSLM − C1, TSLM − C2, TSLM − C3. Aucun chiffre
 n'est recopié à la main.
 
+> Si tu livres **plusieurs** runs (par exemple T0, T1, T2, T3), ajoute
+> `--tslm-run-id <le run de référence>`. Sans lui la commande s'arrête et le dit,
+> plutôt que de deviner lequel est le run principal.
+
 ---
 
 ## 5. Le barreau à dépasser n'est pas celui qu'on croyait

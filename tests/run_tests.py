@@ -357,6 +357,19 @@ def stress_t3_preserves_fft_magnitude_and_is_real():
 
 
 @test
+def stress_t2_permutes_the_whole_clip():
+    """[correctif] aucun échantillon ne doit rester à sa place d'origine par défaut."""
+    x = np.arange(8000, dtype=float)
+    y = stress.t2_block_permutation(x, np.random.default_rng(0))
+    assert len(y) == len(x)
+    n = stress.BLOCK_SAMPLES
+    assert 8000 % n == 0, "la taille de bloc doit diviser la longueur du clip"
+    # Une longueur non divisible doit échouer bruyamment plutôt que laisser un reste.
+    must_raise(ValueError, stress.t2_block_permutation,
+               np.arange(8001, dtype=float), np.random.default_rng(0))
+
+
+@test
 def stress_transforms_are_deterministic():
     x = np.random.default_rng(6).normal(size=8000)
     for name, spec in stress.TRANSFORMS.items():

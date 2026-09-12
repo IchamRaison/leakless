@@ -265,7 +265,14 @@ def main() -> None:
     tslm = args.tslm_run_id
     if tslm is None:
         candidates = [r for r in runs if r not in CONTROL_ORDER and "shuffled" not in r]
-        tslm = candidates[0] if len(candidates) == 1 else None
+        if len(candidates) == 1:
+            tslm = candidates[0]
+        elif len(candidates) > 1:
+            # Cas réel : Hicham livre T0/T1/T2/T3. L'auto-détection ne peut pas
+            # deviner lequel est le run de référence — le dire, pas l'inventer.
+            sys.exit(f"{len(candidates)} runs hors contrôles trouvés ({candidates}). "
+                     f"Préciser lequel est le run de référence avec --tslm-run-id, "
+                     f"sinon le rapport dirait à tort qu'aucun TSLM n'a été fourni.")
 
     comps = {}
     ids = sorted(runs)

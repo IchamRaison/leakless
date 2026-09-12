@@ -12,7 +12,7 @@
 | SHA256 | `7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896` |
 | Clips | 1000 |
 | Clusters de dépendance | 185 |
-| Commit du dépôt | `1289095fccd5f7c7c0553e22894e1fdf378d9856` |
+| Commit du dépôt | `2f61695072e0f16205d6a7047243c59600eb2792` |
 | Règle d'agrégation | median des probabilités du cluster (gelée) |
 | Bootstrap | 2000 tirages, graine 20260912, unité : cluster de dépendance |
 | Source | Zenodo 18631450, CC BY 4.0 — site d'entraînement expérimental de Dongguan |
@@ -22,7 +22,7 @@
 | run | modèle | checkpoint | commit d'entraînement | horodatage |
 |---|---|---|---|---|
 | `c0` | C0 — niveau RMS absolu, signal brut — raccourci d'acquisition | `logreg(C=0.01)` | `1289095fccd5` | 2026-09-12T16:16:12+00:00 |
-| `c1` | C1 — forme d'amplitude seule, aucune information fréquentielle | `logreg(C=0.01)` | `1289095fccd5` | 2026-09-12T16:16:12+00:00 |
+| `c1` | C1 — forme d'amplitude seule, aucune information fréquentielle | `logreg(C=0.01)` | `2f61695072e0` | 2026-09-12T16:26:40+00:00 |
 | `c2` | C2 — spectre agrégé, invariant à l'ordre, sans phase | `logreg(C=0.1)` | `1289095fccd5` | 2026-09-12T16:16:13+00:00 |
 | `c3` | C3 — baseline historique — mélange C1 + C2 + taux de passages par zéro | `logreg(C=0.01)` | `1289095fccd5` | 2026-09-12T16:16:13+00:00 |
 
@@ -102,8 +102,8 @@ Jeux préparés, invariants **mesurés** et non supposés :
 |---|---|---|---|---|---|---|
 | T0 | original, aucune transformation | 1000 | 185 | 0.00e+00 | identique | 0 |
 | T1 | inversion temporelle | 1000 | 185 | 2.67e-16 | identique | 0 |
-| T2 | permutation de blocs de 32 ms | 1000 | 185 | 6.96e-01 | identique | 0 |
-| T3 | randomisation de phase, module préservé | 1000 | 185 | 2.80e-16 | modifié | 0 |
+| T2 | permutation de blocs de 250 échantillons (31,25 ms) | 1000 | 185 | 6.95e-01 | identique | 0 |
+| T3 | randomisation de phase, module préservé | 1000 | 185 | 2.79e-16 | modifié | 0 |
 
 > Ce ne sont **pas** des augmentations préservant l'étiquette. Un modèle dont le score ne bouge pas sous T1/T2/T3 n'utilise pas l'ordre temporel.
 

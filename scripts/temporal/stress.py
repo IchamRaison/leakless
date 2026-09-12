@@ -9,8 +9,8 @@
     T0  original
     T1  inversion temporelle   — distribution d'amplitude et |FFT| préservées,
                                  direction du temps renversée
-    T2  permutation de blocs   — blocs de 32 ms, graine fixe ; les morceaux locaux
-                                 survivent, l'ordre long est détruit
+    T2  permutation de blocs   — blocs de 250 échantillons (31,25 ms), graine fixe ;
+                                 les morceaux locaux survivent, l'ordre long est détruit
     T3  randomisation de phase — |rFFT| préservée, phase tirée de façon déterministe,
                                  signal réel reconstruit
 
@@ -23,7 +23,10 @@ from __future__ import annotations
 
 import numpy as np
 
-BLOCK_MS = 32                 # gelé : 32 ms à 8 kHz = 256 échantillons
+# 250 échantillons = 31,25 ms à 8 kHz. Choisi parce que 8000 est divisible par 250 :
+# avec 256 (32 ms) il restait 64 échantillons en fin de clip que la permutation ne
+# touchait jamais, soit 0,8 % du signal laissé à sa place d'origine.
+BLOCK_SAMPLES = 250           # gelé
 STRESS_SEED = 20260912        # gelé
 
 
@@ -37,14 +40,21 @@ def t1_reverse(x: np.ndarray, _rng: np.random.Generator) -> np.ndarray:
 
 
 def t2_block_permutation(x: np.ndarray, rng: np.random.Generator,
-                         block_ms: int = BLOCK_MS, sample_rate: int = 8000) -> np.ndarray:
-    """Permutation de blocs de taille fixe. Ordre local intact, ordre long détruit."""
+                         block_samples: int = BLOCK_SAMPLES) -> np.ndarray:
+    """Permutation de blocs de taille fixe. Ordre local intact, ordre long détruit.
+
+    Si la longueur n'est pas un multiple de la taille de bloc, le reste serait
+    laissé à sa place d'origine — une portion du clip que la transformation ne
+    toucherait jamais. On échoue plutôt que de le laisser passer en silence.
+    """
     x = np.asarray(x, dtype=np.float64)
-    n = int(round(sample_rate * block_ms / 1000))
-    full = (len(x) // n) * n
-    blocks = x[:full].reshape(-1, n)
-    order = rng.permutation(len(blocks))
-    return np.concatenate([blocks[order].reshape(-1), x[full:]])
+    if len(x) % block_samples:
+        raise ValueError(
+            f"longueur {len(x)} non divisible par {block_samples} : {len(x) % block_samples} "
+            f"échantillons resteraient non permutés. Choisir une taille de bloc qui divise "
+            f"la longueur du clip.")
+    blocks = x.reshape(-1, block_samples)
+    return blocks[rng.permutation(len(blocks))].reshape(-1)
 
 
 def t3_phase_randomisation(x: np.ndarray, rng: np.random.Generator) -> np.ndarray:
@@ -67,7 +77,7 @@ def t3_phase_randomisation(x: np.ndarray, rng: np.random.Generator) -> np.ndarra
 TRANSFORMS = {
     "T0": {"fn": t0_original, "description": "original, aucune transformation"},
     "T1": {"fn": t1_reverse, "description": "inversion temporelle"},
-    "T2": {"fn": t2_block_permutation, "description": f"permutation de blocs de {BLOCK_MS} ms"},
+    "T2": {"fn": t2_block_permutation, "description": f"permutation de blocs de {BLOCK_SAMPLES} échantillons (31,25 ms)"},
     "T3": {"fn": t3_phase_randomisation, "description": "randomisation de phase, module préservé"},
 }
 
