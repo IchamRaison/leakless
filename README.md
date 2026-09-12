@@ -2,6 +2,20 @@
 
 Project workspace for the EHL hackathon in Zurich.
 
+## Application Safoan — studio local
+
+Premier jalon disponible : import et lecture WAV, waveform et spectrogramme,
+API FastAPI et contrats. Les modèles restent explicitement indisponibles.
+Installation, lancement, API, tests et limites : [docs/APPLICATION.md](docs/APPLICATION.md).
+
+```sh
+.venv/bin/python -m uvicorn pipe.api.main:app --app-dir src --host 127.0.0.1 --port 8000
+# Dans un second terminal, après installation documentée :
+npm --prefix frontend run dev
+```
+
+Ouvrir http://127.0.0.1:5173.
+
 Event information: https://tum-ai.notion.site/ehl-hackathon-zurich
 
 ## Setup
@@ -18,4 +32,4 @@ Open `vault/` as a vault in Obsidian and start with `Accueil.md`. It contains th
 
 Notes and shared settings are tracked in Git. Device-specific workspaces, local plugins, trash, and secrets are excluded. Git is the sharing mechanism; automatic Obsidian Sync is not configured. Pull before editing and commit/push to share changes.
 
-Project scope and implementation are to be defined.
+La répartition et les contrats de l'équipe sont documentés dans le vault partagé.
