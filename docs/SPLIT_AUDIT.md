@@ -6,6 +6,10 @@
 >
 > Ces folds sont **les mêmes pour tous les modèles** — baseline, contrôle RMS, TSLM. Les changer
 > après avoir vu un score invaliderait toute comparaison.
+>
+> **Le split n'est pas adapté à la dépendance entre clips — le protocole l'est.** Les règles
+> d'évaluation group-aware qui en découlent sont dans `EVAL_PROTOCOL.md` §7ter et résumées au §6.1
+> ci-dessous.
 
 ---
 
@@ -136,16 +140,30 @@ côté *non-leak*, essentiellement sur une session unique.
 **Ce n'est pas un leakage** — le groupe est entier dans val, rien ne fuit vers test. C'est une
 question de **taille d'échantillon effective** : elle vaut ~9 unités indépendantes, pas 100.
 
-> **Décision à prendre explicitement par l'équipe**, pas par moi et pas en silence : laisser ce
-> groupe en validation, ou contraindre la procédure à plafonner la part d'un groupe dans un fold.
-> Le changement serait légitime — il repose sur une propriété structurelle visible **avant tout
-> score** — mais il change les folds, et donc doit être décidé maintenant ou jamais. **En l'état,
-> le manifeste figé est celui décrit ici.**
+> ### ✅ **Décision d'équipe, 2026-09-12 : `split_v1` est conservé tel quel.**
+>
+> Motifs retenus : seed fixée avant tout résultat, aucune recherche de seed, aucun leakage entre
+> groupes. Modifier le split maintenant dans le seul but d'équilibrer la taille des groupes
+> serait du **split engineering** — on optimiserait la forme de ses données d'évaluation après
+> les avoir regardées.
+>
+> **Ce n'est donc pas le split qui est adapté à la dépendance entre clips, c'est le protocole**
+> — voir `EVAL_PROTOCOL.md` §7ter : métriques group-aware, agrégation non pondérée par groupe,
+> bootstrap sur les groupes, seuil calibré en pondérant par groupe (le groupe de 74 clips compte
+> pour **1 unité sur 9**, pas 74 sur 100), et nombre de groupes publié avec chaque score.
 
 ### 6.2 Le test *non-leak* compte 11 unités indépendantes, pas 100
 
 Le plus gros groupe porte 43 des 100 clips (43 %). Tout score *non-leak* doit être publié avec son
 nombre de groupes et une dispersion inter-groupes — **jamais un chiffre unique**.
+
+| Fold | Clips *non-leak* | **Groupes indépendants** |
+|---|---|---|
+| val | 100 | **9** |
+| test | 100 | **11** |
+
+C'est le N honnête. `EVAL_PROTOCOL.md` §7ter-E impose de le porter dans tout rapport et dans le
+pitch.
 
 ### 6.3 Le device est réparti de façon très inégale
 
@@ -169,8 +187,12 @@ mesurables, entraînement baseline et TSLM, contrôle RMS — tous sur **exactem
 
 **N'autorise pas** :
 
-- refaire un split, changer le seed, ou « réessayer » après avoir vu un score ;
-- rapporter un score *non-leak* sans son nombre de groupes ;
+- refaire un split, changer le seed, ou « réessayer » après avoir vu un score — **`split_v1` est
+  figé et n'est plus modifié après le premier résultat** (`EVAL_PROTOCOL.md` §7ter-F) ;
+- rapporter un score clip-level seul, ou group-level seul : les deux, ensemble, avec le nombre de
+  groupes (§7ter-B) ;
+- calculer un intervalle de confiance en rééchantillonnant des clips plutôt que des groupes
+  (§7ter-C) ;
 - comparer un résultat tenu à l'écart au 0,857 descriptif de `DATASET_AUDIT.md` §11 — **ce n'est
   pas un seuil** ; le seul point de comparaison légitime est le contrôle RMS évalué sur ces mêmes
   folds, calculé sur le signal **brut non normalisé** (`EVAL_PROTOCOL.md` §7bis-A) ;

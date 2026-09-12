@@ -114,6 +114,10 @@ it is high.
 **Abstention is thresholded on validation**, never on a confidence the model asserts inside
 its own generated text.
 
+> ⚠️ **Every metric in this table is subject to §7ter**: reported clip-level *and* group-level,
+> always with the number of groups behind it, with uncertainty bootstrapped over groups. The
+> threshold is calibrated group-weighted, not clip-weighted.
+
 ---
 
 ## 6. Separate the classifier from the prose
@@ -196,6 +200,68 @@ hydrophone clips, and **zero environmental-noise clips**. It cannot test noise r
 contradictory metadata, and deleting one side of those would silently pick which label is right.
 Merging keeps every clip, guarantees duplicates never straddle a fold, and leaves the curation
 error visible. Deduplication by removal remains available as an ablation.
+
+---
+
+## 7ter. AMENDMENT — 2026-09-12, group-aware evaluation
+
+> Added **after `split_v1` was frozen and before any result exists.** Team decision: `split_v1`
+> stays as it is — the seed was fixed before any result, no seed search was run, and no group
+> leaks across folds. Rebalancing group sizes *now*, purely to make the folds look tidier, would
+> be split engineering. **The split is not adapted to the dependency between clips; the protocol
+> is.**
+
+### A. Clips are not independent observations
+
+The unit of independence in this dataset is the **group**, not the clip. A group is one recording
+session; its clips are consecutive seconds or repetitions of it, correlated 8× to 14× above
+chance (`DATASET_AUDIT.md` §1.8). Treating 1000 clips as 1000 observations overstates the
+evidence by roughly a factor of three, and much more on the non-leak side.
+
+> ### The honest N is the number of groups, not the number of clips.
+
+| Fold | Clips *non-leak* | **Independent groups** |
+|---|---|---|
+| val | 100 | **9** |
+| test | 100 | **11** |
+
+### B. Every score is reported three ways, always together
+
+| Reported quantity | Definition |
+|---|---|
+| **Clip-level metric** | every clip weighted equally — the conventional number |
+| **Group-level metric** | the metric is computed per group, then averaged **unweighted across groups**. A 74-clip group and a 2-clip group each count as **one unit**. |
+| **Number of groups** | printed next to the score, every time, without exception |
+
+Publishing one of the three without the other two is forbidden. A clip-level score alone is
+dominated by the largest sessions; a group-level score alone hides how much audio it rests on.
+
+### C. Uncertainty is bootstrapped over GROUPS
+
+Confidence intervals are computed by resampling **whole groups** with replacement (cluster
+bootstrap), never by resampling clips. A clip bootstrap on this dataset produces intervals that
+are far too narrow, because it resamples within sessions that are nearly identical.
+
+### D. Threshold calibration on validation is group-weighted
+
+The abstention threshold (§5) is calibrated so that **no single group can drive it**:
+
+- the calibration criterion is computed **per group**, then aggregated **unweighted** across the
+  9 non-leak validation groups;
+- the 74-clip group counts as **1 unit out of 9**, not 74 out of 100;
+- the chosen threshold is reported together with the number of groups that supported it.
+
+### E. Stated limitation, carried in every report and in the pitch
+
+> **Validation non-leak rests on 9 independent groups; test non-leak on 11. One validation group
+> carries 74 of its 100 clips.** Any non-leak figure is an estimate over single-digit independent
+> units, and it is presented as such.
+
+### F. `split_v1` is frozen
+
+`manifests/split_v1.csv`, seed 20260912, sha256 `89f0624a4543fb18…`. It is **not modified after
+the first result**, for any reason. Baseline, RMS-only control and TSLM all run on these exact
+folds. A future split is a *new version* with its own audit, never an edit of this one.
 
 ---
 

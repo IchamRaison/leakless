@@ -32,6 +32,9 @@ Supporting claims, equally permitted:
 | "We measure and report the gap between a naive random split and a grouped split." | `EVAL_PROTOCOL.md` §4 |
 | "The textual descriptions are generated from labels and computed measurements, and are not expert annotations." | `DATASET_CARD.md` §4 |
 | "We compare the model against a baseline on held-out data." | challenge requirement, `EVAL_PROTOCOL.md` §5 |
+| "Baseline, RMS-only control and TSLM run on exactly the same frozen folds." | `manifests/split_v1.csv`, seed 20260912, `SPLIT_AUDIT.md` |
+| "Our metrics are group-aware: the independent unit is the recording session, not the clip." | `EVAL_PROTOCOL.md` §7ter |
+| "Validation non-leak rests on 9 independent groups, test non-leak on 11." | `SPLIT_AUDIT.md` §4 |
 | "We evaluate the classifier separately from the generated text." | `EVAL_PROTOCOL.md` §6 |
 | "Abstention is thresholded on validation data." | `EVAL_PROTOCOL.md` §5 |
 | "No hardware was used or tested in this work." | factual, and stated in `README.md` |
@@ -59,6 +62,10 @@ Saying any of these would be false, unprovable, or both — regardless of how go
 | "Accuracy is *[high number]*" — stated without naming the split | A number without its split is not a result. |
 | "The model detects leaks" — stated without the held-out RMS-only control | Loudness is a measured confound. A score published without a control evaluated on the same held-out grouped split may be describing a volume meter. `EVAL_PROTOCOL.md` §7bis-A. |
 | A non-leak score stated without the number of test groups | 51 non-leak groups total, a 20 % test fold draws 11, one carrying 43 % of it. |
+| Any score stated clip-level only, or group-level only | Both are required, together, with the group count. `EVAL_PROTOCOL.md` §7ter-B. |
+| A confidence interval bootstrapped over clips | Clips inside a group are not independent. Resample groups. §7ter-C. |
+| "Validation non-leak gives us 100 observations." | It gives **9 independent groups**, one carrying 74 of the 100 clips. §7ter-E. |
+| Any change to `split_v1` after the first result | Frozen: seed 20260912, sha256 `89f0624a4543fb18…`. A new split is a new version with its own audit. §7ter-F. |
 | "The RMS AUC of 0.857 is our baseline / our control / the bar to beat." | **0.857 is descriptive only** — computed on the whole dataset, nothing held out. It describes the confound; it is **not a performance threshold** and no model result may be compared against it. The control is a separate quantity, evaluated on the held-out grouped split. |
 | "Our model beats 0.857." | Compares a held-out score against a number measured on all the data. Two different quantities. |
 | An RMS-only control computed on amplitude-normalised audio | Normalisation deletes the very information the control exists to measure. The control runs on the **original un-normalised signal**. `EVAL_PROTOCOL.md` §7bis-A. |
