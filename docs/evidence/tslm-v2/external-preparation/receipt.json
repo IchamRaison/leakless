@@ -1,0 +1,11 @@
+{
+  "checksums_sha256": "ba193cb22418b32291df535f9b48668fea7de8ae166c558a0c7f075e929162a7",
+  "cropped_signal_hashes_unique": true,
+  "model_loaded": false,
+  "prepared_at_utc": "2026-09-12T21:58:25.451680+00:00",
+  "raw_hashes_unique": true,
+  "scores_computed": false,
+  "source_code_executed": false,
+  "source_integrity_verified": true,
+  "status": "complete"
+}

@@ -1,0 +1,21 @@
+{
+  "protocol": "split_v2_binary_with_noise_v0",
+  "preprocessing_version": "rms-f32-hann256-hop128-band4-log1p-v2",
+  "manifest_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+  "records": 806,
+  "fold_counts": {
+    "train": 598,
+    "val": 208
+  },
+  "test_audio_or_cache_opened": false,
+  "canonical_vs_timef_exact": true,
+  "timef_manifest_sha256": "ace99698290d2f1f53a5bc469b6fc84977e3644c3092524109f53f358d72120a",
+  "cache_sha256": {
+    "train": "8bf27c0ad1ef13056fa7f688a8e091aec027d53f0438db03e88dead0b138f27b",
+    "val": "5046b750cfa060a9c21206a3eda9d2f6b5ebe3051b7a69fe9a9cac1af64e78be"
+  },
+  "source_sha256": {
+    "prepare.py": "d48c32b7ac5406ccaac836b300bd9363471fcefc4324883cb1b61783b2af5d4c",
+    "preprocessing.py": "ae10fa426f4fb8523260474f64baa70881f6b63b7ff91f9c56d773dbb3e66239"
+  }
+}
