@@ -214,6 +214,14 @@ Sur T3 l'AUC clip tombe au même arrondi à trois décimales (0,72619 contre
 > blocs sort de l'ambiguïté. Les deux stress qui touchent l'ordre temporel
 > dégradent désormais C2b de façon lisible.
 
+> ℹ️ **Sur quoi porte exactement le seuil des runs stressés.** Le moteur applique
+> la même règle à tous les runs : seuil recalculé sur le fold `val` *du run*. Pour
+> un run stressé, ce fold est donc lui aussi stressé. Les conclusions ci-dessus
+> reposent sur l'**AUC et la corrélation des probabilités**, toutes deux
+> indépendantes du seuil ; seules les colonnes macro-F1 en dépendent. Le modèle,
+> lui, n'est jamais réentraîné : `retrained: false` et `C = 0,1` dans les quatre
+> runs.
+
 Deux des trois stress sortent maintenant de l'ambiguïté : T2 et T3.
 
 > **Ces trois effets étaient prédits au §9, avant de les mesurer** : T1 faible
