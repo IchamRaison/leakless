@@ -182,21 +182,45 @@ Aucune affirmation de significativité statistique.
 
 ## Stress temporel — même modèle, aucun réentraînement
 
-| | clip AUC | cluster AUC | écart vs T0 | corrélation des probabilités avec T0 | \|Δp\| médian |
-|---|---|---|---|---|---|
-| T0 original | 0,847 | 0,915 | — | 1,000 | — |
-| T1 inversion | 0,849 | 0,906 | +0,002 | **0,992** | 0,015 |
-| T2 permutation de blocs | 0,819 | 0,845 | −0,028 | 0,748 | 0,116 |
-| T3 phase randomisée | 0,726 | 0,679 | **−0,121** | 0,724 | 0,110 |
+> ### ⚠️ Résultats T2 et T3 régénérés après un correctif de reproductibilité
+>
+> Les premiers chiffres T2/T3 ont été produits avec un `clip_rng` qui dérivait sa
+> graine de `hash()`, salé par processus : les transformations n'étaient pas
+> reproductibles d'une exécution à l'autre. Corrigé en `b23601a` (dérivation
+> SHA-256 canonique). **T0 et T1 sont inchangés au bit près** — ils n'utilisent
+> pas le générateur. Les anciens T2/T3 sont **SUPERSEDED**.
 
-Comparaison appariée T0 − T3 : Δ clip AUC **+0,121**, IC95 [+0,068, +0,283],
-*evidence compatible with improvement* pour T0. C'est la seule des trois qui
-sorte de l'ambiguïté.
+| | clip AUC | cluster AUC | corrélation des probabilités avec T0 | statut |
+|---|---|---|---|---|
+| T0 original | 0,847 | 0,915 | 1,000 | inchangé |
+| T1 inversion | 0,849 | 0,906 | **0,992** | inchangé |
+| ~~T2 (ancien, RNG instable)~~ | ~~0,819~~ | ~~0,845~~ | ~~0,748~~ | 🔴 SUPERSEDED |
+| **T2 permutation de blocs** | **0,751** | **0,785** | **0,729** | régénéré |
+| ~~T3 (ancien, RNG instable)~~ | ~~0,726~~ | ~~0,679~~ | ~~0,724~~ | 🔴 SUPERSEDED |
+| **T3 phase randomisée** | **0,726** | **0,697** | **0,705** | régénéré |
+
+Sur T3 l'AUC clip tombe au même arrondi à trois décimales (0,72619 contre
+0,726297) : c'est une coïncidence, les 1000 prédictions diffèrent.
+
+| comparaison appariée T0 − stress | Δ clip AUC | IC95 | lecture |
+|---|---|---|---|
+| T0 − T1 | −0,002 | [−0,026, +0,011] | inconclusive |
+| ~~T0 − T2 (ancien)~~ | ~~+0,028~~ | ~~[−0,024, +0,113]~~ | ~~inconclusive~~ 🔴 |
+| **T0 − T2** | **+0,097** | **[+0,031, +0,192]** | **compatible with improvement** |
+| **T0 − T3** | **+0,121** | **[+0,059, +0,316]** | **compatible with improvement** |
+
+> **Le correctif renforce la conclusion.** Avec le RNG instable, T2 était
+> *inconclusive* ; avec le RNG stable, la dégradation de C2b sous permutation de
+> blocs sort de l'ambiguïté. Les deux stress qui touchent l'ordre temporel
+> dégradent désormais C2b de façon lisible.
+
+Deux des trois stress sortent maintenant de l'ambiguïté : T2 et T3.
 
 > **Ces trois effets étaient prédits au §9, avant de les mesurer** : T1 faible
 > parce que l'autocorrélation et le flux sont presque invariants au renversement ;
-> T2 et T3 forts. La prédiction s'est vérifiée, y compris la mise en garde que
-> T1 est un stress faible pour des descripteurs temporels peu profonds.
+> T2 et T3 forts. La prédiction s'est vérifiée, et le correctif de RNG l'a même
+> rendue plus nette : avec des transformations réellement reproductibles, T2
+> dégrade C2b de façon lisible alors qu'il était ambigu auparavant.
 
 ## La réponse à la question unique
 
@@ -213,8 +237,9 @@ temporelle simple apporte quelque chose au-delà de C1, ni qu'elle n'apporte rie
 Ce qui est en revanche établi :
 
 1. **C2b est réellement temporel.** Ses prédictions se désorganisent sous T2
-   (corrélation 0,748) et sous T3 (0,724), et la dégradation d'AUC sous T3
-   (−0,121) survit au bootstrap apparié. Ce n'est pas du spectre déguisé.
+   (corrélation 0,729) et sous T3 (0,705), et les dégradations d'AUC sous T2
+   (−0,097) comme sous T3 (−0,121) survivent au bootstrap apparié. Ce n'est pas
+   du spectre déguisé.
 2. **C1 reste le barreau à franchir**, et il n'a pas bougé. Un TSLM qui
    dépasserait C2b sans dépasser C1 n'aurait rien démontré.
 3. **C2b et C3 sont indiscernables** (Δ clip AUC +0,023, IC95 traversant zéro).

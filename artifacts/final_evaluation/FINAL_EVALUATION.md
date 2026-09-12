@@ -12,7 +12,7 @@
 | SHA256 | `7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896` |
 | Clips | 1000 |
 | Clusters de dépendance | 185 |
-| Commit du dépôt | `355f0743fb306da50897c0720e6fab5ecf947c52` |
+| Commit du dépôt | `b23601ab28c5b3949b2b17c46478daa46c847c0f` |
 | Règle d'agrégation | median des probabilités du cluster (gelée) |
 | Bootstrap | 2000 tirages, graine 20260912, unité : cluster de dépendance |
 | Source | Zenodo 18631450, CC BY 4.0 — site d'entraînement expérimental de Dongguan |
@@ -24,7 +24,7 @@
 | `c0` | C0 — niveau RMS absolu, signal brut — raccourci d'acquisition | `logreg(C=0.01)` | `1289095fccd5` | 2026-09-12T16:16:12+00:00 |
 | `c1` | C1 — forme d'amplitude seule, aucune information fréquentielle | `logreg(C=0.01)` | `2f61695072e0` | 2026-09-12T16:26:40+00:00 |
 | `c2` | C2 — spectre agrégé, invariant à l'ordre, sans phase | `logreg(C=0.1)` | `1289095fccd5` | 2026-09-12T16:16:13+00:00 |
-| `c2b` | C2b — structure temporelle peu profonde — enveloppe, modulation, flux | `logreg(C=0.1)` | `355f0743fb30` | 2026-09-12T17:45:52+00:00 |
+| `c2b` | C2b — structure temporelle peu profonde — enveloppe, modulation, flux | `logreg(C=0.1)` | `913575406b39` | 2026-09-12T18:25:44+00:00 |
 | `c3` | C3 — baseline historique — mélange C1 + C2 + taux de passages par zéro | `logreg(C=0.01)` | `1289095fccd5` | 2026-09-12T16:16:13+00:00 |
 
 ## 3. Échelle de contrôles et résultats — TEST

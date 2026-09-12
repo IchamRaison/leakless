@@ -157,8 +157,13 @@ from stress import TRANSFORMS, clip_rng
 stressed = TRANSFORMS["T2"]["fn"](raw, clip_rng("T2", clip_id))
 ```
 
-`clip_rng(nom, clip_id)` dérive une graine du couple : même clip, même
-transformation, même résultat, sur n'importe quelle machine. Si tu tires ta
+`clip_rng(nom, clip_id)` dérive une graine du couple par **SHA-256** : même clip,
+même transformation, même résultat, sur n'importe quelle machine et dans
+n'importe quel processus.
+
+> ⚠️ **Prends la version à partir du commit `b23601a`.** Avant lui, `clip_rng`
+> utilisait `hash()` de Python, salé par processus : deux exécutions donnaient
+> deux permutations différentes. Si tu as déjà récupéré le fichier, reprends-le. Si tu tires ta
 propre permutation, tes T2 ne seront pas nos T2 et les invariants publiés ne
 s'appliqueront plus.
 
