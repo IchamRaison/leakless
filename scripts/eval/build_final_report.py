@@ -54,7 +54,7 @@ def control_ladder(reports: dict) -> dict:
 
 def stress_base_id(run_id: str, metadata: dict) -> str:
     """Run T0 dont dérive un run de stress : déclaré, sinon convention `<base>-Tn`."""
-    return metadata.get("base_run_id") or run_id.rsplit("-", 1)[0]
+    return declared(metadata, "base_run_id") or run_id.rsplit("-", 1)[0]
 
 
 _COMMIT_RE = re.compile(r"[0-9a-f]{7,40}")
@@ -134,7 +134,12 @@ def prediction_shift(split, base_run, stress_run, fold: str = "test") -> dict:
     d = b - a
     q1, q3 = np.percentile(d, [25, 75])
     # Corrélation indéfinie si l'une des deux séries est constante : None, pas NaN.
-    r = None if np.std(a) == 0 or np.std(b) == 0 else round(float(np.corrcoef(a, b)[0, 1]), 6)
+    # np.ptp est exactement nul pour des flottants identiques ; np.std ne l'est pas
+    # toujours (0.1 répété donne un écart-type de l'ordre de 1e-17).
+    r = None
+    if np.ptp(a) > 0 and np.ptp(b) > 0:
+        c = float(np.corrcoef(a, b)[0, 1])
+        r = round(c, 6) if np.isfinite(c) else None
     return {"fold": fold, "n_clips": len(ids),
             "pearson_r_with_T0": r,
             "delta_p_median": round(float(np.median(d)), 6),

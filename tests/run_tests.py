@@ -1086,16 +1086,27 @@ def training_commit_is_read_from_the_repo_not_the_caller_directory():
 
 
 @test
+def stress_base_id_normalizes_blank_declarations():
+    """Un base_run_id absent, null, vide ou blanc retombe sur la convention `<base>-Tn`."""
+    f = build_final_report.stress_base_id
+    for meta in ({}, {"base_run_id": None}, {"base_run_id": ""}, {"base_run_id": "   "}):
+        assert f("c2b-T2", meta) == "c2b", meta
+    assert f("c2b_phase_stress", {"base_run_id": " c2b "}) == "c2b"
+
+
+@test
 def prediction_shift_never_writes_nan():
     """Une série constante rend la corrélation indéfinie : None, jamais NaN dans le JSON."""
     split = split_loader.load_split(ROOT / "manifests")
     Run = type("Run", (), {})
     base, flat = Run(), Run()
     base.probabilities = {c.clip_id: (0.2 if c.label == 0 else 0.8) for c in split.clips}
-    flat.probabilities = {c.clip_id: 0.5 for c in split.clips}
-    sh = build_final_report.prediction_shift(split, base, flat)
-    assert sh["pearson_r_with_T0"] is None
-    json.dumps(sh, allow_nan=False)
+    for value in (0.5, 0.1, 0.3, 1 / 3):                 # 0.1 : écart-type flottant non nul
+        flat.probabilities = {c.clip_id: value for c in split.clips}
+        for a, b in ((base, flat), (flat, base)):
+            sh = build_final_report.prediction_shift(split, a, b)
+            assert sh["pearson_r_with_T0"] is None, (value, sh["pearson_r_with_T0"])
+            json.dumps(sh, allow_nan=False)
 
 
 @test
