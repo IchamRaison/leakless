@@ -142,7 +142,7 @@ Quatre jeux TimeF sont prêts, mêmes `clip_id`, mêmes folds, mêmes clusters :
 |---|---|---|---|
 | T0 | aucune | tout | rien |
 | T1 | inversion temporelle | `\|FFT\|` à 3,5e-16, histogramme d'amplitude | la direction du temps |
-| T2 | permutation de blocs de 32 ms | histogramme d'amplitude | l'ordre au-delà de 32 ms (déviation `\|FFT\|` médiane 0,70) |
+| T2 | permutation de blocs de 250 échantillons (31,25 ms) | histogramme d'amplitude | l'ordre au-delà de 31,25 ms (déviation `\|FFT\|` médiane 0,70) |
 | T3 | randomisation de phase | `\|FFT\|` à 3,4e-16 | la structure de phase |
 
 Si tu peux faire tourner le checkpoint sur T1, T2 et T3 et nous rendre trois

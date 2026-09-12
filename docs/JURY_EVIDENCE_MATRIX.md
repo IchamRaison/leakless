@@ -22,7 +22,7 @@
 | Les métriques sont group-aware | clip-level **et** cluster-level partout, effectif de clusters avec chaque chiffre, bootstrap sur clusters | **démontré** | — | `EVAL_PROTOCOL.md` §7ter, `harness/metrics.py` |
 | Les comparaisons de modèles sont appariées | un seul tirage de clusters sert aux deux modèles ; test : comparer un modèle à lui-même donne Δ = 0 et IC nul | **démontré** | — | `tests/run_tests.py::paired_bootstrap_is_paired_and_zero_for_identical` |
 | Le jeu TimeF est valide et groupé | 1000 records relus depuis le disque, 185 clusters en `subject_ids`, 500/500 | **démontré** | jeu local, non publié dans un registre | `scripts/timenet/`, `PIPELINE_RESULTS.md` §3 |
-| Les transformations de stress préservent ce qu'elles annoncent | T1 et T3 : `\|FFT\|` préservé à 3,5e-16 ; T2 : histogramme d'amplitude identique, `\|FFT\|` détruit (déviation médiane 0,70) ; 0 violation de mapping | **démontré** | ce ne sont pas des augmentations préservant l'étiquette | `eval-out/stress_invariants.json`, `FINAL_EVALUATION.md` §7 |
+| Les transformations de stress préservent ce qu'elles annoncent | T1 et T3 : `\|FFT\|` préservé à 3,5e-16 ; T2 (blocs de 250 échantillons) : histogramme d'amplitude identique, `\|FFT\|` détruit (déviation médiane 0,70) ; 0 violation de mapping | **démontré** | ce ne sont pas des augmentations préservant l'étiquette | `eval-out/stress_invariants.json`, `FINAL_EVALUATION.md` §7 |
 | Aucune métadonnée d'acquisition n'atteint un modèle | contrat : 19 colonnes interdites ; `split_v2_audit.csv` n'est ouvert que pour `path` ; sentinelle testée | **démontré** | la résolution `clip_id -> chemin` reste une règle, pas une impossibilité physique | `docs/MODEL_EVAL_CONTRACT.md` §2, `tests` S8 |
 
 ---
