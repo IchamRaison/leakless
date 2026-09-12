@@ -959,6 +959,12 @@ def report_refuses_a_stress_run_that_is_not_the_base_model():
         "t", tb, "t-T1", {**tb, "retrained": False})
     must_raise(ValueError, build_final_report.check_stress_provenance,
                "t", tb, "t-T1", {**tb, "retrained": False, "checkpoint": "gs://x/step-2"})
+    # Identité absente des deux côtés : égale, mais invérifiable -> refus.
+    for empty in (None, ""):
+        for field in ("checkpoint", "training_commit"):
+            nb = {**tb, field: empty}
+            must_raise(ValueError, build_final_report.check_stress_provenance,
+                       "t", nb, "t-T1", {**nb, "retrained": False})
 
 
 @test

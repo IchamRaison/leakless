@@ -63,6 +63,12 @@ def check_stress_provenance(base_id: str, base_meta: dict, rid: str, meta: dict)
     Avec une empreinte de modèle (contrôles) : elle doit être identique. Sans
     empreinte (checkpoint de TSLM) : même checkpoint.
     """
+    fa, fb = base_meta.get("model_fingerprint"), meta.get("model_fingerprint")
+    if not (fa or (base_meta.get("checkpoint") and base_meta.get("training_commit"))):
+        # Deux identités absentes sont égales, mais n'identifient rien.
+        raise ValueError(f"{base_id} : identité du modèle absente — il faut une "
+                         f"`model_fingerprint` ou un `checkpoint` et un `training_commit` "
+                         f"non vides pour vérifier ses runs de stress")
     if meta.get("retrained") is not False:
         raise ValueError(f"{rid} : `retrained` doit valoir false (not retrained on stressed data)")
     if meta.get("model_definition_commit") != base_meta.get("model_definition_commit"):
@@ -72,7 +78,6 @@ def check_stress_provenance(base_id: str, base_meta: dict, rid: str, meta: dict)
     if meta.get("training_commit") != base_meta.get("training_commit"):
         raise ValueError(f"{rid} : training_commit {meta.get('training_commit')} différent "
                          f"de celui de {base_id} ({base_meta.get('training_commit')})")
-    fa, fb = base_meta.get("model_fingerprint"), meta.get("model_fingerprint")
     if fa or fb:
         if fa != fb:
             raise ValueError(f"{rid} : empreinte de modèle différente de {base_id} — "
