@@ -24,10 +24,12 @@ from __future__ import annotations
 import csv
 import json
 import math
+from numbers import Real
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from .split_loader import FROZEN_SPLIT_NAME, FROZEN_SPLIT_SHA256, Split
+from .split_loader import FROZEN_SPLIT_NAME, FROZEN_SPLIT_SHA256, Split, sha256_of
 
 # Colonnes interdites dans predictions.csv. Deux familles :
 #  - métadonnées d'acquisition : elles ne doivent jamais circuler avec un modèle ;
@@ -79,8 +81,34 @@ def _fail(checks: list[CheckResult], name: str, coverage: str, detail: str) -> N
     raise ContractError(f"{name} — {detail}")
 
 
+def _external_manifest(split: Split, name: str | None, digest: str | None) -> bool:
+    """Opt-in explicite : identité ET octets du manifeste externe déjà chargé.
+
+    Le lecteur externe construit les Clip/ Split et vérifie ses cibles séparées.
+    Cette fonction ne remplace pas ce lecteur ni le split_loader historique.
+    """
+    if name is None and digest is None:
+        return False
+    if (not isinstance(name, str) or not name or name.strip() != name
+            or name in (".", "..") or any(char in name for char in ("/", "\\", "\x00", ":"))
+            or re.search(r"split_v\d", name, flags=re.IGNORECASE)
+            or not isinstance(digest, str) or re.fullmatch(r"[0-9a-f]{64}", digest) is None
+            or digest == FROZEN_SPLIT_SHA256):
+        raise ContractError("Nom distinct et SHA-256 complet du manifeste externe requis ensemble")
+    path = Path(split.manifest_path)
+    if path.name != name or split.sha256 != digest:
+        raise ContractError("Identité externe différente du manifeste chargé")
+    if not path.is_file() or sha256_of(path) != digest:
+        raise ContractError("Octets du manifeste externe différents de l'empreinte attendue")
+    ids = [clip.clip_id for clip in split.clips]
+    if not ids or len(ids) != len(set(ids)):
+        raise ContractError("Scope externe vide ou contenant des clip_id dupliqués")
+    return True
+
+
 def load_run(run_dir: str | Path, split: Split, *, folds: tuple[str, ...] = ("val", "test"),
-             require_frozen_sha: bool = True) -> PredictionRun:
+             require_frozen_sha: bool = True, external_manifest_name: str | None = None,
+             external_manifest_sha256: str | None = None) -> PredictionRun:
     """Charge et valide un dossier de run.
 
     Args:
@@ -88,11 +116,18 @@ def load_run(run_dir: str | Path, split: Split, *, folds: tuple[str, ...] = ("va
         split: le split gelé déjà chargé et vérifié.
         folds: folds dont chaque clip doit être prédit exactement une fois.
         require_frozen_sha: vérifie que le run déclare le SHA gelé.
+        external_manifest_name / external_manifest_sha256: opt-in fourni ensemble.
+            Vérifie l'identité du vrai manifeste externe au lieu de l'identité V1 ;
+            impose deux colonnes exactes et une couverture exacte des folds choisis.
+            Exemple : folds=("external",), nom="external_aghashahi_v1.json".
 
     Raises:
         ContractError: au premier contrôle en échec, avec sa couverture.
     """
     run_dir = Path(run_dir)
+    is_external = _external_manifest(split, external_manifest_name, external_manifest_sha256)
+    expected_name = external_manifest_name if is_external else FROZEN_SPLIT_NAME
+    expected_sha = external_manifest_sha256 if is_external else FROZEN_SPLIT_SHA256
     checks: list[CheckResult] = []
     meta_path, pred_path = run_dir / "metadata.json", run_dir / "predictions.csv"
 
@@ -112,20 +147,23 @@ def load_run(run_dir: str | Path, split: Split, *, folds: tuple[str, ...] = ("va
     checks.append(CheckResult("champs de metadata.json", True,
                               f"{len(REQUIRED_METADATA_FIELDS)}/{len(REQUIRED_METADATA_FIELDS)} présents"))
 
-    if meta["split_filename"] != FROZEN_SPLIT_NAME:
+    if meta["split_filename"] != expected_name:
         _fail(checks, "identité du split déclaré", "1 champ",
-              f"le run déclare « {meta['split_filename']} ». Seul {FROZEN_SPLIT_NAME} "
+              f"le run déclare « {meta['split_filename']} ». Seul {expected_name} "
               f"est valide ; split_v1 est INVALIDE.")
     checks.append(CheckResult("identité du split déclaré", True, "1/1 champ"))
 
-    if require_frozen_sha and meta["split_sha256"] != FROZEN_SPLIT_SHA256:
+    if (require_frozen_sha or is_external) and meta["split_sha256"] != expected_sha:
         _fail(checks, "SHA256 du split déclaré", "1 champ",
-              f"déclaré {meta['split_sha256'][:16]}…, gelé {FROZEN_SPLIT_SHA256[:16]}…")
+              f"déclaré {meta['split_sha256'][:16]}…, gelé {expected_sha[:16]}…")
     if meta["split_sha256"] != split.sha256:
         _fail(checks, "SHA256 du split déclaré", "1 champ",
               f"le run déclare {meta['split_sha256'][:16]}… mais le manifeste chargé "
               f"vaut {split.sha256[:16]}…")
     checks.append(CheckResult("SHA256 du split déclaré", True, "1/1 champ"))
+    if is_external:
+        checks.append(CheckResult("octets du manifeste externe épinglés", True, "1/1 manifeste",
+                                  f"{external_manifest_name} : {external_manifest_sha256}"))
 
     if meta["test_labels_not_used_for_tuning"] is not True:
         _fail(checks, "déclaration d'absence de réglage sur le test", "1 champ",
@@ -134,8 +172,14 @@ def load_run(run_dir: str | Path, split: Split, *, folds: tuple[str, ...] = ("va
 
     with open(pred_path) as fh:
         reader = csv.DictReader(fh)
+        ordered_columns = reader.fieldnames or []
         columns = set(reader.fieldnames or [])
         rows = list(reader)
+
+    if is_external and (ordered_columns != ["clip_id", "probability_leak"]
+                        or any(set(row) != {"clip_id", "probability_leak"} for row in rows)):
+        _fail(checks, "colonnes externes exactes", f"{len(rows)} lignes ; {len(ordered_columns)} colonnes",
+              "exactement clip_id,probability_leak, sans colonne ajoutée/dupliquée ni valeur surnuméraire")
 
     leaked = sorted(columns & FORBIDDEN_PREDICTION_COLUMNS)
     if leaked:
@@ -176,6 +220,10 @@ def load_run(run_dir: str | Path, split: Split, *, folds: tuple[str, ...] = ("va
     checks.append(CheckResult("probabilités dans [0, 1]", True, f"{len(rows)} lignes"))
 
     required = {c.clip_id for c in split.clips if c.fold in folds}
+    if is_external and (not required or set(probs) != required):
+        _fail(checks, f"couverture externe exacte des folds {folds}", f"{len(required)} clips attendus",
+              f"scope vide ou couverture différente : {len(required - set(probs))} manquants, "
+              f"{len(set(probs) - required)} hors scope")
     missing_ids = sorted(required - set(probs))
     if missing_ids:
         _fail(checks, f"couverture des folds {folds}", f"{len(required)} clips attendus",
@@ -189,31 +237,51 @@ def load_run(run_dir: str | Path, split: Split, *, folds: tuple[str, ...] = ("va
 
 def write_run(run_dir: str | Path, *, run_id: str, model_name: str, checkpoint: str,
               training_commit: str, split: Split, threshold_rule: str,
-              probabilities: dict[str, float], extra: dict | None = None) -> Path:
-    """Écrit un dossier de run au format du contrat. Utilisé par les contrôles C0-C3."""
+              probabilities: dict[str, float], extra: dict | None = None,
+              external_manifest_name: str | None = None,
+              external_manifest_sha256: str | None = None) -> Path:
+    """Écrit un run ; comportement historique inchangé sans opt-in externe.
+
+    En externe, le Split représente exactement le scope à exporter : aucun ID
+    supplémentaire/manquant, fichier de labels séparé, dossier neuf et scores
+    flottants conservés à 17 chiffres significatifs.
+    Extra peut compléter la provenance, pas écraser les champs requis.
+    """
     import datetime
 
     run_dir = Path(run_dir)
-    run_dir.mkdir(parents=True, exist_ok=True)
+    is_external = _external_manifest(split, external_manifest_name, external_manifest_sha256)
+    if is_external:
+        if run_dir.exists() or run_dir.is_symlink():
+            raise ContractError("Sortie externe déjà présente : aucun écrasement, même d'un dossier vide")
+        if set(probabilities) != {clip.clip_id for clip in split.clips}:
+            raise ContractError("Couverture externe différente du scope chargé")
+        if any(isinstance(value, bool) or not isinstance(value, Real)
+               or not math.isfinite(value) or not 0 <= value <= 1 for value in probabilities.values()):
+            raise ContractError("Probabilités externes finies dans [0,1] requises, sans valeur de remplacement")
+        if set(extra or {}) & set(REQUIRED_METADATA_FIELDS):
+            raise ContractError("Extra ne peut pas remplacer la provenance externe requise")
+    run_dir.mkdir(parents=True, exist_ok=not is_external)
     meta = {
         "run_id": run_id,
         "model_name": model_name,
         "checkpoint": checkpoint,
         "training_commit": training_commit,
         "config_hash": None,
-        "split_filename": FROZEN_SPLIT_NAME,
+        "split_filename": external_manifest_name if is_external else FROZEN_SPLIT_NAME,
         "split_sha256": split.sha256,
         "timestamp": datetime.datetime.now(datetime.UTC).isoformat(timespec="seconds"),
         "threshold_rule": threshold_rule,
         "test_labels_not_used_for_tuning": True,
         **(extra or {}),
     }
-    with open(run_dir / "metadata.json", "w") as fh:
+    with open(run_dir / "metadata.json", "x" if is_external else "w") as fh:
         json.dump(meta, fh, indent=2, ensure_ascii=False)
         fh.write("\n")
-    with open(run_dir / "predictions.csv", "w", newline="") as fh:
+    with open(run_dir / "predictions.csv", "x" if is_external else "w", newline="") as fh:
         w = csv.writer(fh, lineterminator="\n")
         w.writerow(["clip_id", "probability_leak"])
         for cid in sorted(probabilities):
-            w.writerow([cid, f"{probabilities[cid]:.10f}"])
+            value = f"{float(probabilities[cid]):.17g}" if is_external else f"{probabilities[cid]:.10f}"
+            w.writerow([cid, value])
     return run_dir
