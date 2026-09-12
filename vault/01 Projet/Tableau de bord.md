@@ -36,7 +36,10 @@ Icham
 - [x] Compatibilité V1 `0b1399e` vérifiée sur les quatre témoins, scores historiques exacts ; aucun export V1 modifié.
 - [x] Diagnostic 598 train terminé : sonde exacte TimeNet/C1 et autopsie supervision/gradients ; A/C retenues, B omise faute de justification. [[V2 ML - exécution]].
 - [x] Manifeste externe vérifié/figé `84007801…`, 3 600 fenêtres primaires ; aucun score externe.
-- [ ] Vérifier nouveau code/cache commun A/C, puis gates complets 209 et reloads A/C avant les six fits comparatifs.
+- [x] Code A/C `04d53b6` publié, 117 tests runtime sans skip ; nouveau cache806 bandes/mesures/textes exactement vérifié, références A/C indépendantes mêmes poids créées.
+- [x] A `04d53b6` et reload complet PASS, delta zéro, SHA `ed2bfdc5…`.
+- [ ] C et reload dans la même séquence active (`98052`) avant les six fits comparatifs.
+- [ ] Runner de campagne et évaluateur externe à seuil figé codés/testés localement ; vérifier ensemble dans le runtime avant exécution réelle.
 - [x] Objectif final utilisateur ajouté : évolution d'événement/investigation et benchmark gabarit → Qwen sur mesures → TSLM sur séries. [[Plan V2 - fiabilité et parité des scores#7. Objectif final — démontrer la valeur du TSLM]].
 - [ ] Construire et évaluer ce benchmark final sur des événements/historiques/contextes réservés ; ne pas confondre campagne A/C et preuve d'utilité du TSLM.
 - [x] Reprise dans clone sain `/home/animus/ehl-hackathon-zurich-v2-recovery`, `e9c8ddd` publié ; ancien Git endommagé conservé, aucun reset/destruction.

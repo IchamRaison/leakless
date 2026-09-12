@@ -41,7 +41,7 @@ def debug_rows(rows: list[dict], count: int) -> list[dict]:
     return selected
 
 
-def complete_bundle(output: Path, base_dir: Path, lockfile: Path):
+def complete_bundle(output: Path, base_dir: Path, lockfile: Path, *, provenance_overrides=None):
     """Ajoute licences/provenance/environnement sans toucher aux poids appris."""
     manifest = output / "checksums.json"
     if manifest.exists():
@@ -69,6 +69,10 @@ def complete_bundle(output: Path, base_dir: Path, lockfile: Path):
         "qwen": "https://huggingface.co/Qwen/Qwen3.5-4B ; QWEN-LICENSE et QWEN-MODEL-CARD.md inclus.",
         "opentslm": "https://github.com/OpenTSLM/OpenTSLM ; bibliothèque sous MIT, révision épinglée dans metadata.json.",
     }
+    if provenance_overrides is not None:
+        for key, value in provenance_overrides.items():
+            provenance[key] = ({**provenance[key], **value}
+                               if isinstance(provenance.get(key), dict) and isinstance(value, dict) else value)
     (output / "PROVENANCE.json").write_text(json.dumps(provenance, indent=2, ensure_ascii=False) + "\n")
     checksums = {str(path.relative_to(output)): sha256_file(path)
                  for path in sorted(output.rglob("*")) if path.is_file() and path != manifest}

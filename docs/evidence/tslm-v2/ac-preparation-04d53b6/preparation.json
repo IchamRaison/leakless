@@ -1,0 +1,26 @@
+{
+  "protocol": "split_v2_binary_with_noise_v0",
+  "preprocessing_version": "rms-f32-hann256-hop128-band4-log1p-v2",
+  "manifest_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+  "records": 806,
+  "fold_counts": {
+    "train": 598,
+    "val": 208
+  },
+  "test_audio_or_cache_opened": false,
+  "canonical_vs_timef_exact": true,
+  "amplitude_evidence_version": "c1-amplitude-text-6sig-v1",
+  "amplitude_records_verified": 806,
+  "amplitude_features_raw_vs_timef_exact": true,
+  "amplitude_text_raw_vs_timef_exact": true,
+  "timef_manifest_sha256": "ace99698290d2f1f53a5bc469b6fc84977e3644c3092524109f53f358d72120a",
+  "cache_sha256": {
+    "train": "9b7b14e195bc7a82cd0e09907c31d26b75c15ed8fca84f4a9b68895e8c174c44",
+    "val": "30042b666adf6cc6a4d80683585d45c91532746b8d0ee1c31149819e7d0e64b8"
+  },
+  "source_sha256": {
+    "prepare.py": "2a522a97cc06525c57efad4f66e1d4e7173f45d9864a659c41c76aa20f736e5a",
+    "preprocessing.py": "0712e053f3fb812f524ea23f56904d0f18dd9b437191901b76ef3a8b6e175519",
+    "features.py": "db819eee9a7703b08c93b85dc8d5f70f23841d41d4a8ec3b5f2d7f0d4773040c"
+  }
+}

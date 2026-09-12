@@ -146,6 +146,17 @@ class CoherentPredictor:
         self._artifact, self._artifact_sha = artifact, _sha256(decision)
         self._lock = threading.Lock()
 
+    def state_hashes(self):
+        """Empreintes des poids en mémoire pour l'audit, sans exposer le backend."""
+        from pipe.tslm.train import tensor_state_hash
+        if not self._lock.acquire(blocking=False):
+            raise self._error_type("model_busy", "Une inférence cohérente est déjà en cours")
+        try:
+            return {name: tensor_state_hash(getattr(self._backend.model, name))
+                    for name in ("encoder", "projector", "llm")}
+        finally:
+            self._lock.release()
+
     def predict(self, wav_bytes):
         """Retour distinct de Prediction v0.1 ; afficher seulement les champs hors audit."""
         return self._predict(wav_bytes, 8000, waveform_input=False)

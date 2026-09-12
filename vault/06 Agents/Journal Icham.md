@@ -1,5 +1,9 @@
 # Journal Icham
 
+## 13 septembre — A/C vérifiées avant contrôles de score
+
+Objectif final publié dans le vault `7ddd9d8`, miroirs explicitement actualisés. Code/preuves A/C publiés `04d53b6` depuis le clone sain ; **117 tests runtime sans skip**, nouvelle préparation806 exactement concordante (bandes, mesures C1, textes WAV/TimeF), références A et C distinctes créées sans réentraînement. Séquence des deux gates209 et de leurs reloads lancée, handle98052 ; processus A réellement actif vérifié, aucun entraînement TSLM V2. [[V2 ML - exécution]] contient chemins et SHA. La future campagne réutilise la même recette A/C et les folds train exacts ; elle ne remplace pas le benchmark final à trois approches demandé par Icham.
+
 ## 13 septembre — reprise et objectif final explicite
 
 Icham demande de reprendre et d'ajouter au vault la valeur attendue au-delà d'une classe/bande DSP : évolution d'événement, contexte réellement disponible et investigation interactive. Ajout au plan final avec benchmark gabarit / Qwen sur mesures / TSLM sur séries, sans présumer la supériorité de ce dernier. La campagne actuelle A/C ne remplace pas ce benchmark. Les demandes de statut et l'interruption précédentes n'avaient pas publié cette mise à jour ; reprise après lecture de l'état réel et intégration distante du vault. Ponytail : réutilisation du harness, des mesures C1 et de la boucle d'entraînement, pas de nouveau moteur.

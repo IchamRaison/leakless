@@ -1,5 +1,7 @@
 """Contrôles CPU exécutables : python -m unittest discover -s tests/tslm."""
 import io
+import hashlib
+import json
 from pathlib import Path
 import tempfile
 import unittest
@@ -13,6 +15,32 @@ from pipe.tslm.preprocessing import decode_wav, measured_band, model_input, prep
 
 
 class PipelineChecks(unittest.TestCase):
+    def test_bundle_provenance_is_overridden_before_checksums_without_changing_legacy(self):
+        from pipe.tslm.train import complete_bundle
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base = root / "base"
+            base.mkdir()
+            for name in ("LICENSE", "README.md"):
+                (base / name).write_text("fixture")
+            lock = root / "lock"
+            lock.write_text("fixture environment")
+            legacy, current = root / "legacy", root / "current"
+            legacy.mkdir()
+            current.mkdir()
+            complete_bundle(legacy, base, lock)
+            original = json.loads((legacy / "PROVENANCE.json").read_text())
+            overrides = {"audio": {"reload_example": "No bundled audio"},
+                         "transformations": "Canonical bands and measured amplitude text"}
+            complete_bundle(current, base, lock, provenance_overrides=overrides)
+            observed = json.loads((current / "PROVENANCE.json").read_text())
+            self.assertEqual(observed["audio"]["creators"], original["audio"]["creators"])
+            self.assertEqual(observed["audio"]["reload_example"], "No bundled audio")
+            self.assertNotEqual(original["transformations"], observed["transformations"])
+            self.assertEqual(observed["qwen"], original["qwen"])
+            for name, checksum in json.loads((current / "checksums.json").read_text()).items():
+                self.assertEqual(hashlib.sha256((current / name).read_bytes()).hexdigest(), checksum)
+
     def test_predict_separates_generated_text_and_dsp(self):
         from pipe.tslm.predict import PredictionError, predict_audio
         from pipe.tslm.model import AcousticQwenSP

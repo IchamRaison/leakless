@@ -93,6 +93,26 @@ class CoherentChecks(unittest.TestCase):
     def service(self):
         return coherent.CoherentPredictor(self.bundle, self.decision_path, self.evidence_path, device="cpu")
 
+    def test_memory_state_audit_uses_same_backend_and_releases_shared_lock(self):
+        service = self.service()
+        for name in ("encoder", "projector", "llm"):
+            setattr(self.model, name, {"state": name})
+        hasher = Mock(side_effect=lambda module: module["state"])
+        with patch.dict(sys.modules, {"pipe.tslm.train": SimpleNamespace(tensor_state_hash=hasher)}):
+            before = service.state_hashes()
+            self.model.encoder["state"] = "changed"
+            self.assertNotEqual(before, service.state_hashes())
+            service._lock.acquire()
+            with self.assertRaises(FakeError) as raised:
+                service.state_hashes()
+            self.assertEqual(raised.exception.code, "model_busy")
+            service._lock.release()
+            hasher.side_effect = RuntimeError("hash failed")
+            with self.assertRaisesRegex(RuntimeError, "hash failed"):
+                service.state_hashes()
+            self.assertFalse(service._lock.locked())
+        self.factory.assert_called_once()
+
     def test_checked_text_and_canonical_dispatch_and_exact_boundary(self):
         service = self.service()
         self.backend.score.return_value = self.artifact["threshold"]

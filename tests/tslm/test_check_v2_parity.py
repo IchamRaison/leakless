@@ -217,6 +217,15 @@ class V2ParityGateChecks(unittest.TestCase):
         self.assertEqual(summary["threshold_diagnostic"]["near_threshold_ids"], ["val"])
         self.assertFalse(summary["threshold_diagnostic"]["selected_here"])
         self.assertEqual(len(summary["threshold_diagnostic"]["decision_flips"]), 1)
+        # Le sélecteur officiel peut rendre min(score)-1e-9 ou max(score)+1e-9.
+        # Ne pas rabattre un seuil figé dans [0,1], ni le confondre avec un score.
+        for threshold in (-1e-9, 1 + 1e-9):
+            observed = gate.summarize_scores(scores, threshold)["threshold_diagnostic"]
+            self.assertEqual(observed["threshold"], threshold)
+            self.assertEqual(observed["decision_flips"], [])
+        for threshold in (float("nan"), float("inf"), -float("inf")):
+            with self.assertRaises(ValueError):
+                gate.summarize_scores(scores, threshold)
         scores["val"]["batch_4_reversed"] = 0.5 + 0.8e-6
         self.assertFalse(gate.summarize_scores(scores)["batch_scores_within_atol"])
         del scores["val"]["waveform"]

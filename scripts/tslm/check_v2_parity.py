@@ -167,8 +167,8 @@ def score_batches(ids, series, score_batch):
 
 
 def summarize_scores(scores, threshold=None):
-    if threshold is not None and (not np.isfinite(threshold) or not 0 <= threshold <= 1):
-        raise ValueError("Seuil de diagnostic fini dans [0,1] requis")
+    if threshold is not None and not np.isfinite(threshold):
+        raise ValueError("Seuil de diagnostic fini requis")
     expected = set(ADAPTERS) | {f"batch_{size}_{order}" for size in BATCH_SIZES
                                 for order in ("forward", "reversed")}
     adapters, all_paths, flips = {}, {}, []
@@ -317,8 +317,8 @@ def main(argv=None):
     parser.add_argument("--reference", type=Path)
     parser.add_argument("--threshold", type=float, help="Seuil déjà figé, diagnostic seul ; aucun seuil choisi ici")
     args = parser.parse_args(argv)
-    if args.threshold is not None and (not np.isfinite(args.threshold) or not 0 <= args.threshold <= 1):
-        parser.error("--threshold doit être fini dans [0,1]")
+    if args.threshold is not None and not np.isfinite(args.threshold):
+        parser.error("--threshold doit être fini (borne externe permise par pick_threshold)")
     # Sortie neuve obligatoire : ne jamais remplacer les preuves V1/V2 existantes.
     args.output.mkdir(parents=True, exist_ok=False)
     report = {"schema": SCHEMA, "all_checks_pass": False, "checks": {name: False for name in CHECKS},
