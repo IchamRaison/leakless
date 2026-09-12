@@ -123,3 +123,16 @@ hors de cette livraison.
 Prochaine action : revue de l'UI et du diff par Nevil avant tout push ; puis
 intégration d'une sortie modèle réelle au contrat applicatif convenu, sans
 modifier les résultats, le split ou le moteur d'évaluation.
+
+## Revue Safoan du 2026-09-12 (notes épinglées)
+
+Notes stockées dans `notes/site-notes.json` (mode `?notes`, serveur de dev
+seulement), toutes marquées résolues après traitement :
+
+1. Plein écran du bâtiment → bouton Fullscreen (bâtiment et carte temporelle).
+2. Landing appréciée, à ne pas changer → hero inchangé.
+3. Pitch de 5 min, slides + démo rapide → `docs/pitch/` (deck HTML, minutage,
+   pré-vol, parcours démo 90 s, replis).
+4. Dashboard pour la démo → `#monitor` : replay des trois vrais WAV train,
+   niveau/centroïde/bandes mesurés, aucune alerte générée, TSLM PENDING,
+   canaux distincts des positions du bâtiment.

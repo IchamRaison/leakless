@@ -1,0 +1,461 @@
+<title>LeakLess 5-Minute Pitch</title>
+<meta name="color-scheme" content="dark">
+<style>
+  :root {
+    --ground: #0f1612;
+    --surface: #17221a;
+    --raised: #1d2a20;
+    --ink: #e2e9e1;
+    --muted: #9cad9f;
+    --faint: #6f8173;
+    --line: #ffffff1c;
+    --signal: #b8dba5;
+    --pending: #d8c59a;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+  }
+  button { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+
+  /* Stage: slides are authored at 1600 x 900 and scaled to the window. */
+  .viewport { position: fixed; inset: 0; overflow: hidden; }
+  .deck { width: 1600px; height: 900px; position: absolute; left: 50%; top: 50%; transform-origin: center; transform: translate(-50%, -50%); }
+  .slide {
+    position: absolute; inset: 0;
+    padding: 86px 120px 120px;
+    display: none;
+    flex-direction: column;
+    gap: 34px;
+    background: var(--ground);
+  }
+  .slide.active { display: flex; }
+  .kicker {
+    font: 500 19px/1 var(--mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex; gap: 22px; align-items: baseline;
+  }
+  .kicker .slot { color: var(--signal); }
+  h1, h2 { margin: 0; font-weight: 500; text-wrap: balance; letter-spacing: -0.03em; }
+  h1 { font-size: 104px; line-height: 1.02; max-width: 1250px; }
+  h2 { font-size: 62px; line-height: 1.08; max-width: 1300px; }
+  h1 em, h2 em { font-style: normal; color: var(--signal); }
+  p { margin: 0; }
+  .lede { font-size: 32px; line-height: 1.45; color: #c7d3c8; max-width: 1050px; }
+  .fine { font-size: 22px; line-height: 1.5; color: var(--muted); max-width: 1150px; }
+  .mono { font-family: var(--mono); }
+  .push { margin-top: auto; }
+
+  /* Slide 1 */
+  .signal-strip { width: 100%; height: 120px; display: block; }
+  .signal-strip path { fill: none; stroke: var(--signal); stroke-width: 2; }
+  .signal-strip line { stroke: var(--line); stroke-width: 2; }
+
+  /* Slide 2: a real sequence, so it is numbered. */
+  .pipeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); }
+  .pipeline > div { padding: 34px 40px 0 0; display: flex; flex-direction: column; gap: 16px; }
+  .pipeline > div + div { padding-left: 40px; border-left: 1px solid var(--line); }
+  .step { font: 500 20px/1 var(--mono); color: var(--signal); letter-spacing: 0.1em; }
+  .pipeline h3 { margin: 0; font-size: 36px; font-weight: 500; letter-spacing: -0.02em; }
+  .figure { font: 500 58px/1 var(--mono); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+  .figure small { font-size: 22px; color: var(--muted); letter-spacing: 0; margin-left: 8px; }
+  .pipeline p { font-size: 23px; line-height: 1.5; color: #c2cec3; }
+
+  /* Slide 3 */
+  .demo { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 70px; }
+  .demo li { list-style: none; display: grid; grid-template-columns: 64px 1fr; gap: 6px 0; align-items: baseline; }
+  .demo ol { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 26px; }
+  .demo .n { font: 500 22px/1 var(--mono); color: var(--signal); }
+  .demo strong { font-size: 34px; font-weight: 500; letter-spacing: -0.015em; }
+  .demo span.d { grid-column: 2; font-size: 22px; color: var(--muted); line-height: 1.45; }
+  .demo .where { grid-column: 2; font: 18px/1.4 var(--mono); color: var(--pending); }
+  .honest { border: 1px solid #d8c59a55; background: #d8c59a0f; border-radius: 6px; padding: 22px 26px; font-size: 22px; line-height: 1.5; color: #d9d2bb; align-self: start; }
+  .honest b { color: var(--pending); font-weight: 500; }
+
+  /* Slide 4: AUC ladder drawn to one 0.5–1.0 scale. */
+  .ladder { display: grid; grid-template-columns: 330px 1fr 140px 140px; column-gap: 30px; align-items: center; }
+  .ladder .head { font: 17px/1 var(--mono); color: var(--faint); letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 14px; }
+  .ladder .head.num { text-align: right; }
+  .axis { position: relative; height: 17px; }
+  .axis span { position: absolute; transform: translateX(-50%); font: 17px/1 var(--mono); color: var(--faint); }
+  .row { display: contents; }
+  .row > * { border-top: 1px solid var(--line); padding: 17px 0; }
+  .ctl { display: flex; align-items: baseline; gap: 16px; }
+  .ctl b { font: 500 22px/1 var(--mono); color: var(--muted); width: 50px; }
+  .ctl span { font-size: 26px; }
+  .track { position: relative; height: 58px; }
+  .track::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px dashed #ffffff22; }
+  .track i { position: absolute; top: 50%; transform: translate(-50%, -50%); border-radius: 50%; }
+  .track .clip { width: 20px; height: 20px; background: var(--signal); }
+  .track .cluster { width: 22px; height: 22px; border: 3px solid var(--ink); background: var(--ground); }
+  .track .grid { position: absolute; top: 0; bottom: 0; border-left: 1px solid #ffffff10; }
+  .val { font: 500 28px/1 var(--mono); text-align: right; font-variant-numeric: tabular-nums; }
+  .val.pend { color: var(--pending); font-size: 20px; }
+  .row.ref .ctl span::after { content: "reference"; font: 16px/1 var(--mono); color: var(--signal); margin-left: 14px; letter-spacing: 0.08em; }
+  .row.tslm .ctl span, .row.tslm .ctl b { color: var(--pending); }
+  .legend { display: flex; gap: 40px; font-size: 20px; color: var(--muted); align-items: center; }
+  .legend i { display: inline-block; vertical-align: middle; margin-right: 10px; border-radius: 50%; }
+
+  /* Slide 5 */
+  .ledger { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; border-top: 1px solid var(--line); padding-top: 34px; }
+  .ledger h3 { margin: 0 0 22px; font: 500 20px/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; }
+  .ledger .yes h3 { color: var(--signal); }
+  .ledger .no h3 { color: var(--pending); }
+  .ledger ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 16px; }
+  .ledger li { font-size: 28px; line-height: 1.3; display: grid; grid-template-columns: 40px 1fr; }
+  .ledger li::before { font-family: var(--mono); }
+  .ledger .yes li::before { content: "✓"; color: var(--signal); }
+  .ledger .no li::before { content: "—"; color: var(--pending); }
+  .next { font-size: 26px; line-height: 1.5; color: #c7d3c8; border-left: 3px solid var(--signal); padding-left: 24px; max-width: 1250px; }
+
+  /* Slide 6 */
+  .team { font: 24px/1.6 var(--mono); color: var(--muted); letter-spacing: 0.04em; }
+
+  /* Five-minute ruler: each segment is that slide's real time budget. */
+  .ruler {
+    position: absolute; left: 120px; right: 120px; bottom: 48px;
+    display: flex; gap: 6px; align-items: flex-end;
+  }
+  .ruler div { height: 6px; background: #ffffff1a; border-radius: 1px; position: relative; }
+  .ruler div.done { background: #b8dba566; }
+  .ruler div.now { background: var(--signal); height: 10px; }
+  .ruler-labels { position: absolute; left: 120px; right: 120px; bottom: 18px; display: flex; justify-content: space-between; font: 16px/1 var(--mono); color: var(--faint); }
+
+  /* Presenter chrome, outside the 16:9 stage. */
+  .chrome {
+    position: fixed; right: 16px; top: 14px; z-index: 5; opacity: 0.4; transition: opacity 160ms;
+    display: flex; gap: 8px; align-items: center;
+    font: 13px/1 var(--mono); color: var(--muted);
+  }
+  .chrome:hover, .chrome:focus-within { opacity: 1; }
+  .chrome button {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 5px;
+    padding: 8px 11px; cursor: pointer;
+  }
+  .chrome button:hover { border-color: var(--signal); }
+  .chrome .clock.over { color: var(--pending); }
+  .notes {
+    position: fixed; left: 16px; right: 16px; bottom: 56px; z-index: 5;
+    max-width: 880px; margin-inline: auto;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+    padding: 18px 22px; font-size: 16px; line-height: 1.6; color: #d3ddd3;
+    box-shadow: 0 16px 40px #000a;
+  }
+  .notes b { font: 12px/1 var(--mono); letter-spacing: 0.1em; color: var(--signal); display: block; margin-bottom: 8px; }
+  .notes[hidden] { display: none; }
+
+  /* Overview and phone widths: every slide as a readable document, notes inline. */
+  body.overview { overflow: auto; }
+  body.overview .viewport { position: static; display: block; padding-block: 24px 90px; }
+  body.overview .deck { position: static; transform: none !important; width: auto; height: auto; display: flex; flex-direction: column; gap: 28px; max-width: 1100px; margin: 0 auto; padding-inline: 16px; }
+  body.overview .slide { position: relative; display: flex; padding: 40px; border: 1px solid var(--line); border-radius: 8px; gap: 22px; }
+  body.overview .slide .ruler, body.overview .slide .ruler-labels { display: none; }
+  body.overview .inline-notes { display: block; }
+  .inline-notes { display: none; font-size: 16px; line-height: 1.6; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 16px; }
+  .inline-notes b { font: 12px/1 var(--mono); color: var(--signal); letter-spacing: 0.1em; margin-right: 8px; }
+  body.overview h1 { font-size: clamp(38px, 6vw, 72px); }
+  body.overview h2 { font-size: clamp(30px, 4.4vw, 48px); }
+  body.overview .lede { font-size: clamp(18px, 2.2vw, 26px); }
+  body.overview .fine, body.overview .pipeline p, body.overview .demo span.d, body.overview .honest { font-size: 17px; }
+  body.overview .kicker { font-size: 14px; flex-wrap: wrap; gap: 8px 16px; }
+  body.overview .figure { font-size: 40px; }
+  body.overview .pipeline h3, body.overview .demo strong { font-size: 24px; }
+  body.overview .ledger li, body.overview .next { font-size: 19px; }
+  body.overview .ctl span { font-size: 18px; }
+  body.overview .val { font-size: 19px; }
+  body.overview .notes { display: none; }
+  body.overview .chrome { opacity: 1; top: auto; bottom: 14px; }
+  @media (max-width: 860px) {
+    body.overview .pipeline, body.overview .demo, body.overview .ledger { grid-template-columns: 1fr; gap: 24px; }
+    body.overview .pipeline > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); padding-top: 24px; }
+    body.overview .slide { padding: 24px 18px; }
+    body.overview .ladder { grid-template-columns: 1fr 64px 64px; column-gap: 12px; }
+    body.overview .ladder .track, body.overview .ladder .axis, body.overview .ladder .head.track-head { display: none; }
+    body.overview .legend { display: none; }
+    body.overview .ctl { flex-wrap: wrap; gap: 4px 10px; }
+    body.overview .chrome .wide { display: none; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .slide.active > * { animation: rise 420ms cubic-bezier(.2,.7,.2,1) both; }
+    .slide.active > *:nth-child(2) { animation-delay: 40ms; }
+    .slide.active > *:nth-child(3) { animation-delay: 80ms; }
+    .slide.active > *:nth-child(4) { animation-delay: 120ms; }
+    @keyframes rise { from { transform: translateY(10px); } to { transform: none; } }
+  }
+</style>
+
+<div class="viewport">
+  <main class="deck" id="deck" aria-live="polite">
+
+    <section class="slide" data-seconds="40" data-label="Problem">
+      <div class="kicker"><span>LeakLess · Temporal AI Challenge</span><span class="slot">0:00 – 0:40</span></div>
+      <h1>Water damage becomes visible late. <em>The signal can change earlier.</em></h1>
+      <p class="lede">LeakLess helps facilities and maintenance teams inspect unusual acoustic signals before deciding where to investigate.</p>
+      <svg class="signal-strip push" viewBox="0 0 1360 120" preserveAspectRatio="none" aria-hidden="true">
+        <line x1="0" y1="60" x2="1360" y2="60"></line>
+        <path id="strip"></path>
+      </svg>
+      <p class="fine">Research prototype. Experimental recordings, no field validation, early-warning lead time not demonstrated.</p>
+      <aside class="inline-notes"><b>SAY</b><span class="say"></span></aside>
+    </section>
+
+    <section class="slide" data-seconds="50" data-label="Data">
+      <div class="kicker"><span>Data &amp; approach</span><span class="slot">0:40 – 1:30</span></div>
+      <h2>Real recordings, a split that cannot cheat, <em>models that must earn their place.</em></h2>
+      <div class="pipeline">
+        <div>
+          <span class="step">1 · DATA</span>
+          <span class="figure">1,000<small>1-s WAV clips</small></span>
+          <h3>Experimental acoustic dataset</h3>
+          <p>Zenodo 18631450, CC BY 4.0. Leak, no-leak and environmental-noise recordings from a test bed, processed through TimeNet / TimeF.</p>
+        </div>
+        <div>
+          <span class="step">2 · SPLIT</span>
+          <span class="figure">185<small>dependency clusters</small></span>
+          <h3>Leakage-aware, frozen</h3>
+          <p>Clips from the same capture never sit on both sides. Held-out test: 41 clusters, 11 of them non-leak.</p>
+        </div>
+        <div>
+          <span class="step">3 · MODELS</span>
+          <span class="figure">C0–C4<small>same split</small></span>
+          <h3>Controls before claims</h3>
+          <p>Loudness, envelope, static spectrum, shallow temporal and a mixed baseline, then the TSLM, all scored on the same clusters.</p>
+        </div>
+      </div>
+      <aside class="inline-notes"><b>SAY</b><span class="say"></span></aside>
+    </section>
+
+    <section class="slide" data-seconds="90" data-label="Live demo">
+      <div class="kicker"><span>Live demo</span><span class="slot">1:30 – 3:00</span></div>
+      <h2>One building, <em>real signals</em>, nothing simulated.</h2>
+      <div class="demo">
+        <ol>
+          <li><span class="n">1</span><strong>Pick a measurement point</strong><span class="d">Illustrative position in the building. It does not locate a leak.</span><span class="where">Hero → N1</span></li>
+          <li><span class="n">2</span><strong>Listen and look</strong><span class="d">Real recording, waveform and spectrogram, with its SHA-256 identity.</span><span class="where">02 → Leak-associated</span></li>
+          <li><span class="n">3</span><strong>Temporal Signal Map</strong><span class="d">Geometry derived from the measured spectrum, window by window.</span><span class="where">03 → Fullscreen</span></li>
+        </ol>
+        <ol>
+          <li><span class="n">4</span><strong>Monitor replay</strong><span class="d">Three channels measured as they replay: level, centroid, bands.</span><span class="where">Nav → Monitor replay</span></li>
+          <li><span class="n">5</span><strong>Inspect your own WAV</strong><span class="d">Any recording goes through the same checks and plots.</span><span class="where">06 → Load a recording</span></li>
+          <li class="honest"><span><b>On screen, the model reads PENDING.</b> No probability is shown until an evaluated TSLM checkpoint is wired in.</span></li>
+        </ol>
+      </div>
+      <aside class="inline-notes"><b>SAY</b><span class="say"></span></aside>
+    </section>
+
+    <section class="slide" data-seconds="70" data-label="Results">
+      <div class="kicker"><span>Question the result · held-out test</span><span class="slot">3:00 – 4:10</span></div>
+      <h2>What could the model <em>be cheating on?</em></h2>
+      <div class="ladder" id="ladder" role="table" aria-label="AUC on the held-out test for controls C0 to C4"></div>
+      <div class="legend push">
+        <span><i style="width:16px;height:16px;background:var(--signal)"></i>Clip AUC</span>
+        <span><i style="width:17px;height:17px;border:3px solid var(--ink)"></i>Cluster AUC</span>
+        <span class="mono" style="color:var(--faint)">41 test clusters · 11 non-leak · wide uncertainty · C1 vs C0 inconclusive</span>
+      </div>
+      <aside class="inline-notes"><b>SAY</b><span class="say"></span></aside>
+    </section>
+
+    <section class="slide" data-seconds="35" data-label="Limits">
+      <div class="kicker"><span>Evidence ledger</span><span class="slot">4:10 – 4:45</span></div>
+      <h2>What we can show, <em>and what we cannot yet.</em></h2>
+      <div class="ledger">
+        <div class="yes">
+          <h3>Demonstrated</h3>
+          <ul>
+            <li>Experimental acoustic dataset processed through TimeNet/TimeF</li>
+            <li>Leakage-aware frozen split</li>
+            <li>C0–C3 and C2b controls evaluated</li>
+            <li>Shallow temporal control responds to temporal perturbations</li>
+          </ul>
+        </div>
+        <div class="no">
+          <h3>Not demonstrated</h3>
+          <ul>
+            <li>Field leak detection</li>
+            <li>Physical leak localization</li>
+            <li>Customer deployment</li>
+            <li>Early-warning lead time</li>
+            <li>Causal physical interpretation</li>
+            <li>TSLM superiority</li>
+          </ul>
+        </div>
+      </div>
+      <p class="next push">Next: score an evaluated TSLM checkpoint on the same frozen split, against the same controls, before any claim.</p>
+      <aside class="inline-notes"><b>SAY</b><span class="say"></span></aside>
+    </section>
+
+    <section class="slide" data-seconds="15" data-label="Close">
+      <div class="kicker"><span>LeakLess</span><span class="slot">4:45 – 5:00</span></div>
+      <h1>The signal <em>before the decision.</em></h1>
+      <p class="lede">A measured signal, controls that keep us honest, explicit limits. Then a human decides where to look.</p>
+      <p class="team push">Icham · Nevil · Safoan · Vincent<br>EHL Zurich · Temporal AI Challenge</p>
+      <aside class="inline-notes"><b>SAY</b><span class="say"></span></aside>
+    </section>
+
+  </main>
+</div>
+
+<div class="notes" id="notes" hidden><b id="notes-label">SPEAKER NOTES</b><span id="notes-text"></span></div>
+
+<nav class="chrome" aria-label="Presenter controls">
+  <span class="clock wide" id="clock" title="Elapsed since the first slide change (T resets)">0:00 / 5:00</span>
+  <button id="prev" aria-label="Previous slide">←</button>
+  <span id="count">1 / 6</span>
+  <button id="next" aria-label="Next slide">→</button>
+  <button id="toggle-notes" class="wide" aria-pressed="false">Notes (N)</button>
+  <button id="toggle-overview" aria-pressed="false">Overview (O)</button>
+</nav>
+
+<script>
+  const NOTES = [
+    "Leaks inside buildings are usually found when the damage is already visible: a stain, a ceiling, a floor. By then the repair is expensive. Pipes make sound before that. Our question: can a short acoustic recording help a facilities team decide where to look, and can we prove what a model is actually using? Say clearly: research prototype, experimental data.",
+    "We used a public experimental dataset: 1,000 one-second recordings, leak, no-leak and environmental noise, CC BY 4.0, processed through TimeNet and TimeF. The trap with acoustic data is leakage: clips from the same capture are nearly identical. So we grouped them into 185 dependency clusters and froze a split where no cluster crosses sides. Every model, from simple controls to the TSLM, is scored on the same 41 held-out clusters.",
+    "Switch to the site (tab already open, API running). Click N1 in the building: say it is an illustrative position, not a leak location. Pick Leak-associated, play two seconds, point at waveform and spectrogram. Open the Temporal Signal Map fullscreen: the shape comes from the measured spectrum. Nav → Monitor replay: three real recordings replayed, values measured live, alerts none, TSLM pending. If time allows, drop a WAV in section 06. Back to slides at 3:00.",
+    "The interesting result is not the highest score. Loudness alone, C0, already reaches 0.878 clip AUC. The envelope control, C1, reaches 0.902 clip and 0.927 cluster AUC. With 41 test clusters and only 11 non-leak, intervals are wide and C1 versus C0 is inconclusive. So any model we ship has to beat these controls on held-out clusters, not just look accurate. The TSLM row stays pending until it is evaluated on this split.",
+    "We keep a ledger. Demonstrated: the dataset through TimeNet/TimeF, the leakage-aware split, the controls, and a shallow temporal control that reacts to temporal perturbations. Not demonstrated: field detection, localization, deployment, lead time, causal interpretation, and TSLM superiority. Next step is precise: evaluated TSLM checkpoint, same split, same controls.",
+    "One sentence to close: LeakLess puts the signal before the decision, with the controls and limits visible. Thank the jury, name the team, invite questions."
+  ];
+  const AUC = [
+    ["C0", "Loudness", 0.878, 0.839],
+    ["C1", "Envelope", 0.902, 0.927, "ref"],
+    ["C2", "Static spectrum", 0.71, 0.779],
+    ["C2b", "Shallow temporal", 0.847, 0.915],
+    ["C3", "Mixed static baseline", 0.824, 0.9],
+    ["C4", "TSLM", null, null, "tslm"]
+  ];
+
+  const deck = document.getElementById("deck");
+  const slides = [...deck.querySelectorAll(".slide")];
+  const budgets = slides.map((s) => Number(s.dataset.seconds));
+  const total = budgets.reduce((a, b) => a + b, 0);
+  let index = 0, started = null;
+
+  // Slide 1 strip: a quiet stylised trace, drawn once.
+  (function strip() {
+    let d = "M0 60";
+    for (let x = 0; x <= 1360; x += 4) {
+      const burst = Math.exp(-((x - 930) ** 2) / 26000);
+      const y = 60 + Math.sin(x * 0.37) * (5 + 42 * burst) * Math.cos(x * 0.051);
+      d += " L" + x + " " + y.toFixed(1);
+    }
+    document.getElementById("strip").setAttribute("d", d);
+  })();
+
+  // AUC ladder on one 0.5–1.0 scale.
+  (function ladder() {
+    const pos = (v) => ((v - 0.5) / 0.5) * 100;
+    const ticks = [0.5, 0.6, 0.7, 0.8, 0.9, 1.0];
+    let html = '<span class="head" role="columnheader">Control</span>'
+      + '<div class="axis head track-head" role="columnheader" aria-label="AUC scale 0.5 to 1.0">'
+      + ticks.map((t) => `<span style="left:${pos(t)}%">${t.toFixed(1)}</span>`).join("") + "</div>"
+      + '<span class="head num" role="columnheader">Clip</span><span class="head num" role="columnheader">Cluster</span>';
+    for (const [id, name, clip, cluster, kind] of AUC) {
+      html += `<div class="row ${kind || ""}" role="row">`
+        + `<div class="ctl" role="cell"><b>${id}</b><span>${name}</span></div>`
+        + '<div class="track" aria-hidden="true">'
+        + ticks.map((t) => `<span class="grid" style="left:${pos(t)}%"></span>`).join("")
+        + (clip == null ? "" : `<i class="cluster" style="left:${pos(cluster)}%"></i><i class="clip" style="left:${pos(clip)}%"></i>`)
+        + "</div>"
+        + (clip == null
+          ? '<span class="val pend" role="cell">PENDING</span><span class="val pend" role="cell">PENDING</span>'
+          : `<span class="val" role="cell">${clip.toFixed(3)}</span><span class="val" role="cell">${cluster.toFixed(3)}</span>`)
+        + "</div>";
+    }
+    document.getElementById("ladder").innerHTML = html;
+  })();
+
+  // Ruler per slide: segment widths are the real time budgets.
+  let elapsedBefore = 0;
+  slides.forEach((slide, i) => {
+    slide.querySelector(".say").textContent = NOTES[i];
+    const ruler = document.createElement("div");
+    ruler.className = "ruler";
+    ruler.setAttribute("aria-hidden", "true");
+    budgets.forEach((b, j) => {
+      const seg = document.createElement("div");
+      seg.style.flex = String(b);
+      seg.className = j < i ? "done" : j === i ? "now" : "";
+      ruler.append(seg);
+    });
+    const labels = document.createElement("div");
+    labels.className = "ruler-labels";
+    labels.setAttribute("aria-hidden", "true");
+    labels.innerHTML = `<span>${slide.dataset.label.toUpperCase()} · ${budgets[i]} s</span><span>${fmt(elapsedBefore + budgets[i])} / ${fmt(total)}</span>`;
+    elapsedBefore += budgets[i];
+    slide.append(ruler, labels);
+  });
+
+  function fmt(s) { return Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0"); }
+
+  function fit() {
+    if (document.body.classList.contains("overview")) return;
+    const scale = Math.min(innerWidth / 1600, (innerHeight - 8) / 900);
+    deck.style.transform = `translate(-50%, -50%) scale(${scale})`;
+  }
+
+  function show(i) {
+    index = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach((s, j) => s.classList.toggle("active", j === index));
+    document.getElementById("count").textContent = `${index + 1} / ${slides.length}`;
+    document.getElementById("notes-text").textContent = NOTES[index];
+    document.getElementById("notes-label").textContent = `SPEAKER NOTES · ${slides[index].dataset.label.toUpperCase()} · ${budgets[index]} s`;
+    try { history.replaceState(null, "", "#" + (index + 1)); } catch {}
+  }
+  function go(step) { if (started === null && step) started = Date.now(); show(index + step); }
+
+  function setOverview(on) {
+    document.body.classList.toggle("overview", on);
+    document.getElementById("toggle-overview").setAttribute("aria-pressed", String(on));
+    if (on) { deck.style.transform = "none"; slides.forEach((s) => s.classList.add("active")); }
+    else { show(index); fit(); }
+  }
+  function setNotes(on) {
+    document.getElementById("notes").hidden = !on;
+    document.getElementById("toggle-notes").setAttribute("aria-pressed", String(on));
+  }
+
+  document.getElementById("prev").onclick = () => go(-1);
+  document.getElementById("next").onclick = () => go(1);
+  document.getElementById("toggle-notes").onclick = () => setNotes(document.getElementById("notes").hidden);
+  document.getElementById("toggle-overview").onclick = () => setOverview(!document.body.classList.contains("overview"));
+  addEventListener("keydown", (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const k = e.key.toLowerCase();
+    if (["arrowright", " ", "pagedown"].includes(k)) { e.preventDefault(); if (!document.body.classList.contains("overview")) go(1); }
+    else if (["arrowleft", "pageup"].includes(k)) { e.preventDefault(); if (!document.body.classList.contains("overview")) go(-1); }
+    else if (k === "n") setNotes(document.getElementById("notes").hidden);
+    else if (k === "o") setOverview(!document.body.classList.contains("overview"));
+    else if (k === "t") { started = null; }
+    else if (k === "f" && document.fullscreenEnabled) {
+      document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+    }
+  });
+  deck.addEventListener("click", (e) => {
+    if (document.body.classList.contains("overview")) return;
+    go(e.clientX < innerWidth / 3 ? -1 : 1);
+  });
+
+  setInterval(() => {
+    const clock = document.getElementById("clock");
+    const s = started === null ? 0 : (Date.now() - started) / 1000;
+    clock.textContent = `${fmt(s)} / ${fmt(total)}`;
+    clock.classList.toggle("over", s > total);
+  }, 500);
+
+  addEventListener("resize", fit);
+  const fromHash = Number(location.hash.slice(1));
+  show(Number.isFinite(fromHash) && fromHash > 0 ? fromHash - 1 : 0);
+  if (innerWidth < 720) setOverview(true); else fit();
+</script>

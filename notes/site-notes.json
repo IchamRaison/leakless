@@ -1,4 +1,77 @@
 {
   "version": 1,
-  "notes": []
+  "notes": [
+    {
+      "id": "b3af8512-3168-4b85-93aa-702bce941347",
+      "number": 1,
+      "author": "Safoan",
+      "text": "on veut pouvoir le mettre pleins ecran",
+      "status": "resolved",
+      "createdAt": "2026-09-12T20:23:35.103Z",
+      "anchor": {
+        "selector": "#demo > main > section:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(1) > canvas",
+        "section": "01 / BUILDING CONTEXT",
+        "element": "canvas",
+        "snippet": "",
+        "offsetX": 0.7133334791136431,
+        "offsetY": 0.5830113835009649,
+        "viewportWidth": 2133,
+        "hash": ""
+      }
+    },
+    {
+      "id": "1796e968-1282-4ab7-ae0e-2990358d6cd2",
+      "number": 2,
+      "author": "Safoan",
+      "text": "On aime bien la landing page a pas changée !",
+      "status": "resolved",
+      "createdAt": "2026-09-12T20:24:26.448Z",
+      "anchor": {
+        "selector": "#demo > main > section:nth-of-type(1) > div:nth-of-type(1)",
+        "section": "THE SIGNAL BEFORE THE DECISION",
+        "element": "div.hero-copy",
+        "snippet": "THE SIGNAL BEFORE THE DECISIONWater damage becomes visible late.The signal can change earlier.LeakLess helps facilities teams inspect unusual acoustic signals b",
+        "offsetX": 0.1475684262817638,
+        "offsetY": 0.023640115214235154,
+        "viewportWidth": 2133,
+        "hash": ""
+      }
+    },
+    {
+      "id": "b504bfed-b6c7-4021-bdfa-4014619431d7",
+      "number": 3,
+      "author": "Safoan",
+      "text": "On a 5 minute pour presente on a pas le temps de monter la landing on doit presenter le projet sous for,e de silide et faire une demo rapide qui mobntre le projet en action",
+      "status": "resolved",
+      "createdAt": "2026-09-12T20:26:20.865Z",
+      "anchor": {
+        "selector": "#signal",
+        "section": "02 / SELECT A SIGNAL",
+        "element": "section.signal-section",
+        "snippet": "02 / SELECT A SIGNALSelected measurement point: N1 — illustrative building positionThe point does not locate a leak. Every point offers the same three demo reco",
+        "offsetX": 0.14738536414359366,
+        "offsetY": 0.2009420205891538,
+        "viewportWidth": 2133,
+        "hash": ""
+      }
+    },
+    {
+      "id": "44999906-0d8a-448d-a900-f5bf0a283748",
+      "number": 4,
+      "author": "Safoan",
+      "text": "comment on ajoutée un dashboard pour une demo cool ?",
+      "status": "resolved",
+      "createdAt": "2026-09-12T20:29:45.661Z",
+      "anchor": {
+        "selector": "#signal > details > div",
+        "section": "02 / SELECT A SIGNAL",
+        "element": "div.raw-content",
+        "snippet": "Source: Zenodo 18631450 · CC BY 4.0Development example from train. No continuous monitoring.Clip identity & provenanceDataset clip: c0128b879694eDependency clus",
+        "offsetX": 0.23232308805649035,
+        "offsetY": 0.0019566288429092517,
+        "viewportWidth": 2133,
+        "hash": ""
+      }
+    }
+  ]
 }
