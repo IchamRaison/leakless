@@ -20,3 +20,15 @@ Le vault dédié remplace la copie du dépôt code comme référence des notes p
 ## Prochaines décisions
 
 Utiliser [[Modèle décision]] pour les choix qui engagent le projet.
+
+## 2026-09-12 — Méthode de résolution par le pourquoi
+
+À la demande de Safoan, appliquer le Cercle d'or : formuler d'abord le **pourquoi** (cause, utilisateur et changement recherché), expliciter le **comment** (principes, contraintes et preuve attendue), puis choisir le **quoi** (fonction ou implémentation).
+
+Application à PIPE :
+
+- **Pourquoi** : aider un technicien à relire et documenter un signal acoustique inhabituel afin de décider s'il mérite une investigation, sans promesse de diagnostic terrain.
+- **Comment** : relier le même signal à l'écoute, aux visuels et à l'inférence ; séparer mesures DSP, sorties du modèle et labels ; publier les limites et une preuve reproductible ; ne jamais inventer une performance.
+- **Quoi** : studio audio/spectrogramme, prédiction TSLM et comparaison baseline, dans cet ordre de dépendance.
+
+Cette méthode guide le cadrage, les arbitrages d'interface et le pitch. Elle ne remplace ni l'audit dataset, ni les contrats, ni les tests. Source : transcription fournie par Safoan de la conférence « How great leaders inspire action ».
