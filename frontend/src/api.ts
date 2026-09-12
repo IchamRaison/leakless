@@ -23,7 +23,11 @@ export async function api<T>(
   const body = await response.json().catch(() => null);
   if (!response.ok)
     throw new Error(
-      body?.error?.message ?? `Server error (${response.status}).`,
+      body?.error?.message ??
+        // A gateway error without an API body means the dev proxy could not reach the API.
+        ([502, 503, 504].includes(response.status)
+          ? "API unreachable. Check that the local server is running, then retry."
+          : `Server error (${response.status}).`),
     );
   const result = schema.safeParse(body);
   if (!result.success)
