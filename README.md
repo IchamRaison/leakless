@@ -38,13 +38,15 @@ Full decoded brief: [`docs/HACKATHON_BRIEF.md`](docs/HACKATHON_BRIEF.md)
 |---|---|
 | Subject | ⏳ **not decided** — see [`docs/HACKATHON_OPTIONS.md`](docs/HACKATHON_OPTIONS.md) |
 | Nebius compute voucher | ⏳ procedure documented, **not yet activated** |
-| Dataset | ⏳ identified, **not downloaded** |
+| Dataset | ✅ **audited** — 3 archives downloaded outside the repo, 1000 WAV counted, [`docs/DATASET_AUDIT.md`](docs/DATASET_AUDIT.md) → *viable with reservations* |
 | TimeNet | ✅ cloned and working locally (CLI operational) |
 | Training | ❌ **nothing launched, deliberately** |
-| Code | ❌ none yet — this branch adds documentation and empty scaffolding only |
+| Code | ⏳ `scripts/ingest/build_groups.py` implemented (audit + grouping, no split, no training). Everything else is scaffolding. |
 | Submission deadline / format | ❌ **unknown** — to be confirmed with organisers |
 
-**Nothing has been trained. No dataset archive has been downloaded. No API key exists anywhere in this repository.**
+**Nothing has been trained. No API key exists anywhere in this repository.** The dataset
+archives have been downloaded and extracted **outside the repository** for the audit; no WAV,
+no `.rar` and no derived series is tracked by Git.
 
 ---
 
@@ -58,6 +60,7 @@ Full decoded brief: [`docs/HACKATHON_BRIEF.md`](docs/HACKATHON_BRIEF.md)
 | [`docs/HACKATHON_OPTIONS.md`](docs/HACKATHON_OPTIONS.md) | Three candidate directions, compared — **no decision taken** |
 | [`docs/EVAL_PROTOCOL.md`](docs/EVAL_PROTOCOL.md) | The evaluation rules, including the hard no-random-split rule |
 | [`docs/DATASET_CARD.md`](docs/DATASET_CARD.md) | Real data versus generated data, kept strictly separate |
+| [`docs/DATASET_AUDIT.md`](docs/DATASET_AUDIT.md) | **Zenodo dataset audit** (FR) — verified counts, duplicates, group key, measured leakage risks, decision |
 | [`docs/CLAIM_LEDGER.md`](docs/CLAIM_LEDGER.md) | Permitted claims, forbidden claims, claims to verify |
 
 ---

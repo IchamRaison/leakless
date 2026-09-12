@@ -1,8 +1,9 @@
 # DATASET_CARD — candidate acoustic dataset
 
-> Status: **candidate, not adopted.** Nothing has been downloaded. The subject is not decided.
-> This card exists so that the separation between *measured* and *generated* is fixed **before**
-> any data touches the disk.
+> Status: **candidate, not adopted.** The subject is not decided. The three archives have been
+> downloaded and audited **outside the repository** (2026-09-12) — see
+> [`DATASET_AUDIT.md`](DATASET_AUDIT.md). No WAV, no archive and no derived series is tracked
+> by Git. This card fixes the separation between *measured* and *generated*.
 
 ---
 
@@ -28,15 +29,15 @@ comes from a separate public site.
 
 | Class | Clips | Audit status |
 |---|---|---|
-| leak | **500** | ✅ archive downloaded and listed (by Hicham) |
-| no leak | **386** | ❌ **never opened** |
-| environmental noise | **114** | ❌ **never opened** |
+| leak | **500** | ✅ **verified — 500 WAV counted** |
+| no leak | **386** | ✅ **verified — 386 WAV counted** |
+| environmental noise | **114** | ✅ **verified — 114 WAV counted** |
 
-Clip duration: **1 second**.
+Clip duration: **1 second** — verified: all 1000 files are mono, 8 kHz, 16-bit, exactly 1.000 s.
 
-> ⚠️ **Two of the three archives have never been inspected.** The counts above are what the
-> record *announces*, not what we have verified. The no-leak and noise archives must be
-> audited before any split is fixed.
+> ✅ **All three archives have now been audited** (2026-09-12). The announced counts are exact.
+> Full report, including the leakage measurements that decide the split:
+> [`DATASET_AUDIT.md`](DATASET_AUDIT.md). **Verdict: viable with documented reservations.**
 
 ---
 
@@ -104,6 +105,12 @@ project could mislead.
 > The source note is explicit: *« the filenames do not guarantee a perfect reconstruction of
 > the sessions »*. The split is therefore grouped, and its residual limits are documented.
 > See [`EVAL_PROTOCOL.md`](EVAL_PROTOCOL.md).
+>
+> **These four mechanisms are no longer hypothetical — they are measured.**
+> [`DATASET_AUDIT.md`](DATASET_AUDIT.md) §1.6-1.8 quantifies each one, and adds a fifth that
+> this table missed: **pressure and flow rate are filled in for the leak class only**, which
+> makes the filename metadata a near-perfect label leak (100 % precision, 93.8 % recall,
+> without listening to any audio).
 
 ---
 

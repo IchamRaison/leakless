@@ -20,6 +20,10 @@ Supporting claims, equally permitted:
 | Claim | Basis |
 |---|---|
 | "The dataset consists of physical measurements from an external leak-detection training facility." | stated by the Zenodo record |
+| "The three archives contain exactly 500 / 386 / 114 one-second WAV clips, all mono 8 kHz 16-bit." | counted, 2026-09-12, `DATASET_AUDIT.md` §1.1-1.2 |
+| "7.2 % of the dataset is byte-identical duplication, and 6 duplicate pairs carry contradictory metadata." | measured, `DATASET_AUDIT.md` §1.6 |
+| "Pressure and flow rate are recorded for the leak class only, which makes the filename metadata a near-perfect label leak." | measured, `DATASET_AUDIT.md` §1.5 — 469/500 vs 0/500 |
+| "No duplicate and no near-duplicate crosses a class boundary." | measured, `DATASET_AUDIT.md` §1.6-1.7 |
 | "Our split is grouped by condition, session and device as far as the metadata allows, and we document where it does not." | `EVAL_PROTOCOL.md` §2-3 |
 | "We measure and report the gap between a naive random split and a grouped split." | `EVAL_PROTOCOL.md` §4 |
 | "The textual descriptions are generated from labels and computed measurements, and are not expert annotations." | `DATASET_CARD.md` §4 |
@@ -60,8 +64,8 @@ out loud until it moves up to §1, with the check that moved it.
 
 | Claim | What would settle it | Status |
 |---|---|---|
-| "The no-leak and noise archives contain 386 and 114 usable clips." | open and audit the two archives — **never opened so far** | ⏳ |
-| "The filenames allow a clean group reconstruction." | attempt the grouping and measure what remains ambiguous | ⏳ — the source note already doubts it |
+| ~~"The no-leak and noise archives contain 386 and 114 usable clips."~~ | archives opened and counted, 2026-09-12 — `scripts/ingest/build_groups.py`, [`DATASET_AUDIT.md`](DATASET_AUDIT.md) §1.1 | ✅ **moved to permitted** — 386 and 114 WAV counted exactly |
+| "The filenames allow a clean group reconstruction." | grouping attempted, 2026-09-12 — [`DATASET_AUDIT.md`](DATASET_AUDIT.md) §4 | ⚠️ **partially settled: 97.2 % of clips get an unambiguous group, but the no-leak class yields only 18 groups and the hydrophone/logger dilemma is unresolved.** Say "97.2 %, 322 groups", never "clean". |
 | "Temporal structure carries information beyond aggregated features." | the ablation in `EVAL_PROTOCOL.md` §7 | ⏳ **may come back negative, and that is a valid result** |
 | "The model abstains under unseen noise." | inject held-out environmental noise and observe | ⏳ desired, **not guaranteed, never scripted** |
 | "Our TSLM beats the baseline." | grouped-split comparison | ⏳ |
