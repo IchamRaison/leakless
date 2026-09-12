@@ -23,8 +23,9 @@ Icham
 - [x] Campagne V1 terminée : 600 étapes train complet, trois candidats 2/4/8, époque 4 retenue sur validation uniquement, Qwen gelé inchangé. [[V1 ML - exécution]].
 - [x] Bundle V1 autonome et reload neuf hors ligne vérifiés ; score/texte/entrées concordants. Exporteur renforcé et ses 19 tests CPU passent.
 - [x] T0 produit et contrôlé conforme : 402 IDs val/test, exactement deux colonnes, deux fichiers et provenance vérifiée ; aucune métrique finale côté Icham.
-- [ ] Publication T0 puis exécution/livraison T1–T3 avec le checkpoint figé, sans réentraînement.
-- [x] Réserve de graine T2/T3 résolue par Nevil : SHA-256 officiel depuis `b23601a`, version reprise `6dfdf63`. Contrôle interprocessus et exécution des stress encore à réaliser.
+- [x] T0 publié sur `feat/icham-tslm` à `186c45a`, disponible pour Nevil avant les stress.
+- [x] T1–T3 terminés, conformes chacun sur 402/402 clips et publiés à `7c04c9a`, même checkpoint/score, sans réentraînement. Audit indépendant des quatre exports réussi, GPU libéré ; instance toujours allumée.
+- [x] Réserve de graine T2/T3 résolue par Nevil : SHA-256 officiel depuis `b23601a`, version reprise `6dfdf63`. Contrôle interprocessus réussi dans les tests CPU.
 
 - [x] Cadrage explicite Icham : appareil en écoute continue et alertes automatiques, remplacement du scénario d'import manuel. [[Plan surveillance continue]] rédigé ; aucune nouvelle implémentation.
 - [ ] Valider le plan continu : capteur/flux, destinataire, délai visé, fausses alertes tolérées, responsable matériel et périmètre replay/réel.
@@ -38,11 +39,7 @@ Icham
 - [x] Livraison Nevil `nevil/temporal-evidence` (`08562e3`) retrouvée et lue : contrat d'export, moteur d'évaluation, C0–C3, T0–T3, rapports. Tests/résultats non reproduits ici ; branche non intégrée. [[Journal Icham#Vérification des nouveaux livrables Nevil]].
 - [x] Consigne de livraison Nevil transmise : Icham fournit seulement les prédictions T0 et leur provenance ; Nevil exécute l'évaluation finale. [[Journal Icham#Consigne de livraison T0 et stress — Nevil]].
 - [x] Ajouts Nevil `9135754` relus : score continu, contrôleur de conformité existant, petite validation groupée. Plan révisé sans exécution ; réserves longueur/calibration et reproductibilité T2/T3 documentées. [[Journal Icham#Revue des précisions Nevil — scores et stress]].
-- [ ] Icham : vérifier les log-probabilités sur développement, préannoncer une campagne initiale d'au plus trois configurations et renseigner le nombre réel comparé ; aucun choix fondé sur le test.
-- [ ] Icham : vérifier interprocessus puis exécuter les stress officiels corrigés `6dfdf63` après T0, même checkpoint et preprocessing ; conserver leurs empreintes.
-- [ ] Icham : score de classe vérifié, V1 figée puis export T0 conforme sur les 402 clips val/test v2 ; contrôles de contrat sans scoring final. T1/T2/T3 ensuite si possible, même checkpoint, aucun réentraînement.
-- [ ] Icham/Nevil : convenir du suivi de développement validation seule ; T0 respecte le binaire/v2 gelé avec bruit, pas de nouvelle vue implicite. Diagnostics texte séparés, métriques finales chez Nevil ; aucune intégration complète du harness requise pour exporter.
-- [ ] Prochain bloc Icham proposé : C1 score/export → C2 V1 → C3 gel/reload/T0 ; T1–T3 ensuite si possible. Application/flux et collecte en parallèle, pas prérequis de T0. [[Plan surveillance continue]].
+- [x] Trois candidats préannoncés/comparés, nombre réel renseigné, sélection validation seule ; score/log-probabilités et binaire/v2 gelé avec bruit respectés. Diagnostics textuels séparés, métriques finales chez Nevil. [[V1 ML - exécution]].
 - [ ] G0 Nevil/Icham : revue commune de l'audit et du `split_v2` publiés, avec leurs réserves et alignement du protocole. Ne pas utiliser `split_v1` (invalide).
 - [ ] Après G0, Icham/équipe : figer problème et classes ; arbitrer comparaison baseline + mesures/gabarit et test d'utilité proposés dans [[Challenge du cadrage de Nevil]].
 - [ ] G1 Tous : fixture réelle et contrats gelés.
@@ -70,7 +67,7 @@ Voir [[Entire - installation et vérification]].
 
 ## Blocages identifiés
 
-Aucun blocage restant pour les étapes 1 à 5 de la V0. Qualité, revue d'interfaces G1, intégration application et évaluation finale restent à faire ; elles ne sont pas prouvées par le mini-training. Voir [[V0 ML - exécution]].
+Aucun blocage restant pour V0 ni pour la livraison V1/T0–T3, terminées. Qualité finale, revue d'interfaces G1, intégration application et surveillance continue restent à établir ; elles ne sont pas prouvées par la conformité des exports. Voir [[V1 ML - exécution]].
 
 ## Suivi
 

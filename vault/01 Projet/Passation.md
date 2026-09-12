@@ -8,7 +8,9 @@ CLI 0.10.6 et 12 skills installés ; capture Codex locale constatée. La recherc
 
 ## Dernier échange — 2026-09-12
 
-**V1 figée/rechargée, T0 conforme et prêt à publier :** [[V1 ML - exécution]] donne preuves/commandes/chemins. Campagne `1199789f` : 600 étapes, trois candidats 2/4/8, époque 4 retenue sur validation ; poids temporels modifiés, Qwen gelé inchangé. Bundle `/home/hicham/pipe-v0/artifacts/qwen-v1-1199789f-001/bundle`, modèle `pipe-qwen3.5-4b-v1-1199789f-e4`, checksum `b95569c5…`. Reload neuf réussi, 19 tests CPU passent. Exporteur `5a29d6eb` : T0 conforme, 402 lignes et deux colonnes exactes, fichiers dans `artifacts/tslm_runs/tslm-v1/`, SHA CSV `0c4dfb3f…`. Prochaine action : publier T0 puis stress officiels `6dfdf63`, même checkpoint. Aucun résultat final calculé par Icham, aucune adaptation après lecture des scores test. Les paragraphes suivants conservent le cadrage avant le feu vert.
+**Plan ML entièrement exécuté ; T0–T3 conformes et publiés :** branche `feat/icham-tslm`, T0 à `186c45a`, stress à `7c04c9a5636b2872334da17c54beb7016ffa00a3`. Chacun des quatre dossiers `artifacts/tslm_runs/tslm-v1{,-T1,-T2,-T3}/` contient seulement `metadata.json` et `predictions.csv`, 402 clips val/test et deux colonnes exactes. [[V1 ML - exécution]] donne toutes les preuves. Modèle `pipe-qwen3.5-4b-v1-1199789f-e4`, époque 4 retenue parmi trois candidats sur validation ; Qwen gelé inchangé. Bundle `/home/hicham/pipe-v0/artifacts/qwen-v1-1199789f-001/bundle`, checksum `b95569c5…`, reload neuf et 19 tests CPU réussis. Même scoring et checkpoint pour les stress officiels `6dfdf63`, aucun réentraînement. Audit indépendant des quatre exports réussi ; GPU revenu à 0 Mio, instance laissée allumée. Prochaine action : Nevil évalue ces fichiers ; Icham assure le support d'intégration. Aucun calcul final de métriques ni adaptation après inspection du test, aucune intégration applicative revendiquée.
+
+## Repères antérieurs — historique
 
 **Plan révisé après les précisions Nevil, pas démarré :** [[Plan surveillance continue]] §4 C1–C4 et §5 conserve la priorité score → V1 train/validation → gel/reload → T0 à Nevil. Nouveau contrat et `check_run.py` lus à `913575406b39beec3ae7da77aec322cca926d034`. Proposition : log-probabilités des deux continuations, sommes brutes sans normalisation automatique par longueur ; scores non calibrés ; au plus trois configurations candidates initiales, nombre réel déclaré. Toute adaptation, y compris LoRA, répond uniquement à un diagnostic train/validation. Réutiliser le contrôleur dans un dossier neuf, sans tuning d'après son inspection val/test ; un avertissement binaire n'empêche pas son retour zéro. Nevil conserve toutes les métriques finales. Prochain bloc : C1 à C3 jusqu'à T0 livrable ; aucune implémentation, entraînement ou prédiction nouvelle dans ce tour.
 
@@ -40,9 +42,9 @@ Nevil propose le nom LeakLess et confirme le cadrage software-only acoustique, s
 
 ## État courant
 
-Direction de travail : PIPE, surveillance acoustique continue avec alerte automatique, TimeNet, TSLM réellement entraîné et baseline. [[Plan surveillance continue]] fixe le nouveau parcours proposé. La preuve mécanique V0 est acquise ; V1 évaluée, flux continu, logique d'événement, intégration et validation terrain restent à réaliser.
+Direction de travail : PIPE, surveillance acoustique continue avec alerte automatique, TimeNet, TSLM réellement entraîné et baseline. [[Plan surveillance continue]] distingue cette ambition de la livraison ML réalisée : V1 entraînée, sélectionnée sur validation, figée et T0–T3 publiés. L'évaluation finale par Nevil, le raccordement au flux/simulateur, la logique d'événement et la validation terrain restent séparés et ne sont pas prouvés par ces clips.
 
-Un TSLM adapté fonctionne mécaniquement : [[V0 ML - exécution]], qualité non évaluée. Le rapport baseline de Nevil (`1289095`) reste un résultat séparé non reproduit par Icham ; aucune comparaison finale n'est déduite de la V0. `split_v1` invalide, v2 uniquement. Machine fournie par Icham, aucun nouveau GPU provisionné ; l'instance n'a pas été arrêtée.
+Le TSLM adapté et le score continu sont vérifiés : [[V1 ML - exécution]], sans comparaison finale calculée par Icham. Le rapport baseline de Nevil reste séparé ; aucune supériorité du TSLM n'est déduite des diagnostics de validation. `split_v1` invalide, v2 uniquement. Machine fournie par Icham, aucun nouveau GPU provisionné ; l'instance n'a pas été arrêtée.
 
 ## Lire pour reprendre sans le chat
 
@@ -50,12 +52,12 @@ Un TSLM adapté fonctionne mécaniquement : [[V0 ML - exécution]], qualité non
 
 ## Répartition et prochaines actions proposées
 
-- Icham : [[Agent Icham - ML]] ; score TSLM, V1 et budget de calcul continu, règles d'événement avec Nevil. Journal : [[Journal Icham]].
-- Nevil : [[Agent Nevil - Data]] ; validation seule, protocole bruit, données continues et métriques événementielles. Journal : [[Journal Nevil]].
+- Icham : [[Agent Icham - ML]] ; V1/stress livrés, support d'intégration et mesure du budget de calcul continu ; ne pas optimiser sur les résultats test. Journal : [[Journal Icham]].
+- Nevil : [[Agent Nevil - Data]] ; évaluation finale des exports, interprétation des stress, données continues et métriques événementielles. Journal : [[Journal Nevil]].
 - Safoan : [[Agent Safoan - Application]] ; flux/replay sur V0, santé de surveillance, alertes et preuves, interfaces en concertation. Journal : [[Journal Safoan]].
 - Vincent : [[Agent Vincent - Baseline]] ; modèle simple et export comparable, sans confondre son livrable avec les contrôles logistiques de Nevil. Journal : [[Journal Vincent]].
 
-V0 mécanique terminée ; ce nouveau travail n'a pas démarré. Responsable matériel/collecte et pitch/règles organisateurs à désigner par Icham ; répartition détaillée dans [[Plan surveillance continue]].
+V0 terminée et V1 livrée pour T0–T3. Aucun entraînement/export en cours ni à refaire pour cette livraison. Le chantier continu ne doit pas être confondu avec cette livraison ML. Responsable matériel/collecte et pitch/règles organisateurs à désigner par Icham ; répartition détaillée dans [[Plan surveillance continue]].
 
 ## Preuves déjà disponibles
 

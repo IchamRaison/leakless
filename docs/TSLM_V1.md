@@ -30,7 +30,8 @@ Les quatre dossiers contiennent chacun seulement `metadata.json` et `predictions
 | T2 blocs 250 | [CSV](../artifacts/tslm_runs/tslm-v1-T2/predictions.csv) | [JSON](../artifacts/tslm_runs/tslm-v1-T2/metadata.json) |
 | T3 phase | [CSV](../artifacts/tslm_runs/tslm-v1-T3/predictions.csv) | [JSON](../artifacts/tslm_runs/tslm-v1-T3/metadata.json) |
 
-T0 publié à `186c45a` **avant** lancement des stress. Le bundle/reload, la méthode
+T0 publié à `186c45a` **avant** lancement des stress ; T1–T3 publiés à `7c04c9a`.
+Le bundle/reload, la méthode
 de score, les trois configurations comparées et le code de modèle sont identiques
 dans les quatre runs ; seules les transformations/identités/horodatages et
 prédictions changent. Le SHA du bundle est toujours identique après les stress.

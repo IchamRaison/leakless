@@ -4,6 +4,12 @@ Icham
 
 ## État actuel
 
+V1 et les quatre runs T0–T3 livrés sur `feat/icham-tslm` : T0 `186c45a`, stress `7c04c9a5636b2872334da17c54beb7016ffa00a3`. Chacun 402 prédictions conformes, mêmes poids/scoring, aucune métrique finale calculée ici. Entraînement, reload et exports terminés avec code 0 ; GPU 0 Mio / 0 %, instance encore allumée. Prochaine action : évaluation des fichiers par Nevil, puis support d'intégration avec Safoan, sans nouveau réglage sur test. [[V1 ML - exécution]].
+
+## Jalons de cette exécution — historique du plus récent au plus ancien
+
+T1/T2/T3 terminés après publication T0 ; contrôleur officiel conforme sur chacun, logs copiés dans `docs/evidence/tslm-v1/export-v1-T{1,2,3}.log`, six fichiers publiés à `7c04c9a`. Audit indépendant des quatre runs en lecture seule : chacun exactement deux fichiers/deux colonnes, 402 IDs uniques val/test, probabilités finies bornées ; métadonnées identiques sauf identité/transform/horodatage, neuf empreintes de sources concordantes. Les huit SHA de fichiers sont identiques H100/local. Bundle checksum `b95569c5…` inchangé après stress, aucune calibration/resélection ou métrique finale. Les handles et PID des paragraphes historiques ci-dessous sont terminés : ne pas relancer les jobs.
+
 T0 terminé et conforme : `artifacts/tslm_runs/tslm-v1/{metadata.json,predictions.csv}`, 402 IDs val/test, CSV strict et SHA comparés H100/local. Le contrôleur avertit d'une plage resserrée ; aucune modification des scores ou du modèle n'en découle. Publication de T0 avant les stress, pas de métriques finales. [[V1 ML - exécution]].
 
 V1 terminée : train `1199789f`, 600 étapes, trois candidats réellement comparés, époque 4 sélectionnée sur validation ; Qwen SHA identique, encodeur/projecteur modifiés. Bundle autonome checksum `b95569c5…`, reload frais réussi avec exporteur `5a29d6eb` (19 tests CPU), puis T0 lancé. Chemins/rapport dans [[V1 ML - exécution]]. Aucun calcul de métriques finales, aucune modification du modèle après gel.

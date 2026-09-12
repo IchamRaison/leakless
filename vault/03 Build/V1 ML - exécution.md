@@ -4,7 +4,7 @@ Icham
 
 ## État — 2026-09-12
 
-**V1 figée/rechargée et T0 conforme ; publication T0 puis stress.** Modèle retenu `pipe-qwen3.5-4b-v1-1199789f-e4`, trois candidats réellement comparés, sélection sur validation seulement. Entraînement `1199789f471acf79f7e82604e2a15acd45e0b2f7`, exporteur renforcé `5a29d6eb9ceca39fdce829eb22dbbfd67b25589b`, branche `feat/icham-tslm`. Les 19 tests CPU du code d'export passent ; modèle/preprocessing/scoring/stress identiques entre ces révisions. V0 conservée intacte, [[V0 ML - exécution]].
+**Étapes 1–5 réalisées : V1 figée/rechargée, T0–T3 conformes et publiés.** Modèle retenu `pipe-qwen3.5-4b-v1-1199789f-e4`, trois candidats réellement comparés, sélection sur validation seulement. Entraînement `1199789f471acf79f7e82604e2a15acd45e0b2f7`, exporteur renforcé `5a29d6eb9ceca39fdce829eb22dbbfd67b25589b`, branche `feat/icham-tslm`. Les 19 tests CPU du code d'export passent ; modèle/preprocessing/scoring/stress identiques entre ces révisions. V0 conservée intacte, [[V0 ML - exécution]]. Guide code `docs/TSLM_V1.md`, liens vers les huit fichiers de livraison. Aucune métrique finale calculée par Icham.
 
 SSH revérifié : H100 80 Go disponible, 0 Mio utilisés au contrôle initial. Données originales, TimeF/cache et bundle V0 présents sous `/home/hicham/pipe-v0`. Environnement reconstruit `.venv-repro` : PyTorch 2.8.0+cu128, NumPy 2.5.2, SciPy 1.18.1, scikit-learn 1.9.1, CUDA disponible. Pas de nouvelle machine ni dépendance à provisionner.
 
@@ -44,13 +44,11 @@ Bundle autonome `/home/hicham/pipe-v0/artifacts/qwen-v1-1199789f-001/bundle`. SH
 
 Après fin du processus train : `check_v1_reload.py` lancé dans un processus neuf hors ligne avec le code d'export `5a29d6eb`. Intégrité du bundle vérifiée, même scoring, score attendu à tolérance absolue `1e-6`, génération identique, voies WAV/brut/séries concordantes, mauvais WAV refusé. Rapport `/home/hicham/pipe-v0/runs/reload-v1-5a29d6eb.json`, copie `docs/evidence/tslm-v1/reload.json`. Vérification sur l'exemple de développement figé, pas une preuve de qualité sur tout le dataset.
 
-## Scoring et livraison attendus
+## Scoring et contrat livrés
 
 Continuation `leak;` ou `no_leak;`, log-probabilités conditionnelles sommées puis softmax à deux candidats. Tokenisation exacte vérifiée sur le modèle ; aucune moyenne par longueur, EOS ou explication dans le score, aucun seuil ou calibration. Diagnostics mécaniques initiaux seulement sur train. La fonction `predict()` Safoan reste compatible ; une voie score seul traite WAV ou signal brut flottant, sans génération longue ni requantification des stress.
 
-Bundle final autonome avec modèle, paramètres temporels, configuration, scoring, provenance, empreintes et exemple validation ; reload dans un processus neuf obligatoire avant test. Export T0 : seulement `metadata.json` + `predictions.csv`, exactement `clip_id,probability_leak`, 402 IDs val/test. Nevil reste seul propriétaire de l'évaluation finale.
-
-## Stress officiels désormais reproductibles
+Bundle final autonome avec modèle, paramètres temporels, configuration, scoring, provenance, empreintes et exemple validation ; reload dans un processus neuf réalisé avant test. Chaque export T0–T3 : seulement `metadata.json` + `predictions.csv`, exactement `clip_id,probability_leak`, 402 IDs val/test. Nevil reste seul propriétaire de l'évaluation finale.
 
 ## Étape 4 vérifiée — T0 conforme
 
@@ -58,12 +56,26 @@ Run réel `/home/hicham/pipe-v0/exports/tslm-v1` ; copie locale dans le dépôt 
 
 SHA-256 local/distant identiques : CSV `0c4dfb3f06c379fe48ce4f7456d38c67d165c80d5e083fbb3f350e0b2732d7b8`, métadonnées `0d8ed4919540987235a3fe98eb2d1cdd30fbe3482f9b2786eb50603f03fb795f`. Le checkpoint, la méthode, le split et le mapping des WAV sont identifiés par empreintes. Les WAV test sont lus uniquement pour inférence après gel/reload ; aucune sélection à partir du test.
 
-## Stress officiels désormais reproductibles
+**Publication vérifiée :** commit `186c45a3a8f3dd28777a9c1c333836044bc1af0b` poussé sur `feat/icham-tslm`, hash distant confirmé par `git ls-remote`. T0 disponible pour Nevil avant lancement de T1–T3 ; pas de message externe envoyé à sa place.
+
+## Étape 5 vérifiée — stress officiels reproductibles et publiés
 
 Référence récupérée : `6dfdf63580bc15ce6a1cf0817b9da3569553aca1` sur `nevil/temporal-evidence`. Nevil a corrigé la graine dans `b23601ab28c5b3949b2b17c46478daa46c847c0f` : SHA-256 stable du triplet graine/nom/clip. Source `scripts/temporal/stress.py` SHA-256 `7c37e001d270655d2e54ba2087e8b8e476da8cc42948f92bd83c669773ac6350`. La réserve antérieure sur le `hash()` Python est donc levée pour cette révision, pas pour les variantes anciennes.
 
-T1/T2/T3 après T0 : transformations officielles au brut, preprocessing et checkpoint identiques, aucun réentraînement. T2 = 250 échantillons ; aucun reste hors permutation, sans garantie que tous les blocs changent de place. Contrôler la graine publiée et des processus distincts avant génération ; noter version NumPy/empreintes. Aucun stress réel exécuté à ce jalon.
+T1/T2/T3 exécutés après publication T0 : transformations officielles au brut, preprocessing et checkpoint identiques, aucun réentraînement. T2 = 250 échantillons ; aucun reste hors permutation, sans garantie que tous les blocs changent de place. Dérivation de graine et sorties interprocessus T2/T3 vérifiées avant génération, NumPy 2.5.2 et empreintes déclarées.
+
+Trois exports terminés avec code 0 depuis `code-v1-export-5a29d6eb`, même bundle/reload, dossiers `/home/hicham/pipe-v0/exports/tslm-v1-T1/`, `tslm-v1-T2/`, `tslm-v1-T3/`. Chacun passe `check_run.py --run … --inspect`, 402/402 clips (208 validation + 194 test). Logs copiés dans `docs/evidence/tslm-v1/export-v1-T1.log`, `export-v1-T2.log`, `export-v1-T3.log` ; copies des deux fichiers par run dans `artifacts/tslm_runs/`.
+
+**Publication vérifiée :** `7c04c9a5636b2872334da17c54beb7016ffa00a3` poussé sur `feat/icham-tslm`, hash distant confirmé. SHA-256 des CSV, identiques local/H100 :
+
+| Run | SHA-256 de predictions.csv |
+| --- | --- |
+| T1 | `d510328b660e4247372f2b0bb32c08bcde0f675d02d63f90576f3e563f5aae16` |
+| T2 | `9ec9af9256e05a4f61a8a9dd8c184ce890565ca88688dd63fea0db1524d5e5df` |
+| T3 | `65676758ee5109dcceb5e8828bbde1cd05cd72d72461c99d1082b17fc74c3fd5` |
+
+Audit indépendant en lecture seule des quatre runs : exactement deux fichiers/deux colonnes, 402 IDs uniques attendus, probabilités finies dans [0,1] ; métadonnées identiques sauf run/transform/horodatage, neuf SHA de code concordants. SHA du bundle toujours `b95569c5…` après stress. Aucune comparaison des effets des stress, métrique finale, calibration ou retouche après inspection. GPU à 0 Mio / 0 % après terminaison de tous les processus ; instance laissée allumée, pas de service public déployé.
 
 ## Prochaine action concrète
 
-Publier les deux fichiers T0 sur `feat/icham-tslm`, puis exécuter T1–T3 depuis `code-v1-export-5a29d6eb` avec le même bundle/reload. Dossiers neufs et run_id distincts, aucun réentraînement ni réglage fondé sur les scores test. Nevil possède toutes les métriques finales.
+Nevil peut récupérer les quatre dossiers publiés pour son pipeline final ; aucun message externe envoyé à sa place. Ne pas refaire cette campagne ni ces exports : les preuves sont livrées. Icham/Safoan peuvent maintenant convenir du raccordement de `Predictor` et du budget de calcul au flux/simulateur ; application et surveillance terrain non validées par cette livraison. Aucun réentraînement ni réglage fondé sur les scores test.
