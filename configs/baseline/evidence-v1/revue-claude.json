@@ -1,0 +1,17 @@
+{
+  "bus_message": 336,
+  "reviewed_commit": "cf48fdaaa41b1ce287613f14452785e494cd1e65",
+  "reviewer": "Claude Code",
+  "reported_tests_passed": 103,
+  "reported_duration_seconds": 11.13,
+  "findings": [],
+  "scope": [
+    "split_v2 original et groupes",
+    "features sans métadonnées",
+    "padding exclu",
+    "fit train uniquement",
+    "test inférence après gel",
+    "provenance et reload"
+  ],
+  "does_not_validate_final_benchmark": true
+}

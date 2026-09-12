@@ -1,0 +1,61 @@
+{
+  "execution_mode": "live",
+  "benchmark_eligible": false,
+  "scope": "validation_only",
+  "final_test_evaluated": false,
+  "model_sha256": "8d0325605620d761944b6999cb1837b2cfbc2746288f02f034fe91e4e8c7929e",
+  "baseline": {
+    "label_order": [
+      "no_leak",
+      "leak"
+    ],
+    "confusion_matrix": [
+      [
+        70,
+        30
+      ],
+      [
+        17,
+        91
+      ]
+    ],
+    "n_samples": 208,
+    "support": {
+      "no_leak": 100,
+      "leak": 108
+    },
+    "macro_f1": 0.7717114634658945,
+    "leak_precision": 0.7520661157024794,
+    "leak_recall": 0.8425925925925926,
+    "false_positive_rate": 0.3,
+    "warnings": []
+  },
+  "majority_sanity_check": {
+    "label_order": [
+      "no_leak",
+      "leak"
+    ],
+    "confusion_matrix": [
+      [
+        100,
+        0
+      ],
+      [
+        108,
+        0
+      ]
+    ],
+    "n_samples": 208,
+    "support": {
+      "no_leak": 100,
+      "leak": 108
+    },
+    "macro_f1": 0.3246753246753247,
+    "leak_precision": 0.0,
+    "leak_recall": 0.0,
+    "false_positive_rate": 0.0,
+    "warnings": [
+      "Aucune fuite prédite ; précision fixée à zéro par convention."
+    ]
+  }
+}

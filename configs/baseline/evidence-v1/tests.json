@@ -1,0 +1,23 @@
+{
+  "baseline": {
+    "passed": 103,
+    "failed": 0,
+    "command": "PYTHONPATH=src:scripts/timenet:. python -m pytest tests/baseline -q"
+  },
+  "nevil_harness": {
+    "passed": 28,
+    "failed": 0,
+    "skipped": 1,
+    "skip_reason": "Reproduction du score test C0 non demandée",
+    "command": "python tests/run_tests.py --data-root DATA/extracted"
+  },
+  "split_invariants": {
+    "all_passed": true,
+    "wav_count": 1000,
+    "exact_duplicates_cross_fold": 0,
+    "quasi_duplicates_cross_fold": 0,
+    "acquisition_sessions_cross_fold": 0,
+    "leak_conditions_cross_fold": 0,
+    "non_leak_conditions_cross_fold": 0
+  }
+}

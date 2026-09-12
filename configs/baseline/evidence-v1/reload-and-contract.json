@@ -1,0 +1,80 @@
+{
+  "fresh_process": true,
+  "training_pid": 44310,
+  "reload_pid": 44396,
+  "validation_predictions_identical": 208,
+  "wav_timef_validation_scores_exact": 208,
+  "export_count": 402,
+  "validation_count": 208,
+  "test_inference_count": 194,
+  "test_scored": false,
+  "model_sha256": "8d0325605620d761944b6999cb1837b2cfbc2746288f02f034fe91e4e8c7929e",
+  "contract_checks": [
+    {
+      "name": "fichiers du run présents",
+      "passed": true,
+      "coverage": "2/2 fichiers",
+      "detail": ""
+    },
+    {
+      "name": "champs de metadata.json",
+      "passed": true,
+      "coverage": "9/9 présents",
+      "detail": ""
+    },
+    {
+      "name": "identité du split déclaré",
+      "passed": true,
+      "coverage": "1/1 champ",
+      "detail": ""
+    },
+    {
+      "name": "SHA256 du split déclaré",
+      "passed": true,
+      "coverage": "1/1 champ",
+      "detail": ""
+    },
+    {
+      "name": "déclaration d'absence de réglage sur le test",
+      "passed": true,
+      "coverage": "1/1 champ",
+      "detail": ""
+    },
+    {
+      "name": "aucune colonne interdite dans predictions.csv",
+      "passed": true,
+      "coverage": "2 colonnes inspectées",
+      "detail": ""
+    },
+    {
+      "name": "colonnes requises dans predictions.csv",
+      "passed": true,
+      "coverage": "2/2 colonnes requises",
+      "detail": ""
+    },
+    {
+      "name": "aucun clip_id en double",
+      "passed": true,
+      "coverage": "402 lignes",
+      "detail": ""
+    },
+    {
+      "name": "aucun clip_id inconnu",
+      "passed": true,
+      "coverage": "402 lignes",
+      "detail": ""
+    },
+    {
+      "name": "probabilités dans [0, 1]",
+      "passed": true,
+      "coverage": "402 lignes",
+      "detail": ""
+    },
+    {
+      "name": "couverture des folds ('val', 'test')",
+      "passed": true,
+      "coverage": "402/402 clips prédits",
+      "detail": ""
+    }
+  ]
+}
