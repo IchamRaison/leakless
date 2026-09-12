@@ -2,6 +2,12 @@
 
 Icham
 
+## 2026-09-12 — Cas d'usage corrigé par Icham : écoute continue
+
+Décision produit explicite : un appareil écoute les tuyaux en permanence et signale une fuite ; un humain reçoit/examine l'alerte, il ne lance pas l'analyse par upload. [[Plan surveillance continue]] remplace le scénario de relecture manuelle. Les choix un canal, serveur, replay initial, score régulier/texte sur événement et logique de persistance sont des propositions techniques à valider, pas des décisions utilisateur déjà prises.
+
+Conséquences : conserver la V0 comme brique par fenêtre ; ajouter ingestion, santé du flux, suivi d'événement et alertes ; acquérir du continu annoté pour prouver les métriques opérationnelles. TimeNet, entraînement TSLM et baseline restent requis. Aucune autorisation nouvelle de matériel, dépense, collecte privée, notification externe ou commande physique ; aucune implémentation nouvelle dans ce tour.
+
 ## 2026-09-12 — Organisation initiale
 
 - Dépôt privé `IchamRaison/ehl-hackathon-zurich`.

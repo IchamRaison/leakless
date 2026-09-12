@@ -4,6 +4,12 @@ Icham
 
 Statut : chaîne ML V0 implémentée et testée avec TimeNet/OpenTSLM-SP/Qwen 3.5-4B ; application/baseline finale restent des chantiers séparés. [[V0 ML - exécution]] décrit ce qui est réellement vérifié ; le reste de cette note reste l'architecture cible.
 
+## Nouvelle cible proposée — surveillance continue
+
+Le scénario utilisateur est désormais appareil → flux horodaté → fenêtres causales → score TSLM → suivi d'événement → alerte et examen humain. [[Plan surveillance continue]] détaille l'extension ; aucune de ces nouvelles couches n'est implémentée par le cadrage.
+
+Réutiliser TimeNet pour préparation/traçabilité et le preprocessing V0 pour les fenêtres. Séparer score régulier et description sur événement ; mesurer la capacité à suivre le flux, sans supposer que la génération V0 tient le temps réel. Distinguer santé du flux, prédiction par fenêtre et état d'alerte ; les données manquantes ne valent pas « pas de fuite ». Première cible proposée : un canal sur serveur existant, source rejouée déclarée ou vrai flux compatible. L'embarqué reste à dimensionner. L'ancienne API d'import ci-dessous reste un outil de diagnostic.
+
 ## Chaîne de données
 
 WAV source + provenance → manifeste audité et split groupé → TimeNet/TimeF → transformation déterministe partagée → deux branches ML.

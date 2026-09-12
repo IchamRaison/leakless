@@ -4,6 +4,12 @@ Icham
 
 Propriétaire : Nevil ; baseline fournie par Vincent ; TSLM par Icham. Statut : protocole à implémenter avant optimisation.
 
+## Extension proposée — surveillance continue
+
+Icham confirme le cas d'usage automatique ; [[Plan surveillance continue]] distingue désormais classification de fenêtres, tests logiciels de replay et performance sur événements réels. Les métriques ci-dessous restent utiles pour les clips. Elles ne donnent pas de délai de détection ni de fausses alertes/jour.
+
+Sur acquisitions continues annotées et réservées : définir événements et appariement avant scoring, régler seuils/persistance sur développement seulement, puis rapporter rappel par événement, faux événements par appareil-heure surveillée, délai depuis apparition annotée, doublons, disponibilité et durée non surveillée. Séparer acquisitions/installations avant fenêtrage ; mêmes données et protocole de réglage pour les comparateurs. Un collage de clips ou les stress T1–T3 ne remplacent pas ces acquisitions. Ces extensions restent à convenir/implémenter avec Nevil ; ses résultats test de contrôles sont déjà publiés et ne doivent pas orienter les réglages du TSLM.
+
 ## Question testée
 
 Dans le domaine expérimental accessible, le modèle distingue-t-il les clips fuite/non-fuite sur des groupes réservés, et reste-t-il fiable sous perturbation ? La réponse n'établit ni performance client, ni localisation, ni cause physique de la fuite.

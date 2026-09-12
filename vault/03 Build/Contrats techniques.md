@@ -2,7 +2,9 @@
 
 Icham
 
-Version de plan : v0.1. Aucun endpoint ou script PIPE n'existe encore. Ces contrats sont à implémenter puis figer à G1 ; les changements ultérieurs nécessitent note de migration et accord des consommateurs.
+Version de plan historique : v0.1. Une implémentation `Prediction` Safoan et la fonction V0 Icham existent désormais ; preuves dans [[V0 ML - exécution]]. Le reste doit être confronté au code et figé à G1. Les changements nécessitent une migration et l'accord des consommateurs.
+
+Extension **proposée, non implémentée** pour [[Plan surveillance continue]] : métadonnées de flux/fenêtre (appareil, session, séquence, horaires source/réception, qualité et fraîcheur), état de surveillance et événement d'alerte séparés de `Prediction`. Événement : identifiant stable, ouverture/dernière preuve/fin éventuelle, état, versions et extraits justificatifs. Safoan/Icham/Nevil doivent convenir du schéma ; ne pas convertir silencieusement un `sample_id` V0 en identité de session ni une absence de données en classe négative. Conserver le CSV d'évaluation Nevil distinct de ce contrat applicatif.
 
 ## 1. Source et manifeste, propriétaire Nevil
 

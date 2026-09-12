@@ -4,9 +4,19 @@ Icham
 
 ## État actuel
 
+2026-09-12 : Icham corrige le scénario produit vers un appareil écoutant en permanence avec alertes automatiques. [[Plan surveillance continue]] rédigé, ancien parcours manuel marqué historique ; V0 conservée comme brique par fenêtre. Architecture continue, critères métier et collecte réelle proposés, non implémentés. Prochaine action : valider flux/capteur et critères, puis replay/V1 en parallèle ; pas de training lancé par cette demande de plan.
+
 2026-09-12 : étapes 1 à 5 V0 réalisées avec Qwen 3.5-4B. TimeNet/v2 vérifiés sur les 1 000 WAV ; 40 étapes sur 8 groupes train, gradients/poids prouvés ; bundle autonome rechargé hors ligne et environnement reconstruit. Fonction Prediction et preuves dans `docs/TSLM_V0.md`. Qualité/application non validées. Passation détaillée : [[V0 ML - exécution]].
 
 Nouvelle dépendance découverte : Nevil a déjà publié un moteur d'évaluation sur `nevil/temporal-evidence`. Prochaine étape proposée : le réutiliser et convenir du raccordement des scores, sans lancer automatiquement une V1 ni un scoring test.
+
+## Replanification — surveillance automatique continue
+
+- Demande explicite : « un appareil qui écoute constamment les tuyaux […] et qui dit quand y'a une fuite […] refais le nouveau plan complet ». Le consommateur humain devient destinataire de l'alerte ; le cap n'est plus une seconde lecture déclenchée manuellement.
+- Source vault récupérée par `git pull --ff-only`, déjà à jour à `8a52d24` avant édition. Instructions/notes de projet et contrats relus. Changements documentaires : plan dédié et liens de priorité dans accueil, passation, tableau, ancien plan, architecture, contrats, protocole, brief, décision et démo. Aucun journal d'un autre auteur réécrit.
+- Distinctions conservées : V0 réelle vs extensions proposées ; source live vs replay/assemblage ; score par clip vs événement ; pas d'alerte vs surveillance indisponible ; score non calibré vs confiance ; description mesurée vs confirmation physique. TimeNet et adaptation TSLM restent dans le parcours, pas de wrapper baseline→LLM.
+- Référence primaire consultée : [DCASE 2022, évaluation](https://dcase.community/challenge2022/task-sound-event-detection-in-domestic-environments#evaluation), sur classe/localisation temporelle et scénarios de réactivité/faux positifs. Aucun benchmark DCASE importé ou résultat attribué à PIPE.
+- Aucun nouveau téléchargement de données/poids, test, entraînement, merge de branche produit, accès H100, connexion matériel ou envoi d'alerte externe. Plan technique proposé à Icham ; son cadrage produit est la seule décision nouvelle confirmée.
 
 ## Vérification des nouveaux livrables Nevil
 
