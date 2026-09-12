@@ -4,6 +4,64 @@ Project workspace for the EHL hackathon in Zurich.
 
 Event information: https://tum-ai.notion.site/ehl-hackathon-zurich
 
+---
+
+## ⚠️ Scope and honesty statement — read first
+
+**This is a software-only hackathon prototype.**
+
+- **No LeakLess hardware is used, connected, or tested today.** No accelerometer, no piezo, no acoustic sensor, no field installation.
+- **No claim is made about real leak detection under customer conditions.** Nothing in this repository demonstrates that a deployed product detects leaks in a real building.
+- The dataset under consideration consists of **physical measurements taken on an external training facility**, not measurements taken at customer sites.
+- **Textual descriptions produced by an LLM are not expert annotations** and are labelled as such wherever they appear.
+
+**Objective of the work:** a **reproducible pipeline** —
+`temporal signal → text annotation → baseline → evaluation → demo`
+with **strict data-leakage controls** and an explicit record of what is measured versus what is generated.
+
+See [`docs/CLAIM_LEDGER.md`](docs/CLAIM_LEDGER.md) for the exact list of permitted and forbidden claims.
+
+---
+
+## Challenge
+
+**TEMPORAL AI CHALLENGE — "Give AI a Sense of Time"**, by Agentic Systems Lab × Aionic Labs × Nebius.
+Use **TimeNet** to prepare open-source time-series data, then train a **TSLM** (Time-Series Language Model) connecting temporal signals with language for a useful task.
+
+Full decoded brief: [`docs/HACKATHON_BRIEF.md`](docs/HACKATHON_BRIEF.md)
+
+---
+
+## Current state — 2026-09-12
+
+| Item | State |
+|---|---|
+| Subject | ⏳ **not decided** — see [`docs/HACKATHON_OPTIONS.md`](docs/HACKATHON_OPTIONS.md) |
+| Nebius compute voucher | ⏳ procedure documented, **not yet activated** |
+| Dataset | ⏳ identified, **not downloaded** |
+| TimeNet | ✅ cloned and working locally (CLI operational) |
+| Training | ❌ **nothing launched, deliberately** |
+| Code | ❌ none yet — this branch adds documentation and empty scaffolding only |
+| Submission deadline / format | ❌ **unknown** — to be confirmed with organisers |
+
+**Nothing has been trained. No dataset archive has been downloaded. No API key exists anywhere in this repository.**
+
+---
+
+## Documentation
+
+| File | Contents |
+|---|---|
+| [`docs/HACKATHON_BRIEF.md`](docs/HACKATHON_BRIEF.md) | The challenge, decoded from the official PDF and Discord brief — including what is still unknown |
+| [`docs/NEBIUS_SETUP.md`](docs/NEBIUS_SETUP.md) | Step-by-step GPU setup, including how to avoid the initial $25 charge |
+| [`docs/REPO_INVENTORY.md`](docs/REPO_INVENTORY.md) | What both team repositories actually contain |
+| [`docs/HACKATHON_OPTIONS.md`](docs/HACKATHON_OPTIONS.md) | Three candidate directions, compared — **no decision taken** |
+| [`docs/EVAL_PROTOCOL.md`](docs/EVAL_PROTOCOL.md) | The evaluation rules, including the hard no-random-split rule |
+| [`docs/DATASET_CARD.md`](docs/DATASET_CARD.md) | Real data versus generated data, kept strictly separate |
+| [`docs/CLAIM_LEDGER.md`](docs/CLAIM_LEDGER.md) | Permitted claims, forbidden claims, claims to verify |
+
+---
+
 ## Setup
 
 Install the [Entire CLI](https://docs.entire.io/overview), then run `entire enable` after cloning to install local Git and agent hooks. Hooks are not transferred by Git.
@@ -18,4 +76,12 @@ Open `vault/` as a vault in Obsidian and start with `Accueil.md`. It contains th
 
 Notes and shared settings are tracked in Git. Device-specific workspaces, local plugins, trash, and secrets are excluded. Git is the sharing mechanism; automatic Obsidian Sync is not configured. Pull before editing and commit/push to share changes.
 
-Project scope and implementation are to be defined.
+> ⚠️ **The `vault/` directory in this repository is a mirror.** The reference vault is
+> `https://github.com/IchamRaison/ehl-hackathon-zurich-vault` and there is **no automatic
+> synchronisation** between the two. Write notes in the reference vault, not here.
+
+## Secrets
+
+No API key, token, voucher or promo code belongs in this repository — not in files, not in
+notebooks, not in commit messages, not in shell history. `.gitignore` blocks the usual
+suspects, but the rule is the discipline, not the file.

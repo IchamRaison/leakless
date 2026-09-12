@@ -18,3 +18,50 @@ vault/.obsidian/workspace*.json
 vault/.obsidian/cache/
 vault/.obsidian/plugins/
 vault/.trash/
+
+# ---- Ajouts branche nevil/setup ----
+
+# Secrets et identifiants (jamais commités)
+*.token
+*_secret*
+*credentials*
+.envrc
+secrets/
+.nebius/
+.openai/
+
+# Datasets bruts — JAMAIS dans le repo (Zenodo, archives, audio)
+data/
+datasets/
+*.rar
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.wav
+*.flac
+*.mp3
+*.parquet
+
+# Checkpoints, adapters, poids de modeles — trop lourds pour git
+checkpoints/
+runs/
+outputs/
+wandb/
+mlruns/
+*.ckpt
+*.pt
+*.pth
+*.safetensors
+*.bin
+*.gguf
+*.onnx
+adapters/
+lora/
+
+# Caches
+.cache/
+.ipynb_checkpoints/
+.pytest_cache/
+.ruff_cache/
+*.log
