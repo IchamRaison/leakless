@@ -20,8 +20,11 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
+import os
 import json
 import shutil
+import subprocess
 import sys
 import tempfile
 import traceback
@@ -484,6 +487,141 @@ def c2b_is_in_the_ladder():
     assert "C2b" in features.LADDER
     assert features.LADDER["C2b"]["audio"] == "normalised"
     assert len(features.LADDER["C2b"]["names"]) == 6
+
+
+
+# --------------------------------------------------------------------------- #
+# RNG des stress : reproductibilité INTER-PROCESSUS
+# --------------------------------------------------------------------------- #
+# Ces tests lancent de VRAIS sous-processus. Une assertion qui compare la
+# fonction à elle-même dans le même interpréteur passerait alors que le bug
+# existe : c'est exactement ce qui s'est produit avec l'ancien
+# `stress_transforms_are_deterministic`, qui ne testait qu'un seul processus.
+
+_SUBPROC_PRELUDE = (
+    "import sys, hashlib, numpy as np; "
+    f"sys.path.insert(0, {str(ROOT / 'scripts' / 'temporal')!r}); "
+    "import stress; "
+)
+
+
+def _run_in_subprocess(snippet: str, hashseed: str | None = None) -> str:
+    """Exécute du code dans un interpréteur neuf et renvoie sa sortie."""
+    env = dict(os.environ)
+    if hashseed is not None:
+        env["PYTHONHASHSEED"] = hashseed
+    else:
+        env.pop("PYTHONHASHSEED", None)
+    r = subprocess.run([sys.executable, "-c", _SUBPROC_PRELUDE + snippet],
+                       capture_output=True, text=True, env=env, check=True)
+    return r.stdout.strip()
+
+
+@test
+def seed_is_identical_within_one_process():
+    a = stress.derive_seed("T2", "c003cd25f5a5f")
+    b = stress.derive_seed("T2", "c003cd25f5a5f")
+    assert a == b
+
+
+@test
+def seed_is_identical_across_two_independent_processes():
+    """Le test que l'ancienne suite n'avait pas, et qui aurait attrapé le bug."""
+    snippet = "print(stress.derive_seed('T2','c003cd25f5a5f'))"
+    a = _run_in_subprocess(snippet)
+    b = _run_in_subprocess(snippet)
+    assert a == b, f"processus 1 -> {a}, processus 2 -> {b}"
+    assert a == str(stress.derive_seed("T2", "c003cd25f5a5f"))
+
+
+@test
+def seed_is_independent_of_pythonhashseed():
+    snippet = "print(stress.derive_seed('T2','c003cd25f5a5f'))"
+    seeds = {h: _run_in_subprocess(snippet, hashseed=h)
+             for h in ("0", "1", "12345", "4294967295", "random")}
+    assert len(set(seeds.values())) == 1, seeds
+
+
+@test
+def seed_changes_with_clip_id():
+    a = stress.derive_seed("T2", "c003cd25f5a5f")
+    b = stress.derive_seed("T2", "c00c343da6afa")
+    assert a != b
+
+
+@test
+def seed_changes_with_transform_name():
+    seeds = {n: stress.derive_seed(n, "c003cd25f5a5f") for n in ("T0", "T1", "T2", "T3")}
+    assert len(set(seeds.values())) == 4, seeds
+
+
+@test
+def seed_separator_prevents_concatenation_ambiguity():
+    """(« ab », « c ») et (« a », « bc ») ne doivent pas donner la même graine."""
+    assert stress.derive_seed("ab", "c") != stress.derive_seed("a", "bc")
+
+
+@test
+def seed_golden_value_is_frozen():
+    """Valeur figée. Si le schéma de dérivation change, ce test doit échouer.
+
+    Il ne recalcule pas la graine avec la même fonction des deux côtés : la
+    valeur attendue est un littéral, et le digest est recalculé à la main
+    depuis la définition documentée.
+    """
+    assert stress.derive_seed("T2", "c003cd25f5a5f") == 10036266156883065158
+    # Re-dérivation indépendante, sans appeler derive_seed.
+    payload = f"20260912\x1fT2\x1fc003cd25f5a5f".encode("utf-8")
+    expected = int.from_bytes(hashlib.sha256(payload).digest()[:8], "big")
+    assert expected == 10036266156883065158, expected
+    assert stress.SEED_DIGEST_BYTES == 8 and stress.SEED_SEPARATOR == "\x1f"
+
+
+@test
+def no_call_to_python_hash_remains_in_stress():
+    """Aucun APPEL à hash() ne doit subsister. Analyse de l'AST, pas du texte :
+    la docstring cite `hash()` pour expliquer pourquoi on l'a retiré, et un
+    simple grep confondrait la mention avec l'appel."""
+    import ast
+    tree = ast.parse((ROOT / "scripts" / "temporal" / "stress.py").read_text())
+    offenders = [n.lineno for n in ast.walk(tree)
+                 if isinstance(n, ast.Call) and isinstance(n.func, ast.Name)
+                 and n.func.id == "hash"]
+    assert not offenders, f"appel à hash() aux lignes {offenders}"
+
+
+@test
+def t2_is_bit_identical_across_two_processes():
+    snippet = ("x = np.sin(np.arange(8000)/50.0); "
+               "y = stress.t2_block_permutation(x, stress.clip_rng('T2','c003cd25f5a5f')); "
+               "print(hashlib.sha256(np.ascontiguousarray(y).tobytes()).hexdigest())")
+    a, b = _run_in_subprocess(snippet), _run_in_subprocess(snippet, hashseed="777")
+    assert a == b, f"T2 diverge entre processus : {a} vs {b}"
+
+
+@test
+def t3_is_bit_identical_across_two_processes():
+    snippet = ("x = np.sin(np.arange(8000)/50.0); "
+               "y = stress.t3_phase_randomisation(x, stress.clip_rng('T3','c003cd25f5a5f')); "
+               "print(hashlib.sha256(np.ascontiguousarray(y).tobytes()).hexdigest())")
+    a, b = _run_in_subprocess(snippet), _run_in_subprocess(snippet, hashseed="777")
+    assert a == b, f"T3 diverge entre processus : {a} vs {b}"
+
+
+@test
+def t0_and_t1_are_unaffected_by_the_rng():
+    """T0 et T1 ignorent le générateur : leur sortie ne doit dépendre que de l'entrée."""
+    x = np.sin(np.arange(8000) / 50.0)
+    for name in ("T0", "T1"):
+        fn = stress.TRANSFORMS[name]["fn"]
+        a = fn(x, np.random.default_rng(1))
+        b = fn(x, np.random.default_rng(999999))
+        assert np.array_equal(a, b), f"{name} dépend du RNG, ce qui n'était pas prévu"
+    # et entre processus
+    snippet = ("x = np.sin(np.arange(8000)/50.0); "
+               "print(hashlib.sha256(np.ascontiguousarray("
+               "stress.t1_reverse(x, stress.clip_rng('T1','c1'))).tobytes()).hexdigest())")
+    assert _run_in_subprocess(snippet) == _run_in_subprocess(snippet, hashseed="42")
 
 
 @test

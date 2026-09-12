@@ -21,6 +21,8 @@ signal complexe. Les composantes continue et de Nyquist sont donc forcées réel
 
 from __future__ import annotations
 
+import hashlib
+
 import numpy as np
 
 # 250 échantillons = 31,25 ms à 8 kHz. Choisi parce que 8000 est divisible par 250 :
@@ -82,10 +84,41 @@ TRANSFORMS = {
 }
 
 
+# Schéma de dérivation de graine. Documenté ici parce qu'un tiers doit pouvoir
+# le réimplémenter à l'identique dans un autre langage si besoin.
+SEED_SCHEME = "sha256(utf-8, séparateur U+001F, 8 premiers octets, big-endian)"
+SEED_SEPARATOR = "\x1f"          # UNIT SEPARATOR : ne peut apparaître dans un clip_id
+SEED_DIGEST_BYTES = 8             # 64 bits
+
+
+def derive_seed(name: str, clip_id: str, base: int = STRESS_SEED) -> int:
+    """Graine déterministe, stable entre processus, machines et exécutions.
+
+    **N'utilise pas `hash()`.** Le `hash()` de Python sur des chaînes est salé par
+    processus (PYTHONHASHSEED aléatoire par défaut depuis 3.3) : le même tuple
+    donnait quatre graines différentes sur quatre processus, donc T2 et T3
+    n'étaient pas reproductibles d'une exécution à l'autre.
+
+    Canonicalisation, explicite et figée :
+
+      payload  = f"{base}{SEP}{name}{SEP}{clip_id}" encodé en **UTF-8**
+      SEP      = U+001F (UNIT SEPARATOR), impossible dans un clip_id ou un nom de
+                 transformation, donc aucune ambiguïté de concaténation
+      base     = entier écrit en décimal, sans signe ni remplissage
+      digest   = sha256(payload)
+      graine   = int.from_bytes(digest[:8], "big")  -> entier dans [0, 2**64)
+
+    `numpy.random.default_rng` accepte n'importe quel entier non négatif via
+    SeedSequence : 64 bits passent tels quels, sans repli modulo.
+    """
+    payload = f"{base}{SEED_SEPARATOR}{name}{SEED_SEPARATOR}{clip_id}".encode("utf-8")
+    digest = hashlib.sha256(payload).digest()
+    return int.from_bytes(digest[:SEED_DIGEST_BYTES], "big")
+
+
 def clip_rng(name: str, clip_id: str) -> np.random.Generator:
     """Générateur déterministe par (transformation, clip). Aucun état partagé."""
-    seed = abs(hash((STRESS_SEED, name, clip_id))) % (2**32)
-    return np.random.default_rng(seed)
+    return np.random.default_rng(derive_seed(name, clip_id))
 
 
 def invariants(original: np.ndarray, transformed: np.ndarray) -> dict:
