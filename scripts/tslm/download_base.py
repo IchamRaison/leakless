@@ -20,7 +20,7 @@ def main():
     )
     checksums = {}
     for path in sorted(args.output.iterdir()):
-        if path.is_file():
+        if path.is_file() and path.name != "download-receipt.json":
             with path.open("rb") as stream:
                 checksum = hashlib.file_digest(stream, "sha256").hexdigest()
             checksums[path.name] = {"sha256": checksum, "bytes": path.stat().st_size}
