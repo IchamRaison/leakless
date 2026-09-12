@@ -998,6 +998,41 @@ def stress_runs_share_the_base_model():
 
 
 @test
+def report_refuses_an_orphan_stress_run():
+    """M3 — un run de stress sans son run T0 est refusé, pas omis en silence."""
+    split = split_loader.load_split(ROOT / "manifests")
+    with tempfile.TemporaryDirectory() as t:
+        tmp = Path(t)
+        probs = {c.clip_id: (0.3 if c.label == 0 else 0.7) for c in split.clips}
+        d = contract.write_run(tmp / "c2b-T2", run_id="c2b-T2", model_name="orphelin",
+                               checkpoint="x", training_commit="0" * 40, split=split,
+                               threshold_rule="x", probabilities=probs,
+                               extra={"stress_transform": "T2", "base_run_id": "c2b_typo",
+                                      "retrained": False})
+        r = subprocess.run([sys.executable, str(ROOT / "scripts/eval/build_final_report.py"),
+                            "--runs", str(d), "--out", str(tmp / "out"),
+                            "--manifests", str(ROOT / "manifests")],
+                           capture_output=True, text=True, cwd=ROOT)
+        assert r.returncode != 0, "un run de stress orphelin a été accepté"
+        assert "c2b-T2 -> c2b_typo" in r.stderr, r.stderr[-500:]
+        assert not (tmp / "out" / "FINAL_EVALUATION.md").exists()
+
+
+@test
+def training_commit_is_read_from_the_repo_not_the_caller_directory():
+    """M3 — git_state() relève le dépôt du script, quel que soit le répertoire courant."""
+    if shutil.which("git") is None:
+        raise SkipTest("git indisponible")
+    here = run_controls.git_state()[0]
+    assert here != "unknown"
+    snippet = (f"import os, sys; os.chdir('/'); sys.path.insert(0, {str(ROOT / 'scripts/eval')!r}); "
+               f"sys.path.insert(0, {str(ROOT / 'scripts/temporal')!r}); "
+               "import run_controls; print(run_controls.git_state()[0])")
+    out = subprocess.run([sys.executable, "-c", snippet], capture_output=True, text=True, cwd="/")
+    assert out.stdout.strip() == here, (out.stdout, out.stderr[-300:])
+
+
+@test
 def prediction_shift_never_writes_nan():
     """Une série constante rend la corrélation indéfinie : None, jamais NaN dans le JSON."""
     split = split_loader.load_split(ROOT / "manifests")

@@ -232,7 +232,8 @@ def build_markdown(result: dict, comps: dict, tslm: str | None, stress: dict | N
         "",
         "## 2. Identité des modèles — échelle de contrôles",
         "",
-        "Trois commits distincts, tous lus dans `metadata.json` et jamais recalculés ici : "
+        "Trois rôles de commit, qui peuvent pointer vers le même commit, tous lus dans "
+        "`metadata.json` et jamais recalculés ici : "
         "**définition** (où les descripteurs ont été figés), **ajustement** (`training_commit`, "
         "HEAD capturé juste avant le fit), **exécution** (HEAD à l'écriture du run). Aucun "
         "contrôle n'a de checkpoint sérialisé : la régression logistique est réajustée de "
@@ -438,9 +439,10 @@ def main() -> None:
     args = ap.parse_args()
 
     split = split_loader.load_split(args.manifests)
-    runs, reports, stress_runs = {}, {}, {}
+    runs, reports, stress_runs, loaded = {}, {}, {}, []
     for d in args.runs:
         run = contract.load_run(d, split)
+        loaded.append(run)
         # Un run de stress porte `stress_transform` dans sa provenance. Il est
         # évalué comme les autres, mais rangé à part : il ne fait pas partie de
         # l'échelle de contrôles et n'entre dans aucune comparaison au TSLM.
@@ -448,6 +450,16 @@ def main() -> None:
             stress_runs[run.run_id] = run
         else:
             runs[run.run_id] = run
+
+    # Un run de stress dont le run T0 n'est pas fourni ne peut pas être vérifié :
+    # refus immédiat, avant tout calcul, plutôt qu'une omission silencieuse.
+    orphans = {rid: stress_base_id(rid, r.metadata) for rid, r in stress_runs.items()
+               if stress_base_id(rid, r.metadata) not in runs}
+    if orphans:
+        sys.exit("runs de stress sans leur run T0, provenance invérifiable : "
+                 + ", ".join(f"{rid} -> {b}" for rid, b in sorted(orphans.items()))
+                 + ". Fournir le run T0 avec --runs.")
+    for run in loaded:                        # ordre de --runs conservé dans metrics.json
         reports[run.run_id] = evaluate_run(split, run)
 
     tslm = args.tslm_run_id
@@ -480,8 +492,6 @@ def main() -> None:
     all_runs = {**runs, **stress_runs}
     for rid, run in sorted(stress_runs.items()):
         base_id = stress_base_id(rid, run.metadata)
-        if base_id not in runs:
-            continue
         check_stress_provenance(base_id, runs[base_id].metadata, rid, run.metadata)
         stress_bases[rid] = (base_id, run.metadata["stress_transform"])
         c = compare(split, all_runs, base_id, rid)

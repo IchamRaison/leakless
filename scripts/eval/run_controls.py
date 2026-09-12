@@ -58,13 +58,22 @@ STRESS_THRESHOLD_RULE = (
 RETRAINED_MEANING = "not retrained on stressed data"
 
 
+REPO_DIR = Path(__file__).resolve().parent
+
+
 def git_state() -> tuple[str, bool]:
-    """(HEAD, worktree modifié ?). Les fichiers non suivis sont ignorés."""
+    """(HEAD, worktree modifié ?) du dépôt qui contient CE script.
+
+    Git est interrogé depuis le dossier du script, jamais depuis le répertoire
+    courant : lancé ailleurs, il relèverait un autre dépôt ou aucun. Les fichiers
+    non suivis sont ignorés.
+    """
     try:
-        head = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True,
+        head = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, cwd=REPO_DIR,
                               text=True, check=True).stdout.strip()
         dirty = bool(subprocess.run(["git", "status", "--porcelain", "--untracked-files=no"],
-                                    capture_output=True, text=True, check=True).stdout.strip())
+                                    capture_output=True, text=True, check=True,
+                                    cwd=REPO_DIR).stdout.strip())
         return head, dirty
     except Exception:
         return "unknown", True
@@ -183,7 +192,10 @@ def main() -> None:
     args = ap.parse_args()
 
     split = split_loader.load_split(args.manifests)
-    _, dirty = git_state()
+    head, dirty = git_state()
+    if head == "unknown" and not args.allow_dirty:
+        sys.exit("commit introuvable : aucun training_commit ne pourrait être enregistré. "
+                 "Lancer depuis un clone Git du dépôt, ou passer --allow-dirty.")
     if dirty and not args.allow_dirty:
         sys.exit("worktree modifié : le commit enregistré ne reproduirait pas ce run. "
                  "Commiter d'abord, ou passer --allow-dirty (le run le déclarera).")

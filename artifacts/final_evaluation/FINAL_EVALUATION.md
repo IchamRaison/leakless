@@ -12,14 +12,14 @@
 | SHA256 | `7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896` |
 | Clips | 1000 |
 | Clusters de dépendance | 185 |
-| Commit de génération du rapport | `0df4a5bb3581027af69b2840bbf7ea86307950c7` |
+| Commit de génération du rapport | `ea343174922ee8eb8dd369c15bab8fc0ab22d7ff` |
 | Règle d'agrégation | median des probabilités du cluster (gelée) |
 | Bootstrap | 2000 tirages, graine 20260912, unité : cluster de dépendance |
 | Source | Zenodo 18631450, CC BY 4.0 — site d'entraînement expérimental de Dongguan |
 
 ## 2. Identité des modèles — échelle de contrôles
 
-Trois commits distincts, tous lus dans `metadata.json` et jamais recalculés ici : **définition** (où les descripteurs ont été figés), **ajustement** (`training_commit`, HEAD capturé juste avant le fit), **exécution** (HEAD à l'écriture du run). Aucun contrôle n'a de checkpoint sérialisé : la régression logistique est réajustée de façon déterministe sur T0/train à chaque exécution.
+Trois rôles de commit, qui peuvent pointer vers le même commit, tous lus dans `metadata.json` et jamais recalculés ici : **définition** (où les descripteurs ont été figés), **ajustement** (`training_commit`, HEAD capturé juste avant le fit), **exécution** (HEAD à l'écriture du run). Aucun contrôle n'a de checkpoint sérialisé : la régression logistique est réajustée de façon déterministe sur T0/train à chaque exécution.
 
 | run | modèle | checkpoint | commit de définition | commit d'ajustement | commit d'exécution | horodatage |
 |---|---|---|---|---|---|---|
