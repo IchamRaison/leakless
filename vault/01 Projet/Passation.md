@@ -8,7 +8,7 @@ CLI 0.10.6 et 12 skills installés, disponibles pour Hermes et les agents du pro
 
 ## Dernier échange — 2026-09-12
 
-Icham valide [[Plan de session Icham - première version TSLM]], puis réaffirme « Commence pas » : plan accepté, exécution toujours différée. Discussion actuelle sur le GPU : recommandation d'une seule H100 80 Go pour la marge d'expérimentation si accès/crédits confirmés ; L40S 48 Go alternative plausible pour une configuration compacte, pas un besoin minimal mesuré. Source OpenTSLM et tarifs publics Nebius vérifiés, détails dans [[Journal Icham]]. Aucun GPU réservé, code ML installé ou entraînement lancé. Prochaine étape : choix/disponibilité de la machine et première livraison réelle de Nevil ; les classes et réglages détaillés restent à finaliser.
+Icham fournit un accès SSH et demande uniquement de le vérifier. Connexion réussie à `hicham@89.169.123.193` : H100 80 Go visible, pilote 580.173.02, Python 3.12.3, RAM 196 GiB et disque racine avec environ 1,2 Tio libres. Vérifications distantes en lecture seule ; aucune installation ni entraînement. Plan ML validé, mais démarrage de l'implémentation toujours différé. Accès PyTorch/CUDA applicatif, poids, crédit/facturation et première livraison Nevil restent à vérifier. Preuves dans [[Journal Icham]].
 
 ## Cadrage précédent
 

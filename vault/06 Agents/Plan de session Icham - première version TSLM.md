@@ -37,7 +37,7 @@ Le README officiel https://github.com/OpenTSLM/OpenTSLM documente SP, des bases 
 
 Proposition d'apprentissage initiale : adapter encodeur temporel et projecteur ; garder le LLM gelé si cette voie est supportée. Définir et contrôler les paramètres entraînables. Étudier LoRA ou une base différente seulement si les premiers résultats révèlent une limitation correspondante.
 
-Après accord : vérifier l'environnement existant, créer uniquement ce qui manque, tester accès aux poids et GPU, figer versions et mesurer mémoire/temps du premier batch. L'inventaire antérieur n'a pas identifié de GPU NVIDIA local ; aucune H100 distante accessible n'est encore vérifiée.
+Après accord : vérifier l'environnement existant, créer uniquement ce qui manque, tester accès aux poids et runtime GPU, figer versions et mesurer mémoire/temps du premier batch. L'inventaire antérieur n'a pas identifié de GPU NVIDIA local ; l'accès SSH à une H100 80 Go distante est désormais vérifié, sans installation ni entraînement. Détails dans [[Journal Icham]].
 
 Sortie : environnement reproductible, modèle chargeable, liste de paramètres entraînables et configuration de premier essai. Le nombre d'epochs, le batch et les durées restent à mesurer, pas à inventer maintenant.
 

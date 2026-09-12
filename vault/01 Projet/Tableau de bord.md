@@ -9,13 +9,14 @@ Icham
 - [x] Quatre rôles techniques définis.
 - [x] Plan directeur, contrats, protocole et fiches agents rédigés.
 - [x] Icham : plan de session ML validé, avec V0 technique puis V1 évaluée ; démarrage explicitement différé.
+- [x] Icham : SSH distant et présence d'une H100 80 Go vérifiés ; inventaire de base dans [[Journal Icham]]. Aucun entraînement lancé.
 - [x] Icham : lecture complète du vault et des 22 pages du PDF ; état des dépôts inspecté, preuves dans [[Journal Icham]].
 
 - [x] Safoan : branche `feat/safoan-app` publiée ; Entire installé et hooks Git vérifiés. Approbation des hooks Codex et capture réelle encore à faire : [[Journal Safoan]].
 
 ## À lancer — pas encore vérifié
 
-- [ ] Icham : confirmer machine GPU/accessibilité et première livraison Nevil, finir les choix ML puis convenir du démarrage. H100 80 Go unique recommandée pour la marge, non réservée ; détails dans [[Journal Icham]].
+- [ ] Icham : récupérer la première livraison Nevil et convenir du démarrage ; runtime ML et accès aux poids restent à vérifier sur la H100 accessible. Détails dans [[Journal Icham]].
 - [ ] G0 Nevil : audit complet, groupes, labels et split défendable.
 - [ ] Après G0, Icham/équipe : figer problème et classes ; arbitrer comparaison baseline + mesures/gabarit et test d'utilité proposés dans [[Challenge du cadrage de Nevil]].
 - [ ] G1 Tous : fixture réelle et contrats gelés.

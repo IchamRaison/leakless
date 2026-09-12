@@ -4,9 +4,18 @@ Icham
 
 ## État actuel
 
-2026-09-12 : [[Plan de session Icham - première version TSLM]] validé par Icham, qui précise ensuite de ne pas commencer. Discussion des besoins concrets et du GPU. Recommandation : une H100 80 Go unique pour la marge si accès/crédits confirmés ; L40S 48 Go alternative estimée pour la première configuration compacte. Aucun besoin mémoire PIPE mesuré, aucune machine réservée, aucun environnement ML installé ou entraînement lancé.
+2026-09-12 : accès SSH fourni par Icham vérifié sur `hicham@89.169.123.193`. H100 80 Go visible, Python 3.12.3 et ressources de base relevés. Contrôle demandé uniquement, aucune installation ni entraînement ; la machine existait avant notre connexion. [[Plan de session Icham - première version TSLM]] validé, mais implémentation toujours différée. Aucun besoin mémoire PIPE mesuré ; runtime applicatif et accès aux poids restent à tester.
 
 ## Dernière passation
+
+- Demande : « Accès prêt : ssh hicham@89.169.123.193 […] check le ». Portée limitée à une connexion et à l'inventaire de base ; pas de provisionnement, installation ou training.
+- Commande exécutée avec succès (code 0) : `ssh -o BatchMode=yes -o ConnectTimeout=12 -o ConnectionAttempts=1 -o StrictHostKeyChecking=accept-new -o ForwardAgent=no -o ClearAllForwardings=yes hicham@89.169.123.193 'id -un; hostname; uname -sr; command -v nvidia-smi; nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader; command -v python3; python3 --version; free -h; df -h /; command -v git'`.
+- Résultats : utilisateur `hicham`, hôte `computeinstance-e00g3ykxy51wgxcw1p`, Linux `6.11.0-1016-nvidia`. `nvidia-smi` retourne une ligne : `NVIDIA H100 80GB HBM3, 81559 MiB, 580.173.02`. Python `/usr/bin/python3` 3.12.3, Git `/usr/bin/git`. `free -h` : RAM 196 GiB, environ 194 GiB disponibles, aucun swap ; `df -h /` : partition `/dev/vda1`, taille 1,3 Tio, environ 1,2 Tio libres.
+- SSH non interactif réussi, sans demander de secret. Première clé d'hôte ED25519 ajoutée par OpenSSH aux hôtes connus locaux avec `accept-new` ; pas de vérification indépendante de son empreinte, pas de contournement d'une clé modifiée. Aucun fichier distant modifié intentionnellement ; pas d'installation ni de charge ML exécutée.
+- Limites : GPU visible au pilote, mais PyTorch/CUDA applicatif et inférence non testés ; existence d'un environnement ML distant non inspectée. Compte/crédit/facturation et persistance après suppression d'instance non vérifiés. L'accès SSH ne valide pas G2.
+- Prochaine action : obtenir le feu vert de démarrage et la première livraison réelle de Nevil ; tester ensuite le runtime ML et les accès aux poids. Le présent contrôle ne vaut pas autorisation d'entraîner.
+
+## Dimensionnement GPU et validation du plan — étape précédente
 
 - Icham valide le plan (« je valide »), puis interrompt pour demander les besoins sans démarrer (« Commence pas »). Validation du périmètre consignée ; ne pas l'assimiler à une autorisation d'exécution. Besoins prioritaires expliqués : accès GPU et première livraison réelle de Nevil (WAV autorisé/label séparé, transformation TimeNet et sortie numérique, branche/dossier). Split audité nécessaire pour les résultats évalués ; UI et baseline finies non requises pour le raccordement initial.
 - Question actuelle : « On a besoin de quoi comme GPU pour ça ? Une H100 ? ». Recommandation de dimensionnement, pas sélection exécutée : 1× H100 SXM 80 Go en instance à la demande pour la marge d'itération ; pas de cluster multi-GPU justifié pour la première version. L40S 48 Go plausible si base 1B, séries compactes et petit batch ; hypothèse à confirmer par mesure, pas garantie.
