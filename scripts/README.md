@@ -15,6 +15,12 @@ already-extracted dataset from a path outside the repository.
 | `eval/group_metrics.py` | Group-aware metrics: clip-level, group-level, cluster bootstrap, group-weighted threshold | ✅ active |
 | `eval/rms_control.py` | **RMS-only control on the raw, un-normalised signal**, same frozen folds | ✅ active — [`docs/PIPELINE_RESULTS.md`](../docs/PIPELINE_RESULTS.md) |
 | `eval/baseline_logreg.py` | Spectral descriptors + logistic regression on normalised audio, same frozen folds | ✅ active |
+| `eval/harness/` | **Temporal Evidence Harness** — split chokepoint, run contract, group-aware metrics, paired cluster bootstrap, frozen C0-C3 features | ✅ active |
+| `eval/run_controls.py` | Produces C0-C3 prediction runs in the same contract shape as the TSLM (`--shuffle-labels` for the negative control) | ✅ active |
+| `eval/evaluate_predictions.py` | **The only evaluation path.** Any run dir in, clip + cluster metrics and paired comparisons out | ✅ active |
+| `eval/build_final_report.py` | Generates `artifacts/final_evaluation/` — no number is copied by hand | ✅ active |
+| `temporal/stress.py` | T0-T3 transforms and their measured invariants | ✅ active |
+| `temporal/build_stress_timef.py` | Writes the T0-T3 TimeF variants outside the repo and verifies mappings | ✅ active |
 | `eval/split_report.py` | Run naive-random vs grouped split and report the gap — see `docs/EVAL_PROTOCOL.md` §4 | stub |
 
 Datasets live **outside** this repository (`.gitignore` blocks `data/`, `*.rar`, `*.wav`).

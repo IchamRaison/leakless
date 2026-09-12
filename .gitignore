@@ -65,3 +65,12 @@ lora/
 .pytest_cache/
 .ruff_cache/
 *.log
+
+# ---- Temporal Evidence Harness ----
+# Runs de prédiction, sorties TimeF de stress, rapports locaux : hors dépôt.
+runs/
+timef-out/
+timef-stress/
+eval-out/
+artifacts/**/*.parquet
+*-SMOKETEST/

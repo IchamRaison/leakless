@@ -42,6 +42,7 @@ Full decoded brief: [`docs/HACKATHON_BRIEF.md`](docs/HACKATHON_BRIEF.md)
 | TimeNet | ✅ cloned and working locally (CLI operational) |
 | Split | ✅ **`split_v2`** — `manifests/split_v2.csv`, seed 20260912, five leakage invariants verified by independent reconstruction — [`docs/SPLIT_V2_AUDIT.md`](docs/SPLIT_V2_AUDIT.md).<br>🔴 `split_v1` **invalid and superseded** (30 physical conditions crossed folds), kept unmodified as a historical artifact. |
 | Pipeline | ✅ **TimeNet conversion + RMS-only control + baseline** on the frozen folds — [`docs/PIPELINE_RESULTS.md`](docs/PIPELINE_RESULTS.md) |
+| Temporal evidence harness | ✅ **C0-C3 control ladder, one evaluation engine, paired cluster bootstrap, T0-T3 stress sets, 28 tests** — [`docs/JURY_EVIDENCE_MATRIX.md`](docs/JURY_EVIDENCE_MATRIX.md) |
 | Training | ❌ **no TSLM trained — Hicham owns that.** No OpenAI annotation, no GPU used. |
 | Code | ⏳ `scripts/ingest/build_groups.py` implemented — audit, grouping, **frozen split manifest**. No training, no TimeNet conversion, no generated annotation. |
 | Submission deadline / format | ❌ **unknown** — to be confirmed with organisers |
@@ -65,6 +66,8 @@ no `.rar` and no derived series is tracked by Git.
 | [`docs/DATASET_AUDIT.md`](docs/DATASET_AUDIT.md) | **Zenodo dataset audit** (FR) — verified counts, duplicates, group key, measured leakage risks, decision |
 | [`docs/SPLIT_V2_AUDIT.md`](docs/SPLIT_V2_AUDIT.md) | **Split v2 audit** (FR) — root cause of the v1 failure, the repair, falsification tests, fold counts |
 | [`docs/PIPELINE_RESULTS.md`](docs/PIPELINE_RESULTS.md) | **Pipeline results** (FR) — TimeNet conversion, RMS-only control vs baseline on the frozen folds, exact commands |
+| [`docs/MODEL_EVAL_CONTRACT.md`](docs/MODEL_EVAL_CONTRACT.md) | **What the TSLM must deliver** — two files, what is refused and why, the integration command |
+| [`docs/JURY_EVIDENCE_MATRIX.md`](docs/JURY_EVIDENCE_MATRIX.md) | **Every pitch claim mapped to an artifact** — demonstrated / pending / forbidden |
 | [`docs/SPLIT_AUDIT.md`](docs/SPLIT_AUDIT.md) | ⛔ **Caduc** — describes the invalid `split_v1`, kept so the error stays inspectable |
 | [`docs/CLAIM_LEDGER.md`](docs/CLAIM_LEDGER.md) | Permitted claims, forbidden claims, claims to verify |
 

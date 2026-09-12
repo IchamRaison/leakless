@@ -1,0 +1,224 @@
+{
+  "c0_vs_c1": {
+    "seed": 20260912,
+    "n_clusters": 41,
+    "clip_roc_auc": {
+      "delta_observe": -0.023916,
+      "ci95_low": -0.219437,
+      "ci95_high": 0.035389,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "clip_macro_f1": {
+      "delta_observe": -0.047477,
+      "ci95_low": -0.173399,
+      "ci95_high": 0.016752,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "cluster_roc_auc": {
+      "delta_observe": -0.087879,
+      "ci95_low": -0.28411,
+      "ci95_high": 0.077468,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "cluster_macro_f1": {
+      "delta_observe": -0.047319,
+      "ci95_low": -0.175396,
+      "ci95_high": 0.063163,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "fold": "test",
+    "a": "c0",
+    "b": "c1",
+    "n_clips": 194,
+    "avertissement": "aucune significativité statistique n'est revendiquée : 41 clusters indépendants seulement"
+  },
+  "c0_vs_c2": {
+    "seed": 20260912,
+    "n_clusters": 41,
+    "clip_roc_auc": {
+      "delta_observe": 0.168155,
+      "ci95_low": -0.059491,
+      "ci95_high": 0.247322,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "clip_macro_f1": {
+      "delta_observe": 0.127874,
+      "ci95_low": -0.041991,
+      "ci95_high": 0.200634,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "cluster_roc_auc": {
+      "delta_observe": 0.060606,
+      "ci95_low": -0.192381,
+      "ci95_high": 0.294462,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "cluster_macro_f1": {
+      "delta_observe": 0.025657,
+      "ci95_low": -0.115088,
+      "ci95_high": 0.180775,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "fold": "test",
+    "a": "c0",
+    "b": "c2",
+    "n_clips": 194,
+    "avertissement": "aucune significativité statistique n'est revendiquée : 41 clusters indépendants seulement"
+  },
+  "c0_vs_c3": {
+    "seed": 20260912,
+    "n_clusters": 41,
+    "clip_roc_auc": {
+      "delta_observe": 0.053997,
+      "ci95_low": -0.176764,
+      "ci95_high": 0.121299,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "clip_macro_f1": {
+      "delta_observe": 0.050406,
+      "ci95_low": -0.130979,
+      "ci95_high": 0.119277,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "cluster_roc_auc": {
+      "delta_observe": -0.060606,
+      "ci95_low": -0.248575,
+      "ci95_high": 0.134957,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "cluster_macro_f1": {
+      "delta_observe": -0.054527,
+      "ci95_low": -0.199347,
+      "ci95_high": 0.081936,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "fold": "test",
+    "a": "c0",
+    "b": "c3",
+    "n_clips": 194,
+    "avertissement": "aucune significativité statistique n'est revendiquée : 41 clusters indépendants seulement"
+  },
+  "c1_vs_c2": {
+    "seed": 20260912,
+    "n_clusters": 41,
+    "clip_roc_auc": {
+      "delta_observe": 0.192071,
+      "ci95_low": 0.0938,
+      "ci95_high": 0.284066,
+      "lecture": "compatible with improvement",
+      "draws_effectifs": 2000
+    },
+    "clip_macro_f1": {
+      "delta_observe": 0.175351,
+      "ci95_low": 0.047439,
+      "ci95_high": 0.256072,
+      "lecture": "compatible with improvement",
+      "draws_effectifs": 2000
+    },
+    "cluster_roc_auc": {
+      "delta_observe": 0.148485,
+      "ci95_low": 0.041204,
+      "ci95_high": 0.284489,
+      "lecture": "compatible with improvement",
+      "draws_effectifs": 2000
+    },
+    "cluster_macro_f1": {
+      "delta_observe": 0.072975,
+      "ci95_low": -0.065284,
+      "ci95_high": 0.224525,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "fold": "test",
+    "a": "c1",
+    "b": "c2",
+    "n_clips": 194,
+    "avertissement": "aucune significativité statistique n'est revendiquée : 41 clusters indépendants seulement"
+  },
+  "c1_vs_c3": {
+    "seed": 20260912,
+    "n_clusters": 41,
+    "clip_roc_auc": {
+      "delta_observe": 0.077912,
+      "ci95_low": -0.025992,
+      "ci95_high": 0.110639,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "clip_macro_f1": {
+      "delta_observe": 0.097883,
+      "ci95_low": -0.033325,
+      "ci95_high": 0.172554,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "cluster_roc_auc": {
+      "delta_observe": 0.027273,
+      "ci95_low": -0.010592,
+      "ci95_high": 0.086806,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "cluster_macro_f1": {
+      "delta_observe": -0.007209,
+      "ci95_low": -0.13067,
+      "ci95_high": 0.105458,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "fold": "test",
+    "a": "c1",
+    "b": "c3",
+    "n_clips": 194,
+    "avertissement": "aucune significativité statistique n'est revendiquée : 41 clusters indépendants seulement"
+  },
+  "c2_vs_c3": {
+    "seed": 20260912,
+    "n_clusters": 41,
+    "clip_roc_auc": {
+      "delta_observe": -0.114158,
+      "ci95_low": -0.235294,
+      "ci95_high": -0.059191,
+      "lecture": "compatible with degradation",
+      "draws_effectifs": 2000
+    },
+    "clip_macro_f1": {
+      "delta_observe": -0.077468,
+      "ci95_low": -0.174339,
+      "ci95_high": 0.014265,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "cluster_roc_auc": {
+      "delta_observe": -0.121212,
+      "ci95_low": -0.263745,
+      "ci95_high": -0.018939,
+      "lecture": "compatible with degradation",
+      "draws_effectifs": 2000
+    },
+    "cluster_macro_f1": {
+      "delta_observe": -0.080184,
+      "ci95_low": -0.22201,
+      "ci95_high": 0.042085,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "fold": "test",
+    "a": "c2",
+    "b": "c3",
+    "n_clips": 194,
+    "avertissement": "aucune significativité statistique n'est revendiquée : 41 clusters indépendants seulement"
+  }
+}
