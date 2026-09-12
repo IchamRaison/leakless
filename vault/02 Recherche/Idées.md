@@ -1,5 +1,9 @@
 # Idées
 
+Icham
+
+> Note historique de cadrage. Pour exécuter le projet actuel, suivre [[Plan directeur agents]] et les fiches dans 06 Agents. Ne pas prendre les anciennes pistes pour des tâches actives.
+
 ## Statut
 
 Piste privilégiée par Icham : aide à la détection de fuites d’eau, avec un membre du groupe qui possède une entreprise du secteur. Besoin précis et dataset encore non validés ; aucun entraînement lancé. Le dataset de banc hydraulique ci-dessous ne doit pas être confondu avec des données de canalisations d’eau.

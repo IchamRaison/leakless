@@ -1,8 +1,10 @@
 # Brief et contraintes
 
+Icham
+
 ## Sources et statut
 
-Brief Temporal AI Challenge transmis par Icham le 2026-09-12, recoupé avec la couche texte du PDF `Aionic_Temporal_AI_Hackathon.pdf` fourni localement. Copie du PDF dans `assets/`. Extraction texte partielle : certaines pages sont des images, non interprétées ; les sections mission, étapes, livrables, jury et compute sont lisibles. La page Notion générale reste non consultée.
+Brief Temporal AI Challenge transmis par Icham le 2026-09-12. Copie du PDF `Aionic_Temporal_AI_Hackathon.pdf` dans `assets/` : couche texte extraite et 22 pages inspectées visuellement lors de la reprise documentée dans [[Journal Icham]]. Les pages physiques 14, 16 et 17 décrivent mission, étapes et livrables ; 19–21 le soutien Nebius ; 22 les ressources. Aucune deadline de soumission ni durée de pitch indiquée. La page Notion générale reste non consultée.
 
 ## Challenge
 
@@ -44,13 +46,13 @@ Crédit non activé ni vérifié sur un compte. GPU disponible, quotas, coût ho
 
 - [ ] Deadline exacte, fuseau et plateforme de soumission
 - [ ] Durée du pitch et format de la démo
-- [ ] Composition de l'équipe et rôles
+- [x] Composition de l'équipe et rôles documentés dans [[Équipe et répartition]]
 - [ ] Accès TimeNet et activation Nebius
 - [ ] Contraintes de licence des livrables et modèles
 
-## Choix de projet encore ouverts
+## Direction de travail et choix encore ouverts
 
-Utilisateur, domaine, dataset, tâche, modèle, stack et métriques non choisis. Santé, industrie et énergie sont des exemples du brief, pas une décision de l'équipe.
+Direction courante : PIPE, aide à l'analyse acoustique de fuites pour un technicien, classification fuite/non-fuite et observations mesurables. Dataset candidat Zenodo 18631450, à valider par l'audit G0. Répartition, architecture cible et métriques sont décrites dans [[Plan directeur agents]] et [[Protocole évaluation]] ; versions, modèle de base et faisabilité restent à vérifier. LeakLess est un nom proposé, sans validation finale enregistrée. Santé, industrie et énergie restent des exemples du brief.
 
 ## Conséquences pour notre plan
 
