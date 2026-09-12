@@ -1387,3 +1387,89 @@
     gap: 4px;
   }
 }
+/* Illustrative pipe network above the monitor channels. Water motion is decorative. */
+.pipe-network {
+  margin: 0 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #121c16;
+  padding: 18px 20px 12px;
+}
+.pipe-network svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.pipe-network .tank rect {
+  fill: #1d2a20;
+  stroke: #6b8074;
+  stroke-width: 3;
+}
+.pipe-network .tank line {
+  stroke: #6b8074;
+  stroke-width: 3;
+}
+.pipe-network path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.pipe-network .casing {
+  stroke: #4c5f55;
+  stroke-width: 22;
+}
+.pipe-network .water {
+  stroke: #2f7897;
+  stroke-width: 12;
+}
+.pipe-network .flow {
+  stroke: #d6f3ff;
+  stroke-width: 3;
+  stroke-dasharray: 8 20;
+  opacity: 0.85;
+  animation: pipe-flow 1.1s linear infinite;
+}
+.pipe-network.paused .flow {
+  animation-play-state: paused;
+}
+@keyframes pipe-flow {
+  to {
+    stroke-dashoffset: -56;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pipe-network .flow {
+    animation: none;
+  }
+}
+.pipe-network .joint {
+  fill: #5d7166;
+  stroke: #101713;
+  stroke-width: 3;
+}
+.pipe-network .ripple {
+  fill: #b8dba51f;
+  stroke: var(--accent);
+  stroke-width: 2;
+  transition:
+    r 100ms linear,
+    opacity 100ms linear;
+}
+.pipe-network .node {
+  fill: #101713;
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+.pipe-network text {
+  font:
+    500 22px ui-monospace,
+    monospace;
+  fill: #dfe9d8;
+  letter-spacing: 1px;
+}
+.pipe-network figcaption {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #8fa18f;
+}

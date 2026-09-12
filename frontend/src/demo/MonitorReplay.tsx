@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { FullscreenButton } from "./FullscreenButton";
 import { loadExample, type LoadedExample } from "./loadExample";
+import { PipeNetwork } from "./PipeNetwork";
 import recordings from "./recordings.json";
 import {
   BAND_DB,
@@ -83,6 +84,29 @@ export default function MonitorReplay() {
   }, [listening, playing, channels]);
 
   const loaded = recordings.records.filter((record) => channels[record.id]);
+  const rings = useMemo(
+    () =>
+      Object.fromEntries(
+        Object.entries(channels).map(([id, channel]) => [
+          id,
+          signalGeometry(channel.visualization),
+        ]),
+      ),
+    [channels],
+  );
+  const network = recordings.records.map((record, index) => {
+    const channel = channels[record.id];
+    const measured = rings[record.id];
+    return {
+      id: record.id,
+      name: `CH 0${index + 1}`,
+      level:
+        channel && measured?.length
+          ? ringAt(measured, channel.visualization.duration_seconds, clock)
+              .energyDb
+          : null,
+    };
+  });
   return (
     <div className="demo-app monitor" ref={root}>
       <header className="demo-topbar monitor-topbar">
@@ -138,6 +162,7 @@ export default function MonitorReplay() {
             <dd className="pending-value">PENDING</dd>
           </div>
         </dl>
+        <PipeNetwork channels={network} playing={playing} />
         <section className="monitor-grid" aria-label="Replayed channels">
           {recordings.records.map((record, index) =>
             channels[record.id] ? (

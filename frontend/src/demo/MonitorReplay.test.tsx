@@ -65,5 +65,9 @@ it("replays measured values from the real recordings without alerts or scores", 
     "integrity check failed",
   );
   expect(screen.getByText("None generated")).toBeInTheDocument();
+  expect(
+    screen.getByRole("img", { name: /Illustrative pipe network/ }),
+  ).toBeInTheDocument();
+  expect(screen.getByText(/no leak is shown/)).toBeInTheDocument();
   expect(document.body.textContent).not.toMatch(/\d+(\.\d+)?\s*%|probability/i);
 });
