@@ -4,6 +4,12 @@ Icham
 
 Propriétaire : Nevil ; baseline fournie par Vincent ; TSLM par Icham. Statut : protocole à implémenter avant optimisation.
 
+## Livraison finale TSLM — consigne Nevil transmise par Icham
+
+Référence : [MODEL_EVAL_CONTRACT à 08562e3](https://github.com/IchamRaison/ehl-hackathon-zurich/blob/08562e3eee29a9302ed2dfba2a4112b251770051/docs/MODEL_EVAL_CONTRACT.md). Icham fournit T0 sous forme de deux fichiers `metadata.json` + `predictions.csv`, exactement `clip_id,probability_leak`, une ligne par clip val/test v2 (208 + 194). Population gelée inchangée, ni label/fold/métadonnées d'acquisition dans le CSV, ni seuil appliqué aux probabilités. Nevil effectue l'évaluation finale, agrégation en groupes, sélection du seuil sur validation et comparaisons ; l'agent ML ne calcule pas les métriques finales. Diagnostics de développement limités à train/validation et contrôles d'intégrité d'export restent distincts.
+
+T1 inversion, T2 permutation des blocs de 250 échantillons à 8 kHz (31,25 ms), T3 randomisation de phase : optionnels après T0, transformations officielles Nevil, même checkpoint figé et méthode de score, aucun entraînement ou réglage sur ces stress. Le CSV ne contient pas non plus de description générée ; qualité du texte et événements continus demeurent des évaluations séparées à convenir. La consigne n'autorise pas à traiter une série de clips comme une chronologie terrain.
+
 ## Extension proposée — surveillance continue
 
 Icham confirme le cas d'usage automatique ; [[Plan surveillance continue]] distingue désormais classification de fenêtres, tests logiciels de replay et performance sur événements réels. Les métriques ci-dessous restent utiles pour les clips. Elles ne donnent pas de délai de détection ni de fausses alertes/jour.

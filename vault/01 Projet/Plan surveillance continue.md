@@ -65,7 +65,9 @@ Ajouter un état de santé distinct de l'état d'alerte : démarrage, flux frais
 
 ### C — Entraîner et choisir un détecteur V1 sur fenêtres
 
-Icham + Nevil : définir/tester le calcul de score de classe, sans confiance fabriquée. Raccorder l'export Nevil ; score non calibré indiqué comme tel. Ajouter un parcours validation seule au moteur commun avec son propriétaire. Aligner la tâche fuite/non-fuite et l'emploi du bruit externe avant toute comparaison : garder le v2 intact, nommer les vues/périmètres et comparer exactement les mêmes exemples.
+Icham + Nevil : définir/tester le calcul de score de classe, sans confiance fabriquée. Raccorder l'export Nevil ; absence de calibration indiquée dans la provenance, pas présentée comme certitude terrain. Convenir avec Nevil d'un parcours de développement validation seule, sans exécuter le moteur final pendant les réglages. Pour la livraison T0 demandée, respecter exactement la population val/test du v2 gelé, y compris son choix binaire avec bruit ; aucune exclusion ou vue différente décidée par l'agent ML. Une analyse site seul ou du bruit séparé reste une question distincte à convenir, pas un remplacement silencieux de ce benchmark.
+
+**Consigne Nevil transmise par Icham après rédaction du plan** : livrer seulement `metadata.json` et `predictions.csv` (`clip_id,probability_leak`) pour T0, puis si possible trois runs T1/T2/T3 avec exactement le même checkpoint figé et sans réentraînement. Nevil applique les seuils/agrégations et calcule toutes les métriques finales ; Icham contrôle uniquement intégrité, couverture, format et provenance de l'export. Contrat : `docs/MODEL_EVAL_CONTRACT.md` à `08562e3`. Les diagnostics d'entraînement/validation restent séparés ; pas de sélection après consultation des résultats test.
 
 Mesurer V0, puis entraîner sur tout le train retenu. Garder Qwen 3.5-4B, adapter d'abord encodeur/projecteur ; un petit nombre de configurations sélectionnées sur validation. LoRA, représentation plus riche ou modèle léger seulement si une limite observée le justifie. Comparer aux contrôles C0–C3 et à la baseline disponible, sans assimiler C3 à la Random Forest de Vincent.
 

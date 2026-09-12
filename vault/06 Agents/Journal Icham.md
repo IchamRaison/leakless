@@ -4,11 +4,23 @@ Icham
 
 ## État actuel
 
+Consigne finale reçue via Icham : livrer les probabilités T0 (puis stress optionnels) au harness de Nevil, ne pas produire nos propres métriques finales. Contrat relu, aucun export encore créé ; le calcul de score reste à ajouter à la V0.
+
 2026-09-12 : Icham corrige le scénario produit vers un appareil écoutant en permanence avec alertes automatiques. [[Plan surveillance continue]] rédigé, ancien parcours manuel marqué historique ; V0 conservée comme brique par fenêtre. Architecture continue, critères métier et collecte réelle proposés, non implémentés. Prochaine action : valider flux/capteur et critères, puis replay/V1 en parallèle ; pas de training lancé par cette demande de plan.
 
 2026-09-12 : étapes 1 à 5 V0 réalisées avec Qwen 3.5-4B. TimeNet/v2 vérifiés sur les 1 000 WAV ; 40 étapes sur 8 groupes train, gradients/poids prouvés ; bundle autonome rechargé hors ligne et environnement reconstruit. Fonction Prediction et preuves dans `docs/TSLM_V0.md`. Qualité/application non validées. Passation détaillée : [[V0 ML - exécution]].
 
 Nouvelle dépendance découverte : Nevil a déjà publié un moteur d'évaluation sur `nevil/temporal-evidence`. Prochaine étape proposée : le réutiliser et convenir du raccordement des scores, sans lancer automatiquement une V1 ni un scoring test.
+
+## Consigne de livraison T0 et stress — Nevil
+
+- Icham transmet la demande de Nevil et demande de l'examiner, pas de l'exécuter. Référence immuable relue entièrement avec `git show 08562e3eee29a9302ed2dfba2a4112b251770051:docs/MODEL_EVAL_CONTRACT.md` ; comparaison avec `src/pipe/tslm/predict.py` de notre branche.
+- T0 prioritaire : dossier contenant uniquement `metadata.json` et `predictions.csv`. CSV strict `clip_id,probability_leak`, une ligne par ID de validation/test du v2 (402), aucune colonne supplémentaire ni exclusion choisie. Les `clip_id` du manifeste ne sont pas les `sample_id` basés sur le hash audio de l'API Safoan ; mapping exact à garantir par le futur exporteur.
+- Métadonnées de run selon le contrat : identité/run, checkpoint réel, commit d'entraînement, split et SHA gelés, horodatage, absence de seuillage et déclaration honnête de non-réglage sur test ; `config_hash` facultatif. Ne pas copier les métadonnées d'acquisition dans les entrées du modèle ou le CSV. Le `metadata.json` de livraison a le schéma du harness, pas celui du bundle brut à recopier tel quel.
+- V0 observée : `score_type="none"`, génération de classe/texte. Il faut définir/tester une probabilité de classe issue du modèle avant export ; ne pas convertir le verdict en 0/1 par commodité ni demander au texte d'inventer un pourcentage. Documenter la méthode et l'absence de calibration terrain. Après gel du modèle et de cette méthode, contrôler bornes/valeurs finies, IDs, couverture et provenance sans lire les labels test pour ajuster le modèle.
+- Nevil calcule seuil validation, agrégation médiane par groupe, métriques et bootstrap/comparaisons finales. L'agent ML ne lance pas `build_final_report.py` pour sa livraison. Développement sur train/validation distinct ; le mode validation seule reste à convenir avec Nevil si nécessaire, sans faire de l'intégration de tout son moteur une condition de l'export.
+- T1/T2/T3 optionnels après T0 : transformations de Nevil à cette révision, même checkpoint et pipeline de score gelés, IDs conservés, pas de réentraînement ni nouvelle sélection d'hyperparamètres. T2 = 250 échantillons à 8 kHz. Préserver la provenance des transformations et ne pas introduire une conversion destructive non documentée. Ces tests de sensibilité ne valident pas la surveillance continue.
+- Source vault récupérée par `git pull --ff-only` avant mise à jour. Modifications de continuité uniquement : aucune nouvelle métrique, prédiction, installation, transformation de données ou action H100 ; aucun message envoyé à Nevil.
 
 ## Replanification — surveillance automatique continue
 

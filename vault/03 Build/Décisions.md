@@ -2,6 +2,10 @@
 
 Icham
 
+## 2026-09-12 — Répartition confirmée pour la livraison au harness
+
+Message de Nevil transmis par Icham : la partie ML livre les probabilités T0 et leur provenance selon le contrat à `08562e3`, **pas les métriques finales**. Nevil possède l'évaluation sur le split gelé. T1/T2/T3 seulement après T0 si possible, checkpoint identique, aucun réentraînement. Le contrôle d'export (format, couverture, bornes, hash/provenance) ne doit pas être confondu avec le calcul de performances sur test. Voir [[Protocole évaluation]]. Cette instruction prépare une livraison future ; aucun run nouveau autorisé par « regarde ce que Nevil m'a dit ».
+
 ## 2026-09-12 — Cas d'usage corrigé par Icham : écoute continue
 
 Décision produit explicite : un appareil écoute les tuyaux en permanence et signale une fuite ; un humain reçoit/examine l'alerte, il ne lance pas l'analyse par upload. [[Plan surveillance continue]] remplace le scénario de relecture manuelle. Les choix un canal, serveur, replay initial, score régulier/texte sur événement et logique de persistance sont des propositions techniques à valider, pas des décisions utilisateur déjà prises.
