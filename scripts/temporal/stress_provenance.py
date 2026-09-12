@@ -13,7 +13,11 @@ un commit relevé après coup ne prouverait rien.
 Usage :
   python3 scripts/temporal/stress_provenance.py --stress-root <timef-stress> \\
       --invariants <stress_invariants.json> --out <manifeste.json> \\
-      [--generator-commit-note "<pourquoi il manque>"]
+      --generator-commit-note "<pourquoi il manque>"
+
+Ce CLI décrit des jeux DÉJÀ générés, dont le commit n'a pas été capturé : la
+raison est donc obligatoire. Une génération par build_stress_timef.py capture
+elle-même le commit et n'a pas besoin de ce CLI.
 """
 
 from __future__ import annotations

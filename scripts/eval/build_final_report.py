@@ -56,41 +56,53 @@ def stress_base_id(run_id: str, metadata: dict) -> str:
     return metadata.get("base_run_id") or run_id.rsplit("-", 1)[0]
 
 
+def has_serialized_checkpoint(meta: dict) -> bool:
+    """Le modèle du run est-il un checkpoint sérialisé (TSLM) ou non (contrôle) ?
+
+    Décision unique, utilisée par la vérification ET par le rendu : un contrôle
+    (`control_level`) ou un checkpoint préfixé NO_SERIALIZED_CHECKPOINT n'est pas
+    sérialisé ; tout autre checkpoint non vide l'est.
+    """
+    ck = str(meta.get("checkpoint") or "")
+    return bool(ck) and not ck.startswith(contract.NO_SERIALIZED_CHECKPOINT) \
+        and not meta.get("control_level")
+
+
 def check_stress_provenance(base_id: str, base_meta: dict, rid: str, meta: dict) -> None:
     """Refuse un run de stress qui ne dérive pas du modèle du run T0.
 
-    Toujours : `retrained` false, même model_definition_commit, même training_commit.
-    Avec une empreinte de modèle (contrôles) : elle doit être identique. Sans
-    empreinte (checkpoint de TSLM) : même checkpoint.
+    Toutes les règles s'appliquent, sans branche qui en court-circuite une autre :
+      1. `retrained` vaut false ;
+      2. `training_commit` non vide et identique ;
+      3. `model_definition_commit` identique, tout ou rien ;
+      4. même nature de modèle (sérialisé ou non) des deux côtés ;
+      5. modèle sérialisé : `checkpoint` identique ;
+      6. modèle non sérialisé : `model_fingerprint` non vide et identique ;
+      7. une empreinte déclarée d'un côté doit l'être, identique, de l'autre.
     """
-    fa, fb = base_meta.get("model_fingerprint"), meta.get("model_fingerprint")
-    for who, m in ((base_id, base_meta), (rid, meta)):
-        unserialized = (str(m.get("checkpoint") or "").startswith(contract.NO_SERIALIZED_CHECKPOINT)
-                        or m.get("control_level"))
-        if unserialized and not m.get("model_fingerprint"):
-            # Sans checkpoint sérialisé, seule l'empreinte identifie le modèle ajusté.
-            raise ValueError(f"{who} : modèle non sérialisé sans `model_fingerprint` — "
-                             f"identité invérifiable")
-    if not (fa or (base_meta.get("checkpoint") and base_meta.get("training_commit"))):
-        # Deux identités absentes sont égales, mais n'identifient rien.
-        raise ValueError(f"{base_id} : identité du modèle absente — il faut une "
-                         f"`model_fingerprint` ou un `checkpoint` et un `training_commit` "
-                         f"non vides pour vérifier ses runs de stress")
+    def refuse(msg: str) -> None:
+        raise ValueError(f"{rid} (base {base_id}) : {msg}")
+
     if meta.get("retrained") is not False:
-        raise ValueError(f"{rid} : `retrained` doit valoir false (not retrained on stressed data)")
-    if meta.get("model_definition_commit") != base_meta.get("model_definition_commit"):
-        raise ValueError(f"{rid} : model_definition_commit {meta.get('model_definition_commit')} "
-                         f"différent de celui de {base_id} "
-                         f"({base_meta.get('model_definition_commit')})")
+        refuse("`retrained` doit valoir false (not retrained on stressed data)")
+    if not base_meta.get("training_commit"):
+        refuse("training_commit du run T0 absent : identité du modèle invérifiable")
     if meta.get("training_commit") != base_meta.get("training_commit"):
-        raise ValueError(f"{rid} : training_commit {meta.get('training_commit')} différent "
-                         f"de celui de {base_id} ({base_meta.get('training_commit')})")
-    if fa or fb:
-        if fa != fb:
-            raise ValueError(f"{rid} : empreinte de modèle différente de {base_id} — "
-                             f"ce n'est pas le même modèle ajusté")
-    elif meta.get("checkpoint") != base_meta.get("checkpoint"):
-        raise ValueError(f"{rid} : checkpoint différent de {base_id}")
+        refuse(f"training_commit {meta.get('training_commit')} ≠ "
+               f"{base_meta.get('training_commit')}")
+    if meta.get("model_definition_commit") != base_meta.get("model_definition_commit"):
+        refuse(f"model_definition_commit {meta.get('model_definition_commit')} ≠ "
+               f"{base_meta.get('model_definition_commit')}")
+    serialized = has_serialized_checkpoint(base_meta)
+    if has_serialized_checkpoint(meta) != serialized:
+        refuse("l'un des runs a un checkpoint sérialisé, l'autre non")
+    if serialized and meta.get("checkpoint") != base_meta.get("checkpoint"):
+        refuse(f"checkpoint {meta.get('checkpoint')} ≠ {base_meta.get('checkpoint')}")
+    fa, fb = base_meta.get("model_fingerprint"), meta.get("model_fingerprint")
+    if not serialized and not fa:
+        refuse("modèle non sérialisé sans `model_fingerprint` : identité invérifiable")
+    if (fa or fb) and fa != fb:
+        refuse("empreinte de modèle différente : ce n'est pas le même modèle ajusté")
 
 
 def prediction_shift(split, base_run, stress_run, fold: str = "test") -> dict:
@@ -194,7 +206,8 @@ def stress_identity_lines(reports: dict, stress_bases: dict) -> list[str]:
     for base in sorted({b for b, _ in stress_bases.values()}):
         r = reports[base]
         pv = r.get("provenance", {})
-        if pv.get("model_fingerprint"):
+        if not has_serialized_checkpoint({"checkpoint": r.get("checkpoint"),
+                                          "control_level": pv.get("control_level")}):
             lines.append(
                 f"- `{base}` : **aucun checkpoint sérialisé**. Définition figée "
                 f"`{str(pv.get('model_definition_commit'))[:7]}`, régression logistique "

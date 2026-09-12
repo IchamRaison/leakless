@@ -936,43 +936,62 @@ def refit_is_deterministic_and_the_fingerprint_identifies_the_model():
 
 @test
 def report_refuses_a_stress_run_that_is_not_the_base_model():
-    """M3 — sentinelle : autre empreinte, autre définition, autre commit d'ajustement ou réentraînement -> refus."""
-    base = {"training_commit": "a" * 40, "model_fingerprint": "f" * 64, "checkpoint": "x"}
-    ok = {"training_commit": "a" * 40, "model_fingerprint": "f" * 64, "retrained": False,
-          "checkpoint": "autre libellé"}
-    build_final_report.check_stress_provenance("c2b", base, "c2b-T2", ok)
-    for bad in ({**ok, "model_fingerprint": "e" * 64}, {**ok, "training_commit": "b" * 40},
-                {**ok, "model_definition_commit": "d" * 40},
-                {**ok, "retrained": True}, {k: v for k, v in ok.items() if k != "retrained"}):
-        must_raise(ValueError, build_final_report.check_stress_provenance,
-                   "c2b", base, "c2b-T2", bad)
-    # model_definition_commit : tout ou rien. Déclaré sur T0 et absent du run de
-    # stress, c'est un refus, pas une tolérance.
-    based = {**base, "model_definition_commit": "d" * 40}
-    build_final_report.check_stress_provenance(
-        "c2b", based, "c2b-T2", {**ok, "model_definition_commit": "d" * 40})
-    must_raise(ValueError, build_final_report.check_stress_provenance,
-               "c2b", based, "c2b-T2", ok)
-    # Sans empreinte (TSLM) : le checkpoint doit être le même.
-    tb = {"training_commit": "a" * 40, "checkpoint": "gs://x/step-1"}
-    build_final_report.check_stress_provenance(
-        "t", tb, "t-T1", {**tb, "retrained": False})
-    must_raise(ValueError, build_final_report.check_stress_provenance,
-               "t", tb, "t-T1", {**tb, "retrained": False, "checkpoint": "gs://x/step-2"})
-    # Modèle non sérialisé (contrôle) sans empreinte : le libellé n'identifie rien.
-    nock = {"training_commit": "a" * 40,
-            "checkpoint": f"{contract.NO_SERIALIZED_CHECKPOINT} : logreg(C=0.1)"}
-    must_raise(ValueError, build_final_report.check_stress_provenance,
-               "c2b", nock, "c2b-T2", {**nock, "retrained": False})
-    ctl = {"training_commit": "a" * 40, "checkpoint": "logreg", "control_level": "C2b"}
-    must_raise(ValueError, build_final_report.check_stress_provenance,
-               "c2b", ctl, "c2b-T2", {**ctl, "retrained": False})
-    # Identité absente des deux côtés : égale, mais invérifiable -> refus.
-    for empty in (None, ""):
-        for field in ("checkpoint", "training_commit"):
-            nb = {**tb, field: empty}
-            must_raise(ValueError, build_final_report.check_stress_provenance,
-                       "t", nb, "t-T1", {**nb, "retrained": False})
+    """M3 — sentinelle systématique : toute divergence d'identité entre T0 et stress est refusée.
+
+    Oracle tiré de la spécification, pas de l'implémentation : pour chaque nature
+    de modèle, chaque champ d'identité est remplacé par chaque valeur différente
+    (absent, vide, autre). Seules les variations de LIBELLÉ d'un modèle non
+    sérialisé, dont l'identité tient à l'empreinte, sont acceptées.
+    """
+    ns = contract.NO_SERIALIZED_CHECKPOINT
+    bases = {
+        "contrôle": {"training_commit": "a" * 40, "model_definition_commit": "d" * 40,
+                     "checkpoint": f"{ns} : logreg(C=0.1)", "control_level": "C2b",
+                     "model_fingerprint": "f" * 64},
+        "tslm": {"training_commit": "a" * 40, "checkpoint": "gs://m/step-1"},
+        "tslm+empreinte": {"training_commit": "a" * 40, "checkpoint": "gs://m/step-1",
+                           "model_fingerprint": "f" * 64},
+        "tslm+définition": {"training_commit": "a" * 40, "checkpoint": "gs://m/step-1",
+                            "model_definition_commit": "d" * 40},
+    }
+    DROP = object()
+    alternatives = (DROP, None, "", "zzz")
+    check = build_final_report.check_stress_provenance
+    n_refused = 0
+    for kind, base in bases.items():
+        valid = {**base, "retrained": False}
+        if kind == "contrôle":
+            valid["checkpoint"] = f"{ns} : jamais ajustée sur T2"   # libellé différent : accepté
+        check("base", base, "stress", valid)
+        serialized = kind != "contrôle"
+        for key in ("retrained", "training_commit", "model_definition_commit",
+                    "model_fingerprint", "checkpoint", "control_level"):
+            for alt in alternatives + ((True, "false") if key == "retrained" else ()):
+                m = dict(valid)
+                if alt is DROP:
+                    m.pop(key, None)
+                else:
+                    m[key] = alt
+                if m.get(key, DROP) == valid.get(key, DROP) or \
+                        (key != "retrained" and m.get(key) in (None, "") and valid.get(key) in (None, "")):
+                    continue                                  # pas une divergence
+                label_only = not serialized and key in ("checkpoint", "control_level")
+                if label_only:
+                    check("base", base, "stress", m)
+                else:
+                    must_raise(ValueError, check, "base", base, "stress", m)
+                    n_refused += 1
+        # Identité absente des DEUX côtés : égale, mais invérifiable.
+        for key, alt in (("training_commit", None), ("training_commit", ""),
+                         *((("model_fingerprint", None),) if not serialized else ()),
+                         *((("checkpoint", None), ("checkpoint", "")) if kind == "tslm" else ())):
+            nb = {**base, key: alt}
+            must_raise(ValueError, check, "base", nb, "stress", {**nb, "retrained": False})
+            n_refused += 1
+    assert n_refused >= 60, n_refused
+    # Le rendu utilise la même décision : un TSLM avec empreinte reste un checkpoint sérialisé.
+    assert build_final_report.has_serialized_checkpoint(bases["tslm+empreinte"])
+    assert not build_final_report.has_serialized_checkpoint(bases["contrôle"])
 
 
 @test
