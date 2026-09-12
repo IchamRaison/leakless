@@ -4,7 +4,7 @@ Icham
 
 ## Dernier échange — 2026-09-12
 
-Icham demande de challenger le cadrage humain proposé par Nevil. Analyse dans [[Challenge du cadrage de Nevil]] : distinguer classification, description vérifiable et utilité pour le technicien ; comparer au système simple Random Forest + mesures + gabarit ; ne pas adopter trois classes sans audit de provenance. Recommandations à discuter, aucun contrat modifié ni expérience exécutée. Prochaine action : retour G0 de Nevil et cadrage du cas utilisateur avant entraînement destiné aux résultats ; I0 runtime peut avancer en parallèle. Lecture complète précédente et preuves dans [[Journal Icham]].
+Icham demande une critique structurelle, la première réponse étant trop méthodologique. [[Challenge du cadrage de Nevil]] précise l'avis : direction hackathon soutenue, produit à resserrer ; le WHY de surveillance permanente ne correspond pas au WHAT d'analyse d'un extrait choisi. Recommandation à discuter : seconde lecture pour un technicien, avec bénéfice de qualification/documentation à confronter à son travail réel. Nouvelle note distante [[PROBLEM STATEMENT - LeakLess Temporal AI]] intégrée (`0a70a95`) : direction déclarée approuvée en équipe sous réserve de l'audit ; ses trois classes restent à aligner avec les contrats binaires. Aucun contrat ni chantier technique modifié. G0 et entretien métier peuvent avancer en parallèle ; preuves dans [[Journal Icham]].
 
 ## Reprise Safoan — 2026-09-12
 

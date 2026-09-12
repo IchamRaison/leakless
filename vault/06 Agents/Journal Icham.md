@@ -4,10 +4,11 @@ Icham
 
 ## État actuel
 
-2026-09-12 : analyse du cadrage de Nevil terminée à la demande d'Icham ; recommandations dans [[Challenge du cadrage de Nevil]], pas encore arbitrées. Aucun changement de contrat, entraînement ou essai utilisateur exécuté. Périmètre repris : TSLM, environnement Python et intégration finale.
+2026-09-12 : Icham demande une critique structurelle du projet. Avis précisé dans [[Challenge du cadrage de Nevil]] : orientation hackathon soutenue ; produit à resserrer sur un utilisateur, une étape de travail et un bénéfice. Aucun changement de contrat, entraînement ou essai utilisateur exécuté. Périmètre repris : TSLM, environnement Python et intégration finale.
 
 ## Dernière passation
 
+- Clarification structurelle : distinguer surveillance permanente et relecture d'un extrait ; proposer un technicien comme utilisateur principal et une aide à la qualification/documentation. Recommandation à confronter au professionnel, pas décision produit actée. Contribution distante `0a70a95` lue et conservée : [[PROBLEM STATEMENT - LeakLess Temporal AI]] se déclare approuvée en équipe sous réserve de G0 ; écart trois classes/contrats binaires signalé sans migration implicite.
 - Vault distant intégré jusqu'à `f6eed23`, y compris la reprise de Safoan, avant cette édition. Source Zenodo relue en ligne : majorité des bruits venant de dlmeasure.com, minorité du site expérimental ; audit physique des archives non refait. Références OpenTSLM et Jacovi/Goldberg consultées pour distinguer résultats publiés, exactitude descriptive et fidélité d'une explication.
 - Résultat de l'analyse : recommandation de conserver le protocole binaire courant, clarifier la séparation prompt/cibles et comparer la valeur du langage à une baseline enrichie par les mêmes mesures. Aucun message envoyé aux coéquipiers, aucune adoption de trois classes ou d'un nouveau nom.
 - Prochaine action : examiner G0 de Nevil, confronter le problème à un cas réel du professionnel et arbitrer les propositions avant entraînement destiné aux résultats ; I0 runtime reste indépendant.

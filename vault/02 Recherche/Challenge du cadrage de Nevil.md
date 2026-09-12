@@ -10,6 +10,19 @@ Conserver le cadrage par l'utilisateur et sa décision. Le Golden Circle organis
 
 TimeNet et entraînement TSLM sont des contraintes du challenge. Leur nécessité dans un futur produit reste une question expérimentale. Le présent échange ne vaut pas validation du nom LeakLess.
 
+## Clarification structurelle demandée par Icham
+
+Icham juge la première réponse trop centrée sur la méthode scientifique et demande si le reste est validé. Avis précisé : orientation intéressante pour le hackathon, cadrage produit encore à resserrer. Les réserves ci-dessous concernent le choix du produit, au-delà du protocole.
+
+- Le WHY évoque une surveillance permanente impossible à assurer humainement, tandis que le WHAT analyse un extrait déjà enregistré et choisi. Ce prototype ne couvre pas l'acquisition et la sélection des signaux suspects. Il faut choisir entre une ambition de surveillance et une aide à la relecture ; la seconde correspond au périmètre actuellement prévu.
+- Facilities manager qui décide d'une intervention et technicien qui interprète une écoute impliquent des interfaces et des contextes différents. Recommandation : un utilisateur principal, un technicien disposant déjà d'un enregistrement suspect, à confirmer avec le professionnel.
+- Le langage est une capacité, pas un bénéfice établi. Hypothèse produit proposée : réduire l'effort nécessaire pour qualifier et documenter un extrait difficile. Si le vrai problème du professionnel est de trouver où mesurer plutôt que d'interpréter les signaux, cette proposition manquerait le besoin malgré un bon benchmark.
+- Why → How → What aide à présenter un projet mais ne doit pas imposer une démarche strictement linéaire. Dans ce hackathon, TSLM/TimeNet sont imposés et les données bornent la preuve possible : faire des allers-retours entre besoin, données et faisabilité, en distinguant démonstrateur de recherche et produit validé.
+
+Positionnement recommandé, non adopté par ce commentaire : « outil de seconde lecture pour un technicien, qui aide à qualifier un enregistrement suspect et à préparer un compte rendu vérifiable ». Conserver l'audit G0 ; préciser le moment de travail et le bénéfice avec le professionnel en parallèle.
+
+Contribution distante intégrée avant cette clarification : [[PROBLEM STATEMENT - LeakLess Temporal AI]] (`0a70a95`) se déclare `team-approved direction, conditional on dataset audit`. Elle reprend le cadrage transmis et annonce trois classes ; les contrats v0.1 restent binaires. Conserver la contribution et coordonner cet écart avant migration ; aucun contrat modifié dans cette revue.
+
 ## 1. Définir le travail humain avant de promettre l'inspection
 
 « Technicien acoustique » et « facilities manager » désignent deux utilisateurs possibles, dont le travail doit être précisé. Recommandation pour le MVP : un technicien qui dispose déjà d'un enregistrement et doit le relire/documenter. Faire décrire par le professionnel un cas récent : origine du signal, outil utilisé, hésitation, action suivante, temps passé et conséquence d'une erreur. Le besoin reste une hypothèse tant que cet échange n'a pas eu lieu.
