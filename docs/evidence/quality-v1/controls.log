@@ -1,0 +1,46 @@
+c0               -> /home/hicham/pipe-v0/quality-v1-001/controls/c0
+c1               -> /home/hicham/pipe-v0/quality-v1-001/controls/c1
+c2               -> /home/hicham/pipe-v0/quality-v1-001/controls/c2
+c2b              -> /home/hicham/pipe-v0/quality-v1-001/controls/c2b
+c3               -> /home/hicham/pipe-v0/quality-v1-001/controls/c3
+{
+  "runs": [
+    {
+      "control": "C0",
+      "run_dir": "/home/hicham/pipe-v0/quality-v1-001/controls/c0",
+      "C": 0.01,
+      "threshold": 0.536921,
+      "n_features": 1
+    },
+    {
+      "control": "C1",
+      "run_dir": "/home/hicham/pipe-v0/quality-v1-001/controls/c1",
+      "C": 0.01,
+      "threshold": 0.532281,
+      "n_features": 9
+    },
+    {
+      "control": "C2",
+      "run_dir": "/home/hicham/pipe-v0/quality-v1-001/controls/c2",
+      "C": 0.1,
+      "threshold": 0.386458,
+      "n_features": 8
+    },
+    {
+      "control": "C2b",
+      "run_dir": "/home/hicham/pipe-v0/quality-v1-001/controls/c2b",
+      "C": 0.1,
+      "threshold": 0.495914,
+      "n_features": 6
+    },
+    {
+      "control": "C3",
+      "run_dir": "/home/hicham/pipe-v0/quality-v1-001/controls/c3",
+      "C": 0.01,
+      "threshold": 0.510207,
+      "n_features": 11
+    }
+  ],
+  "split_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+  "commit": "c27a43fdd4de73ccc09f5f4bc02acd87c89f58f6"
+}

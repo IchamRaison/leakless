@@ -1,0 +1,115 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:59,  7.12it/s]Loading weights:  10%|▉         | 42/426 [00:00<00:01, 209.91it/s]Loading weights:  21%|██        | 88/426 [00:00<00:01, 303.25it/s]Loading weights:  31%|███       | 131/426 [00:00<00:00, 347.00it/s]Loading weights:  40%|████      | 171/426 [00:00<00:00, 359.73it/s]Loading weights:  49%|████▉     | 209/426 [00:00<00:00, 365.96it/s]Loading weights:  59%|█████▉    | 253/426 [00:00<00:00, 387.82it/s]Loading weights:  69%|██████▉   | 293/426 [00:00<00:00, 387.67it/s]Loading weights:  78%|███████▊  | 333/426 [00:00<00:00, 390.49it/s]Loading weights:  89%|████████▉ | 379/426 [00:01<00:00, 405.47it/s]Loading weights:  99%|█████████▊| 420/426 [00:01<00:00, 390.24it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 357.56it/s]
+Audit texte : 20/402, fold val
+Audit texte : 40/402, fold val
+Audit texte : 60/402, fold val
+Audit texte : 80/402, fold val
+Audit texte : 100/402, fold val
+Audit texte : 120/402, fold val
+Audit texte : 140/402, fold val
+Audit texte : 160/402, fold val
+Audit texte : 180/402, fold val
+Audit texte : 200/402, fold val
+Audit texte : 220/402, fold test
+Audit texte : 240/402, fold test
+Audit texte : 260/402, fold test
+Audit texte : 280/402, fold test
+Audit texte : 300/402, fold test
+Audit texte : 320/402, fold test
+Audit texte : 340/402, fold test
+Audit texte : 360/402, fold test
+Audit texte : 380/402, fold test
+Audit texte : 400/402, fold test
+Audit texte : 402/402, fold test
+{
+  "purpose": "frozen_v1_text_audit_no_model_selection",
+  "threshold": 0.46893701143635425,
+  "warmup_included": false,
+  "warmup_call_succeeded": true,
+  "folds": {
+    "val": {
+      "n_expected": 208,
+      "n_attempted": 208,
+      "n_errors": 0,
+      "n_abstentions": 0,
+      "n_valid_format": 208,
+      "valid_format_rate_all_clips": 1.0,
+      "n_correct_band": 202,
+      "correct_band_rate_all_clips": 0.9711538461538461,
+      "n_wrong_band_among_valid": 6,
+      "n_no_usable_text": 0,
+      "n_comparable_class_decisions": 208,
+      "n_class_disagreements": 27,
+      "class_disagreement_rate_comparable": 0.12980769230769232,
+      "n_class_comparisons_unavailable": 0,
+      "error_counts": {},
+      "error_clip_ids": [],
+      "api_latency_after_warmup_all_attempts": {
+        "n": 208,
+        "median_ms": 710.5429165003443,
+        "p95_ms": 750.9211573000357,
+        "min_ms": 695.2680009999312,
+        "max_ms": 833.443065002939
+      },
+      "api_latency_after_warmup_successful_payloads": {
+        "n": 208,
+        "median_ms": 710.5429165003443,
+        "p95_ms": 750.9211573000357,
+        "min_ms": 695.2680009999312,
+        "max_ms": 833.443065002939
+      },
+      "generation_latency_after_warmup_successful_calls": {
+        "n": 208,
+        "median_ms": 709.8600405006437,
+        "p95_ms": 750.2421539995339,
+        "min_ms": 694.5889210001042,
+        "max_ms": 832.7503920008894
+      }
+    },
+    "test": {
+      "n_expected": 194,
+      "n_attempted": 194,
+      "n_errors": 0,
+      "n_abstentions": 0,
+      "n_valid_format": 194,
+      "valid_format_rate_all_clips": 1.0,
+      "n_correct_band": 184,
+      "correct_band_rate_all_clips": 0.9484536082474226,
+      "n_wrong_band_among_valid": 10,
+      "n_no_usable_text": 0,
+      "n_comparable_class_decisions": 194,
+      "n_class_disagreements": 36,
+      "class_disagreement_rate_comparable": 0.18556701030927836,
+      "n_class_comparisons_unavailable": 0,
+      "error_counts": {},
+      "error_clip_ids": [],
+      "api_latency_after_warmup_all_attempts": {
+        "n": 194,
+        "median_ms": 705.4392134996306,
+        "p95_ms": 819.1747281500284,
+        "min_ms": 688.2563369981654,
+        "max_ms": 827.6781579988892
+      },
+      "api_latency_after_warmup_successful_payloads": {
+        "n": 194,
+        "median_ms": 705.4392134996306,
+        "p95_ms": 819.1747281500284,
+        "min_ms": 688.2563369981654,
+        "max_ms": 827.6781579988892
+      },
+      "generation_latency_after_warmup_successful_calls": {
+        "n": 194,
+        "median_ms": 704.7452770020755,
+        "p95_ms": 818.5099426507804,
+        "min_ms": 687.5804289993539,
+        "max_ms": 826.9392229994992
+      }
+    }
+  },
+  "limitations": [
+    "Description gabarit parmi quatre bandes, pas justification causale de fuite.",
+    "Désaccord classe/score : cohérence de sorties, pas exactitude de classification.",
+    "Latences séquentielles sur clips, pas preuve de débit soutenu ni validation terrain."
+  ],
+  "raw_sha256": "eb7c25eef70d3836e24c4aa278625387f7fd4510d54a09805f9f0f29a148691f"
+}

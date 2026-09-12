@@ -18,9 +18,12 @@ Icham
 ## En cours et à vérifier
 
 - [x] Nouvel objectif actif : exécution du plan qualité V1 lancée en worktree isolé ; références/fichiers et intégrité revérifiés. [[Évaluation qualité V1 - exécution]].
-- [ ] Préinscription/code publiés puis évaluation CPU T0/contrôles/stress, audit texte complet H100, rapport de verdict vérifié.
-- [x] Icham demande de planifier une vraie évaluation par nous-mêmes, sans attendre Nevil ; ancienne exclusivité levée. [[Protocole évaluation#Plan qualité V1 — proposé, non exécuté]]. Aucun calcul lancé.
-- [ ] Après feu vert : T0/test complet, contrôles comparables, stress puis audit texte val/test séparés, checkpoint figé ; pas une démo de huit clips.
+- [x] Préinscription/code `c27a43fd` publiés, 32 tests runtime cible réussis, 1 000 MD5/formats WAV et huit SHA de runs vérifiés.
+- [x] Cinq contrôles fixes reproduits sans nouvelle recherche TSLM ; comparaison RF Vincent conditionnelle faute d'export accessible.
+- [x] Évaluation CPU neuf runs et huit comparaisons appariées terminées ; AUC T0 clip/groupe 0,665/0,861, pas de gain établi face à C1. [[Évaluation qualité V1 - exécution]].
+- [x] Audit texte 208 val + 194 test terminé : bandes test 184/194 correctes, 36/194 désaccords classe/score, format 194/194 ; aucun changement du modèle.
+- [ ] Revue indépendante et publication du verdict/preuves en cours ; aucun job GPU restant.
+- [x] Icham a levé l'exclusivité Nevil puis lancé l'objectif d'évaluation complète. [[Protocole évaluation]].
 - [x] Icham autorise l'implémentation V1 complète jusqu'à T0/T1–T3 ; runtime H100 et données existantes revérifiés. [[V1 ML - exécution]].
 - [x] Scoring continu implémenté, huit tests CPU et contrôle H100 sur quatre clips train réussis ; aucune évaluation de qualité. [[V1 ML - exécution]].
 - [x] Scripts de campagne/reload/export publiés et transférés à `1199789f` ; 18 tests CPU réussis dans le runtime reconstruit.
@@ -50,7 +53,7 @@ Icham
 - [x] G2 mécanique Icham : runtime, entraînement court, checkpoint complet et reload neuf hors ligne, puis environnement reconstruit. [[V0 ML - exécution]].
 - [ ] Vincent : baseline entraînée sur développement, tests et export.
 - [ ] G3 Safoan : audio/spectrogramme et vraie inférence de bout en bout.
-- [ ] G4 Icham : évaluation finale commune via le harness existant après gel des modèles ; planifiée seulement, nouvelle consigne utilisateur.
+- [x] G4 Icham : évaluation finale V1 via le harness existant exécutée après gel ; résultats mesurés, pas une validation de fiabilité opérationnelle. Publication/revue en cours.
 - [ ] G5 Équipe : checkpoint livré, reproduction, pitch/démo et soumission vérifiée.
 
 ## Entire — finaliser l’onboarding du poste Icham
@@ -71,7 +74,7 @@ Voir [[Entire - installation et vérification]].
 
 ## Blocages identifiés
 
-Aucun blocage restant pour V0 ni pour la livraison V1/T0–T3, terminées. Qualité finale, revue d'interfaces G1, intégration application et surveillance continue restent à établir ; elles ne sont pas prouvées par la conformité des exports. Voir [[V1 ML - exécution]].
+Aucun blocage d'exécution V0/V1/évaluation. Qualité V1 désormais mesurée et insuffisante pour promettre une surveillance fiable : [[Évaluation qualité V1 - exécution]]. Export RF Vincent encore inaccessible, comparaison conditionnelle omise. Revue d'interfaces G1, intégration application et validation continue restent séparées.
 
 ## Suivi
 

@@ -1,0 +1,43 @@
+{
+  "run_id": "c3",
+  "model_name": "C3 — baseline historique — mélange C1 + C2 + taux de passages par zéro",
+  "checkpoint": "logreg(C=0.01)",
+  "training_commit": "c27a43fdd4de73ccc09f5f4bc02acd87c89f58f6",
+  "config_hash": null,
+  "split_filename": "split_v2.csv",
+  "split_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+  "timestamp": "2026-09-12T20:51:37+00:00",
+  "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
+  "test_labels_not_used_for_tuning": true,
+  "control_level": "C3",
+  "audio": "normalised",
+  "features": [
+    "centroide_hz",
+    "ecart_type_spectral_hz",
+    "rolloff85_hz",
+    "platitude",
+    "bande_0_250",
+    "bande_250_500",
+    "bande_500_1000",
+    "bande_1000_2000",
+    "bande_2000_4000",
+    "taux_passages_zero",
+    "facteur_crete"
+  ],
+  "feature_weights": {
+    "centroide_hz": 0.078635,
+    "ecart_type_spectral_hz": -0.141311,
+    "rolloff85_hz": -0.121211,
+    "platitude": -0.086945,
+    "bande_0_250": -0.206667,
+    "bande_250_500": 0.145352,
+    "bande_500_1000": 0.10218,
+    "bande_1000_2000": -0.016094,
+    "bande_2000_4000": -0.003395,
+    "taux_passages_zero": -0.0827,
+    "facteur_crete": -0.760595
+  },
+  "selected_C": 0.01,
+  "threshold": 0.510207,
+  "negative_control_shuffled_labels": false
+}

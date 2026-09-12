@@ -8,7 +8,7 @@ CLI 0.10.6 et 12 skills installés ; capture Codex locale constatée. La recherc
 
 ## Dernier échange — 2026-09-12
 
-**Objectif d'évaluation désormais en exécution :** les deux fichiers d'objectif reprennent les six étapes et sont traités comme le lancement du chantier. [[Évaluation qualité V1 - exécution]] suit les preuves et prochaines actions. Préparation dans `feat/icham-quality-eval`, intégrité V1/exports vérifiée, protocole préinscrit avant résultats ; aucune métrique finale encore calculée à ce jalon. Ancienne étape « planification seulement » ci-dessous conservée comme historique. Les poids et le scoring ne changent pas.
+**Évaluation réelle terminée, synthèse/revue en cours :** T0 sur 194 test manque 25/98 fuites et produit 43/96 fausses alertes. AUC clip/groupe `0,665/0,861`, contre `0,902/0,927` pour C1 ; aucun gain TSLM démontré. Audit 402/402 terminé : sur test, 184/194 bandes correctes et 36/194 désaccords entre classe générée et décision du score. [[Évaluation qualité V1 - exécution]] donne chiffres, intervalles, chemins et limites. Code/préinscription `c27a43fd`, 32 tests réussis, données et poids inchangés ; tous les jobs sont terminés, GPU à 0 Mio, instance toujours allumée. Prochaine action : achever la revue indépendante puis publier le rapport/artefacts ; ne pas réentraîner ni relancer l'audit. Les paragraphes « planification seulement »/« Nevil seul » ci-dessous sont historiques.
 
 **Nouvelle consigne : nous évaluerons la qualité nous-mêmes, mais planification seulement à ce stade.** Icham indique que Nevil n'a pas encore fait l'évaluation et lève sa responsabilité exclusive. [[Protocole évaluation#Plan qualité V1 — proposé, non exécuté]] décrit détection T0 sur 194 test, comparaison appariée aux contrôles, stress déjà exportés et audit texte complet val/test séparés. Prochaine action : feu vert d'exécution, puis réutilisation du harness existant ; aucune métrique, inférence ou modification du checkpoint lancée dans ce tour. La responsabilité Nevil mentionnée dans les jalons précédents est historique ; les contraintes de gel et d'absence de tuning test restent en vigueur.
 
@@ -46,9 +46,9 @@ Nevil propose le nom LeakLess et confirme le cadrage software-only acoustique, s
 
 ## État courant
 
-Direction de travail : PIPE, surveillance acoustique continue avec alerte automatique, TimeNet, TSLM réellement entraîné et baseline. [[Plan surveillance continue]] distingue cette ambition de la livraison ML réalisée : V1 entraînée, sélectionnée sur validation, figée et T0–T3 publiés. L'évaluation finale est désormais planifiée côté Icham, sans exécution autorisée dans ce tour. Raccordement au flux/simulateur, logique d'événement et validation terrain restent séparés et ne sont pas prouvés par ces clips.
+Direction de travail : PIPE, surveillance acoustique continue avec alerte automatique, TimeNet, TSLM réellement entraîné et baseline. [[Plan surveillance continue]] distingue cette ambition de la V1 et de son évaluation réellement exécutée par Icham : [[Évaluation qualité V1 - exécution]]. Le détecteur est insuffisant à ce stade ; aucun raccordement au flux/simulateur ni logique d'événement ou fiabilité terrain n'est prouvé par ces clips.
 
-Le TSLM adapté et le score continu sont vérifiés : [[V1 ML - exécution]], sans comparaison finale calculée par Icham. Le rapport baseline de Nevil reste séparé ; aucune supériorité du TSLM n'est déduite des diagnostics de validation. `split_v1` invalide, v2 uniquement. Machine fournie par Icham, aucun nouveau GPU provisionné ; l'instance n'a pas été arrêtée.
+Le TSLM adapté et son score continu sont vérifiés : [[V1 ML - exécution]]. L'évaluation finale réutilise le harness Nevil, cinq contrôles fixes et les exports gelés ; les résultats ne démontrent pas de supériorité TSLM. `split_v1` invalide, v2 uniquement. Machine fournie par Icham, aucun nouveau GPU provisionné ; l'instance n'a pas été arrêtée.
 
 ## Lire pour reprendre sans le chat
 

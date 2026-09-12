@@ -4,9 +4,9 @@ Icham
 
 ## Commencer ici
 
-[[Passation]] donne l'état réel. [[Plan surveillance continue]] donne le plan courant et la livraison ML prioritaire à Nevil ; [[Plan directeur agents]] conserve le plan initial et les contraintes communes. Aucune lecture du chat n'est nécessaire.
+[[Passation]] donne l'état réel. [[Évaluation qualité V1 - exécution]] donne les résultats mesurés ; [[Plan surveillance continue]] distingue l'ambition produit du prototype. [[Plan directeur agents]] conserve le plan initial et les contraintes communes. Aucune lecture du chat n'est nécessaire.
 
-PIPE : un appareil écoute les canalisations en continu ; le système vise des alertes automatiques avec preuves acoustiques consultables. Cadrage précisé par Icham : [[Plan surveillance continue]]. V1 entraînée et rechargée, exports T0–T3 conformes et publiés : [[V1 ML - exécution]]. Évaluation finale par Nevil à venir ; surveillance et fiabilité terrain non encore validées, aucune performance opérationnelle annoncée.
+PIPE vise un appareil qui écoute les canalisations en continu et produit des alertes avec preuves acoustiques consultables. V1 entraînée/rechargée, exports T0–T3 publiés et évaluation complète exécutée par Icham. Résultat : détecteur encore insuffisant, sans gain démontré face au contrôle C1 ; descriptions de bandes globalement correctes mais parfois incohérentes avec le score. [[Évaluation qualité V1 - exécution]]. Surveillance et fiabilité terrain non validées.
 
 ## Votre mission
 

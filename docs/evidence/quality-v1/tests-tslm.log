@@ -1,0 +1,30 @@
+test_all_clip_denominators_include_wrong_invalid_and_failed_outputs (test_audit_text.TextAuditChecks.test_all_clip_denominators_include_wrong_invalid_and_failed_outputs) ... ok
+test_capture_is_transparent_including_raw_whitespace_and_exceptions (test_audit_text.TextAuditChecks.test_capture_is_transparent_including_raw_whitespace_and_exceptions) ... ok
+test_existing_output_fails_before_importing_or_loading_model (test_audit_text.TextAuditChecks.test_existing_output_fails_before_importing_or_loading_model) ... ok
+test_frozen_audio_manifest_and_per_clip_bytes_are_verified (test_audit_text.TextAuditChecks.test_frozen_audio_manifest_and_per_clip_bytes_are_verified) ... ok
+test_full_mock_audit_records_402_attempts_and_excludes_warmup (test_audit_text.TextAuditChecks.test_full_mock_audit_records_402_attempts_and_excludes_warmup) ... ok
+test_threshold_is_full_precision_verified_on_val_not_test (test_audit_text.TextAuditChecks.test_threshold_is_full_precision_verified_on_val_not_test) ... ok
+test_full_train_shuffle_and_fixed_diagnostic_groups (test_campaign.CampaignChecks.test_full_train_shuffle_and_fixed_diagnostic_groups) ... ok
+test_split_and_cache_cannot_silently_include_test (test_campaign.CampaignChecks.test_split_and_cache_cannot_silently_include_test) ... ok
+test_validation_selection_uses_groups_and_earliest_exact_tie (test_campaign.CampaignChecks.test_validation_selection_uses_groups_and_earliest_exact_tie) ... ok
+test_changed_audit_mapping_rejected_before_model_load (test_export.ExportChecks.test_changed_audit_mapping_rejected_before_model_load) ... ok
+test_complete_export_mock_maps_ids_and_stresses_float_audio (test_export.ExportChecks.test_complete_export_mock_maps_ids_and_stresses_float_audio) ... ok
+test_existing_run_rejected_before_model_load (test_export.ExportChecks.test_existing_run_rejected_before_model_load) ... ok
+test_export_requires_full_code_revision_before_model_load (test_export.ExportChecks.test_export_requires_full_code_revision_before_model_load) ... ok
+test_frozen_provenance_requires_real_count_matching_reload_and_scoring (test_export.ExportChecks.test_frozen_provenance_requires_real_count_matching_reload_and_scoring) ... ok
+test_official_stress_golden_seed_and_cross_process_identity (test_export.ExportChecks.test_official_stress_golden_seed_and_cross_process_identity) ... ok
+test_predictions_exact_schema_mapping_precision_and_invalid_values (test_export.ExportChecks.test_predictions_exact_schema_mapping_precision_and_invalid_values) ... ok
+test_reload_tolerance_is_small_absolute_and_rejects_invalid_scores (test_export.ExportChecks.test_reload_tolerance_is_small_absolute_and_rejects_invalid_scores) ... ok
+test_archive_paths (test_pipeline.PipelineChecks.test_archive_paths) ... ok
+test_debug_selection_is_train_only_and_group_distinct (test_pipeline.PipelineChecks.test_debug_selection_is_train_only_and_group_distinct) ... ok
+test_invalid_inputs_and_wav_roundtrip (test_pipeline.PipelineChecks.test_invalid_inputs_and_wav_roundtrip) ... ok
+test_numeric_flow_and_target_separation (test_pipeline.PipelineChecks.test_numeric_flow_and_target_separation) ... ok
+test_predict_separates_generated_text_and_dsp (test_pipeline.PipelineChecks.test_predict_separates_generated_text_and_dsp) ... ok
+test_causal_sum_unequal_lengths_padding_and_softmax (test_scoring.ScoringChecks.test_causal_sum_unequal_lengths_padding_and_softmax) ... ok
+test_numeric_predictor_keeps_float_audio_and_preprocessing (test_scoring.ScoringChecks.test_numeric_predictor_keeps_float_audio_and_preprocessing) ... ok
+test_rejects_metadata_training_mode_and_nonfinite_scores (test_scoring.ScoringChecks.test_rejects_metadata_training_mode_and_nonfinite_scores) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 0.363s
+
+OK

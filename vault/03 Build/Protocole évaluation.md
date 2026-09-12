@@ -2,9 +2,11 @@
 
 Icham
 
-**Responsabilité révisée par Icham : évaluation par nous-mêmes, planification uniquement pour l'instant.** Nevil n'a pas encore évalué selon Icham. Son harness reste le parcours réutilisé ; l'ancienne exclusivité du calcul final est levée pour le prochain chantier, pas une autorisation de lancer des calculs dans ce tour. V1 et exports T0–T3 restent figés/publiés (`186c45a`, `7c04c9a`) ; aucun résultat final nouveau. Preuves de livraison : [[V1 ML - exécution]].
+**État courant : évaluation complète exécutée par Icham**, après levée de l'exclusivité Nevil puis lancement de l'objectif. Son harness est réutilisé, avec correction prospective de l'AP en cas d'ex aequo et prose de conclusions neutralisée avant calcul. Protocole/code préinscrits à `c27a43fd`. Les résultats réels sont dans [[Évaluation qualité V1 - exécution]] ; V1 et exports T0–T3 demeurent figés (`186c45a`, `7c04c9a`). Les responsabilités/consignes restrictives plus bas décrivent la livraison antérieure, pas le statut courant.
 
 ## Plan qualité V1 — proposé, non exécuté
+
+Titre conservé pour les liens historiques : ce plan initial a depuis été exécuté ; voir [[Évaluation qualité V1 - exécution]]. Les temps de réponse texte ont été mesurés ; ni benchmark du score seul ni mémoire de pointe ou débit streaming ne sont revendiqués.
 
 1. **Figer le protocole avant tout calcul test.** Modèle époque 4 et scoring inchangés, SHA des quatre runs et split v2 vérifiés. 598 train exclus du verdict ; 208 validation pour le seuil, 194 test pour l'évaluation finale. Cible binaire actuelle, bruit environnemental parmi les négatifs. Critère principal proposé : ROC-AUC après médiane par groupe ; métriques clip et d'exploitation complémentaires, incertitude par groupes heuristiques. Conserver les trois configurations effectivement comparées et le caractère optimiste possible du score de sélection validation.
 2. **Mesurer la détection T0 sur tous les clips test.** Réutiliser `evaluate_predictions.py` et les exports existants, sans nouvelle inférence GPU. Seuil choisi exclusivement sur les médianes de groupes validation par maximum de macro-F1 ; départage du harness au plus petit seuil, décision `score >= seuil`. Publier ROC-AUC, précision moyenne (`pr_auc` dans ce code), macro-F1, balanced accuracy, rappel fuite/FPR, matrice TP/FP/TN/FN et Brier brut non calibré. Précision et F1 fuite peuvent être dérivés des mêmes effectifs, sans second moteur d'évaluation. Aucune moyenne mélangeant validation et test ; pas de seuil arbitraire 0,5 ni réglage sur test.

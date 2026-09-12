@@ -4,7 +4,15 @@ Icham
 
 ## État actuel
 
-Nouvel objectif actif à deux fichiers lu intégralement, repris comme lancement des six étapes d'évaluation. Worktree isolé `feat/icham-quality-eval`, code/harness/runtime/empreintes inspectés ; détails dans [[Évaluation qualité V1 - exécution]]. Avant résultats : défaut AP avec scores égaux démontré sur jouet et correction prospective isolée, seuil d'audit à pleine précision, RF Vincent conditionnelle faute d'export accessible. Aucun calcul final TSLM ni changement de modèle à ce premier jalon.
+Évaluation complète terminée : neuf runs CPU, huit comparaisons appariées, 402 textes H100, tous les processus code 0. AUC test T0 clip/groupe 0,665/0,861 ; 25/98 fuites manquées, 43/96 fausses alertes ; C1 0,902/0,927. Textes test 184/194 bandes correctes, 36/194 désaccords classe/score, aucune abstention/erreur runtime. Revue indépendante et publication en cours : [[Évaluation qualité V1 - exécution]]. GPU 0 Mio / 0 %, instance allumée. Les résultats test ne motivent aucun réglage.
+
+## Évaluation réelle — 2026-09-12
+
+Code/préinscription `c27a43fd` publiés avant résultats, 32 tests runtime réussis, 1 000 WAV et huit empreintes de fichiers TSLM vérifiés. Contrôles fixes C0/C1/C2/C2b/C3 reproduits ; CPU `quality-v1-001/report` terminé, ancien handle `55175`. Audit `quality-v1-001/text-audit` terminé à 20:59:59 UTC, ancien handle `56401`, 402 lignes conservées, SHA brut `eb7c25eef70d3836e24c4aa278625387f7fd4510d54a09805f9f0f29a148691f`. Tous les artefacts copiés dans le worktree qualité ; aucune modification des fichiers du modèle ni des prédictions T0–T3. Latence texte test médiane 705 ms/p95 819 ms, chauffe exclue, pas un benchmark streaming. RF Vincent non comparée faute d'export accessible. Revue indépendante demandée sur calculs, audit texte et écart du diagnostic validation historique avec les probabilités exportées.
+
+## Préparation de l'évaluation — historique
+
+Nouvel objectif actif à deux fichiers lu intégralement, repris comme lancement des six étapes d'évaluation. Worktree isolé `feat/icham-quality-eval`, code/harness/runtime/empreintes inspectés. Avant résultats : défaut AP avec scores égaux démontré sur jouet et correction prospective isolée, seuil d'audit à pleine précision, RF Vincent conditionnelle faute d'export accessible. Aucune métrique finale TSLM à ce premier jalon ; ces réserves ont été traitées avant le calcul CPU.
 
 ## Passage à la planification — historique
 
