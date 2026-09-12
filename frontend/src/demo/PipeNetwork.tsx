@@ -88,9 +88,10 @@ export function PipeNetwork({
         })}
       </svg>
       <figcaption>
-        Illustrative network: pipes, water motion and channel positions are
-        drawn for the demo, not measured, and no leak is shown. Ripple size =
-        measured level of each replayed recording.
+        Three experimental recordings replayed for demonstration. Illustrative
+        network: pipes, water motion and channel positions are drawn for the
+        demo, not measured, and no leak is shown. Ripple size = measured level
+        of each replayed recording.
       </figcaption>
     </figure>
   );

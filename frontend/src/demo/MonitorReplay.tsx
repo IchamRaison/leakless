@@ -99,7 +99,7 @@ export default function MonitorReplay() {
     const measured = rings[record.id];
     return {
       id: record.id,
-      name: `CH 0${index + 1}`,
+      name: `REC 0${index + 1}`,
       level:
         channel && measured?.length
           ? ringAt(measured, channel.visualization.duration_seconds, clock)
@@ -178,7 +178,7 @@ export default function MonitorReplay() {
               />
             ) : (
               <article className="monitor-card monitor-waiting" key={record.id}>
-                <span className="demo-kicker">CH 0{index + 1}</span>
+                <span className="demo-kicker">REC 0{index + 1}</span>
                 {errors[record.id] ? (
                   <div role="alert">
                     <p>{errors[record.id]}</p>
@@ -235,7 +235,7 @@ function ChannelCard({
   if (!rings.length)
     return (
       <article className="monitor-card monitor-waiting">
-        <span className="demo-kicker">CH 0{index + 1}</span>
+        <span className="demo-kicker">REC 0{index + 1}</span>
         <p>PENDING — valid spectral measurements required.</p>
       </article>
     );
@@ -255,7 +255,7 @@ function ChannelCard({
   return (
     <article className="monitor-card" aria-labelledby={`channel-${record.id}`}>
       <header>
-        <span className="demo-kicker">CH 0{index + 1}</span>
+        <span className="demo-kicker">REC 0{index + 1}</span>
         <h2 id={`channel-${record.id}`}>
           <span className="monitor-label">Dataset label</span> {record.title}
         </h2>

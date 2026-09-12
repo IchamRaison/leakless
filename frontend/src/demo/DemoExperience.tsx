@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowDown,
-  ArrowUpRight,
   AudioLines,
   Check,
   ChevronRight,
@@ -409,14 +408,9 @@ export default function DemoExperience() {
                 highest score.
               </p>
             </div>
-            <a
-              className="report-link"
-              href={evidence.source}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Source & protocol <ArrowUpRight size={14} />
-            </a>
+            <span className="report-link">
+              Protocol frozen before final TSLM evaluation · protocol-freeze-v1
+            </span>
           </div>
           <div className="control-ladder">
             {evidence.controls.map((control) => (
