@@ -139,12 +139,12 @@ export default function MonitorReplay() {
       <main className="demo-main monitor-main">
         <p className="monitor-banner" role="note">
           <strong>Replay, not a live feed.</strong> Three recorded train clips
-          from the experimental dataset, each looped. Channels are recordings,
-          not building locations. No detection model output: TSLM pending.
+          from the experimental dataset, each looped. Recordings are not
+          building locations. No detection model output: TSLM pending.
         </p>
         <dl className="monitor-summary">
           <div>
-            <dt>Channels</dt>
+            <dt>Recordings</dt>
             <dd>
               {loaded.length} / {recordings.records.length}
             </dd>
