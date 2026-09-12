@@ -1598,3 +1598,17 @@
   line-height: 1.6;
   color: #a7b8aa;
 }
+/* Phones: the fullscreen point panel sits between the scene and the controls instead of over it. */
+@media (max-width: 760px) {
+  .building-panel:fullscreen .point-panel {
+    position: static;
+    width: auto;
+    margin: 8px 0;
+    padding: 12px 14px;
+    gap: 6px;
+  }
+  .building-panel:fullscreen .point-panel-id {
+    font-size: 22px;
+    margin-bottom: 0;
+  }
+}
