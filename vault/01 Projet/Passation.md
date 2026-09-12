@@ -4,6 +4,10 @@ Icham
 
 ## Dernier échange — 2026-09-12
 
+Icham demande de reprendre son chantier ML, puis d'installer `grill-me` avant toute autre action. Installation locale terminée et fichiers vérifiés, avec sa dépendance `grilling`, depuis `mattpocock/skills` révision `3cca18b`. Détails et commande reproductible dans [[Journal Icham]]. Aucun entretien grill-me ni test ML lancé ; prochaine action : reprendre I0 (environnement, accès au modèle et premier chargement).
+
+## Cadrage précédent
+
 Icham demande une critique structurelle, la première réponse étant trop méthodologique. [[Challenge du cadrage de Nevil]] précise l'avis : direction hackathon soutenue, produit à resserrer ; le WHY de surveillance permanente ne correspond pas au WHAT d'analyse d'un extrait choisi. Recommandation à discuter : seconde lecture pour un technicien, avec bénéfice de qualification/documentation à confronter à son travail réel. Nouvelle note distante [[PROBLEM STATEMENT - LeakLess Temporal AI]] intégrée (`0a70a95`) : direction déclarée approuvée en équipe sous réserve de l'audit ; ses trois classes restent à aligner avec les contrats binaires. Aucun contrat ni chantier technique modifié. G0 et entretien métier peuvent avancer en parallèle ; preuves dans [[Journal Icham]].
 
 ## Reprise Safoan — 2026-09-12
