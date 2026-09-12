@@ -151,3 +151,72 @@ Aucune affirmation de significativité statistique.
 `c2b_search_region_matches_declared_bounds` ·
 `c2b_periodicity_strength_is_low_on_white_noise` · `c2b_is_deterministic` ·
 `c2b_is_in_the_ladder`
+
+
+---
+
+# RÉSULTATS — ajoutés au commit B, après le gel
+
+> Les définitions ci-dessus ont été commitées en `355f074`, qui ne contient
+> aucun chiffre. Tout ce qui suit a été mesuré ensuite.
+
+## Échelle complète — test, 41 clusters (30 leak / 11 non-leak)
+
+| run | clip AUC | clip PR-AUC | clip F1 | cluster AUC | cluster F1 | Brier |
+|---|---|---|---|---|---|---|
+| C1 enveloppe | **0,902** | 0,878 | **0,856** | **0,927** | 0,849 | **0,140** |
+| **C2b temporel** | 0,847 | 0,829 | 0,763 | 0,915 | 0,814 | 0,160 |
+| C3 baseline | 0,824 | 0,792 | 0,758 | 0,900 | **0,856** | 0,173 |
+| C2 spectral | 0,710 | 0,711 | 0,680 | 0,779 | 0,776 | 0,214 |
+
+## Comparaisons appariées — mêmes tirages de clusters
+
+| comparaison | métrique | Δ observé | IC95 | lecture |
+|---|---|---|---|---|
+| C2b − C1 | clip AUC | −0,055 | [−0,164, +0,058] | inconclusive |
+| C2b − C1 | cluster AUC | −0,012 | [−0,157, +0,157] | inconclusive |
+| C2b − C2 | clip AUC | +0,137 | [−0,004, +0,269] | inconclusive |
+| C2b − C2 | cluster AUC | +0,136 | [−0,061, +0,368] | inconclusive |
+| C2b − C3 | clip AUC | +0,023 | [−0,154, +0,123] | inconclusive |
+| C2b − C3 | cluster AUC | +0,015 | [−0,152, +0,225] | inconclusive |
+
+## Stress temporel — même modèle, aucun réentraînement
+
+| | clip AUC | cluster AUC | écart vs T0 | corrélation des probabilités avec T0 | \|Δp\| médian |
+|---|---|---|---|---|---|
+| T0 original | 0,847 | 0,915 | — | 1,000 | — |
+| T1 inversion | 0,849 | 0,906 | +0,002 | **0,992** | 0,015 |
+| T2 permutation de blocs | 0,819 | 0,845 | −0,028 | 0,748 | 0,116 |
+| T3 phase randomisée | 0,726 | 0,679 | **−0,121** | 0,724 | 0,110 |
+
+Comparaison appariée T0 − T3 : Δ clip AUC **+0,121**, IC95 [+0,068, +0,283],
+*evidence compatible with improvement* pour T0. C'est la seule des trois qui
+sorte de l'ambiguïté.
+
+> **Ces trois effets étaient prédits au §9, avant de les mesurer** : T1 faible
+> parce que l'autocorrélation et le flux sont presque invariants au renversement ;
+> T2 et T3 forts. La prédiction s'est vérifiée, y compris la mise en garde que
+> T1 est un stress faible pour des descripteurs temporels peu profonds.
+
+## La réponse à la question unique
+
+> ### « Does shallow temporal structure add information beyond the strongest static/acquisition control C1? »
+>
+> ## **INCONCLUSIVE**
+
+Toutes les estimations ponctuelles favorisent C1 — clip AUC −0,055, cluster AUC
+−0,012, macro-F1 −0,093 — mais chaque intervalle de confiance contient zéro.
+Avec 41 clusters indépendants, et 11 seulement du côté non-leak, aucun de ces
+écarts n'est distinguable du bruit. **Nous ne pouvons pas dire que la structure
+temporelle simple apporte quelque chose au-delà de C1, ni qu'elle n'apporte rien.**
+
+Ce qui est en revanche établi :
+
+1. **C2b est réellement temporel.** Ses prédictions se désorganisent sous T2
+   (corrélation 0,748) et sous T3 (0,724), et la dégradation d'AUC sous T3
+   (−0,121) survit au bootstrap apparié. Ce n'est pas du spectre déguisé.
+2. **C1 reste le barreau à franchir**, et il n'a pas bougé. Un TSLM qui
+   dépasserait C2b sans dépasser C1 n'aurait rien démontré.
+3. **C2b et C3 sont indiscernables** (Δ clip AUC +0,023, IC95 traversant zéro).
+   La baseline historique n'apportait donc rien de plus qu'une représentation
+   temporelle à six descripteurs.

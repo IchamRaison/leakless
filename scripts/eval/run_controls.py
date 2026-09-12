@@ -33,7 +33,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 
 sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(Path(__file__).parent.parent / "temporal"))
 from harness import contract, features, metrics, split_loader  # noqa: E402
+from stress import TRANSFORMS, clip_rng  # noqa: E402
 
 C_GRID = (0.01, 0.1, 1.0, 10.0)   # gelé
 SHUFFLE_SEED = 20260912           # gelé
@@ -47,11 +49,20 @@ def git_commit() -> str:
         return "unknown"
 
 
-def build_matrix(split, data_root: Path, control: str):
+def build_matrix(split, data_root: Path, control: str, transform: str = "T0"):
+    """Descripteurs de tous les clips, éventuellement après un stress temporel.
+
+    `transform` s'applique au signal BRUT, avant l'extraction. Le modèle n'est
+    jamais réentraîné dessus : on mesure comment un modèle entraîné sur l'original
+    réagit à une organisation temporelle perturbée.
+    """
     fn = features.LADDER[control]["fn"]
+    tfn = TRANSFORMS[transform]["fn"]
     ids, X, y, g, folds = [], [], [], [], []
     for c in split.clips:
         raw = split_loader.read_wav_raw(data_root, split.path_of(c.clip_id))
+        if transform != "T0":
+            raw = tfn(raw, clip_rng(transform, c.clip_id))
         ids.append(c.clip_id)
         X.append(fn(raw))
         y.append(c.label)
@@ -89,7 +100,7 @@ def fit_control(control: str, ids, X, y, g, folds, *, shuffle_labels: bool):
             best = (f1, C, clf, t)
     _, C, clf, threshold = best
     probs = clf.predict_proba(Xs)[:, 1]
-    return {cid: float(p) for cid, p in zip(ids, probs)}, C, threshold, clf, y_fit
+    return ({cid: float(p) for cid, p in zip(ids, probs)}, C, threshold, clf, y_fit, scaler)
 
 
 def main() -> None:
@@ -99,6 +110,9 @@ def main() -> None:
     ap.add_argument("--manifests", default="manifests")
     ap.add_argument("--runs-dir", required=True, help="dossier de runs, HORS dépôt")
     ap.add_argument("--controls", nargs="+", default=["C0", "C1", "C2", "C3"])
+    ap.add_argument("--stress-transforms", nargs="*", default=[],
+                    help="applique T1/T2/T3 à l'audio et réutilise le modèle entraîné "
+                         "sur T0/train, SANS réentraînement")
     ap.add_argument("--shuffle-labels", action="store_true",
                     help="contrôle négatif : étiquettes permutées par cluster, "
                          "on attend un résultat proche du hasard")
@@ -112,7 +126,7 @@ def main() -> None:
         if control not in features.LADDER:
             sys.exit(f"contrôle inconnu : {control}")
         ids, X, y, g, folds = build_matrix(split, Path(args.data_root), control)
-        probs, C, threshold, clf, y_fit = fit_control(
+        probs, C, threshold, clf, y_fit, scaler = fit_control(
             control, ids, X, y, g, folds, shuffle_labels=args.shuffle_labels)
 
         suffix = "-shuffled" if args.shuffle_labels else ""
@@ -143,6 +157,29 @@ def main() -> None:
                         "threshold": round(float(threshold), 6),
                         "n_features": len(spec["names"])})
         print(f"{run_id:<16} -> {run_dir}")
+
+        # Stress temporel : MÊME scaler, MÊME modèle, descripteurs recalculés sur
+        # l'audio transformé. Aucun réentraînement — c'est tout l'intérêt.
+        for tname in args.stress_transforms:
+            if tname == "T0":
+                continue
+            ids_t, Xt, _, _, _ = build_matrix(split, Path(args.data_root), control, tname)
+            assert list(ids_t) == list(ids), "l'ordre des clips a changé sous transformation"
+            probs_t = {cid: float(p) for cid, p in
+                       zip(ids_t, clf.predict_proba(scaler.transform(Xt))[:, 1])}
+            rid = f"{run_id}-{tname}"
+            d = contract.write_run(
+                Path(args.runs_dir) / rid, run_id=rid,
+                model_name=f"{control} sous {tname} — {TRANSFORMS[tname]['description']}",
+                checkpoint=f"logreg(C={C}) entraîné sur T0/train, NON réentraîné",
+                training_commit=commit, split=split,
+                threshold_rule="hérité de T0 : seuil choisi sur la validation de T0",
+                probabilities=probs_t,
+                extra={"control_level": control, "stress_transform": tname,
+                       "retrained": False, "audio": spec["audio"],
+                       "features": list(spec["names"])})
+            summary.append({"control": control, "transform": tname, "run_dir": str(d)})
+            print(f"{rid:<16} -> {d}")
 
     print(json.dumps({"runs": summary, "split_sha256": split.sha256,
                       "commit": commit}, indent=2, ensure_ascii=False))

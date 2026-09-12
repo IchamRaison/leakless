@@ -121,12 +121,16 @@ Mesuré sur le test gelé, 41 clusters (30 *leak* / 11 *non-leak*) :
 | C0 | niveau sonore absolu, signal brut | 0,878 | 0,839 |
 | **C1** | **forme d'amplitude seule, audio normalisé** | **0,902** | **0,927** |
 | C2 | spectre agrégé, sans phase ni ordre | 0,710 | 0,779 |
+| **C2b** | **structure temporelle peu profonde** (enveloppe, modulation, flux) | 0,847 | 0,915 |
 | C3 | baseline historique (mélange C1 + C2 + ZCR) | 0,824 | 0,900 |
 
 > ### C1 fait mieux que C0.
 > La normalisation d'amplitude retire le niveau absolu mais **pas** le raccourci
 > d'acquisition : la forme de l'enveloppe en porte davantage. Le contrôle que le
 > TSLM doit dépasser est donc **C1 (0,902 / 0,927)**, pas C0.
+>
+> Et C2b, un contrôle temporel peu profond à six descripteurs, ne dépasse pas C1
+> non plus (Δ clip AUC −0,055, IC95 traversant zéro). Battre C2b ne suffit pas.
 
 Et la formulation reste qualitative : avec 41 clusters, aucun écart n'est déclaré
 significatif. Les verdicts autorisés sont *compatible with improvement*,

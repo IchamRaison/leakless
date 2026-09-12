@@ -12,7 +12,7 @@
 | SHA256 | `7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896` |
 | Clips | 1000 |
 | Clusters de dépendance | 185 |
-| Commit du dépôt | `2f61695072e0f16205d6a7047243c59600eb2792` |
+| Commit du dépôt | `355f0743fb306da50897c0720e6fab5ecf947c52` |
 | Règle d'agrégation | median des probabilités du cluster (gelée) |
 | Bootstrap | 2000 tirages, graine 20260912, unité : cluster de dépendance |
 | Source | Zenodo 18631450, CC BY 4.0 — site d'entraînement expérimental de Dongguan |
@@ -24,6 +24,7 @@
 | `c0` | C0 — niveau RMS absolu, signal brut — raccourci d'acquisition | `logreg(C=0.01)` | `1289095fccd5` | 2026-09-12T16:16:12+00:00 |
 | `c1` | C1 — forme d'amplitude seule, aucune information fréquentielle | `logreg(C=0.01)` | `2f61695072e0` | 2026-09-12T16:26:40+00:00 |
 | `c2` | C2 — spectre agrégé, invariant à l'ordre, sans phase | `logreg(C=0.1)` | `1289095fccd5` | 2026-09-12T16:16:13+00:00 |
+| `c2b` | C2b — structure temporelle peu profonde — enveloppe, modulation, flux | `logreg(C=0.1)` | `355f0743fb30` | 2026-09-12T17:45:52+00:00 |
 | `c3` | C3 — baseline historique — mélange C1 + C2 + taux de passages par zéro | `logreg(C=0.01)` | `1289095fccd5` | 2026-09-12T16:16:13+00:00 |
 
 ## 3. Échelle de contrôles et résultats — TEST
@@ -33,6 +34,7 @@
 | `c0` | C0 — niveau RMS absolu, signal brut — racc | 0.878 | 0.870 | 0.808 | 0.163 | 0.839 | 0.802 | 194 | 41 (30/11) |
 | `c1` | C1 — forme d'amplitude seule, aucune infor | 0.902 | 0.878 | 0.856 | 0.140 | 0.927 | 0.849 | 194 | 41 (30/11) |
 | `c2` | C2 — spectre agrégé, invariant à l'ordre,  | 0.710 | 0.711 | 0.680 | 0.214 | 0.779 | 0.776 | 194 | 41 (30/11) |
+| `c2b` | C2b — structure temporelle peu profonde —  | 0.847 | 0.829 | 0.763 | 0.160 | 0.915 | 0.814 | 194 | 41 (30/11) |
 | `c3` | C3 — baseline historique — mélange C1 + C2 | 0.824 | 0.792 | 0.758 | 0.173 | 0.900 | 0.856 | 194 | 41 (30/11) |
 
 ### Validation (pour information — c'est là que le seuil est choisi)
@@ -42,6 +44,7 @@
 | `c0` | C0 — niveau RMS absolu, signal brut — racc | 0.870 | 0.866 | 0.817 | 0.168 | 0.812 | 0.846 | 208 | 42 (34/8) |
 | `c1` | C1 — forme d'amplitude seule, aucune infor | 0.928 | 0.927 | 0.870 | 0.127 | 0.971 | 0.923 | 208 | 42 (34/8) |
 | `c2` | C2 — spectre agrégé, invariant à l'ordre,  | 0.777 | 0.810 | 0.673 | 0.199 | 0.783 | 0.797 | 208 | 42 (34/8) |
+| `c2b` | C2b — structure temporelle peu profonde —  | 0.870 | 0.875 | 0.773 | 0.149 | 0.665 | 0.635 | 208 | 42 (34/8) |
 | `c3` | C3 — baseline historique — mélange C1 + C2 | 0.886 | 0.895 | 0.773 | 0.155 | 0.996 | 0.963 | 208 | 42 (34/8) |
 
 ## 4. Incertitude — bootstrap sur les clusters
@@ -53,6 +56,7 @@ Les intervalles rééchantillonnent des **clusters entiers**. Un bootstrap au cl
 | `c0` | [0.679, 0.932] | [0.647, 0.975] | [0.615, 0.862] |
 | `c1` | [0.803, 0.988] | [0.788, 1.000] | [0.708, 0.909] |
 | `c2` | [0.609, 0.819] | [0.576, 0.943] | [0.568, 0.765] |
+| `c2b` | [0.758, 0.922] | [0.811, 0.984] | [0.643, 0.849] |
 | `c3` | [0.751, 0.962] | [0.724, 1.000] | [0.656, 0.820] |
 
 ## 5. Différences appariées
@@ -69,6 +73,10 @@ Un **seul** tirage de clusters sert aux deux modèles comparés. Comparer deux i
 | `c0_vs_c2` | cluster_roc_auc | +0.061 | [-0.192, +0.294] | inconclusive |
 | `c0_vs_c2` | clip_macro_f1 | +0.128 | [-0.042, +0.201] | inconclusive |
 | `c0_vs_c2` | cluster_macro_f1 | +0.026 | [-0.115, +0.181] | inconclusive |
+| `c0_vs_c2b` | clip_roc_auc | +0.031 | [-0.155, +0.093] | inconclusive |
+| `c0_vs_c2b` | cluster_roc_auc | -0.076 | [-0.271, +0.087] | inconclusive |
+| `c0_vs_c2b` | clip_macro_f1 | +0.045 | [-0.132, +0.122] | inconclusive |
+| `c0_vs_c2b` | cluster_macro_f1 | -0.013 | [-0.175, +0.174] | inconclusive |
 | `c0_vs_c3` | clip_roc_auc | +0.054 | [-0.177, +0.121] | inconclusive |
 | `c0_vs_c3` | cluster_roc_auc | -0.061 | [-0.249, +0.135] | inconclusive |
 | `c0_vs_c3` | clip_macro_f1 | +0.050 | [-0.131, +0.119] | inconclusive |
@@ -77,14 +85,26 @@ Un **seul** tirage de clusters sert aux deux modèles comparés. Comparer deux i
 | `c1_vs_c2` | cluster_roc_auc | +0.148 | [+0.041, +0.284] | compatible with improvement |
 | `c1_vs_c2` | clip_macro_f1 | +0.175 | [+0.047, +0.256] | compatible with improvement |
 | `c1_vs_c2` | cluster_macro_f1 | +0.073 | [-0.065, +0.225] | inconclusive |
+| `c1_vs_c2b` | clip_roc_auc | +0.055 | [-0.058, +0.164] | inconclusive |
+| `c1_vs_c2b` | cluster_roc_auc | +0.012 | [-0.157, +0.157] | inconclusive |
+| `c1_vs_c2b` | clip_macro_f1 | +0.093 | [-0.062, +0.188] | inconclusive |
+| `c1_vs_c2b` | cluster_macro_f1 | +0.034 | [-0.171, +0.249] | inconclusive |
 | `c1_vs_c3` | clip_roc_auc | +0.078 | [-0.026, +0.111] | inconclusive |
 | `c1_vs_c3` | cluster_roc_auc | +0.027 | [-0.011, +0.087] | inconclusive |
 | `c1_vs_c3` | clip_macro_f1 | +0.098 | [-0.033, +0.173] | inconclusive |
 | `c1_vs_c3` | cluster_macro_f1 | -0.007 | [-0.131, +0.105] | inconclusive |
+| `c2_vs_c2b` | clip_roc_auc | -0.137 | [-0.269, +0.004] | inconclusive |
+| `c2_vs_c2b` | cluster_roc_auc | -0.136 | [-0.368, +0.061] | inconclusive |
+| `c2_vs_c2b` | clip_macro_f1 | -0.082 | [-0.193, +0.022] | inconclusive |
+| `c2_vs_c2b` | cluster_macro_f1 | -0.039 | [-0.252, +0.179] | inconclusive |
 | `c2_vs_c3` | clip_roc_auc | -0.114 | [-0.235, -0.059] | compatible with degradation |
 | `c2_vs_c3` | cluster_roc_auc | -0.121 | [-0.264, -0.019] | compatible with degradation |
 | `c2_vs_c3` | clip_macro_f1 | -0.077 | [-0.174, +0.014] | inconclusive |
 | `c2_vs_c3` | cluster_macro_f1 | -0.080 | [-0.222, +0.042] | inconclusive |
+| `c2b_vs_c3` | clip_roc_auc | +0.023 | [-0.154, +0.123] | inconclusive |
+| `c2b_vs_c3` | cluster_roc_auc | +0.015 | [-0.152, +0.225] | inconclusive |
+| `c2b_vs_c3` | clip_macro_f1 | +0.005 | [-0.118, +0.134] | inconclusive |
+| `c2b_vs_c3` | cluster_macro_f1 | -0.042 | [-0.266, +0.173] | inconclusive |
 
 > ⚠️ **Aucune significativité statistique n'est revendiquée.** Le test compte 41 clusters indépendants, dont 11 du côté *non-leak*. Les verdicts sont qualitatifs.
 
