@@ -4,9 +4,40 @@ Icham
 
 ## État actuel
 
-2026-09-12 : rappel dataset corrigé après découverte de livrables plus récents que le vault. `origin/nevil/setup` à `3efa08f` contient audit des 1 000 WAV, scripts et `split_v2` ; `split_v1` est invalide. Fichiers/rapports inspectés et hash du manifeste vérifié, sans réexécuter l'audit ni lire les lignes de labels test. Conversion TimeNet non livrée dans cette branche. H100 accessible déjà vérifiée ; aucun entraînement ou nouvelle action distante. Plan validé, démarrage toujours différé.
+2026-09-12 : étapes 1 à 5 V0 réalisées avec Qwen 3.5-4B. TimeNet/v2 vérifiés sur les 1 000 WAV ; 40 étapes sur 8 groupes train, gradients/poids prouvés ; bundle autonome rechargé hors ligne et environnement reconstruit. Fonction Prediction et preuves dans `docs/TSLM_V0.md`. Qualité/application non validées. Passation détaillée : [[V0 ML - exécution]].
 
-## Dernière passation
+## V0 — apprentissage et rechargement vérifiés
+
+- Code numérique du run `a968405f3c3e505582c3dcd8be0248d1075431c1`, packaging/tests/guide `8e70a4c`, branche isolée `feat/icham-tslm`.
+- Trois archives intègres, 1 000 WAV strictement décodés ; manifeste v2 SHA `7a8716...` intact. TimeNet round-trip d'abord sur train `c0128b879694e`, erreur 2,03e-7, puis tous les clips. Invariants Nevil rejoués depuis les WAV : zéro violation, avec couvertures explicites. Aucun score test calculé.
+- Premier batch réel : loss 0,247565, gradients non nuls encodeur/projecteur. Petit diagnostic : 8 clips de 8 groupes train, 40 étapes ; toutes pertes finies, 0,48272 au premier batch / 0,03166 au dernier. Delta poids encodeur 1,81215 et projecteur 0,44250 ; hash intégral des états Qwen identique avant/après.
+- Runtime observé : pic ~18,5 Gio alloués ; run/contrôles/sauvegarde ~70,3 s. Ce n'est ni un benchmark de qualité ni un plafond mémoire garanti.
+- Bundle `/home/hicham/pipe-v0/artifacts/qwen-v0-smoke-001` : décodeur texte, tokenizer, paramètres temporels, optimizer, config, lockfile, licences/provenance, exemple validation. SHA du manifeste final `24f27afedfb3e26f853ff0029d8648e03ee08b46b50b906b1775ec69c96a46fe`.
+- Processus train terminé, puis `HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 ... scripts/tslm/check_reload.py` exécuté : classe/texte/mesures identiques. Répété dans `.venv-repro` recréé depuis les 131 dépendances verrouillées + package local. `uv pip check` valide 132 paquets.
+- Avant adaptation, sortie validation invalide `no_leak; 0-1000` ; après, format valide avec description complète. Conservé dans le rapport, pas corrigé rétroactivement. Un exemple ne mesure pas la précision.
+- Cinq tests CPU passent : formats/WAV, propriétés/entrées, chemins d'archive, train/groupes, séparation texte généré/DSP et refus de `answer` dans generate. Mauvais WAV refusé par le vrai predictor rechargé.
+- Livraison : `Predictor(checkpoint).predict(wav_bytes)`, contrat Safoan v0.1 inchangé, erreurs documentées ; application laissée à Safoan. Prochaine action équipe : intégration privée GPU puis V1/évaluation commune après gel.
+
+## Migration Qwen demandée par Icham
+
+- Llama était une proposition initiale, pas un modèle déjà téléchargé. Icham choisit une autre famille ; revue des sources officielles Qwen/Gemma et de Transformers, aucun historique Entire d'une adaptation Qwen retrouvé.
+- `configs/tslm/v0.json` fixe Qwen 3.5-4B à `851bf6e...`, code `3064fc3`. Téléchargement `token=False` réussi, deux shards 9,32 Go et reçus SHA-256 hors Git sur H100.
+- `src/pipe/tslm/model.py` réutilise l'entrelacement/encodeur/projecteur OpenTSLM-SP ; charge le décodeur texte Qwen officiel, non la vision. Chat template officiel sans thinking, loss corrigée pour exclure le padding cible. Pas d'adapter Llama présenté comme compatible.
+- Runtime Transformers 5.13.0 + OpenTSLM testé ; décodeur Qwen chargé sans manque de poids (`runs/load-qwen.log`). Fast path DeltaNet non installé, fallback PyTorch signalé ; débit réel à mesurer avant optimisation.
+- Trois tests CPU passent (`python -m unittest discover -s tests/tslm -v`). Archives récupérées et vérifiées ; arrêt initial sur `desktop.ini`, exclusion explicite uniquement de cette métadonnée. Deuxième correction : le writer TimeF publie sous dataset_id/version, pas directement sous son root. Aucun WAV supprimé/écrasé.
+- Prochaine action : valider le round-trip complet et le batch réel, puis petit run train et checkpoint/reload.
+
+## Démarrage effectif V0
+
+- Objectif intégral relu depuis le fichier fourni : cinq étapes jusqu'au checkpoint rechargé et à la vraie prédiction, pas seulement une interface simulée.
+- `git worktree add ... -b feat/icham-tslm` depuis `ddcbd75` ; aucun changement de branche dans le checkout principal partagé.
+- Recherche Entire retrouve `1289095` ; lecture du connecteur, du pilote, du vérificateur et du rapport. Reprise exacte par `git archive` des fichiers sélectionnés, pas de fusion aveugle. Contrat Safoan repris sans modification depuis `4dd7b88`.
+- Sur H100 : Python 3.12.3, ni pip ni ensurepip initialement. uv 0.10.9 copié avec scp ; venv et PyTorch 2.8.0 CUDA 12.8 installés sans sudo. Calcul réel : perte 249.751068, gradient 8.807761, journal `/home/hicham/pipe-v0/runs/runtime.json`.
+- Décision V0 : nom explicite `split_v2_binary_with_noise_v0`, folds intactes ; pas de remplacement implicite du protocole principal ni de comparaison avec un périmètre différent.
+- Blocage observé : config Llama HTTP 401, token distant absent ; connexion HF demandée sans collecter de secret. Dépendances OpenTSLM/TimeNet installées à révisions figées, vérification d'import en cours.
+- Prochaine action : archives vérifiées puis TimeF/bandes temporelles ; reprendre le chargement de poids une fois autorisé.
+
+## Rappel dataset — étape précédente
 
 - Icham : « On avait pas identifié des datasets justement ? ». Oui : source principale Zenodo 18631450, alternatives historiques Intra-Domestic Water Leaks, LeakDB et BattLeDIM, avec réserves dans [[PIPE - proposition ML et démo]]. Aucune nouvelle recherche de source nécessaire tant que l'audit courant reste acceptable.
 - Recherche via les skills using-entire/search : `entire search 'dataset acoustique fuite Zenodo Nevil' --json --compact --limit 5 --repo IchamRaison/ehl-hackathon-zurich` fonctionne désormais et retrouve quatre commits, dont audit `e07eca9`, GO conditionnel `15e33e7` et ancien split `0f4ec18`. C'est un résultat de recherche de commits, pas une lecture de transcriptions. Ne pas maintenir l'ancien diagnostic « non authentifié » comme état courant.
