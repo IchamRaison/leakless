@@ -18,7 +18,7 @@ Préparer le Temporal AI Challenge (ASL × Aionic × Nebius) : TimeNet, entraîn
 
 ## Dernier changement
 
-Brief reçu d’Icham et recoupé avec les sections lisibles du PDF. Exigences, livrables et inconnues consignés dans [[Brief et contraintes]]. Source PDF archivée dans `assets/`. La règle de mise à jour continue reste active : [[Continuité du projet]] et `AGENTS.md`.
+Exploration de problèmes documentée dans [[Idées]], avec sources consultées : diagnostic hydraulique UCI, compte rendu ECG PTB-XL, triage de télémétrie spatiale. Recommandation provisoire industrie ou santé ; aucune sélection par Icham. Risques de fuite et de données anonymisées signalés pour SMAP/MSL. Aucun benchmark exécuté.
 
 ## En cours et limites
 
