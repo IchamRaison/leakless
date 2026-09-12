@@ -29,7 +29,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from evaluate_predictions import compare, evaluate_run, vectors  # noqa: E402,F401
 from harness import contract, metrics, split_loader  # noqa: E402
 
-CONTROL_ORDER = ["c0", "c1", "c2", "c3"]
+CONTROL_ORDER = ["c0", "c1", "c2", "c2b", "c3"]
 
 
 def fmt(x, nd=3):

@@ -369,6 +369,123 @@ def stress_t2_permutes_the_whole_clip():
                np.arange(8001, dtype=float), np.random.default_rng(0))
 
 
+
+# --------------------------------------------------------------------------- #
+# C2b — validation du design. AUCUNE métrique val/test ici (commit A).
+# --------------------------------------------------------------------------- #
+@test
+def c2b_has_exactly_six_features():
+    """4 à 6 descripteurs maximum : pas de pêche aux descripteurs."""
+    assert len(features.C2B_NAMES) == 6
+    x = np.random.default_rng(0).normal(size=8000)
+    assert len(features.c2b_shallow_temporal(x)) == 6
+
+
+@test
+def c2b_is_gain_invariant():
+    """Aucun descripteur ne doit ré-encoder le niveau : C0 et C1 le couvrent déjà."""
+    x = np.random.default_rng(1).normal(size=8000)
+    a = features.c2b_shallow_temporal(x)
+    b = features.c2b_shallow_temporal(x * 137.0)
+    assert np.allclose(a, b, atol=1e-9), np.abs(a - b)
+
+
+@test
+def c2b_is_order_sensitive():
+    """Permuter des blocs doit changer C2b. C'est toute sa raison d'être."""
+    rng = np.random.default_rng(2)
+    t = np.arange(8000) / 8000
+    x = (1 + 0.6 * np.sin(2 * np.pi * 12 * t)) * rng.normal(size=8000)
+    a = features.c2b_shallow_temporal(x)
+    b = features.c2b_shallow_temporal(stress.t2_block_permutation(x, np.random.default_rng(0)))
+    rel = np.abs(a - b) / (np.abs(a) + 1e-9)
+    assert rel.max() > 0.10, f"C2b quasi inchangé par une permutation : {rel}"
+
+
+@test
+def c2b_sees_what_c2_structurally_cannot():
+    """Sous randomisation de phase, |FFT| est préservé : C2 ne peut pas bouger, C2b doit.
+
+    C'est la validation du design. Si C2b bougeait aussi peu que C2 sous T3, il
+    ne mesurerait que du spectre et n'aurait pas lieu d'exister.
+    """
+    rng = np.random.default_rng(3)
+    t = np.arange(8000) / 8000
+    x = (1 + 0.8 * np.sin(2 * np.pi * 20 * t)) * rng.normal(size=8000)
+    y = stress.t3_phase_randomisation(x, np.random.default_rng(0))
+
+    c2_a, c2_b = features.c2_spectral(x), features.c2_spectral(y)
+    c2b_a, c2b_b = features.c2b_shallow_temporal(x), features.c2b_shallow_temporal(y)
+    c2_rel = float(np.median(np.abs(c2_a - c2_b) / (np.abs(c2_a) + 1e-9)))
+    c2b_rel = float(np.median(np.abs(c2b_a - c2b_b) / (np.abs(c2b_a) + 1e-9)))
+    # C2 n'est PAS exactement invariant : _spectrum applique une fenêtre de Hann,
+    # et T3 ne préserve le |FFT| que du signal non fenêtré. Le fenêtrage est une
+    # convolution en fréquence, donc une phase différente déplace un peu les
+    # bandes (mesuré : jusqu'à 21 % sur une bande étroite). La bonne assertion
+    # n'est donc pas « C2 ne bouge pas » mais « C2b bouge beaucoup plus ».
+    # Conséquence pour les stress tests : un petit déplacement de score sous T3
+    # n'est pas une preuve de sensibilité temporelle.
+    assert c2b_rel > 5 * c2_rel, f"C2b ({c2b_rel:.3f}) ne bouge pas plus que C2 ({c2_rel:.3f})"
+    assert c2b_rel > 0.2, f"C2b n'a quasiment pas bougé : {c2b_rel:.3f}"
+
+
+@test
+def c2b_recovers_a_known_modulation_frequency():
+    """Vérité terrain : la fréquence de modulation doit se lire dans le descripteur.
+
+    L'estimateur vient du spectre de modulation, pas de l'autocorrélation :
+    l'autocorrélation pique à chaque multiple de la période et donnerait
+    l'erreur d'octave (mesuré : 55 Hz lu comme 27,3 Hz avant correction).
+    """
+    rng = np.random.default_rng(4)
+    t = np.arange(8000) / 8000
+    for f_mod in (7.0, 20.0, 55.0, 120.0):
+        x = (1 + 0.9 * np.sin(2 * np.pi * f_mod * t)) * rng.normal(size=8000)
+        v = features.c2b_shallow_temporal(x)
+        recovered = 10 ** v[features.C2B_NAMES.index("mod_peak_hz_log")]
+        assert abs(recovered - f_mod) / f_mod < 0.05, (f_mod, recovered)
+
+
+@test
+def c2b_modulation_bands_are_proportions():
+    x = np.random.default_rng(5).normal(size=8000)
+    v = features.c2b_shallow_temporal(x)
+    bands = [v[features.C2B_NAMES.index(n)] for n in ("mod_1_4", "mod_4_16", "mod_16_64")]
+    assert all(0.0 <= b <= 1.0 for b in bands), bands
+    assert sum(bands) <= 1.0 + 1e-9, sum(bands)
+
+
+@test
+def c2b_search_region_matches_declared_bounds():
+    """La région de recherche est gelée : 4-250 Hz à 8 kHz."""
+    assert features.ENV_LAG_MIN == 32 and features.ENV_LAG_MAX == 2000
+    assert abs(8000 / features.ENV_LAG_MIN - 250.0) < 1e-9
+    assert abs(8000 / features.ENV_LAG_MAX - 4.0) < 1e-9
+    assert features.MOD_BANDS == ((1, 4), (4, 16), (16, 64))
+
+
+@test
+def c2b_periodicity_strength_is_low_on_white_noise():
+    """Un bruit blanc n'est pas périodique : la force doit rester faible."""
+    for seed in (0, 1, 2):
+        v = features.c2b_shallow_temporal(np.random.default_rng(seed).normal(size=8000))
+        assert v[features.C2B_NAMES.index("env_ac_peak")] < 0.15
+
+
+@test
+def c2b_is_deterministic():
+    x = np.random.default_rng(6).normal(size=8000)
+    assert np.array_equal(features.c2b_shallow_temporal(x),
+                          features.c2b_shallow_temporal(x))
+
+
+@test
+def c2b_is_in_the_ladder():
+    assert "C2b" in features.LADDER
+    assert features.LADDER["C2b"]["audio"] == "normalised"
+    assert len(features.LADDER["C2b"]["names"]) == 6
+
+
 @test
 def stress_transforms_are_deterministic():
     x = np.random.default_rng(6).normal(size=8000)
