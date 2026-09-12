@@ -11,13 +11,6 @@ import {
   RotateCcw,
   Upload,
 } from "lucide-react";
-import { api } from "../api";
-import {
-  sampleSchema,
-  visualizationSchema,
-  type Sample,
-  type Visualization,
-} from "../contracts";
 import { SignalView } from "../SignalView";
 import {
   BuildingScene,
@@ -26,18 +19,14 @@ import {
 } from "./BuildingScene";
 import { FullscreenButton } from "./FullscreenButton";
 import { InspectRecording } from "./InspectRecording";
+import { loadExample, type LoadedExample, type Recording } from "./loadExample";
 import { ModelReadout } from "./ModelReadout";
 import { TemporalSignalMap } from "./TemporalSignalMap";
 import { evidence } from "./evidence";
 import recordings from "./recordings.json";
 import "./demo.css";
 
-type Recording = (typeof recordings.records)[number];
-type Loaded = {
-  record: Recording;
-  sample: Sample;
-  visualization: Visualization;
-};
+type Loaded = LoadedExample;
 
 export default function DemoExperience() {
   const [measurement, setMeasurement] = useState<Measurement | null>(null);
@@ -69,50 +58,8 @@ export default function DemoExperience() {
     setLoading(true);
     async function load() {
       try {
-        const response = await fetch(current.url, {
-          signal: controller.signal,
-        });
-        if (!response.ok)
-          throw new Error("The example recording is unavailable. Retry.");
-        const raw = await response.arrayBuffer();
-        const digest = [
-          ...new Uint8Array(await crypto.subtle.digest("SHA-256", raw)),
-        ]
-          .map((byte) => byte.toString(16).padStart(2, "0"))
-          .join("");
-        if (digest !== current.fileSha256)
-          throw new Error(
-            "Recording integrity check failed. No measurements displayed.",
-          );
-        const form = new FormData();
-        form.append(
-          "file",
-          new Blob([raw], { type: "audio/wav" }),
-          "recording.wav",
-        );
-        const sample = await api("/samples", sampleSchema, {
-          method: "POST",
-          body: form,
-          signal: controller.signal,
-        });
-        if (sample.input_sha256 !== current.inputSha256)
-          throw new Error(
-            "The decoded signal does not match the selected example.",
-          );
-        const visualization = await api(
-          `/samples/${sample.sample_id}/visualization`,
-          visualizationSchema,
-          { signal: controller.signal },
-        );
-        if (
-          visualization.input_sha256 !== sample.input_sha256 ||
-          visualization.sample_id !== sample.sample_id
-        )
-          throw new Error(
-            "The measurements do not match the selected recording.",
-          );
+        const result = await loadExample(current, controller.signal);
         if (controller.signal.aborted) return;
-        const result = { record: current, sample, visualization };
         cache.current.set(current.id, result);
         setLoaded(result);
       } catch (err) {
@@ -152,6 +99,7 @@ export default function DemoExperience() {
         <nav aria-label="Demo navigation">
           <a href="#signal">Explore the signal</a>
           <a href="#evidence">The evidence</a>
+          <a href="#monitor">Monitor replay</a>
           <a className="load-link" href="#inspect">
             Load a recording <Upload size={14} />
           </a>

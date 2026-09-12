@@ -28,3 +28,11 @@ it("renders LeakLess as the only experience, including for the former studio has
   expect(text).not.toMatch(/PIPE|Acoustic studio|Safoan/i);
   expect(text).not.toMatch(/Forme d|Fréquence|Amplitude numérique/);
 });
+
+it("opens the monitor replay on #monitor", async () => {
+  location.hash = "#monitor";
+  render(<App />);
+  expect(
+    await screen.findByText(/Replay, not a live feed\./),
+  ).toBeInTheDocument();
+});

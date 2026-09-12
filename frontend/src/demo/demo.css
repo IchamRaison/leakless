@@ -1150,3 +1150,236 @@
     padding-block: 12px;
   }
 }
+/* Monitor replay (note 4): control-room view of the real recordings, no generated alerts. */
+.monitor {
+  min-height: 100vh;
+}
+.monitor:fullscreen {
+  overflow: auto;
+}
+.monitor-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+}
+.monitor-clock {
+  font:
+    12px ui-monospace,
+    monospace;
+  letter-spacing: 1px;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.monitor-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #b1beb2;
+}
+.monitor-main {
+  padding-block: 24px 40px;
+}
+.monitor-banner {
+  font-size: 12px;
+  color: #b4c0b5;
+  border: 1px solid #c4b99740;
+  background: #c4b99710;
+  border-radius: 5px;
+  padding: 10px 14px;
+}
+.monitor-banner strong {
+  color: #d8c59a;
+  font-weight: 500;
+}
+.monitor-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 40px;
+  margin: 20px 0;
+}
+.monitor-summary dt {
+  font-size: 11px;
+  color: #93a695;
+}
+.monitor-summary dd {
+  margin: 2px 0 0;
+  font-size: 15px;
+}
+.monitor-summary .pending-value {
+  font:
+    15px ui-monospace,
+    monospace;
+  color: #c4b997;
+}
+.monitor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  overflow: hidden;
+}
+.monitor-card {
+  padding: 18px 20px;
+  border-right: 1px solid var(--line);
+  background: #14201960;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+.monitor-card:last-child {
+  border-right: 0;
+}
+.monitor-card header h2 {
+  display: block;
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: 8px;
+}
+.monitor-label,
+.monitor-clip {
+  display: block;
+  font-size: 11px;
+  color: #93a695;
+}
+.monitor-clip {
+  font-family: ui-monospace, monospace;
+  margin-top: 2px;
+}
+.monitor-waiting {
+  min-height: 420px;
+  color: #a8baa9;
+  font-size: 12px;
+}
+.monitor-scope {
+  width: 100%;
+  height: 64px;
+  background: #1b291e;
+  border-radius: 3px;
+}
+.monitor-scope path {
+  stroke: #b0c79a;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.monitor-scope line {
+  stroke: #d8c59a;
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+.monitor-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 0;
+}
+.monitor-metrics > div {
+  position: relative;
+  padding-bottom: 8px;
+}
+.monitor-metrics dt {
+  font-size: 11px;
+  color: #93a695;
+}
+.monitor-metrics dd {
+  margin: 2px 0 0;
+  font:
+    24px ui-monospace,
+    monospace;
+  font-variant-numeric: tabular-nums;
+  color: #dfe9d8;
+}
+.monitor-metrics small {
+  font-size: 11px;
+  color: #93a695;
+}
+.monitor-metrics i {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--accent);
+}
+.monitor-bands {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  height: 90px;
+}
+.monitor-bands > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: stretch;
+  gap: 4px;
+  background: #ffffff06;
+  border-radius: 3px;
+}
+.monitor-bands span {
+  background: #8fb07f;
+  border-radius: 2px 2px 0 0;
+}
+.monitor-bands small {
+  text-align: center;
+  font-size: 10px;
+  color: #93a695;
+  padding-bottom: 4px;
+}
+.monitor-trace span {
+  font-size: 11px;
+  color: #93a695;
+}
+.monitor-trace svg {
+  width: 100%;
+  height: 46px;
+  margin-top: 4px;
+}
+.monitor-trace polyline {
+  fill: none;
+  stroke: #b8dba5;
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+.monitor-card footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+  font-size: 11px;
+  color: #a3b49f;
+}
+.monitor-card footer .pending-value {
+  font:
+    12px ui-monospace,
+    monospace;
+  color: #c4b997;
+  margin-left: 6px;
+}
+.monitor-scales {
+  margin-top: 14px;
+  font-size: 11px;
+  color: #8fa18f;
+  line-height: 1.7;
+  max-width: 900px;
+}
+@media (max-width: 1100px) {
+  .monitor-grid {
+    grid-template-columns: 1fr;
+  }
+  .monitor-card {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+}
+@media (max-width: 760px) {
+  .monitor-controls .monitor-clock,
+  .monitor-controls .monitor-fullscreen {
+    display: none;
+  }
+  .monitor-controls {
+    gap: 4px;
+  }
+}
