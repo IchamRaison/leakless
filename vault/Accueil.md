@@ -2,6 +2,12 @@
 
 Point d'entrée du projet. Les informations non vérifiées restent signalées comme telles.
 
+## Reprendre le projet
+
+Lire [[Passation]] pour comprendre immédiatement l'état actuel, les blocages et la prochaine action.
+
+Règle permanente : tenir ce vault à jour après chaque avancée significative et avant de rendre la main, sans attendre une demande. Toute personne ou tout agent doit pouvoir reprendre sans lire le chat. Voir [[Continuité du projet]].
+
 ## Maintenant
 
 1. Récupérer et lire le brief officiel.
