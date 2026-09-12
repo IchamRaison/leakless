@@ -10,6 +10,7 @@ from export_run import ROOT, sha256_file
 
 
 def make_reference(source, output, revision):
+    from pipe.tslm.model import CANONICAL_SCORING_VERSION
     from pipe.tslm.preprocessing import CANONICAL_VERSION, VERSION
     if not re.fullmatch(r"[0-9a-f]{40}", revision):
         raise ValueError("Révision réelle SHA40 requise")
@@ -24,9 +25,12 @@ def make_reference(source, output, revision):
     original = json.loads((source / "metadata.json").read_text())
     if original["preprocessing_version"] != VERSION:
         raise ValueError("Référence source V1 requise")
+    scoring_spec = {**original["scoring_spec"], "version": CANONICAL_SCORING_VERSION,
+                    "acoustic_batching": "one_clip_four_channels"}
     config = {"source_config_hash": original["config_hash"],
               "preprocessing_version": CANONICAL_VERSION,
-              "scoring_spec": original["scoring_spec"], "purpose": "parity_only_no_retraining",
+              "scoring_spec": scoring_spec, "single_clip_acoustic_encoding": True,
+              "purpose": "parity_only_no_retraining",
               "source_checksums_sha256": sha256_file(source / "checksums.json")}
     config_hash = hashlib.sha256(json.dumps(config, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
     metadata = {key: original[key] for key in (
@@ -40,12 +44,12 @@ def make_reference(source, output, revision):
     output.mkdir(parents=True, exist_ok=False)
     # Copie indépendante : aucun lien dur qui permettrait de modifier V1 ensuite.
     shutil.copytree(source / "base", output / "base")
-    for name in ("temporal.pt", "scoring_spec.json", "QWEN-LICENSE", "QWEN-MODEL-CARD.md",
+    for name in ("temporal.pt", "QWEN-LICENSE", "QWEN-MODEL-CARD.md",
                  "requirements-ml.lock", "PROVENANCE.json"):
         shutil.copyfile(source / name, output / name)
     shutil.copyfile(source / "metadata.json", output / "source-v1-metadata.json")
     shutil.copyfile(source / "training-report.json", output / "source-v1-training-report.json")
-    for name, value in (("metadata.json", metadata), ("config.json", config)):
+    for name, value in (("metadata.json", metadata), ("config.json", config), ("scoring_spec.json", scoring_spec)):
         with (output / name).open("x") as stream:
             json.dump(value, stream, indent=2, allow_nan=False)
             stream.write("\n")

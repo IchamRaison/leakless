@@ -29,6 +29,21 @@ l'erreur existante `model_busy`. Le score et la génération utilisent ce même
 backend. Le DSP emploie son dispatcher canonique et ses métadonnées : pas de
 normalisation parallèle ni de version V1 sélectionnée implicitement.
 
+## Politique numérique V2
+
+Le bundle V2 déclare `single_clip_acoustic_encoding: true` et le scoring
+`class-continuation-logprob-sum-softmax-single-clip-v2`. Chaque clip passe
+séparément dans l'encodeur/projecteur ; les interfaces acceptent toujours les
+lots et rendent un score par clip. Le graphe de gradients est conservé pour
+l'apprentissage. V1 garde sa politique historique par défaut.
+
+La trace contrôlée `docs/evidence/tslm-v2/batch-trace-001/report.json` montre une
+première différence à la sortie de l'encodeur, amplifiée jusqu'à `0.06245874`
+sur le score. L'intervention par clip rétablit l'égalité exacte dans les vingt
+contextes tracés. Cela ne remplace pas le gate complet : 208 validations et
+un train, trois interfaces, lots 1/2/4 dans les deux ordres, puis processus neuf,
+tolérance absolue inchangée `1e-6`. Aucun entraînement avant son PASS complet.
+
 ## Préparer la décision après la parité
 
 Le producteur du seuil doit utiliser les prédictions **de validation du modèle

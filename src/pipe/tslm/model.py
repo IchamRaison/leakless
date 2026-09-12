@@ -15,11 +15,17 @@ from transformers import AutoTokenizer, Qwen3_5ForCausalLM
 
 CLASS_CONTINUATIONS = ("leak;", "no_leak;")
 SCORING_VERSION = "class-continuation-logprob-sum-softmax-v1"
+CANONICAL_SCORING_VERSION = "class-continuation-logprob-sum-softmax-single-clip-v2"
 
 
 class AcousticQwenSP(OpenTSLMSP):
-    def __init__(self, base_dir: str | Path, device: str = "cuda"):
+    single_clip_acoustic_encoding = False
+
+    def __init__(self, base_dir: str | Path, device: str = "cuda", *, single_clip_acoustic_encoding: bool = False):
+        if type(single_clip_acoustic_encoding) is not bool:
+            raise ValueError("Politique d'encodage booléenne explicite requise")
         TimeSeriesLLM.__init__(self, device)
+        self.single_clip_acoustic_encoding = single_clip_acoustic_encoding
         self.tokenizer = AutoTokenizer.from_pretrained(base_dir, local_files_only=True,
                                                        trust_remote_code=False, padding_side="right")
         if self.tokenizer.pad_token is None:
@@ -50,7 +56,15 @@ class AcousticQwenSP(OpenTSLMSP):
             )
             pre, post = prompt.split(marker)
             framed.append({**sample, "pre_prompt": pre, "post_prompt": post})
-        return super().pad_and_apply_batch(framed)
+        assemble = super().pad_and_apply_batch
+        if self.single_clip_acoustic_encoding and len(framed) > 1:
+            # ponytail: quatre canaux par appel encodeur, indépendamment du lot.
+            # Batcher davantage seulement après preuve de parité numérique.
+            # Pas de detach/no_grad : le même chemin sert aussi à l'apprentissage.
+            parts = [assemble([sample]) for sample in framed]
+            return (torch.nn.utils.rnn.pad_sequence([x[0] for x, _ in parts], batch_first=True),
+                    torch.nn.utils.rnn.pad_sequence([m[0] for _, m in parts], batch_first=True))
+        return assemble(framed)
 
     def compute_loss(self, batch):
         """Loss uniquement sur les tokens de réponse, sans BOS ajouté ni padding cible."""
@@ -89,11 +103,15 @@ class AcousticQwenSP(OpenTSLMSP):
             raise ValueError("Tokenisation de classe vide ou non réversible")
         if token_ids[0] == token_ids[1]:
             raise ValueError("Les deux classes ont la même tokenisation")
-        return {"version": SCORING_VERSION, "class_continuations": list(CLASS_CONTINUATIONS),
+        spec = {"version": CANONICAL_SCORING_VERSION if self.single_clip_acoustic_encoding else SCORING_VERSION,
+                "class_continuations": list(CLASS_CONTINUATIONS),
                 "class_token_ids": token_ids, "class_token_counts": list(map(len, token_ids)),
                 "aggregation": "sum", "length_normalization": False,
                 "class_terminator": ";", "includes_eos": False,
                 "includes_description": False, "calibration": "none"}
+        if self.single_clip_acoustic_encoding:
+            spec["acoustic_batching"] = "one_clip_four_channels"
+        return spec
 
     @torch.inference_mode()
     def score_class_logprobs(self, batch) -> torch.Tensor:

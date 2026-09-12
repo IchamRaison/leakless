@@ -86,7 +86,8 @@ class Predictor:
             required = {"metadata.json", "temporal.pt", "base/config.json", "base/tokenizer_config.json"}
             if not required.issubset(checksums) or not any(name.endswith(".safetensors") for name in checksums):
                 raise ValueError("Checkpoint incomplet")
-            self.model = AcousticQwenSP(root / "base", device=device)
+            self.model = AcousticQwenSP(root / "base", device=device,
+                single_clip_acoustic_encoding=self.metadata.get("single_clip_acoustic_encoding", False))
             temporal = torch.load(root / "temporal.pt", map_location=device, weights_only=True)
             self.model.encoder.load_state_dict(temporal["encoder_state"], strict=True)
             self.model.projector.load_state_dict(temporal["projector_state"], strict=True)

@@ -9,7 +9,7 @@ import numpy as np
 import torch
 
 from opentslm.model.llm.TimeSeriesLLM import TimeSeriesLLM
-from pipe.tslm.model import AcousticQwenSP, CLASS_CONTINUATIONS
+from pipe.tslm.model import AcousticQwenSP, CANONICAL_SCORING_VERSION, CLASS_CONTINUATIONS, OpenTSLMSP
 from pipe.tslm.predict import PredictionError, Predictor
 from pipe.tslm.preprocessing import CANONICAL_VERSION, VERSION, band_series, model_input, preprocess_audio
 
@@ -62,6 +62,42 @@ class ToyModel(AcousticQwenSP):
 
 
 class ScoringChecks(unittest.TestCase):
+    def test_opt_in_acoustic_singletons_preserve_batch_coverage_and_gradients(self):
+        model = AcousticQwenSP.__new__(AcousticQwenSP)
+        TimeSeriesLLM.__init__(model, "cpu")
+        model.tokenizer = SimpleNamespace(apply_chat_template=lambda messages, **kw: messages[0]["content"])
+        weight = torch.tensor(2.0, requires_grad=True)
+        calls = []
+
+        def upstream(_, batch):
+            calls.append(len(batch))
+            lengths = [sample["n_steps"] for sample in batch]
+            inputs = [weight * len(batch) * torch.ones((n, 1)) for n in lengths]
+            masks = [torch.ones(n, dtype=torch.long) for n in lengths]
+            return (torch.nn.utils.rnn.pad_sequence(inputs, batch_first=True),
+                    torch.nn.utils.rnn.pad_sequence(masks, batch_first=True))
+
+        batch = [{"pre_prompt": "signal", "post_prompt": "answer", "n_steps": n} for n in (2, 3)]
+        with patch.object(OpenTSLMSP, "pad_and_apply_batch", upstream):
+            legacy, _ = model.pad_and_apply_batch(batch)
+            self.assertEqual(calls, [2])
+            model.single_clip_acoustic_encoding = True
+            canonical, mask = model.pad_and_apply_batch(batch)
+            self.assertEqual(calls, [2, 1, 1])
+            self.assertEqual(mask.tolist(), [[1, 1, 0], [1, 1, 1]])
+            self.assertEqual(canonical[:, :, 0].tolist(), [[2, 2, 0], [2, 2, 2]])
+            self.assertFalse(torch.equal(legacy, canonical))
+            canonical.sum().backward()
+            self.assertEqual(weight.grad.item(), 5)
+        toy = ToyModel()
+        old = toy.scoring_spec()
+        toy.single_clip_acoustic_encoding = True
+        revised = toy.scoring_spec()
+        self.assertEqual(revised["version"], CANONICAL_SCORING_VERSION)
+        self.assertEqual(revised["acoustic_batching"], "one_clip_four_channels")
+        self.assertEqual({k: v for k, v in revised.items() if k not in ("version", "acoustic_batching")},
+                         {k: v for k, v in old.items() if k != "version"})
+
     def test_causal_sum_unequal_lengths_padding_and_softmax(self):
         model = ToyModel()
         batch = [model_input(np.zeros((4, 64), dtype=np.float32)) for _ in range(2)]

@@ -40,6 +40,8 @@ class V2PreparationChecks(unittest.TestCase):
             result = make_reference(source, root / "v2", "b" * 40)
             revised = json.loads((root / "v2/metadata.json").read_text())
             self.assertFalse(result["retrained"])
+            self.assertTrue(revised["single_clip_acoustic_encoding"])
+            self.assertEqual(revised["scoring_spec"]["acoustic_batching"], "one_clip_four_channels")
             self.assertEqual(revised["preprocessing_version"], CANONICAL_VERSION)
             self.assertNotEqual(revised["config_hash"], metadata["config_hash"])
             self.assertEqual(result["temporal_sha256"], original["temporal.pt"])
