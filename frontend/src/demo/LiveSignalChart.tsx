@@ -66,8 +66,8 @@ export function LiveSignalChart({
   const series = SENSORS.map((_, s) =>
     samples.map((j) => reading(s, j, incidents)),
   );
-  // Time ticks aligned to the sample clock: every 20 s, every 40 s on narrow screens.
-  const tickEvery = (width < 600 ? 40_000 : 20_000) / SAMPLE_MS;
+  // Time ticks aligned to the sample clock: every 20 s, every 60 s on narrow screens.
+  const tickEvery = (width < 600 ? 60_000 : 20_000) / SAMPLE_MS;
   const timeTicks = samples.filter((j) => j % tickEvery === 0);
   const latest = series.map((values) => values[values.length - 1]);
 
