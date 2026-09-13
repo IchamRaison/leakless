@@ -5,6 +5,7 @@ Icham
 ## Priorité actuelle — 13 septembre
 
 - [x] Proposition d'Icham consignée : [[Diagnostic causal TSLM vs C1]], expliquer l'écart avant une nouvelle recette ; ancien enchaînement V2 en pause.
+- [x] Revue Claude intégrée : contrôles manquants ajoutés et conclusions non démontrées nuancées. [[Diagnostic causal TSLM vs C1#Checklist enrichie après la revue de Claude]]. Aucun contrôle nouvellement exécuté ni logger modifié.
 - [ ] Vérifier/rapatrier les trois reçus manquants de l'ancienne campagne sans relancer les fits. Logs A2/C/fold1/C/fold2 terminés ; aucun processus de campagne actif observé à 03:23:29 Paris.
 - [ ] Convenir du premier bloc d'expériences discriminantes et de son budget sur développement ; aucune expérience nouvelle exécutée à ce stade.
 - [ ] Produire la matrice causes démontrées / hypothèses non soutenues dans les conditions testées / inconnues. Aucun refit ni confirmation externe automatique.
