@@ -1,5 +1,11 @@
 # Journal Icham
 
+## 13 septembre — D3 mémorise ; demande de mesure hors entraînement
+
+Le fit existant a terminé normalement au pas400, sans interruption ni changement de recette :100époques/3200présentations des mêmes32clips,32/32corrects,NLL binaire0,000826279. Qwen gelé inchangé, loss complète d'origine. Reçu train `5e782e54…` vérifié sur la H100 avec toutes les empreintes. Reload neuf ensuite exécuté : reçu `3fe96a1a…`,32scores reproduits exactement, poids avant/après identiques. Aucun nouvel entraînement. Les preuves finales sans poids sont dans `docs/evidence/tslm-v2/causal-d3-001/final/`.
+
+Icham demande de tester le reste : extension bornée aux98 réservés du fold0D0, groupes disjoints des32 ; les autres clips des mêmes groupes ne sont pas amalgamés. Code `141ff92`, self-test local/runtime réussi, préinscription `78e3b455…` avant observation. Même checkpoint/scoring, zéro réglage, métriques du harness. La comparaison A0 restera descriptive (500clips appris contre32), pas attribution causale du budget. [[Diagnostic causal - exécution#D3 — résultat final et extension sur groupes réservés]]. Aucun score réservé encore à ce jalon.
+
 ## 13 septembre — D3 point100 vérifié, assets du second nœud conformes
 
 D3 continue sur la première H100, même handle20214/PID100634. Point100 : NLL binaire0,5749842273444788,24/32corrects, AUC0,76953125 ; critère strict non atteint. Observations rapatriées et scores/NLL/agrégats revérifiés sans inférence, preuves `b7ffdc3`. Revue indépendante du préfixe40pas/10époques : ordre/cibles/compteurs/AdamW/clipping cohérents, aucune panne mécanique visible, pas de verdict final. [[Diagnostic causal - exécution#D3 — entraînement en cours, pas encore de verdict]].

@@ -48,7 +48,7 @@ Les contrôles diagnostiques ci-dessous couvrent seulement les étapes 1 à 5 ; 
 - [x] D0 : vrais scores/NLL train, alignement structurel, contrôles de reload et interventions, états initial/terminal. Les écarts numériques loss/scoring restent une piste ouverte.
 - [x] D1 : trois politiques de tête aux mêmes checkpoints A0/C0, contrôles exacts, artefacts scellés et résultats ci-dessous ; pas de relance ni de sélection de politique.
 - [ ] Avant tout nouveau fit : journalisation classe/description/EOS, comptes exacts, gradients/clipping/mises à jour et résumés d'époque testés puis vérifiés réellement.
-- [ ] Test de mémorisation32 à budget préinscrit, si nécessaire ; verdict limité à la capacité observée.
+- [x] Test de mémorisation32 : critère atteint au pas400 et reload neuf exact ; verdict limité à la capacité observée, résultats ci-dessous.
 - [ ] Contrastes complémentaires choisis selon preuves : lecteur non linéaire, tête sans Qwen, neuf mesures par voie entraînable ; exécution ou omission justifiée explicitement, jamais marquée réussie sans preuve.
 - [ ] Matrice finale par hypothèse : démontrée / non soutenue dans les conditions testées / inconnue ; preuve, alternatives et portée pour chaque verdict.
 - [ ] Nouvelle recette proposée seulement après restitution causale, ou constat motivé des données manquantes. Aucun réglage sur test officiel/externe.
@@ -63,7 +63,7 @@ Critères détaillés : [[Diagnostic causal TSLM vs C1#Critère de complétion d
 
 ## Prochaine action
 
-**Suivre l'unique fit D3 déjà lancé, handle 20214, PID distant 100634**, sans deuxième invocation. Préinscription `42920f6d…` et tests publiés à `e5a8543` avant lancement ; protocole source `b636b21`, miroir `fb436b3`. Après sortie réussie/reçu intègre, lancer `reload` dans un processus neuf, puis vérifier les artefacts et le verdict. D2 reste terminé, ne pas relancer ses fits. D3 mesure la mémorisation, pas la généralisation ; aucun ajout de données ou nouvelle recette produit.
+**Observer les98 réservés du développement avec le checkpoint D3 terminé et rechargé**, à la demande explicite d'Icham. Protocole/code/préinscription ci-dessous ; aucun fit supplémentaire, même scoring, aucun réglage. Les runs D0–D3 sont conservés ; ne pas relancer le fit D3 (ancien handle20214 terminé).
 
 D0 et D1 restent scellés ; aucun score à reproduire pour récupérer les résultats. D1 : handles A 22963 / C 5435 terminés avec code zéro, respectivement 312,744 s et 339,558 s. H100 après C : 0 Mio / 0 %, instance laissée allumée. Artefacts locaux `docs/evidence/tslm-v2/causal-d1-001/`, runtime `/home/hicham/pipe-v0/artifacts/causal-d1-306d330-001/`, logs `/home/hicham/pipe-v0/quality-causal-306d330/`.
 
@@ -220,7 +220,7 @@ cd /home/hicham/pipe-v0/code-causal-d3-c08ff78
 
 Ne pas relancer un dossier incomplet, ni lancer le reload tant que le reçu train n'est pas intègre. Un résultat terminé est relu via `finished()`, jamais réentraîné pour le récupérer. Le second runtime est installé et vérifié indépendamment (`docs/evidence/runtime-h100-2-001/`), pas une seconde tentative D3 ni un fit distribué.
 
-### D3 — entraînement en cours, pas encore de verdict
+### D3 — historique des premiers points
 
 Unique commande `train` lancée après publication, handle **20214**, PID **100634**, hôte `computeinstance-e00g3ykxy51wgxcw1p`. SHA de préinscription revérifié avant l'appel. Le point 0 donne NLL binaire `3,244997234820116`, 16/32 décisions correctes, reproduisant D0-A initial ; les gardes de poids/AdamW neufs passent. À 07:32:25 Paris, six époques /24 pas consignés ; ce n'est pas une complétion ni le premier point de décision programmé (pas100).
 
@@ -229,6 +229,18 @@ Journaux : `/home/hicham/pipe-v0/artifacts/causal-d3-c08ff78-001/train/{steps.js
 **Point100 vérifié, intermédiaire :** NLL binaire `0,5749842273444788`,24/32corrects (12TP,12TN,4FP,4FN), AUC clip/groupe `0,76953125`. Critère non atteint ; le même essai continue. Preuves `b7ffdc3`, `docs/evidence/tslm-v2/causal-d3-001/progress-0100/` :32IDs/ordre/cibles/groupes exacts, sommes des tokens, softmax et NLL recomposés à1e-14 ; agrégats reproduits avec `partition_summary`, sans nouvelle inférence. Ce dossier est une copie intermédiaire, pas un run terminé ou un checkpoint livrable. Les32clips sont vus pendant le fit, aucune conclusion de généralisation.
 
 Revue indépendante en lecture seule du préfixe40pas/10époques/320présentations : ordre/cibles/comptes et agrégats cohérents (écart maximal5,55e-17), AdamW0→40, paramètres/gradients/moments FP32, zéro forward ajouté. Clipping global actif15/40pas, maximum postclip0,9999998275. Point0 identique à D0-A pour scores/LP/compute_loss. NLL classe en ligne par clip époque1→10 :2,498666→0,701559 ; description2,852736→0,038432. Pas de panne mécanique visible dans ce préfixe, mais ces traces à poids évolutifs ne remplacent pas les points binaires à poids fixes.
+
+### D3 — résultat final et extension sur groupes réservés
+
+D3 termine normalement au premier point positif, pas400 : 100 époques, 3 200 présentations des mêmes32 clips, NLL binaire0,0008262787353015177, 32/32corrects. Étapes100/200/300 : respectivement24/23/27 corrects. La loss complète d'origine et Qwen BF16 gelé ont suffi à cette mémorisation ; ni LoRA ni perte classe-seule n'étaient nécessaires à ce résultat. Leur utilité éventuelle pour la vitesse ou la généralisation reste inconnue. Un token sur19 n'implique pas5%du gradient ; au point100 la classe représente99,83%de la NLL totale, sans mesure de sa part du gradient.
+
+Reçu train `5e782e54eaa82067d91d36ee2e35c0ebedf0e578e4b7dc2ae307104bb6a5ab3a`, checkpoint `3e99f7aecad16b1cf531bbec1af9c20cfb61f631cc3f0204713d323499da8148`. Intégrité distante vérifiée par `finished()`, poids inclus. Reload neuf exécuté avec le script/code D3 d'origine : reçu `3fe96a1a35e95acbfab1aca6f710636526c0421a4170ae45b2e3dc94149377e6`, écart maximal des32scores **0**, décisions/critère exacts, empreintes avant/après identiques. Total D3 avec reload :192 observations/384 forwards hors entraînement. Copies sans poids dans `docs/evidence/tslm-v2/causal-d3-001/final/` ; revue exhaustive des400journaux encore à distinguer des contrôles d'intégrité et du préfixe40 déjà relu.
+
+**Extension autorisée ensuite par Icham, pas incluse rétroactivement dans D3 :** même checkpoint au pas400 sur les98 `heldout_ids` D0 du fold0, jamais entraînés par D3 et groupes disjoints des32. 73fuites/2vrais sans-fuite/23bruits ; ces groupes heuristiques ne sont pas une preuve d'indépendance de sessions réelles. Le reste des598 n'est pas amalgamé : certains clips appartiennent aux groupes des32. Développement déjà consulté dans les anciens diagnostics, pas confirmation indépendante.
+
+Code `141ff92`, `scripts/tslm/evaluate_memorization_holdout.py` : réutilise chargement/scoring/observation/métriques/reçus existants, sans nouveau moteur ni dépendance. Self-test local et runtime réussi : couverture, ordre, fold, disjonction des IDs et groupes. Préinscription `78e3b455f1f10e94d1faeced386071180da6f6727720b92e3ba4da7e47cd0eca` dans `/home/hicham/pipe-v0/artifacts/d3-heldout-98-141ff92-001`. Un checkpoint,98 observations/196 forwards, zéro optimiseur/génération/réglage ; AUC groupe primaire, AUC clip/NLL/matrice de confusion au seuil0,5 secondaires. A0 relu sur les mêmes98 pour repère, pas contraste causal : il a appris500clips contre32pour D3. Aucun WAV/cache val/test officiel ou externe observé.
+
+Après publication de cette préinscription, commande unique depuis le snapshot D3 : `PYTHONPATH=src ../.venv-repro/bin/python scripts/tslm/evaluate_memorization_holdout.py run --output /home/hicham/pipe-v0/artifacts/d3-heldout-98-141ff92-001`. Aucun résultat réservé encore à ce jalon ; ne pas relancer un dossier incomplet.
 
 ## Audit des populations et des cibles
 

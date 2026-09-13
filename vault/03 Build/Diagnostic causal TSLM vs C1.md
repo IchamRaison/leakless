@@ -38,6 +38,8 @@ Les commandes, empreintes et limites détaillées restent dans [[V2 ML - exécut
 
 ## Questions à départager — pas six chantiers simultanés
 
+**Actualisation D3 :** mémorisation32 réussie au pas400 avec Qwen gelé/loss complète, reload neuf exact. À la demande d'Icham, observer ensuite ce checkpoint fixe sur les98 réservés du fold0, en extension séparée sans apprentissage ni réglage. Ne pas traiter LoRA comme déblocage nécessaire ni32/32 comme preuve de qualité hors entraînement. [[Diagnostic causal - exécution#D3 — résultat final et extension sur groupes réservés]].
+
 | Cause possible | Contraste contrôlé proposé | Limite d'interprétation |
 |---|---|---|
 | Données / comparaison | Vérifier mapping, cibles et groupes ; analyser C1 et TSLM sur les mêmes sous-populations de développement, avec support suffisant des deux classes. | Les groupes heuristiques ne prouvent pas l'indépendance des sessions ; un effet d'acquisition n'est pas automatiquement un effet de fuite. |
