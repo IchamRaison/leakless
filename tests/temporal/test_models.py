@@ -6,6 +6,7 @@ import sys
 import tempfile
 import unittest
 import wave
+from types import SimpleNamespace
 
 import numpy as np
 import torch
@@ -16,7 +17,7 @@ sys.path.insert(0, str(ROOT / "scripts/eval"))
 from run_campaign import partition
 from prepare_external_holdout import expected_recordings
 from pipe.temporal_model import acoustic_features, decode_pcm, digest, C1Detector, v2_c1
-from pipe.sequence_model import SequenceModel
+from pipe.sequence_model import SequenceModel, load_sequence, sequence_probability
 
 
 class ModelsTest(unittest.TestCase):
@@ -83,6 +84,18 @@ class ModelsTest(unittest.TestCase):
         loss.backward()
         self.assertTrue(all(p.grad is not None and torch.isfinite(p.grad).all() for p in model.parameters()))
         self.assertGreater(float(sum(p.grad.abs().sum() for p in model.parameters())), 0)
+
+    def test_reload_preserves_precision_policy(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            torch.save(SequenceModel().state_dict(), root / "lstm.pt")
+            np.savez(root / "normalization.npz", mean=np.zeros(10), scale=np.ones(10))
+            torch.backends.cudnn.allow_tf32 = True
+            model, mean, scale = load_sequence(SimpleNamespace(directory=root,
+                metadata={"config": {"hidden_size": 32}}), device="cpu")
+            self.assertFalse(torch.backends.cudnn.allow_tf32)
+            self.assertFalse(torch.backends.cuda.matmul.allow_tf32)
+            self.assertTrue(0 < sequence_probability(model, np.zeros((30, 10)), mean, scale) < 1)
 
 
 if __name__ == "__main__":

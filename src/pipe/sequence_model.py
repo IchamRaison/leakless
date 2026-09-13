@@ -16,6 +16,9 @@ class SequenceModel(nn.Module):
 
 
 def load_sequence(detector, device="cuda"):
+    # Même FP32 que le fit : les valeurs par défaut d'un processus neuf diffèrent.
+    torch.backends.cuda.matmul.allow_tf32 = False
+    torch.backends.cudnn.allow_tf32 = False
     model = SequenceModel(detector.metadata["config"]["hidden_size"]).to(device)
     model.load_state_dict(torch.load(detector.directory / "lstm.pt", map_location=device, weights_only=True))
     model.eval()
