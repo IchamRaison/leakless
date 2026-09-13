@@ -63,9 +63,18 @@ Critères détaillés : [[Diagnostic causal TSLM vs C1#Critère de complétion d
 
 ## Prochaine action
 
-**Tester puis préinscrire D2 avant ses trois fits**, selon le protocole fixé ci-dessous. L'implémentation est en cours dans les seuls nouveaux `scripts/tslm/diagnose_nonlinear.py` et `tests/tslm/test_diagnose_nonlinear.py` ; aucun fit réel lancé. D1 ne résout pas le retard ; la sonde linéaire faible ne départage pas représentation et capacité de lecture. Réutiliser les métriques/agrégations et les comparateurs réservés existants, sans retuning. Aucun ajout de données ou nouvelle recette Qwen à ce stade.
+**Finaliser/tester puis préinscrire D2 avant ses trois fits**, selon le protocole fixé ci-dessous. Seul `scripts/tslm/diagnose_nonlinear.py` existe dans le clone sain, non commité/non revu/non testé ; `tests/tslm/test_diagnose_nonlinear.py` n'est pas encore créé. Aucune préinscription machine ni fit réel D2. D1 ne résout pas le retard ; la sonde linéaire faible ne départage pas représentation et capacité de lecture. Réutiliser les métriques/agrégations et les comparateurs réservés existants, sans retuning. Aucun ajout de données ou nouvelle recette Qwen à ce stade.
 
 D0 et D1 restent scellés ; aucun score à reproduire pour récupérer les résultats. D1 : handles A 22963 / C 5435 terminés avec code zéro, respectivement 312,744 s et 339,558 s. H100 après C : 0 Mio / 0 %, instance laissée allumée. Artefacts locaux `docs/evidence/tslm-v2/causal-d1-001/`, runtime `/home/hicham/pipe-v0/artifacts/causal-d1-306d330-001/`, logs `/home/hicham/pipe-v0/quality-causal-306d330/`.
+
+### Repères pour le contrôle d'apprentissage conditionnel
+
+Lecture de code uniquement, pas nouveau protocole adopté ni expérience exécutée. Si les résultats D2 justifient le contrôle de mémorisation :
+
+- Reprendre les 32 IDs exacts de `diagnose_causal.cohorts(...)["subset_ids"]` du fold 0 : 16/16 classes et 32 groupes du fit. Ne pas refaire une sélection sur les 598 clips.
+- Réutiliser `run_v2_campaign.initialize_training`, `examples(training=True)` et `train_epoch` avec initialisation neuve ; pas les checkpoints terminaux A0/C0. Avec batch effectif 8, 32 clips donnent quatre pas par époque ; 1 000 pas représenteraient 250 époques, budget/cadence/critères restant à préinscrire.
+- `capture_training_diagnostics` s'utilise par époque, `pop_step` après chaque pas, puis `epoch_summary`. Fermer le logger avant les observations `compute_loss`, sinon elles contaminent les traces d'entraînement. Scorer aux frontières d'époques : `score_rows` laisse le modèle en mode évaluation.
+- Garder la loss d'origine pour un premier témoin de capacité ; aucune pondération de classe supplémentaire choisie. Sauvegarde acoustique existante et reload dans un processus neuf à réutiliser. Éviter l'ancien overfit V0 `pipe.tslm.train.main`, qui lit la validation officielle, et ne pas modifier les anciens reçus de campagne.
 
 ## D0 — résultats et limites vérifiés
 

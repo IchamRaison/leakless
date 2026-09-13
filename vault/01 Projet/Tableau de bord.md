@@ -4,6 +4,8 @@ Icham
 
 ## Priorité actuelle — 13 septembre
 
+- [x] Deux nouveaux serveurs SSH joints, mais authentification refusée sur `icham@89.169.102.78` et `ich@89.169.122.233` ; accès existant `hicham@89.169.123.193` revérifié. [[Journal Icham#13 septembre — vérification des deux nouveaux accès SSH]]. Aucun GPU supplémentaire vérifié.
+- [ ] Vérifier les comptes et l'autorisation de la clé publique sur les deux nouvelles machines, puis leur inventaire/runtime ; quatrième accès encore non fourni.
 - [x] Périmètre du goal étendu aux étapes 6 à 10 à la demande d'Icham ; [[Diagnostic causal TSLM vs C1#Plan global en dix étapes]]. Ajout documentaire, pas exécution.
 - [x] Proposition d'Icham consignée : [[Diagnostic causal TSLM vs C1]], expliquer l'écart avant une nouvelle recette ; ancien enchaînement V2 en pause.
 - [x] Revue Claude intégrée : contrôles manquants ajoutés et conclusions non démontrées nuancées. [[Diagnostic causal TSLM vs C1#Checklist enrichie après la revue de Claude]]. Aucun contrôle nouvellement exécuté ni logger modifié.
@@ -14,7 +16,7 @@ Icham
 - [x] D1 implémenté/testé/préinscrit : code `306d330`, 203 tests runtime sans skip, préinscription `37cfcae1…` et preuves `1f89933` avant observation.
 - [x] D1 A/C exécutés : 3 588 forwards sans fit, artefacts `640d29c` / `9c163d4`, poids/entrées inchangés et reproduction D0 exacte ; [[Diagnostic causal - exécution#D1 — résultats et portée]]. Pas de politique FP32 adoptée ni correction uniforme de l'écart à C1.
 - [x] D2 borné : une configuration d'arbres boostés, mêmes 256 valeurs/folds, comparateurs réservés existants, AUC groupe primaire ; revue méthodologique favorable. [[Diagnostic causal - exécution#D2 — sonde non linéaire, protocole avant fit]].
-- [ ] D2 implémentation/tests puis préinscription et trois fits CPU du contrôle séparé ; aucun fit réel encore, apprentissages TSLM toujours sur H100.
+- [ ] D2 : runner local non commité/non revu, tests non créés ; finalisation/tests puis préinscription et trois fits CPU du contrôle séparé. Aucun fit réel encore, apprentissages TSLM toujours sur H100.
 - [ ] Vérifier la journalisation sur un prochain fit réel : implémentation `66f390b`, neuf tests runtime de transparence réussis, preuves `306d330` ; aucun nouvel entraînement lancé.
 - [ ] Produire la matrice causes démontrées / hypothèses non soutenues dans les conditions testées / inconnues. Aucun refit ni confirmation externe automatique.
 - [x] Audit train/cibles : les trois entraînements contiennent les deux classes ;242 vrais sans-fuite concentrés dans7 groupes. Limites dans [[Diagnostic causal - exécution#Audit des populations et des cibles]].
