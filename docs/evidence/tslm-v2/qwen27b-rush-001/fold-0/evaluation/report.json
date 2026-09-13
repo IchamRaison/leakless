@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "reload_max_absolute_difference": 0.0,
+  "probabilities": {
+    "c0128b879694e": 0.4073296303630383,
+    "c02543903a0da": 0.40732922748936795,
+    "c04206cc802ff": 0.3775385959056442,
+    "c04498a7ed239": 0.377537447349026
+  },
+  "runtime": {
+    "python": "3.12.3",
+    "packages": {
+      "torch": "2.8.0+cu128",
+      "transformers": "5.13.0",
+      "peft": "0.20.0",
+      "numpy": "2.5.2",
+      "scikit-learn": "1.9.1",
+      "timenet": "0.1.0",
+      "opentslm": "0.1.0"
+    },
+    "cuda": "12.8",
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "lock_sha256": "7b6429e67593cd945bb3c7d542cf160c9352064373d19112e865830327d1da2a",
+    "tf32_matmul": false,
+    "tf32_cudnn": true,
+    "deterministic": false
+  },
+  "pid": 115413,
+  "hostname": "computeinstance-e00g3ykxy51wgxcw1p",
+  "bundle_sha256": "388519325854750eed7a7ada7c78369b7cb5ef72d94705a2d3f8e0e0ba1a4a20",
+  "optimizer_steps": 0,
+  "official_validation_test_external_read": false,
+  "fold_id": 0,
+  "heldout_clips": 98,
+  "fit_complete": true,
+  "metrics": {
+    "n_clips": 98,
+    "n_clusters": 34,
+    "n_clusters_leak": 26,
+    "n_clusters_non_leak": 8,
+    "n_clips_leak": 73,
+    "n_clips_non_leak": 25,
+    "threshold": 0.5,
+    "aggregation": "median",
+    "clip_level": {
+      "roc_auc": 0.555616,
+      "pr_auc": 0.778962,
+      "macro_f1": 0.203252,
+      "balanced_accuracy": 0.5,
+      "leak_recall": 0.0,
+      "false_positive_rate": 0.0,
+      "brier": 0.312958,
+      "tp": 0,
+      "fp": 0,
+      "fn": 73,
+      "tn": 25
+    },
+    "cluster_level": {
+      "roc_auc": 0.701923,
+      "pr_auc": 0.894245,
+      "macro_f1": 0.190476,
+      "balanced_accuracy": 0.5,
+      "leak_recall": 0.0,
+      "false_positive_rate": 0.0,
+      "brier": 0.313916,
+      "tp": 0,
+      "fp": 0,
+      "fn": 26,
+      "tn": 8
+    },
+    "group_roc_auc_full": 0.7019230769230769,
+    "clip_roc_auc_full": 0.5556164383561644
+  },
+  "binary_nll": 0.8213100277782361
+}
