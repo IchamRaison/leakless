@@ -2258,3 +2258,10 @@
 .alert-state.is-pending {
   color: #93a695;
 }
+/* Sentence-case labels inside the incident panel: no tracked mono, which only suits caps. */
+.sim-panel .demo-kicker {
+  font-family: inherit;
+  font-size: 12px;
+  letter-spacing: 0;
+  color: #a7b6aa;
+}
