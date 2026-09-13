@@ -1,5 +1,19 @@
 # Journal Icham
 
+## 13 septembre — nouveaux essais SSH, une H100 supplémentaire accessible
+
+Icham fournit `iche@89.169.97.196` et `ich@195.242.28.46`. Contrôles en lecture seule avec la clé déjà acceptée sur la machine existante :
+
+```bash
+ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -o IdentitiesOnly=yes -i /home/animus/.ssh/id_ed25519 -o ConnectTimeout=10 -o ConnectionAttempts=1 iche@89.169.97.196 'id -un && hostname && nvidia-smi --query-gpu=name,memory.total,driver_version,memory.used,utilization.gpu --format=csv,noheader && python3 --version && df -h /'
+ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -o IdentitiesOnly=yes -i /home/animus/.ssh/id_ed25519 -o ConnectTimeout=10 -o ConnectionAttempts=1 ich@195.242.28.46 'id -un && hostname && nvidia-smi --query-gpu=name,memory.total,driver_version,memory.used,utilization.gpu --format=csv,noheader && python3 --version && df -h /'
+```
+
+- `iche@89.169.97.196` : service SSH joignable, `Permission denied (publickey)`, sortie 255. Seconde tentative identique sans `-o IdentitiesOnly=yes -i /home/animus/.ssh/id_ed25519` : même refus, sortie 255. Aucun inventaire distant exécuté ; cause compte/clé non départagée.
+- `ich@195.242.28.46` : réussite dès la tentative avec clé explicite, sortie 0. Utilisateur `ich`, hostname `computeinstance-e00fgs9mdc3y0zkpk7`. Sortie GPU : `NVIDIA H100 80GB HBM3, 81559 MiB, 580.173.02, 0 MiB, 0 %`. Python 3.12.3 ; `/dev/vda1` monté sur `/`, taille 1,3 To, 18 Go utilisés, environ 1,2 To libres (2 %). GPU inoccupé à cet instant, pas une réservation ni une mesure de vitesse d'entraînement.
+
+Nouvelles clés d'hôtes acceptées selon le mécanisme de première connexion `accept-new`, aucune vérification désactivée pour une clé modifiée. Aucun fichier distant, paquet, poids, donnée ou job créé/modifié. La nouvelle H100 est accessible, mais PyTorch/CUDA applicatif, environnement du projet, code et données n'ont pas été testés/préparés. D2 et les expériences restent inchangés. Accès existant `hicham@89.169.123.193` réussi lors de l'échange précédent, non retesté ici ; deux accès H100 vérifiés au total. Les nouvelles adresses ne sont pas supposées désigner des instances additionnelles aux précédentes : correspondance aux quatre machines envisagées à préciser.
+
 ## 13 septembre — vérification des deux nouveaux accès SSH
 
 Icham fournit deux adresses pour les machines supplémentaires. Vérifications de connexion uniquement, sans installation ni lancement de calcul :

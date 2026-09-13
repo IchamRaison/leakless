@@ -4,8 +4,9 @@ Icham
 
 ## Priorité actuelle — 13 septembre
 
-- [x] Deux nouveaux serveurs SSH joints, mais authentification refusée sur `icham@89.169.102.78` et `ich@89.169.122.233` ; accès existant `hicham@89.169.123.193` revérifié. [[Journal Icham#13 septembre — vérification des deux nouveaux accès SSH]]. Aucun GPU supplémentaire vérifié.
-- [ ] Vérifier les comptes et l'autorisation de la clé publique sur les deux nouvelles machines, puis leur inventaire/runtime ; quatrième accès encore non fourni.
+- [x] Nouvel accès `ich@195.242.28.46` réussi : H100 80GB HBM3, GPU inoccupé au contrôle, Python 3.12.3, environ 1,2 To libres. Deux accès H100 vérifiés avec la machine existante. [[Journal Icham#13 septembre — nouveaux essais SSH, une H100 supplémentaire accessible]].
+- [x] `iche@89.169.97.196` testé avec clé explicite puis identités normales : SSH répond, authentification refusée ; GPU non vérifié. Les deux autres refus de l'échange précédent restent historiques, sans nouvel essai.
+- [ ] Résoudre les accès refusés (compte/autorisation de clé) et préciser les instances retenues ; environnement ML/code/poids/données de la nouvelle H100 à préparer et vérifier avant tout fit.
 - [x] Périmètre du goal étendu aux étapes 6 à 10 à la demande d'Icham ; [[Diagnostic causal TSLM vs C1#Plan global en dix étapes]]. Ajout documentaire, pas exécution.
 - [x] Proposition d'Icham consignée : [[Diagnostic causal TSLM vs C1]], expliquer l'écart avant une nouvelle recette ; ancien enchaînement V2 en pause.
 - [x] Revue Claude intégrée : contrôles manquants ajoutés et conclusions non démontrées nuancées. [[Diagnostic causal TSLM vs C1#Checklist enrichie après la revue de Claude]]. Aucun contrôle nouvellement exécuté ni logger modifié.
