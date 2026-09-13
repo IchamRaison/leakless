@@ -1,0 +1,14 @@
+test_nonfinite_or_negative_nll_rejected (test_training_observations.AggregationChecks.test_nonfinite_or_negative_nll_rejected) ... ok
+test_token_weighted_sum_and_no_discriminant_double_count (test_training_observations.AggregationChecks.test_token_weighted_sum_and_no_discriminant_double_count) ... ok
+test_zero_denominator_is_null_not_epsilon (test_training_observations.AggregationChecks.test_zero_denominator_is_null_not_epsilon) ... ok
+test_bad_labels_attention_and_batch_fail_explicitly (test_training_observations.TorchTrainingObservationChecks.test_bad_labels_attention_and_batch_fail_explicitly) ... ok
+test_buffer_is_bounded_and_requires_consumption_before_next_forward (test_training_observations.TorchTrainingObservationChecks.test_buffer_is_bounded_and_requires_consumption_before_next_forward) ... ok
+test_capture_failure_restores_existing_forward_and_compute_loss_overrides (test_training_observations.TorchTrainingObservationChecks.test_capture_failure_restores_existing_forward_and_compute_loss_overrides) ... ok
+test_exact_tensor_return_no_extra_forward_and_cleanup_on_body_failure (test_training_observations.TorchTrainingObservationChecks.test_exact_tensor_return_no_extra_forward_and_cleanup_on_body_failure) ... ok
+test_mismatched_record_does_not_consume_or_double_count (test_training_observations.TorchTrainingObservationChecks.test_mismatched_record_does_not_consume_or_double_count) ... ok
+test_real_compute_loss_train_epoch_bitwise_updates_rng_modes_and_weighting (test_training_observations.TorchTrainingObservationChecks.test_real_compute_loss_train_epoch_bitwise_updates_rng_modes_and_weighting) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 6.497s
+
+OK
