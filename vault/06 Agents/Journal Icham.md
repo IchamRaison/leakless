@@ -1,5 +1,11 @@
 # Journal Icham
 
+## 13 septembre — D3 point100 vérifié, assets du second nœud conformes
+
+D3 continue sur la première H100, même handle20214/PID100634. Point100 : NLL binaire0,5749842273444788,24/32corrects, AUC0,76953125 ; critère strict non atteint. Observations rapatriées et scores/NLL/agrégats revérifiés sans inférence, preuves `b7ffdc3`. Revue indépendante du préfixe40pas/10époques : ordre/cibles/compteurs/AdamW/clipping cohérents, aucune panne mécanique visible, pas de verdict final. [[Diagnostic causal - exécution#D3 — entraînement en cours, pas encore de verdict]].
+
+Transfert646fichiers terminé (handle26958, sortie0), vérification distante terminée (handle1166, sortie0) par script `e142f66`, empreinte locale/distante identique `5b309b60…`. Inventaire exact,43SHAQwen/5SHAprovenance/598MD5WAVtrain conformes ; agrégatassets `dc23c125…`, WAV `2bf8c8b7…`, preuves `docs/evidence/runtime-h100-2-001/verify-assets.log`. Logiciels et socle train disponibles sur les deux H100 ; aucune donnée val/test/externe transférée, aucun chargement/forward Qwen ou fit réel sur le second nœud encore. Prochain usage après justification d'essais indépendants et contrôle de parité, sans modifier D3 ni réécrire les préinscriptions historiques.
+
 ## 13 septembre — unique fit D3 lancé après publication
 
 Préinscription/tests/seconde installation publiés `e5a8543`, notes source `b636b21`, miroir `fb436b3`. D3 `train` lancé une seule fois : handle20214, PID100634, première H100 ; empreinte préinscrite revérifiée avant appel. Point0 reproduit exactement D0-A initial (NLL3,244997234820116,16/32corrects), puis premiers pas réels avec logger sans forwards supplémentaires. Six époques/24pas observés à07:32:25Paris ; aucun verdict ni reload encore. [[Diagnostic causal - exécution#D3 — entraînement en cours, pas encore de verdict]].

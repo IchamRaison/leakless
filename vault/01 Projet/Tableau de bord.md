@@ -7,6 +7,7 @@ Icham
 - [x] Nouvel accès `ich@195.242.28.46` réussi : H100 80GB HBM3, GPU inoccupé au contrôle, Python 3.12.3, environ 1,2 To libres. Deux accès H100 vérifiés avec la machine existante. [[Journal Icham#13 septembre — nouveaux essais SSH, une H100 supplémentaire accessible]].
 - [x] `iche@89.169.97.196` testé avec clé explicite puis identités normales : SSH répond, authentification refusée ; GPU non vérifié. Les deux autres refus de l'échange précédent restent historiques, sans nouvel essai.
 - [x] Deuxième runtime H100 préparé avec uv/lock existants : 132 paquets compatibles, imports, calcul/backward GPU et 214 tests sans skip. `docs/evidence/runtime-h100-2-001/`. Pas encore de poids/données ni de parité Qwen entre machines ; pas de DDP ou essai supplémentaire.
+- [x] Socle train ensuite transféré et vérifié sur H100-2 :646fichiers exacts,43SHAQwen/5SHAprovenance/598MD5WAV conformes, aucun val/test/externe. Script `e142f66`, `verify-assets.log` ; vraie parité Qwen entre nœuds encore non mesurée.
 - [x] Périmètre du goal étendu aux étapes 6 à 10 à la demande d'Icham ; [[Diagnostic causal TSLM vs C1#Plan global en dix étapes]]. Ajout documentaire, pas exécution.
 - [x] Proposition d'Icham consignée : [[Diagnostic causal TSLM vs C1]], expliquer l'écart avant une nouvelle recette ; ancien enchaînement V2 en pause.
 - [x] Revue Claude intégrée : contrôles manquants ajoutés et conclusions non démontrées nuancées. [[Diagnostic causal TSLM vs C1#Checklist enrichie après la revue de Claude]]. Aucun contrôle nouvellement exécuté ni logger modifié.
@@ -21,6 +22,7 @@ Icham
 - [x] D2 : trois fits/200 itérations terminés, reçus et résultats revérifiés indépendamment, artefacts `160655a`. AUC groupe réservée moyenne 0,854167, trois gains vs sonde linéaire, encore derrière C1 fixe. [[Diagnostic causal - exécution#D2 — résultats vérifiés et portée]].
 - [x] D3 implémenté `c08ff78`, relu, huit tests ciblés puis 222 tests runtime ; préinscription machine `42920f6d…`, aucun fit à ce jalon. [[Diagnostic causal - exécution#D3 — vérifications avant fit]].
 - [ ] D3 : unique fit A lancé après publication `e5a8543`, handle 20214 /PID100634 ; premiers pas/journalisation réussis, aucun verdict. Suivre sans relancer, puis reload neuf après reçu train intègre ; maximum 1 000 pas, aucune prolongation automatique.
+- [x] D3 point100 :24/32corrects, NLL0,574984, critère non atteint ; traces/agrégats revérifiés, preuves `b7ffdc3`. Essai encore en cours, aucun gain de généralisation revendiqué.
 - [ ] Vérifier la journalisation sur un prochain fit réel : implémentation `66f390b`, neuf tests runtime de transparence réussis, preuves `306d330` ; aucun nouvel entraînement lancé.
 - [ ] Produire la matrice causes démontrées / hypothèses non soutenues dans les conditions testées / inconnues. Aucun refit ni confirmation externe automatique.
 - [x] Audit train/cibles : les trois entraînements contiennent les deux classes ;242 vrais sans-fuite concentrés dans7 groupes. Limites dans [[Diagnostic causal - exécution#Audit des populations et des cibles]].
