@@ -1,5 +1,13 @@
 # Journal Icham
 
+## 13 septembre — D0 complet, hypothèses révisées et D1 numérique borné
+
+Précédent tour de goal classé progrès : ajout conditionnel de collecte publié et audit train consigné, aucun blocage. Reprise sur état réel : A vérifié via `finished()` puis rapatrié/revérifié, `f64c943`; C exécuté une seule fois, handle67983 sorti0 après397,87s,822 observations, reçu `c6d2121f…`, tous fichiers revérifiés localement/distamment et publiés `9dd5b73`. D0 total1516observations/3032forwards, zérofit, poids inchangés par état, reload98 et échanges complets àdelta0. H1000Mio/0% après C, instance allumée.
+
+Revue indépendante A694/C822 confirme IDs, cibles, masques, agrégats et isolation des interventions. A fit NLL0,675040/AUCclip0,639307/groupe0,730769 ; C fit0,577496/0,878461/0,730769, mais réservé0,573121/0,498630/0,5. La décision de classe n'est donc pas uniformément au hasard surtrain. Description54,67%/58,95% de la NLL initiale sur32 ; petite en fin sans preuve qu'elle nuit àl'optimisation. C sensible aux séries ettexte ; aucune compréhension temporelle ni utilité horsgroupes démontrée.
+
+Piste suivante choisie d'après les traces : premières marges A surunegrille de0,125, écarts token LP loss/scoring jusqu'à0,140450 A/0,223227 C malgré préfixes identiques. Pas de correction d'avance : D1 compare tête BF16 originale, recalcul linéaire FP32 et FP32 réarrondi, mêmes poids/hidden states/inputs,598clips×3×2=3588forwards maximum ; aucun fit ni réglage surtest. Code runtime Qwen lu via inspect : head nn.Linear, pas d'upcast avant sa projection. Implémentation D1 et journalisationtrain déléguées sur fichiers nouveaux distincts, root seul SSH/GPU ; tests et préinscription avant exécution. [[Diagnostic causal - exécution]] contient résultats, matrice provisoire et protocole.
+
 ## 13 septembre — diversité des données et collecte conditionnelle en fin de plan
 
 Icham demande de garder l'élargissement des acquisitions pour la fin, si les autres pistes n'améliorent pas suffisamment le modèle. Ajout au [[Diagnostic causal TSLM vs C1]] : davantage de conditions sans fuite et paires fuite/sans fuite comparables, pas davantage de fenêtres des mêmes groupes ; nouveau protocole avant intégration, test et réserve externe inchangés. Planification uniquement dans ce tour, aucune collecte, recherche de dataset ou expérience lancée.

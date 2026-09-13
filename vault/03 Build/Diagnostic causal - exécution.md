@@ -6,7 +6,9 @@ Icham — 2026-09-13
 
 **Objectif d'implémentation désormais autorisé par Icham : [[Diagnostic causal TSLM vs C1]].** L'ancienne suite V2 de refit/confirmation reste suspendue ; l'autorisation porte sur le diagnostic et ses expériences contrôlées, pas sur une nouvelle recette produit. Premier jalon réalisé : les six fits existants sont complets et vérifiés, derniers artefacts publiés au commit code `b65042a`. Aucun réentraînement pour les récupérer, aucun score externe.
 
-**D0 implémenté, testé et préinscrit ; A terminé, C non lancé.** Le processus A (handle30906) est sorti normalement :694 observations/1388 forwards, zéro étape d'apprentissage, reçu annoncé `4810270a…`, reload98 et échanges complets annoncés à écart nul. Rapatriement et vérification indépendante des artefacts restent à faire avant verdict ; ne pas relancer A. Code `733b9c6`, 181 tests runtime sans skip (130 TSLM +51 évaluation), preuves `3e425b4`. Préinscription du 13 septembre à03:58:45Paris, SHA `cd2c3916cbac2b61b979f463fa793dec1be3585c6e558d7743a0d4c43a7e6d1f` ;22 sources vérifiées localement contre ce document. Aucun modèle chargé pendant la préinscription, aucun fit. Code dans `/home/animus/ehl-hackathon-zurich-v2-recovery`, branche `feat/icham-v2-reliability` ; ne pas commiter dans l'ancien dépôt Git endommagé.
+**D0 terminé, rapatrié et vérifié :1516 observations/3032 forwards, zéro apprentissage.** A reçu `4810270a…`, preuves `f64c943` ; C reçu `c6d2121f…`, preuves `9dd5b73`. Reçus et tous fichiers vérifiés localement/distamment avec `finished()`. Reload98 et échanges d'entrées complètes reproduisent exactement leurs scores ; poids inchangés dans chaque état. Revue indépendante des694 lignes A et822 lignes C : identités, cibles, masques et agrégats concordants. Ne pas relancer D0. Code `733b9c6`,181 tests runtime sans skip, préinscription SHA `cd2c3916cbac2b61b979f463fa793dec1be3585c6e558d7743a0d4c43a7e6d1f`. Checkout sain `/home/animus/ehl-hackathon-zurich-v2-recovery`, branche `feat/icham-v2-reliability` ; ancien Git endommagé à préserver.
+
+**Prochain contraste : D1, précision de la tête de sortie, sans fit.** Motif observé ci-dessous : marge de décision discrétisée et écarts LP supervision/scoring. Implémentation/journalisation en cours ; tests et préinscription machine avant toute nouvelle inférence. Pas de nouvelle recette adoptée, collecte conditionnelle toujours en dernier recours.
 
 ## Inventaire V2 complet — acquis de développement
 
@@ -39,9 +41,9 @@ D0 mesure comparaison, cohérence des objectifs/scoring et sensibilité aux entr
 ## Audit de complétion du nouvel objectif
 
 - [x] Six fits précédents vérifiés, récupérés et inventoriés sans réentraînement.
-- [x] D0 observateur/runner testés et préinscription machine publiée avant observation ; exécution et verdict non encore acquis.
+- [x] D0 observateur/runner testés, préinscrit puis exécuté ; résultats et revue indépendante consignés ci-dessous.
 - [x] Données/comparaison : mappings/cibles et supports examinés en lecture seule ; limites de diversité et d'acquisition consignées ci-dessous. Aucune causalité ni exactitude physique des annotations démontrée par ces contrôles.
-- [ ] D0 implémenté/testé/préinscrit puis exécuté : vrais scores/NLL train, alignement causal, contrôles de reload et interventions, états initial/terminal.
+- [x] D0 : vrais scores/NLL train, alignement structurel, contrôles de reload et interventions, états initial/terminal. Les écarts numériques loss/scoring restent une piste ouverte.
 - [ ] Avant tout nouveau fit : journalisation classe/description/EOS, comptes exacts, gradients/clipping/mises à jour et résumés d'époque testés puis vérifiés réellement.
 - [ ] Test de mémorisation32 à budget préinscrit, si nécessaire ; verdict limité à la capacité observée.
 - [ ] Contrastes complémentaires choisis selon preuves : lecteur non linéaire, tête sans Qwen, neuf mesures par voie entraînable ; exécution ou omission justifiée explicitement, jamais marquée réussie sans preuve.
@@ -52,7 +54,48 @@ D0 mesure comparaison, cohérence des objectifs/scoring et sensibilité aux entr
 
 ## Prochaine action
 
-Rapatrier/vérifier A sans réinférence, puis observer C depuis le snapshot `code-causal-733b9c6`, dans `/home/hicham/pipe-v0/artifacts/causal-d0-733b9c6-001`. Commande : `.venv-repro/bin/python scripts/tslm/diagnose_causal.py observe --output /home/hicham/pipe-v0/artifacts/causal-d0-733b9c6-001 --variant C`, depuis le snapshot avec PYTHONPATH habituel. Ne pas démarrer de mini-entraînement avant le verdict du bloc sans apprentissage. Les contrôles constants utilisent0,5 et la fréquence0,442 des500 clips fit, sans estimation sur les98 réservés. La collecte conditionnelle ajoutée par Icham ne change pas cette prochaine action.
+Terminer/tester le diagnostic D1 de précision de tête et la journalisation transparente du train ; publier code/préinscription avant le contraste numérique. Aucun mini-entraînement avant ce contrôle. D0 conservé dans `/home/hicham/pipe-v0/artifacts/causal-d0-733b9c6-001` et `docs/evidence/tslm-v2/causal-d0-001/`, handles30906/67983 terminaux. H100 revenue à0Mio/0% après C, instance allumée. Aucune relance des observations terminées.
+
+## D0 — résultats et limites vérifiés
+
+Mesures à checkpoints terminaux figés, pas pertes de batches pendant l'apprentissage. Les deux constantes de référence sont0,5 et0,442 (fréquence calculée seulement sur500fit).
+
+| Modèle / population | NLL binaire officielle | AUC clip | AUC groupe | FN / FP au seuil diagnostique0,5 |
+|---|---:|---:|---:|---:|
+| A /500 fit |0,675040|0,639307|0,730769|221 /0|
+| A /98 réservés |0,740530|0,709589|0,759615|73 /0|
+| C /500 fit |0,577496|0,878461|0,730769|0 /154|
+| C /98 réservés |0,573121|0,498630|0,500000|0 /21|
+
+NLL du prédicteur constant0,442 :0,686404 surfit et0,756994 surles98 ; constante0,5 :ln2=0,693147 partout. C illustre qu'une NLL inférieure àln2 peut coexister avec un classement hors groupes proche du hasard lorsque la prévalence change. Son AUC train par clip ne vaut pas celle par groupe : les situations nombreuses pèsent davantage dans la première. A a un classement empirique modeste malgré toutes ses décisions négatives à0,5 ; ce seuil n'est pas réglé ni adopté en produit.
+
+Sur les32 mêmes témoins, NLL binaire initiale→terminale : A3,244997→0,680683 ; C1,887097→0,683933. La description représente54,67% de la NLL initiale A et58,95% initiale C, contre7,53% et0,86% en fin. Elle n'est donc pas négligeable à tous les stades ; son effet sur les gradients reste inconnu. Chez A, la norme L2 moyenne du projecteur avant cast vaut17,661→18,473, contre0,746 pour les seuls tokens de réponse valides : pas une entrée projetée de norme minuscule, mais aucune cause d'échelle excessive démontrée.
+
+Les interventions modifient les scores. A : deltas absolus moyens0,030676 (donneurs même classe),0,032511 (classes opposées). C : séries seules0,106197/0,126311 ; texte des mesures seul0,173343/0,207452 ; conjoint0,235073/0,327953. Revue des empreintes C : les échanges séries/texte ne modifient que leur voie respective ; conjoint et A séries reproduisent le donneur exactement. Sensibilité réelle aux deux entrées, pas preuve de compréhension des nombres ni d'utilité hors groupes. Une moyenne signée nulle d'une permutation bijective n'est pas une absence d'effet.
+
+**Écart numérique distinct de la parité d'interface :** prompts loss/scoring exactement identiques, mais LP du token de classe différentes entre forward supervision1 et score2. Sur598 terminaux A, écart maximal par token0,140450 ; classe complète, moyenne absolue0,026105 surfit et0,025126 surles98. Pour C, maximum token0,223227 ; maximum absolu NLLclasse surfit0,223253. Ce n'est pas une différence de NLL binaire et aucun score alternatif n'est reconstruit depuis la seule LP vraie. Chez A, les premières marges de logits ont sept valeurs, multiples de0,125 ;366 clips à−0,25 et162 à−0,125. Les tokens suivants contribuent au différentiel pour moins de0,000722. Signature compatible avec BF16, cause à isoler. Le runtime `Qwen3_5ForCausalLM.forward` lu via `inspect` applique directement sa `nn.Linear` lm_head aux hidden states ; caster ensuite les logits arrondis enfloat32 ne récupère pas leur résolution.
+
+### Matrice provisoire après D0 — pas verdict final
+
+| Hypothèse | État après D0 | Limite / contrôle manquant |
+|---|---|---|
+| Tout est étiqueté fuite ou cibles décalées | Non soutenue par audit IDs/cibles/masques | Annotations physiques source non revérifiées |
+| Aucun classement appris, même sur train | Non soutenue pour A0/C0 | Capacité à mémoriser parfaitement et autres folds non mesurées ici |
+| Qwen ignore complètement séries / texte C | Non soutenue par interventions | Sensibilité ≠ exploitation utile ni compréhension temporelle |
+| La description est toujours négligeable | Contredite à l'initialisation | Impact causal sur optimisation/gradients non isolé |
+| Projecteur de norme trop petite | Non soutenue dans ces états A | Autre défaut d'échelle/gradient encore possible |
+| Précision du score limite le classement | Piste renforcée par grille/écarts LP | D1 pour isoler la tête de sortie ; pas attribution BF16 acquise |
+| Représentation insuffisante / données peu diverses | Limites et écarts de sondes observés | Sonde non linéaire et causalité du manque de diversité restent ouvertes |
+
+## D1 — précision de tête, protocole fixé avant exécution
+
+- Mêmes checkpoints terminaux A0/C0, mêmes598train et mêmes partitions500/98. Aucun nouveau fit, prompt, label de classe, seuil ou méthode de normalisation des continuations.
+- Trois voies par clip : tête originale BF16 ; même couche linéaire recalculée avec hidden states et poids convertis enFP32, sortie FP32 ; même recalcul FP32 réarrondi enBF16. Ce dernier témoin distingue perte de résolution et différences arithmétiques du produit matriciel ; ne pas présupposer qu'il égale parfaitement le calcul BF16 original.
+- Chaque voie passe par le score officiel des deux continuations complètes. Les deux politiques alternatives sont déclarées comme variantes numériques diagnostiques, pas exports conformes ni recette adoptée. Même état caché, mêmes entrées et mêmes poids à vérifier par empreintes ; seule la tête varie temporairement, restauration obligatoire.
+- Budget :598×3=1794 forwards par modèle, total3588, sans génération ni backward. Baseline rechargée contreD0 sur598 à tolérance1e-6 ; échec arrête l'interprétation. Dossiers neufs, artefacts incomplets conservés, sources/runtime/checkpoints liés à la préinscription machine avant lancement.
+- Rapporter résolution des marges, deltas de scores/NLL et AUC par clip/groupe séparément pourfit etréservés. Une grille plus fine ne prouve pas un meilleur classement ; un gain ne devient ni une preuve externe ni une explication de tout l'écart à C1. Aucune sélection du meilleur résultat ni recherche de seuil. Évaluer aussi les écarts du témoin réarrondi avant d'attribuer un effet au seul arrondi.
+
+La journalisation des futurs fits est implémentée en parallèle sans expérience : enveloppe transparente du vrai `compute_loss`, statistiques détachées sans forward supplémentaire, sommes/comptes parclip/époque, gradients avant/après clipping et mises à jour. La NLL binaire officielle reste une observation séparée à checkpoint figé. Elle ne peut pas être reconstruite à partir du seul forward supervisé.
 
 ## Audit des populations et des cibles
 
