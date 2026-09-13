@@ -50,7 +50,7 @@ D0 mesure comparaison, cohérence des objectifs/scoring et sensibilité aux entr
 - [ ] Matrice finale par hypothèse : démontrée / non soutenue dans les conditions testées / inconnue ; preuve, alternatives et portée pour chaque verdict.
 - [ ] Nouvelle recette proposée seulement après restitution causale, ou constat motivé des données manquantes. Aucun réglage sur test officiel/externe.
 - [ ] Code, commandes, tests, artefacts et passation publiés ; revue indépendante des conclusions.
-- [ ] **Après les autres pistes seulement, si l'amélioration reste insuffisante :** préparer la diversification des acquisitions sans fuite et des paires fuite/sans fuite comparables. [[Diagnostic causal TSLM vs C1#Dernière étape conditionnelle — diversifier les acquisitions sans fuite]]. Planifié, aucune collecte lancée.
+- [ ] **Après les autres pistes seulement, si l'amélioration reste insuffisante :** préparer la diversification globale des données acoustiques, fuite et sans-fuite, sites/capteurs/matériaux/conditions comparables. [[Diagnostic causal TSLM vs C1#Dernière étape conditionnelle — diversifier les données acoustiques]]. Revue de la shortlist effectuée dans [[Datasets utiles pour PIPE]] ; aucune nouvelle collecte ou intégration lancée, D1 reste à exécuter.
 
 ## Prochaine action
 

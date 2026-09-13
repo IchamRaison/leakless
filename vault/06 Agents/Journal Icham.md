@@ -1,5 +1,11 @@
 # Journal Icham
 
+## 13 septembre — diversité globale, revue des datasets et rôle d'Aghashahi
+
+Icham précise que l'élargissement doit viser la diversité de toutes les données, pas uniquement les sans-fuite, et demande une relecture de la shortlist attribuée à Luna. Notes et pages primaires consultées ; recherche Entire ciblée sans résultat, aucune attribution d'intention déduite de cet historique absent. Revue indépendante Hong Kong/Aghashahi en lecture seule. [[Datasets utiles pour PIPE#Revue du 13 septembre — diversité globale]] contient l'avis et ses limites : Hong Kong ajoute potentiellement du terrain, Aghashahi des facteurs expérimentaux ; les autres sources servent souvent d'autres modalités/usages. Indépendance Hong Kong non démontrée, appariement avant/après à auditer ; détail51,2kHz retiré faute de confirmation sur la page Aghashahi. README NTNU précise l'incertitude temporelle±3min ; Wessex consulté via index du domaine officiel après403 direct.
+
+Icham demande si réserver Aghashahi prive l'apprentissage de données utiles. Coût d'opportunité reconnu ; proposition non validée de réaffectation dans un futur protocole avec autre réserve exploitable, éventuellement Hong Kong après audit. Aucun transfert de rôle effectué : Aghashahi reste figé/sans score, aucune fenêtre ni modalité liée ajoutée au train. Les diagnostics restants ne sont pas épuisés : D1 demeure la prochaine action. Pas de nouvelle collecte, téléchargement de données, inférence ou apprentissage dans cette revue. Plan, passation et tableau de bord élargis à la diversité globale ; source distante intégrée avant édition et miroirs à actualiser après publication.
+
 ## 13 septembre — D0 complet, hypothèses révisées et D1 numérique borné
 
 Précédent tour de goal classé progrès : ajout conditionnel de collecte publié et audit train consigné, aucun blocage. Reprise sur état réel : A vérifié via `finished()` puis rapatrié/revérifié, `f64c943`; C exécuté une seule fois, handle67983 sorti0 après397,87s,822 observations, reçu `c6d2121f…`, tous fichiers revérifiés localement/distamment et publiés `9dd5b73`. D0 total1516observations/3032forwards, zérofit, poids inchangés par état, reload98 et échanges complets àdelta0. H1000Mio/0% après C, instance allumée.

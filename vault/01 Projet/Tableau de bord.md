@@ -14,7 +14,8 @@ Icham
 - [ ] Journalisation transparente des futurs fits : termes NLL/comptes, gradients/clipping/mises à jour ; en implémentation, aucun fit lancé.
 - [ ] Produire la matrice causes démontrées / hypothèses non soutenues dans les conditions testées / inconnues. Aucun refit ni confirmation externe automatique.
 - [x] Audit train/cibles : les trois entraînements contiennent les deux classes ;242 vrais sans-fuite concentrés dans7 groupes. Limites dans [[Diagnostic causal - exécution#Audit des populations et des cibles]].
-- [ ] **En dernier recours uniquement :** si les autres pistes n'améliorent pas suffisamment le modèle, diversifier les acquisitions sans fuite et les conditions fuite/sans fuite comparables. [[Diagnostic causal TSLM vs C1#Dernière étape conditionnelle — diversifier les acquisitions sans fuite]]. Aucune collecte lancée.
+- [x] Shortlist relue sur les sources : [[Datasets utiles pour PIPE#Revue du 13 septembre — diversité globale]]. Diversité de l'ensemble des données visée ; Hong Kong candidat à auditer, Aghashahi déjà réservé. Aucun nouveau téléchargement de données ni entraînement.
+- [ ] **En dernier recours uniquement :** si les autres pistes n'améliorent pas suffisamment le modèle, diversifier les données acoustiques des deux classes, sites/capteurs/matériaux/conditions. [[Diagnostic causal TSLM vs C1#Dernière étape conditionnelle — diversifier les données acoustiques]]. Les diagnostics restants ne sont pas omis ; aucune collecte supplémentaire lancée.
 
 ## Prêt
 
