@@ -1,5 +1,17 @@
 # Journal Icham
 
+## 13 septembre — README évaluateurs et publication rapide
+
+Icham limite la distribution complète au push immédiat et au README. Guide racine : chaîne C1/OpenTSLM/Qwen, tunnel8020, replay43s sans fit, routes et prérequis d'accès. Pas de release de poids, d'installation ou de changement de visibilité ; code privé `IchamRaison/leakless`, branche `feat/c1-opentslm-qwen`. Preuves et limites conservées. [[C1 OpenTSLM Qwen - exécution]].
+
+## 13 septembre — C1 OpenTSLM Qwen livré sur8020
+
+[[C1 OpenTSLM Qwen - exécution]] : deuxième fit LoRA400pas terminé, relecture corrigée des noms de paramètres sans refit (`77c174f`), reload exact.16/25descriptions brutes contre3/25 ;9fallbacks,8/25 inversions, règles25/25 par construction. Chronologies artificielles dev, aucun gain terrain revendiqué. Service8020 isolé PID129483,39tests réussis. Replay HTTP43s : proposition Nevil31e haute, doublon idempotent, fin via fallback explicite, zéro WhatsApp ; p95ingestion C18,12ms. Code/preuves `2318dee`, checkpoint sauvegardé hors Git avec empreintes vérifiées. Ponytail : C1/API/OpenTSLM réutilisés, Qwen à vocabulaire fermé et durées déterministes. Raccordement backend restant, pas de frontend/repli195 touché, pas de nouveau fit.
+
+## 13 septembre — correction OpenTSLM, pas LSTM acoustique
+
+Icham précise la tâche : C1 fournit ses scores, OpenTSLM/Qwen restitue l'évolution, un message est proposé à Nevil après plus de30s ; partie IA seulement. [[C1 OpenTSLM Qwen - exécution]]. Réutilisation du raccordement OpenTSLM-SP/Qwen retrouvé par Entire, C1 inchangé. Préinscription `a468d26`, fit400pas :3/25descriptions brutes correctes,22fallbacks, reload exact. Ce n'est pas un succès du modèle. Second essai borné LoRA annoncé sur difficulté train, publié `b7419d9`, mêmes scénarios/400pas, en cours. Code endpoint `2102ff5`,39tests (strict30/31, trous, doublons, reprise, worker/panne). Pas de troisième recette automatique ; ni évaluation terrain ni qualité acoustique déduite de ces scénarios artificiels.
+
 ## 13 septembre — endpoint réel livré, LSTM non promu
 
 [[C1 temporel - exécution]] : préinscription `96bfe7c`, premier run arrêté sur pleine échelle avant LSTM ; nouveau protocole inclusif `12303e6`, C1 exact réutilisé sans deuxième fit. LSTM `472b57b` :100époques/500pas,39/40train. Reload initial bloqué avant réserves ; TF32 restauré désactivé comme au fit (`3b5d094`), écart5,3644e-7, tolérance inchangée. AUC groupe validation0,375/confirmation0,590278, contrôle sans ordre0,8125/1,0 : non-promotion, pas de réglage après confirmation. Saturation/domaine/rareté des groupes et absence d'onsets publiés.

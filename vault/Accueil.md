@@ -4,9 +4,11 @@ Icham
 
 ## Commencer ici
 
+**Livré : [[C1 OpenTSLM Qwen - exécution]].** C1 détecte, OpenTSLM-SP/Qwen3.5-4B + LoRA décrit l'historique ; message proposé à Nevil après31secondes hautes consécutives. Service GPU loopback8020,39tests et recette HTTP43s réussis ; code/preuves `2318dee`. Modèle brut16/25 sur scénarios artificiels,9fallbacks : pas de qualité terrain ni d'utilité supérieure aux règles démontrée. Durées déterministes, aucun WhatsApp/frontend. Prochaine action : raccordement backend/Monitor au contrat `docs/TEMPORAL_LANGUAGE_ENDPOINT.md`, pas de nouveau fit.
+
 **Livré/testé : [[C1 temporel - exécution]].** Endpoint C1/suivi/aperçus sur la première H100, loopback8019 via SSH ; recette avec vrais poids réussie. LSTM entraîné sur le nouveau protocole Aghashahi puis non promu après comparaison défavorable. Pas de qualité terrain démontrée, de frontend modifié ni de message WhatsApp. Repli `195.242.28.46` intact. Contrat `docs/TEMPORAL_ENDPOINT.md`, code/preuves `8baecab` ; [[Passation]] donne le raccordement restant.
 
-**Plan d'origine :** [[Plan C1 - suivi temporel et notifications]]. Qwen reste optionnel pour restituer des faits et n'a pas été ajouté au moteur d'alertes. Les calculs du [[Rush Qwen 27B - exécution]] sont terminés, audit consolidé et archivage final encore inachevés ; cette ancienne campagne reste distincte de la livraison C1.
+**Plan d'origine :** [[Plan C1 - suivi temporel et notifications]]. Qwen était optionnel et absent du premier endpoint8019 ; la correction explicite d'Icham a conduit au nouveau8020 ci-dessus. Les calculs du [[Rush Qwen 27B - exécution]] sont terminés, audit consolidé et archivage final encore inachevés ; cette ancienne campagne reste distincte de la livraison C1.
 
 [[Passation]] donne l'état réel. [[Évaluation qualité V1 - exécution]] donne les résultats mesurés ; [[Plan surveillance continue]] distingue l'ambition produit du prototype. [[Plan directeur agents]] conserve le plan initial et les contraintes communes. Aucune lecture du chat n'est nécessaire.
 

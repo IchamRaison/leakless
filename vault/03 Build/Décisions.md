@@ -2,6 +2,10 @@
 
 Icham
 
+## 2026-09-13 — Correction explicite : OpenTSLM + Qwen de restitution
+
+Icham demande C1 + OpenTSLM (pas un autre LSTM acoustique) + petit Qwen. Implémentation isolée8020, historique numérique causal64×10 ; Qwen3.5-4B avec LoRA rang8 retenu entre deux recettes bornées (16/25 contre3/25 sur développement artificiel). Choix parmi cinq formulations, pas génération libre. Le modèle ne compte pas les secondes et ne décide pas l'envoi : durées/condition>30s déterministes, désaccord factuel remplacé par gabarit déclaré. IA/endpoint seulement, destinataire logique Nevil, aucun WhatsApp. Pas de supériorité sur les règles ni validation terrain démontrée. [[C1 OpenTSLM Qwen - exécution]], livraison `2318dee`. Ancienne décision8019 ci-dessous conservée comme historique.
+
 ## 2026-09-13 — Livraison C1, LSTM non promu et endpoint GPU
 
 Icham autorise explicitement le plan C1 et la réaffectation Aghashahi, sans WhatsApp, par endpoint sur le GPU. Nouveau protocole publié avant fit : BR train/validation, LO confirmation, capteurs d'une même condition ensemble ; cible globale30s, jamais onsets inventés. Préparation/résultats historiques intacts. Les signaux à pleine échelle restent inclus dans l'expérience descriptive mais provoquent l'abstention du service, différence de couverture publiée.

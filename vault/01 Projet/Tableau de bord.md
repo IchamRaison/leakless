@@ -4,6 +4,11 @@ Icham
 
 ## Priorité actuelle — 13 septembre
 
+- [x] Correction de périmètre : [[C1 OpenTSLM Qwen - exécution]], pas un LSTM acoustique supplémentaire ; durée31s, Nevil destinataire logique, IA seulement.
+- [x] Historique/description/jobs durables et garde-fous implémentés,39tests réussis ; premier fit/reload terminé,3/25descriptions brutes,22fallbacks sur scénarios artificiels.
+- [x] Second essai LoRA terminé/reload exact :16/25descriptions brutes,9fallbacks,8/25 inversions. RecetteHTTP43s réussie, message31e haute, nouveau service8020 disponible ; code/preuves `2318dee`. Pas de supériorité aux règles démontrée. Aucun envoi WhatsApp, frontend ou remplacement de8019/195.
+- [ ] Raccorder le backend/Monitor au **nouveau8020** selon `docs/TEMPORAL_LANGUAGE_ENDPOINT.md` ; attendre les aperçus prêts et dédupliquer côté envoi. Aucun nouvel entraînement prévu dans cette livraison.
+
 - [x] Icham autorise [[C1 temporel - exécution]] et la réaffectation Aghashahi ; endpoint GPU demandé, WhatsApp exclu.
 - [x] Audit/protocole publiés avant fit ; C1 unique598train, LSTM H100100époques/500pas, reload corrigé FP32 et comparaisons validation/confirmation terminées. LSTM non promu ; [[C1 temporel - exécution]].
 - [x] Suivi causal SQLite, santé/coupures/doublons/redémarrage, aperçus seuls et endpoint isolé implémentés/testés. Replay HTTP réel12fenêtres à1Hz : scores/mesures exacts, événement+deux aperçus, p95serveur11,06ms sur ce court essai ; preuves `8baecab`.

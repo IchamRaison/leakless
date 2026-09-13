@@ -2,6 +2,10 @@
 
 Icham
 
+## Correction actuelle — C1 + OpenTSLM-SP + Qwen
+
+[[C1 OpenTSLM Qwen - exécution]] : C1 par fenêtre → historique64×10 → encodeur/projecteur OpenTSLM-SP → Qwen3.5-4B avec LoRA rang8, choix de description contrôlée. Compteurs/horodatages déterministes, proposition Nevil après31s, travailleur modèle asynchrone et tâches SQLite. Aucun réseau récurrent LSTM de classification ajouté ici. Livré `2318dee`, service `77c174f` sur8020,39tests/recetteHTTP43s réussis ; brut16/25scénarios artificiels, garde-fou contre désaccord factuel. Aucun bénéfice TSLM ou terrain démontré. L'ancien8019 reste une livraison distincte ci-dessous.
+
 ## Livraison actuelle — C1 temporel isolé, 13 septembre
 
 [[C1 temporel - exécution]] : WAV1s/8kHz → neuf descripteurs C1 + score continu → suivi causal SQLite (événement et santé séparés) → aperçu déterministe, **aucun envoi WhatsApp**. API `/temporal` sur première H100/loopback8019, via tunnel SSH ; Monitor à raccorder séparément. Code/service `5553e14`, preuves `8baecab`, `docs/TEMPORAL_ENDPOINT.md`. Repli195 inchangé.
