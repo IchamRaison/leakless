@@ -148,7 +148,7 @@ def fit(args, config):
     assert frozen_hash(model) == frozen
     weights={"encoder_state":model.encoder.state_dict(),"projector_state":model.projector.state_dict()}
     if config.get("lora"):
-        weights.update(lora_enabled=True,lora_state={name:p.detach() for name,p in model.named_parameters() if "lora_" in name and p.requires_grad})
+        weights.update(lora_enabled=True,lora_state={name:p.detach() for name,p in model.llm.named_parameters() if "lora_" in name and p.requires_grad})
     torch.save(weights,args.output/"temporal.pt")
     model.eval()
     with torch.inference_mode():

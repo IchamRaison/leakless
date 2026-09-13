@@ -100,7 +100,12 @@ class TemporalNarrator:
         self.model.encoder.load_state_dict(weights["encoder_state"])
         self.model.projector.load_state_dict(weights["projector_state"])
         if lora:
-            self.model.load_lora_state_from_checkpoint(weights,allow_missing=False)
+            # Le premier export nommait depuis le wrapper ; OpenTSLM charge depuis llm.
+            state={name.removeprefix("llm."):tensor for name,tensor in weights["lora_state"].items()}
+            expected={name for name,p in self.model.llm.named_parameters() if "lora_" in name and p.requires_grad}
+            if set(state) != expected:
+                raise ValueError("Mapping des adaptateurs LoRA divergent")
+            self.model.load_lora_state_from_checkpoint(weights | {"lora_state":state},allow_missing=False)
         self.model.eval()
         with np.load(self.directory / "normalization.npz", allow_pickle=False) as stats:
             self.mean, self.scale = stats["mean"], stats["scale"]
