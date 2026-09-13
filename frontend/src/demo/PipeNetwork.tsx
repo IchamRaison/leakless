@@ -1,16 +1,40 @@
+import { useRef, type KeyboardEvent, type MouseEvent } from "react";
 import { LEVEL_DB, toUnit } from "./replay";
+import {
+  HIT_STROKE,
+  PIPE_PATHS,
+  pipePolylines,
+  type Point,
+  type SimulatedIncident,
+} from "./simulation";
 
 export type NetworkChannel = { id: string; name: string; level: number | null };
 
-// Flow order matters: the dash animation runs from each path's start to its end.
-const SEGMENTS = [
-  "M130,240 H600",
-  "M600,240 H1080 V300",
-  "M300,240 V70",
-  "M300,70 H880",
-  "M880,70 V240",
-  "M590,70 V160 H440 V240",
-];
+const SEGMENTS = PIPE_PATHS;
+const VIEW = { x: 0, y: 30, width: 1240, height: 280 };
+// Keyboard fallback for the pipe hit areas: the middle of each pipe's first straight run.
+const MIDPOINTS = pipePolylines().map(([a, b]) => ({
+  x: (a.x + b.x) / 2,
+  y: (a.y + b.y) / 2,
+}));
+
+/** Client coordinates to SVG units, with a viewBox fallback where no CTM exists (jsdom). */
+function toSvgPoint(
+  svg: SVGSVGElement,
+  clientX: number,
+  clientY: number,
+): Point {
+  const ctm = svg.getScreenCTM?.();
+  if (ctm) {
+    const point = new DOMPoint(clientX, clientY).matrixTransform(ctm.inverse());
+    return { x: point.x, y: point.y };
+  }
+  const rect = svg.getBoundingClientRect();
+  return {
+    x: VIEW.x + ((clientX - rect.left) / (rect.width || 1)) * VIEW.width,
+    y: VIEW.y + ((clientY - rect.top) / (rect.height || 1)) * VIEW.height,
+  };
+}
 const JOINTS = [
   [600, 240],
   [300, 240],
@@ -33,16 +57,40 @@ export function PipeNetwork({
   playing,
   focused = null,
   onFocus,
+  incident = null,
+  onIncident,
 }: {
   channels: NetworkChannel[];
   playing: boolean;
   focused?: string | null;
   onFocus?: (id: string) => void;
+  incident?: SimulatedIncident | null;
+  onIncident?: (click: Point) => void;
 }) {
+  const svg = useRef<SVGSVGElement>(null);
+  const hit = (event: MouseEvent<SVGPathElement>) => {
+    if (svg.current && onIncident)
+      onIncident(toSvgPoint(svg.current, event.clientX, event.clientY));
+  };
+  const hitKey = (event: KeyboardEvent<SVGPathElement>, pipe: number) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    onIncident?.(MIDPOINTS[pipe]);
+  };
   return (
-    <figure className={playing ? "pipe-network" : "pipe-network paused"}>
+    <figure
+      className={[
+        "pipe-network",
+        playing ? "" : "paused",
+        incident ? "simulating" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
+      {incident && <span className="sim-chip">SIMULATION MODE</span>}
       <svg
-        viewBox="0 30 1240 280"
+        ref={svg}
+        viewBox={`${VIEW.x} ${VIEW.y} ${VIEW.width} ${VIEW.height}`}
         role="group"
         aria-label="Illustrative pipe network with animated water. Each recording marker ripples with the measured level of its replayed recording. No leak is shown."
       >
@@ -70,6 +118,65 @@ export function PipeNetwork({
             rx="5"
           />
         ))}
+        {onIncident && (
+          <g className="pipe-hits">
+            {SEGMENTS.map((d, pipe) => (
+              <path
+                key={d}
+                className="pipe-hit"
+                d={d}
+                strokeWidth={HIT_STROKE}
+                role="button"
+                tabIndex={0}
+                aria-label={`Simulate an incident on pipe ${pipe + 1}`}
+                onClick={hit}
+                onKeyDown={(event) => hitKey(event, pipe)}
+              />
+            ))}
+          </g>
+        )}
+        {incident && (
+          <g className="sim-layer" aria-label="Simulated sensor responses">
+            {incident.responses.map(({ sensor, response }) => (
+              <g
+                key={sensor.id}
+                className={
+                  sensor.id === incident.nearest.id
+                    ? "sim-sensor is-nearest"
+                    : "sim-sensor"
+                }
+              >
+                <circle
+                  className="sim-ripple"
+                  cx={sensor.x}
+                  cy={sensor.y}
+                  r={16 + response * 40}
+                  style={{ opacity: 0.15 + response * 0.65 }}
+                />
+                <rect
+                  className="sim-node"
+                  x={sensor.x - 9}
+                  y={sensor.y - 9}
+                  width="18"
+                  height="18"
+                  rx="3"
+                />
+                <text
+                  x={sensor.x + sensor.label[0]}
+                  y={sensor.y + sensor.label[1]}
+                >
+                  SIM {sensor.id}
+                </text>
+              </g>
+            ))}
+            <circle
+              className="sim-incident"
+              cx={incident.position.x}
+              cy={incident.position.y}
+              r="15"
+            />
+          </g>
+        )}
         {channels.map((channel, index) => {
           const [x, y, dx, dy] = POINTS[index];
           const unit =
@@ -114,6 +221,15 @@ export function PipeNetwork({
         network: pipes, water motion and recording markers are drawn for the
         demo, not measured, and no leak is shown. Ripple size = measured level
         of each replayed recording.
+        {onIncident &&
+          !incident &&
+          " Click a pipe to run the simulated incident demo."}
+        {incident && (
+          <strong className="sim-caption">
+            {" "}
+            Illustrative sensor positions — not dataset channels.
+          </strong>
+        )}
       </figcaption>
     </figure>
   );

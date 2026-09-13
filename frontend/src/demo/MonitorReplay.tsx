@@ -23,6 +23,8 @@ import {
   toUnit,
 } from "./replay";
 import { signalGeometry } from "./signalGeometry";
+import { SimulationPanel } from "./SimulationPanel";
+import { simulateIncident, type SimulatedIncident } from "./simulation";
 import "./demo.css";
 
 const TICK_MS = 100;
@@ -42,6 +44,8 @@ export default function MonitorReplay() {
   const [clock, setClock] = useState(0);
   const [listening, setListening] = useState<string | null>(null);
   const [focused, setFocused] = useState<string | null>(focusFromHash);
+  // Illustrative product simulation, independent from the replayed recordings.
+  const [incident, setIncident] = useState<SimulatedIncident | null>(null);
   const root = useRef<HTMLDivElement>(null);
   const audio = useRef<HTMLAudioElement>(null);
 
@@ -192,7 +196,15 @@ export default function MonitorReplay() {
           playing={playing}
           focused={focused}
           onFocus={focusRecording}
+          incident={incident}
+          onIncident={(click) => setIncident(simulateIncident(click))}
         />
+        {incident && (
+          <SimulationPanel
+            incident={incident}
+            onClear={() => setIncident(null)}
+          />
+        )}
         <section className="monitor-grid" aria-label="Replayed channels">
           {recordings.records.map((record, index) =>
             channels[record.id] ? (

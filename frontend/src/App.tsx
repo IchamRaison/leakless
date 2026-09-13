@@ -43,7 +43,12 @@ export function App() {
         .querySelectorAll<HTMLAudioElement>(".demo-view audio")
         .forEach((audio) => audio.pause());
     // The demo stays mounted while the monitor is shown: selection, recordings and uploads survive.
-    window.scrollTo(0, monitor ? 0 : demoScroll.current);
+    // Leaving the monitor for a section anchor (#evidence…) opens that section, not the old position.
+    const id = decodeURIComponent(location.hash.slice(1));
+    const section =
+      !monitor && id && id !== "demo" ? document.getElementById(id) : null;
+    if (section) section.scrollIntoView({ block: "start" });
+    else window.scrollTo(0, monitor ? 0 : demoScroll.current);
   }, [monitor]);
   const notes = NotesLayer && new URLSearchParams(location.search).has("notes");
   return (
