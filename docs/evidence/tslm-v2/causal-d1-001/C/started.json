@@ -1,0 +1,7 @@
+{
+  "schema": "pipe-head-precision-d1-v1",
+  "variant": "C",
+  "preregistration_sha256": "37cfcae18aa00cc402001d15f53f2df6a1802a9c0fd1c6ec13f7ca210e00ce05",
+  "expected_forwards": 1794,
+  "optimizer_steps": 0
+}
