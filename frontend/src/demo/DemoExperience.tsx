@@ -481,6 +481,9 @@ export default function DemoExperience() {
             {evidence.testNonLeakClusters} non-leak. Wide uncertainty intervals.
             C1 vs C0 remains inconclusive. {tslm.verdict}
           </p>
+          {tslm.summary && (
+            <p className="evidence-caveat stress-caveat">{tslm.summary}</p>
+          )}
           {tslm.stress && (
             <p className="evidence-caveat stress-caveat">{tslm.stress}</p>
           )}

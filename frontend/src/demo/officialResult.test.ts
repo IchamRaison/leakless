@@ -34,6 +34,7 @@ it("absent result keeps the exact current NOT EVALUATED YET copy and no C4 score
       clusterAuc: null,
     },
     verdict: "No TSLM superiority demonstrated.",
+    summary: null,
     stress: null,
     status: "TSLM · NOT EVALUATED YET",
     probability: "NOT EVALUATED YET",
@@ -168,7 +169,26 @@ it("stress lectures use the frozen inverted mapping, threshold-free only", () =>
     "compatible with improvement";
   const state = read(files);
   expect(tslmCopy(state).stress).toBe(
-    "Temporal stress on the TSLM, not retrained: T1 clip AUC inconclusive; T2 clip AUC compatible with degradation under stress; T3 clip AUC inconclusive. This measures sensitivity to temporal organisation, not its physical relevance.",
+    "Temporal stress on the TSLM, not retrained, clip AUC paired with the original: temporal reversal (T1) inconclusive; block permutation (T2) compatible with degradation under stress; phase randomization (T3) inconclusive. This measures sensitivity to temporal organisation, not its physical relevance.",
+  );
+  expect(tslmCopy(state).summary).toBe(
+    "The first TSLM did not outperform the strongest simple control. Its ranking degraded under block permutation, while temporal reversal and phase randomization were inconclusive.",
+  );
+});
+
+it("summary: degradation vs C1, two stresses degrade, reversal inconclusive", () => {
+  const files = fixture();
+  setC1(files, "compatible with degradation", "inconclusive");
+  for (const tr of ["T2", "T3"])
+    files.metrics.stress_comparisons[
+      `${T}_vs_${T}-${tr}`
+    ].clip_roc_auc.lecture = "compatible with improvement";
+  const copy = tslmCopy(read(files));
+  expect(copy.summary).toBe(
+    "The first TSLM did not outperform the strongest simple control. Its ranking degraded under block permutation and phase randomization, while temporal reversal was inconclusive.",
+  );
+  expect(JSON.stringify(copy)).not.toMatch(
+    /superior|statistically significant|causal(?!\s*physical)|calibrated/i,
   );
 });
 

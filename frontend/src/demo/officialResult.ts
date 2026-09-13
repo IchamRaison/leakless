@@ -26,6 +26,11 @@ const lecture = z.enum([
 export type Lecture = z.infer<typeof lecture>;
 // build_final_report.py::STRESS_VERDICT : les comparaisons de stress portent
 // T0 − stress, la lecture est donc inversée pour se lire « sous stress ».
+const TRANSFORM_NAMES = {
+  T1: "temporal reversal",
+  T2: "block permutation",
+  T3: "phase randomization",
+} as const;
 const STRESS_VERDICT = {
   "compatible with improvement": "compatible with degradation under stress",
   "compatible with degradation": "compatible with improvement under stress",
@@ -331,6 +336,7 @@ export function tslmCopy(state: OfficialState) {
         clusterAuc: null as number | null,
       },
       verdict: "No TSLM superiority demonstrated.",
+      summary: null as string | null,
       stress: null as string | null,
       status: "TSLM · NOT EVALUATED YET",
       probability: "NOT EVALUATED YET",
@@ -344,6 +350,35 @@ export function tslmCopy(state: OfficialState) {
     };
   const r = state.result;
   const c1 = r.versus.c1;
+  // Transformations gelées T1-T3 (build_final_report, section 7), nommées en anglais.
+  const named = (s: OfficialTslmResult["stress"][number]) =>
+    TRANSFORM_NAMES[s.transform as keyof typeof TRANSFORM_NAMES];
+  const list = (items: string[]) =>
+    items.length > 1
+      ? `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}`
+      : items[0];
+  const byVerdict = (verdict: string) =>
+    r.stress.filter((s) => s.clipAucVerdict === verdict).map(named);
+  const degraded = byVerdict("compatible with degradation under stress");
+  const improved = byVerdict("compatible with improvement under stress");
+  const unclear = byVerdict("inconclusive");
+  const clauses = [
+    degraded.length && `its ranking degraded under ${list(degraded)}`,
+    improved.length &&
+      `its ranking was compatible with improvement under ${list(improved)}`,
+    unclear.length &&
+      `${list(unclear)} ${unclear.length > 1 ? "were" : "was"} inconclusive`,
+  ].filter((clause): clause is string => Boolean(clause));
+  const stressSentence = clauses.length
+    ? ` ${clauses[0][0].toUpperCase()}${clauses[0].slice(1)}${clauses
+        .slice(1)
+        .map((clause) => `, while ${clause}`)
+        .join("")}.`
+    : "";
+  const lead =
+    r.outcome === "improvement"
+      ? "The first TSLM was compatible with improvement over the strongest simple control; no statistical significance is claimed."
+      : "The first TSLM did not outperform the strongest simple control.";
   const suffix = {
     improvement: "No statistical significance claimed.",
     inconclusive: "No demonstrated advantage.",
@@ -357,9 +392,10 @@ export function tslmCopy(state: OfficialState) {
       clusterAuc: round3(r.test.clusterAuc),
     },
     verdict: `TSLM vs C1, paired on the same clusters: clip AUC ${c1.clipAuc.lecture}; cluster AUC ${c1.clusterAuc.lecture}. ${suffix}`,
+    summary: `${lead}${stressSentence}`,
     stress: r.stress.length
-      ? `Temporal stress on the TSLM, not retrained: ${r.stress
-          .map((s) => `${s.transform} clip AUC ${s.clipAucVerdict}`)
+      ? `Temporal stress on the TSLM, not retrained, clip AUC paired with the original: ${r.stress
+          .map((s) => `${named(s)} (${s.transform}) ${s.clipAucVerdict}`)
           .join(
             "; ",
           )}. This measures sensitivity to temporal organisation, not its physical relevance.`
