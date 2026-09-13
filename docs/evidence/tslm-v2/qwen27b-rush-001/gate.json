@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "code_revision": "dae7e221b55f81110f40f7bc31857fade4abd76c",
+  "config_sha256": "c914edee7b21352488ed9139d7ed173f16b8e82691564edb1ae1880ffc4f8ab4",
+  "microbatch_size": 4,
+  "epochs": 1,
+  "decision_utc": "2026-09-13T07:38:30+00:00",
+  "epochs_selection": "largest of 1/2/4 finishing all fits before 08:02:26 with25% margin; no heldout result observed",
+  "seconds_per_step_measured": 4.692700289000641,
+  "probe_elapsed_seconds": 251,
+  "fixed_overhead_per_fit_seconds": 241.61459942199872,
+  "budget_formula": "1.25 * (2*fixed_overhead + 88*epochs*seconds_per_step); node2 sequential47+41 steps/epoch is critical path",
+  "estimated_seconds_by_epochs": {"1": 1120.24, "2": 1636.44, "4": 2668.84},
+  "technical_optimizer_steps": 2,
+  "technical_presentations": 16,
+  "technical_weights_reused_in_fits": false,
+  "reload_node1_sha256": "312f2324b7c48cb38c3167d57d528a1b600177436d81a366c10df8a35c25b65b",
+  "reload_node2_sha256": "8766264c9bd795be329829a24b4bc335941cdc3fd22b7a293453d70edeb31071",
+  "reload_max_absolute_difference_both_nodes": 0.0,
+  "cross_node_max_absolute_difference": 0.0,
+  "runtime": {
+    "python": "3.12.3",
+    "packages": {"torch": "2.8.0+cu128", "transformers": "5.13.0", "peft": "0.20.0", "numpy": "2.5.2", "scikit-learn": "1.9.1", "timenet": "0.1.0", "opentslm": "0.1.0"},
+    "cuda": "12.8",
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "lock_sha256": "7b6429e67593cd945bb3c7d542cf160c9352064373d19112e865830327d1da2a",
+    "tf32_matmul": false,
+    "tf32_cudnn": true,
+    "deterministic": false
+  }
+}

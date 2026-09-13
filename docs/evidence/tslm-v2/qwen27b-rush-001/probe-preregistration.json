@@ -1,0 +1,82 @@
+{
+  "config": {
+    "base_model": "Qwen/Qwen3.8-27B",
+    "base_revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+    "architecture": "OpenTSLM-SP-Qwen3.8-27B-LoRA",
+    "seed": 20260912,
+    "batch_size": 8,
+    "encoder_lr": 0.0002,
+    "projector_lr": 0.0001,
+    "lora_lr": 0.0001,
+    "weight_decay": 0.01,
+    "gradient_clip": 1.0,
+    "lora": {
+      "r": 8,
+      "alpha": 16,
+      "dropout": 0.0,
+      "target_modules": [
+        "q_proj",
+        "v_proj",
+        "in_proj_qkv",
+        "out_proj"
+      ]
+    },
+    "gradient_checkpointing": true,
+    "hidden_size": 5120,
+    "loss": "full_answer_and_eos",
+    "n_configs_planned": 1,
+    "preprocessing_version": "rms-f32-hann256-hop128-band4-log1p-v2",
+    "scoring_version": "class-continuation-logprob-sum-softmax-single-clip-v2",
+    "threshold_rule": "aucun seuil appliqué ; sommes complètes leak; / no_leak;, sans description, sans normalisation de longueur, scores bruts non calibrés",
+    "start_utc": "2026-09-13T07:17:26+00:00",
+    "training_stop_utc": "2026-09-13T08:02:26+00:00",
+    "deadline_utc": "2026-09-13T08:17:26+00:00",
+    "single_clip_acoustic_encoding": true,
+    "amplitude_evidence": false,
+    "max_new_tokens": 48,
+    "fold_id": 0,
+    "n_configs_compared": 1,
+    "model_version": "pipe-qwen3.8-27b-lora-dae7e221-fold0",
+    "purpose": "technical_probe_discard"
+  },
+  "code_revision": "dae7e221b55f81110f40f7bc31857fade4abd76c",
+  "mode": "probe",
+  "epochs": 2,
+  "microbatch_size": 4,
+  "training_ids": [
+    "c02543903a0da",
+    "c04498a7ed239",
+    "c062288ccfbf0",
+    "c06568d1b9f0f",
+    "c0128b879694e",
+    "c04206cc802ff",
+    "c04baf7fef3e6",
+    "c05f4f069b542"
+  ],
+  "heldout_ids": [],
+  "folds_sha256": "5c2bea733f8f2a2dc525b9738a5aa40ae3ce220cf6d76d712cab984afb4d5efb",
+  "runtime": {
+    "python": "3.12.3",
+    "packages": {
+      "torch": "2.8.0+cu128",
+      "transformers": "5.13.0",
+      "peft": "0.20.0",
+      "numpy": "2.5.2",
+      "scikit-learn": "1.9.1",
+      "timenet": "0.1.0",
+      "opentslm": "0.1.0"
+    },
+    "cuda": "12.8",
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "lock_sha256": "7b6429e67593cd945bb3c7d542cf160c9352064373d19112e865830327d1da2a",
+    "tf32_matmul": false,
+    "tf32_cudnn": true,
+    "deterministic": false
+  },
+  "config_sha256": "c914edee7b21352488ed9139d7ed173f16b8e82691564edb1ae1880ffc4f8ab4",
+  "base_receipt_sha256": "66cc72538886a2addb286dd3c7b553efb9da6e1328b4bbcc8733cb832103a994",
+  "created_at": "2026-09-13T07:29:56.650142+00:00",
+  "pid": 112120,
+  "hostname": "computeinstance-e00g3ykxy51wgxcw1p",
+  "official_validation_test_external_read": false
+}
