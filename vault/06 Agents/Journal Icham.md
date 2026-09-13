@@ -1,5 +1,13 @@
 # Journal Icham
 
+## 13 septembre — D1 testé et préinscrit avant toute observation
+
+Reprise du goal élargi après publication des étapes 6 à 10 (`622eeb4`, miroir `ecfbae9`) : progrès documentaire acquis, expériences non terminées. Code D1 et ses tests lus entièrement, revue indépendante sans blocage statique. Local : neuf tests passent, quatre ignorés faute de PyTorch ; runtime ML : les 13 passent, puis 152 tests TSLM et 51 tests évaluation sans skip. Code publié `306d330`, snapshot `/home/hicham/pipe-v0/code-causal-306d330`, tests CPU sans chargement des vrais poids Qwen.
+
+Préinscription machine créée sans modèle chargé, SHA `37cfcae18aa00cc402001d15f53f2df6a1802a9c0fd1c6ec13f7ca210e00ce05`, liée aux reçus D0, checkpoints A0/C0, 23 sources et code Qwen installé (`cf085792…`). TF32 matmul désactivé, précision FP32 highest, autocast désactivé. Fichier et logs rapatriés, empreintes des sources revérifiées ; preuves publiées `1f89933` avant observation. Budget 598 clips × 3 voies × 2 modèles = 3 588 forwards, 500 fit/98 réservés séparés, aucun fit ou politique retenue. Prochaine action : A puis C et contrôle des invariants.
+
+Logger entraînement `66f390b` : neuf tests runtime de transparence terminés antérieurement, logs désormais publiés `306d330` ; aucune nouvelle trajectoire d'entraînement Qwen réelle instrumentée. H100 libre et aucun processus D0/D1/campagne actif lors du contrôle préalable. Source notes récupérée avant édition, aucune collecte ou donnée externe utilisée.
+
 ## 13 septembre — goal étendu aux étapes 6 à 10 dans le document de référence
 
 À la demande explicite d'Icham, [[Diagnostic causal TSLM vs C1]] contient maintenant le plan complet en dix étapes et ses critères de complétion. Le renvoi `/goal` existant reste valable ; aucun besoin de créer un autre objectif ni de déclarer l'ancien terminé. Ajouts : corrections entraînées/évaluées, diversification globale conditionnelle, contraste avec/sans nouvelles données, gel/confirmation indépendante, intégration continue et benchmark gabarit/Qwen/TSLM. Aghashahi reste réservé tant qu'une réaffectation explicite dans un nouveau protocole n'est pas décidée.

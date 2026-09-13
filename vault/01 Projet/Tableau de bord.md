@@ -11,8 +11,9 @@ Icham
 - [x] Objectif de diagnostic autorisé ; premier bloc D0 borné à1516observations A0/C0, sans apprentissage, protocole fixé avant scores.
 - [x] D0 implémenté `733b9c6`, 181 tests runtime sans skip ; préinscription `cd2c3916…` publiée avant observation, preuves `3e425b4`.
 - [x] D0 A/C :1516 observations vérifiées et revues, preuves `f64c943` / `9dd5b73`, zéro apprentissage. Reload et échanges complets exacts, aucune relance.
-- [ ] D1 numérique : implémenter/tester/préinscrire puis comparer tête BF16/FP32/FP32 réarrondie,3588 forwards prévus sans fit ; [[Diagnostic causal - exécution]].
-- [ ] Journalisation transparente des futurs fits : termes NLL/comptes, gradients/clipping/mises à jour ; en implémentation, aucun fit lancé.
+- [x] D1 implémenté/testé/préinscrit : code `306d330`, 203 tests runtime sans skip, préinscription `37cfcae1…` et preuves `1f89933`. Aucun score D1 encore.
+- [ ] D1 numérique : exécuter A puis C, comparer tête BF16/FP32/FP32 réarrondie, 3 588 forwards prévus sans fit ; [[Diagnostic causal - exécution]].
+- [ ] Vérifier la journalisation sur un prochain fit réel : implémentation `66f390b`, neuf tests runtime de transparence réussis, preuves `306d330` ; aucun nouvel entraînement lancé.
 - [ ] Produire la matrice causes démontrées / hypothèses non soutenues dans les conditions testées / inconnues. Aucun refit ni confirmation externe automatique.
 - [x] Audit train/cibles : les trois entraînements contiennent les deux classes ;242 vrais sans-fuite concentrés dans7 groupes. Limites dans [[Diagnostic causal - exécution#Audit des populations et des cibles]].
 - [x] Shortlist relue sur les sources : [[Datasets utiles pour PIPE#Revue du 13 septembre — diversité globale]]. Diversité de l'ensemble des données visée ; Hong Kong candidat à auditer, Aghashahi déjà réservé. Aucun nouveau téléchargement de données ni entraînement.

@@ -8,7 +8,7 @@ Icham — 2026-09-13
 
 **D0 terminé, rapatrié et vérifié :1516 observations/3032 forwards, zéro apprentissage.** A reçu `4810270a…`, preuves `f64c943` ; C reçu `c6d2121f…`, preuves `9dd5b73`. Reçus et tous fichiers vérifiés localement/distamment avec `finished()`. Reload98 et échanges d'entrées complètes reproduisent exactement leurs scores ; poids inchangés dans chaque état. Revue indépendante des694 lignes A et822 lignes C : identités, cibles, masques et agrégats concordants. Ne pas relancer D0. Code `733b9c6`,181 tests runtime sans skip, préinscription SHA `cd2c3916cbac2b61b979f463fa793dec1be3585c6e558d7743a0d4c43a7e6d1f`. Checkout sain `/home/animus/ehl-hackathon-zurich-v2-recovery`, branche `feat/icham-v2-reliability` ; ancien Git endommagé à préserver.
 
-**Prochain contraste : D1, précision de la tête de sortie, sans fit.** Motif observé ci-dessous : marge de décision discrétisée et écarts LP supervision/scoring. Implémentation/journalisation en cours ; tests et préinscription machine avant toute nouvelle inférence. Pas de nouvelle recette adoptée, collecte conditionnelle toujours en dernier recours.
+**D1 implémenté, testé et préinscrit, observations à lancer A puis C.** Code `306d330`, 203 tests runtime sans skip (152 TSLM + 51 évaluation), dont les 13 tests D1 et ses quatre contrôles PyTorch de vrai recalcul/restauration. Préinscription SHA `37cfcae18aa00cc402001d15f53f2df6a1802a9c0fd1c6ec13f7ca210e00ce05`, preuves publiées `1f89933`, 23 empreintes source revérifiées localement. Revue indépendante : aucun blocage statique trouvé ; traversée Qwen réelle encore à vérifier. Aucun gain ou politique adopté, collecte conditionnelle toujours en dernier recours.
 
 ## Inventaire V2 complet — acquis de développement
 
@@ -62,7 +62,9 @@ Critères détaillés : [[Diagnostic causal TSLM vs C1#Critère de complétion d
 
 ## Prochaine action
 
-Terminer/tester le diagnostic D1 de précision de tête et la journalisation transparente du train ; publier code/préinscription avant le contraste numérique. Aucun mini-entraînement avant ce contrôle. D0 conservé dans `/home/hicham/pipe-v0/artifacts/causal-d0-733b9c6-001` et `docs/evidence/tslm-v2/causal-d0-001/`, handles30906/67983 terminaux. H100 revenue à0Mio/0% après C, instance allumée. Aucune relance des observations terminées.
+Lancer D1 A puis C dans des processus distincts depuis `/home/hicham/pipe-v0/code-causal-306d330`, avec `PYTHONPATH=src /home/hicham/pipe-v0/.venv-repro/bin/python scripts/tslm/diagnose_head_precision.py observe --output /home/hicham/pipe-v0/artifacts/causal-d1-306d330-001 --variant A` (puis `C`). Préinscription publiée avant toute observation ; 1 794 forwards par modèle, aucune génération ni apprentissage. Ne pas relancer un dossier incomplet sans localiser l'erreur et fixer une reprise explicite. Reçus/poids/inputs et reproduction D0 à vérifier avant interprétation.
+
+Tests et préinscription locaux : `docs/evidence/tslm-v2/causal-d1-001/`, logs runtime `/home/hicham/pipe-v0/quality-causal-306d330/`. D0 reste scellé, handles 30906/67983 terminaux, aucun nouveau score D0 à produire. H100 vérifiée libre avant D1 ; aucune instance arrêtée ou supplémentaire créée. Aucun mini-entraînement avant le contraste numérique.
 
 ## D0 — résultats et limites vérifiés
 
@@ -103,7 +105,7 @@ Les interventions modifient les scores. A : deltas absolus moyens0,030676 (donne
 - Budget :598×3=1794 forwards par modèle, total3588, sans génération ni backward. Baseline rechargée contreD0 sur598 à tolérance1e-6 ; échec arrête l'interprétation. Dossiers neufs, artefacts incomplets conservés, sources/runtime/checkpoints liés à la préinscription machine avant lancement.
 - Rapporter résolution des marges, deltas de scores/NLL et AUC par clip/groupe séparément pourfit etréservés. Une grille plus fine ne prouve pas un meilleur classement ; un gain ne devient ni une preuve externe ni une explication de tout l'écart à C1. Aucune sélection du meilleur résultat ni recherche de seuil. Évaluer aussi les écarts du témoin réarrondi avant d'attribuer un effet au seul arrondi.
 
-La journalisation des futurs fits est implémentée en parallèle sans expérience : enveloppe transparente du vrai `compute_loss`, statistiques détachées sans forward supplémentaire, sommes/comptes parclip/époque, gradients avant/après clipping et mises à jour. La NLL binaire officielle reste une observation séparée à checkpoint figé. Elle ne peut pas être reconstruite à partir du seul forward supervisé.
+La journalisation des futurs fits est implémentée (`66f390b`) et testée : neuf tests runtime, dont équivalence exacte avec/sans observation des losses, gradients, mises à jour, moments et états aléatoires sur le vrai `train_epoch` et un petit décodeur différentiable. Preuves `docs/evidence/tslm-v2/training-observations-001/`, publiées `306d330`. Elle n'a pas encore accompagné un nouvel entraînement sur les vrais poids Qwen. Statistiques détachées sans forward supplémentaire, sommes/comptes par clip/époque, gradients avant/après clipping et mises à jour. La NLL binaire officielle reste une observation séparée à checkpoint figé, non reconstructible depuis le seul forward supervisé.
 
 ## Audit des populations et des cibles
 
