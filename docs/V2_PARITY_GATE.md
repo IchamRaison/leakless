@@ -63,6 +63,16 @@ un écart numériquement accepté peut changer une décision proche du seuil. Au
 seuil n'est sélectionné ou utilisé pour modifier les scores. Sans cette option,
 aucune décision seuillée n'est inventée.
 
+Le seuil doit être fini, mais n'est pas rabattu dans [0,1] : le sélecteur officiel
+peut choisir une borne juste au-delà des scores. Après l'entraînement final,
+relancer les deux processus sur le **bundle final**, avec son seuil validation
+exact. L'export externe exige en plus zéro franchissement de décision intra- et
+interprocessus ; le PASS d'une référence pré-entraînement ne remplace pas ce contrôle.
+
+Pour C, le gate compare aussi mesures et textes du cache avec WAV/TimeF, et lie
+leur définition par la version et le SHA de `features.py`. `amplitude_tokens`
+empreinte le fragment de texte isolé, pas les tokens du chat complet entrelacé.
+
 ## Contrat du reçu
 
 `report.json` porte `schema="pipe-parity-v2"`, `all_checks_pass` et les cinq

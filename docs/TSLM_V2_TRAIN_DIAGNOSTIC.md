@@ -63,6 +63,12 @@ Un échec laisse les artefacts intermédiaires présents : absence du message fi
 
 ## Autopsie optionnelle des tokens et gradients
 
+L'autopsie historique concerne A/V1 uniquement : elle refuse explicitement C
+avant chargement du modèle, car elle ne construit pas ses prompts d'amplitude
+variables. L'expérience train déjà réalisée est conservée et ne doit pas être
+relancée comme une mesure de qualité de C. Son résultat et les SHAs sont dans
+`docs/evidence/tslm-v2/train-diagnostic-001/`.
+
 Ajouter `--checkpoint /chemin/bundle-v1` exige un GPU et l'autorisation de lancement
 par le responsable de campagne. Le bundle doit correspondre au SHA du receipt de
 parité. Le chargeur existant vérifie les fichiers ; base Qwen et poids temporels

@@ -212,6 +212,8 @@ def capture_loss_forward(llm):
 
 def supervision_audit(checkpoint, rows, cached, parity):
     """Autopsie des poids V1 déjà entraînés : PAS une mesure hors-groupes."""
+    if parity.get("amplitude_evidence") is True:
+        raise ValueError("Cette autopsie historique ne prend pas en charge les prompts C variables")
     import torch
     import torch.nn.functional as functional
     from opentslm.time_series_datasets.util import extend_time_series_to_match_patch_size_and_aggregate as collate

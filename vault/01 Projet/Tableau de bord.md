@@ -38,8 +38,9 @@ Icham
 - [x] Manifeste externe vérifié/figé `84007801…`, 3 600 fenêtres primaires ; aucun score externe.
 - [x] Code A/C `04d53b6` publié, 117 tests runtime sans skip ; nouveau cache806 bandes/mesures/textes exactement vérifié, références A/C indépendantes mêmes poids créées.
 - [x] A `04d53b6` et reload complet PASS, delta zéro, SHA `ed2bfdc5…`.
-- [ ] C et reload dans la même séquence active (`98052`) avant les six fits comparatifs.
-- [ ] Runner de campagne et évaluateur externe à seuil figé codés/testés localement ; vérifier ensemble dans le runtime avant exécution réelle.
+- [x] C et reload PASS, delta zéro, SHA `50ec36e9…` ; séquence `98052` terminée normalement, pas de relance.
+- [x] Runner et évaluateur externe publiés `b750f5d`, 144 tests runtime passent ; aucun fit réel encore.
+- [ ] Exporteur final codé/relu, tests locaux passent ; dernière validation runtime puis préinscription/campagne à exécuter.
 - [x] Objectif final utilisateur ajouté : évolution d'événement/investigation et benchmark gabarit → Qwen sur mesures → TSLM sur séries. [[Plan V2 - fiabilité et parité des scores#7. Objectif final — démontrer la valeur du TSLM]].
 - [ ] Construire et évaluer ce benchmark final sur des événements/historiques/contextes réservés ; ne pas confondre campagne A/C et preuve d'utilité du TSLM.
 - [x] Reprise dans clone sain `/home/animus/ehl-hackathon-zurich-v2-recovery`, `e9c8ddd` publié ; ancien Git endommagé conservé, aucun reset/destruction.

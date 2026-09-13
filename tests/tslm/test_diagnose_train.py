@@ -21,6 +21,10 @@ def fixture_rows():
 
 
 class TrainDiagnosticChecks(unittest.TestCase):
+    def test_historical_autopsy_refuses_c_before_loading_model_or_data(self):
+        with self.assertRaisesRegex(ValueError, "prompts C"):
+            diagnostic.supervision_audit(None, [], {}, {"amplitude_evidence": True})
+
     def test_folds_are_fixed_group_stratified_and_train_only(self):
         rows = fixture_rows()
         folds = diagnostic.grouped_folds(rows)
@@ -70,8 +74,11 @@ class TrainDiagnosticChecks(unittest.TestCase):
             receipt = path / "report.json"
             def verify(value):
                 receipt.write_text(json.dumps(value))
-                return diagnostic.verify_parity(receipt, path, "canonical-fixture",
-                                                source_paths={"model.py": source})
+                # Cette fixture vérifie les empreintes, pas l'installation TimeNet.
+                with patch.dict(sys.modules, {"pipe.tslm.preprocessing": SimpleNamespace(
+                        AMPLITUDE_EVIDENCE_VERSION="c1-amplitude-text-6sig-v1")}):
+                    return diagnostic.verify_parity(receipt, path, "canonical-fixture",
+                                                    source_paths={"model.py": source})
             self.assertEqual(verify(report), report["provenance"])
             (path / "preparation.json").write_text(json.dumps({**preparation, "records": 209}))
             with self.assertRaises(ValueError):

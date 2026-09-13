@@ -4,7 +4,7 @@ Icham — mise à jour 2026-09-13
 
 ## État courant
 
-Objectif utilisateur actif : implémenter [[Plan V2 - fiabilité et parité des scores]] dans son ensemble. **Référence corrigée `0b1399e` : parité/reload PASS, delta zéro ; diagnostic train et compatibilité V1 terminés. A/C préparées en code, aucun entraînement TSLM V2 réalisé : nouveaux gates A/C requis avant fits.** Le 13 septembre, Icham ajoute explicitement le cap final langage/événements/investigation et benchmark à trois approches ; aucune de ces capacités n'est encore validée. Checkout actif sain `/home/animus/ehl-hackathon-zurich-v2-recovery`, branche `feat/icham-v2-reliability`. L'ancien worktree `/home/animus/ehl-hackathon-zurich-v2` et le dépôt code commun sont conservés sans réparation destructive après découverte d'objets Git vides ; ne plus y commiter. Le vault dédié reste sain et autoritaire.
+Objectif utilisateur actif : implémenter [[Plan V2 - fiabilité et parité des scores]] dans son ensemble. **Parité A et C, rechargements neufs compris : PASS, écarts nuls (`04d53b6`). Diagnostic train et compatibilité V1 terminés ; 144 tests runtime passent à `b750f5d`. Aucun entraînement TSLM V2 réalisé : assemblage final de l'exporteur à vérifier, puis préinscription et six fits comparatifs explicites.** Le 13 septembre, Icham ajoute explicitement le cap final langage/événements/investigation et benchmark à trois approches ; aucune de ces capacités n'est encore validée. Checkout actif sain `/home/animus/ehl-hackathon-zurich-v2-recovery`, branche `feat/icham-v2-reliability`. L'ancien worktree `/home/animus/ehl-hackathon-zurich-v2` et le dépôt code commun sont conservés sans réparation destructive après découverte d'objets Git vides ; ne plus y commiter. Le vault dédié reste sain et autoritaire.
 
 ## Conditions vérifiées au démarrage
 
@@ -16,7 +16,7 @@ Objectif utilisateur actif : implémenter [[Plan V2 - fiabilité et parité des 
 
 ## Chantiers actifs et limites d'autorité
 
-- Diagnostic : outil CPU comparant WAV/TimeF/cache, puis traces du score avec checkpoint gelé ; root possède toute exécution GPU. Hypothèse de quantification TimeF float32 à mesurer, pas cause déjà démontrée.
+- Diagnostic numérique terminé : passage float32 et dépendance au lot démontrés/corrigés, preuves ci-dessous. Root possède toute exécution GPU ; ne pas relancer les contrôles terminés.
 - Restitution : interface V2 opt-in cohérente, artefact de seuil lié au modèle et conservation du texte brut. Implémentation séparée de V1, pas de déploiement applicatif implicite. Tests synthétiques autorisés, audit réel après parité.
 - Données externes : audit des sources/inventaires et conditions de licence, sans consulter de performances et sans entraîner sur le holdout. Aucun import d'un dataset supposé compatible par son seul descriptif.
 - Deux questions non bloquantes à Icham : budget de fausses alertes/délai ; disponibilité d'enregistrements continus annotés ou d'une collecte. Leur absence ne bloque pas les travaux numériques, mais la preuve de surveillance réelle reste distincte.
@@ -95,6 +95,14 @@ Orchestration restante en construction séparée : campagne CV/refit/validation,
 
 Runner `run_v2_campaign.py` implémenté : préinscription A/C/folds/recette/provenance, six fits explicites, C1 séparé, sélection, refit frais et seuil validation dans un processus neuf ; **17 tests CPU locaux passent**, aucun fit réel. Évaluateur externe opt-in ajouté, **8 tests locaux passent**, réutilise métriques/bootstrap avec reçus de seuil val existants et même reçu pour chaque stress. Derniers ajouts non numériques : `CoherentPredictor.state_hashes()` pour l'audit en mémoire, 12 tests locaux ; le gate final accepte le seuil fini exact de `pick_threshold`, même si borne juste hors [0,1], sans modifier les scores ni `1e-6` (7 tests locaux). Provenance A/C du bundle final personnalisée avant scellement, défaut V1 préservé. Ces ajouts seront testés ensemble dans le runtime ; ils ne modifient ni modèle, ni prédiction, ni preprocessing des gates `04d53b6` en cours.
 
+## Porte A/C complète franchie — prochaine campagne
+
+Séquence `98052` **terminée normalement, exit 0**. C + reload : cinq contrôles vrais et écart maximal zéro sur 209 clips × chemins/lots/ordres, y compris entre processus. Rapport SHA **`50ec36e961ab1248f956161ab9912beb8fbc3e671f444219e1a9236e87500f55`** ; A reload SHA `ed2bfdc5…`. Les deux références de contrôle sont donc vérifiées, sans améliorer ni réentraîner leurs poids. Aucun de ces gates ne contient de seuil sélectionné ; contrôle final au vrai seuil toujours requis après apprentissage.
+
+Orchestration publiée à `b750f5d1bc18681643392b1d760ad4ad8ca29f50`, **144 tests runtime passent sans skip** (99 TSLM +45 évaluation), logs `docs/evidence/tslm-v2/campaign-b750f5d/`. Exporteur externe maintenant codé, 11 tests CPU locaux et relecture indépendante sans écart bloquant : parent neuf `run/` (deux fichiers contractuels) et `audit/` (texte/erreurs/latences et bruits annexes séparés), contrôle des poids en mémoire et des sources avant/après, pas de score de remplacement. Sa validation runtime reste à faire avant tout export réel. L'autopsie historique refuse désormais explicitement C plutôt que d'ignorer ses prompts variables ; aucune sonde n'est relancée.
+
+Prochaine étape : figer/tester ce dernier assemblage logiciel, préinscrire la campagne dans un dossier neuf avec les deux reçus PASS, puis lancer explicitement les six fits train. Recette A/C commune : quatre époques, seed20260912, batch effectif8 / microbatch1, composants acoustiques et optimiseur neufs à chaque fold. Aucun score de validation pour choisir A/C, aucun score externe. Le classement et les erreurs par clip seront inspectés avant autorisation technique du refit final ; aucune chaîne automatique ne prolonge la recherche.
+
 ## Incident Git local — historique conservé
 
 Le 13 septembre, le HEAD local pointait vers `0ce65624725a0c44b56334771a16c549bae03155`, objet vide ; vingt objets vides et fin de reflog remplie de NUL constatés. Cause de stockage inconnue, disque non plein. SHA distant `aaab4af` et ses objets intègres. Nouveau clone indépendant depuis cette branche, contrôle `git fsck --connectivity-only` réussi, fichiers non publiés utiles copiés depuis l'ancien worktree, aucun fichier utilisateur supprimé ni ancien Git réinitialisé. Publication saine poursuivie à `e9c8ddd`. Les hooks de l'ancien dépôt ne sont pas supposés installés dans le nouveau clone. Les autres worktrees ne sont pas réparés implicitement.
@@ -107,7 +115,7 @@ Le 13 septembre, le HEAD local pointait vers `0ce65624725a0c44b56334771a16c549ba
 - [x] Version nouvelle et copie distincte, poids V1 conservés ; aucune livraison historique modifiée.
 - [ ] Restitution cohérente testée réellement, erreurs explicites et audit texte brut/affiché séparé.
 - [x] Diagnostic de discrimination sur train, sonde exacte TimeNet/C1, supervision/gradients/groupes inspectés ; aucune V2 entraînée par ce diagnostic.
-- [ ] Sources A/C nouvelles vérifiées et deux nouveaux gates complets/reloads PASS avant entraînement.
+- [x] Sources A/C nouvelles vérifiées et deux nouveaux gates complets/reloads PASS avant entraînement, `04d53b6`, deltas zéro.
 - [ ] Variantes justifiées puis préinscrites, CV groupée train avec réinitialisation, sélection et entraînement final ; seuil du modèle exact sur validation seulement.
 - [ ] Reload final et comparaison externe indépendante avec C1, métriques et audit complets ; stress au seuil T0 fixé après gel.
 - [ ] Limites de généralisation documentées ; protocole/données continues et critères métier résolus pour toute revendication opérationnelle.
@@ -115,4 +123,4 @@ Le 13 septembre, le HEAD local pointait vers `0ce65624725a0c44b56334771a16c549ba
 
 ## Prochaine action concrète
 
-Suivre la séquence A/C déjà lancée (`98052`), sans la redémarrer ; vérifier les deux rapports reload finaux. Pendant ce temps, terminer/revoir/tester l'orchestration CV/export/évaluation. Après deux gates PASS, préinscrire A/C, la recette commune et les folds exacts, puis six fits comparatifs et modèle final frais / seuil validation / confirmation externe. Ne pas relancer la préparation806, la sonde, l'ancien gate ou l'audit de recouvrement déjà terminés. Le benchmark final à trois approches et les données d'événements/contexte restent une étape distincte non validée.
+Les deux gates/reloads A/C sont terminés PASS ; ne pas les recommencer. Tester le dernier assemblage logiciel incluant l'export, puis préinscrire A/C et lancer les fits comparatifs explicites. Sélection/refit frais/seuil et confirmation externe suivent, sans prolongation cachée d'essais. Ne pas relancer la préparation806, la sonde ou l'audit de recouvrement déjà terminés. Le benchmark final à trois approches et les données d'événements/contexte restent une étape distincte non validée.

@@ -1,5 +1,9 @@
 # Journal Icham
 
+## 13 septembre — deux gates A/C complets, avant les fits
+
+A et C passent chacun le gate209 puis le reload neuf, écart maximal zéro ; A SHA `ed2bfdc5…`, C SHA `50ec36e9…`, séquence98052 terminée normalement. Code de campagne/évaluation `b750f5d` testé dans le runtime : 144 tests sans skip. Exporteur final écrit et relu indépendamment, 11 tests CPU locaux passent ; dernier assemblage à vérifier puis préinscription et premiers fits train. Aucun gain de détection ni score externe annoncé. [[V2 ML - exécution]].
+
 ## 13 septembre — A/C vérifiées avant contrôles de score
 
 Objectif final publié dans le vault `7ddd9d8`, miroirs explicitement actualisés. Code/preuves A/C publiés `04d53b6` depuis le clone sain ; **117 tests runtime sans skip**, nouvelle préparation806 exactement concordante (bandes, mesures C1, textes WAV/TimeF), références A et C distinctes créées sans réentraînement. Séquence des deux gates209 et de leurs reloads lancée, handle98052 ; processus A réellement actif vérifié, aucun entraînement TSLM V2. [[V2 ML - exécution]] contient chemins et SHA. La future campagne réutilise la même recette A/C et les folds train exacts ; elle ne remplace pas le benchmark final à trois approches demandé par Icham.

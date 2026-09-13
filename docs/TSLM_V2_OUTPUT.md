@@ -4,8 +4,8 @@ Implémentation logicielle de la phase 3 V2, **pas un nouveau modèle entraîné
 `Predictor.predict`, `Prediction` v0.1 et les livraisons V1 restent inchangés.
 Aucun endpoint applicatif n'est remplacé ou déployé par ce module.
 
-Statut de ce module : dix tests CPU sur faux backend passent, y compris l'entrée
-waveform sans requantification. Ils ne remplacent pas l'inférence réelle ni le lot
+Statut de ce module : douze tests CPU sur faux backend passent dans le runtime
+`b750f5d`, y compris l'entrée waveform et l'audit des poids en mémoire. Ils ne remplacent pas l'inférence réelle ni le lot
 d'audit après la porte de parité. Le dispatcher canonique
 `predict.preprocess_for_model(waveform, sample_rate, metadata)` est réutilisé.
 Aucune tolérance ni performance nouvelle n'est revendiquée ici.
@@ -39,7 +39,7 @@ La frontière numérique existante exige 8000 échantillons réels et finis à 8
 elle refuse les signaux constants. Une copie privée protège la cohérence entre
 score, mesure et génération ; son dtype et ses valeurs ne sont pas modifiés par
 le wrapper. La normalisation appartient toujours au preprocessing du backend.
-Le texte utilise le même `model_input`, collator `normalize=False` et
+Le texte utilise le même `model_input_for_model`, collator `normalize=False` et
 `model.generate(max_new_tokens=metadata["max_new_tokens"], max_time=15.0)` que la
 voie WAV, sans modifier les quatre sources numériques liées au gate.
 
@@ -65,6 +65,10 @@ l'erreur existante `model_busy`. Le score et la génération utilisent ce même
 backend. Le DSP emploie son dispatcher canonique et ses métadonnées : pas de
 normalisation parallèle ni de version V1 sélectionnée implicitement.
 
+`service.state_hashes()` expose uniquement les empreintes des états encodeur,
+projecteur et Qwen sous le même verrou. L'export peut ainsi vérifier les poids en
+mémoire avant/après l'audit sans charger un second modèle ni accéder au backend privé.
+
 ## Politique numérique V2
 
 Le bundle V2 déclare `single_clip_acoustic_encoding: true` et le scoring
@@ -72,6 +76,14 @@ Le bundle V2 déclare `single_clip_acoustic_encoding: true` et le scoring
 séparément dans l'encodeur/projecteur ; les interfaces acceptent toujours les
 lots et rendent un score par clip. Le graphe de gradients est conservé pour
 l'apprentissage. V1 garde sa politique historique par défaut.
+
+Variante C opt-in : scoring `class-continuation-logprob-sum-softmax-single-clip-c1text-v2`,
+`amplitude_evidence: true`, version `c1-amplitude-text-6sig-v1`. Les quatre séries
+sont inchangées ; neuf mesures C1 sont ajoutées au prompt, jamais des labels ou
+une prédiction de baseline. Les voies WAV/waveform recalculent ces mesures après
+la même normalisation et conversion float32 que TimeF. `score_series` exige les
+mesures séparées pour C et les refuse pour A. Cela ne démontre pas encore un
+bénéfice du langage ni de l'accès aux séries par rapport à un gabarit.
 
 La trace contrôlée `docs/evidence/tslm-v2/batch-trace-001/report.json` montre une
 première différence à la sortie de l'encodeur, amplifiée jusqu'à `0.06245874`
@@ -108,7 +120,7 @@ receipt = {
 `checkpoint_identity` lie le checksum du bundle, ses poids temporels,
 `config_hash`, `model_version`, `preprocessing_version`, le fichier
 `scoring_spec.json` et les SHA des sources modèle/prédiction/prétraitement/
-connecteur effectivement présentes dans l'installation. Tout module numérique
+connecteur et `harness/features.py` effectivement présents dans l'installation. Tout module numérique
 supplémentaire devra être inclus explicitement dans cette liste avant utilisation.
 
 Après enregistrement du reçu par le pipeline de validation :
