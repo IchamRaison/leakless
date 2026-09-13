@@ -4,7 +4,11 @@ Icham — 2026-09-13
 
 ## Statut et objectif
 
-**Objectif d'implémentation désormais autorisé par Icham.** [[Diagnostic causal - exécution]] décrit les preuves courantes, le budget D0 fixé et les travaux réellement lancés. Le texte ci-dessous conserve le cadrage et la checklist validés ; les anciennes mentions « planification uniquement » décrivent leur rédaction initiale et ne bloquent plus l'exécution contrôlée. La suite V2 de refit/confirmation reste en pause : pas de nouvelle recette avant le diagnostic.
+**Périmètre du goal élargi par Icham le 13 septembre aux étapes 1 à 10 ci-dessous.** Le prompt `/goal` renvoie à ce fichier : celui-ci définit donc l'objectif complet, pas seulement le diagnostic. Les étapes 6 à 10 font désormais partie du travail à réaliser, avec leurs conditions de passage ; terminer le diagnostic ne termine plus le goal. [[Diagnostic causal - exécution]] conserve l'état réel et les preuves. Cette extension documentaire ne constitue ni une expérience exécutée ni une reprise automatique de l'ancienne recette V2.
+
+> Diagnostiquer les causes du retard du TSLM face à C1, appliquer et mesurer les corrections justifiées, diversifier globalement les données si le progrès reste insuffisant et mesurer cet apport, figer puis évaluer le modèle sur une réserve indépendante, enfin intégrer et tester la surveillance continue et l'utilité du langage et des séries pour l'investigation.
+
+La première phase conserve son objectif causal :
 
 > Expliquer l'écart de performance observé entre les pipelines TSLM et C1 sur développement. Examiner les causes plausibles — données, représentation, supervision, optimisation, utilisation du signal par Qwen et scoring — puis les départager par des expériences contrôlées. Distinguer causes démontrées, hypothèses non soutenues dans les conditions testées et inconnues avant de proposer une nouvelle recette.
 
@@ -30,15 +34,60 @@ Les commandes, empreintes et limites détaillées restent dans [[V2 ML - exécut
 | Utilisation du signal | À checkpoint et prompt figés, échanger les représentations entre clips de développement ; pour C, séparer interventions sur séries et texte des neuf mesures. | Une variation du score montre une sensibilité, pas une utilisation utile. Les entrées désaccordées peuvent être hors distribution ; pas de conclusion physique à partir de ce seul test. |
 | Scoring | Contrôler token par token les deux continuations complètes, contexte causal et alignement avec les positions supervisées. | La parité entre interfaces ne détecte pas une erreur commune à toutes. Tout autre libellé ou score est une variante déclarée, jamais un réglage sur test. |
 
-## Ordre proposé et règle d'arrêt
+## Plan global en dix étapes
 
-1. **Inventaire avant calcul :** récupérer/vérifier les résultats de l'ancienne campagne et construire la matrice des preuves déjà disponibles. Réutiliser les reçus, prédictions, sondes et harness existants ; aucun nouveau moteur d'évaluation.
-2. **Premier bloc sans réentraînement :** vérifier la comparaison et l'alignement supervision/scoring, puis tester l'utilisation du signal si les vérifications précédentes ne suffisent pas. Fixer à l'avance checkpoint, groupes, interventions, graines, mesures et résultats attendus.
-3. **Un seul contraste supplémentaire à la fois :** choisir représentation, supervision ou optimisation selon les observations précédentes, pas selon la recette qu'on aimerait essayer. Annoncer avant lancement un budget numérique de runs/étapes et la condition d'arrêt ; ces budgets restent à convenir, aucune campagne n'est autorisée par cette note.
-4. **Restituer avant de corriger :** pour chaque hypothèse, preuve, alternatives encore compatibles, verdict limité aux conditions testées et prochaine expérience réellement discriminante. Si les données ne départagent pas les causes, conclure « inconnu » et préciser l'observation manquante, sans prolongation automatique.
-5. **En dernier recours, élargir les acquisitions :** si le diagnostic et les essais de correction justifiés n'améliorent pas suffisamment le modèle sur développement, activer la collecte conditionnelle décrite en fin de plan. Ce chantier vient après les autres pistes, pas en parallèle par défaut.
+Préalables déjà réalisés : inventaire des six fits, contrôles de parité antérieurs et observations D0. Réutiliser leurs preuves ; ne pas les relancer pour recommencer ce plan. La numérotation ci-dessous reprend l'enchaînement expliqué à Icham.
+
+1. **Précision numérique :** terminer les tests et la préinscription D1, puis comparer les têtes BF16, FP32 et FP32 réarrondie sur les mêmes checkpoints et entrées, sans apprentissage.
+2. **Interprétation :** quantifier l'effet observé et choisir le contraste suivant ; ne pas adopter une correction numérique sur la seule apparence d'une grille plus fine.
+3. **Représentation :** si nécessaire, tester un lecteur non linéaire borné sur les entrées exactes du TSLM, mêmes groupes de développement et comparaison C1.
+4. **Apprentissage :** suivant les preuves, mémorisation sur 32 clips fixés, journalisation des pertes/gradients/mises à jour, contournement de Qwen et mesures C1 par voie entraînable. Chaque contrôle doit départager une question ; pas six campagnes simultanées.
+5. **Bilan causal :** causes démontrées, hypothèses non soutenues, inconnues et corrections justifiées ; preuve et limite de chaque verdict, justification des contrôles conditionnels omis. Une inconnue ne devient pas une cause acquise ni un motif de recherche illimitée.
+
+Pour les étapes 1 à 5, annoncer avant chaque expérience données, composants fixes, interventions, graines, critères, budget numérique et arrêt. Les étapes 3 et 4 peuvent être ordonnées selon les observations de l'étape 2. Réutiliser reçus, sondes et harness existants.
 
 Conserver séparément qualité du classement, décisions au seuil fixé et cohérence du texte brut/affiché. Une phrase corrigée par DSP/gabarit ne constitue pas un gain du modèle. Une cause de score incorrect n'est pas nécessairement la cause de tout l'écart à C1.
+
+### 6. Appliquer les corrections justifiées et mesurer la nouvelle version
+
+- Partir du bilan de l'étape 5 ; implémenter les corrections étayées avec leurs tests de régression. Préserver les versions historiques et vérifier la parité des chemins préparation, entraînement, inférence et export concernés.
+- Préannoncer une campagne bornée : configurations, budget, critère de sélection et définition du progrès suffisant. Entraîner puis comparer la nouvelle version aux références actuelles et à C1 sur les mêmes groupes de développement ; aucune sélection sur le test officiel ou externe.
+- Publier classement, rappel/fausses alertes, résultats clip/groupe, incertitudes et cohérence des sorties. Une baisse de loss seule ne suffit pas. Si aucune correction n'est soutenue par le diagnostic, le documenter au lieu d'inventer une recette.
+- **Preuve de fin :** corrections et tests liés à leurs causes, recettes/checkpoints/essais tracés, comparaison vérifiée et décision motivée de passer à 7 ou directement à 9. Un résultat insuffisant reste un résultat, pas un succès de qualité.
+
+### 7. Diversifier globalement les données si le progrès reste insuffisant
+
+- Déclencher cette étape après le bilan des diagnostics et corrections, selon les critères annoncés en 6 ; ne pas remplacer les contrôles restants par davantage de données. Si l'élargissement n'est pas nécessaire, consigner pourquoi 7 et 8 ne sont pas activées.
+- Auditer la couverture des deux classes : types/intensités de fuite, situations normales, sites, matériaux, capteurs/montages, hydraulique et bruits. Réutiliser [[Datasets utiles pour PIPE]], puis vérifier formats, annotations, provenance, droits, recouvrements et acquisitions liées avant intégration.
+- Définir un nouveau protocole versionné train/développement/confirmation, par acquisition/site avant fenêtrage. Aghashahi peut être envisagé pour un futur entraînement et Hong Kong pour une autre réserve après audit ; ce choix reste explicite et conditionnel, pas acquis par cette extension. Ne pas placer les capteurs ou fenêtres d'une même expérience des deux côtés.
+- **Preuve de fin :** audit et manifeste du corpus, rôles des sources, séparation vérifiée, réserve de confirmation intacte et décision d'intégration tracée. Collecte matérielle, données privées ou nouvelles dépenses exigent l'autorité et les moyens correspondants ; leur absence est signalée, pas compensée par des données inventées.
+
+### 8. Mesurer l'apport des nouvelles données
+
+- Comparer la même recette avec et sans ajout sur les mêmes groupes de développement réservés. Garder le preprocessing, le scoring et les règles de sélection comparables ; fixer le budget de calcul avant essais pour ne pas confondre ajout de données et allongement d'entraînement.
+- Vérifier que les acquisitions ajoutées ne recouvrent pas les réserves, puis rapporter les résultats par source et sous-population lorsque les effectifs le permettent. Déclarer le nombre réel d'essais et les limites de variance.
+- **Preuve de fin :** contraste apparié et reproductible, apport positif/nul/négatif mesuré, modèle retenu selon la règle annoncée. Pas d'adoption automatique du modèle enrichi. Étape omise uniquement avec la justification conditionnelle de 7.
+
+### 9. Figer puis confirmer sur une réserve indépendante
+
+- Figer checkpoint, preprocessing, prompt, classes, calcul du score, seuil éventuel, restitution, runtime et empreintes ; recharger dans un processus neuf et vérifier la reproductibilité avant l'évaluation indépendante.
+- Évaluer le modèle retenu et C1 avec le harness réutilisé sur la réserve auditée, non utilisée pour choisir les corrections, les données ou les réglages. Publier performances, couverture, incertitudes, erreurs, cohérence du texte et coûts/latences pertinents. Une source réaffectée au train ne peut plus jouer ce rôle.
+- Les éventuels stress utilisent le même checkpoint sans réentraînement, avec transformations reproductibles et seuil T0 conservé pour les décisions. Aucun réglage après lecture de la réserve ; une nouvelle adaptation appartiendrait à un nouveau cycle, pas à cette confirmation.
+- **Preuve de fin :** artefacts gelés, reload vérifié, prédictions et rapport indépendant reproductible avec verdict favorable ou défavorable. Sans réserve exploitable, cette étape reste incomplète ; ne pas rebaptiser du développement « test indépendant ».
+
+### 10. Intégrer et tester la surveillance continue et la valeur du TSLM
+
+- Réutiliser l'API/UI de Safoan et le simulateur existant : bundle réel, contrat convenu, réception et inférence de bout en bout, reload et pannes testés. Un test local du simulateur n'est pas une preuve de raccordement applicatif.
+- Implémenter et tester le flux causal horodaté, les doublons/pertes/retards, la file bornée et la santé de surveillance. Versionner ouverture, persistance et fin d'événement ; ne pas produire une nouvelle alerte par fenêtre ni confondre panne, acquittement et disparition de fuite. Mesurer le débit soutenu et la latence avant toute promesse de cadence.
+- Distinguer la recette fonctionnelle en replay de la validation sur acquisitions continues réelles annotées, avec sessions/installations réservées et durée surveillée connue. Mesurer rappel événementiel, faux événements par appareil-heure, délai, répétitions et couverture. Les données continues nécessaires à cette preuve constituent un besoin distinct de l'élargissement conditionnel du train en 7.
+- Comparer **classifieur + DSP + gabarit**, **classifieur + mesures/contexte + Qwen**, **TSLM + séries/contexte**, sur les mêmes événements réservés, historiques disponibles et questions fixées avant comparaison. Mesurer fidélité aux preuves/à la chronologie, comparaison des périodes, gestion de l'incertitude, utilité pour l'investigation, détection et coût/latence. Ne pas inventer une modalité ou une durée absente ; conserver texte brut, mesures et fallback identifié.
+- **Preuve de fin :** intégration sur poids réels, tests du continu, rapport événementiel et benchmark à trois approches vérifiés, avec limites et passation publiées. Une démo ou un replay seul ne valide pas le terrain. Si le langage ou l'accès aux séries n'apporte pas de gain, le constater ; la supériorité du TSLM n'est pas présumée. Une preuve manquante reste incomplète ou bloquée, pas validée par défaut.
+
+Références d'exécution de 10 : [[Plan surveillance continue]], [[Plan simulateur de capteur]], [[Plan V2 - fiabilité et parité des scores#7. Objectif final — démontrer la valeur du TSLM]]. Aucun achat, déploiement client, notification externe ou commande physique n'est implicite.
+
+## Critère de complétion du goal élargi
+
+Le goal ne s'arrête plus à la matrice causale ou à une proposition de recette. Les preuves des étapes 6, 9 et 10 sont requises, ainsi que celles de 7 et 8 si leur condition est déclenchée. Les omissions ne concernent que les contrôles réellement conditionnels et doivent être justifiées ; aucune étape obligatoire incomplète ne peut être remplacée par un statut « planifié ». Publier code, configurations, commandes, tests, données/provenance autorisées, artefacts, rapports et passation, avec revue des conclusions. Ne pas garantir un gain à l'avance ni transformer une qualité insuffisante en promesse de fiabilité terrain.
 
 ## Checklist enrichie après la revue de Claude
 
@@ -75,6 +124,8 @@ Runtime : `/home/hicham/pipe-v0/artifacts/v2-campaign-c13fd47-001`, logs `/home/
 **Mise à jour :** les trois reçus manquants sont maintenant récupérés/vérifiés, sans réentraîner. Le protocole et la prochaine action du nouvel objectif sont dans [[Diagnostic causal - exécution]].
 
 ## Dernière étape conditionnelle — diversifier les données acoustiques
+
+Ce dernier recours d'amélioration correspond à l'étape 7 du goal élargi ; les étapes 8 à 10 viennent ensuite. Ce n'est plus la fin de l'objectif global.
 
 **Ajout demandé par Icham le 13 septembre ; planifié, non lancé.** À activer seulement si les autres pistes diagnostiques et les corrections justifiées n'apportent pas une amélioration suffisante sur développement. Juger cette amélioration avec les critères de qualité annoncés avant comparaison, pas avec la seule baisse de loss ; aucun seuil de gain arbitraire ajouté ici.
 

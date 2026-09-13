@@ -1,5 +1,11 @@
 # Journal Icham
 
+## 13 septembre — goal étendu aux étapes 6 à 10 dans le document de référence
+
+À la demande explicite d'Icham, [[Diagnostic causal TSLM vs C1]] contient maintenant le plan complet en dix étapes et ses critères de complétion. Le renvoi `/goal` existant reste valable ; aucun besoin de créer un autre objectif ni de déclarer l'ancien terminé. Ajouts : corrections entraînées/évaluées, diversification globale conditionnelle, contraste avec/sans nouvelles données, gel/confirmation indépendante, intégration continue et benchmark gabarit/Qwen/TSLM. Aghashahi reste réservé tant qu'une réaffectation explicite dans un nouveau protocole n'est pas décidée.
+
+Relecture indépendante des exigences produit : intégration réelle distincte du simulateur seul, santé/événements, flux causal borné, preuve continue réservée, utilité des trois approches et limites terrain conservées. Passation, tableau de bord, décisions et checklist d'exécution alignés ; diagnostic seul insuffisant pour terminer le goal. Mise à jour documentaire uniquement, aucun fit, score externe, téléchargement ou déploiement nouveau ; D1 demeure la prochaine action expérimentale. Source distante intégrée avant édition, miroirs à rafraîchir après publication.
+
 ## 13 septembre — diversité globale, revue des datasets et rôle d'Aghashahi
 
 Icham précise que l'élargissement doit viser la diversité de toutes les données, pas uniquement les sans-fuite, et demande une relecture de la shortlist attribuée à Luna. Notes et pages primaires consultées ; recherche Entire ciblée sans résultat, aucune attribution d'intention déduite de cet historique absent. Revue indépendante Hong Kong/Aghashahi en lecture seule. [[Datasets utiles pour PIPE#Revue du 13 septembre — diversité globale]] contient l'avis et ses limites : Hong Kong ajoute potentiellement du terrain, Aghashahi des facteurs expérimentaux ; les autres sources servent souvent d'autres modalités/usages. Indépendance Hong Kong non démontrée, appariement avant/après à auditer ; détail51,2kHz retiré faute de confirmation sur la page Aghashahi. README NTNU précise l'incertitude temporelle±3min ; Wessex consulté via index du domaine officiel après403 direct.

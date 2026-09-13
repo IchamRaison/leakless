@@ -4,6 +4,8 @@ Icham — 2026-09-12
 
 ## Statut et objectif
 
+**Extension ultérieure demandée par Icham :** [[Diagnostic causal TSLM vs C1#Plan global en dix étapes]] inclut désormais les corrections après diagnostic, la diversification conditionnelle, la confirmation et le produit décrit en section 7. Ce plan V2 reste une référence historique et technique, pas une campagne à relancer automatiquement. L'état courant est dans [[Diagnostic causal - exécution]] ; les étapes 6 à 10 du goal élargi sont à réaliser, pas déjà validées.
+
 **13 septembre : enchaînement d'implémentation en pause.** Icham propose [[Diagnostic causal TSLM vs C1]] pour expliquer l'écart avant toute nouvelle recette. Le plan ci-dessous conserve la référence historiquement autorisée ; il ne doit plus déclencher automatiquement de nouveaux entraînements, refit final ou évaluation externe. [[V2 ML - exécution]] distingue résultats vérifiés et derniers fits dont les logs annoncent la fin, reçus à contrôler. Les portes de vérification, la préservation de V1 et l'interdiction de réglage sur le test consulté restent applicables. Le cap produit de la section7 n'est pas abandonné.
 
 Trois problèmes distincts : reproductibilité numérique, qualité de détection, cohérence de restitution. Corriger le premier ou rendre le texte cohérent ne prouve pas une amélioration de classification. Référence immuable : [[Évaluation qualité V1 - exécution]], rapport/code sur `feat/icham-quality-eval` (`c8dcb9d`, miroir final `16a6df0`). Aucun écrasement du bundle V1, des validations de campagne ou de T0–T3.

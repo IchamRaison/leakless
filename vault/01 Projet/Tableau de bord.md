@@ -4,6 +4,7 @@ Icham
 
 ## Priorité actuelle — 13 septembre
 
+- [x] Périmètre du goal étendu aux étapes 6 à 10 à la demande d'Icham ; [[Diagnostic causal TSLM vs C1#Plan global en dix étapes]]. Ajout documentaire, pas exécution.
 - [x] Proposition d'Icham consignée : [[Diagnostic causal TSLM vs C1]], expliquer l'écart avant une nouvelle recette ; ancien enchaînement V2 en pause.
 - [x] Revue Claude intégrée : contrôles manquants ajoutés et conclusions non démontrées nuancées. [[Diagnostic causal TSLM vs C1#Checklist enrichie après la revue de Claude]]. Aucun contrôle nouvellement exécuté ni logger modifié.
 - [x] Six fits précédents complets/vérifiés/rapatriés, derniers artefacts `b65042a`, bilan dans [[Diagnostic causal - exécution]]. Aucun réentraînement.
@@ -16,6 +17,16 @@ Icham
 - [x] Audit train/cibles : les trois entraînements contiennent les deux classes ;242 vrais sans-fuite concentrés dans7 groupes. Limites dans [[Diagnostic causal - exécution#Audit des populations et des cibles]].
 - [x] Shortlist relue sur les sources : [[Datasets utiles pour PIPE#Revue du 13 septembre — diversité globale]]. Diversité de l'ensemble des données visée ; Hong Kong candidat à auditer, Aghashahi déjà réservé. Aucun nouveau téléchargement de données ni entraînement.
 - [ ] **En dernier recours uniquement :** si les autres pistes n'améliorent pas suffisamment le modèle, diversifier les données acoustiques des deux classes, sites/capteurs/matériaux/conditions. [[Diagnostic causal TSLM vs C1#Dernière étape conditionnelle — diversifier les données acoustiques]]. Les diagnostics restants ne sont pas omis ; aucune collecte supplémentaire lancée.
+
+## Suite incluse dans le goal — après le diagnostic
+
+- [ ] **6.** Corrections justifiées, nouvelle version entraînée et comparaison sur développement avec les références et C1.
+- [ ] **7.** Si progrès insuffisant : diversification globale, audit des sources et séparation train/développement/confirmation avant intégration ; sinon omission motivée.
+- [ ] **8.** Si ajout de données : comparaison même recette avec/sans ajout, apport réellement mesuré.
+- [ ] **9.** Gel complet, reload neuf et évaluation sur réserve indépendante ; aucun réglage sur ses résultats.
+- [ ] **10.** Intégration sur poids réels, surveillance/événements/santé testés, replay distinct du terrain et benchmark gabarit/Qwen/TSLM sur événements réservés.
+
+[[Diagnostic causal TSLM vs C1#Critère de complétion du goal élargi]] et [[Diagnostic causal - exécution]] portent les critères et preuves. Une étape prévue n'est pas une étape terminée.
 
 ## Prêt
 

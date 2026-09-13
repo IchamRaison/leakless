@@ -2,6 +2,12 @@
 
 Icham
 
+## 2026-09-13 — Étendre le goal au-delà du diagnostic
+
+Icham demande explicitement d'ajouter les étapes 6, 7, 8, 9 et 10 au vault et au goal général, puis précise que le prompt `/goal` est un renvoi vers le vault. [[Diagnostic causal TSLM vs C1#Plan global en dix étapes]] devient donc le périmètre complet : corrections et comparaison, diversification globale si nécessaire, mesure de son apport, confirmation indépendante, intégration continue et test de valeur des trois approches. La fin du diagnostic seule n'est plus la fin du goal.
+
+Les étapes sont incluses avec leurs conditions et preuves, pas réputées exécutées. Aucune reprise automatique de l'ancienne campagne, réaffectation de la réserve Aghashahi, dépense ou action physique n'est impliquée par cet ajout. Le premier contrôle restant demeure D1 ; chaque campagne ultérieure exige un protocole et un budget annoncés avant calcul. [[Diagnostic causal - exécution]] conserve la checklist et l'état réel.
+
 ## 2026-09-13 — Diagnostiquer l'écart avant une nouvelle recette
 
 Icham propose un nouvel objectif de diagnostic causal : données, représentation, supervision, optimisation, utilisation du signal par Qwen et scoring. [[Diagnostic causal TSLM vs C1]] cadre cette proposition ; le protocole détaillé et son budget restent à convenir, aucune nouvelle expérience lancée. Préférer « expliquer l'écart observé entre les pipelines » à l'affirmation préalable « le TSLM exploite moins bien les données ». C1 n'est pas une vérité terrain ; la parité réparée ne démontre pas une amélioration de discrimination.

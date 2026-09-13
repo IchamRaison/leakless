@@ -4,7 +4,7 @@ Icham — 2026-09-13
 
 ## État courant
 
-**Objectif d'implémentation désormais autorisé par Icham : [[Diagnostic causal TSLM vs C1]].** L'ancienne suite V2 de refit/confirmation reste suspendue ; l'autorisation porte sur le diagnostic et ses expériences contrôlées, pas sur une nouvelle recette produit. Premier jalon réalisé : les six fits existants sont complets et vérifiés, derniers artefacts publiés au commit code `b65042a`. Aucun réentraînement pour les récupérer, aucun score externe.
+**Goal élargi par Icham jusqu'aux étapes 6 à 10 de [[Diagnostic causal TSLM vs C1#Plan global en dix étapes]].** Après le diagnostic : corrections et comparaison, diversification si nécessaire, mesure de son apport, gel/confirmation indépendante, puis intégration continue et benchmark à trois approches. Le diagnostic n'est plus le critère de fin global. Les portes de passage restent obligatoires ; aucune nouvelle recette ni réaffectation d'Aghashahi n'est adoptée d'avance. L'ancienne campagne reste une référence historique, pas une recette à relancer automatiquement. Six fits déjà vérifiés, derniers artefacts `b65042a` ; aucun réentraînement pour les récupérer ni score externe.
 
 **D0 terminé, rapatrié et vérifié :1516 observations/3032 forwards, zéro apprentissage.** A reçu `4810270a…`, preuves `f64c943` ; C reçu `c6d2121f…`, preuves `9dd5b73`. Reçus et tous fichiers vérifiés localement/distamment avec `finished()`. Reload98 et échanges d'entrées complètes reproduisent exactement leurs scores ; poids inchangés dans chaque état. Revue indépendante des694 lignes A et822 lignes C : identités, cibles, masques et agrégats concordants. Ne pas relancer D0. Code `733b9c6`,181 tests runtime sans skip, préinscription SHA `cd2c3916cbac2b61b979f463fa793dec1be3585c6e558d7743a0d4c43a7e6d1f`. Checkout sain `/home/animus/ehl-hackathon-zurich-v2-recovery`, branche `feat/icham-v2-reliability` ; ancien Git endommagé à préserver.
 
@@ -40,6 +40,8 @@ D0 mesure comparaison, cohérence des objectifs/scoring et sensibilité aux entr
 
 ## Audit de complétion du nouvel objectif
 
+Les contrôles diagnostiques ci-dessous couvrent seulement les étapes 1 à 5 ; leur achèvement ne suffit plus à terminer le goal élargi.
+
 - [x] Six fits précédents vérifiés, récupérés et inventoriés sans réentraînement.
 - [x] D0 observateur/runner testés, préinscrit puis exécuté ; résultats et revue indépendante consignés ci-dessous.
 - [x] Données/comparaison : mappings/cibles et supports examinés en lecture seule ; limites de diversité et d'acquisition consignées ci-dessous. Aucune causalité ni exactitude physique des annotations démontrée par ces contrôles.
@@ -50,7 +52,13 @@ D0 mesure comparaison, cohérence des objectifs/scoring et sensibilité aux entr
 - [ ] Matrice finale par hypothèse : démontrée / non soutenue dans les conditions testées / inconnue ; preuve, alternatives et portée pour chaque verdict.
 - [ ] Nouvelle recette proposée seulement après restitution causale, ou constat motivé des données manquantes. Aucun réglage sur test officiel/externe.
 - [ ] Code, commandes, tests, artefacts et passation publiés ; revue indépendante des conclusions.
-- [ ] **Après les autres pistes seulement, si l'amélioration reste insuffisante :** préparer la diversification globale des données acoustiques, fuite et sans-fuite, sites/capteurs/matériaux/conditions comparables. [[Diagnostic causal TSLM vs C1#Dernière étape conditionnelle — diversifier les données acoustiques]]. Revue de la shortlist effectuée dans [[Datasets utiles pour PIPE]] ; aucune nouvelle collecte ou intégration lancée, D1 reste à exécuter.
+- [ ] **6 — Corrections et nouvelle version :** tests de régression, campagne bornée et comparaison vérifiée sur développement, décision de progression explicite.
+- [ ] **7 — Diversification conditionnelle :** si le progrès reste insuffisant, audit global, sources et rôles décidés, nouveau protocole séparé par acquisition ; sinon omission motivée.
+- [ ] **8 — Apport des données :** même recette avec/sans ajout, réserves et budget comparables, rapport vérifié ; conditionnelle à 7.
+- [ ] **9 — Confirmation indépendante :** modèle/chaîne gelés, reload neuf, réserve intacte, prédictions et rapport, aucun réglage après consultation.
+- [ ] **10 — Produit et valeur :** intégration réelle, flux/événements/santé testés, replay distinct du terrain annoté, métriques événementielles et benchmark gabarit/Qwen/TSLM. Données ou preuves manquantes explicitement signalées.
+
+Critères détaillés : [[Diagnostic causal TSLM vs C1#Critère de complétion du goal élargi]]. Les étapes 6 à 10 sont ajoutées au périmètre, pas exécutées par cette mise à jour.
 
 ## Prochaine action
 
