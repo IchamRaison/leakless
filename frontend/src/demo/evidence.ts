@@ -1,5 +1,5 @@
 // Presentation copy of the authorized results. No model probabilities live here.
-// Update this single module from the frozen report (tag protocol-freeze-v1); never compute evaluation in the UI.
+// Controls C0–C3 from the frozen report (tag protocol-freeze-v1). C4 is filled only by ./official (official TSLM result); never compute evaluation in the UI.
 export const evidence = {
   source:
     "https://github.com/IchamRaison/ehl-hackathon-zurich/tree/protocol-freeze-v1",

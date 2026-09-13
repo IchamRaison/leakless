@@ -1,0 +1,187 @@
+{
+  "SYNTHETIC-FIXTURE-tslm_vs_c0": {
+    "seed": 20260912,
+    "n_clusters": 41,
+    "clip_roc_auc": {
+      "delta_observe": -0.777,
+      "ci95_low": -0.888,
+      "ci95_high": 0.999,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "clip_macro_f1": {
+      "delta_observe": -0.777,
+      "ci95_low": -0.888,
+      "ci95_high": 0.999,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "cluster_roc_auc": {
+      "delta_observe": -0.777,
+      "ci95_low": -0.888,
+      "ci95_high": 0.999,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "cluster_macro_f1": {
+      "delta_observe": -0.777,
+      "ci95_low": -0.888,
+      "ci95_high": 0.999,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "fold": "test",
+    "a": "SYNTHETIC-FIXTURE-tslm",
+    "b": "c0",
+    "n_clips": 194,
+    "avertissement": "SYNTHETIC FIXTURE"
+  },
+  "SYNTHETIC-FIXTURE-tslm_vs_c1": {
+    "seed": 20260912,
+    "n_clusters": 41,
+    "clip_roc_auc": {
+      "delta_observe": -0.777,
+      "ci95_low": -0.888,
+      "ci95_high": 0.999,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "clip_macro_f1": {
+      "delta_observe": -0.777,
+      "ci95_low": -0.888,
+      "ci95_high": 0.999,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "cluster_roc_auc": {
+      "delta_observe": -0.777,
+      "ci95_low": -0.888,
+      "ci95_high": 0.999,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "cluster_macro_f1": {
+      "delta_observe": -0.777,
+      "ci95_low": -0.888,
+      "ci95_high": 0.999,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "fold": "test",
+    "a": "SYNTHETIC-FIXTURE-tslm",
+    "b": "c1",
+    "n_clips": 194,
+    "avertissement": "SYNTHETIC FIXTURE"
+  },
+  "SYNTHETIC-FIXTURE-tslm_vs_c2": {
+    "seed": 20260912,
+    "n_clusters": 41,
+    "clip_roc_auc": {
+      "delta_observe": -0.777,
+      "ci95_low": -0.888,
+      "ci95_high": 0.999,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "clip_macro_f1": {
+      "delta_observe": -0.777,
+      "ci95_low": -0.888,
+      "ci95_high": 0.999,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "cluster_roc_auc": {
+      "delta_observe": -0.777,
+      "ci95_low": -0.888,
+      "ci95_high": 0.999,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "cluster_macro_f1": {
+      "delta_observe": -0.777,
+      "ci95_low": -0.888,
+      "ci95_high": 0.999,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "fold": "test",
+    "a": "SYNTHETIC-FIXTURE-tslm",
+    "b": "c2",
+    "n_clips": 194,
+    "avertissement": "SYNTHETIC FIXTURE"
+  },
+  "SYNTHETIC-FIXTURE-tslm_vs_c2b": {
+    "seed": 20260912,
+    "n_clusters": 41,
+    "clip_roc_auc": {
+      "delta_observe": -0.777,
+      "ci95_low": -0.888,
+      "ci95_high": 0.999,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "clip_macro_f1": {
+      "delta_observe": -0.777,
+      "ci95_low": -0.888,
+      "ci95_high": 0.999,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "cluster_roc_auc": {
+      "delta_observe": -0.777,
+      "ci95_low": -0.888,
+      "ci95_high": 0.999,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "cluster_macro_f1": {
+      "delta_observe": -0.777,
+      "ci95_low": -0.888,
+      "ci95_high": 0.999,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "fold": "test",
+    "a": "SYNTHETIC-FIXTURE-tslm",
+    "b": "c2b",
+    "n_clips": 194,
+    "avertissement": "SYNTHETIC FIXTURE"
+  },
+  "SYNTHETIC-FIXTURE-tslm_vs_c3": {
+    "seed": 20260912,
+    "n_clusters": 41,
+    "clip_roc_auc": {
+      "delta_observe": -0.777,
+      "ci95_low": -0.888,
+      "ci95_high": 0.999,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "clip_macro_f1": {
+      "delta_observe": -0.777,
+      "ci95_low": -0.888,
+      "ci95_high": 0.999,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "cluster_roc_auc": {
+      "delta_observe": -0.777,
+      "ci95_low": -0.888,
+      "ci95_high": 0.999,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "cluster_macro_f1": {
+      "delta_observe": -0.777,
+      "ci95_low": -0.888,
+      "ci95_high": 0.999,
+      "lecture": "inconclusive",
+      "draws_effectifs": 2000
+    },
+    "fold": "test",
+    "a": "SYNTHETIC-FIXTURE-tslm",
+    "b": "c3",
+    "n_clips": 194,
+    "avertissement": "SYNTHETIC FIXTURE"
+  }
+}

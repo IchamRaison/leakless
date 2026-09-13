@@ -9,8 +9,11 @@ du projet en action, sans parcourir la landing.
   d'ensemble (répétition, copie vers Google Slides/Keynote), F plein écran,
   T remet le chrono à zéro. Clic tiers gauche = précédent.
 - Textes des slides en anglais comme le site ; chiffres repris uniquement de
-  `frontend/src/demo/evidence.ts`. TSLM affiché « NOT EVALUATED YET » tant qu'aucun
-  checkpoint évalué n'existe.
+  `frontend/src/demo/evidence.ts` (contrôles) et du rapport officiel gelé
+  `frontend/src/demo/official/` (TSLM `tslm-v1`, protocol-freeze-v1, commit
+  3e4e73ab6e19) : C4 clip AUC 0.665, cluster AUC 0.861 ; TSLM vs C1 : clip
+  compatible with degradation, cluster inconclusive. Aucune probabilité par
+  enregistrement.
 
 ## Minutage
 
@@ -39,7 +42,7 @@ du projet en action, sans parcourir la landing.
 2. Panneau → **REC 02** : vrai enregistrement, forme d'onde, label du dataset,
    « No physical association between this point and the recording ».
 3. **Inspect this recording** → Monitor avec REC 02 au premier plan,
-   « Alerts: N/A · replay only », TSLM · NOT EVALUATED YET, **Listen** au besoin.
+   « Alerts: N/A · replay only », TSLM · NO PER-RECORDING OUTPUT, **Listen** au besoin.
 4. **Overview** : retour avec la même sélection ; 03 → Fullscreen sur la
    Temporal Signal Map si le temps le permet.
 5. S'il reste du temps : 06 → **Load a recording** avec le WAV du bureau.
@@ -49,5 +52,5 @@ du projet en action, sans parcourir la landing.
 - API tombée : les sections affichent « Signal unavailable » / Retry. Ne pas
   improviser de chiffres ; relancer l'API (étape 1) ou passer aux résultats.
 - WebGL indisponible : les boutons N1–N4 et les graphiques 2D restent utilisables.
-- Retard : sauter l'étape 5 de la démo et la slide Limits (garder la phrase
-  « TSLM superiority not demonstrated » sur la slide Results).
+- Retard : sauter l'étape 5 de la démo et la slide Limits (garder sur la slide Results
+  la phrase « The first TSLM did not outperform the strongest simple control »).

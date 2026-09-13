@@ -1,0 +1,12 @@
+{
+  "status": "OFFICIAL",
+  "contract_check": "PASS",
+  "provenance_check": "PASS",
+  "final_report": "GENERATED",
+  "protocol_tag": "protocol-freeze-v1",
+  "protocol_commit": "3e4e73ab6e1944b42b0223e9bd9b3d500f49bc65",
+  "report_commit": "3e4e73ab6e1944b42b0223e9bd9b3d500f49bc65",
+  "tslm_run_id": "tslm-v1",
+  "metrics_sha256": "dca95be26def474987f93d6affdc57fa8fdebdb6afd33909c8ba1204197bd5e2",
+  "comparison_sha256": "b72cfe3e7c8bb6dccac440ffd63e22feb5201172588a9d976632adbff639b5dc"
+}

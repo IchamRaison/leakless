@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>LeakLess 5-Minute Pitch</title>
 <meta name="color-scheme" content="dark">
 <style>
@@ -83,6 +84,7 @@
   .demo .where { grid-column: 2; font: 18px/1.4 var(--mono); color: var(--pending); }
   .honest { border: 1px solid #d8c59a55; background: #d8c59a0f; border-radius: 6px; padding: 22px 26px; font-size: 22px; line-height: 1.5; color: #d9d2bb; align-self: start; }
   .honest b { color: var(--pending); font-weight: 500; }
+  .demo li.honest { display: block; }
 
   /* Slide 4: AUC ladder drawn to one 0.5–1.0 scale. */
   .ladder { display: grid; grid-template-columns: 330px 1fr 140px 140px; column-gap: 30px; align-items: center; }
@@ -105,6 +107,9 @@
   .val.pend { color: var(--pending); font-size: 20px; }
   .row.ref .ctl span::after { content: "reference"; font: 16px/1 var(--mono); color: var(--signal); margin-left: 14px; letter-spacing: 0.08em; }
   .row.tslm .ctl span, .row.tslm .ctl b { color: var(--pending); }
+  .result-note { font-size: 21px; line-height: 1.45; max-width: none; }
+  section[data-label="Results"] .row > * { padding: 11px 0; }
+  section[data-label="Results"] .track { height: 48px; }
   .legend { display: flex; gap: 40px; font-size: 20px; color: var(--muted); align-items: center; }
   .legend i { display: inline-block; vertical-align: middle; margin-right: 10px; border-radius: 50%; }
 
@@ -231,7 +236,7 @@
           <span class="step">3 · MODELS</span>
           <span class="figure">C0–C4<small>same split</small></span>
           <h3>Controls before claims</h3>
-          <p>Loudness, envelope, static spectrum, shallow temporal and a mixed baseline are scored on the same clusters; the TSLM will be scored there once its training and evaluation are complete.</p>
+          <p>Loudness, envelope, static spectrum, shallow temporal, a mixed baseline and the TSLM are scored on the same 41 held-out clusters.</p>
         </div>
       </div>
       <aside class="inline-notes"><b>SAY</b><span class="say"></span></aside>
@@ -249,7 +254,7 @@
         <ol>
           <li><span class="n">4</span><strong>Monitor replay</strong><span class="d">Three channels measured as they replay: level, centroid, bands.</span><span class="where">Nav → Monitor replay</span></li>
           <li><span class="n">5</span><strong>Inspect your own WAV</strong><span class="d">Any recording goes through the same checks and plots.</span><span class="where">06 → Load a recording</span></li>
-          <li class="honest"><span><b>On screen, TSLM reads NOT EVALUATED YET.</b> No probability is shown until an evaluated TSLM checkpoint is wired in.</span></li>
+          <li class="honest"><span><b>On screen: TSLM · NO PER-RECORDING OUTPUT.</b> Its result is a held-out benchmark; no per-recording probability.</span></li>
         </ol>
       </div>
       <aside class="inline-notes"><b>SAY</b><span class="say"></span></aside>
@@ -264,6 +269,7 @@
         <span><i style="width:17px;height:17px;border:3px solid var(--ink)"></i>Cluster AUC</span>
         <span class="mono" style="color:var(--faint)">41 test clusters · 11 non-leak · wide uncertainty · C1 vs C0 inconclusive</span>
       </div>
+      <p class="next result-note">TSLM vs C1, paired on the same clusters: clip AUC compatible with degradation, cluster AUC inconclusive. The first TSLM did not outperform the strongest simple control. Its ranking degraded under block permutation and phase randomization, while temporal reversal was inconclusive.</p>
       <aside class="inline-notes"><b>SAY</b><span class="say"></span></aside>
     </section>
 
@@ -292,7 +298,7 @@
           </ul>
         </div>
       </div>
-      <p class="next push">Next: score an evaluated TSLM checkpoint on the same frozen split, against the same controls, before any claim.</p>
+      <p class="next push">Next: C1 remains the bar to beat. Any new TSLM is scored on the same frozen split, against the same controls, before any claim.</p>
       <aside class="inline-notes"><b>SAY</b><span class="say"></span></aside>
     </section>
 
@@ -321,10 +327,10 @@
 <script>
   const NOTES = [
     "Leaks inside buildings are usually found when the damage is already visible: a stain, a ceiling, a floor. By then the repair is expensive. Our question: can acoustic signals help a facilities team decide when to inspect, and can we prove what a model is actually using? We have not measured any early-warning lead time. Say clearly: research prototype, experimental data.",
-    "We used a public experimental dataset: 1,000 one-second recordings, leak, no-leak and environmental noise, CC BY 4.0, processed through TimeNet and TimeF. The trap with acoustic data is leakage: clips from the same capture are nearly identical. So we grouped them into 185 dependency clusters and froze a split where no cluster crosses sides. The controls are scored on the same 41 held-out clusters; the TSLM will be scored on that split once its training and evaluation are complete.",
-    "Switch to the site (tab already open, API running). Building fullscreen, click N1: say it is an illustrative position, not a leak location. In the panel choose REC 02: a real recording, its waveform and dataset label, no physical association with the point. Click Inspect this recording: the Monitor opens with REC 02 in front, values measured live, alerts N/A because it is a replay, TSLM not evaluated yet. Overview brings you back with the same selection. If time allows, drop a WAV in section 06. Back to slides at 3:00.",
-    "The interesting result is not the highest score. Loudness alone, C0, already reaches 0.878 clip AUC. The envelope control, C1, reaches 0.902 clip and 0.927 cluster AUC. With 41 test clusters and only 11 non-leak, intervals are wide and C1 versus C0 is inconclusive. So any model we ship has to beat these controls on held-out clusters, not just look accurate. The TSLM row stays not evaluated yet until it is evaluated on this split.",
-    "We keep a ledger. Demonstrated: the dataset through TimeNet/TimeF, the leakage-aware split, the controls, and a shallow temporal control that reacts to temporal perturbations. Not demonstrated: field detection, localization, deployment, lead time, causal interpretation, and TSLM superiority. Next step is precise: evaluated TSLM checkpoint, same split, same controls.",
+    "We used a public experimental dataset: 1,000 one-second recordings, leak, no-leak and environmental noise, CC BY 4.0, processed through TimeNet and TimeF. The trap with acoustic data is leakage: clips from the same capture are nearly identical. So we grouped them into 185 dependency clusters and froze a split where no cluster crosses sides. The controls and the TSLM are scored on the same 41 held-out clusters.",
+    "Switch to the site (tab already open, API running). Building fullscreen, click N1: say it is an illustrative position, not a leak location. In the panel choose REC 02: a real recording, its waveform and dataset label, no physical association with the point. Click Inspect this recording: the Monitor opens with REC 02 in front, values measured live, alerts N/A because it is a replay, and no per-recording TSLM output: the TSLM result is a held-out benchmark. Overview brings you back with the same selection. If time allows, drop a WAV in section 06. Back to slides at 3:00.",
+    "The interesting result is not the highest score. Loudness alone, C0, already reaches 0.878 clip AUC. The envelope control, C1, reaches 0.902 clip and 0.927 cluster AUC. With 41 test clusters and only 11 non-leak, intervals are wide and C1 versus C0 is inconclusive. So any model has to beat these controls on held-out clusters, not just look accurate. The TSLM, C4, reaches 0.665 clip and 0.861 cluster AUC. Paired against C1 on the same clusters, clip AUC is compatible with degradation and cluster AUC is inconclusive: the first TSLM did not outperform the strongest simple control. Under temporal stress, without retraining, its ranking degraded under block permutation and phase randomization, while temporal reversal was inconclusive. That measures sensitivity to temporal organisation, not its physical relevance, and no statistical significance is claimed.",
+    "We keep a ledger. Demonstrated: the dataset through TimeNet/TimeF, the leakage-aware split, the controls, and a shallow temporal control that reacts to temporal perturbations. Not demonstrated: field detection, localization, deployment, lead time, causal interpretation, and TSLM superiority. Next step is precise: C1 remains the bar to beat, and any new TSLM goes through the same split and controls.",
     "One sentence to close: LeakLess puts the signal before the decision, with the controls and limits visible. Thank the jury, name the team, invite questions."
   ];
   const AUC = [
@@ -333,7 +339,7 @@
     ["C2", "Static spectrum", 0.71, 0.779],
     ["C2b", "Shallow temporal", 0.847, 0.915],
     ["C3", "Mixed static baseline", 0.824, 0.9],
-    ["C4", "TSLM", null, null, "tslm"]
+    ["C4", "TSLM", 0.665, 0.861]
   ];
 
   const deck = document.getElementById("deck");

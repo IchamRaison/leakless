@@ -1,14 +1,20 @@
 """Application CPU locale. Les adaptateurs ML seront intégrés après livraison G1/G2."""
 
-from contextlib import asynccontextmanager
+import asyncio
+from contextlib import asynccontextmanager, suppress
+from pathlib import Path
 from typing import Annotated
 
 from fastapi import FastAPI, File, Request, UploadFile
+from pydantic import BaseModel, Field
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse, Response
 from starlette.exceptions import HTTPException
 from starlette.types import ASGIApp, Receive, Scope, Send
 
+import logging
+
+from pipe.api.alerts import IncidentStore, store_from_env
 from pipe.api.audio import MAX_BYTES, MAX_SAMPLES, AudioError, decode_audio, visualization
 from pipe.contracts import PredictRequest, Prediction, Sample
 
@@ -17,10 +23,35 @@ def fail(status: int, code: str, message: str):
     raise HTTPException(status, {"code": code, "message": message})
 
 
+log = logging.getLogger("leakless.api")
+ROOT = Path(__file__).resolve().parents[3]
+ALERT_TICK_SECONDS = 0.5
+
+
+def alert_store_factory() -> IncidentStore:
+    """Remplaçable dans les tests (transport simulé, horloge contrôlée)."""
+    return store_from_env(ROOT)
+
+
+async def alert_loop(store: IncidentStore):
+    # La persistance et l'envoi vivent ici, pas dans le navigateur. Aucune exception ne l'arrête.
+    while True:
+        try:
+            await asyncio.to_thread(store.tick)
+        except Exception:
+            log.exception("Alert loop iteration failed; monitoring continues.")
+        await asyncio.sleep(ALERT_TICK_SECONDS)
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     app.state.samples = {}
+    app.state.alerts = alert_store_factory()
+    loop = asyncio.create_task(alert_loop(app.state.alerts))
     yield
+    loop.cancel()
+    with suppress(asyncio.CancelledError):
+        await loop
     app.state.samples.clear()
 
 
@@ -160,3 +191,42 @@ def predict(body: PredictRequest):
 @app.get("/evaluation")
 def evaluation():
     fail(404, "evaluation_unavailable", "Not evaluated: no published run metrics.json is integrated.")
+
+
+class Position(BaseModel):
+    # Coordonnées du dessin : finies et bornées, jamais NaN ni infini.
+    x: float = Field(allow_inf_nan=False, ge=-2000, le=4000)
+    y: float = Field(allow_inf_nan=False, ge=-2000, le=4000)
+
+
+class IncidentRequest(BaseModel):
+    strongest_sensor: int = Field(ge=1, le=3)
+    position: Position
+    verification: str | None = Field(default=None, pattern=r"^[A-Za-z0-9:_-]{1,48}$")
+
+
+@app.get("/incidents/current")
+def incidents_current():
+    return app.state.alerts.snapshot()
+
+
+@app.post("/incidents", status_code=201)
+def inject_incident(body: IncidentRequest):
+    incident, created = app.state.alerts.inject(body.strongest_sensor, body.position.model_dump(),
+                                                verification=body.verification)
+    return {"created": created, "incident_id": incident.incident_id, **app.state.alerts.snapshot()}
+
+
+@app.post("/incidents/{incident_id}/retry")
+def retry_incident(incident_id: str):
+    if app.state.alerts.retry(incident_id) is None:
+        fail(409, "retry_not_allowed", "Only an active incident whose notification failed can be retried.")
+    return app.state.alerts.snapshot()
+
+
+@app.post("/incidents/{incident_id}/resolve")
+def resolve_incident(incident_id: str):
+    if app.state.alerts.resolve(incident_id) is None:
+        fail(404, "incident_not_found", "Incident not found.")
+    return app.state.alerts.snapshot()
+

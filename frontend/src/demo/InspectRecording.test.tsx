@@ -9,6 +9,7 @@ import {
 } from "@testing-library/react";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { InspectRecording } from "./InspectRecording";
+import { tslm } from "./official";
 
 vi.mock("./SceneCanvas", () => ({
   SceneCanvas: () => <div>3D test host</div>,
@@ -132,7 +133,7 @@ it("shows metadata, waveform, map and a pending model for a valid upload, withou
   );
   expect(
     screen.getByText("Probability leak").nextElementSibling,
-  ).toHaveTextContent("NOT EVALUATED YET");
+  ).toHaveTextContent(tslm.probability);
   expect(screen.getByText("a".repeat(64))).toBeInTheDocument();
   const [, init] = fetchMock.mock.calls[0];
   expect(((init as RequestInit).body as FormData).get("file")).toHaveProperty(
