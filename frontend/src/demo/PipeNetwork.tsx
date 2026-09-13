@@ -12,11 +12,6 @@ export type NetworkChannel = { id: string; name: string; level: number | null };
 
 const SEGMENTS = PIPE_PATHS;
 const VIEW = { x: 0, y: 30, width: 1240, height: 280 };
-// Keyboard fallback for the pipe hit areas: the middle of each pipe's first straight run.
-const MIDPOINTS = pipePolylines().map(([a, b]) => ({
-  x: (a.x + b.x) / 2,
-  y: (a.y + b.y) / 2,
-}));
 
 /** Client coordinates to SVG units, with a viewBox fallback where no CTM exists (jsdom). */
 function toSvgPoint(
@@ -50,6 +45,38 @@ const POINTS = [
   [590, 118, 34, 8],
   [880, 155, 50, 8],
 ] as const;
+// Keyboard fallback for the pipe hit areas: the point of each pipe's first straight run
+// closest to its middle while staying clear of every recording marker, so the simulated
+// incident never hides under a REC node.
+const REC_CLEARANCE = 70;
+const KEYBOARD_TARGETS = pipePolylines().map((line) => {
+  const middle = {
+    x: (line[0].x + line[1].x) / 2,
+    y: (line[0].y + line[1].y) / 2,
+  };
+  let best: Point = middle;
+  let bestDistance = Infinity;
+  for (let i = 1; i < line.length; i += 1) {
+    const [a, b] = [line[i - 1], line[i]];
+    const steps = Math.max(
+      1,
+      Math.round(Math.hypot(b.x - a.x, b.y - a.y) / 10),
+    );
+    for (let step = 0; step <= steps; step += 1) {
+      const point = {
+        x: a.x + ((b.x - a.x) * step) / steps,
+        y: a.y + ((b.y - a.y) * step) / steps,
+      };
+      const clear = POINTS.every(
+        ([x, y]) => Math.hypot(point.x - x, point.y - y) >= REC_CLEARANCE,
+      );
+      const distance = Math.hypot(point.x - middle.x, point.y - middle.y);
+      if (clear && distance < bestDistance)
+        [best, bestDistance] = [point, distance];
+    }
+  }
+  return best;
+});
 
 /** Illustrative network: water motion is decorative; only ripple size is measured (replayed level). */
 export function PipeNetwork({
@@ -75,7 +102,7 @@ export function PipeNetwork({
   const hitKey = (event: KeyboardEvent<SVGPathElement>, pipe: number) => {
     if (event.key !== "Enter" && event.key !== " ") return;
     event.preventDefault();
-    onIncident?.(MIDPOINTS[pipe]);
+    onIncident?.(KEYBOARD_TARGETS[pipe]);
   };
   return (
     <figure
