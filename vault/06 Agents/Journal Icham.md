@@ -1,5 +1,15 @@
 # Journal Icham
 
+## 13 septembre — D2 terminé, information exploitable et prochain contrôle D3
+
+Trois fits HGB réels terminés normalement (handle 86079, sortie 0), chacun 200 itérations, aucun Qwen. Préinscription `67ed6bd5…` publiée `3505928` avant fit ; reçu `48ac9de1…`, artefacts `160655a`. Sources/runtime/entrées inchangés, reçus/tous fichiers vérifiés localement et à distance. Revue indépendante puis reproduction locale via `verify.py` : partitions, 1 794 prédictions, métriques, NLL et critère concordants, aucun refit ; [[Diagnostic causal - exécution#D2 — résultats vérifiés et portée]].
+
+AUC groupe réservée moyenne : D2 0,854167 contre linéaire 0,636218 et C1 fixe 0,937500. Trois gains face à la sonde linéaire, trois retards face à C1 ; sur fit AUC 1,0 et zéro erreur à 0,5 dans chaque fold. L'entrée contient une information exploitable ; ce n'est pas un nouveau score du TSLM ni une preuve de généralisation terrain. Les quatre probabilités historiques linéaires `p=1` sur des négatifs expliquent les NLL infinies sans clipping. D2 ne doit pas être relancé.
+
+Contrôle suivant D3 choisi et borné avant fit : un A neuf sur les mêmes 32 témoins, recette inchangée hors budget maximal de 1 000 pas ; observations tous les 100 pas, arrêt seulement si NLL binaire <0,1 et 32/32 décisions correctes, puis reload neuf. Implémentation confiée, pas de fit ni préinscription machine D3 encore ; pas de gain TSLM ou de cause unique annoncé.
+
+Icham rappelle les **deux H100** : répartition de futurs fits indépendants après préparation du second runtime, sans multiplier les essais ni distribuer automatiquement un fit. Inspection de `ich@195.242.28.46` : Python 3.12.3, git/tar/scp présents, GPU à 0 Mio, environ 1,2 To libres ; projet/venv/pip/ensurepip/uv absents. Le bootstrap uv + lockfile déjà documenté est réutilisable ; les anciennes préinscriptions aux chemins absolus ne seront pas réécrites pour changer de machine. Aucune installation, copie de poids ou expérience supplémentaire effectuée à ce jalon.
+
 ## 13 septembre — D2 implémenté, testé et préinscrit avant fit
 
 Reprise du goal sur l'état réel : runner inachevé, aucune expérience D2 à reprendre ; H100 existante libre et aucun processus de campagne/diagnostic actif au contrôle. Recherche Entire D2 sans résultat ; source et protocole du vault utilisés. Ponytail : réutilisation des chargeurs train, partitions, métriques et reçus existants, aucune dépendance nouvelle. Code/tests `303609e`, revue indépendante sans blocage ; 11 tests ciblés réussis puis 214 tests de régression runtime sans skip. Le Python local incomplet n'est pas présenté comme une validation de la chaîne ML.

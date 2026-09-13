@@ -34,6 +34,8 @@ La première phase conserve son objectif causal :
 
 Les commandes, empreintes et limites détaillées restent dans [[V2 ML - exécution]]. Les résultats V1 test ne sont pas directement comparables aux folds V2 train ; aucun réglage ne doit partir du test déjà consulté.
 
+**D2 désormais exécuté et vérifié :** sur les mêmes 256 valeurs et trois folds, le lecteur HGB obtient 0,854167 d'AUC groupe réservée moyenne, contre 0,636218 pour la sonde linéaire et 0,937500 pour C1 fixe. Gains sur les trois folds face à la sonde linéaire ; aucune absence globale d'information prédictive démontrée. Cela justifie le contrôle suivant du chemin d'apprentissage Qwen, pas une adoption du boosting comme TSLM ni une collecte immédiate. [[Diagnostic causal - exécution#D2 — résultats vérifiés et portée]].
+
 ## Questions à départager — pas six chantiers simultanés
 
 | Cause possible | Contraste contrôlé proposé | Limite d'interprétation |
@@ -51,7 +53,7 @@ Préalables déjà réalisés : inventaire des six fits, contrôles de parité a
 
 1. **Précision numérique — exécutée :** D1 compare les têtes BF16, FP32 et FP32 réarrondie sur les mêmes checkpoints et entrées, sans apprentissage ; tests, préinscription et artefacts conservés. Ne pas relancer.
 2. **Interprétation :** quantifier l'effet observé et choisir le contraste suivant ; ne pas adopter une correction numérique sur la seule apparence d'une grille plus fine.
-3. **Représentation :** si nécessaire, tester un lecteur non linéaire borné sur les entrées exactes du TSLM, mêmes groupes de développement et comparaison C1.
+3. **Représentation — exécutée :** D2 teste un lecteur non linéaire borné sur les entrées exactes, mêmes groupes de développement et comparaison C1 ; résultats et limites ci-dessus, ne pas relancer.
 4. **Apprentissage :** suivant les preuves, mémorisation sur 32 clips fixés, journalisation des pertes/gradients/mises à jour, contournement de Qwen et mesures C1 par voie entraînable. Chaque contrôle doit départager une question ; pas six campagnes simultanées.
 5. **Bilan causal :** causes démontrées, hypothèses non soutenues, inconnues et corrections justifiées ; preuve et limite de chaque verdict, justification des contrôles conditionnels omis. Une inconnue ne devient pas une cause acquise ni un motif de recherche illimitée.
 

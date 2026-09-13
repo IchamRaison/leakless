@@ -63,7 +63,7 @@ Critères détaillés : [[Diagnostic causal TSLM vs C1#Critère de complétion d
 
 ## Prochaine action
 
-**Exécuter D2 une fois puis vérifier ses trois fits**, selon le protocole fixé ci-dessous. Runner et 11 tests publiés `303609e` ; 214 tests runtime sans skip. Préinscription machine `67ed6bd5…` publiée avec les logs à `3505928`, avant tout fit réel D2. D1 ne résout pas le retard ; la sonde linéaire faible ne départage pas représentation et capacité de lecture. Réutiliser les métriques/agrégations et les comparateurs réservés existants, sans retuning. Aucun ajout de données ou nouvelle recette Qwen à ce stade.
+**Finaliser/tester puis préinscrire D3**, selon le protocole ci-dessous. D2 est terminé et vérifié ; ses trois fits ne sont pas à relancer. La représentation est exploitable par le lecteur non linéaire, sans que le chemin Qwen ait démontré la même capacité : prochain contrôle sur les 32 témoins déjà fixés. Un essai A neuf seulement, aucun ajout de données ni nouvelle recette produit. Tests et préinscription machine D3 restent à faire.
 
 D0 et D1 restent scellés ; aucun score à reproduire pour récupérer les résultats. D1 : handles A 22963 / C 5435 terminés avec code zéro, respectivement 312,744 s et 339,558 s. H100 après C : 0 Mio / 0 %, instance laissée allumée. Artefacts locaux `docs/evidence/tslm-v2/causal-d1-001/`, runtime `/home/hicham/pipe-v0/artifacts/causal-d1-306d330-001/`, logs `/home/hicham/pipe-v0/quality-causal-306d330/`.
 
@@ -152,7 +152,7 @@ Le seul changement de première marge C concerne le clip fit `c51eb51347f21` : �
 
 ## D2 — sonde non linéaire, protocole avant fit
 
-**Décision après D1 ; implémentation/test/préinscription terminés, pas encore de résultat D2.** Vérifier si une autre capacité de lecture exploite mieux les mêmes entrées que la sonde linéaire. C'est un contrôle séparé du TSLM : seuls ses trois petits fits utilisent le CPU de la machine existante ; les apprentissages du TSLM restent sur H100. Aucun basculement de Qwen sur CPU, aucune bibliothèque/GPU à installer ou provisionner.
+**Protocole conservé après exécution ; résultats ci-dessous.** Vérifier si une autre capacité de lecture exploite mieux les mêmes entrées que la sonde linéaire. C'est un contrôle séparé du TSLM : seuls ses trois petits fits utilisent le CPU de la machine existante ; les apprentissages du TSLM restent sur H100. Aucun basculement de Qwen sur CPU, aucune bibliothèque/GPU à installer ou provisionner.
 
 - **Entrée exacte :** les 598 train / 102 groupes, quatre séries TimeNet de 64 valeurs aplaties en 256, padding inclus. Cache courant `prepared-v2-ac-04d53b6`, SHA train `9b7b14e1…` ; vérifier son égalité des séries avec l'ancien cache `prepared-v2-aaab4af` (`8bf27c0a…`) utilisé par les sondes. Les NPZ enrichis diffèrent, pas nécessairement leurs séries. Aucun descripteur C1, label ou métadonnée ajouté aux features.
 - **Partitions :** réutiliser strictement `folds.json`, SHA `5c2bea733f8f2a2dc525b9738a5aa40ae3ce220cf6d76d712cab984afb4d5efb`. Trois fits ne voyant chacun que le train du fold ; chaque clip est réservé une fois, groupes disjoints. Aucun split automatique d'early stopping.
@@ -172,7 +172,39 @@ Code `303609edd5e48367390ebe332c92cb777da920b9`, snapshot `/home/hicham/pipe-v0/
 
 Préinscription créée à 06:58:46 Paris, SHA-256 `67ed6bd5a70caa7201d961fb692b0a0aa7eaccea53e3d41ee157fd0bc0ae8977`, publiée avec les logs à `3505928` avant fit. Comparateurs recalculés à l'identique, séries anciennes/courantes identiques, 16 sources revérifiées contre le snapshot ; paramètres complets/interpréteur/bibliothèques liés au JSON. Dossier distant `/home/hicham/pipe-v0/artifacts/causal-d2-303609e-001`, copie locale `docs/evidence/tslm-v2/causal-d2-001/`. Dossier `run/` encore absent au contrôle préalable.
 
-Commande d'exécution prévue, depuis le snapshot : `PYTHONPATH=src /home/hicham/pipe-v0/.venv-repro/bin/python scripts/tslm/diagnose_nonlinear.py run --output /home/hicham/pipe-v0/artifacts/causal-d2-303609e-001`. Ne pas recréer une préinscription ni relancer silencieusement un dossier incomplet. Les chemins et la commande `preregister` sont reconstructibles depuis les champs `paths` du JSON ; aucune base Qwen chargée.
+Commande exécutée une fois depuis le snapshot : `PYTHONPATH=src /home/hicham/pipe-v0/.venv-repro/bin/python scripts/tslm/diagnose_nonlinear.py run --output /home/hicham/pipe-v0/artifacts/causal-d2-303609e-001`. Ne pas recréer une préinscription ni relancer les fits. Les chemins et la commande `preregister` sont reconstructibles depuis les champs `paths` du JSON ; aucune base Qwen chargée.
+
+### D2 — résultats vérifiés et portée
+
+Handle 86079 terminé normalement, sortie 0. Trois fits/200 itérations terminés ; 1 794 prédictions conservées (598 par modèle, fit et réservé séparés). Reçu `48ac9de1fef8238c616207f3eef557bd3c3fc137c26535a7762250bfec126747`, artefacts publiés `160655a`. `finished()` vérifie tous les fichiers localement et sur le serveur ; préinscription inchangée avant/après. Aucun réglage, refit de référence, Qwen ou lecture audio/cache officiel val/test/externe. H100 d'origine à 0 Mio / 0 % après exécution.
+
+| AUC groupe réservée | Fold 0 | Fold 1 | Fold 2 | Moyenne des trois |
+|---|---:|---:|---:|---:|
+| Sonde linéaire TimeNet256 | 0,711538 | 0,586538 | 0,610577 | 0,636218 |
+| D2 HGB, mêmes entrées | 0,879808 | 0,774038 | 0,908654 | 0,854167 |
+| C1 fixe, C=1 | 0,951923 | 0,918269 | 0,942308 | 0,937500 |
+
+Critère préinscrit satisfait : deltas groupe vs linéaire +0,168269 / +0,187500 / +0,298077 ; contre C1 −0,072115 / −0,144231 / −0,033654. AUC clip réservée moyenne : D2 0,824582, linéaire 0,561235, C1 0,896558. Sur les clips vus : AUC clip/groupe 1,0 et zéro erreur à 0,5 dans chaque fold ; NLL 0,066272 / 0,037734 / 0,037638. Sur les réservés : NLL D2 0,461787 / 0,711871 / 0,548772, supérieure à C1 dans les trois folds.
+
+Revue indépendante puis reproduction locale de cette revue sans refit : reçus, 598 identités, partitions, scores, métriques, moyennes et critère conformes. Script spécifique à ces artefacts `docs/evidence/tslm-v2/causal-d2-001/verify.py`, log `verification.log` ; commande depuis la racine du code : `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=scripts/eval python3 docs/evidence/tslm-v2/causal-d2-001/verify.py`. Il réutilise le harness et refuse les sources/artefacts modifiés ; NumPy local 2.4.4, écart maximal de reconstruction NLL nul. L'égalité des matrices distantes est prouvée par le runner et les empreintes, pas relue par ce contrôle local.
+
+Les NLL linéaires `null` représentent +∞ sur les probabilités sauvegardées : 1 / 2 / 1 clips non-fuite réservés, quatre groupes distincts, ont `p=1`. Pas d'epsilon ajouté ni de clip supprimé ; les deltas NLL concernés restent indéfinis. Cela ne signifie pas que la NLL calculable avant saturation depuis les logits logistiques serait infinie.
+
+**Verdict :** la sonde linéaire fixe sous-estimait nettement les performances accessibles avec cette entrée ; une représentation presque dépourvue d'information prédictive n'est pas soutenue par D2. Le lecteur non linéaire sépare les données vues et classe mieux les groupes réservés, sans que cela prouve une exploitation équivalente par Qwen. Le retard sur C1 persiste : représentation, lecteur et conditions d'acquisition ne sont pas entièrement départagés. Les folds déjà consultés, groupes heuristiques et mélange bruit/vrais sans-fuite limitent la portée ; aucune confirmation indépendante, compréhension temporelle ou nouvelle qualité TSLM revendiquée.
+
+## D3 — mémorisation du chemin Qwen, protocole avant fit
+
+**Choisi après D2 ; implémentation en cours, aucun fit D3.** Tester si le chemin A existant sait apprendre une décision confiante sur un petit ensemble déjà fixé. Un seul essai sur H100 ; aucun bras supplémentaire pour occuper la seconde machine.
+
+- **Population :** les 32 `subset_ids` de D0, ordre conservé et égalité revérifiée avec les cohortes du fold 0 : 16 fuite / 16 non-fuite, 32 groupes distincts. Les manifests, caches train et anciens reçus sont lus pour leur provenance, mais aucune nouvelle observation/évaluation sur les 98 réservés, val/test officiels ou externe.
+- **Initialisation/recette :** A seul, `initialize_training(base, "A")`, seed 20260912 ; encodeur/projecteur et AdamW neufs. Qwen gelé BF16, tête originale, mêmes prompt/labels/scoring officiel/loss complète. Encodage canonique par clip, sans texte C1. Microbatch 1, batch effectif 8, LR 0,0002/0,0001, decay 0,01, clipping 1 ; aucun scheduler ni changement de supervision.
+- **Budget :** 1 000 pas d'optimiseur au maximum, soit 250 époques de quatre pas et 8 000 présentations train. Observations à poids fixes aux pas 0, 100, 200, …, 1 000, exclusivement sur les mêmes 32. Budget d'observation maximal avec reload : 384 observations / 768 forwards LLM hors entraînement si deux forwards par observation ; compter les appels réels.
+- **Arrêt :** premier point programmé après le pas 0 où la moyenne de NLL binaire officielle est strictement <0,1 **et** les 32 décisions sont correctes à `p >= 0,5`. Sinon arrêt au pas 1 000 ; aucun allongement automatique ni choix d'un autre checkpoint sur les réservés. Critère de mémorisation, pas de généralisation ou de qualité du texte.
+- **Gardes avant fit :** source/runtime/base/caches/cohortes/recette/scoring et critères liés à une nouvelle préinscription machine publiée avant lancement. Poids initiaux identiques à D0-A initial, modules temporels distincts d'A0 terminal ; état AdamW vide, groupes de paramètres exacts, Qwen gelé, aucune substitution de tête. Échec conservé, pas de correction silencieuse ni relance dans le même dossier.
+- **Journalisation :** réutiliser `train_epoch`, `examples(training=True)`, `capture_training_diagnostics` par époque, `pop_step` à chaque pas puis `epoch_summary`. Fermer le logger avant `observe_example` : pas de contamination des logs train par les observations. Rapporter pertes par partition, comptes exacts, gradients pré/post-clipping, moments/dtypes/epsilon et mises à jour relatives. NLL binaire issue du vrai scoring, séparée de la NLL supervisée.
+- **Gel/reload :** sauvegarde `temporal.pt` existante, configuration/scoring/IDs/journaux/nombre réel de pas/empreintes ; base Qwen immuable non dupliquée. Commande séparée dans un processus neuf via `initialize`/`load_terminal`, mêmes 32 observations, poids identiques, scores à 1e-6, décisions et verdict identiques. Aucun pas d'optimiseur pendant ce reload.
+
+Une réussite prouverait une capacité de mémorisation sous ce budget, pas que seul le manque de diversité explique la généralisation. Un échec laisserait ouverts optimisation, supervision et chemin Qwen/prompt/scoring ; le contournement par tête BCE serait alors à borner selon les traces. Aucun lecteur C1 entraînable ni recette FP32/LoRA décidé d'avance. Nouveaux fichiers confiés : `scripts/tslm/diagnose_memorization.py` et `tests/tslm/test_diagnose_memorization.py` ; helpers partagés conservés, tests/runtime/préinscription requis avant toute expérience.
 
 ## Audit des populations et des cibles
 

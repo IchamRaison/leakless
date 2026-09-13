@@ -6,7 +6,7 @@ Icham
 
 - [x] Nouvel accès `ich@195.242.28.46` réussi : H100 80GB HBM3, GPU inoccupé au contrôle, Python 3.12.3, environ 1,2 To libres. Deux accès H100 vérifiés avec la machine existante. [[Journal Icham#13 septembre — nouveaux essais SSH, une H100 supplémentaire accessible]].
 - [x] `iche@89.169.97.196` testé avec clé explicite puis identités normales : SSH répond, authentification refusée ; GPU non vérifié. Les deux autres refus de l'échange précédent restent historiques, sans nouvel essai.
-- [ ] Résoudre les accès refusés (compte/autorisation de clé) et préciser les instances retenues ; environnement ML/code/poids/données de la nouvelle H100 à préparer et vérifier avant tout fit.
+- [ ] Deux H100 confirmées par Icham : préparer le second runtime avant des fits indépendants en parallèle. Sur `ich@195.242.28.46`, projet/venv/pip/ensurepip/uv absents ; inspection seulement, aucune installation. Pas de DDP ni nouvel essai implicite.
 - [x] Périmètre du goal étendu aux étapes 6 à 10 à la demande d'Icham ; [[Diagnostic causal TSLM vs C1#Plan global en dix étapes]]. Ajout documentaire, pas exécution.
 - [x] Proposition d'Icham consignée : [[Diagnostic causal TSLM vs C1]], expliquer l'écart avant une nouvelle recette ; ancien enchaînement V2 en pause.
 - [x] Revue Claude intégrée : contrôles manquants ajoutés et conclusions non démontrées nuancées. [[Diagnostic causal TSLM vs C1#Checklist enrichie après la revue de Claude]]. Aucun contrôle nouvellement exécuté ni logger modifié.
@@ -18,7 +18,8 @@ Icham
 - [x] D1 A/C exécutés : 3 588 forwards sans fit, artefacts `640d29c` / `9c163d4`, poids/entrées inchangés et reproduction D0 exacte ; [[Diagnostic causal - exécution#D1 — résultats et portée]]. Pas de politique FP32 adoptée ni correction uniforme de l'écart à C1.
 - [x] D2 borné : une configuration d'arbres boostés, mêmes 256 valeurs/folds, comparateurs réservés existants, AUC groupe primaire ; revue méthodologique favorable. [[Diagnostic causal - exécution#D2 — sonde non linéaire, protocole avant fit]].
 - [x] D2 implémenté `303609e`, revue sans blocage, 11 tests ciblés et 214 tests runtime sans skip ; préinscription `67ed6bd5…` publiée `3505928` avant les fits. Identité exacte des séries/caches vérifiée.
-- [ ] D2 : trois fits CPU/200 itérations du contrôle séparé, vérification des reçus/prédictions/comparaisons puis interprétation. Aucun fit réel encore, apprentissages TSLM toujours sur H100.
+- [x] D2 : trois fits/200 itérations terminés, reçus et résultats revérifiés indépendamment, artefacts `160655a`. AUC groupe réservée moyenne 0,854167, trois gains vs sonde linéaire, encore derrière C1 fixe. [[Diagnostic causal - exécution#D2 — résultats vérifiés et portée]].
+- [ ] D3 : finaliser/tester le runner de mémorisation sur 32 témoins, préinscrire puis exécuter un essai A neuf et son reload ; budget 1 000 pas maximum, aucun fit encore. [[Diagnostic causal - exécution#D3 — mémorisation du chemin Qwen, protocole avant fit]].
 - [ ] Vérifier la journalisation sur un prochain fit réel : implémentation `66f390b`, neuf tests runtime de transparence réussis, preuves `306d330` ; aucun nouvel entraînement lancé.
 - [ ] Produire la matrice causes démontrées / hypothèses non soutenues dans les conditions testées / inconnues. Aucun refit ni confirmation externe automatique.
 - [x] Audit train/cibles : les trois entraînements contiennent les deux classes ;242 vrais sans-fuite concentrés dans7 groupes. Limites dans [[Diagnostic causal - exécution#Audit des populations et des cibles]].
