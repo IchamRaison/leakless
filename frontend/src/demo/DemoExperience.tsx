@@ -88,10 +88,12 @@ export default function DemoExperience() {
 
   // Points are illustrative positions, not leak locations: choosing one never picks a recording.
   const selectPoint = (id: Measurement) => setMeasurement(id);
-  const openMonitor = async () => {
+  const leaveFullscreenTo = async (hash: string) => {
     if (document.fullscreenElement)
       await document.exitFullscreen().catch(() => {});
-    location.hash = "monitor";
+    location.hash = hash;
+    // Setting the hash it already has does not scroll; sections of this page scroll themselves.
+    document.getElementById(hash)?.scrollIntoView?.();
   };
   const reload = () => {
     cache.current.clear();
@@ -172,13 +174,8 @@ export default function DemoExperience() {
             {measurement && (
               <PointPanel
                 measurement={measurement}
-                record={record}
-                active={active}
-                loading={loading}
-                error={error}
-                onChoose={setRecord}
-                onRetry={reload}
-                onInspect={() => void openMonitor()}
+                onInspect={() => void leaveFullscreenTo("monitor")}
+                onListen={() => void leaveFullscreenTo("signal")}
               />
             )}
             <div className="building-caption">

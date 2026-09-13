@@ -1577,6 +1577,20 @@
   border-color: #8eab8666;
   font-size: 12px;
 }
+.demo-app .point-panel-listen {
+  align-self: flex-start;
+  min-height: 0;
+  padding: 2px 0;
+  border: 0;
+  background: none;
+  color: #a8baa9;
+  font-size: 11px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.demo-app .point-panel-listen:hover {
+  color: var(--paper);
+}
 /* Monitor focus: the recording chosen from the building or a marker comes to the front. */
 .monitor-card.is-focused {
   background: #1b2a20;

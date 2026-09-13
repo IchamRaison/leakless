@@ -133,16 +133,10 @@ it("never ties a measurement point to a recording class", async () => {
     screen.getByRole("button", { name: "Select measurement N1" }),
   );
   expect(api).not.toHaveBeenCalled();
-  for (const rec of ["REC 01", "REC 02", "REC 03"])
-    expect(screen.getByRole("button", { name: rec })).toHaveAttribute(
-      "aria-pressed",
-      "false",
-    );
   expect(
-    screen.getByText(
-      "No physical association between this point and the recording.",
-    ),
+    screen.getByText("Illustrative position · does not locate a leak."),
   ).toBeInTheDocument();
+  expect(screen.queryByRole("button", { name: /^REC 0/ })).toBeNull();
   fireEvent.click(screen.getByRole("button", { name: /Leak-associated/ }));
   await screen.findByText(`Waveform ${sample(1).sample_id}`);
   for (const point of ["N2", "N3", "N4"]) {

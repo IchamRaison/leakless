@@ -83,7 +83,7 @@ afterEach(() => {
   location.hash = "";
 });
 
-it("lets a building point replay a chosen real recording without associating it", async () => {
+it("keeps a building point illustrative and sends the viewer to the live monitor", async () => {
   render(<DemoExperience />);
   fireEvent.click(
     screen.getByRole("button", { name: "Select measurement N1" }),
@@ -92,17 +92,22 @@ it("lets a building point replay a chosen real recording without associating it"
     name: "Illustrative measurement point",
   });
   expect(within(panel).getByText("N1")).toBeInTheDocument();
-  expect(loadExample).not.toHaveBeenCalled();
-  expect(within(panel).getByText("Choose a recording.")).toBeInTheDocument();
-
-  fireEvent.click(within(panel).getByRole("button", { name: "REC 02" }));
-  expect(vi.mocked(loadExample).mock.calls[0][0]).toBe(recordings.records[1]);
   expect(
-    await within(panel).findByRole("img", { name: "Waveform of REC 02" }),
+    within(panel).getByText("Illustrative position · does not locate a leak."),
   ).toBeInTheDocument();
-  expect(within(panel).getByText("Leak-associated")).toBeInTheDocument();
-  expect(within(panel).getByText(tslm.status)).toBeInTheDocument();
-  expect(panel.textContent).not.toMatch(/%|probability|detected|located/i);
+  // No recording, waveform or model output next to a building position.
+  expect(loadExample).not.toHaveBeenCalled();
+  expect(within(panel).queryByRole("img")).not.toBeInTheDocument();
+  expect(within(panel).queryByText(/REC 0|TSLM/)).not.toBeInTheDocument();
+  expect(panel.textContent).not.toContain(tslm.status);
+  expect(panel.textContent).not.toMatch(/%|probability|detected|association/i);
+
+  fireEvent.click(
+    within(panel).getByRole("button", {
+      name: `Listen to the ${recordings.records.length} dataset recordings`,
+    }),
+  );
+  await vi.waitFor(() => expect(location.hash).toBe("#signal"));
 
   fireEvent.click(
     within(panel).getByRole("button", { name: /Open the live monitor/ }),
