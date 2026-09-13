@@ -2306,3 +2306,13 @@
     stroke-width: 8px;
   }
 }
+/* Phones: keep sensor, RMS and status in view. Crest stays in the chart legend; reception time is secondary. */
+@media (max-width: 460px) {
+  .sensor-table {
+    min-width: 0;
+  }
+  .sensor-table tr > :nth-child(3),
+  .sensor-table tr > :nth-child(5) {
+    display: none;
+  }
+}
