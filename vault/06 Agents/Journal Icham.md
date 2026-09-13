@@ -1,5 +1,11 @@
 # Journal Icham
 
+## 13 septembre — question sur trois H100 supplémentaires
+
+Icham demande si quatre H100 au total accéléreraient l'entraînement. Lecture du code : `initialize_training` place le modèle sur un seul `cuda`, batch effectif8/micro1, pas de wrapper distribué. Un seul fit ne profitera donc pas automatiquement de cartes ajoutées. L'usage le plus direct serait plusieurs fits indépendants (notamment trois folds) sur des GPU/processus isolés ; gain réel à mesurer, pas promesse ×4. Distribuer un fit exigerait une adaptation et une vérification de la pondération des gradients/batches ; [documentation primaire PyTorch2.8 DDP](https://docs.pytorch.org/docs/2.8/generated/torch.nn.parallel.DistributedDataParallel.html). Même machine/interconnexion ou serveurs séparés non précisés. Recommandation : pas de provisionnement pendant la sonde D2 CPU et les diagnostics dépendants ; envisager les GPU quand une campagne parallèle justifiée est prête. Aucune location ni nouvelle autorisation déduite de la question.
+
+Pause opérationnelle pendant cet échange : agent D2 arrêté, seul `scripts/tslm/diagnose_nonlinear.py` créé dans le clone sain, tests non écrits/non exécutés ; aucun fit, SSH de campagne ou métrique nouvelle par l'agent. Runner non revu/non commité, à préserver et à ne pas lancer tel quel. La reprise nécessite finalisation des tests, revue et préinscription ; les dix étapes du goal restent inchangées.
+
 ## 13 septembre — D2 borné, distinction sonde CPU et TSLM H100
 
 Après le verdict D1, choix d'un seul HistGradientBoostingClassifier sur les 256 valeurs exactes et trois folds existants, sans recherche de paramètres. Revue indépendante favorable : AUC groupe réservée primaire face à TimeNet256 linéaire, C1 séparé, pas de comparaison fit/réservés mélangée ni de plafond absolu inféré d'un échec. Budget trois fits/200 itérations, configuration et limites consignées dans [[Diagnostic causal - exécution#D2 — sonde non linéaire, protocole avant fit]].
