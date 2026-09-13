@@ -1,0 +1,8 @@
+{
+  "schema": "pipe-causal-d0-v1",
+  "variant": "A",
+  "preregistration_sha256": "cd2c3916cbac2b61b979f463fa793dec1be3585c6e558d7743a0d4c43a7e6d1f",
+  "expected_observations": 694,
+  "optimizer_steps": 0,
+  "created_at": "2026-09-13T02:01:38.510029+00:00"
+}

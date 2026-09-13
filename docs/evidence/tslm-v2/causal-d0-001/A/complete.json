@@ -1,0 +1,753 @@
+{
+  "schema": "pipe-causal-d0-v1",
+  "variant": "A",
+  "preregistration_sha256": "cd2c3916cbac2b61b979f463fa793dec1be3585c6e558d7743a0d4c43a7e6d1f",
+  "observations": 694,
+  "llm_forwards": 1388,
+  "optimizer_steps": 0,
+  "state_sha256": {
+    "initial_before": {
+      "encoder": "c9aa3ddd1b95d85f138a06728f65f4d81e7416a70782094fbb91e35e5485259c",
+      "projector": "7cc647a7a993648002038443dcf4180e53bf7dcc7664c6ed00b299ba39cb8715",
+      "llm": "c1b469d8d93ec5ffebd6fdd102296f1b2689d5966bc4fe3077e2f699b887267e"
+    },
+    "initial_after": {
+      "encoder": "c9aa3ddd1b95d85f138a06728f65f4d81e7416a70782094fbb91e35e5485259c",
+      "projector": "7cc647a7a993648002038443dcf4180e53bf7dcc7664c6ed00b299ba39cb8715",
+      "llm": "c1b469d8d93ec5ffebd6fdd102296f1b2689d5966bc4fe3077e2f699b887267e"
+    },
+    "terminal_before": {
+      "encoder": "cff21a02de65323ba69c97efac746769e75586b84184a7daaa1d50f0972c58c5",
+      "projector": "b789d7f77ca72a3fdef28389ac2230f32db2a8953b1979dfc9de429b4547c031",
+      "llm": "c1b469d8d93ec5ffebd6fdd102296f1b2689d5966bc4fe3077e2f699b887267e"
+    },
+    "terminal_after": {
+      "encoder": "cff21a02de65323ba69c97efac746769e75586b84184a7daaa1d50f0972c58c5",
+      "projector": "b789d7f77ca72a3fdef28389ac2230f32db2a8953b1979dfc9de429b4547c031",
+      "llm": "c1b469d8d93ec5ffebd6fdd102296f1b2689d5966bc4fe3077e2f699b887267e"
+    }
+  },
+  "weights_unchanged_within_each_state": true,
+  "reload": {
+    "n_clips": 98,
+    "atol": 1e-06,
+    "max_abs_difference": 0.0,
+    "mismatch_ids": [],
+    "passed": true
+  },
+  "initial_subset_32_fit": {
+    "n_clips": 32,
+    "binary_nll_sum": 103.83991151424371,
+    "binary_nll_mean": 3.244997234820116,
+    "loss_terms": {
+      "class": {
+        "n_tokens": 112,
+        "nll_sum": 127.9808680804133,
+        "nll_per_token": 1.1426863221465473,
+        "nll_per_clip": 3.9994021275129157
+      },
+      "first_discriminating_token": {
+        "n_tokens": 32,
+        "nll_sum": 125.78770709037781,
+        "nll_per_token": 3.9308658465743065,
+        "nll_per_clip": 3.9308658465743065
+      },
+      "description": {
+        "n_tokens": 454,
+        "nll_sum": 158.06892164799774,
+        "nll_per_token": 0.3481694309427263,
+        "nll_per_clip": 4.939653801499929
+      },
+      "eos": {
+        "n_tokens": 32,
+        "nll_sum": 3.091995023190975,
+        "nll_per_token": 0.09662484447471797,
+        "nll_per_clip": 0.09662484447471797
+      },
+      "response": {
+        "n_tokens": 598,
+        "nll_sum": 289.141784751602,
+        "nll_per_token": 0.48351469022007026,
+        "nll_per_clip": 9.035680773487563
+      }
+    },
+    "metrics": {
+      "n_clips": 32,
+      "n_clusters": 32,
+      "n_clusters_leak": 16,
+      "n_clusters_non_leak": 16,
+      "n_clips_leak": 16,
+      "n_clips_non_leak": 16,
+      "threshold": 0.5,
+      "aggregation": "median",
+      "clip_level": {
+        "roc_auc": 0.535156,
+        "pr_auc": 0.661889,
+        "macro_f1": 0.333333,
+        "balanced_accuracy": 0.5,
+        "leak_recall": 0.0,
+        "false_positive_rate": 0.0,
+        "brier": 0.498413,
+        "tp": 0,
+        "fp": 0,
+        "fn": 16,
+        "tn": 16
+      },
+      "cluster_level": {
+        "roc_auc": 0.535156,
+        "pr_auc": 0.661889,
+        "macro_f1": 0.333333,
+        "balanced_accuracy": 0.5,
+        "leak_recall": 0.0,
+        "false_positive_rate": 0.0,
+        "brier": 0.498413,
+        "tp": 0,
+        "fp": 0,
+        "fn": 16,
+        "tn": 16
+      },
+      "group_roc_auc_full": 0.53515625,
+      "clip_roc_auc_full": 0.53515625
+    },
+    "controls": {
+      "constant_half": {
+        "probability_leak": 0.5,
+        "fit_fold": null,
+        "binary_nll_sum": 22.18070977791825,
+        "binary_nll_mean": 0.6931471805599453,
+        "metrics": {
+          "n_clips": 32,
+          "n_clusters": 32,
+          "n_clusters_leak": 16,
+          "n_clusters_non_leak": 16,
+          "n_clips_leak": 16,
+          "n_clips_non_leak": 16,
+          "threshold": 0.5,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.5,
+            "pr_auc": 0.5,
+            "macro_f1": 0.333333,
+            "balanced_accuracy": 0.5,
+            "leak_recall": 1.0,
+            "false_positive_rate": 1.0,
+            "brier": 0.25,
+            "tp": 16,
+            "fp": 16,
+            "fn": 0,
+            "tn": 0
+          },
+          "cluster_level": {
+            "roc_auc": 0.5,
+            "pr_auc": 0.5,
+            "macro_f1": 0.333333,
+            "balanced_accuracy": 0.5,
+            "leak_recall": 1.0,
+            "false_positive_rate": 1.0,
+            "brier": 0.25,
+            "tp": 16,
+            "fp": 16,
+            "fn": 0,
+            "tn": 0
+          },
+          "group_roc_auc_full": 0.5,
+          "clip_roc_auc_full": 0.5
+        }
+      },
+      "clip_frequency_from_500_fit_only": {
+        "probability_leak": 0.442,
+        "fit_fold": "inner_fit_500",
+        "binary_nll_sum": 22.39746741608424,
+        "binary_nll_mean": 0.6999208567526325,
+        "metrics": {
+          "n_clips": 32,
+          "n_clusters": 32,
+          "n_clusters_leak": 16,
+          "n_clusters_non_leak": 16,
+          "n_clips_leak": 16,
+          "n_clips_non_leak": 16,
+          "threshold": 0.5,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.5,
+            "pr_auc": 0.5,
+            "macro_f1": 0.333333,
+            "balanced_accuracy": 0.5,
+            "leak_recall": 0.0,
+            "false_positive_rate": 0.0,
+            "brier": 0.253364,
+            "tp": 0,
+            "fp": 0,
+            "fn": 16,
+            "tn": 16
+          },
+          "cluster_level": {
+            "roc_auc": 0.5,
+            "pr_auc": 0.5,
+            "macro_f1": 0.333333,
+            "balanced_accuracy": 0.5,
+            "leak_recall": 0.0,
+            "false_positive_rate": 0.0,
+            "brier": 0.253364,
+            "tp": 0,
+            "fp": 0,
+            "fn": 16,
+            "tn": 16
+          },
+          "group_roc_auc_full": 0.5,
+          "clip_roc_auc_full": 0.5
+        }
+      }
+    },
+    "threshold_fitted": false
+  },
+  "terminal_subset_32_fit": {
+    "n_clips": 32,
+    "binary_nll_sum": 21.78184950777293,
+    "binary_nll_mean": 0.680682797117904,
+    "loss_terms": {
+      "class": {
+        "n_tokens": 112,
+        "nll_sum": 21.960107809032365,
+        "nll_per_token": 0.1960723911520747,
+        "nll_per_clip": 0.6862533690322614
+      },
+      "first_discriminating_token": {
+        "n_tokens": 32,
+        "nll_sum": 21.942324548959732,
+        "nll_per_token": 0.6856976421549916,
+        "nll_per_clip": 0.6856976421549916
+      },
+      "description": {
+        "n_tokens": 454,
+        "nll_sum": 1.7889010117621993,
+        "nll_per_token": 0.003940310598595152,
+        "nll_per_clip": 0.05590315661756873
+      },
+      "eos": {
+        "n_tokens": 32,
+        "nll_sum": 0.00802473904332146,
+        "nll_per_token": 0.00025077309510379564,
+        "nll_per_clip": 0.00025077309510379564
+      },
+      "response": {
+        "n_tokens": 598,
+        "nll_sum": 23.757033559837886,
+        "nll_per_token": 0.039727480869294125,
+        "nll_per_clip": 0.7424072987449339
+      }
+    },
+    "metrics": {
+      "n_clips": 32,
+      "n_clusters": 32,
+      "n_clusters_leak": 16,
+      "n_clusters_non_leak": 16,
+      "n_clips_leak": 16,
+      "n_clips_non_leak": 16,
+      "threshold": 0.5,
+      "aggregation": "median",
+      "clip_level": {
+        "roc_auc": 0.683594,
+        "pr_auc": 0.653751,
+        "macro_f1": 0.333333,
+        "balanced_accuracy": 0.5,
+        "leak_recall": 0.0,
+        "false_positive_rate": 0.0,
+        "brier": 0.243991,
+        "tp": 0,
+        "fp": 0,
+        "fn": 16,
+        "tn": 16
+      },
+      "cluster_level": {
+        "roc_auc": 0.683594,
+        "pr_auc": 0.653751,
+        "macro_f1": 0.333333,
+        "balanced_accuracy": 0.5,
+        "leak_recall": 0.0,
+        "false_positive_rate": 0.0,
+        "brier": 0.243991,
+        "tp": 0,
+        "fp": 0,
+        "fn": 16,
+        "tn": 16
+      },
+      "group_roc_auc_full": 0.68359375,
+      "clip_roc_auc_full": 0.68359375
+    },
+    "controls": {
+      "constant_half": {
+        "probability_leak": 0.5,
+        "fit_fold": null,
+        "binary_nll_sum": 22.18070977791825,
+        "binary_nll_mean": 0.6931471805599453,
+        "metrics": {
+          "n_clips": 32,
+          "n_clusters": 32,
+          "n_clusters_leak": 16,
+          "n_clusters_non_leak": 16,
+          "n_clips_leak": 16,
+          "n_clips_non_leak": 16,
+          "threshold": 0.5,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.5,
+            "pr_auc": 0.5,
+            "macro_f1": 0.333333,
+            "balanced_accuracy": 0.5,
+            "leak_recall": 1.0,
+            "false_positive_rate": 1.0,
+            "brier": 0.25,
+            "tp": 16,
+            "fp": 16,
+            "fn": 0,
+            "tn": 0
+          },
+          "cluster_level": {
+            "roc_auc": 0.5,
+            "pr_auc": 0.5,
+            "macro_f1": 0.333333,
+            "balanced_accuracy": 0.5,
+            "leak_recall": 1.0,
+            "false_positive_rate": 1.0,
+            "brier": 0.25,
+            "tp": 16,
+            "fp": 16,
+            "fn": 0,
+            "tn": 0
+          },
+          "group_roc_auc_full": 0.5,
+          "clip_roc_auc_full": 0.5
+        }
+      },
+      "clip_frequency_from_500_fit_only": {
+        "probability_leak": 0.442,
+        "fit_fold": "inner_fit_500",
+        "binary_nll_sum": 22.39746741608424,
+        "binary_nll_mean": 0.6999208567526325,
+        "metrics": {
+          "n_clips": 32,
+          "n_clusters": 32,
+          "n_clusters_leak": 16,
+          "n_clusters_non_leak": 16,
+          "n_clips_leak": 16,
+          "n_clips_non_leak": 16,
+          "threshold": 0.5,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.5,
+            "pr_auc": 0.5,
+            "macro_f1": 0.333333,
+            "balanced_accuracy": 0.5,
+            "leak_recall": 0.0,
+            "false_positive_rate": 0.0,
+            "brier": 0.253364,
+            "tp": 0,
+            "fp": 0,
+            "fn": 16,
+            "tn": 16
+          },
+          "cluster_level": {
+            "roc_auc": 0.5,
+            "pr_auc": 0.5,
+            "macro_f1": 0.333333,
+            "balanced_accuracy": 0.5,
+            "leak_recall": 0.0,
+            "false_positive_rate": 0.0,
+            "brier": 0.253364,
+            "tp": 0,
+            "fp": 0,
+            "fn": 16,
+            "tn": 16
+          },
+          "group_roc_auc_full": 0.5,
+          "clip_roc_auc_full": 0.5
+        }
+      }
+    },
+    "threshold_fitted": false
+  },
+  "terminal_partitions": {
+    "fit": {
+      "n_clips": 500,
+      "binary_nll_sum": 337.5198651633359,
+      "binary_nll_mean": 0.6750397303266719,
+      "loss_terms": {
+        "class": {
+          "n_tokens": 1779,
+          "nll_sum": 339.51503007517124,
+          "nll_per_token": 0.1908459977938006,
+          "nll_per_clip": 0.6790300601503425
+        },
+        "first_discriminating_token": {
+          "n_tokens": 500,
+          "nll_sum": 339.2277680039406,
+          "nll_per_token": 0.6784555360078811,
+          "nll_per_clip": 0.6784555360078811
+        },
+        "description": {
+          "n_tokens": 7033,
+          "nll_sum": 14.266698169496344,
+          "nll_per_token": 0.0020285366372097746,
+          "nll_per_clip": 0.028533396338992687
+        },
+        "eos": {
+          "n_tokens": 500,
+          "nll_sum": 0.12637545572943054,
+          "nll_per_token": 0.00025275091145886107,
+          "nll_per_clip": 0.00025275091145886107
+        },
+        "response": {
+          "n_tokens": 9312,
+          "nll_sum": 353.908103700397,
+          "nll_per_token": 0.03800559532865088,
+          "nll_per_clip": 0.7078162074007941
+        }
+      },
+      "metrics": {
+        "n_clips": 500,
+        "n_clusters": 68,
+        "n_clusters_leak": 52,
+        "n_clusters_non_leak": 16,
+        "n_clips_leak": 221,
+        "n_clips_non_leak": 279,
+        "threshold": 0.5,
+        "aggregation": "median",
+        "clip_level": {
+          "roc_auc": 0.639307,
+          "pr_auc": 0.538195,
+          "macro_f1": 0.358151,
+          "balanced_accuracy": 0.5,
+          "leak_recall": 0.0,
+          "false_positive_rate": 0.0,
+          "brier": 0.241142,
+          "tp": 0,
+          "fp": 0,
+          "fn": 221,
+          "tn": 279
+        },
+        "cluster_level": {
+          "roc_auc": 0.730769,
+          "pr_auc": 0.900097,
+          "macro_f1": 0.190476,
+          "balanced_accuracy": 0.5,
+          "leak_recall": 0.0,
+          "false_positive_rate": 0.0,
+          "brier": 0.27766,
+          "tp": 0,
+          "fp": 0,
+          "fn": 52,
+          "tn": 16
+        },
+        "group_roc_auc_full": 0.7307692307692307,
+        "clip_roc_auc_full": 0.6393065083767171
+      },
+      "controls": {
+        "constant_half": {
+          "probability_leak": 0.5,
+          "fit_fold": null,
+          "binary_nll_sum": 346.5735902799726,
+          "binary_nll_mean": 0.6931471805599453,
+          "metrics": {
+            "n_clips": 500,
+            "n_clusters": 68,
+            "n_clusters_leak": 52,
+            "n_clusters_non_leak": 16,
+            "n_clips_leak": 221,
+            "n_clips_non_leak": 279,
+            "threshold": 0.5,
+            "aggregation": "median",
+            "clip_level": {
+              "roc_auc": 0.5,
+              "pr_auc": 0.442,
+              "macro_f1": 0.306519,
+              "balanced_accuracy": 0.5,
+              "leak_recall": 1.0,
+              "false_positive_rate": 1.0,
+              "brier": 0.25,
+              "tp": 221,
+              "fp": 279,
+              "fn": 0,
+              "tn": 0
+            },
+            "cluster_level": {
+              "roc_auc": 0.5,
+              "pr_auc": 0.764706,
+              "macro_f1": 0.433333,
+              "balanced_accuracy": 0.5,
+              "leak_recall": 1.0,
+              "false_positive_rate": 1.0,
+              "brier": 0.25,
+              "tp": 52,
+              "fp": 16,
+              "fn": 0,
+              "tn": 0
+            },
+            "group_roc_auc_full": 0.5,
+            "clip_roc_auc_full": 0.5
+          }
+        },
+        "clip_frequency_from_500_fit_only": {
+          "probability_leak": 0.442,
+          "fit_fold": "inner_fit_500",
+          "binary_nll_sum": 343.2020050475115,
+          "binary_nll_mean": 0.6864040100950229,
+          "metrics": {
+            "n_clips": 500,
+            "n_clusters": 68,
+            "n_clusters_leak": 52,
+            "n_clusters_non_leak": 16,
+            "n_clips_leak": 221,
+            "n_clips_non_leak": 279,
+            "threshold": 0.5,
+            "aggregation": "median",
+            "clip_level": {
+              "roc_auc": 0.5,
+              "pr_auc": 0.442,
+              "macro_f1": 0.358151,
+              "balanced_accuracy": 0.5,
+              "leak_recall": 0.0,
+              "false_positive_rate": 0.0,
+              "brier": 0.246636,
+              "tp": 0,
+              "fp": 0,
+              "fn": 221,
+              "tn": 279
+            },
+            "cluster_level": {
+              "roc_auc": 0.5,
+              "pr_auc": 0.764706,
+              "macro_f1": 0.190476,
+              "balanced_accuracy": 0.5,
+              "leak_recall": 0.0,
+              "false_positive_rate": 0.0,
+              "brier": 0.28407,
+              "tp": 0,
+              "fp": 0,
+              "fn": 52,
+              "tn": 16
+            },
+            "group_roc_auc_full": 0.5,
+            "clip_roc_auc_full": 0.5
+          }
+        }
+      },
+      "threshold_fitted": false
+    },
+    "heldout": {
+      "n_clips": 98,
+      "binary_nll_sum": 72.57197612992057,
+      "binary_nll_mean": 0.7405303686726589,
+      "loss_terms": {
+        "class": {
+          "n_tokens": 319,
+          "nll_sum": 73.16574079758072,
+          "nll_per_token": 0.22935968902062923,
+          "nll_per_clip": 0.7465891918120482
+        },
+        "first_discriminating_token": {
+          "n_tokens": 98,
+          "nll_sum": 73.11795869469643,
+          "nll_per_token": 0.7461016193336371,
+          "nll_per_clip": 0.7461016193336371
+        },
+        "description": {
+          "n_tokens": 1378,
+          "nll_sum": 3.1042766265244737,
+          "nll_per_token": 0.0022527406578552057,
+          "nll_per_clip": 0.03167629210739259
+        },
+        "eos": {
+          "n_tokens": 98,
+          "nll_sum": 0.027148109758854844,
+          "nll_per_token": 0.00027702152815158005,
+          "nll_per_clip": 0.00027702152815158005
+        },
+        "response": {
+          "n_tokens": 1795,
+          "nll_sum": 76.29716553386405,
+          "nll_per_token": 0.042505384698531504,
+          "nll_per_clip": 0.7785425054475923
+        }
+      },
+      "metrics": {
+        "n_clips": 98,
+        "n_clusters": 34,
+        "n_clusters_leak": 26,
+        "n_clusters_non_leak": 8,
+        "n_clips_leak": 73,
+        "n_clips_non_leak": 25,
+        "threshold": 0.5,
+        "aggregation": "median",
+        "clip_level": {
+          "roc_auc": 0.709589,
+          "pr_auc": 0.853656,
+          "macro_f1": 0.203252,
+          "balanced_accuracy": 0.5,
+          "leak_recall": 0.0,
+          "false_positive_rate": 0.0,
+          "brier": 0.273646,
+          "tp": 0,
+          "fp": 0,
+          "fn": 73,
+          "tn": 25
+        },
+        "cluster_level": {
+          "roc_auc": 0.759615,
+          "pr_auc": 0.892679,
+          "macro_f1": 0.190476,
+          "balanced_accuracy": 0.5,
+          "leak_recall": 0.0,
+          "false_positive_rate": 0.0,
+          "brier": 0.275702,
+          "tp": 0,
+          "fp": 0,
+          "fn": 26,
+          "tn": 8
+        },
+        "group_roc_auc_full": 0.7596153846153846,
+        "clip_roc_auc_full": 0.7095890410958904
+      },
+      "controls": {
+        "constant_half": {
+          "probability_leak": 0.5,
+          "fit_fold": null,
+          "binary_nll_sum": 67.92842369487464,
+          "binary_nll_mean": 0.6931471805599453,
+          "metrics": {
+            "n_clips": 98,
+            "n_clusters": 34,
+            "n_clusters_leak": 26,
+            "n_clusters_non_leak": 8,
+            "n_clips_leak": 73,
+            "n_clips_non_leak": 25,
+            "threshold": 0.5,
+            "aggregation": "median",
+            "clip_level": {
+              "roc_auc": 0.5,
+              "pr_auc": 0.744898,
+              "macro_f1": 0.426901,
+              "balanced_accuracy": 0.5,
+              "leak_recall": 1.0,
+              "false_positive_rate": 1.0,
+              "brier": 0.25,
+              "tp": 73,
+              "fp": 25,
+              "fn": 0,
+              "tn": 0
+            },
+            "cluster_level": {
+              "roc_auc": 0.5,
+              "pr_auc": 0.764706,
+              "macro_f1": 0.433333,
+              "balanced_accuracy": 0.5,
+              "leak_recall": 1.0,
+              "false_positive_rate": 1.0,
+              "brier": 0.25,
+              "tp": 26,
+              "fp": 8,
+              "fn": 0,
+              "tn": 0
+            },
+            "group_roc_auc_full": 0.5,
+            "clip_roc_auc_full": 0.5
+          }
+        },
+        "clip_frequency_from_500_fit_only": {
+          "probability_leak": 0.442,
+          "fit_fold": "inner_fit_500",
+          "binary_nll_sum": 74.18542188904469,
+          "binary_nll_mean": 0.7569941009086193,
+          "metrics": {
+            "n_clips": 98,
+            "n_clusters": 34,
+            "n_clusters_leak": 26,
+            "n_clusters_non_leak": 8,
+            "n_clips_leak": 73,
+            "n_clips_non_leak": 25,
+            "threshold": 0.5,
+            "aggregation": "median",
+            "clip_level": {
+              "roc_auc": 0.5,
+              "pr_auc": 0.744898,
+              "macro_f1": 0.203252,
+              "balanced_accuracy": 0.5,
+              "leak_recall": 0.0,
+              "false_positive_rate": 0.0,
+              "brier": 0.281772,
+              "tp": 0,
+              "fp": 0,
+              "fn": 73,
+              "tn": 25
+            },
+            "cluster_level": {
+              "roc_auc": 0.5,
+              "pr_auc": 0.764706,
+              "macro_f1": 0.190476,
+              "balanced_accuracy": 0.5,
+              "leak_recall": 0.0,
+              "false_positive_rate": 0.0,
+              "brier": 0.28407,
+              "tp": 0,
+              "fp": 0,
+              "fn": 26,
+              "tn": 8
+            },
+            "group_roc_auc_full": 0.5,
+            "clip_roc_auc_full": 0.5
+          }
+        }
+      },
+      "threshold_fitted": false
+    }
+  },
+  "interventions": {
+    "within_class_cycle-series": {
+      "n_clips": 32,
+      "mean_signed_score_change": 0.0,
+      "mean_abs_score_change": 0.03067632985536884,
+      "max_abs_score_change": 0.09127125204610681,
+      "quality_metrics_calculated": false,
+      "donor_reproduction": {
+        "n_clips": 32,
+        "atol": 1e-06,
+        "max_abs_difference": 0.0,
+        "mismatch_ids": [],
+        "passed": true
+      }
+    },
+    "cross_class_pairs-series": {
+      "n_clips": 32,
+      "mean_signed_score_change": 0.0,
+      "mean_abs_score_change": 0.03251134873873561,
+      "max_abs_score_change": 0.09126211963792524,
+      "quality_metrics_calculated": false,
+      "donor_reproduction": {
+        "n_clips": 32,
+        "atol": 1e-06,
+        "max_abs_difference": 0.0,
+        "mismatch_ids": [],
+        "passed": true
+      }
+    }
+  },
+  "pooled_598_performance_calculated": false,
+  "validation_test_external_read": false,
+  "elapsed_seconds": 289.12947465400066,
+  "limitations": [
+    "Les 98 réservés sont du développement déjà consulté, pas un nouveau holdout.",
+    "Les 32 témoins sont équilibrés : tous les 16 groupes fit non-fuite, 16/52 groupes fuite.",
+    "Les entrées séries/texte désaccordées peuvent être hors distribution ; sensibilité n'est pas utilité.",
+    "Les gradients/mises à jour ne sont pas mesurés ici ; aucune cause d'optimisation n'est prouvée."
+  ],
+  "artifacts_sha256": {
+    "cross_class_pairs-series.jsonl": "4ad8c8933924d89b4e70ba38d83678aab828ffb793b9fce498eebbc6d7e49507",
+    "initial.jsonl": "c870bb30b9b73329d9cb27a99f1842c8bbad159a5208aced2e0db8c77472c16b",
+    "reload.json": "1be6a1fad067dc7bc446c4467ac92573db52a3d873035fc3b04ad8b82696bf0e",
+    "started.json": "e7a5a446288c3cebd5dd3a1f909bb69dcf29cfa8291f0cda0f845b7697bf7438",
+    "summary.json": "3468264508d394e1f983f86a022f27fbbcffbbf001f08da8b4c598e0493b1765",
+    "terminal.jsonl": "fc45a45a5fff4614055808896f770105fab5359bdb8b05a6fba5ec73e572a9e1",
+    "within_class_cycle-series.jsonl": "bebea3c9e710cfa25da0e0121cc53a7c40d042a4d1a1cceebe20a5679d9c4f38"
+  },
+  "receipt_sha256": "4810270aec3c73398c4d0052393a2b4271f8497eaf485c0305ccb65ec1cc5137"
+}
