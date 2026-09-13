@@ -20,6 +20,9 @@ def preview(event, kind):
                "Une vérification est recommandée." if kind == "opened" else
                f"REPLAY — Retour durable sous le seuil observé après {duration} secondes surveillées. "
                "Cela ne confirme pas une réparation.")
+    if kind == "persistent":
+        message = (f"REPLAY — Nevil, un signal compatible avec une fuite est observé à niveau élevé "
+                   f"depuis {event['current_high_seconds']} secondes consécutives. Une vérification est recommandée.")
     return {"event_id": event["event_id"], "kind": kind, "message": message + coverage,
             "delivery": "preview_only", "description_source": "template", "sent": False}
 
@@ -31,6 +34,8 @@ class Tracker:
                        ("open_seconds", "close_seconds", "max_gap_seconds"))):
             raise ValueError("Politique invalide")
         self.path, self.policy, self.model_version = str(path), policy, model_version
+        if "language_after_seconds" in policy and policy["language_after_seconds"] != 30:
+            raise ValueError("Cette démo de langage exige strictement plus de30secondes")
         self.boot_id = uuid4().hex
         self.version = hashlib.sha256(json.dumps(policy, sort_keys=True).encode()).hexdigest()
         with self.connection() as db:
@@ -40,6 +45,8 @@ class Tracker:
                 CREATE TABLE IF NOT EXISTS events (id TEXT PRIMARY KEY, session_id TEXT NOT NULL, value TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS previews (event_id TEXT NOT NULL, kind TEXT NOT NULL, value TEXT NOT NULL,
                                                      PRIMARY KEY(event_id, kind));
+                CREATE TABLE IF NOT EXISTS language_jobs (event_id TEXT NOT NULL, kind TEXT NOT NULL,
+                    history TEXT NOT NULL, PRIMARY KEY(event_id, kind));
             """)
             signature = json.dumps([model_version, self.version])
             old = db.execute("SELECT value FROM metadata WHERE key='signature'").fetchone()
@@ -133,6 +140,7 @@ class Tracker:
                 state.update(candidate_at=None, high_count=0, low_count=0, history=[])
                 if state["active"]:
                     state["active"]["coverage_interrupted"] = True
+                    state["active"]["current_high_seconds"] = 0
             new_preview = None
             if problem:
                 state["quality_errors"] += 1
@@ -140,17 +148,23 @@ class Tracker:
             else:
                 state["health"] = "fresh"
                 state["observed_windows"] += 1
-                state["history"] = (state["history"] + [features])[-30:]
+                state["history"] = (state["history"] + [features + [probability]])[-64:] if features is not None else []
                 if state["active"]:
                     event = state["active"]
                     event["observed_seconds"] += 1
                     event["last_observed_at"] = iso(end)
+                    event["current_high_seconds"] = event.get("current_high_seconds", 0) + 1 if probability >= self.policy["open_threshold"] else 0
+                    event["high_observed_seconds"] = event.get("high_observed_seconds", 0) + int(probability >= self.policy["open_threshold"])
                     state["low_count"] = state["low_count"] + 1 if probability <= self.policy["close_threshold"] else 0
                     if state["low_count"] >= self.policy["close_seconds"]:
                         event.update(status="ended", ended_at=iso(end))
                         new_preview = preview(event, "ended")
                         state["active"] = None
                         state["low_count"] = 0
+                    elif ("language_after_seconds" in self.policy and not event.get("language_alert_created")
+                          and event["current_high_seconds"] > self.policy["language_after_seconds"]):
+                        event["language_alert_created"] = True
+                        new_preview = preview(event, "persistent")
                     db.execute("INSERT OR REPLACE INTO events VALUES (?, ?, ?)",
                                (event["event_id"], session, json.dumps(event)))
                 elif probability >= self.policy["open_threshold"]:
@@ -164,6 +178,7 @@ class Tracker:
                             "source_mode": state["source_mode"], "first_observed_at": iso(state["candidate_at"]),
                             "confirmed_at": iso(end), "last_observed_at": iso(end),
                             "observed_seconds": state["high_count"], "coverage_interrupted": False,
+                            "current_high_seconds": state["high_count"], "high_observed_seconds": state["high_count"],
                             "model_version": self.model_version, "policy_version": self.version}
                         state.update(active=event, high_count=0, candidate_at=None)
                         db.execute("INSERT INTO events VALUES (?, ?, ?)", (event["event_id"], session, json.dumps(event)))
@@ -173,6 +188,17 @@ class Tracker:
             if problem and state["active"]:
                 event = state["active"]
                 db.execute("UPDATE events SET value=? WHERE id=?", (json.dumps(event), event["event_id"]))
+            if new_preview:
+                if "language_after_seconds" in self.policy:
+                    if new_preview["kind"] == "opened" or (new_preview["kind"] == "ended" and not event.get("language_alert_created")):
+                        new_preview = None
+                    else:
+                        new_preview.update(recipient="Nevil", status="pending", description_source="template_pending_model",
+                            duration_source="source_timestamps_and_valid_window_counts",
+                            facts={k:event[k] for k in ("first_observed_at","confirmed_at","last_observed_at",
+                                "observed_seconds","current_high_seconds","high_observed_seconds","coverage_interrupted")})
+                        db.execute("INSERT OR IGNORE INTO language_jobs VALUES (?, ?, ?)",
+                            (new_preview["event_id"],new_preview["kind"],json.dumps(state["history"])))
             if new_preview:
                 db.execute("INSERT OR IGNORE INTO previews VALUES (?, ?, ?)",
                            (new_preview["event_id"], new_preview["kind"], json.dumps(new_preview)))
@@ -185,6 +211,33 @@ class Tracker:
             state["last_response"] = response
             db.execute("UPDATE sessions SET state=? WHERE id=?", (json.dumps(state, allow_nan=False), session))
         return response
+
+    def pending_language(self):
+        with self.connection() as db:
+            row = db.execute("SELECT event_id, kind, history FROM language_jobs ORDER BY rowid LIMIT 1").fetchone()
+        return (row[0],row[1],json.loads(row[2])) if row else None
+
+    def language_context(self, session):
+        with self.connection() as db:
+            state = self.read(db,session)
+        if self.public(state,time.time())["health"] != "fresh" or len(state["history"]) < 31:
+            raise ValueError("31fenêtres récentes valides requises ; laisser le contexte se remplir")
+        return state["history"],state["last_sequence"]
+
+    def finish_language(self, event_id, kind, description):
+        with self.connection() as db:
+            db.execute("BEGIN IMMEDIATE")
+            row = db.execute("SELECT value FROM previews WHERE event_id=? AND kind=?",(event_id,kind)).fetchone()
+            if not row:
+                raise KeyError("Aperçu inconnu")
+            value = json.loads(row[0])
+            value.update(status="ready", temporal_description=description,
+                description_source=description["description_source"])
+            value["message"] += " " + description["description"]
+            # Même job rejoué après crash : suppression et restitution sont atomiques.
+            if db.execute("SELECT 1 FROM language_jobs WHERE event_id=? AND kind=?",(event_id,kind)).fetchone():
+                db.execute("UPDATE previews SET value=? WHERE event_id=? AND kind=?",(json.dumps(value),event_id,kind))
+                db.execute("DELETE FROM language_jobs WHERE event_id=? AND kind=?",(event_id,kind))
 
     def end(self, session):
         with self.connection() as db:

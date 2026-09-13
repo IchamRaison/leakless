@@ -1,5 +1,7 @@
 """Endpoint GPU explicite, un modèle chargé, aucune notification externe."""
 from datetime import datetime
+from concurrent.futures import ThreadPoolExecutor
+import asyncio
 import hashlib
 import hmac
 import os
@@ -40,8 +42,21 @@ def initialize(app):
         return
     try:
         detector = C1Detector(values[0], values[1])
-        tracker = Tracker(Path(values[2]), detector.metadata["config"]["policy"], detector.version)
+        language = os.getenv("PIPE_TEMPORAL_LANGUAGE")
+        policy = dict(detector.metadata["config"]["policy"])
+        narrator = None
+        if language:
+            from pipe.temporal_language import TemporalNarrator
+            narrator = TemporalNarrator(language, os.environ["PIPE_TEMPORAL_LANGUAGE_SHA256"])
+            if narrator.metadata["c1_bundle_sha256"] != values[1]:
+                raise ValueError("C1 différent du détecteur de préparation du langage")
+            policy["language_after_seconds"] = 30
+        tracker = Tracker(Path(values[2]), policy, detector.version)
         app.state.temporal = {"detector": detector, "tracker": tracker, "lock": Lock(), "sequence": None}
+        if narrator:
+            app.state.temporal.update(narrator=narrator, executor=ThreadPoolExecutor(max_workers=1),
+                                      language_lock=Lock(), language_future=None)
+            schedule_language(app.state.temporal)
         app.state.temporal_reason = None
     except Exception as exc:
         app.state.temporal_reason = f"Temporal bundle unavailable ({type(exc).__name__})."
@@ -65,13 +80,42 @@ def checked(action):
         raise HTTPException(503, {"code": "storage_unavailable", "message": "Event storage unavailable; no delivery claimed."})
 
 
+def schedule_language(value):
+    if "narrator" not in value:
+        return
+    def work():
+        while (job := value["tracker"].pending_language()) is not None:
+            event_id, kind, history = job
+            try:
+                description = value["narrator"].describe(history)
+            except Exception as exc:
+                description = {"description": "Description temporelle indisponible ; les durées proviennent du suivi horodaté.",
+                    "description_source":"template_fallback", "fallback_used":True,
+                    "fallback_reason":type(exc).__name__, "field_validated":False}
+            value["tracker"].finish_language(event_id,kind,description)
+    # ponytail: un seul travailleur et aucun backlog mémoire ; les demandes restent dans SQLite.
+    with value["language_lock"]:
+        future = value["language_future"]
+        if future is None or future.done():
+            value["language_future"] = value["executor"].submit(work)
+
+
+def shutdown(app):
+    value = getattr(app.state,"temporal",None)
+    if value and "executor" in value:
+        value["executor"].shutdown(wait=True)
+
+
 @router.get("/health")
 def health(request: Request):
     ready = request.app.state.temporal
     return {"available": ready is not None, "reason": request.app.state.temporal_reason,
         "model_version": ready["detector"].version if ready else None,
         "schema_version": "pipe.temporal-api.v1", "notifications": "preview_only",
-        "event_detector_validated": False, "sequence_model_status": "experimental_terminal_30s_only"}
+        "event_detector_validated": False, "sequence_model_status": "experimental_terminal_30s_only",
+        "temporal_language": ready["narrator"].version if ready and "narrator" in ready else None,
+        "notification_after_seconds":30 if ready and "narrator" in ready else None,
+        "notification_comparison":"strictly_greater", "delivery":"preview_only"}
 
 
 @router.post("/sessions", status_code=201)
@@ -81,7 +125,27 @@ def create(request: Request, body: SessionRequest):
 
 @router.get("/sessions/{session_id}")
 def status(request: Request, session_id: str):
+    schedule_language(service(request))
     return checked(lambda: service(request)["tracker"].snapshot(session_id))
+
+
+@router.post("/sessions/{session_id}/describe")
+async def describe(request: Request, session_id: str):
+    value=service(request)
+    if "narrator" not in value:
+        raise HTTPException(503,{"code":"language_unavailable","message":"OpenTSLM/Qwen not configured."})
+    history,sequence=checked(lambda:value["tracker"].language_context(session_id))
+    with value["language_lock"]:
+        future=value["language_future"]
+        if future is not None and not future.done():
+            raise HTTPException(409,{"code":"language_busy","message":"Temporal description in progress."})
+        future=value["executor"].submit(value["narrator"].describe,history)
+        value["language_future"]=future
+    try:
+        result=await asyncio.wrap_future(future)
+        return {"session_id":session_id,"through_sequence":sequence,"description":result}
+    except (RuntimeError,ValueError,OSError):
+        raise HTTPException(503,{"code":"language_unavailable","message":"Temporal description unavailable."})
 
 
 @router.post("/sessions/{session_id}/end")
@@ -116,6 +180,7 @@ async def window(request: Request, session_id: str, file: Annotated[UploadFile, 
         problem = str(exc)
     result = checked(lambda: value["tracker"].consume(session_id, sequence, source_end_at.timestamp(),
         time.time(), hashlib.sha256(raw).hexdigest(), score, features, problem))
+    schedule_language(value)
     return result | {"latency_ms": (time.perf_counter() - started) * 1000}
 
 

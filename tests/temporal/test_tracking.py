@@ -11,6 +11,46 @@ POLICY = {"open_threshold": .8, "close_threshold": .4, "open_seconds": 3,
 
 
 class TrackingTest(unittest.TestCase):
+    def language_tracker(self):
+        self.tracker = Tracker(Path(self.tmp.name)/"language.db", POLICY | {"language_after_seconds":30}, "test-model")
+        self.session = self.tracker.create(now=100)["session_id"]
+
+    def test_language_waits_strictly_beyond_30_and_survives_restart(self):
+        self.language_tracker()
+        for seq in range(30):
+            self.assertIsNone(self.put(seq)["preview"])
+        result=self.put(30)
+        self.assertEqual(result["preview"]["kind"],"persistent")
+        self.assertEqual(result["preview"]["facts"]["current_high_seconds"],31)
+        self.assertEqual(result["preview"]["recipient"],"Nevil")
+        self.assertFalse(result["preview"]["sent"])
+        job=self.tracker.pending_language()
+        self.assertEqual(len(job[2]),31)
+        self.assertEqual(len(job[2][0]),10)
+        self.tracker=Tracker(Path(self.tmp.name)/"language.db",POLICY|{"language_after_seconds":30},"test-model")
+        self.assertEqual(self.tracker.pending_language(),job)
+        description={"description":"Test contrôlé.","description_source":"opentslm_qwen_constrained"}
+        self.tracker.finish_language(job[0],job[1],description)
+        self.tracker.finish_language(job[0],job[1],description)
+        ready=self.tracker.snapshot(self.session,131)["previews"]
+        self.assertEqual(len(ready),1)
+        self.assertEqual(ready[0]["message"].count("Test contrôlé."),1)
+        self.assertEqual(ready[0]["status"],"ready")
+        self.assertTrue(self.put(30)["duplicate"])
+        for seq in range(31,36): self.put(seq,.2)
+        self.assertEqual(self.tracker.pending_language()[1],"ended")
+
+    def test_language_gap_breaks_30_second_continuity(self):
+        self.language_tracker()
+        for seq in range(29): self.put(seq)
+        self.put(30)
+        self.assertIsNone(self.tracker.pending_language())
+        self.assertEqual(self.tracker.snapshot(self.session,131)["active"]["current_high_seconds"],1)
+        for seq in range(31,60): self.put(seq)
+        self.assertIsNone(self.tracker.pending_language())
+        self.put(60)
+        self.assertIsNotNone(self.tracker.pending_language())
+
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)

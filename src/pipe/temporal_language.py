@@ -97,14 +97,24 @@ class TemporalNarrator:
         self.model.eval()
         with np.load(self.directory / "normalization.npz", allow_pickle=False) as stats:
             self.mean, self.scale = stats["mean"], stats["scale"]
+        if self.mean.shape != (10,) or self.scale.shape != (10,) or not np.isfinite(self.mean).all() or not np.all(np.isfinite(self.scale) & (self.scale > 0)):
+            raise ValueError("Normalisation de langage invalide")
         self.version = "opentslm-qwen-dynamics-" + expected_sha256[:12]
 
     def describe(self, history):
         import torch
         measured = facts(history)
+        if measured["history_seconds"] < 31:
+            return {"model_version":self.version,"model_pattern":None,"model_phrase":None,"candidate_scores":{},
+                "facts":measured,"description":PHRASES[LABELS.index(measured["pattern"])],
+                "description_source":"template_fallback","fallback_used":True,
+                "fallback_reason":"fewer_than_31_recent_valid_windows","field_validated":False,
+                "calibration":"none","generation":"not_run_insufficient_history"}
         with torch.inference_mode():
             logits = decision_logits(self.model, model_sample(history, self.mean, self.scale))
             scores = torch.softmax(logits.float(), -1).cpu().tolist()
+        if not np.isfinite(scores).all():
+            raise ValueError("Scores de langage non finis")
         index = int(np.argmax(scores))
         matched = LABELS[index] == measured["pattern"]
         return {"model_version": self.version, "model_pattern": LABELS[index],

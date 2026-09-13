@@ -14,12 +14,19 @@ if __name__ == "__main__":
     parser.add_argument("--sha256", required=True)
     parser.add_argument("--db", type=Path, required=True)
     parser.add_argument("--port", type=int, default=8019)
+    parser.add_argument("--language", type=Path)
+    parser.add_argument("--language-sha256")
     args = parser.parse_args()
     if not 1 <= args.port <= 65535:
         parser.error("Port invalide")
+    if bool(args.language) != bool(args.language_sha256):
+        parser.error("Fournir ensemble --language et --language-sha256")
     os.umask(0o077)
     os.environ.update(PIPE_TEMPORAL_BUNDLE=str(args.bundle.resolve()), PIPE_TEMPORAL_SHA256=args.sha256,
                       PIPE_TEMPORAL_DB=str(args.db.resolve()), PIPE_TEMPORAL_DEVICE="cuda")
+    if args.language:
+        os.environ.update(PIPE_TEMPORAL_LANGUAGE=str(args.language.resolve()),
+                          PIPE_TEMPORAL_LANGUAGE_SHA256=args.language_sha256)
     import torch
     import uvicorn
     torch.set_num_threads(2)

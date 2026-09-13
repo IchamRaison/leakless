@@ -25,6 +25,7 @@ async def lifespan(app: FastAPI):
     app.state.tslm = load_tslm()
     temporal.initialize(app)
     yield
+    temporal.shutdown(app)
     app.state.samples.clear()
 
 
