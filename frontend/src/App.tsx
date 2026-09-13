@@ -51,7 +51,14 @@ export function App() {
       <div className="demo-view" hidden={monitor}>
         <DemoExperience />
       </div>
-      {monitor && <MonitorReplay />}
+      {/* Own boundary: loading the monitor chunk must never suspend (and re-run) the mounted demo. */}
+      {monitor && (
+        <Suspense
+          fallback={<div className="app-loading">Loading LeakLess…</div>}
+        >
+          <MonitorReplay />
+        </Suspense>
+      )}
       {notes && NotesLayer && (
         <Suspense fallback={null}>
           <NotesLayer />

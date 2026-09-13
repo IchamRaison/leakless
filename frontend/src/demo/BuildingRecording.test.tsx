@@ -12,6 +12,7 @@ import { loadExample } from "./loadExample";
 import DemoExperience from "./DemoExperience";
 import MonitorReplay from "./MonitorReplay";
 import recordings from "./recordings.json";
+import { tslm } from "./official";
 
 vi.mock("./SceneCanvas", () => ({
   SceneCanvas: () => <div>3D test host</div>,
@@ -87,9 +88,7 @@ it("lets a building point replay a chosen real recording without associating it"
     await within(panel).findByRole("img", { name: "Waveform of REC 02" }),
   ).toBeInTheDocument();
   expect(within(panel).getByText("Leak-associated")).toBeInTheDocument();
-  expect(
-    within(panel).getByText("TSLM · NOT EVALUATED YET"),
-  ).toBeInTheDocument();
+  expect(within(panel).getByText(tslm.status)).toBeInTheDocument();
   expect(panel.textContent).not.toMatch(/%|probability|detected|located/i);
 
   fireEvent.click(

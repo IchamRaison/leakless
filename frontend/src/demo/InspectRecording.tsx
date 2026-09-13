@@ -9,6 +9,7 @@ import {
 } from "../contracts";
 import { SignalView } from "../SignalView";
 import { ModelReadout } from "./ModelReadout";
+import { tslm } from "./official";
 import { TemporalSignalMap } from "./TemporalSignalMap";
 
 const MAX_BYTES = 8 * 1024 * 1024;
@@ -223,8 +224,7 @@ export function InspectRecording({ paused }: { paused: boolean }) {
                 <p>
                   Measured properties only.
                   <br />
-                  No inspection recommendation is generated while TSLM is not
-                  evaluated yet.
+                  {tslm.decision}
                 </p>
               </div>
               <button className="quiet-button" onClick={() => void remove()}>

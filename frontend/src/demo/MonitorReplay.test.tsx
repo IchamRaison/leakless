@@ -5,6 +5,7 @@ import { afterEach, expect, it, vi } from "vitest";
 import { loadExample } from "./loadExample";
 import MonitorReplay from "./MonitorReplay";
 import recordings from "./recordings.json";
+import { tslm } from "./official";
 
 vi.mock("./loadExample", () => ({ loadExample: vi.fn() }));
 const visualization = (level: number) => ({
@@ -60,9 +61,7 @@ it("replays measured values from the real recordings without alerts or scores", 
   expect(within(leak).getByText("Level").nextElementSibling).toHaveTextContent(
     "-55.0 dB",
   );
-  expect(
-    within(leak).getByText("TSLM · NOT EVALUATED YET"),
-  ).toBeInTheDocument();
+  expect(within(leak).getByText(tslm.status)).toBeInTheDocument();
   expect(await screen.findByRole("alert")).toHaveTextContent(
     "integrity check failed",
   );

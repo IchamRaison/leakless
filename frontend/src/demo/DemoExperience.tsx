@@ -25,6 +25,7 @@ import { LEVEL_DB, ringAt, toUnit } from "./replay";
 import { signalGeometry } from "./signalGeometry";
 import { TemporalSignalMap } from "./TemporalSignalMap";
 import { evidence } from "./evidence";
+import { tslm } from "./official";
 import recordings from "./recordings.json";
 import "./demo.css";
 
@@ -340,8 +341,7 @@ export default function DemoExperience() {
                 </span>
                 <span>
                   <i className="model-key" />
-                  MODEL COLOR / STATE{" "}
-                  <small>model output · not evaluated yet</small>
+                  MODEL COLOR / STATE <small>{tslm.mapKey}</small>
                 </span>
               </div>
               <p className="map-disclaimer">
@@ -357,17 +357,13 @@ export default function DemoExperience() {
                 <em>inspection?</em>
               </h2>
               <ModelReadout />
-              <p className="tslm-definition">
-                TSLM = Time-Series Language Model. Training and evaluation are
-                still in progress; no final held-out result is shown here.
-              </p>
+              <p className="tslm-definition">{tslm.definition}</p>
               <div className="decision-note">
                 <span className="small-rule" />
                 <p>
                   A measured signal, then a human decision.
                   <br />
-                  No inspection recommendation is generated while TSLM is not
-                  evaluated yet.
+                  {tslm.decision}
                 </p>
               </div>
               <a href="#evidence" className="evidence-link">
@@ -448,39 +444,46 @@ export default function DemoExperience() {
             </span>
           </div>
           <div className="control-ladder">
-            {evidence.controls.map((control) => (
-              <article
-                className={`control-card ${control.id === "C1" ? "reference-control" : ""}`}
-                key={control.id}
-              >
-                <span className="control-id">
-                  {control.id}
-                  {control.id === "C1" && <small>REFERENCE</small>}
-                </span>
-                <h3>{control.name}</h3>
-                <p>{control.detail}</p>
-                <dl>
-                  <div>
-                    <dt>Clip AUC</dt>
-                    <dd>
-                      {control.clipAuc?.toFixed(3) ?? "NOT EVALUATED YET"}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt>Cluster AUC</dt>
-                    <dd>
-                      {control.clusterAuc?.toFixed(3) ?? "NOT EVALUATED YET"}
-                    </dd>
-                  </div>
-                </dl>
-              </article>
-            ))}
+            {evidence.controls
+              .map((control) =>
+                control.id === "C4" ? { ...control, ...tslm.c4 } : control,
+              )
+              .map((control) => (
+                <article
+                  className={`control-card ${control.id === "C1" ? "reference-control" : control.clipAuc == null ? "pending-control" : ""}`}
+                  key={control.id}
+                >
+                  <span className="control-id">
+                    {control.id}
+                    {control.id === "C1" && <small>REFERENCE</small>}
+                  </span>
+                  <h3>{control.name}</h3>
+                  <p>{control.detail}</p>
+                  <dl>
+                    <div>
+                      <dt>Clip AUC</dt>
+                      <dd>
+                        {control.clipAuc?.toFixed(3) ?? "NOT EVALUATED YET"}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>Cluster AUC</dt>
+                      <dd>
+                        {control.clusterAuc?.toFixed(3) ?? "NOT EVALUATED YET"}
+                      </dd>
+                    </div>
+                  </dl>
+                </article>
+              ))}
           </div>
           <p className="evidence-caveat">
             TEST · {evidence.testClusters} dependency clusters, including{" "}
             {evidence.testNonLeakClusters} non-leak. Wide uncertainty intervals.
-            C1 vs C0 remains inconclusive. No TSLM superiority demonstrated.
+            C1 vs C0 remains inconclusive. {tslm.verdict}
           </p>
+          {tslm.stress && (
+            <p className="evidence-caveat stress-caveat">{tslm.stress}</p>
+          )}
           <div className="proof-columns">
             <section>
               <span className="demo-kicker">WE DEMONSTRATED</span>

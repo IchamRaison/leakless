@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { ArrowRight, RotateCcw } from "lucide-react";
 import type { Measurement } from "./BuildingScene";
 import type { LoadedExample, Recording } from "./loadExample";
+import { tslm } from "./official";
 import recordings from "./recordings.json";
 
 export const recLabel = (index: number) => `REC 0${index + 1}`;
@@ -83,7 +84,7 @@ export function PointPanel({
           >
             <path d={waveform} />
           </svg>
-          <span className="point-panel-tslm">TSLM · NOT EVALUATED YET</span>
+          <span className="point-panel-tslm">{tslm.status}</span>
           <button
             className="point-panel-inspect"
             onClick={() => onInspect(index)}

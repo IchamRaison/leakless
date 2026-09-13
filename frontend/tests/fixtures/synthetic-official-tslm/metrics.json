@@ -1,0 +1,1994 @@
+{
+  "split": {
+    "filename": "split_v2.csv",
+    "sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+    "n_clips": 1000,
+    "n_clusters": 185
+  },
+  "aggregation_rule": "median",
+  "bootstrap": {
+    "draws": 2000,
+    "seed": 20260912,
+    "unit": "cluster de dépendance"
+  },
+  "control_ladder": [
+    "c0",
+    "c1",
+    "c2",
+    "c2b",
+    "c3"
+  ],
+  "runs": {
+    "c0": {
+      "run_id": "c0",
+      "model_name": "C0 — niveau RMS absolu, signal brut — raccourci d'acquisition",
+      "checkpoint": "aucun checkpoint sérialisé : logreg(C=0.01) ajustée de façon déterministe sur T0/train",
+      "training_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+      "config_hash": null,
+      "timestamp": "2026-09-12T19:23:46+00:00",
+      "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
+      "threshold_recomputed_on_val": 0.536921,
+      "threshold_declared_by_run": 0.536921,
+      "provenance": {
+        "model_definition_commit": "2f61695072e0f16205d6a7047243c59600eb2792",
+        "training_worktree_dirty": false,
+        "execution_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+        "execution_worktree_dirty": false,
+        "model_fingerprint": "0e0df6066534d7c2d00b6e404ca30ffc013cde6c721004a1e01f7b139c569934",
+        "fit_data": "T0/train",
+        "control_level": "C0"
+      },
+      "contract_checks": [
+        {
+          "name": "fichiers du run présents",
+          "passed": true,
+          "coverage": "2/2 fichiers"
+        },
+        {
+          "name": "champs de metadata.json",
+          "passed": true,
+          "coverage": "9/9 présents"
+        },
+        {
+          "name": "identité du split déclaré",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "SHA256 du split déclaré",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "déclaration d'absence de réglage sur le test",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "aucune colonne interdite dans predictions.csv",
+          "passed": true,
+          "coverage": "2 colonnes inspectées"
+        },
+        {
+          "name": "colonnes requises dans predictions.csv",
+          "passed": true,
+          "coverage": "2/2 colonnes requises"
+        },
+        {
+          "name": "aucun clip_id en double",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "aucun clip_id inconnu",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "probabilités dans [0, 1]",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "couverture des folds ('val', 'test')",
+          "passed": true,
+          "coverage": "402/402 clips prédits"
+        }
+      ],
+      "folds": {
+        "val": {
+          "n_clips": 208,
+          "n_clusters": 42,
+          "n_clusters_leak": 34,
+          "n_clusters_non_leak": 8,
+          "n_clips_leak": 108,
+          "n_clips_non_leak": 100,
+          "threshold": 0.53692059925,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.870093,
+            "pr_auc": 0.866421,
+            "macro_f1": 0.816698,
+            "balanced_accuracy": 0.816296,
+            "leak_recall": 0.842593,
+            "false_positive_rate": 0.21,
+            "brier": 0.168063,
+            "tp": 91,
+            "fp": 21,
+            "fn": 17,
+            "tn": 79
+          },
+          "cluster_level": {
+            "roc_auc": 0.8125,
+            "pr_auc": 0.934529,
+            "macro_f1": 0.845588,
+            "balanced_accuracy": 0.845588,
+            "leak_recall": 0.941176,
+            "false_positive_rate": 0.25,
+            "brier": 0.15949,
+            "tp": 32,
+            "fp": 2,
+            "fn": 2,
+            "tn": 6
+          },
+          "bootstrap_ci95": {
+            "draws_effectifs": {
+              "clip_roc_auc": 2000,
+              "clip_macro_f1": 2000,
+              "cluster_roc_auc": 2000,
+              "cluster_macro_f1": 2000
+            },
+            "seed": 20260912,
+            "clip_roc_auc": {
+              "ci95_low": 0.661667,
+              "ci95_high": 0.924364
+            },
+            "clip_macro_f1": {
+              "ci95_low": 0.58331,
+              "ci95_high": 0.848632
+            },
+            "cluster_roc_auc": {
+              "ci95_low": 0.567217,
+              "ci95_high": 0.991453
+            },
+            "cluster_macro_f1": {
+              "ci95_low": 0.66813,
+              "ci95_high": 0.965992
+            }
+          }
+        },
+        "test": {
+          "n_clips": 194,
+          "n_clusters": 41,
+          "n_clusters_leak": 30,
+          "n_clusters_non_leak": 11,
+          "n_clips_leak": 98,
+          "n_clips_non_leak": 96,
+          "threshold": 0.53692059925,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.87787,
+            "pr_auc": 0.87044,
+            "macro_f1": 0.808131,
+            "balanced_accuracy": 0.808567,
+            "leak_recall": 0.877551,
+            "false_positive_rate": 0.260417,
+            "brier": 0.163056,
+            "tp": 86,
+            "fp": 25,
+            "fn": 12,
+            "tn": 71
+          },
+          "cluster_level": {
+            "roc_auc": 0.839394,
+            "pr_auc": 0.914227,
+            "macro_f1": 0.801613,
+            "balanced_accuracy": 0.784848,
+            "leak_recall": 0.933333,
+            "false_positive_rate": 0.363636,
+            "brier": 0.165409,
+            "tp": 28,
+            "fp": 4,
+            "fn": 2,
+            "tn": 7
+          },
+          "bootstrap_ci95": {
+            "draws_effectifs": {
+              "clip_roc_auc": 2000,
+              "clip_macro_f1": 2000,
+              "cluster_roc_auc": 2000,
+              "cluster_macro_f1": 2000
+            },
+            "seed": 20260912,
+            "clip_roc_auc": {
+              "ci95_low": 0.679005,
+              "ci95_high": 0.932421
+            },
+            "clip_macro_f1": {
+              "ci95_low": 0.615152,
+              "ci95_high": 0.862413
+            },
+            "cluster_roc_auc": {
+              "ci95_low": 0.647046,
+              "ci95_high": 0.974813
+            },
+            "cluster_macro_f1": {
+              "ci95_low": 0.632522,
+              "ci95_high": 0.933871
+            }
+          }
+        }
+      }
+    },
+    "c1": {
+      "run_id": "c1",
+      "model_name": "C1 — forme d'amplitude seule, aucune information fréquentielle",
+      "checkpoint": "aucun checkpoint sérialisé : logreg(C=0.01) ajustée de façon déterministe sur T0/train",
+      "training_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+      "config_hash": null,
+      "timestamp": "2026-09-12T19:23:47+00:00",
+      "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
+      "threshold_recomputed_on_val": 0.532281,
+      "threshold_declared_by_run": 0.532281,
+      "provenance": {
+        "model_definition_commit": "2f61695072e0f16205d6a7047243c59600eb2792",
+        "training_worktree_dirty": false,
+        "execution_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+        "execution_worktree_dirty": false,
+        "model_fingerprint": "0beae6c0c214e60e632936be9ab940a1aa56f00c76e03c7eed0c38f0f5a47572",
+        "fit_data": "T0/train",
+        "control_level": "C1"
+      },
+      "contract_checks": [
+        {
+          "name": "fichiers du run présents",
+          "passed": true,
+          "coverage": "2/2 fichiers"
+        },
+        {
+          "name": "champs de metadata.json",
+          "passed": true,
+          "coverage": "9/9 présents"
+        },
+        {
+          "name": "identité du split déclaré",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "SHA256 du split déclaré",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "déclaration d'absence de réglage sur le test",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "aucune colonne interdite dans predictions.csv",
+          "passed": true,
+          "coverage": "2 colonnes inspectées"
+        },
+        {
+          "name": "colonnes requises dans predictions.csv",
+          "passed": true,
+          "coverage": "2/2 colonnes requises"
+        },
+        {
+          "name": "aucun clip_id en double",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "aucun clip_id inconnu",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "probabilités dans [0, 1]",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "couverture des folds ('val', 'test')",
+          "passed": true,
+          "coverage": "402/402 clips prédits"
+        }
+      ],
+      "folds": {
+        "val": {
+          "n_clips": 208,
+          "n_clusters": 42,
+          "n_clusters_leak": 34,
+          "n_clusters_non_leak": 8,
+          "n_clips_leak": 108,
+          "n_clips_non_leak": 100,
+          "threshold": 0.532281239,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.927778,
+            "pr_auc": 0.927215,
+            "macro_f1": 0.869514,
+            "balanced_accuracy": 0.868704,
+            "leak_recall": 0.907407,
+            "false_positive_rate": 0.17,
+            "brier": 0.127299,
+            "tp": 98,
+            "fp": 17,
+            "fn": 10,
+            "tn": 83
+          },
+          "cluster_level": {
+            "roc_auc": 0.970588,
+            "pr_auc": 0.99328,
+            "macro_f1": 0.922794,
+            "balanced_accuracy": 0.922794,
+            "leak_recall": 0.970588,
+            "false_positive_rate": 0.125,
+            "brier": 0.122702,
+            "tp": 33,
+            "fp": 1,
+            "fn": 1,
+            "tn": 7
+          },
+          "bootstrap_ci95": {
+            "draws_effectifs": {
+              "clip_roc_auc": 2000,
+              "clip_macro_f1": 2000,
+              "cluster_roc_auc": 2000,
+              "cluster_macro_f1": 2000
+            },
+            "seed": 20260912,
+            "clip_roc_auc": {
+              "ci95_low": 0.863064,
+              "ci95_high": 0.970818
+            },
+            "clip_macro_f1": {
+              "ci95_low": 0.68934,
+              "ci95_high": 0.900366
+            },
+            "cluster_roc_auc": {
+              "ci95_low": 0.905724,
+              "ci95_high": 1.0
+            },
+            "cluster_macro_f1": {
+              "ci95_low": 0.772481,
+              "ci95_high": 1.0
+            }
+          }
+        },
+        "test": {
+          "n_clips": 194,
+          "n_clusters": 41,
+          "n_clusters_leak": 30,
+          "n_clusters_non_leak": 11,
+          "n_clips_leak": 98,
+          "n_clips_non_leak": 96,
+          "threshold": 0.532281239,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.901786,
+            "pr_auc": 0.877986,
+            "macro_f1": 0.855609,
+            "balanced_accuracy": 0.855548,
+            "leak_recall": 0.867347,
+            "false_positive_rate": 0.15625,
+            "brier": 0.13995,
+            "tp": 85,
+            "fp": 15,
+            "fn": 13,
+            "tn": 81
+          },
+          "cluster_level": {
+            "roc_auc": 0.927273,
+            "pr_auc": 0.962192,
+            "macro_f1": 0.848931,
+            "balanced_accuracy": 0.859091,
+            "leak_recall": 0.9,
+            "false_positive_rate": 0.181818,
+            "brier": 0.118449,
+            "tp": 27,
+            "fp": 2,
+            "fn": 3,
+            "tn": 9
+          },
+          "bootstrap_ci95": {
+            "draws_effectifs": {
+              "clip_roc_auc": 2000,
+              "clip_macro_f1": 2000,
+              "cluster_roc_auc": 2000,
+              "cluster_macro_f1": 2000
+            },
+            "seed": 20260912,
+            "clip_roc_auc": {
+              "ci95_low": 0.803238,
+              "ci95_high": 0.988411
+            },
+            "clip_macro_f1": {
+              "ci95_low": 0.70814,
+              "ci95_high": 0.909492
+            },
+            "cluster_roc_auc": {
+              "ci95_low": 0.787879,
+              "ci95_high": 1.0
+            },
+            "cluster_macro_f1": {
+              "ci95_low": 0.705287,
+              "ci95_high": 0.962896
+            }
+          }
+        }
+      }
+    },
+    "c2": {
+      "run_id": "c2",
+      "model_name": "C2 — spectre agrégé, invariant à l'ordre, sans phase",
+      "checkpoint": "aucun checkpoint sérialisé : logreg(C=0.1) ajustée de façon déterministe sur T0/train",
+      "training_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+      "config_hash": null,
+      "timestamp": "2026-09-12T19:23:47+00:00",
+      "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
+      "threshold_recomputed_on_val": 0.386458,
+      "threshold_declared_by_run": 0.386458,
+      "provenance": {
+        "model_definition_commit": "2f61695072e0f16205d6a7047243c59600eb2792",
+        "training_worktree_dirty": false,
+        "execution_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+        "execution_worktree_dirty": false,
+        "model_fingerprint": "a98070a45f853ddf5808a114cb79763977bc7ed3befa566547e3eeba5c5bedd8",
+        "fit_data": "T0/train",
+        "control_level": "C2"
+      },
+      "contract_checks": [
+        {
+          "name": "fichiers du run présents",
+          "passed": true,
+          "coverage": "2/2 fichiers"
+        },
+        {
+          "name": "champs de metadata.json",
+          "passed": true,
+          "coverage": "9/9 présents"
+        },
+        {
+          "name": "identité du split déclaré",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "SHA256 du split déclaré",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "déclaration d'absence de réglage sur le test",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "aucune colonne interdite dans predictions.csv",
+          "passed": true,
+          "coverage": "2 colonnes inspectées"
+        },
+        {
+          "name": "colonnes requises dans predictions.csv",
+          "passed": true,
+          "coverage": "2/2 colonnes requises"
+        },
+        {
+          "name": "aucun clip_id en double",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "aucun clip_id inconnu",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "probabilités dans [0, 1]",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "couverture des folds ('val', 'test')",
+          "passed": true,
+          "coverage": "402/402 clips prédits"
+        }
+      ],
+      "folds": {
+        "val": {
+          "n_clips": 208,
+          "n_clusters": 42,
+          "n_clusters_leak": 34,
+          "n_clusters_non_leak": 8,
+          "n_clips_leak": 108,
+          "n_clips_non_leak": 100,
+          "threshold": 0.38645763885,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.777407,
+            "pr_auc": 0.809888,
+            "macro_f1": 0.672894,
+            "balanced_accuracy": 0.677037,
+            "leak_recall": 0.824074,
+            "false_positive_rate": 0.47,
+            "brier": 0.199486,
+            "tp": 89,
+            "fp": 47,
+            "fn": 19,
+            "tn": 53
+          },
+          "cluster_level": {
+            "roc_auc": 0.783088,
+            "pr_auc": 0.915092,
+            "macro_f1": 0.797101,
+            "balanced_accuracy": 0.783088,
+            "leak_recall": 0.941176,
+            "false_positive_rate": 0.375,
+            "brier": 0.197015,
+            "tp": 32,
+            "fp": 3,
+            "fn": 2,
+            "tn": 5
+          },
+          "bootstrap_ci95": {
+            "draws_effectifs": {
+              "clip_roc_auc": 2000,
+              "clip_macro_f1": 2000,
+              "cluster_roc_auc": 2000,
+              "cluster_macro_f1": 2000
+            },
+            "seed": 20260912,
+            "clip_roc_auc": {
+              "ci95_low": 0.584709,
+              "ci95_high": 0.899844
+            },
+            "clip_macro_f1": {
+              "ci95_low": 0.512106,
+              "ci95_high": 0.753247
+            },
+            "cluster_roc_auc": {
+              "ci95_low": 0.521327,
+              "ci95_high": 0.975668
+            },
+            "cluster_macro_f1": {
+              "ci95_low": 0.590466,
+              "ci95_high": 0.941817
+            }
+          }
+        },
+        "test": {
+          "n_clips": 194,
+          "n_clusters": 41,
+          "n_clusters_leak": 30,
+          "n_clusters_non_leak": 11,
+          "n_clips_leak": 98,
+          "n_clips_non_leak": 96,
+          "threshold": 0.38645763885,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.709715,
+            "pr_auc": 0.711114,
+            "macro_f1": 0.680257,
+            "balanced_accuracy": 0.684311,
+            "leak_recall": 0.806122,
+            "false_positive_rate": 0.4375,
+            "brier": 0.214061,
+            "tp": 79,
+            "fp": 42,
+            "fn": 19,
+            "tn": 54
+          },
+          "cluster_level": {
+            "roc_auc": 0.778788,
+            "pr_auc": 0.867034,
+            "macro_f1": 0.775956,
+            "balanced_accuracy": 0.768182,
+            "leak_recall": 0.9,
+            "false_positive_rate": 0.363636,
+            "brier": 0.215051,
+            "tp": 27,
+            "fp": 4,
+            "fn": 3,
+            "tn": 7
+          },
+          "bootstrap_ci95": {
+            "draws_effectifs": {
+              "clip_roc_auc": 2000,
+              "clip_macro_f1": 2000,
+              "cluster_roc_auc": 2000,
+              "cluster_macro_f1": 2000
+            },
+            "seed": 20260912,
+            "clip_roc_auc": {
+              "ci95_low": 0.608514,
+              "ci95_high": 0.819458
+            },
+            "clip_macro_f1": {
+              "ci95_low": 0.568449,
+              "ci95_high": 0.765433
+            },
+            "cluster_roc_auc": {
+              "ci95_low": 0.576373,
+              "ci95_high": 0.943182
+            },
+            "cluster_macro_f1": {
+              "ci95_low": 0.605769,
+              "ci95_high": 0.913684
+            }
+          }
+        }
+      }
+    },
+    "c2b": {
+      "run_id": "c2b",
+      "model_name": "C2b — structure temporelle peu profonde — enveloppe, modulation, flux",
+      "checkpoint": "aucun checkpoint sérialisé : logreg(C=0.1) ajustée de façon déterministe sur T0/train",
+      "training_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+      "config_hash": null,
+      "timestamp": "2026-09-12T19:23:55+00:00",
+      "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
+      "threshold_recomputed_on_val": 0.495914,
+      "threshold_declared_by_run": 0.495914,
+      "provenance": {
+        "model_definition_commit": "355f0743fb306da50897c0720e6fab5ecf947c52",
+        "training_worktree_dirty": false,
+        "execution_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+        "execution_worktree_dirty": false,
+        "model_fingerprint": "89f23a4f9773537302c6edc69a5f8bff2de9cf9d78c02ba576c9ae465cb39fc9",
+        "fit_data": "T0/train",
+        "control_level": "C2b"
+      },
+      "contract_checks": [
+        {
+          "name": "fichiers du run présents",
+          "passed": true,
+          "coverage": "2/2 fichiers"
+        },
+        {
+          "name": "champs de metadata.json",
+          "passed": true,
+          "coverage": "9/9 présents"
+        },
+        {
+          "name": "identité du split déclaré",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "SHA256 du split déclaré",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "déclaration d'absence de réglage sur le test",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "aucune colonne interdite dans predictions.csv",
+          "passed": true,
+          "coverage": "2 colonnes inspectées"
+        },
+        {
+          "name": "colonnes requises dans predictions.csv",
+          "passed": true,
+          "coverage": "2/2 colonnes requises"
+        },
+        {
+          "name": "aucun clip_id en double",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "aucun clip_id inconnu",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "probabilités dans [0, 1]",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "couverture des folds ('val', 'test')",
+          "passed": true,
+          "coverage": "402/402 clips prédits"
+        }
+      ],
+      "folds": {
+        "val": {
+          "n_clips": 208,
+          "n_clusters": 42,
+          "n_clusters_leak": 34,
+          "n_clusters_non_leak": 8,
+          "n_clips_leak": 108,
+          "n_clips_non_leak": 100,
+          "threshold": 0.49591433900000004,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.870093,
+            "pr_auc": 0.874538,
+            "macro_f1": 0.773405,
+            "balanced_accuracy": 0.773148,
+            "leak_recall": 0.796296,
+            "false_positive_rate": 0.25,
+            "brier": 0.149457,
+            "tp": 86,
+            "fp": 25,
+            "fn": 22,
+            "tn": 75
+          },
+          "cluster_level": {
+            "roc_auc": 0.665441,
+            "pr_auc": 0.902443,
+            "macro_f1": 0.634783,
+            "balanced_accuracy": 0.628676,
+            "leak_recall": 0.882353,
+            "false_positive_rate": 0.625,
+            "brier": 0.18026,
+            "tp": 30,
+            "fp": 5,
+            "fn": 4,
+            "tn": 3
+          },
+          "bootstrap_ci95": {
+            "draws_effectifs": {
+              "clip_roc_auc": 2000,
+              "clip_macro_f1": 2000,
+              "cluster_roc_auc": 2000,
+              "cluster_macro_f1": 2000
+            },
+            "seed": 20260912,
+            "clip_roc_auc": {
+              "ci95_low": 0.521191,
+              "ci95_high": 0.927968
+            },
+            "clip_macro_f1": {
+              "ci95_low": 0.438334,
+              "ci95_high": 0.834656
+            },
+            "cluster_roc_auc": {
+              "ci95_low": 0.44868,
+              "ci95_high": 0.862003
+            },
+            "cluster_macro_f1": {
+              "ci95_low": 0.432432,
+              "ci95_high": 0.805556
+            }
+          }
+        },
+        "test": {
+          "n_clips": 194,
+          "n_clusters": 41,
+          "n_clusters_leak": 30,
+          "n_clusters_non_leak": 11,
+          "n_clips_leak": 98,
+          "n_clips_non_leak": 96,
+          "threshold": 0.49591433900000004,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.847151,
+            "pr_auc": 0.829035,
+            "macro_f1": 0.76274,
+            "balanced_accuracy": 0.766582,
+            "leak_recall": 0.908163,
+            "false_positive_rate": 0.375,
+            "brier": 0.159595,
+            "tp": 89,
+            "fp": 36,
+            "fn": 9,
+            "tn": 60
+          },
+          "cluster_level": {
+            "roc_auc": 0.915152,
+            "pr_auc": 0.968823,
+            "macro_f1": 0.81448,
+            "balanced_accuracy": 0.772727,
+            "leak_recall": 1.0,
+            "false_positive_rate": 0.454545,
+            "brier": 0.124557,
+            "tp": 30,
+            "fp": 5,
+            "fn": 0,
+            "tn": 6
+          },
+          "bootstrap_ci95": {
+            "draws_effectifs": {
+              "clip_roc_auc": 2000,
+              "clip_macro_f1": 2000,
+              "cluster_roc_auc": 2000,
+              "cluster_macro_f1": 2000
+            },
+            "seed": 20260912,
+            "clip_roc_auc": {
+              "ci95_low": 0.757608,
+              "ci95_high": 0.922073
+            },
+            "clip_macro_f1": {
+              "ci95_low": 0.643351,
+              "ci95_high": 0.849161
+            },
+            "cluster_roc_auc": {
+              "ci95_low": 0.810924,
+              "ci95_high": 0.983525
+            },
+            "cluster_macro_f1": {
+              "ci95_low": 0.632522,
+              "ci95_high": 0.954292
+            }
+          }
+        }
+      }
+    },
+    "c3": {
+      "run_id": "c3",
+      "model_name": "C3 — baseline historique — mélange C1 + C2 + taux de passages par zéro",
+      "checkpoint": "aucun checkpoint sérialisé : logreg(C=0.01) ajustée de façon déterministe sur T0/train",
+      "training_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+      "config_hash": null,
+      "timestamp": "2026-09-12T19:23:48+00:00",
+      "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
+      "threshold_recomputed_on_val": 0.510207,
+      "threshold_declared_by_run": 0.510207,
+      "provenance": {
+        "model_definition_commit": "2f61695072e0f16205d6a7047243c59600eb2792",
+        "training_worktree_dirty": false,
+        "execution_commit": "0a22990f6451fe6dfb5e023361cdf5509998e0f9",
+        "execution_worktree_dirty": false,
+        "model_fingerprint": "1d9ddaceeb03b152a0d7d48b899a540f7490df984483a5fa869e68095604955d",
+        "fit_data": "T0/train",
+        "control_level": "C3"
+      },
+      "contract_checks": [
+        {
+          "name": "fichiers du run présents",
+          "passed": true,
+          "coverage": "2/2 fichiers"
+        },
+        {
+          "name": "champs de metadata.json",
+          "passed": true,
+          "coverage": "9/9 présents"
+        },
+        {
+          "name": "identité du split déclaré",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "SHA256 du split déclaré",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "déclaration d'absence de réglage sur le test",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "aucune colonne interdite dans predictions.csv",
+          "passed": true,
+          "coverage": "2 colonnes inspectées"
+        },
+        {
+          "name": "colonnes requises dans predictions.csv",
+          "passed": true,
+          "coverage": "2/2 colonnes requises"
+        },
+        {
+          "name": "aucun clip_id en double",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "aucun clip_id inconnu",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "probabilités dans [0, 1]",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "couverture des folds ('val', 'test')",
+          "passed": true,
+          "coverage": "402/402 clips prédits"
+        }
+      ],
+      "folds": {
+        "val": {
+          "n_clips": 208,
+          "n_clusters": 42,
+          "n_clusters_leak": 34,
+          "n_clusters_non_leak": 8,
+          "n_clips_leak": 108,
+          "n_clips_non_leak": 100,
+          "threshold": 0.5102072023,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.886111,
+            "pr_auc": 0.895329,
+            "macro_f1": 0.773152,
+            "balanced_accuracy": 0.772778,
+            "leak_recall": 0.805556,
+            "false_positive_rate": 0.26,
+            "brier": 0.154715,
+            "tp": 87,
+            "fp": 26,
+            "fn": 21,
+            "tn": 74
+          },
+          "cluster_level": {
+            "roc_auc": 0.996324,
+            "pr_auc": 0.99916,
+            "macro_f1": 0.963126,
+            "balanced_accuracy": 0.985294,
+            "leak_recall": 0.970588,
+            "false_positive_rate": 0.0,
+            "brier": 0.139045,
+            "tp": 33,
+            "fp": 0,
+            "fn": 1,
+            "tn": 8
+          },
+          "bootstrap_ci95": {
+            "draws_effectifs": {
+              "clip_roc_auc": 2000,
+              "clip_macro_f1": 2000,
+              "cluster_roc_auc": 2000,
+              "cluster_macro_f1": 2000
+            },
+            "seed": 20260912,
+            "clip_roc_auc": {
+              "ci95_low": 0.850005,
+              "ci95_high": 0.99159
+            },
+            "clip_macro_f1": {
+              "ci95_low": 0.643512,
+              "ci95_high": 0.836614
+            },
+            "cluster_roc_auc": {
+              "ci95_low": 0.978378,
+              "ci95_high": 1.0
+            },
+            "cluster_macro_f1": {
+              "ci95_low": 0.863489,
+              "ci95_high": 1.0
+            }
+          }
+        },
+        "test": {
+          "n_clips": 194,
+          "n_clusters": 41,
+          "n_clusters_leak": 30,
+          "n_clusters_non_leak": 11,
+          "n_clips_leak": 98,
+          "n_clips_non_leak": 96,
+          "threshold": 0.5102072023,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.823873,
+            "pr_auc": 0.79174,
+            "macro_f1": 0.757726,
+            "balanced_accuracy": 0.757759,
+            "leak_recall": 0.755102,
+            "false_positive_rate": 0.239583,
+            "brier": 0.172799,
+            "tp": 74,
+            "fp": 23,
+            "fn": 24,
+            "tn": 73
+          },
+          "cluster_level": {
+            "roc_auc": 0.9,
+            "pr_auc": 0.929158,
+            "macro_f1": 0.85614,
+            "balanced_accuracy": 0.887879,
+            "leak_recall": 0.866667,
+            "false_positive_rate": 0.090909,
+            "brier": 0.160925,
+            "tp": 26,
+            "fp": 1,
+            "fn": 4,
+            "tn": 10
+          },
+          "bootstrap_ci95": {
+            "draws_effectifs": {
+              "clip_roc_auc": 2000,
+              "clip_macro_f1": 2000,
+              "cluster_roc_auc": 2000,
+              "cluster_macro_f1": 2000
+            },
+            "seed": 20260912,
+            "clip_roc_auc": {
+              "ci95_low": 0.750895,
+              "ci95_high": 0.961797
+            },
+            "clip_macro_f1": {
+              "ci95_low": 0.656363,
+              "ci95_high": 0.820401
+            },
+            "cluster_roc_auc": {
+              "ci95_low": 0.724102,
+              "ci95_high": 1.0
+            },
+            "cluster_macro_f1": {
+              "ci95_low": 0.714428,
+              "ci95_high": 0.962896
+            }
+          }
+        }
+      }
+    },
+    "SYNTHETIC-FIXTURE-tslm": {
+      "run_id": "SYNTHETIC-FIXTURE-tslm",
+      "model_name": "SYNTHETIC FIXTURE — NOT A MODEL",
+      "checkpoint": "SYNTHETIC-FIXTURE-checkpoint",
+      "training_commit": "0000000",
+      "config_hash": null,
+      "timestamp": "SYNTHETIC",
+      "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
+      "threshold_recomputed_on_val": 0.532281,
+      "threshold_declared_by_run": 0.532281,
+      "provenance": {},
+      "contract_checks": [
+        {
+          "name": "fichiers du run présents",
+          "passed": true,
+          "coverage": "2/2 fichiers"
+        },
+        {
+          "name": "champs de metadata.json",
+          "passed": true,
+          "coverage": "9/9 présents"
+        },
+        {
+          "name": "identité du split déclaré",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "SHA256 du split déclaré",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "déclaration d'absence de réglage sur le test",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "aucune colonne interdite dans predictions.csv",
+          "passed": true,
+          "coverage": "2 colonnes inspectées"
+        },
+        {
+          "name": "colonnes requises dans predictions.csv",
+          "passed": true,
+          "coverage": "2/2 colonnes requises"
+        },
+        {
+          "name": "aucun clip_id en double",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "aucun clip_id inconnu",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "probabilités dans [0, 1]",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "couverture des folds ('val', 'test')",
+          "passed": true,
+          "coverage": "402/402 clips prédits"
+        }
+      ],
+      "folds": {
+        "val": {
+          "n_clips": 208,
+          "n_clusters": 42,
+          "n_clusters_leak": 34,
+          "n_clusters_non_leak": 8,
+          "n_clips_leak": 108,
+          "n_clips_non_leak": 100,
+          "threshold": 0.532281239,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.927778,
+            "pr_auc": 0.927215,
+            "macro_f1": 0.869514,
+            "balanced_accuracy": 0.868704,
+            "leak_recall": 0.907407,
+            "false_positive_rate": 0.17,
+            "brier": 0.127299,
+            "tp": 98,
+            "fp": 17,
+            "fn": 10,
+            "tn": 83
+          },
+          "cluster_level": {
+            "roc_auc": 0.970588,
+            "pr_auc": 0.99328,
+            "macro_f1": 0.922794,
+            "balanced_accuracy": 0.922794,
+            "leak_recall": 0.970588,
+            "false_positive_rate": 0.125,
+            "brier": 0.122702,
+            "tp": 33,
+            "fp": 1,
+            "fn": 1,
+            "tn": 7
+          },
+          "bootstrap_ci95": {
+            "draws_effectifs": {
+              "clip_roc_auc": 2000,
+              "clip_macro_f1": 2000,
+              "cluster_roc_auc": 2000,
+              "cluster_macro_f1": 2000
+            },
+            "seed": 20260912,
+            "clip_roc_auc": {
+              "ci95_low": 0.863064,
+              "ci95_high": 0.970818
+            },
+            "clip_macro_f1": {
+              "ci95_low": 0.68934,
+              "ci95_high": 0.900366
+            },
+            "cluster_roc_auc": {
+              "ci95_low": 0.905724,
+              "ci95_high": 1.0
+            },
+            "cluster_macro_f1": {
+              "ci95_low": 0.772481,
+              "ci95_high": 1.0
+            }
+          }
+        },
+        "test": {
+          "n_clips": 194,
+          "n_clusters": 41,
+          "n_clusters_leak": 30,
+          "n_clusters_non_leak": 11,
+          "n_clips_leak": 98,
+          "n_clips_non_leak": 96,
+          "threshold": 0.532281239,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.111,
+            "pr_auc": 0.123,
+            "macro_f1": 0.234,
+            "balanced_accuracy": 0.855548,
+            "leak_recall": 0.867347,
+            "false_positive_rate": 0.15625,
+            "brier": 0.345,
+            "tp": 85,
+            "fp": 15,
+            "fn": 13,
+            "tn": 81
+          },
+          "cluster_level": {
+            "roc_auc": 0.222,
+            "pr_auc": 0.962192,
+            "macro_f1": 0.456,
+            "balanced_accuracy": 0.859091,
+            "leak_recall": 0.9,
+            "false_positive_rate": 0.181818,
+            "brier": 0.118449,
+            "tp": 27,
+            "fp": 2,
+            "fn": 3,
+            "tn": 9
+          },
+          "bootstrap_ci95": {
+            "draws_effectifs": {
+              "clip_roc_auc": 2000,
+              "clip_macro_f1": 2000,
+              "cluster_roc_auc": 2000,
+              "cluster_macro_f1": 2000
+            },
+            "seed": 20260912,
+            "clip_roc_auc": {
+              "ci95_low": 0.011,
+              "ci95_high": 0.222
+            },
+            "clip_macro_f1": {
+              "ci95_low": 0.70814,
+              "ci95_high": 0.909492
+            },
+            "cluster_roc_auc": {
+              "ci95_low": 0.011,
+              "ci95_high": 0.333
+            },
+            "cluster_macro_f1": {
+              "ci95_low": 0.705287,
+              "ci95_high": 0.962896
+            }
+          }
+        }
+      }
+    },
+    "SYNTHETIC-FIXTURE-tslm-T1": {
+      "run_id": "SYNTHETIC-FIXTURE-tslm-T1",
+      "model_name": "SYNTHETIC FIXTURE — NOT A MODEL",
+      "checkpoint": "SYNTHETIC-FIXTURE-checkpoint",
+      "training_commit": "0000000",
+      "config_hash": null,
+      "timestamp": "SYNTHETIC",
+      "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
+      "threshold_recomputed_on_val": 0.532281,
+      "threshold_declared_by_run": 0.532281,
+      "provenance": {
+        "stress_transform": "T1"
+      },
+      "contract_checks": [
+        {
+          "name": "fichiers du run présents",
+          "passed": true,
+          "coverage": "2/2 fichiers"
+        },
+        {
+          "name": "champs de metadata.json",
+          "passed": true,
+          "coverage": "9/9 présents"
+        },
+        {
+          "name": "identité du split déclaré",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "SHA256 du split déclaré",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "déclaration d'absence de réglage sur le test",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "aucune colonne interdite dans predictions.csv",
+          "passed": true,
+          "coverage": "2 colonnes inspectées"
+        },
+        {
+          "name": "colonnes requises dans predictions.csv",
+          "passed": true,
+          "coverage": "2/2 colonnes requises"
+        },
+        {
+          "name": "aucun clip_id en double",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "aucun clip_id inconnu",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "probabilités dans [0, 1]",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "couverture des folds ('val', 'test')",
+          "passed": true,
+          "coverage": "402/402 clips prédits"
+        }
+      ],
+      "folds": {
+        "val": {
+          "n_clips": 208,
+          "n_clusters": 42,
+          "n_clusters_leak": 34,
+          "n_clusters_non_leak": 8,
+          "n_clips_leak": 108,
+          "n_clips_non_leak": 100,
+          "threshold": 0.532281239,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.927778,
+            "pr_auc": 0.927215,
+            "macro_f1": 0.869514,
+            "balanced_accuracy": 0.868704,
+            "leak_recall": 0.907407,
+            "false_positive_rate": 0.17,
+            "brier": 0.127299,
+            "tp": 98,
+            "fp": 17,
+            "fn": 10,
+            "tn": 83
+          },
+          "cluster_level": {
+            "roc_auc": 0.970588,
+            "pr_auc": 0.99328,
+            "macro_f1": 0.922794,
+            "balanced_accuracy": 0.922794,
+            "leak_recall": 0.970588,
+            "false_positive_rate": 0.125,
+            "brier": 0.122702,
+            "tp": 33,
+            "fp": 1,
+            "fn": 1,
+            "tn": 7
+          },
+          "bootstrap_ci95": {
+            "draws_effectifs": {
+              "clip_roc_auc": 2000,
+              "clip_macro_f1": 2000,
+              "cluster_roc_auc": 2000,
+              "cluster_macro_f1": 2000
+            },
+            "seed": 20260912,
+            "clip_roc_auc": {
+              "ci95_low": 0.863064,
+              "ci95_high": 0.970818
+            },
+            "clip_macro_f1": {
+              "ci95_low": 0.68934,
+              "ci95_high": 0.900366
+            },
+            "cluster_roc_auc": {
+              "ci95_low": 0.905724,
+              "ci95_high": 1.0
+            },
+            "cluster_macro_f1": {
+              "ci95_low": 0.772481,
+              "ci95_high": 1.0
+            }
+          }
+        },
+        "test": {
+          "n_clips": 194,
+          "n_clusters": 41,
+          "n_clusters_leak": 30,
+          "n_clusters_non_leak": 11,
+          "n_clips_leak": 98,
+          "n_clips_non_leak": 96,
+          "threshold": 0.532281239,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.101,
+            "pr_auc": 0.123,
+            "macro_f1": 0.234,
+            "balanced_accuracy": 0.855548,
+            "leak_recall": 0.867347,
+            "false_positive_rate": 0.15625,
+            "brier": 0.345,
+            "tp": 85,
+            "fp": 15,
+            "fn": 13,
+            "tn": 81
+          },
+          "cluster_level": {
+            "roc_auc": 0.202,
+            "pr_auc": 0.962192,
+            "macro_f1": 0.456,
+            "balanced_accuracy": 0.859091,
+            "leak_recall": 0.9,
+            "false_positive_rate": 0.181818,
+            "brier": 0.118449,
+            "tp": 27,
+            "fp": 2,
+            "fn": 3,
+            "tn": 9
+          },
+          "bootstrap_ci95": {
+            "draws_effectifs": {
+              "clip_roc_auc": 2000,
+              "clip_macro_f1": 2000,
+              "cluster_roc_auc": 2000,
+              "cluster_macro_f1": 2000
+            },
+            "seed": 20260912,
+            "clip_roc_auc": {
+              "ci95_low": 0.011,
+              "ci95_high": 0.222
+            },
+            "clip_macro_f1": {
+              "ci95_low": 0.70814,
+              "ci95_high": 0.909492
+            },
+            "cluster_roc_auc": {
+              "ci95_low": 0.011,
+              "ci95_high": 0.333
+            },
+            "cluster_macro_f1": {
+              "ci95_low": 0.705287,
+              "ci95_high": 0.962896
+            }
+          }
+        }
+      }
+    },
+    "SYNTHETIC-FIXTURE-tslm-T2": {
+      "run_id": "SYNTHETIC-FIXTURE-tslm-T2",
+      "model_name": "SYNTHETIC FIXTURE — NOT A MODEL",
+      "checkpoint": "SYNTHETIC-FIXTURE-checkpoint",
+      "training_commit": "0000000",
+      "config_hash": null,
+      "timestamp": "SYNTHETIC",
+      "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
+      "threshold_recomputed_on_val": 0.532281,
+      "threshold_declared_by_run": 0.532281,
+      "provenance": {
+        "stress_transform": "T2"
+      },
+      "contract_checks": [
+        {
+          "name": "fichiers du run présents",
+          "passed": true,
+          "coverage": "2/2 fichiers"
+        },
+        {
+          "name": "champs de metadata.json",
+          "passed": true,
+          "coverage": "9/9 présents"
+        },
+        {
+          "name": "identité du split déclaré",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "SHA256 du split déclaré",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "déclaration d'absence de réglage sur le test",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "aucune colonne interdite dans predictions.csv",
+          "passed": true,
+          "coverage": "2 colonnes inspectées"
+        },
+        {
+          "name": "colonnes requises dans predictions.csv",
+          "passed": true,
+          "coverage": "2/2 colonnes requises"
+        },
+        {
+          "name": "aucun clip_id en double",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "aucun clip_id inconnu",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "probabilités dans [0, 1]",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "couverture des folds ('val', 'test')",
+          "passed": true,
+          "coverage": "402/402 clips prédits"
+        }
+      ],
+      "folds": {
+        "val": {
+          "n_clips": 208,
+          "n_clusters": 42,
+          "n_clusters_leak": 34,
+          "n_clusters_non_leak": 8,
+          "n_clips_leak": 108,
+          "n_clips_non_leak": 100,
+          "threshold": 0.532281239,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.927778,
+            "pr_auc": 0.927215,
+            "macro_f1": 0.869514,
+            "balanced_accuracy": 0.868704,
+            "leak_recall": 0.907407,
+            "false_positive_rate": 0.17,
+            "brier": 0.127299,
+            "tp": 98,
+            "fp": 17,
+            "fn": 10,
+            "tn": 83
+          },
+          "cluster_level": {
+            "roc_auc": 0.970588,
+            "pr_auc": 0.99328,
+            "macro_f1": 0.922794,
+            "balanced_accuracy": 0.922794,
+            "leak_recall": 0.970588,
+            "false_positive_rate": 0.125,
+            "brier": 0.122702,
+            "tp": 33,
+            "fp": 1,
+            "fn": 1,
+            "tn": 7
+          },
+          "bootstrap_ci95": {
+            "draws_effectifs": {
+              "clip_roc_auc": 2000,
+              "clip_macro_f1": 2000,
+              "cluster_roc_auc": 2000,
+              "cluster_macro_f1": 2000
+            },
+            "seed": 20260912,
+            "clip_roc_auc": {
+              "ci95_low": 0.863064,
+              "ci95_high": 0.970818
+            },
+            "clip_macro_f1": {
+              "ci95_low": 0.68934,
+              "ci95_high": 0.900366
+            },
+            "cluster_roc_auc": {
+              "ci95_low": 0.905724,
+              "ci95_high": 1.0
+            },
+            "cluster_macro_f1": {
+              "ci95_low": 0.772481,
+              "ci95_high": 1.0
+            }
+          }
+        },
+        "test": {
+          "n_clips": 194,
+          "n_clusters": 41,
+          "n_clusters_leak": 30,
+          "n_clusters_non_leak": 11,
+          "n_clips_leak": 98,
+          "n_clips_non_leak": 96,
+          "threshold": 0.532281239,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.101,
+            "pr_auc": 0.123,
+            "macro_f1": 0.234,
+            "balanced_accuracy": 0.855548,
+            "leak_recall": 0.867347,
+            "false_positive_rate": 0.15625,
+            "brier": 0.345,
+            "tp": 85,
+            "fp": 15,
+            "fn": 13,
+            "tn": 81
+          },
+          "cluster_level": {
+            "roc_auc": 0.202,
+            "pr_auc": 0.962192,
+            "macro_f1": 0.456,
+            "balanced_accuracy": 0.859091,
+            "leak_recall": 0.9,
+            "false_positive_rate": 0.181818,
+            "brier": 0.118449,
+            "tp": 27,
+            "fp": 2,
+            "fn": 3,
+            "tn": 9
+          },
+          "bootstrap_ci95": {
+            "draws_effectifs": {
+              "clip_roc_auc": 2000,
+              "clip_macro_f1": 2000,
+              "cluster_roc_auc": 2000,
+              "cluster_macro_f1": 2000
+            },
+            "seed": 20260912,
+            "clip_roc_auc": {
+              "ci95_low": 0.011,
+              "ci95_high": 0.222
+            },
+            "clip_macro_f1": {
+              "ci95_low": 0.70814,
+              "ci95_high": 0.909492
+            },
+            "cluster_roc_auc": {
+              "ci95_low": 0.011,
+              "ci95_high": 0.333
+            },
+            "cluster_macro_f1": {
+              "ci95_low": 0.705287,
+              "ci95_high": 0.962896
+            }
+          }
+        }
+      }
+    },
+    "SYNTHETIC-FIXTURE-tslm-T3": {
+      "run_id": "SYNTHETIC-FIXTURE-tslm-T3",
+      "model_name": "SYNTHETIC FIXTURE — NOT A MODEL",
+      "checkpoint": "SYNTHETIC-FIXTURE-checkpoint",
+      "training_commit": "0000000",
+      "config_hash": null,
+      "timestamp": "SYNTHETIC",
+      "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
+      "threshold_recomputed_on_val": 0.532281,
+      "threshold_declared_by_run": 0.532281,
+      "provenance": {
+        "stress_transform": "T3"
+      },
+      "contract_checks": [
+        {
+          "name": "fichiers du run présents",
+          "passed": true,
+          "coverage": "2/2 fichiers"
+        },
+        {
+          "name": "champs de metadata.json",
+          "passed": true,
+          "coverage": "9/9 présents"
+        },
+        {
+          "name": "identité du split déclaré",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "SHA256 du split déclaré",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "déclaration d'absence de réglage sur le test",
+          "passed": true,
+          "coverage": "1/1 champ"
+        },
+        {
+          "name": "aucune colonne interdite dans predictions.csv",
+          "passed": true,
+          "coverage": "2 colonnes inspectées"
+        },
+        {
+          "name": "colonnes requises dans predictions.csv",
+          "passed": true,
+          "coverage": "2/2 colonnes requises"
+        },
+        {
+          "name": "aucun clip_id en double",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "aucun clip_id inconnu",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "probabilités dans [0, 1]",
+          "passed": true,
+          "coverage": "1000 lignes"
+        },
+        {
+          "name": "couverture des folds ('val', 'test')",
+          "passed": true,
+          "coverage": "402/402 clips prédits"
+        }
+      ],
+      "folds": {
+        "val": {
+          "n_clips": 208,
+          "n_clusters": 42,
+          "n_clusters_leak": 34,
+          "n_clusters_non_leak": 8,
+          "n_clips_leak": 108,
+          "n_clips_non_leak": 100,
+          "threshold": 0.532281239,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.927778,
+            "pr_auc": 0.927215,
+            "macro_f1": 0.869514,
+            "balanced_accuracy": 0.868704,
+            "leak_recall": 0.907407,
+            "false_positive_rate": 0.17,
+            "brier": 0.127299,
+            "tp": 98,
+            "fp": 17,
+            "fn": 10,
+            "tn": 83
+          },
+          "cluster_level": {
+            "roc_auc": 0.970588,
+            "pr_auc": 0.99328,
+            "macro_f1": 0.922794,
+            "balanced_accuracy": 0.922794,
+            "leak_recall": 0.970588,
+            "false_positive_rate": 0.125,
+            "brier": 0.122702,
+            "tp": 33,
+            "fp": 1,
+            "fn": 1,
+            "tn": 7
+          },
+          "bootstrap_ci95": {
+            "draws_effectifs": {
+              "clip_roc_auc": 2000,
+              "clip_macro_f1": 2000,
+              "cluster_roc_auc": 2000,
+              "cluster_macro_f1": 2000
+            },
+            "seed": 20260912,
+            "clip_roc_auc": {
+              "ci95_low": 0.863064,
+              "ci95_high": 0.970818
+            },
+            "clip_macro_f1": {
+              "ci95_low": 0.68934,
+              "ci95_high": 0.900366
+            },
+            "cluster_roc_auc": {
+              "ci95_low": 0.905724,
+              "ci95_high": 1.0
+            },
+            "cluster_macro_f1": {
+              "ci95_low": 0.772481,
+              "ci95_high": 1.0
+            }
+          }
+        },
+        "test": {
+          "n_clips": 194,
+          "n_clusters": 41,
+          "n_clusters_leak": 30,
+          "n_clusters_non_leak": 11,
+          "n_clips_leak": 98,
+          "n_clips_non_leak": 96,
+          "threshold": 0.532281239,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.101,
+            "pr_auc": 0.123,
+            "macro_f1": 0.234,
+            "balanced_accuracy": 0.855548,
+            "leak_recall": 0.867347,
+            "false_positive_rate": 0.15625,
+            "brier": 0.345,
+            "tp": 85,
+            "fp": 15,
+            "fn": 13,
+            "tn": 81
+          },
+          "cluster_level": {
+            "roc_auc": 0.202,
+            "pr_auc": 0.962192,
+            "macro_f1": 0.456,
+            "balanced_accuracy": 0.859091,
+            "leak_recall": 0.9,
+            "false_positive_rate": 0.181818,
+            "brier": 0.118449,
+            "tp": 27,
+            "fp": 2,
+            "fn": 3,
+            "tn": 9
+          },
+          "bootstrap_ci95": {
+            "draws_effectifs": {
+              "clip_roc_auc": 2000,
+              "clip_macro_f1": 2000,
+              "cluster_roc_auc": 2000,
+              "cluster_macro_f1": 2000
+            },
+            "seed": 20260912,
+            "clip_roc_auc": {
+              "ci95_low": 0.011,
+              "ci95_high": 0.222
+            },
+            "clip_macro_f1": {
+              "ci95_low": 0.70814,
+              "ci95_high": 0.909492
+            },
+            "cluster_roc_auc": {
+              "ci95_low": 0.011,
+              "ci95_high": 0.333
+            },
+            "cluster_macro_f1": {
+              "ci95_low": 0.705287,
+              "ci95_high": 0.962896
+            }
+          }
+        }
+      }
+    }
+  },
+  "stress_runs": [
+    "SYNTHETIC-FIXTURE-tslm-T1",
+    "SYNTHETIC-FIXTURE-tslm-T2",
+    "SYNTHETIC-FIXTURE-tslm-T3"
+  ],
+  "stress_run_bases": {
+    "SYNTHETIC-FIXTURE-tslm-T1": [
+      "SYNTHETIC-FIXTURE-tslm",
+      "T1"
+    ],
+    "SYNTHETIC-FIXTURE-tslm-T2": [
+      "SYNTHETIC-FIXTURE-tslm",
+      "T2"
+    ],
+    "SYNTHETIC-FIXTURE-tslm-T3": [
+      "SYNTHETIC-FIXTURE-tslm",
+      "T3"
+    ]
+  },
+  "stress_claim_metrics": [
+    "clip_roc_auc",
+    "cluster_roc_auc",
+    "pearson_r_with_T0",
+    "delta_p"
+  ],
+  "stress_comparisons": {
+    "SYNTHETIC-FIXTURE-tslm_vs_SYNTHETIC-FIXTURE-tslm-T1": {
+      "seed": 20260912,
+      "n_clusters": 41,
+      "clip_roc_auc": {
+        "delta_observe": -0.777,
+        "ci95_low": -0.888,
+        "ci95_high": 0.999,
+        "lecture": "inconclusive",
+        "draws_effectifs": 2000
+      },
+      "cluster_roc_auc": {
+        "delta_observe": -0.777,
+        "ci95_low": -0.888,
+        "ci95_high": 0.999,
+        "lecture": "inconclusive",
+        "draws_effectifs": 2000
+      },
+      "fold": "test",
+      "a": "SYNTHETIC-FIXTURE-tslm",
+      "b": "SYNTHETIC-FIXTURE-tslm-T1",
+      "n_clips": 194,
+      "avertissement": "SYNTHETIC FIXTURE",
+      "excluded_threshold_dependent_metrics": [
+        "clip_macro_f1",
+        "cluster_macro_f1"
+      ]
+    },
+    "SYNTHETIC-FIXTURE-tslm_vs_SYNTHETIC-FIXTURE-tslm-T2": {
+      "seed": 20260912,
+      "n_clusters": 41,
+      "clip_roc_auc": {
+        "delta_observe": -0.777,
+        "ci95_low": -0.888,
+        "ci95_high": 0.999,
+        "lecture": "inconclusive",
+        "draws_effectifs": 2000
+      },
+      "cluster_roc_auc": {
+        "delta_observe": -0.777,
+        "ci95_low": -0.888,
+        "ci95_high": 0.999,
+        "lecture": "inconclusive",
+        "draws_effectifs": 2000
+      },
+      "fold": "test",
+      "a": "SYNTHETIC-FIXTURE-tslm",
+      "b": "SYNTHETIC-FIXTURE-tslm-T2",
+      "n_clips": 194,
+      "avertissement": "SYNTHETIC FIXTURE",
+      "excluded_threshold_dependent_metrics": [
+        "clip_macro_f1",
+        "cluster_macro_f1"
+      ]
+    },
+    "SYNTHETIC-FIXTURE-tslm_vs_SYNTHETIC-FIXTURE-tslm-T3": {
+      "seed": 20260912,
+      "n_clusters": 41,
+      "clip_roc_auc": {
+        "delta_observe": -0.777,
+        "ci95_low": -0.888,
+        "ci95_high": 0.999,
+        "lecture": "inconclusive",
+        "draws_effectifs": 2000
+      },
+      "cluster_roc_auc": {
+        "delta_observe": -0.777,
+        "ci95_low": -0.888,
+        "ci95_high": 0.999,
+        "lecture": "inconclusive",
+        "draws_effectifs": 2000
+      },
+      "fold": "test",
+      "a": "SYNTHETIC-FIXTURE-tslm",
+      "b": "SYNTHETIC-FIXTURE-tslm-T3",
+      "n_clips": 194,
+      "avertissement": "SYNTHETIC FIXTURE",
+      "excluded_threshold_dependent_metrics": [
+        "clip_macro_f1",
+        "cluster_macro_f1"
+      ]
+    }
+  },
+  "stress_prediction_shift": {},
+  "tslm_run_id": "SYNTHETIC-FIXTURE-tslm",
+  "stress_invariants": {
+    "manifest_dir": "/Users/nevil/dev/sandbox/ehl-zurich/ehl-hackathon-zurich/manifests",
+    "n_clips": 1000,
+    "transforms": {
+      "T0": {
+        "description": "original, aucune transformation",
+        "output": "/Users/nevil/dev/sandbox/ehl-zurich/timef-stress/T0",
+        "n_records": 1000,
+        "n_samples_unchanged_all": true,
+        "rms_relative_deviation_max": 0.0,
+        "fft_magnitude_relative_deviation_max": 0.0,
+        "fft_magnitude_relative_deviation_median": 0.0,
+        "amplitude_histogram_identical_all": true,
+        "waveform_identical_all": true,
+        "clip_fold_label_cluster_mapping_violations": 0,
+        "n_clusters": 185,
+        "clips_par_fold": {
+          "test": 194,
+          "val": 208,
+          "train": 598
+        }
+      },
+      "T1": {
+        "description": "inversion temporelle",
+        "output": "/Users/nevil/dev/sandbox/ehl-zurich/timef-stress/T1",
+        "n_records": 1000,
+        "n_samples_unchanged_all": true,
+        "rms_relative_deviation_max": 0.0,
+        "fft_magnitude_relative_deviation_max": 3.497204327394354e-16,
+        "fft_magnitude_relative_deviation_median": 2.673937340417115e-16,
+        "amplitude_histogram_identical_all": true,
+        "waveform_identical_all": false,
+        "clip_fold_label_cluster_mapping_violations": 0,
+        "n_clusters": 185,
+        "clips_par_fold": {
+          "test": 194,
+          "val": 208,
+          "train": 598
+        }
+      },
+      "T2": {
+        "description": "permutation de blocs de 250 échantillons (31,25 ms)",
+        "output": "/Users/nevil/dev/sandbox/ehl-zurich/timef-stress/T2",
+        "n_records": 1000,
+        "n_samples_unchanged_all": true,
+        "rms_relative_deviation_max": 0.0,
+        "fft_magnitude_relative_deviation_max": 1.0993223609471443,
+        "fft_magnitude_relative_deviation_median": 0.695168414589163,
+        "amplitude_histogram_identical_all": true,
+        "waveform_identical_all": false,
+        "clip_fold_label_cluster_mapping_violations": 0,
+        "n_clusters": 185,
+        "clips_par_fold": {
+          "test": 194,
+          "val": 208,
+          "train": 598
+        }
+      },
+      "T3": {
+        "description": "randomisation de phase, module préservé",
+        "output": "/Users/nevil/dev/sandbox/ehl-zurich/timef-stress/T3",
+        "n_records": 1000,
+        "n_samples_unchanged_all": true,
+        "rms_relative_deviation_max": 2.89062799124372e-16,
+        "fft_magnitude_relative_deviation_max": 3.3611717886048967e-16,
+        "fft_magnitude_relative_deviation_median": 2.7861239145247848e-16,
+        "amplitude_histogram_identical_all": false,
+        "waveform_identical_all": false,
+        "clip_fold_label_cluster_mapping_violations": 0,
+        "n_clusters": 185,
+        "clips_par_fold": {
+          "test": 194,
+          "val": 208,
+          "train": 598
+        }
+      }
+    }
+  }
+}

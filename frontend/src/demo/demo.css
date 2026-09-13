@@ -880,7 +880,7 @@
   color: #ccd9c2;
   margin: 0;
 }
-.control-card:last-child dd {
+.control-card.pending-control dd {
   font-size: 11px;
   color: #bdb497;
 }
@@ -889,6 +889,10 @@
   color: #a2b29b;
   line-height: 1.7;
   padding: 16px 0 27px;
+}
+.evidence-caveat.stress-caveat {
+  margin-top: -21px;
+  padding-top: 0;
 }
 .proof-columns {
   display: grid;

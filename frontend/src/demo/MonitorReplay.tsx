@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { FullscreenButton } from "./FullscreenButton";
 import { loadExample, type LoadedExample } from "./loadExample";
+import { tslm } from "./official";
 import { PipeNetwork } from "./PipeNetwork";
 import recordings from "./recordings.json";
 import {
@@ -164,7 +165,7 @@ export default function MonitorReplay() {
         <p className="monitor-banner" role="note">
           <strong>Replay, not a live feed.</strong> Three recorded train clips
           from the experimental dataset, each looped. Recordings are not
-          building locations. No detection model output: TSLM not evaluated yet.
+          building locations. {tslm.monitorBanner}
         </p>
         <dl className="monitor-summary">
           <div>
@@ -183,7 +184,7 @@ export default function MonitorReplay() {
           </div>
           <div>
             <dt>Model output</dt>
-            <dd className="pending-value">TSLM · NOT EVALUATED YET</dd>
+            <dd className="pending-value">{tslm.status}</dd>
           </div>
         </dl>
         <PipeNetwork
@@ -342,7 +343,7 @@ function ChannelCard({
       </div>
       <footer>
         <span>
-          <b className="pending-value">TSLM · NOT EVALUATED YET</b>
+          <b className="pending-value">{tslm.status}</b>
         </span>
         <button
           className="quiet-button"

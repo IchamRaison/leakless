@@ -11,6 +11,7 @@ import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { api } from "../api";
 import DemoExperience from "./DemoExperience";
 import recordings from "./recordings.json";
+import { tslm } from "./official";
 
 vi.mock("./SceneCanvas", () => ({
   SceneCanvas: () => <div>3D test host</div>,
@@ -113,7 +114,7 @@ it("loads a real-example identity through the existing API and never requests a 
   ).toBeInTheDocument();
   expect(
     screen.getAllByText("Probability leak")[0].nextElementSibling,
-  ).toHaveTextContent("NOT EVALUATED YET");
+  ).toHaveTextContent(tslm.probability);
   expect(vi.mocked(api).mock.calls.some(([path]) => path === "/predict")).toBe(
     false,
   );
