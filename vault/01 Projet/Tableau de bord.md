@@ -43,8 +43,11 @@ Icham
 - [x] Assemblage final `c13fd47`, 156 tests runtime sans skip ; campagne A/C préinscrite avant fit, SHA `5c5e0b4b…`, preuve publiée `550c7a6`.
 - [ ] Six fits TSLM et douze fits C1 sur les mêmes trois folds train ; inspection explicite après classement avant tout refit final.
 - [x] Douze fits C1 terminés ; `C=0.01` retenu sur train, moyenne AUC groupe0,948718 /clip0,891382, pas une confirmation externe.
-- [ ] A/fold0 et file C0→C1→C2 réellement en cours (handles10635/77795) ; A1→A2 à lancer après A0, deux processus ML maximum.
-- [ ] Exporteur final codé/relu, tests locaux passent ; dernière validation runtime puis préinscription/campagne à exécuter.
+- [x] A0 terminé/vérifié, preuve `83bcbe0` : AUC clip/groupe0,710/0,760 sur98 clips réservés ; Qwen inchangé. Pas de conclusion A/C sur ce seul fold.
+- [x] A1 et C0 terminés/vérifiés, artefacts `fa1b9b4` ; 3/6 fits TSLM complets, résultats partiels derrière C1.
+- [ ] A2 (`88307`) et C/fold1→fold2 (`77795`) toujours actifs ; ne pas relancer A0/A1/C0 terminés.
+- [x] Exporteur inclus dans les156 tests runtime réussis ; audit réel sur modèle final encore à réaliser.
+- [x] Générateur Markdown V2 et compte des contradictions affichées publiés `0c99a3a`, 162 tests runtime passent ; rendu réel après comparaison complète, pas de nouveau moteur de métriques.
 - [x] Objectif final utilisateur ajouté : évolution d'événement/investigation et benchmark gabarit → Qwen sur mesures → TSLM sur séries. [[Plan V2 - fiabilité et parité des scores#7. Objectif final — démontrer la valeur du TSLM]].
 - [ ] Construire et évaluer ce benchmark final sur des événements/historiques/contextes réservés ; ne pas confondre campagne A/C et preuve d'utilité du TSLM.
 - [x] Reprise dans clone sain `/home/animus/ehl-hackathon-zurich-v2-recovery`, `e9c8ddd` publié ; ancien Git endommagé conservé, aucun reset/destruction.

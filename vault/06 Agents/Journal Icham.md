@@ -1,5 +1,17 @@
 # Journal Icham
 
+## 13 septembre — A1 et C0 terminés, 3/6 fits vérifiés
+
+A1 :188 étapes, AUC clip/groupe0,562541/0,735577 ; C0 :252 étapes, AUC0,498630/0,500000. Reçus et fichiers revérifiés, poids Qwen identiques et acoustique modifiée ; artefacts publiés `fa1b9b4`. Les résultats partiels restent nettement derrière C1 ; aucune sélection/recette/score modifié. Les files poursuivent A2 (PID70853, handle88307) et C/fold1 puis2 (PID70917, handle77795). Trois fits restent à terminer, aucun score externe. [[V2 ML - exécution]].
+
+## 13 septembre — A0 complet et générateur V2 vérifié
+
+A/fold0 terminé normalement : 500 fit /98 réservés, quatre époques/252 étapes, Qwen gelé inchangé et deux composants acoustiques modifiés. Reçu et tous artefacts distants vérifiés ; publiés `83bcbe0`. AUC clip/groupe0,709589/0,759615 contre C1 0,883288/0,961538 sur ce fold ; au seuil diagnostique0,5, FN73 et FP0. Résultat partiel seulement : aucune sélection ou modification des cinq autres fits. Files88307/77795 actives, A0/10635 terminal. Générateur Markdown V2 `0c99a3a` publié et162 tests runtime sans skip ; restitue JSON existants et audit affiché séparé du texte brut, sans nouveau calcul ni chargement des données. Logs `d8978ad`. [[V2 ML - exécution]].
+
+## 13 septembre — trois fits indépendants et préparation du rapport
+
+Continuation sur processus vérifiés vivants : A0 et C0 progressent, pertes/gradients valides. Mémoire stable35Go sur80Go ; lancement anticipé de la file A1→A2 (`88307`), total~51Go observé, trois processus maximum sans changement de recette/seed/configuration. La préinscription reste intacte. Revue indépendante C1 : comptes/folds/choix C/scaler train uniquement concordants, aucune métrique recalculée. Recherche Entire retrouve le générateur historique Nevil ; lecture du code confirme que son mode V1 ne convient pas à l'externe. Adaptation minimale de présentation V2 en cours dans le même fichier, tables réutilisées, aucun moteur numérique nouveau ni source des fits modifiée. [[V2 ML - exécution]].
+
 ## 13 septembre — premiers entraînements V2 et C1 réel
 
 A0 lancé sur H100, premières étapes avec pertes/gradients valides, puis C0→C1→C2 dans un second processus indépendant ; handles10635/77795, aucun redémarrage à faire sans contrôle. Pas de changement de recette ni lecture val/test. C1 a terminé ses12 fits, `C=0.01`, AUC train interne moyenne groupe0,948718 /clip0,891382. Suivre les fits puis lancer A1→A2 après A0 ; ne sélectionner/refitter qu'après les six résultats et leur inspection. [[V2 ML - exécution]].

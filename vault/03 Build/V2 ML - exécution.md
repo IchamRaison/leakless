@@ -4,7 +4,7 @@ Icham — mise à jour 2026-09-13
 
 ## État courant
 
-Objectif utilisateur actif : implémenter [[Plan V2 - fiabilité et parité des scores]] dans son ensemble. **Campagne préinscrite `c13fd47`, 156 tests runtime passent ; entraînements A/fold0 et C/fold0 réellement en cours sur la H100. C1 a terminé ses douze fits train. Aucun fit TSLM complet ni score externe encore disponible.** Parité A et C, rechargements neufs compris : PASS, écarts nuls (`04d53b6`). Diagnostic train et compatibilité V1 terminés. Le 13 septembre, Icham ajoute explicitement le cap final langage/événements/investigation et benchmark à trois approches ; aucune de ces capacités n'est encore validée. Checkout actif sain `/home/animus/ehl-hackathon-zurich-v2-recovery`, branche `feat/icham-v2-reliability`. L'ancien worktree `/home/animus/ehl-hackathon-zurich-v2` et le dépôt code commun sont conservés sans réparation destructive après découverte d'objets Git vides ; ne plus y commiter. Le vault dédié reste sain et autoritaire.
+Objectif utilisateur actif : implémenter [[Plan V2 - fiabilité et parité des scores]] dans son ensemble. **A0, A1 et C0 terminés/vérifiés (3/6 fits TSLM), résultats partiels nettement derrière le comparateur C1 ; A2 et C/fold1 actifs, C/fold2 prévu dans la même file. C1 a terminé ses douze fits train. Générateur de rapport V2 publié, 162 tests runtime passent à `0c99a3a`. Aucun candidat sélectionné, seuil final ou score externe.** Campagne préinscrite `c13fd47`, SHA `5c5e0b4b…` inchangé. Parité A et C, rechargements neufs compris : PASS, écarts nuls (`04d53b6`). Diagnostic train et compatibilité V1 terminés. Le 13 septembre, Icham ajoute explicitement le cap final langage/événements/investigation et benchmark à trois approches ; aucune de ces capacités n'est encore validée. Checkout actif sain `/home/animus/ehl-hackathon-zurich-v2-recovery`, branche `feat/icham-v2-reliability`. L'ancien worktree `/home/animus/ehl-hackathon-zurich-v2` et le dépôt code commun sont conservés sans réparation destructive après découverte d'objets Git vides ; ne plus y commiter. Le vault dédié reste sain et autoritaire.
 
 ## Conditions vérifiées au démarrage
 
@@ -111,11 +111,31 @@ Les 598 WAV ont été revérifiés avant écriture du reçu ; mêmes trois folds
 
 Exécution suivante depuis `/home/hicham/pipe-v0/code-v2-c13fd47`, environnement `.venv-repro`, `PYTHONPATH=src:scripts/eval:scripts/timenet` : `scripts/tslm/run_v2_campaign.py fit-fold --output /home/hicham/pipe-v0/artifacts/v2-campaign-c13fd47-001 --variant A --fold 0`. Chaque fit emploie un processus neuf, ne reprend jamais V1 et conserve tout dossier incomplet. Ne pas modifier les sources/recette/cache/chemins préinscrits.
 
-## Premiers fits réellement démarrés
+## Fits réellement en cours
 
-Après publication de la préinscription : **A/fold0 lancé**, handle SSH `10635`, PID `66438` ; pertes et gradients finis/non nuls constatés aux premiers pas, environ16Go GPU. **C/fold0 lancé en parallèle**, file `C0 → C1 → C2`, handle SSH `77795`, premier PID `66971`. Deux processus ML au maximum sur la H100 existante, réinitialisations indépendantes ; aucune recette modifiée. Chaque transition C exige la fin normale du fit précédent, arrêt dès erreur. A/folds1–2 ne sont pas encore lancés : les lancer après A0 dans un second flux séquentiel. Logs adjacents `/home/hicham/pipe-v0/quality-v2-001/fit-{A,C}{0,1,2}-c13fd47.log`, reçus attendus `artifacts/v2-campaign-c13fd47-001/cv/{A,C}/fold-{0,1,2}/complete.json`. Vérifier les handles/processus avant toute reprise, ne pas doubler un job actif.
+Après publication de la préinscription : **A/fold0 lancé**, handle SSH `10635`, PID `66438` ; pertes et gradients finis/non nuls constatés, environ16Go GPU. **C/fold0 en parallèle**, file `C0 → C1 → C2`, handle SSH `77795`, premier PID `66971`. Après observation d'une mémoire stable de35Go/80Go à deux processus, **file A1 → A2 lancée**, handle `88307`, premier PID `67837`. Trois processus indépendants au maximum, environ51Go constatés ; cela remplace la première limitation conservatrice à deux. Recette, seeds, données, six fits et préinscription inchangés ; ni Qwen adapté ni nouveau GPU. Chaque transition de file exige la fin normale du fit précédent, arrêt dès erreur. Logs adjacents `/home/hicham/pipe-v0/quality-v2-001/fit-{A,C}{0,1,2}-c13fd47.log`, reçus attendus `artifacts/v2-campaign-c13fd47-001/cv/{A,C}/fold-{0,1,2}/complete.json`. Vérifier les handles/processus avant toute reprise, ne pas doubler un job actif.
 
 **C1 terminé normalement**, 4 configurations /12 fits sur les mêmes folds, aucun val/test. `C=0.01` sélectionné par la règle préinscrite, moyenne AUC groupée0,948718, clip0,891382 ; résultats de développement, pas holdout externe. Reçus locaux `docs/evidence/tslm-v2/campaign-c13fd47/C1/{comparison,complete}.json`. Les anciens six fits de sondes restent comptés à part. Aucun seuil final réglé, aucune sélection A/C possible avant les six résultats TSLM complets.
+
+## Premier fold TSLM terminé et vérifié
+
+**A/fold0 terminé normalement**, ancien handle `10635` terminal et drainé ; ne pas relancer. 500 clips fit /98 réservés, 252 étapes et quatre époques ; Qwen identique avant/après, encodeur et projecteur modifiés. Reçu `complete.json` SHA logique `8079cc445fcf67cdd9d984f523f97493c97e15a1234db3c85a96e81712e0a619` ; `finished(...)` a revérifié le reçu et **tous** les fichiers distants, poids compris. Prédictions/journal/reçus publiés `83bcbe0`, dossier `docs/evidence/tslm-v2/campaign-c13fd47/A/fold-0/`.
+
+Résultat de développement seulement : AUC clip **0,709589**, groupe **0,759615**, contre **0,883288 /0,961538** pour le C1 global retenu sur ce même fold. Au seuil diagnostique0,5, A donne FN73/73 fuites et FP0/25 non-fuites. Ce seuil n'est ni réglé ni servi ; ne pas en déduire seul le compromis final d'un score non calibré. Ce premier fold ne justifie ni choix A/C ni arrêt anticipé des autres fits préinscrits. Les files A1→A2 (`88307`) et C0→C1→C2 (`77795`) restent actives.
+
+**Restitution V2 publiée `0c99a3aace5cfaffd7e4424c18422f3e21eda474`**, 162 tests runtime sans skip (111 TSLM +51 évaluation), logs publiés `d8978ad`, `docs/evidence/tslm-v2/report-0c99a3a/`. `build_final_report.py --v2-campaign CAMPAGNE [--v2-evaluation JSON] [--v2-audits PARENT_EXPORT...] --out DOSSIER_NEUF` réutilise les tables et résultats existants ; pas de nouveau calcul de métriques ou lecture audio/split. Compte séparément contradictions affichées, erreurs, fallback et audit brut ; absence d'audit reste non vérifiée. Rapport réel à produire après les six fits/sélection, puis compléter avec les artefacts externes si la campagne justifie de poursuivre. Sources numériques et préinscription des entraînements non modifiées par cet ajout.
+
+## Trois folds complets, trois restants
+
+A1 et C0 ont terminé normalement dans leurs files respectives ; reçus et tous fichiers distants revérifiés via `finished(...)`, Qwen inchangé, encodeur/projecteur modifiés et quatre époques respectées. Artefacts publiés **`fa1b9b4`**, sous `docs/evidence/tslm-v2/campaign-c13fd47/{A/fold-1,C/fold-0}/`. Reçus SHA logiques A1 `f13985c89a55837202dacae73669949c38c9934676b27708d4ba0ef2620438f8`, C0 `367452263e7d54c2c83f6f7682c06e6067535d31e62f762fb3ff5a497d66b754`.
+
+| Résultat partiel | Fit / réservés | Étapes | AUC clip / groupe | C1 sur le même fold, clip / groupe | FN / FP à0,5 |
+|---|---|---|---|---|---|
+| A0 | 500 /98 | 252 | 0,709589 /0,759615 | 0,883288 /0,961538 | 73 /0 |
+| A1 | 373 /225 | 188 | 0,562541 /0,735577 | 0,930188 /0,980769 | 4 /119 |
+| C0 | 500 /98 | 252 | 0,498630 /0,500000 | 0,883288 /0,961538 | 0 /21 |
+
+Développement uniquement, seuil0,5 diagnostique non calibré ; pas de moyenne partielle présentée comme un résultat final, pas de changement de recette ni de scoring. Les files ont enchaîné sans réentraînement : **A2 PID70853**, handle `88307` ; **C/fold1 PID70917**, handle `77795`, puis C/fold2 automatiquement après réussite. Dernier contrôle : étapes48/164 pour A2 et37/188 pour C/fold1, processus vivants. Le classement final et la décision d'arrêter/poursuivre attendent les six résultats, sans ajout d'essais.
 
 ## Incident Git local — historique conservé
 
@@ -137,4 +157,4 @@ Le 13 septembre, le HEAD local pointait vers `0ce65624725a0c44b56334771a16c549ba
 
 ## Prochaine action concrète
 
-Suivre A0 (`10635`) et la file C0→C1→C2 (`77795`) sans les redémarrer ; lancer A1→A2 seulement après A0 terminé normalement. C1 est complet. Sélection et inspection face à C1 avant toute décision de refit final ; seuil et confirmation externe ensuite si la campagne justifie de poursuivre. Ne pas relancer gates, préparation806, sonde ou audit de recouvrement terminés. Le benchmark final à trois approches et les données d'événements/contexte restent une étape distincte non validée.
+Suivre A2 (`88307`) et C/fold1→fold2 (`77795`) sans les redémarrer ; A0/A1/C0 terminés et C1 comparateur complet. Après les six fits : `select`, rapport de développement avec le générateur V2 vérifié, puis inspection explicite face à C1 avant toute décision de refit final ; seuil et confirmation externe ensuite si la campagne justifie de poursuivre. Ne pas relancer gates, préparation806, sonde ou audit de recouvrement terminés. Le benchmark final à trois approches et les données d'événements/contexte restent une étape distincte non validée.
