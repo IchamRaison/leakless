@@ -1,5 +1,13 @@
 # Journal Icham
 
+## 13 septembre — D0 testé et préinscrit avant observation
+
+Observateur `07db24b`, runner `733b9c6`, 181 tests runtime réussis sans skip (130TSLM/51évaluation). Préinscription machine à03:58:45Paris, SHA `cd2c3916cbac2b61b979f463fa793dec1be3585c6e558d7743a0d4c43a7e6d1f`, rapatriée et22 sources revérifiées, preuves `3e425b4`. Aucun modèle chargé pendant cette étape. Budget1516observations, baseline constante de fréquence0,442 issue seulement des500fit. Prochaine action : A puis C à poids fixes, aucun nouveau fit.
+
+Relecture indépendante : représentation4bandes destructive mais enveloppe grossière conservée, C1 et TSLM tous deux normalisés en RMS, sonde linéaire fixe ≠ plafond d'information. C expose les mêmes définitions C1 via un chemin numérique différent et texte6chiffres ; effet sur la qualité inconnu. Détail/preuves dans [[Diagnostic causal - exécution]]. Initialisation D0 comparable aux fits par construction ; hashes réels et reload98 restent à vérifier pendant l'observation. Les NLL eval ne reproduisent pas les losses train avec dropout.
+
+Continuité : push notes initial refusé car Safoan avait publié entre-temps ; ses quatre commits jusqu'à `ef1e706` lus puis rebasés, conflit Passation résolu en conservant son intégration API/UI et notre nouveau cap. Vault `3121453` publié, neuf notes copiées explicitement dans les deux miroirs, commit code `733b9c6`. Aucun écrasement des travaux Safoan ni fusion de code application ; les poids/décision/reçu finaux demandés par l'UI ne sont pas encore disponibles.
+
 ## 13 septembre — diagnostic autorisé, inventaire complet et D0 borné
 
 Icham lance l'objectif d'implémentation du [[Diagnostic causal TSLM vs C1]]. Lecture du vault et des sources, récupération distante avant édition. Recherche Entire retrouve les commits historiques du raccordement et du scoring, aucune cause du plateau ; aucune intention supposée d'après ces titres. Ponytail conduit à réutiliser `finished`, `choose_variant`, le loader train, les captures et le harness existants.

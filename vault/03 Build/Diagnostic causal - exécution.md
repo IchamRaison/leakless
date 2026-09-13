@@ -6,7 +6,7 @@ Icham — 2026-09-13
 
 **Objectif d'implémentation désormais autorisé par Icham : [[Diagnostic causal TSLM vs C1]].** L'ancienne suite V2 de refit/confirmation reste suspendue ; l'autorisation porte sur le diagnostic et ses expériences contrôlées, pas sur une nouvelle recette produit. Premier jalon réalisé : les six fits existants sont complets et vérifiés, derniers artefacts publiés au commit code `b65042a`. Aucun réentraînement pour les récupérer, aucun score externe.
 
-Le bloc D0 sans apprentissage est en cours d'implémentation. Son budget et ses contrastes sont fixés ci-dessous avant toute observation nouvelle. La préinscription machine, ses empreintes et les tests runtime restent à produire avant lancement. Code dans `/home/animus/ehl-hackathon-zurich-v2-recovery`, branche `feat/icham-v2-reliability` ; ne pas commiter dans l'ancien dépôt Git endommagé.
+**D0 implémenté, testé et préinscrit ; observations réelles à lancer.** Code `733b9c6`, 181 tests runtime sans skip (130 TSLM +51 évaluation), preuves `3e425b4`. Préinscription du 13 septembre à03:58:45Paris, SHA `cd2c3916cbac2b61b979f463fa793dec1be3585c6e558d7743a0d4c43a7e6d1f` ; 22 sources vérifiées localement contre ce document. Aucun modèle chargé pendant la préinscription, aucun fit. Code dans `/home/animus/ehl-hackathon-zurich-v2-recovery`, branche `feat/icham-v2-reliability` ; ne pas commiter dans l'ancien dépôt Git endommagé.
 
 ## Inventaire V2 complet — acquis de développement
 
@@ -39,6 +39,7 @@ D0 mesure comparaison, cohérence des objectifs/scoring et sensibilité aux entr
 ## Audit de complétion du nouvel objectif
 
 - [x] Six fits précédents vérifiés, récupérés et inventoriés sans réentraînement.
+- [x] D0 observateur/runner testés et préinscription machine publiée avant observation ; exécution et verdict non encore acquis.
 - [ ] Données/comparaison : mappings, groupes, support des sous-populations et particularités d'acquisition examinés ; limites publiées.
 - [ ] D0 implémenté/testé/préinscrit puis exécuté : vrais scores/NLL train, alignement causal, contrôles de reload et interventions, états initial/terminal.
 - [ ] Avant tout nouveau fit : journalisation classe/description/EOS, comptes exacts, gradients/clipping/mises à jour et résumés d'époque testés puis vérifiés réellement.
@@ -50,4 +51,12 @@ D0 mesure comparaison, cohérence des objectifs/scoring et sensibilité aux entr
 
 ## Prochaine action
 
-Terminer et relire l'observateur de loss/scoring et le runner D0, tester sur CPU puis dans le runtime H100 sans modifier les sources numériques historiques, produire/publier la préinscription machine et exécuter les observations A puis C. Ne pas démarrer de mini-entraînement avant le verdict du bloc sans apprentissage.
+Exécuter les observations A puis C depuis le snapshot `code-causal-733b9c6`, dans `/home/hicham/pipe-v0/artifacts/causal-d0-733b9c6-001`. Commande : `.venv-repro/bin/python scripts/tslm/diagnose_causal.py observe --output /home/hicham/pipe-v0/artifacts/causal-d0-733b9c6-001 --variant A` (puis C), depuis le snapshot avec PYTHONPATH habituel. Ne pas démarrer de mini-entraînement avant le verdict du bloc sans apprentissage. Les contrôles constants utiliseront0,5 et la fréquence0,442 des500 clips fit, sans estimation sur les98 réservés.
+
+## Relecture du prétraitement — preuve de code, pas résultat expérimental
+
+Les deux chemins retirent moyenne et RMS global : C1 n'a pas ici un accès exclusif au gain brut. `preprocessing.band_series` conserve61 fenêtres Hann de32ms, espacées de16ms, puis trois pas nuls ; la somme des quatre bandes avant `log1p` conserve une énergie locale. L'affirmation « toute l'enveloppe est effacée » est donc trop forte. La transformation est destructive (phase/détail spectral perdus ; x et−x donnent les mêmes bandes alors que la skewness C1 change de signe), sans que cela démontre un plafond prédictif fuite/non-fuite.
+
+C1 expose directement huit statistiques globales non linéaires et la dispersion de20 RMS de50ms ; la sonde linéaire fixe sur256 valeurs doit exploiter une autre représentation. Son score inférieur ne démontre pas même le meilleur plafond linéaire atteignable. Enfin, C emploie les mêmes définitions C1 mais après passage float32/renormalisation et texte à six chiffres significatifs : identité de définition, pas bit à bit avec la baseline WAV float64. Aucun effet de ces arrondis sur la qualité n'est prouvé. Sources : `scripts/eval/harness/features.py:64`, `scripts/timenet/leakless_acoustic/connector.py:67`, `scripts/eval/harness/split_loader.py:151`, `src/pipe/tslm/preprocessing.py:50`, `:114`, `:135`, `scripts/tslm/diagnose_train.py:363`, code `733b9c6`.
+
+Revue indépendante de l'initialisation : même seed, ordre RNG et constructeur que les fits ; hashes réels encore à confirmer au lancement. D0 utilise le mode eval pour toutes ses observations : ce sont des NLL à poids fixes, pas une reproduction exacte des pertes en ligne avec encodeur/projecteur en mode train.
