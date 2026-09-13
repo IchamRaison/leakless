@@ -1,0 +1,17 @@
+{
+  "base/chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+  "base/config.json": "b65089b5c32d7bdb3479ca0c8ed835c86a90592ce0590dc9851acf650fa20be2",
+  "base/generation_config.json": "8e29eeb222454c2a417b17547a84aee206c110a033418b7c0342cd75e75d92a0",
+  "base/model-00001-of-00003.safetensors": "51ef7ae8b7247cd50f31a9613620dd2e388c20a772fa4ea56000ff571a5fc77b",
+  "base/model-00002-of-00003.safetensors": "27313c75a3a92d5f575860fda796c075439888d3d2434e36742513dd702564bc",
+  "base/model-00003-of-00003.safetensors": "acca2e05d349267bb098412b7cf15c461e59e794d025d19edf2fb8caefe25397",
+  "base/model.safetensors.index.json": "532c625a499b88fb2adb26d7f63e6b75f2662b4923404c3be1a1ace1c2bac7ab",
+  "base/tokenizer.json": "9b3fd089e5954a2c59e16bcc34d25302e0090f6b9ca3b526d2ce8fc691681e37",
+  "base/tokenizer_config.json": "ef127185cc4e669d1e4e4cb54b0a4736480067fd3936057cf22c3fe62d58c004",
+  "metadata.json": "533ae97da87a52170ff4eef1394dc1cd2f45fa820df75583ecef6060e29be76f",
+  "optimizer.pt": "83a8448a6bc85f2aa5251c034d22642f7b28b7883f72ad08d81185da82618763",
+  "reload-example.wav": "daf17dc8d90df21bb484e9b05a3f2585c4201f9426b33e5bb8f1f130d9e34f35",
+  "temporal.pt": "e85fec45cc90d58707c36359de47271be220155efd7213bd9214e95e0c11bc63",
+  "training-report.json": "95a4af0c3cf2a11b66cb39ba7f10c69d308d1dff8dc36ca2f80ad56056909907",
+  "training.jsonl": "9d279c03abfbfd590b8fbc58fa11f391624264d301a253e93a03543e986438b2"
+}

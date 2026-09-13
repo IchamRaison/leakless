@@ -4,5 +4,10 @@
     "push_sessions": false
   },
   "absolute_git_hook_path": true,
-  "telemetry": false
+  "telemetry": false,
+  "checkpoints": {
+    "primary": {
+      "type": "git-branch"
+    }
+  }
 }

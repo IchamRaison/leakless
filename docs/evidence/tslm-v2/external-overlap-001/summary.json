@@ -1,0 +1,28 @@
+{
+  "automatic_exclusions": false,
+  "elapsed_seconds": 375.54372471100214,
+  "exact_aligned_matches": 0,
+  "files_sha256": {
+    "best_per_original.json": "b28d0511a1ece1a450d6607ed850285eb2c50470e77a288783b9fce11d1482a1",
+    "exact_matches.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "pairs.jsonl": "2ab63b4f72b3ceb030f8869bdd212b243220eda3bb3d2f49c28565ceb927c81a",
+    "provenance.json": "24ac92f3b8da5742c20f30f51390f897bb23bdd1e10e74336995bc205ba98ac9",
+    "suspects.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "interpretation": "Candidats de recouvrement, pas preuve automatique de provenance ou indépendance",
+  "limitations": [
+    "Pas de rééchantillonnage, inversion temporelle ni filtrage testés",
+    "Offsets entiers uniquement ; changements de vitesse/fraction de sample non couverts",
+    "Fenêtres de variance nulle ou numériquement non résoluble non évaluables",
+    "Absence de candidat au seuil ne prouve pas des sessions indépendantes"
+  ],
+  "offsets_per_pair": 232001,
+  "pairs_examined": 122000,
+  "pairs_expected": 122000,
+  "pairs_with_unassessable_offsets": 0,
+  "status": "complete",
+  "suspect_pairs": 0,
+  "threshold": 0.995,
+  "unassessable_offsets_total": 0,
+  "unassessable_pairs": 0
+}

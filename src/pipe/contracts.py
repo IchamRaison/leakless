@@ -38,6 +38,20 @@ class Prediction(Contract):
     execution_mode: ExecutionMode
 
 
+class PredictResponse(Prediction):
+    """Réponse applicative : Prediction v0.1 et provenance de la décision V2."""
+
+    request_id: str = Field(min_length=1, max_length=80)
+    decision_version: str | None = None
+    decision_artifact_sha256: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
+    threshold: float | None = None
+    calibration: Literal["none"] = "none"
+    description_source: Literal["llm_checked_against_dsp", "dsp_template_fallback"] | None = None
+    fallback_used: bool = False
+    fallback_reasons: list[str] = Field(default_factory=list)
+    model_input_sha256: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
+
+
 class PredictRequest(Contract):
     sample_id: str = Field(pattern=r"^[0-9a-f]{24}$")
     model_name: ModelName

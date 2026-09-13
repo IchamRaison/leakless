@@ -14,7 +14,7 @@ import { TemporalSignalMap } from "./TemporalSignalMap";
 const MAX_BYTES = 8 * 1024 * 1024;
 type Loaded = { sample: Sample; visualization: Visualization };
 
-/** Upload path inherited from the acoustic studio: same API, same checks, no model call. */
+/** Upload path inherited from the acoustic studio: same API and checks. */
 export function InspectRecording({ paused }: { paused: boolean }) {
   const [loaded, setLoaded] = useState<Loaded | null>(null);
   const [busy, setBusy] = useState(false);
@@ -118,8 +118,8 @@ export function InspectRecording({ paused }: { paused: boolean }) {
           <span className="demo-kicker">06 / INSPECT YOUR OWN SIGNAL</span>
           <h2 id="inspect-title">Inspect another recording.</h2>
           <p>
-            Measured by the same local API as the examples. No model output is
-            produced.
+            Measured by the same local API as the examples, then optionally sent
+            to the loaded TSLM V2.
           </p>
         </div>
         <button className="load-button" disabled={busy} onClick={choose}>
@@ -217,14 +217,14 @@ export function InspectRecording({ paused }: { paused: boolean }) {
                   {warning}
                 </p>
               ))}
-              <ModelReadout />
+              <ModelReadout sample={sample} />
               <div className="decision-note">
                 <span className="small-rule" />
                 <p>
                   Measured properties only.
                   <br />
-                  No inspection recommendation is generated while TSLM is not
-                  evaluated yet.
+                  A live TSLM result is evidence for review, not an automatic
+                  inspection recommendation.
                 </p>
               </div>
               <button className="quiet-button" onClick={() => void remove()}>

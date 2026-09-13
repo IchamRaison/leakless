@@ -1,4 +1,4 @@
-"""Application CPU locale. Les adaptateurs ML seront intégrés après livraison G1/G2."""
+"""Application locale : studio acoustique et adaptateur optionnel TSLM V2."""
 
 from contextlib import asynccontextmanager
 from typing import Annotated
@@ -10,7 +10,8 @@ from starlette.exceptions import HTTPException
 from starlette.types import ASGIApp, Receive, Scope, Send
 
 from pipe.api.audio import MAX_BYTES, MAX_SAMPLES, AudioError, decode_audio, visualization
-from pipe.contracts import PredictRequest, Prediction, Sample
+from pipe.api.model_service import load_tslm, predict_tslm
+from pipe.contracts import PredictRequest, PredictResponse, Sample
 
 
 def fail(status: int, code: str, message: str):
@@ -20,6 +21,7 @@ def fail(status: int, code: str, message: str):
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     app.state.samples = {}
+    app.state.tslm = load_tslm()
     yield
     app.state.samples.clear()
 
@@ -96,9 +98,14 @@ def get_sample(sample_id: str):
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "schema_version": "0.1", "device": "cpu",
-            "models": [{"name": name, "available": False, "version": None,
-                        "reason": "Adapter and weights not delivered"} for name in ("tslm", "baseline")],
+    tslm = app.state.tslm
+    return {"status": "ok", "schema_version": "0.1", "device": tslm.device,
+            "models": [
+                {"name": "tslm", "available": tslm.available, "version": tslm.version,
+                 "reason": tslm.reason or "Restitution fiable V2 chargée"},
+                {"name": "baseline", "available": False, "version": None,
+                 "reason": "Adaptateur baseline non intégré"},
+            ],
             "capabilities": {"upload": True, "visualization": True, "perturbation": False, "replay": False}}
 
 
@@ -151,10 +158,20 @@ def label(sample_id: str):
     fail(404, "label_unavailable", "No authorised demonstration label for this upload.")
 
 
-@app.post("/predict", response_model=Prediction)
+@app.post("/predict", response_model=PredictResponse)
 def predict(body: PredictRequest):
-    get_sample(body.sample_id)
-    fail(503, "model_unavailable", "Model unavailable: adapter and weights not delivered.")
+    audio = get_sample(body.sample_id)
+    if body.model_name != "tslm":
+        fail(503, "model_unavailable", "La baseline n'est pas encore intégrée.")
+    if not app.state.tslm.available:
+        fail(503, "model_unavailable", app.state.tslm.reason or "Modèle V2 indisponible.")
+    try:
+        return predict_tslm(app.state.tslm, audio=audio, request_id=body.request_id)
+    except Exception as exc:
+        code = getattr(exc, "code", "model_failure")
+        status = {"model_busy": 409, "unsupported_audio": 422, "silent_audio": 422,
+                  "invalid_score": 502}.get(code, 503)
+        fail(status, code, str(exc))
 
 
 @app.get("/evaluation")

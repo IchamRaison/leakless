@@ -130,9 +130,9 @@ it("shows metadata, waveform, map and a pending model for a valid upload, withou
   expect(screen.getByText("Channels").nextElementSibling).toHaveTextContent(
     "Mono",
   );
-  expect(
-    screen.getByText("Probability leak").nextElementSibling,
-  ).toHaveTextContent("NOT EVALUATED YET");
+  expect(screen.getByText("Decision").nextElementSibling).toHaveTextContent(
+    "NOT RUN",
+  );
   expect(screen.getByText("a".repeat(64))).toBeInTheDocument();
   const [, init] = fetchMock.mock.calls[0];
   expect(((init as RequestInit).body as FormData).get("file")).toHaveProperty(

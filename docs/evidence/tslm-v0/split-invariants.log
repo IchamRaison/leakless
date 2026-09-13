@@ -1,0 +1,16 @@
+manifeste : manifests/split_v2.csv
+  colonnes utilisées : clip_id, fold  (group_id ignoré volontairement)
+OK   clips du disque absents du manifeste: 0 violation(s)   [couverture 1000/1000 = 100%]
+OK   clips du manifeste absents du disque: 0 violation(s)   [couverture 1000/1000 = 100%]
+OK   I1 doublons exacts à cheval sur deux folds: 0 violation(s)   [couverture 1000/1000 = 100%]
+OK   I2 quasi-doublons (seuil 0.7) à cheval: 0 violation(s)   [couverture 1000/1000 = 100%]
+OK   I3 même session d'acquisition à cheval: 0 violation(s)   [couverture 1000/1000 = 100%]
+OK   I4 condition leak (pression,débit) à cheval: 0 violation(s)   [couverture 426/1000 = 43%]
+OK   I5 condition non-leak (matériau,région) à cheval: 0 violation(s)   [couverture 386/1000 = 39%]
+
+répartition recalculée depuis la source :
+  train   598 clips  leak=294  non-leak=304
+  val     208 clips  leak=108  non-leak=100
+  test    194 clips  leak=98   non-leak=96
+
+=== TOUS LES INVARIANTS TENUS ===

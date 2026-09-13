@@ -24,3 +24,7 @@ Liens transmis par le brief/PDF, contenu distant non encore étudié.
 - Entire : https://docs.entire.io/overview
 
 Ajouter pour chaque source utile ce qu'elle permet de vérifier. Ne pas confondre une piste avec une preuve.
+
+## Datasets complémentaires recherchés
+
+La shortlist et le tri par usage sont dans [[Datasets utiles pour PIPE]]. Priorité proposée : hold-out acoustique Aghashahi, puis données acoustiques terrain Hong Kong ; Yorkshire/Wessex et les séries hydrauliques servent seulement à la couche événements/priorisation. Aucun téléchargement, entraînement ou changement du benchmark gelé n'a été fait dans cette recherche.

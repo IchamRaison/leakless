@@ -1,0 +1,92 @@
+{
+  "purpose": "frozen_v1_text_audit_no_model_selection",
+  "threshold": 0.46893701143635425,
+  "warmup_included": false,
+  "warmup_call_succeeded": true,
+  "folds": {
+    "val": {
+      "n_expected": 208,
+      "n_attempted": 208,
+      "n_errors": 0,
+      "n_abstentions": 0,
+      "n_valid_format": 208,
+      "valid_format_rate_all_clips": 1.0,
+      "n_correct_band": 202,
+      "correct_band_rate_all_clips": 0.9711538461538461,
+      "n_wrong_band_among_valid": 6,
+      "n_no_usable_text": 0,
+      "n_comparable_class_decisions": 208,
+      "n_class_disagreements": 27,
+      "class_disagreement_rate_comparable": 0.12980769230769232,
+      "n_class_comparisons_unavailable": 0,
+      "error_counts": {},
+      "error_clip_ids": [],
+      "api_latency_after_warmup_all_attempts": {
+        "n": 208,
+        "median_ms": 710.5429165003443,
+        "p95_ms": 750.9211573000357,
+        "min_ms": 695.2680009999312,
+        "max_ms": 833.443065002939
+      },
+      "api_latency_after_warmup_successful_payloads": {
+        "n": 208,
+        "median_ms": 710.5429165003443,
+        "p95_ms": 750.9211573000357,
+        "min_ms": 695.2680009999312,
+        "max_ms": 833.443065002939
+      },
+      "generation_latency_after_warmup_successful_calls": {
+        "n": 208,
+        "median_ms": 709.8600405006437,
+        "p95_ms": 750.2421539995339,
+        "min_ms": 694.5889210001042,
+        "max_ms": 832.7503920008894
+      }
+    },
+    "test": {
+      "n_expected": 194,
+      "n_attempted": 194,
+      "n_errors": 0,
+      "n_abstentions": 0,
+      "n_valid_format": 194,
+      "valid_format_rate_all_clips": 1.0,
+      "n_correct_band": 184,
+      "correct_band_rate_all_clips": 0.9484536082474226,
+      "n_wrong_band_among_valid": 10,
+      "n_no_usable_text": 0,
+      "n_comparable_class_decisions": 194,
+      "n_class_disagreements": 36,
+      "class_disagreement_rate_comparable": 0.18556701030927836,
+      "n_class_comparisons_unavailable": 0,
+      "error_counts": {},
+      "error_clip_ids": [],
+      "api_latency_after_warmup_all_attempts": {
+        "n": 194,
+        "median_ms": 705.4392134996306,
+        "p95_ms": 819.1747281500284,
+        "min_ms": 688.2563369981654,
+        "max_ms": 827.6781579988892
+      },
+      "api_latency_after_warmup_successful_payloads": {
+        "n": 194,
+        "median_ms": 705.4392134996306,
+        "p95_ms": 819.1747281500284,
+        "min_ms": 688.2563369981654,
+        "max_ms": 827.6781579988892
+      },
+      "generation_latency_after_warmup_successful_calls": {
+        "n": 194,
+        "median_ms": 704.7452770020755,
+        "p95_ms": 818.5099426507804,
+        "min_ms": 687.5804289993539,
+        "max_ms": 826.9392229994992
+      }
+    }
+  },
+  "limitations": [
+    "Description gabarit parmi quatre bandes, pas justification causale de fuite.",
+    "Désaccord classe/score : cohérence de sorties, pas exactitude de classification.",
+    "Latences séquentielles sur clips, pas preuve de débit soutenu ni validation terrain."
+  ],
+  "raw_sha256": "eb7c25eef70d3836e24c4aa278625387f7fd4510d54a09805f9f0f29a148691f"
+}

@@ -33,3 +33,12 @@ Open `vault/` as a vault in Obsidian and start with `Accueil.md`. It contains th
 Notes and shared settings are tracked in Git. Device-specific workspaces, local plugins, trash, and secrets are excluded. Git is the sharing mechanism; automatic Obsidian Sync is not configured. Pull before editing and commit/push to share changes.
 
 La répartition et les contrats de l'équipe sont documentés dans le vault partagé.
+
+## V0 acoustique — Icham
+
+Chaîne réelle WAV → TimeNet → bandes temporelles → OpenTSLM-SP/Qwen 3.5-4B.
+Un petit entraînement de diagnostic a été exécuté sur train ; la qualité n'est pas validée.
+Installation, checkpoint, preuves et fonction de prédiction : [guide V0](docs/TSLM_V0.md).
+La couche fiable V2 est documentée dans [TSLM_V2_OUTPUT.md](docs/TSLM_V2_OUTPUT.md).
+Son chargement applicatif exige le bundle sélectionné, l'artefact de décision et
+sa preuve de validation ; aucun résultat n'est inventé si ces fichiers manquent.

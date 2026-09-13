@@ -1,0 +1,66 @@
+{
+  "run_id": "tslm-v1-T2",
+  "model_name": "AcousticQwenSP / Qwen3.5-4B V1",
+  "checkpoint": "/home/hicham/pipe-v0/artifacts/qwen-v1-1199789f-001/bundle",
+  "training_commit": "1199789f471acf79f7e82604e2a15acd45e0b2f7",
+  "config_hash": "41fa12bf21be6463ae11b45ea8b5010409b526bbba366f83c7ba27b7c3122f70",
+  "n_configs_compared": 3,
+  "checkpoint_checksums_sha256": "b95569c50f5e1bbf3533bddc92530b5f285eb25dec999f83999f60ffd912d1ae",
+  "temporal_sha256": "183a1b1c29facf0e27f27efc7adab8c1bb13556cede06abc7f735672cbe7eb82",
+  "scoring_spec_sha256": "7857c3c890ebdf15063546e9763aa7e687a80ed900c95f0ddd96e500b6010a94",
+  "scoring_spec": {
+    "version": "class-continuation-logprob-sum-softmax-v1",
+    "class_continuations": [
+      "leak;",
+      "no_leak;"
+    ],
+    "class_token_ids": [
+      [
+        273,
+        570,
+        26
+      ],
+      [
+        2083,
+        11414,
+        570,
+        26
+      ]
+    ],
+    "class_token_counts": [
+      3,
+      4
+    ],
+    "aggregation": "sum",
+    "length_normalization": false,
+    "class_terminator": ";",
+    "includes_eos": false,
+    "includes_description": false,
+    "calibration": "none"
+  },
+  "reload_report_sha256": "d18827f94bdc4d4951f2ef2eb7dee1754af9c43d0689d15a315c0ac6b83ecaaf",
+  "split_filename": "split_v2.csv",
+  "split_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+  "split_audit_filename": "split_v2_audit.csv",
+  "split_audit_sha256": "1a3bd3c18ad6d886d42ecc85ba3a5cceaa45a9084102fc112b53e66782e29d61",
+  "timestamp": "2026-09-12T19:49:36+00:00",
+  "threshold_rule": "aucun seuil appliqué — probabilités brutes non calibrées ; sommes des log-probabilités des continuations complètes ; softmax à deux classes ; aucune normalisation par longueur",
+  "test_labels_not_used_for_tuning": true,
+  "export_commit": "5a29d6eb9ceca39fdce829eb22dbbfd67b25589b",
+  "harness_source_commit": "6dfdf63580bc15ce6a1cf0817b9da3569553aca1",
+  "transform": "T2",
+  "stress_seed": 20260912,
+  "stress_seed_scheme": "sha256(utf-8, séparateur U+001F, 8 premiers octets, big-endian)",
+  "numpy_version": "2.5.2",
+  "source_sha256": {
+    "scripts/tslm/export_run.py": "95b9ca513f28f122f560718d9c9b53a10b5a235fd2971e55c713d7ff5ba39704",
+    "scripts/eval/check_run.py": "096c2f27d1283e68518d6ac73328b394eb4d5821a7c62807ebdaf3360961a213",
+    "scripts/eval/harness/contract.py": "b6b97249e1b5993f2a69c42e665be30039bf36821f6ee594c5525186ca59dffe",
+    "scripts/eval/harness/split_loader.py": "54ee8349b4dffc1cf59ca285e48a07c7940198a3b781b0d587c1c090f8f5304d",
+    "scripts/temporal/stress.py": "7c37e001d270655d2e54ba2087e8b8e476da8cc42948f92bd83c669773ac6350",
+    "src/pipe/tslm/model.py": "2dc0a94d69580db6b2c60c96b7d45d4a9d9327080fd096af94a39e2e380151c0",
+    "src/pipe/tslm/predict.py": "da98da851a3e614053a7b9ad5b946d4b3caceefaeb8b13ce40c763a155cae486",
+    "src/pipe/tslm/preprocessing.py": "b9630f473af9c0f2514d3a8e408a79476368f306a2b15370826ac140c64036cd",
+    "scripts/timenet/leakless_acoustic/connector.py": "670db629b62102cdfb4d6a98aaaa3a52807b4b37b6055a8705a0f4fe0fde94e4"
+  }
+}

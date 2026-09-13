@@ -18,6 +18,11 @@ runs/
 frontend/test-results/
 frontend/playwright-report/
 .DS_Store
+*.egg-info/
+/data/
+/artifacts/
+/runs/
+/upstream/
 
 # Obsidian per-device state and local plugins
 vault/.obsidian/workspace*.json

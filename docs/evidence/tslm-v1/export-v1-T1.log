@@ -1,0 +1,52 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:01,  6.90it/s]Loading weights:  10%|▉         | 42/426 [00:00<00:01, 205.56it/s]Loading weights:  20%|█▉        | 84/426 [00:00<00:01, 293.65it/s]Loading weights:  28%|██▊       | 120/426 [00:00<00:00, 316.02it/s]Loading weights:  37%|███▋      | 159/426 [00:00<00:00, 339.43it/s]Loading weights:  47%|████▋     | 201/426 [00:00<00:00, 363.85it/s]Loading weights:  58%|█████▊    | 248/426 [00:00<00:00, 384.12it/s]Loading weights:  68%|██████▊   | 291/426 [00:00<00:00, 390.81it/s]Loading weights:  78%|███████▊  | 331/426 [00:00<00:00, 386.96it/s]Loading weights:  87%|████████▋ | 371/426 [00:01<00:00, 384.15it/s]Loading weights:  97%|█████████▋| 413/426 [00:01<00:00, 393.06it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 351.05it/s]
+squelette écrit dans /home/hicham/pipe-v0/exports/tslm-v1-T1
+  predictions.csv : 402 clip_id déjà remplis (208 val + 194 test)
+  il ne reste qu'à remplir la colonne probability_leak et metadata.json
+
+  ⚠️ L'ordre des lignes n'a aucune importance, mais chaque clip_id doit
+     apparaître exactement une fois. Ne réordonne pas par autre chose que
+     le clip_id si tu produis le fichier autrement.
+T1 : 20/402 clips prédits
+T1 : 40/402 clips prédits
+T1 : 60/402 clips prédits
+T1 : 80/402 clips prédits
+T1 : 100/402 clips prédits
+T1 : 120/402 clips prédits
+T1 : 140/402 clips prédits
+T1 : 160/402 clips prédits
+T1 : 180/402 clips prédits
+T1 : 200/402 clips prédits
+T1 : 220/402 clips prédits
+T1 : 240/402 clips prédits
+T1 : 260/402 clips prédits
+T1 : 280/402 clips prédits
+T1 : 300/402 clips prédits
+T1 : 320/402 clips prédits
+T1 : 340/402 clips prédits
+T1 : 360/402 clips prédits
+T1 : 380/402 clips prédits
+T1 : 400/402 clips prédits
+T1 : 402/402 clips prédits
+run « tslm-v1-T1 » (AcousticQwenSP / Qwen3.5-4B V1) — /home/hicham/pipe-v0/exports/tslm-v1-T1
+  OK   fichiers du run présents   [couverture 2/2 fichiers]
+  OK   champs de metadata.json   [couverture 9/9 présents]
+  OK   identité du split déclaré   [couverture 1/1 champ]
+  OK   SHA256 du split déclaré   [couverture 1/1 champ]
+  OK   déclaration d'absence de réglage sur le test   [couverture 1/1 champ]
+  OK   aucune colonne interdite dans predictions.csv   [couverture 2 colonnes inspectées]
+  OK   colonnes requises dans predictions.csv   [couverture 2/2 colonnes requises]
+  OK   aucun clip_id en double   [couverture 402 lignes]
+  OK   aucun clip_id inconnu   [couverture 402 lignes]
+  OK   probabilités dans [0, 1]   [couverture 402 lignes]
+  OK   couverture des folds ('val', 'test')   [couverture 402/402 clips prédits]
+
+✅ CONFORME AU CONTRAT — le run peut être envoyé.
+   Aucune métrique n'a été calculée ici : conformité et évaluation sont séparées.
+
+=== distribution des probabilités (val + test) ===
+  n=402  valeurs distinctes=393  min=0.3776  max=0.5313
+  valeur la plus fréquente : 0.5313 sur 2 clips (0.5 %)
+  (plage resserrée — sans effet sur l'AUC, mais le score de Brier en pâtira ; sans importance si tu déclares les probabilités non calibrées)
+  couverture : test=194, val=208
+Run exporté : /home/hicham/pipe-v0/exports/tslm-v1-T1 ; aucune métrique finale calculée.

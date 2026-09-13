@@ -1,0 +1,26 @@
+{
+  "selected_epoch": 4,
+  "n_configs_compared": 3,
+  "selection_rule": "max_validation_roc_auc_of_group_median_probability; exact_tie_earliest_epoch",
+  "candidates": [
+    {
+      "epoch": 2,
+      "step": 150,
+      "validation_group_roc_auc": 0.9595588235294117,
+      "temporal_sha256": "bec2acbb1b1989356cc2be1d3bace43aec8f3b447acac75d71f557b068b3722d"
+    },
+    {
+      "epoch": 4,
+      "step": 300,
+      "validation_group_roc_auc": 0.9632352941176471,
+      "temporal_sha256": "183a1b1c29facf0e27f27efc7adab8c1bb13556cede06abc7f735672cbe7eb82"
+    },
+    {
+      "epoch": 8,
+      "step": 600,
+      "validation_group_roc_auc": 0.9264705882352942,
+      "temporal_sha256": "dd522c8c2ba95f15ea12a8752d8546c7db70d556806a71beab1b059586e9f04c"
+    }
+  ],
+  "test_labels_not_used_for_tuning": true
+}

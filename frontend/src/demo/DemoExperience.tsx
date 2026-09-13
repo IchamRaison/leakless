@@ -356,18 +356,18 @@ export default function DemoExperience() {
                 signal deserve <br />
                 <em>inspection?</em>
               </h2>
-              <ModelReadout />
+              <ModelReadout sample={active?.sample ?? null} />
               <p className="tslm-definition">
-                TSLM = Time-Series Language Model. Training and evaluation are
-                still in progress; no final held-out result is shown here.
+                TSLM = Time-Series Language Model. V2 runs only when its selected
+                checkpoint, validation threshold and decision evidence are loaded.
               </p>
               <div className="decision-note">
                 <span className="small-rule" />
                 <p>
                   A measured signal, then a human decision.
                   <br />
-                  No inspection recommendation is generated while TSLM is not
-                  evaluated yet.
+                  The model output remains evidence for human review, not an
+                  automatic inspection recommendation.
                 </p>
               </div>
               <a href="#evidence" className="evidence-link">

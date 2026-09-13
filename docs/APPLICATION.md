@@ -2,14 +2,16 @@
 
 ## État
 
-Premier jalon S0–S1 : API CPU et studio lançables, import WAV local, lecteur natif,
-waveform et spectrogramme. Contrats v0.1 proposés dans `src/pipe/contracts.py` et
-validés côté frontend avec Zod. Le gel collectif G1 reste à faire.
+L'API et le studio sont lançables : import WAV local, lecteur natif, waveform,
+spectrogramme et exécution manuelle de la restitution TSLM V2 d'Icham. Le backend
+est chargé une seule fois au démarrage. L'interface valide et recoupe
+`request_id`, `sample_id` et `input_sha256` avant d'afficher une réponse.
 
-Aucun adaptateur baseline/TSLM, poids, prétraitement partagé, WAV de développement
-audité ou résultat d'évaluation n'est livré dans cette branche. Les boutons
-d'inférence et de révélation sont donc désactivés. S2–S4, le bruit et le replay ne
-sont **pas** annoncés comme réalisés. Aucun entraînement/data pipeline modifié.
+Le code d'intégration est livré, mais aucun bundle sélectionné, `decision.json`
+ni `validation-evidence.json` n'est versionné dans le dépôt. Sans ces trois
+artefacts, `/health` et l'interface indiquent explicitement que le modèle est
+indisponible. Aucun score de remplacement n'est fabriqué. La baseline,
+l'évaluation publiée, le bruit et le replay modèle restent indisponibles.
 
 ## Installation et lancement
 
@@ -38,32 +40,42 @@ Studio : http://127.0.0.1:5173. OpenAPI interactive : http://127.0.0.1:8000/docs
 Les deux services restent sur localhost. Vite refuse un port occupé (strictPort).
 Le proxy `/api` cible le port 8000. Si un port doit changer, adapter explicitement
 la commande et `frontend/vite.config.ts` ; ne pas arrêter un service inconnu.
-Aucune variable secrète ni GPU n'est nécessaire. `vite preview` sert seulement
+Pour utiliser seulement les fonctions audio et l'interface, aucune variable
+secrète ni GPU n'est nécessaire. `vite preview` sert seulement
 le build statique et n'est pas le lancement du studio avec API.
 
 `requirements-api.txt` verrouille uniquement l'environnement CPU Safoan et ses
-tests. Le futur `pyproject.toml` et lock ML restent sous responsabilité d'Icham.
+tests. Le `pyproject.toml` et `requirements-ml.lock` d'Icham ciblent Python 3.12.
 Pour actualiser ce lock : `uv pip compile requirements-api.in --python python3.13
 --output-file requirements-api.txt`.
+
+Pour une inférence réelle, utiliser un environnement Python 3.12 contenant les
+dépendances de `requirements-api.txt` et `requirements-ml.lock`, puis renseigner
+les quatre variables documentées dans `.env.example` avant de lancer Uvicorn.
+`PIPE_TSLM_DEVICE=cpu` est la valeur par défaut ; `cuda` reste un choix explicite.
+Les trois chemins doivent pointer vers les artefacts cohérents produits par la
+chaîne de validation V2. L'application ne crée ni seuil ni décision par défaut.
 
 ## API opérationnelle
 
 | Méthode et route | Comportement |
 | --- | --- |
-| `GET /health` | Version, CPU, modèles indisponibles et capacités |
+| `GET /health` | Device, disponibilité/version V2, raison publique et capacités |
 | `GET /samples` | Imports de la session serveur, IDs opaques, sans labels ni noms source |
 | `POST /samples` | Multipart `file` WAV → métadonnées `Sample`, HTTP 201 |
 | `DELETE /samples/{id}` | Retrait de l'import en mémoire, HTTP 204 |
 | `GET /samples/{id}/audio` | Octets WAV d'origine et en-tête `X-Input-SHA256` |
 | `GET /samples/{id}/visualization` | Waveform min/max, spectrogramme et paramètres d'affichage |
-| `POST /predict` | JSON `sample_id`, `model_name`, `request_id` ; HTTP 503 explicite tant que non intégré |
+| `POST /predict` | JSON `sample_id`, `model_name`, `request_id` ; exécute TSLM V2 ou renvoie HTTP 503 explicite |
 | `GET /samples/{id}/label` | HTTP 404 : aucun label autorisé pour les imports |
 | `GET /evaluation` | HTTP 404 : aucune évaluation publiée intégrée |
 
 Les erreurs sont `{ "error": { "code": "…", "message": "…" } }` et portent un
 statut HTTP d'échec. `Prediction` suit le vault et interdit `ground_truth`.
-`request_id` est porté par la requête ; l'identité du résultat est définie par
-`sample_id`/`input_sha256`. Son écho et les adaptateurs restent à convenir à G1.
+`request_id` est renvoyé tel quel ; l'identité du résultat est définie par
+`sample_id`/`input_sha256`. La réponse porte aussi le seuil, sa version et son
+SHA, la provenance du texte, le fallback éventuel et le SHA de l'entrée WAV vue
+par le modèle. L'audit ML brut reste exclusivement côté serveur.
 
 Extension explicitement proposée au contrat v0.1 : importer d'abord via
 `POST /samples`, puis utiliser le même ID pour écoute, visualisation et future
@@ -109,13 +121,12 @@ Recette navigateur : importer un WAV de développement autorisé, vérifier dur�
 lecture, boucle, curseur, spectrogramme, erreurs et comparaison indisponible.
 Une recette sur signal synthétique ne valide pas G3 (vraie inférence attendue).
 
-## Intégration suivante — hors de ce premier jalon
+## Travail restant
 
 1. Nevil : livrer un WAV autorisé hors test scellé, sa provenance et le contrat
    final `SignalExample`/prétraitement. Safoan branche la bibliothèque démo.
-2. Icham et Vincent : livrer les points d'entrée de chargement/prédiction et
-   versions. Safoan charge chaque modèle une seule fois au démarrage, traite
-   timeout/concurrence et affiche le `Prediction` validé, sans fallback caché.
+2. Icham : livrer le bundle sélectionné, le reçu de validation et la décision
+   cohérents. Safoan peut alors exécuter la recette navigateur avec le modèle réel.
 3. Nevil : livrer `metrics.json`/provenance du run et, après G3, `mix_noise`.
    Safoan intègre les vues et la perturbation en conservant l'identité du signal.
 4. Après vraie inférence : valider G3, enregistrer un replay réel clairement

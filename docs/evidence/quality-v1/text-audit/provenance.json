@@ -1,0 +1,121 @@
+{
+  "status": "complete",
+  "purpose": "frozen_v1_text_audit_no_model_selection",
+  "started_at": "2026-09-12T20:54:58.224494+00:00",
+  "audit_commit": "c27a43fdd4de73ccc09f5f4bc02acd87c89f58f6",
+  "run_id": "tslm-v1",
+  "checkpoint": "/home/hicham/pipe-v0/artifacts/qwen-v1-1199789f-001/bundle",
+  "checkpoint_checksums_sha256": "b95569c50f5e1bbf3533bddc92530b5f285eb25dec999f83999f60ffd912d1ae",
+  "temporal_sha256": "183a1b1c29facf0e27f27efc7adab8c1bb13556cede06abc7f735672cbe7eb82",
+  "config_hash": "41fa12bf21be6463ae11b45ea8b5010409b526bbba366f83c7ba27b7c3122f70",
+  "scoring_spec": {
+    "version": "class-continuation-logprob-sum-softmax-v1",
+    "class_continuations": [
+      "leak;",
+      "no_leak;"
+    ],
+    "class_token_ids": [
+      [
+        273,
+        570,
+        26
+      ],
+      [
+        2083,
+        11414,
+        570,
+        26
+      ]
+    ],
+    "class_token_counts": [
+      3,
+      4
+    ],
+    "aggregation": "sum",
+    "length_normalization": false,
+    "class_terminator": ";",
+    "includes_eos": false,
+    "includes_description": false,
+    "calibration": "none"
+  },
+  "training_commit": "1199789f471acf79f7e82604e2a15acd45e0b2f7",
+  "split_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+  "split_audit_sha256": "1a3bd3c18ad6d886d42ecc85ba3a5cceaa45a9084102fc112b53e66782e29d61",
+  "run_files_sha256": {
+    "metadata.json": "0d8ed4919540987235a3fe98eb2d1cdd30fbe3482f9b2786eb50603f03fb795f",
+    "predictions.csv": "0c4dfb3f06c379fe48ce4f7456d38c67d165c80d5e083fbb3f350e0b2732d7b8"
+  },
+  "threshold": 0.46893701143635425,
+  "threshold_repr": "0.46893701143635425",
+  "threshold_source": "harness metrics.json runs[run_id].folds.val.threshold, verified on val only",
+  "threshold_provenance_sha256": "c8954eaf39e75cfe4c61b2f2501c1a923cd69801fac62949121b2409cf5397fa",
+  "threshold_rule": "harness.metrics.pick_threshold, validation cluster median macro-F1, score >= threshold",
+  "audio_integrity_rule": "MD5 des octets WAV vérifié par clip_id dans split_v2_audit.csv dont le SHA256 est gelé",
+  "fold_order": [
+    "val",
+    "test"
+  ],
+  "expected_counts": {
+    "val": 208,
+    "test": 194
+  },
+  "warmup_included_in_metrics": false,
+  "numpy_version": "2.5.2",
+  "source_sha256": {
+    "src/pipe/tslm/model.py": "2dc0a94d69580db6b2c60c96b7d45d4a9d9327080fd096af94a39e2e380151c0",
+    "src/pipe/tslm/predict.py": "da98da851a3e614053a7b9ad5b946d4b3caceefaeb8b13ce40c763a155cae486",
+    "src/pipe/tslm/preprocessing.py": "b9630f473af9c0f2514d3a8e408a79476368f306a2b15370826ac140c64036cd",
+    "scripts/timenet/leakless_acoustic/connector.py": "670db629b62102cdfb4d6a98aaaa3a52807b4b37b6055a8705a0f4fe0fde94e4",
+    "scripts/tslm/audit_text.py": "3b2604a43002ff0b6cb0ee42446bd50e1934107ab2c6ae9a8616e6c1dd84d09c",
+    "scripts/tslm/export_run.py": "95b9ca513f28f122f560718d9c9b53a10b5a235fd2971e55c713d7ff5ba39704",
+    "scripts/eval/harness/metrics.py": "7f0da97ddf86fc8bc976e81bae91289e7051f07792b82f4768a3971be8bd8518",
+    "scripts/eval/evaluate_predictions.py": "2e4f05f084989abe9f4b30233682cd73eb5b9fa13e271821e3fa2a8dcad4fd79",
+    "scripts/eval/harness/contract.py": "b6b97249e1b5993f2a69c42e665be30039bf36821f6ee594c5525186ca59dffe",
+    "scripts/eval/harness/split_loader.py": "54ee8349b4dffc1cf59ca285e48a07c7940198a3b781b0d587c1c090f8f5304d"
+  },
+  "checkpoint_load_elapsed_ms": 9229.841972999566,
+  "warmup": {
+    "clip_id": "c00c343da6afa",
+    "input_sha256": "daf17dc8d90df21bb484e9b05a3f2585c4201f9426b33e5bb8f1f130d9e34f35",
+    "api_payload": {
+      "schema_version": "0.1",
+      "sample_id": "daf17dc8d90df21bb484e9b0",
+      "input_sha256": "daf17dc8d90df21bb484e9b05a3f2585c4201f9426b33e5bb8f1f130d9e34f35",
+      "model_name": "tslm",
+      "model_version": "pipe-qwen3.5-4b-v1-1199789f-e4",
+      "preprocessing_version": "rms-hann256-hop128-band4-log1p-v1",
+      "prediction": "no_leak",
+      "class_scores": null,
+      "score_type": "none",
+      "abstained": false,
+      "abstention_reason": null,
+      "observations": [
+        {
+          "name": "greatest_mean_spectral_energy_band",
+          "value": "0-1000",
+          "unit": "Hz",
+          "method": "DSP:rms-hann256-hop128-band4-log1p-v1"
+        }
+      ],
+      "description": "Greatest mean spectral energy: 0-1000 Hz.",
+      "latency_ms": 1310.5980639993504,
+      "warnings": [
+        "V0 mécanique, qualité non évaluée ; aucune confiance calibrée.",
+        "Domaine expérimental ; ni localisation, ni validation terrain."
+      ],
+      "execution_mode": "live"
+    },
+    "error": null,
+    "generation_calls": [
+      {
+        "returned": [
+          "no_leak; Greatest mean spectral energy: 0-1000 Hz.\n"
+        ],
+        "error": null,
+        "elapsed_ms": 1309.4173129975388
+      }
+    ]
+  },
+  "summary_sha256": "a901e5385b5759b295bbb2389c26fa6e17dc23a926e582e0b84ae59057b3af3c",
+  "finished_at": "2026-09-12T20:59:59.302920+00:00"
+}

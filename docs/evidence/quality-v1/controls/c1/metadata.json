@@ -1,0 +1,39 @@
+{
+  "run_id": "c1",
+  "model_name": "C1 — forme d'amplitude seule, aucune information fréquentielle",
+  "checkpoint": "logreg(C=0.01)",
+  "training_commit": "c27a43fdd4de73ccc09f5f4bc02acd87c89f58f6",
+  "config_hash": null,
+  "split_filename": "split_v2.csv",
+  "split_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+  "timestamp": "2026-09-12T20:51:26+00:00",
+  "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
+  "test_labels_not_used_for_tuning": true,
+  "control_level": "C1",
+  "audio": "normalised",
+  "features": [
+    "facteur_crete",
+    "kurtosis",
+    "skewness",
+    "abs_p50",
+    "abs_p75",
+    "abs_p90",
+    "abs_p99",
+    "ratio_p99_p50",
+    "ecart_type_enveloppe"
+  ],
+  "feature_weights": {
+    "facteur_crete": -0.383008,
+    "kurtosis": -0.199259,
+    "skewness": 0.322464,
+    "abs_p50": 0.379546,
+    "abs_p75": 0.245524,
+    "abs_p90": -0.146886,
+    "abs_p99": -0.269101,
+    "ratio_p99_p50": -0.223083,
+    "ecart_type_enveloppe": 0.087099
+  },
+  "selected_C": 0.01,
+  "threshold": 0.532281,
+  "negative_control_shuffled_labels": false
+}
