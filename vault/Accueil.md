@@ -4,7 +4,7 @@ Icham
 
 ## Commencer ici
 
-**En cours : [[Rush Qwen 27B - exécution]]**, autorisé pour une heure, deux H100, train interne seulement. Gate technique/reload/parité réussi ;3fits lancés avec MB4/1époque figés. Aucune qualité27B mesurée à ce stade, stop apprentissage10:02Paris et bilan avant10:17.
+**Dernier échange : discussion uniquement.** Icham propose détection acoustique C1 → suivi temporel candidat LSTM → notification factuelle, Qwen sans rôle de décision. Proposition non adoptée et non implémentée ; [[Journal Icham#13 septembre — proposition acoustique, suivi temporel et notification]]. Les trois fits et évaluations internes du [[Rush Qwen 27B - exécution]] sont terminés ; contrôle du wrapper réussi, audit consolidé et archivage final encore à terminer. Aucun nouveau fit lancé dans cette discussion.
 
 [[Passation]] donne l'état réel. [[Évaluation qualité V1 - exécution]] donne les résultats mesurés ; [[Plan surveillance continue]] distingue l'ambition produit du prototype. [[Plan directeur agents]] conserve le plan initial et les contraintes communes. Aucune lecture du chat n'est nécessaire.
 

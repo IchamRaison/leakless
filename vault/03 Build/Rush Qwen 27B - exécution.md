@@ -24,6 +24,8 @@ Icham autorise une heure totale : 09:17:26–10:17:26 Paris ; arrêt propre des 
 
 ## État réel
 
+**Dernier état :** les trois fits et leurs évaluations sont terminés, avec reload neuf exact ; 63/47/41 mises à jour et 500/373/323 présentations, évaluations sur 98/225/275 clips internes réservés. Le wrapper score/predict passe son contrôle train en processus neuf (`api-check.json` sur H100-1, code `ec2587b`), sans validation de l'intégration web. Aucun processus de campagne restant au dernier contrôle, les deux GPU à 0 Mio/0 %. Seul le fold0 a son audit indépendant terminé ; audit consolidé, archivage final et bilan restent inachevés. Icham demande actuellement une discussion d'architecture, pas un nouveau fit : [[Journal Icham#13 septembre — proposition acoustique, suivi temporel et notification]]. Les paragraphes suivants retracent les jalons antérieurs.
+
 Téléchargements terminés sur les deux nœuds :31 fichiers chacun, reçus strictement identiques SHA256 `66cc72538886a2addb286dd3c7b553efb9da6e1328b4bbcc8733cb832103a994`, empreintes de tous les fichiers calculées. Code initial `dae7e22` publié : LoRA opt-in, mode train compatible checkpointing, logger microbatch/LoRA et chargement explicite des adaptateurs sans fusion ; runner séparant fit et évaluation. Tests TSLM sur H100-2 :172 réussis sans skip, dont transparence du logger avec microbatches4/2/1. Contrôle technique MB4 sur H100-1 lancé ; pas encore de fit de comparaison ni de qualité27B mesurée. Anciennes preuves/splits inchangés.
 
 Sources : [modèle officiel](https://huggingface.co/Qwen/Qwen3.8-27B), `configs/tslm/qwen27b_lora.json`. Historique antérieur inchangé : [[Diagnostic causal - exécution]].

@@ -1,5 +1,18 @@
 # Journal Icham
 
+## 13 septembre — proposition acoustique, suivi temporel et notification
+
+Icham demande une discussion uniquement : C1 + LSTM + LLM, Qwen chargé de formuler une notification WhatsApp à partir des résultats, sans interprétation du signal. Proposition non adoptée, aucun code, fit, déploiement ou message externe lancé pour cette piste.
+
+- Trois responsabilités cohérentes pour le produit : mesurer/classer l'acoustique, suivre un événement causalement, communiquer des faits. C1 actuel reste neuf descripteurs et une régression logistique, pas un encodeur acoustique préentraîné. Conserver les mesures et scores continus, pas seulement la classe dure, pour un éventuel lecteur temporel.
+- Distinguer structure acoustique dans la fenêtre et évolution entre fenêtres. Un LSTM peut viser la seconde, mais ne rétablit pas automatiquement l'information éliminée dans la première. Pour compter une durée observée, horodatage/persistance suffisent ; son avantage sur ces règles reste à mesurer en fausses alertes par durée surveillée, événements manqués et délai de détection.
+- Les clips actuels ne constituent pas des séquences continues avec débuts/fins annotés. Leur concaténation ne prouverait ni une chronologie réelle ni l'apprentissage de l'apparition d'une fuite. Futur apprentissage/évaluation événementiel : vraies séquences, séparation par acquisition/installation, modèle causal sans accès au futur.
+- Début observé, durée et déclenchement calculés hors LLM ; formulation « signal compatible avec une fuite observé depuis X », pas certitude sur le début physique. Gabarit suffisant pour un message fixe ; LLM optionnel pour reformulation, service applicatif responsable de l'envoi. Aucun besoin démontré de 27B ou LoRA pour cette seule restitution.
+- [[Brief et contraintes]] demande TimeNet et entraînement/fine-tuning TSLM. Classifieur séquentiel + LLM de notification n'y répond pas automatiquement ; faire valider le cadrage ou conserver le TSLM comme expérience comparée, sans renommer le pipeline artificiellement.
+- Source primaire consultée : [R-CRNN, 2018](https://arxiv.org/abs/1808.06627), exemple de caractéristiques acoustiques avec couche récurrente et localisation d'événements ; aucune performance de cet article transposée à PIPE.
+
+État des calculs antérieurs vérifié en lecture seule : trois fits27B et évaluations terminés ; les deux GPU sont libres. Contrôle du wrapper terminé, `rush-qwen27b-001/api-check.json` sur H100-1 (`ec2587b`) : quatre scores train reproduits exactement, une génération valide, WAV invalide rejeté. Fold2 possède son `evaluation/report.json` sur H100-2. Audit indépendant uniquement fold0 à ce stade (`audit-partial-fold0.json`) ; rapatriement final, audit des trois folds et publication du bilan restent à terminer. Ne pas confondre ce travail inachevé avec une autorisation d'implémenter la proposition.
+
 ## 13 septembre — rush27B autorisé et téléchargement vérifié
 
 Gate ensuite terminé et publié `b70a408` : base gelée vérifiée, MB4 avec30% de marge,4,693s/pas logger inclus, deux reloads neufs exacts et parité inter-nœuds0. Budget fixe1époque retenu avec25% de marge et coûts fixes mesurés ; aucun résultat réservé utilisé. Fits lancés sur code immuable `dae7e22` : handle76771/fold0 et30641/fold1 puis2. Un audit sans modèle, `29f92c3`, prépare la revérification des batches/cibles/compteurs/predictions/métriques ; pas encore exécuté sur la campagne incomplète. Les checkpoints techniques ne sont jamais réutilisés pour les fits.
