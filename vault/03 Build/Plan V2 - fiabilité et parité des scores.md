@@ -4,7 +4,7 @@ Icham — 2026-09-12
 
 ## Statut et objectif
 
-**Implémentation désormais autorisée par l'objectif utilisateur et en cours : [[V2 ML - exécution]].** Le texte ci-dessous conserve le plan validé comme référence. Au tour de sa rédaction, la consigne était « sans commencer » ; aucune action technique n'avait alors été lancée. Cette ancienne restriction ne remplace pas l'objectif d'implémentation actuel. Les portes de vérification, la préservation de V1 et l'interdiction de réglage sur le test consulté restent intégralement applicables.
+**13 septembre : enchaînement d'implémentation en pause.** Icham propose [[Diagnostic causal TSLM vs C1]] pour expliquer l'écart avant toute nouvelle recette. Le plan ci-dessous conserve la référence historiquement autorisée ; il ne doit plus déclencher automatiquement de nouveaux entraînements, refit final ou évaluation externe. [[V2 ML - exécution]] distingue résultats vérifiés et derniers fits dont les logs annoncent la fin, reçus à contrôler. Les portes de vérification, la préservation de V1 et l'interdiction de réglage sur le test consulté restent applicables. Le cap produit de la section7 n'est pas abandonné.
 
 Trois problèmes distincts : reproductibilité numérique, qualité de détection, cohérence de restitution. Corriger le premier ou rendre le texte cohérent ne prouve pas une amélioration de classification. Référence immuable : [[Évaluation qualité V1 - exécution]], rapport/code sur `feat/icham-quality-eval` (`c8dcb9d`, miroir final `16a6df0`). Aucun écrasement du bundle V1, des validations de campagne ou de T0–T3.
 

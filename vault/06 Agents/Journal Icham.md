@@ -1,5 +1,11 @@
 # Journal Icham
 
+## 13 septembre — changement de cap proposé, diagnostic avant nouvelle recette
+
+Icham propose d'expliquer le retard du TSLM sur C1 avant de chercher une nouvelle recette. [[Diagnostic causal TSLM vs C1]] distingue preuves numériques acquises, limites des sondes existantes et hypothèses concurrentes. Protocole borné à convenir ; aucune nouvelle expérience/implémentation, aucun refit ni score externe lancé. Relecture indépendante du cadrage : ne pas confondre AUC, décision au seuil et cohérence du texte, ni attribuer d'avance l'écart à Qwen.
+
+Contrôle SSH lecture seule à 03:19:52 Paris : logs A2 et C/fold1 `completed: true`, dernier C/fold2 encore actif. **Dernier contrôle à 03:23:29 : C/fold2 annonce aussi sa fin, aucun processus de campagne actif observé.** Trois reçus restent non intégralement vérifiés/rapatriés ; A0/A1/C0 restent publiés/vérifiés. Aucun arrêt de processus dans ce tour, aucune relance. Vault dédié récupéré (`git pull --ff-only`, déjà à jour) avant édition ; miroir actualisé explicitement après publication. Ancien objectif d'implémentation en pause, pas marqué achevé.
+
 ## 13 septembre — A1 et C0 terminés, 3/6 fits vérifiés
 
 A1 :188 étapes, AUC clip/groupe0,562541/0,735577 ; C0 :252 étapes, AUC0,498630/0,500000. Reçus et fichiers revérifiés, poids Qwen identiques et acoustique modifiée ; artefacts publiés `fa1b9b4`. Les résultats partiels restent nettement derrière C1 ; aucune sélection/recette/score modifié. Les files poursuivent A2 (PID70853, handle88307) et C/fold1 puis2 (PID70917, handle77795). Trois fits restent à terminer, aucun score externe. [[V2 ML - exécution]].

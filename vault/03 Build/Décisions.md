@@ -2,6 +2,12 @@
 
 Icham
 
+## 2026-09-13 — Diagnostiquer l'écart avant une nouvelle recette
+
+Icham propose un nouvel objectif de diagnostic causal : données, représentation, supervision, optimisation, utilisation du signal par Qwen et scoring. [[Diagnostic causal TSLM vs C1]] cadre cette proposition ; le protocole détaillé et son budget restent à convenir, aucune nouvelle expérience lancée. Préférer « expliquer l'écart observé entre les pipelines » à l'affirmation préalable « le TSLM exploite moins bien les données ». C1 n'est pas une vérité terrain ; la parité réparée ne démontre pas une amélioration de discrimination.
+
+La suite d'implémentation V2 est en pause, sans refit automatique. Conserver les résultats de l'ancienne campagne et les hypothèses non départagées ; ne pas déclarer l'objectif atteint ni réécrire les résultats historiques. Les trois approches du benchmark produit ci-dessous restent le cap final, pas la prochaine recette à lancer.
+
 ## 2026-09-13 — Valeur finale du langage et des séries à démontrer séparément
 
 Icham demande explicitement d'ajouter cet objectif au vault et de reprendre V2 : comprendre l'évolution d'un événement, exploiter les signaux/contextes réellement disponibles et permettre une investigation interactive. Un score + bande DSP + phrase fixe ne démontrent pas l'intérêt d'un TSLM. Le benchmark final comparera trois approches, sans présumer laquelle doit gagner : classifieur/DSP/gabarit ; classifieur/mesures/contexte/Qwen ; TSLM/séries/contexte. [[Plan V2 - fiabilité et parité des scores#7. Objectif final — démontrer la valeur du TSLM]].

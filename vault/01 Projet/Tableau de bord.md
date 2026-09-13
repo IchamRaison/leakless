@@ -2,6 +2,13 @@
 
 Icham
 
+## Priorité actuelle — 13 septembre
+
+- [x] Proposition d'Icham consignée : [[Diagnostic causal TSLM vs C1]], expliquer l'écart avant une nouvelle recette ; ancien enchaînement V2 en pause.
+- [ ] Vérifier/rapatrier les trois reçus manquants de l'ancienne campagne sans relancer les fits. Logs A2/C/fold1/C/fold2 terminés ; aucun processus de campagne actif observé à 03:23:29 Paris.
+- [ ] Convenir du premier bloc d'expériences discriminantes et de son budget sur développement ; aucune expérience nouvelle exécutée à ce stade.
+- [ ] Produire la matrice causes démontrées / hypothèses non soutenues dans les conditions testées / inconnues. Aucun refit ni confirmation externe automatique.
+
 ## Prêt
 
 - [x] Dépôts privés code et vault créés.
@@ -41,17 +48,17 @@ Icham
 - [x] C et reload PASS, delta zéro, SHA `50ec36e9…` ; séquence `98052` terminée normalement, pas de relance.
 - [x] Runner et évaluateur externe publiés `b750f5d`, 144 tests runtime passent ; aucun fit réel encore.
 - [x] Assemblage final `c13fd47`, 156 tests runtime sans skip ; campagne A/C préinscrite avant fit, SHA `5c5e0b4b…`, preuve publiée `550c7a6`.
-- [ ] Six fits TSLM et douze fits C1 sur les mêmes trois folds train ; inspection explicite après classement avant tout refit final.
+- [ ] Bilan complet de l'ancienne campagne six fits TSLM /douze fits C1 ; pas de prolongation ni de refit automatique, priorité au diagnostic causal.
 - [x] Douze fits C1 terminés ; `C=0.01` retenu sur train, moyenne AUC groupe0,948718 /clip0,891382, pas une confirmation externe.
 - [x] A0 terminé/vérifié, preuve `83bcbe0` : AUC clip/groupe0,710/0,760 sur98 clips réservés ; Qwen inchangé. Pas de conclusion A/C sur ce seul fold.
 - [x] A1 et C0 terminés/vérifiés, artefacts `fa1b9b4` ; 3/6 fits TSLM complets, résultats partiels derrière C1.
-- [ ] A2 (`88307`) et C/fold1→fold2 (`77795`) toujours actifs ; ne pas relancer A0/A1/C0 terminés.
+- [ ] Vérifier les trois derniers reçus : logs A2/C/fold1/C/fold2 complets, aucun processus de campagne actif observé à 03:23:29 Paris. Ne pas relancer les fits terminés.
 - [x] Exporteur inclus dans les156 tests runtime réussis ; audit réel sur modèle final encore à réaliser.
 - [x] Générateur Markdown V2 et compte des contradictions affichées publiés `0c99a3a`, 162 tests runtime passent ; rendu réel après comparaison complète, pas de nouveau moteur de métriques.
 - [x] Objectif final utilisateur ajouté : évolution d'événement/investigation et benchmark gabarit → Qwen sur mesures → TSLM sur séries. [[Plan V2 - fiabilité et parité des scores#7. Objectif final — démontrer la valeur du TSLM]].
 - [ ] Construire et évaluer ce benchmark final sur des événements/historiques/contextes réservés ; ne pas confondre campagne A/C et preuve d'utilité du TSLM.
 - [x] Reprise dans clone sain `/home/animus/ehl-hackathon-zurich-v2-recovery`, `e9c8ddd` publié ; ancien Git endommagé conservé, aucun reset/destruction.
-- [ ] Après parité : cohérence de restitution, diagnostic train et campagne V2 bornée ; confirmation sur de nouvelles données réservées, pas sur le test V1 déjà consulté.
+- [ ] Suite V2 mise en pause au profit de [[Diagnostic causal TSLM vs C1]] ; restitution réelle et confirmation externe restent non exécutées, pas des tâches terminées.
 - [x] Icham a levé l'exclusivité Nevil puis lancé l'objectif d'évaluation complète. [[Protocole évaluation]].
 - [x] Icham autorise l'implémentation V1 complète jusqu'à T0/T1–T3 ; runtime H100 et données existantes revérifiés. [[V1 ML - exécution]].
 - [x] Scoring continu implémenté, huit tests CPU et contrôle H100 sur quatre clips train réussis ; aucune évaluation de qualité. [[V1 ML - exécution]].
