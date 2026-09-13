@@ -8,7 +8,7 @@ Icham — 2026-09-13
 
 **D0 terminé, rapatrié et vérifié :1516 observations/3032 forwards, zéro apprentissage.** A reçu `4810270a…`, preuves `f64c943` ; C reçu `c6d2121f…`, preuves `9dd5b73`. Reçus et tous fichiers vérifiés localement/distamment avec `finished()`. Reload98 et échanges d'entrées complètes reproduisent exactement leurs scores ; poids inchangés dans chaque état. Revue indépendante des694 lignes A et822 lignes C : identités, cibles, masques et agrégats concordants. Ne pas relancer D0. Code `733b9c6`,181 tests runtime sans skip, préinscription SHA `cd2c3916cbac2b61b979f463fa793dec1be3585c6e558d7743a0d4c43a7e6d1f`. Checkout sain `/home/animus/ehl-hackathon-zurich-v2-recovery`, branche `feat/icham-v2-reliability` ; ancien Git endommagé à préserver.
 
-**D1 implémenté, testé et préinscrit, observations à lancer A puis C.** Code `306d330`, 203 tests runtime sans skip (152 TSLM + 51 évaluation), dont les 13 tests D1 et ses quatre contrôles PyTorch de vrai recalcul/restauration. Préinscription SHA `37cfcae18aa00cc402001d15f53f2df6a1802a9c0fd1c6ec13f7ca210e00ce05`, preuves publiées `1f89933`, 23 empreintes source revérifiées localement. Revue indépendante : aucun blocage statique trouvé ; traversée Qwen réelle encore à vérifier. Aucun gain ou politique adopté, collecte conditionnelle toujours en dernier recours.
+**D1 terminé, rapatrié et vérifié : 3 588 forwards, aucun apprentissage.** A `640d29c` / reçu `f9402c5d…`, C `9c163d4` / reçu `00d8de16…`. Traversée Qwen réelle sur 598 clips par modèle, trois politiques ; entrées, états cachés et poids identiques entre voies, reproduction exacte de D0. Résultats et limites ci-dessous : résolution accrue, mais pas d'amélioration uniforme ni de correction suffisante de l'écart à C1. Code `306d330`, 203 tests runtime sans skip (152 TSLM + 51 évaluation), préinscription SHA `37cfcae18aa00cc402001d15f53f2df6a1802a9c0fd1c6ec13f7ca210e00ce05`, publiée à `1f89933` avant observation. Aucun gain final ni politique adopté, collecte conditionnelle toujours en dernier recours.
 
 ## Inventaire V2 complet — acquis de développement
 
@@ -46,6 +46,7 @@ Les contrôles diagnostiques ci-dessous couvrent seulement les étapes 1 à 5 ; 
 - [x] D0 observateur/runner testés, préinscrit puis exécuté ; résultats et revue indépendante consignés ci-dessous.
 - [x] Données/comparaison : mappings/cibles et supports examinés en lecture seule ; limites de diversité et d'acquisition consignées ci-dessous. Aucune causalité ni exactitude physique des annotations démontrée par ces contrôles.
 - [x] D0 : vrais scores/NLL train, alignement structurel, contrôles de reload et interventions, états initial/terminal. Les écarts numériques loss/scoring restent une piste ouverte.
+- [x] D1 : trois politiques de tête aux mêmes checkpoints A0/C0, contrôles exacts, artefacts scellés et résultats ci-dessous ; pas de relance ni de sélection de politique.
 - [ ] Avant tout nouveau fit : journalisation classe/description/EOS, comptes exacts, gradients/clipping/mises à jour et résumés d'époque testés puis vérifiés réellement.
 - [ ] Test de mémorisation32 à budget préinscrit, si nécessaire ; verdict limité à la capacité observée.
 - [ ] Contrastes complémentaires choisis selon preuves : lecteur non linéaire, tête sans Qwen, neuf mesures par voie entraînable ; exécution ou omission justifiée explicitement, jamais marquée réussie sans preuve.
@@ -62,9 +63,9 @@ Critères détaillés : [[Diagnostic causal TSLM vs C1#Critère de complétion d
 
 ## Prochaine action
 
-Lancer D1 A puis C dans des processus distincts depuis `/home/hicham/pipe-v0/code-causal-306d330`, avec `PYTHONPATH=src /home/hicham/pipe-v0/.venv-repro/bin/python scripts/tslm/diagnose_head_precision.py observe --output /home/hicham/pipe-v0/artifacts/causal-d1-306d330-001 --variant A` (puis `C`). Préinscription publiée avant toute observation ; 1 794 forwards par modèle, aucune génération ni apprentissage. Ne pas relancer un dossier incomplet sans localiser l'erreur et fixer une reprise explicite. Reçus/poids/inputs et reproduction D0 à vérifier avant interprétation.
+**Préparer une seule sonde non linéaire des 256 valeurs exactes du TSLM**, avec les trois folds groupés train déjà figés. D1 ne résout pas le retard ; la sonde linéaire faible ne départage pas représentation et capacité de lecture. Choisir une famille/configuration et un budget borné, préinscrire les critères avant fit, puis réutiliser les métriques et agrégations existantes. Comparer à la sonde linéaire et à C1 fixe `C=1` déjà mesurés sur les mêmes folds ; ne pas remplacer discrètement ce témoin par le C1 retuné `C=0,01`. Le nouveau contraste n'est pas encore implémenté ni exécuté. Aucun ajout de données ou nouvelle recette Qwen à ce stade.
 
-Tests et préinscription locaux : `docs/evidence/tslm-v2/causal-d1-001/`, logs runtime `/home/hicham/pipe-v0/quality-causal-306d330/`. D0 reste scellé, handles 30906/67983 terminaux, aucun nouveau score D0 à produire. H100 vérifiée libre avant D1 ; aucune instance arrêtée ou supplémentaire créée. Aucun mini-entraînement avant le contraste numérique.
+D0 et D1 restent scellés ; aucun score à reproduire pour récupérer les résultats. D1 : handles A 22963 / C 5435 terminés avec code zéro, respectivement 312,744 s et 339,558 s. H100 après C : 0 Mio / 0 %, instance laissée allumée. Artefacts locaux `docs/evidence/tslm-v2/causal-d1-001/`, runtime `/home/hicham/pipe-v0/artifacts/causal-d1-306d330-001/`, logs `/home/hicham/pipe-v0/quality-causal-306d330/`.
 
 ## D0 — résultats et limites vérifiés
 
@@ -106,6 +107,39 @@ Les interventions modifient les scores. A : deltas absolus moyens0,030676 (donne
 - Rapporter résolution des marges, deltas de scores/NLL et AUC par clip/groupe séparément pourfit etréservés. Une grille plus fine ne prouve pas un meilleur classement ; un gain ne devient ni une preuve externe ni une explication de tout l'écart à C1. Aucune sélection du meilleur résultat ni recherche de seuil. Évaluer aussi les écarts du témoin réarrondi avant d'attribuer un effet au seul arrondi.
 
 La journalisation des futurs fits est implémentée (`66f390b`) et testée : neuf tests runtime, dont équivalence exacte avec/sans observation des losses, gradients, mises à jour, moments et états aléatoires sur le vrai `train_epoch` et un petit décodeur différentiable. Preuves `docs/evidence/tslm-v2/training-observations-001/`, publiées `306d330`. Elle n'a pas encore accompagné un nouvel entraînement sur les vrais poids Qwen. Statistiques détachées sans forward supplémentaire, sommes/comptes par clip/époque, gradients avant/après clipping et mises à jour. La NLL binaire officielle reste une observation séparée à checkpoint figé, non reconstructible depuis le seul forward supervisé.
+
+## D1 — résultats et portée
+
+Commandes exécutées une fois par modèle dans des processus distincts, depuis `/home/hicham/pipe-v0/code-causal-306d330` : `PYTHONPATH=src /home/hicham/pipe-v0/.venv-repro/bin/python scripts/tslm/diagnose_head_precision.py observe --output /home/hicham/pipe-v0/artifacts/causal-d1-306d330-001 --variant A`, puis `--variant C`. Aucun pas d'optimiseur, génération, réglage de seuil, validation officielle, test ou réserve externe.
+
+`run_v2_campaign.finished()` vérifie localement et sur le serveur les reçus et toutes leurs empreintes contre la préinscription `37cfcae1…`. A : `f9402c5d43ceb9f36b596050e27985338ade0c1a7528ba9502b20b4b4bda2cac` ; C : `00d8de1658cb4cec3914b0aef4d5969f8e5dc9c417563af9fe82b309b08ddd54`. Chaque reçu compte 598 clips et 1 794 forwards ; poids avant/après inchangés, inputs/masques/hidden states identiques entre voies, écart maximal du score BF16 avec D0 égal à zéro.
+
+Revue indépendante CPU des 598 lignes de chaque modèle : reçus/préinscription/identités/D0 conformes, scores/NLL/agrégats et comparaisons reconstruits avec le harness, aucun blocage détecté. Les logits FP32 capturés avant réarrondi sont identiques entre les deux voies alternatives, et leur réarrondi BF16 est exact. Cette vérification porte sur les logits de décision capturés, pas sur tout le vocabulaire.
+
+Mesures issues des `summary.json`, arrondies ici à six décimales ; mêmes partitions de développement, pas de moyenne mêlant fit et réservé :
+
+| Modèle / population | Tête | AUC clip | AUC groupe | NLL binaire |
+|---|---|---:|---:|---:|
+| A / 500 fit | BF16 originale | 0,639307 | 0,730769 | 0,675040 |
+| A / 500 fit | FP32 | 0,688723 | 0,774038 | 0,674231 |
+| A / 500 fit | FP32 réarrondie BF16 | 0,640101 | 0,730769 | 0,675040 |
+| A / 98 réservés | BF16 originale | 0,709589 | 0,759615 | 0,740530 |
+| A / 98 réservés | FP32 | 0,722740 | 0,745192 | 0,742207 |
+| A / 98 réservés | FP32 réarrondie BF16 | 0,708493 | 0,759615 | 0,740531 |
+| C / 500 fit | BF16 originale | 0,878461 | 0,730769 | 0,577496 |
+| C / 500 fit | FP32 | 0,879109 | 0,731971 | 0,578160 |
+| C / 500 fit | FP32 réarrondie BF16 | 0,878461 | 0,730769 | 0,577412 |
+| C / 98 réservés | BF16 originale | 0,498630 | 0,500000 | 0,573121 |
+| C / 98 réservés | FP32 | 0,504658 | 0,509615 | 0,576711 |
+| C / 98 réservés | FP32 réarrondie BF16 | 0,498630 | 0,500000 | 0,573121 |
+
+Les premières marges distinctes BF16→FP32 passent de 7→471 (A fit), 4→98 (A réservé), 41→473 (C fit) et 22→98 (C réservé). **La tête numérique change réellement le scoring à poids fixes ; supprimer cette grille ne suffit pas à rendre le modèle bon.** A gagne en AUC clip fit, mais son AUC groupe réservée et sa NLL se dégradent ; C reste presque au hasard sur les groupes réservés. Aucun FP32 promu automatiquement, aucun gain de généralisation ou de calibration établi.
+
+Le témoin FP32 réarrondi n'est pas exactement la tête BF16 originale : A conserve toutes les premières marges, mais 22 scores complets changent, maximum 0,000020085 ; C change 41 scores, maximum 0,027828214 sur fit, avec un écart maximal de première marge de 0,125. Ses AUC restent identiques à l'originale. Les deux calculs matriciels peuvent différer près d'une frontière d'arrondi ; ne pas attribuer tout le contraste original→FP32 au seul cast final. FP32 versus son propre réarrondi isole la résolution de sortie de ce calcul FP32. Cela ne teste ni tous les calculs internes de Qwen ni l'effet de la précision pendant l'entraînement, et ne résout pas directement la divergence loss/scoring entre contextes de forward.
+
+Le seul changement de première marge C concerne le clip fit `c51eb51347f21` : −0,625→−0,75. Logit `no` original 25,75 ; recalcul FP32 25,8125534, juste au-dessus de la frontière 25,8125, donc réarrondi 25,875. Exemple vérifié de la différence entre produits matriciels, pas anomalie à masquer ni justification pour relancer D1.
+
+**Verdict causal limité :** effet numérique du scoring démontré ; hypothèse « la seule tête FP32 corrige le retard » non soutenue pour ces deux checkpoints/fold0. Optimisation, supervision et capacité de lecture/représentation restent à départager. Prochaine étape choisie : sonde non linéaire bornée sur la représentation exacte, pas collecte immédiate ni nouvelle grande campagne.
 
 ## Audit des populations et des cibles
 

@@ -11,8 +11,9 @@ Icham
 - [x] Objectif de diagnostic autorisé ; premier bloc D0 borné à1516observations A0/C0, sans apprentissage, protocole fixé avant scores.
 - [x] D0 implémenté `733b9c6`, 181 tests runtime sans skip ; préinscription `cd2c3916…` publiée avant observation, preuves `3e425b4`.
 - [x] D0 A/C :1516 observations vérifiées et revues, preuves `f64c943` / `9dd5b73`, zéro apprentissage. Reload et échanges complets exacts, aucune relance.
-- [x] D1 implémenté/testé/préinscrit : code `306d330`, 203 tests runtime sans skip, préinscription `37cfcae1…` et preuves `1f89933`. Aucun score D1 encore.
-- [ ] D1 numérique : exécuter A puis C, comparer tête BF16/FP32/FP32 réarrondie, 3 588 forwards prévus sans fit ; [[Diagnostic causal - exécution]].
+- [x] D1 implémenté/testé/préinscrit : code `306d330`, 203 tests runtime sans skip, préinscription `37cfcae1…` et preuves `1f89933` avant observation.
+- [x] D1 A/C exécutés : 3 588 forwards sans fit, artefacts `640d29c` / `9c163d4`, poids/entrées inchangés et reproduction D0 exacte ; [[Diagnostic causal - exécution#D1 — résultats et portée]]. Pas de politique FP32 adoptée ni correction uniforme de l'écart à C1.
+- [ ] Borner/préinscrire une sonde non linéaire sur les 256 valeurs exactes, mêmes trois folds train ; une configuration, harness et comparateurs existants, pas de collecte ni nouveau fit Qwen à ce stade.
 - [ ] Vérifier la journalisation sur un prochain fit réel : implémentation `66f390b`, neuf tests runtime de transparence réussis, preuves `306d330` ; aucun nouvel entraînement lancé.
 - [ ] Produire la matrice causes démontrées / hypothèses non soutenues dans les conditions testées / inconnues. Aucun refit ni confirmation externe automatique.
 - [x] Audit train/cibles : les trois entraînements contiennent les deux classes ;242 vrais sans-fuite concentrés dans7 groupes. Limites dans [[Diagnostic causal - exécution#Audit des populations et des cibles]].

@@ -1,5 +1,13 @@
 # Journal Icham
 
+## 13 septembre — renvoi goal unique et D1 A/C terminé
+
+Icham confirme que le prompt du `/goal` doit seulement renvoyer au vault. Point d'entrée explicite ajouté à [[Diagnostic causal TSLM vs C1]] ; les dix étapes, conditions et critères restent dans cette source, aucun second goal créé ni diagnostic déclaré fin de l'objectif.
+
+D1 A puis C terminés normalement, sans relance : 598 clips × 3 voies par modèle, 3 588 forwards, zéro fit. Artefacts scellés rapatriés et revérifiés via `finished()` local/serveur, A publié `640d29c` / reçu `f9402c5d…`, C `9c163d4` / reçu `00d8de16…`. Poids/inputs/hidden states inchangés, BF16 reproduit D0 exactement. AUC groupe des 98 réservés : A 0,759615→0,745192 en FP32, C 0,500000→0,509615. Plus de résolution, sans correction uniforme du retard ni recette promue ; détail et limites du témoin réarrondi dans [[Diagnostic causal - exécution#D1 — résultats et portée]].
+
+Revue indépendante CPU des 598 lignes A et 598 lignes C : scores, NLL, agrégats et invariants concordants. Différence BF16/réarrondi C sur une première marge et 41 scores complets explicitement conservée ; aucun blocage détecté. H100 après C : 0 Mio / 0 %, instance allumée. Prochaine action : borner/préinscrire un seul lecteur non linéaire des entrées exactes, mêmes trois folds et harness. Aucun nouveau dataset, fit Qwen, score externe ni seuil adopté. Notes distantes intégrées avant édition ; publication de la source puis rafraîchissement explicite des miroirs.
+
 ## 13 septembre — D1 testé et préinscrit avant toute observation
 
 Reprise du goal élargi après publication des étapes 6 à 10 (`622eeb4`, miroir `ecfbae9`) : progrès documentaire acquis, expériences non terminées. Code D1 et ses tests lus entièrement, revue indépendante sans blocage statique. Local : neuf tests passent, quatre ignorés faute de PyTorch ; runtime ML : les 13 passent, puis 152 tests TSLM et 51 tests évaluation sans skip. Code publié `306d330`, snapshot `/home/hicham/pipe-v0/code-causal-306d330`, tests CPU sans chargement des vrais poids Qwen.

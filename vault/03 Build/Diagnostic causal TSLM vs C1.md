@@ -2,6 +2,16 @@
 
 Icham — 2026-09-13
 
+## Point d'entrée du goal
+
+Le prompt reste un simple renvoi vers cette note, comme demandé par Icham :
+
+```text
+/goal /home/animus/ehl-hackathon-zurich-vault/03 Build/Diagnostic causal TSLM vs C1.md implémente ça
+```
+
+Maintenir ici le périmètre, l'ordre et les critères ; maintenir l'avancement et les preuves dans [[Diagnostic causal - exécution]]. Ne pas dupliquer le plan dans le prompt ni créer un second goal. Les dix étapes ci-dessous restent la référence, y compris les conditions de diversification et la preuve produit finale.
+
 ## Statut et objectif
 
 **Périmètre du goal élargi par Icham le 13 septembre aux étapes 1 à 10 ci-dessous.** Le prompt `/goal` renvoie à ce fichier : celui-ci définit donc l'objectif complet, pas seulement le diagnostic. Les étapes 6 à 10 font désormais partie du travail à réaliser, avec leurs conditions de passage ; terminer le diagnostic ne termine plus le goal. [[Diagnostic causal - exécution]] conserve l'état réel et les preuves. Cette extension documentaire ne constitue ni une expérience exécutée ni une reprise automatique de l'ancienne recette V2.
@@ -20,6 +30,7 @@ La première phase conserve son objectif causal :
 - **Observé :** les six fits sont désormais vérifiés, bilan complet dans [[Diagnostic causal - exécution]], artefacts `b65042a` après `83bcbe0` / `fa1b9b4`. Moyennes AUC groupe : A=0,671474 ; C=0,562500 ; C1=0,948718 sur les mêmes folds de développement. Aucun progrès final ni refit revendiqué.
 - **Observé :** la sonde linéaire sur les 256 valeurs TimeNet exactes classe moins bien que les neuf descripteurs C1, sur les trois folds train. Cela ne prouve pas que toute information utile a disparu. Preuve `docs/evidence/tslm-v2/train-diagnostic-001/probes.json`.
 - **Observé :** Qwen est gelé, les composants acoustiques changent et leurs gradients sont non nuls. L'autopsie de huit groupes train au checkpoint V1 final n'a pas trouvé une perte dominée par la description. Elle n'écarte ni un problème en début d'apprentissage ni un mauvais signal de gradient.
+- **D0/D1 exécutés :** sensibilité aux entrées et apprentissage partiel mesurés ; changer la précision de la tête modifie les scores à poids fixes, mais ne corrige pas uniformément le classement hors groupes. D1 : 3 588 forwards, aucun apprentissage, preuves A `640d29c` / C `9c163d4`. Aucun passage automatique au FP32 ; prochaine question, l'information exploitable par une sonde non linéaire sur les mêmes 256 valeurs. [[Diagnostic causal - exécution#D1 — résultats et portée]].
 
 Les commandes, empreintes et limites détaillées restent dans [[V2 ML - exécution]]. Les résultats V1 test ne sont pas directement comparables aux folds V2 train ; aucun réglage ne doit partir du test déjà consulté.
 
@@ -38,7 +49,7 @@ Les commandes, empreintes et limites détaillées restent dans [[V2 ML - exécut
 
 Préalables déjà réalisés : inventaire des six fits, contrôles de parité antérieurs et observations D0. Réutiliser leurs preuves ; ne pas les relancer pour recommencer ce plan. La numérotation ci-dessous reprend l'enchaînement expliqué à Icham.
 
-1. **Précision numérique :** terminer les tests et la préinscription D1, puis comparer les têtes BF16, FP32 et FP32 réarrondie sur les mêmes checkpoints et entrées, sans apprentissage.
+1. **Précision numérique — exécutée :** D1 compare les têtes BF16, FP32 et FP32 réarrondie sur les mêmes checkpoints et entrées, sans apprentissage ; tests, préinscription et artefacts conservés. Ne pas relancer.
 2. **Interprétation :** quantifier l'effet observé et choisir le contraste suivant ; ne pas adopter une correction numérique sur la seule apparence d'une grille plus fine.
 3. **Représentation :** si nécessaire, tester un lecteur non linéaire borné sur les entrées exactes du TSLM, mêmes groupes de développement et comparaison C1.
 4. **Apprentissage :** suivant les preuves, mémorisation sur 32 clips fixés, journalisation des pertes/gradients/mises à jour, contournement de Qwen et mesures C1 par voie entraînable. Chaque contrôle doit départager une question ; pas six campagnes simultanées.
@@ -129,7 +140,7 @@ Ce dernier recours d'amélioration correspond à l'étape 7 du goal élargi ; le
 
 **Ajout demandé par Icham le 13 septembre ; planifié, non lancé.** À activer seulement si les autres pistes diagnostiques et les corrections justifiées n'apportent pas une amélioration suffisante sur développement. Juger cette amélioration avec les critères de qualité annoncés avant comparaison, pas avec la seule baisse de loss ; aucun seuil de gain arbitraire ajouté ici.
 
-**Précision d'Icham : la diversité globale est visée, pas seulement celle des sans-fuite.** La faible diversité des négatifs est un constat particulier. Examiner aussi les types et intensités de fuite, sites, tuyaux/matériaux, capteurs et montages, pressions/débits, bruits et états de fonctionnement. Les diagnostics restants, dont D1, ne sont ni terminés ni des échecs ; leur omission n'est pas autorisée par ce complément.
+**Précision d'Icham : la diversité globale est visée, pas seulement celle des sans-fuite.** La faible diversité des négatifs est un constat particulier. Examiner aussi les types et intensités de fuite, sites, tuyaux/matériaux, capteurs et montages, pressions/débits, bruits et états de fonctionnement. D1 est maintenant exécuté ; les autres diagnostics conditionnels non exécutés ne sont pas des échecs, et leur omission doit être justifiée, pas autorisée par ce complément.
 
 - Élargir les acquisitions **avec fuite et réellement sans fuite** dans ces conditions distinctes. Ne pas remplacer les vrais sans-fuite par davantage de bruits environnementaux, ni supposer que plus de clips signifie plus de situations indépendantes.
 - Privilégier des acquisitions **fuite/sans fuite comparables**, avec conditions et sessions documentées. Chercher davantage de situations indépendantes, pas simplement davantage de fenêtres découpées dans les mêmes enregistrements.
