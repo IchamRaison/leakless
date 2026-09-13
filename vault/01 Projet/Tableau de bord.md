@@ -5,6 +5,7 @@ Icham
 ## Priorité actuelle — 13 septembre
 
 - [x] Proposition d'Icham consignée : [[Diagnostic causal TSLM vs C1]], expliquer l'écart avant une nouvelle recette ; ancien enchaînement V2 en pause.
+- [x] Revue Claude intégrée : contrôles manquants ajoutés et conclusions non démontrées nuancées. [[Diagnostic causal TSLM vs C1#Checklist enrichie après la revue de Claude]]. Aucun contrôle nouvellement exécuté ni logger modifié.
 - [ ] Vérifier/rapatrier les trois reçus manquants de l'ancienne campagne sans relancer les fits. Logs A2/C/fold1/C/fold2 terminés ; aucun processus de campagne actif observé à 03:23:29 Paris.
 - [ ] Convenir du premier bloc d'expériences discriminantes et de son budget sur développement ; aucune expérience nouvelle exécutée à ce stade.
 - [ ] Produire la matrice causes démontrées / hypothèses non soutenues dans les conditions testées / inconnues. Aucun refit ni confirmation externe automatique.
@@ -24,6 +25,14 @@ Icham
 - [x] Safoan : branche `feat/safoan-app` publiée ; Entire installé et hooks Git vérifiés. Approbation des hooks Codex et capture réelle encore à faire : [[Journal Safoan]].
 
 ## En cours et à vérifier
+
+- [x] Safoan : code TSLM V2 intégré à l'API/UI sur
+  `feat/demo-temporal-building`, commit `bba67ff` ; 23 tests API, 35 frontend,
+  build et 12 tests wrapper réussis. [[Journal Safoan]].
+- [ ] Safoan/Icham : fournir les trois artefacts V2 cohérents et exécuter la
+  recette sur poids réels ; aucun checkpoint/décision/reçu final n'est dans Git.
+
+## À lancer — pas encore vérifié
 
 - [x] Plan qualité V1 complet exécuté en worktree isolé, sans modification du modèle ; [[Évaluation qualité V1 - exécution]].
 - [x] Préinscription/code `c27a43fd` publiés, 32 tests runtime cible réussis, 1 000 MD5/formats WAV et huit SHA de runs vérifiés.

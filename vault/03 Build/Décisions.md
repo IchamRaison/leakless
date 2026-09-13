@@ -48,3 +48,25 @@ Utiliser [[Modèle décision]] pour les choix qui engagent le projet.
 ## 2026-09-12 — Plan ML validé, démarrage différé
 
 Icham valide [[Plan de session Icham - première version TSLM]], puis précise explicitement de ne pas commencer. Périmètre accepté : compte rendu court en une passe, classe et une propriété vérifiable initialement, V0 technique intégrable puis V1 évaluée et améliorations mesurées. Ni réservation GPU ni entraînement autorisé à ce stade. Les classes, la propriété exacte, la base et la configuration d'exécution restent conditionnelles aux vérifications prévues. Discussion GPU en cours dans [[Journal Icham]] ; une H100 n'est pas encore sélectionnée ou disponible par le seul fait d'être proposée.
+
+## 2026-09-12 — Méthode de résolution par le pourquoi
+
+À la demande de Safoan, appliquer la méthode du Cercle d'or de Simon Sinek aux
+prochains problèmes : formuler d'abord le **pourquoi** (cause, utilisateur et
+changement recherché), expliciter ensuite le **comment** (principes, contraintes
+et preuve attendue), puis choisir le **quoi** (fonction ou implémentation).
+
+Application à PIPE :
+
+- **Pourquoi** : aider un technicien à relire et documenter un signal acoustique
+  inhabituel afin de décider s'il mérite une investigation, sans promesse de
+  diagnostic terrain.
+- **Comment** : relier le même signal à l'écoute, aux visuels et à l'inférence ;
+  séparer mesures DSP, sorties du modèle et labels ; publier les limites et une
+  preuve reproductible ; ne jamais inventer une performance.
+- **Quoi** : studio audio/spectrogramme, prédiction TSLM et comparaison baseline,
+  dans cet ordre de dépendance.
+
+Cette méthode guide le cadrage, les arbitrages d'interface et le pitch. Elle ne
+remplace ni l'audit dataset, ni les contrats, ni les tests. Source : transcription
+fournie par Safoan de la conférence « How great leaders inspire action ».

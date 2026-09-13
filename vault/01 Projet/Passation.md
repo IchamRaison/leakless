@@ -8,7 +8,18 @@ CLI 0.10.6 et 12 skills installés ; capture Codex locale constatée. La recherc
 
 ## Dernier échange — 2026-09-13
 
+**Intégration application/TSLM V2 terminée par Safoan au commit `bba67ff` sur
+`feat/demo-temporal-building` :** fusion de `feat/icham-v2-reliability`,
+adaptateur FastAPI chargé une fois, `POST /predict` réel et bouton UI explicite.
+23 tests API, 35 tests frontend, build et 12 tests du wrapper cohérent passent.
+Les artefacts sélectionnés ne sont pas dans Git : l'inférence sur poids réels
+reste non exécutée et l'UI signale l'indisponibilité sans fabriquer de score.
+Prochaine action : fournir bundle/décision/reçu cohérents, puis recette réelle.
+Voir [[Journal Safoan]] et `docs/APPLICATION.md`.
+
 **Changement de cap proposé par Icham : [[Diagnostic causal TSLM vs C1]].** Expliquer l'écart de performance avant une nouvelle recette, sans présupposer que Qwen ignore le signal. Ancien objectif d'implémentation V2 en pause ; aucun nouvel entraînement, refit final ou score externe lancé. Prochaine action : inventorier les preuves existantes et convenir du premier bloc diagnostique borné, sur développement uniquement.
+
+**Complément Claude intégré à la checklist, sans exécution :** journalisation NLL classe/binaire par clip, vrai contrôle train, mémorisation32, tête BCE sans Qwen, normes/gradients, sonde non linéaire et neuf mesures C1 par voie entraînable. Certaines pistes étaient déjà prévues ; pas de campagne doublonnée. Relecture corrige la provenance époque4 versus dernier batch époque8 et maintient scoring/optimisation parmi les hypothèses ouvertes : une loss proche de ln2 ne prouve pas un classement au hasard. [[Diagnostic causal TSLM vs C1#Checklist enrichie après la revue de Claude]].
 
 **Dernier état vérifié :** A0/A1/C0 complets et publiés (`83bcbe0`, `fa1b9b4`), nettement derrière C1 sur les mêmes folds ; parité A/C et reloads PASS, écarts nuls. Au dernier contrôle SSH du 13 septembre à **03:23:29 Paris**, A2, C/fold1 et C/fold2 annoncent leur fin dans les logs ; **aucun processus de campagne encore actif observé**. Leurs trois reçus restent à revérifier/rapatrier, ne pas relancer les fits. Aucun job arrêté dans ce tour. C1 a terminé ses12 fits. Préinscription `c13fd47` / SHA `5c5e0b4b…` inchangée ; aucun bilan complet A/C ni choix final. [[V2 ML - exécution]] conserve les preuves. **Checkout sain `/home/animus/ehl-hackathon-zurich-v2-recovery`**, branche `feat/icham-v2-reliability` ; ancien Git endommagé conservé, ne pas y commiter. Le cap final événements/investigation et comparaison gabarit/Qwen/TSLM reste inchangé et non validé.
 
@@ -48,7 +59,11 @@ Icham demande une critique structurelle, la première réponse étant trop méth
 
 ## Reprise Safoan — 2026-09-12
 
-Livraison `feat/safoan-app` à `4dd7b88` : application/API et contrat Prediction présents, imports/audio/visualisation implémentés sur sa branche ; endpoint modèle encore indisponible volontairement. Code de l'API lu, tests application non rejoués par Icham. Suivi personnel : [[Journal Safoan]].
+Premier studio S0–S1 livré sur `feat/safoan-app` : React/Vite + FastAPI,
+import WAV, lecture et visualisation. Le commit `504ad14` a passé 19 tests API,
+4 tests React et le build ; Icham a ensuite lu le code à `4dd7b88` sans rejouer
+ces tests. Aucun modèle n'était intégré à ce jalon. Voir [[Journal Safoan]] et
+`docs/APPLICATION.md` dans le code.
 
 ## Nom proposé
 

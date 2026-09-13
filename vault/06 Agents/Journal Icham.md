@@ -1,5 +1,11 @@
 # Journal Icham
 
+## 13 septembre — intégrer la revue Claude sans lancer une nouvelle recette
+
+À la demande d'Icham, checklist du [[Diagnostic causal TSLM vs C1]] enrichie : NLL classe complète/binaire par clip et mesure train figée, test de mémorisation précisé, tête BCE contournant Qwen, normes/gradients/mises à jour, descripteurs C1 numériques par voie entraînable. Sonde non linéaire et permutations déjà prévues, pas de doublon. Tous ces contrôles restent à exécuter après préinscription ; aucun changement de code, job ou métrique modèle dans ce tour.
+
+Relecture indépendante des artefacts actuels : autopsie des poids V1 époque4, pas8 ; last_loss de la campagne8 =dernier batch, pas moyenne train ; nombre de tokens variable. Le plateau est un indice utile, pas une démonstration de hasard ni un motif pour écarter scoring, supervision ou optimisation. Contre-exemple mathématique séparé du modèle et sources primaires log-loss/AdamW/prompt tuning liés dans la note. Aucun usage du test/holdout, aucune recherche dans les conversations Entire de la session active. Vault récupéré avant édition puis publié et miroir explicitement mis à jour.
+
 ## 13 septembre — changement de cap proposé, diagnostic avant nouvelle recette
 
 Icham propose d'expliquer le retard du TSLM sur C1 avant de chercher une nouvelle recette. [[Diagnostic causal TSLM vs C1]] distingue preuves numériques acquises, limites des sondes existantes et hypothèses concurrentes. Protocole borné à convenir ; aucune nouvelle expérience/implémentation, aucun refit ni score externe lancé. Relecture indépendante du cadrage : ne pas confondre AUC, décision au seuil et cohérence du texte, ni attribuer d'avance l'écart à Qwen.
