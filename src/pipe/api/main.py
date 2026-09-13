@@ -11,6 +11,7 @@ from starlette.types import ASGIApp, Receive, Scope, Send
 
 from pipe.api.audio import MAX_BYTES, MAX_SAMPLES, AudioError, decode_audio, visualization
 from pipe.api.model_service import load_tslm, predict_tslm
+from pipe.api import temporal
 from pipe.contracts import PredictRequest, PredictResponse, Sample
 
 
@@ -22,11 +23,13 @@ def fail(status: int, code: str, message: str):
 async def lifespan(app: FastAPI):
     app.state.samples = {}
     app.state.tslm = load_tslm()
+    temporal.initialize(app)
     yield
     app.state.samples.clear()
 
 
 app = FastAPI(title="LeakLess · Acoustic API", version="0.1.0", lifespan=lifespan)
+app.include_router(temporal.router)
 
 
 class BoundUpload:
