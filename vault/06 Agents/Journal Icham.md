@@ -1,5 +1,11 @@
 # Journal Icham
 
+## 13 septembre — unique fit D3 lancé après publication
+
+Préinscription/tests/seconde installation publiés `e5a8543`, notes source `b636b21`, miroir `fb436b3`. D3 `train` lancé une seule fois : handle20214, PID100634, première H100 ; empreinte préinscrite revérifiée avant appel. Point0 reproduit exactement D0-A initial (NLL3,244997234820116,16/32corrects), puis premiers pas réels avec logger sans forwards supplémentaires. Six époques/24pas observés à07:32:25Paris ; aucun verdict ni reload encore. [[Diagnostic causal - exécution#D3 — entraînement en cours, pas encore de verdict]].
+
+Préparation parallèle de la seconde machine : transfert ciblé de646fichiers —43fichiers de la base officielle déjà figée,598WAVtrain, deux caches train, préparation et deux reçus de parité. Aucun WAV/cache val/test/externe ni fit supplémentaire ; archive par liste explicite, chemins relatifs validés, cibles neuves et refus d'écrasement. Transfert handle26958 en cours à ce jalon, vérification des empreintes encore requise. Les JSON historiques à chemins absolus restent inchangés ; les futures préinscriptions devront désigner leurs nœuds propres.
+
 ## 13 septembre — D3 testé et préinscrit, second runtime H100 opérationnel
 
 D3 code `c08ff78`, revue indépendante favorable. Tests locaux : six passent, deux skips explicités ; runtime d'origine : huit ciblés puis 222 tests distincts de régression passent sans skip. Préinscription machine créée à 07:26:23 Paris, SHA `42920f6d5446f34f7419ea2a1c5c1f47067e2a915bb2361fa0bdee4097e93a35` ; copie locale et 25 sources vérifiées. Un seul fit A sur les 32 témoins, critères/budgets inchangés ; aucun fit lancé à ce jalon. Prochaine action après publication : `train`, puis `reload` neuf. [[Diagnostic causal - exécution#D3 — vérifications avant fit]]. Ponytail : réutilisation de l'initialisation, boucle, logger et reçus existants ; aucune nouvelle dépendance ni moteur d'évaluation.

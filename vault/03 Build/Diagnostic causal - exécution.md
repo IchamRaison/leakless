@@ -63,7 +63,7 @@ Critères détaillés : [[Diagnostic causal TSLM vs C1#Critère de complétion d
 
 ## Prochaine action
 
-**Publier la préinscription D3 puis lancer son unique fit**, selon le protocole ci-dessous ; code `c08ff78` testé et préinscription machine `42920f6d…` créée. D2 est terminé et vérifié, ne pas relancer ses fits. D3 contrôle la mémorisation des 32 témoins via Qwen, pas la généralisation ; garder son handle puis recharger le checkpoint dans un processus neuf. Aucun ajout de données ni nouvelle recette produit.
+**Suivre l'unique fit D3 déjà lancé, handle 20214, PID distant 100634**, sans deuxième invocation. Préinscription `42920f6d…` et tests publiés à `e5a8543` avant lancement ; protocole source `b636b21`, miroir `fb436b3`. Après sortie réussie/reçu intègre, lancer `reload` dans un processus neuf, puis vérifier les artefacts et le verdict. D2 reste terminé, ne pas relancer ses fits. D3 mesure la mémorisation, pas la généralisation ; aucun ajout de données ou nouvelle recette produit.
 
 D0 et D1 restent scellés ; aucun score à reproduire pour récupérer les résultats. D1 : handles A 22963 / C 5435 terminés avec code zéro, respectivement 312,744 s et 339,558 s. H100 après C : 0 Mio / 0 %, instance laissée allumée. Artefacts locaux `docs/evidence/tslm-v2/causal-d1-001/`, runtime `/home/hicham/pipe-v0/artifacts/causal-d1-306d330-001/`, logs `/home/hicham/pipe-v0/quality-causal-306d330/`.
 
@@ -219,6 +219,12 @@ cd /home/hicham/pipe-v0/code-causal-d3-c08ff78
 ```
 
 Ne pas relancer un dossier incomplet, ni lancer le reload tant que le reçu train n'est pas intègre. Un résultat terminé est relu via `finished()`, jamais réentraîné pour le récupérer. Le second runtime est installé et vérifié indépendamment (`docs/evidence/runtime-h100-2-001/`), pas une seconde tentative D3 ni un fit distribué.
+
+### D3 — entraînement en cours, pas encore de verdict
+
+Unique commande `train` lancée après publication, handle **20214**, PID **100634**, hôte `computeinstance-e00g3ykxy51wgxcw1p`. SHA de préinscription revérifié avant l'appel. Le point 0 donne NLL binaire `3,244997234820116`, 16/32 décisions correctes, reproduisant D0-A initial ; les gardes de poids/AdamW neufs passent. À 07:32:25 Paris, six époques /24 pas consignés ; ce n'est pas une complétion ni le premier point de décision programmé (pas100).
+
+Journaux : `/home/hicham/pipe-v0/artifacts/causal-d3-c08ff78-001/train/{steps.jsonl,epochs.jsonl,point-0000.json}`, sortie `/home/hicham/pipe-v0/quality-causal-d3-c08ff78/train.log`. Première époque : 32 présentations, 598 tokens supervisés, zéro forward supplémentaire du logger ; premier pas avec gradients/moments FP32 et mises à jour non nulles de l'encodeur/projecteur. Cela vérifie que l'optimiseur agit, pas encore l'apprentissage de la décision. Aucun changement de recette en cours ; aucun reload ni résultat terminé.
 
 ## Audit des populations et des cibles
 
