@@ -1943,10 +1943,16 @@
     animation: none;
   }
 }
-.inject-button {
+/* Scoped like .demo-app .quiet-button, which otherwise strips the outline and amber colour. */
+.demo-app .inject-button {
   min-height: 40px;
+  padding: 2px 14px;
   color: #f0c982;
-  border-color: #e0a84a66;
+  border: 1px solid #e0a84a66;
+}
+.demo-app .inject-button:hover:not(:disabled) {
+  background: #e0a84a14;
+  border-color: #e0a84aaa;
 }
 .live-chart {
   width: 100%;
