@@ -51,7 +51,7 @@
 }
 .demo-brand span {
   color: #8d9c90;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 400;
   letter-spacing: 1px;
   border-left: 1px solid #465249;
@@ -62,7 +62,7 @@
   display: flex;
   align-items: center;
   gap: 30px;
-  font-size: 11px;
+  font-size: 12px;
   color: #b1beb2;
 }
 .demo-topbar nav a:hover {
@@ -95,9 +95,9 @@
   display: flex;
   align-items: center;
   gap: 9px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   color: #9ba99d;
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 1.35px;
   font-weight: 400;
 }
@@ -108,7 +108,7 @@
   border-radius: 50%;
 }
 .hero-copy h1 {
-  margin-top: 23px;
+  margin-top: 12px;
   font-size: clamp(36px, 3.85vw, 59px);
   line-height: 1.095;
   letter-spacing: -2.2px;
@@ -127,7 +127,7 @@
 }
 .prototype-note {
   color: #87968b;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.7;
   margin-top: 13px;
 }
@@ -135,13 +135,13 @@
   display: flex;
   align-items: flex-start;
   gap: 19px;
-  font-size: 11px;
+  font-size: 12px;
   color: #b2c0b3;
   line-height: 1.7;
   margin-top: 23px;
 }
 .hero-who > span {
-  font-size: 10px;
+  font-size: 12px;
   color: #85958a;
   letter-spacing: 1.2px;
   padding-top: 3px;
@@ -152,7 +152,7 @@
   gap: 22px;
   align-items: center;
   color: var(--accent);
-  font-size: 11px;
+  font-size: 12px;
   border-bottom: 1px solid #71956560;
   padding-bottom: 10px;
 }
@@ -165,7 +165,8 @@
   justify-content: space-between;
   color: #809286;
   font:
-    10px ui-monospace,
+    12px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   letter-spacing: 1px;
   padding: 0 5px;
@@ -213,7 +214,8 @@
   padding: 5px 9px;
   transform: translate(-7px, -50%);
   font:
-    10px ui-monospace,
+    12px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   background: #152019e8;
   border: 1px solid #6b857655;
@@ -270,7 +272,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 5px;
-  font-size: 11px;
+  font-size: 12px;
   color: #a7b8aa;
 }
 .building-caption > span {
@@ -290,7 +292,7 @@
 }
 .demo-app .quiet-button {
   border: 0;
-  font-size: 11px;
+  font-size: 12px;
   min-height: 27px;
   padding: 2px 5px;
   color: #a7b8aa;
@@ -304,7 +306,8 @@
   flex: 1;
   justify-content: space-between;
   font:
-    10px ui-monospace,
+    12px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   padding: 7px 12px;
 }
@@ -315,7 +318,7 @@
 }
 .association-note {
   text-align: center;
-  font-size: 11px;
+  font-size: 12px;
   color: #8c9e90;
   line-height: 1.7;
 }
@@ -356,8 +359,23 @@
 .example-label {
   margin-bottom: 9px;
 }
-.example-hint {
+.demo-app .example-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
   color: #c4b997;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.demo-app .example-hint:hover:not(:disabled) {
+  background: none;
+  color: #e0d4ad;
 }
 .outline-tag {
   border: 1px solid #71867250;
@@ -365,7 +383,8 @@
   border-radius: 3px;
   color: #a7baa7;
   font:
-    10px ui-monospace,
+    12px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   letter-spacing: 1px;
 }
@@ -376,7 +395,8 @@
 .example-selector button {
   gap: 10px;
   font:
-    10px ui-monospace,
+    12px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   min-height: 43px;
   letter-spacing: 0.1px;
@@ -393,7 +413,7 @@
 }
 .examples-note {
   color: #899d8e;
-  font-size: 11px;
+  font-size: 12px;
   margin: 12px 0 23px;
 }
 .inspection-grid {
@@ -422,7 +442,8 @@
 }
 .status-tag {
   font:
-    10px ui-monospace,
+    12px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   letter-spacing: 1px;
   color: #a6b69f;
@@ -440,14 +461,15 @@
   left: 24px;
   top: 44%;
   font:
-    10px ui-monospace,
+    12px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   letter-spacing: 1px;
   color: #91a695;
 }
 .time-direction small {
   display: block;
-  font-size: 11px;
+  font-size: 12px;
   margin-top: 8px;
 }
 .map-measured {
@@ -456,13 +478,14 @@
   right: 24px;
   color: #8ca08f;
   font:
-    10px ui-monospace,
+    12px "IBM Plex Mono",
+    ui-monospace,
     monospace;
 }
 .map-method {
   color: #9faf9e;
   margin: 0 25px 16px;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.7;
 }
 .map-method summary {
@@ -493,12 +516,12 @@
 }
 .map-pending p {
   max-width: 340px;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.8;
   color: #92a694;
 }
 .map-pending button {
-  font-size: 11px;
+  font-size: 12px;
   margin-top: 7px;
 }
 .map-key {
@@ -511,7 +534,8 @@
 .map-key > span {
   color: #a4b8a8;
   font:
-    10px ui-monospace,
+    12px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   letter-spacing: 0.4px;
 }
@@ -538,7 +562,7 @@
   border-color: #c4a977;
 }
 .map-disclaimer {
-  font-size: 11px;
+  font-size: 12px;
   color: #8da08f;
   padding: 14px 25px 21px;
 }
@@ -577,17 +601,17 @@
 }
 .model-readout dt,
 .recording-meta dt {
-  font-size: 11px;
+  font-size: 12px;
   color: #a3b49f;
 }
 .recording-meta dd {
   margin: 0;
-  font-size: 11px;
+  font-size: 12px;
   text-align: right;
 }
 .model-readout dd {
   margin: 0;
-  font-size: 11px;
+  font-size: 12px;
   display: flex;
   align-items: center;
   gap: 9px;
@@ -603,7 +627,8 @@
 }
 .model-readout .pending-value {
   font:
-    17px ui-monospace,
+    17px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   letter-spacing: 1px;
   color: #c4b997;
@@ -612,7 +637,7 @@
   display: flex;
   gap: 12px;
   color: #a0b19a;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.8;
 }
 .small-rule {
@@ -625,7 +650,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  font-size: 11px;
+  font-size: 12px;
   color: #c1d3ae;
   margin-top: 24px;
 }
@@ -640,13 +665,14 @@
   align-items: center;
   gap: 11px;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 12px;
   color: #b7c8b6;
 }
 .raw-meta {
   margin-left: auto;
   font:
-    10px ui-monospace,
+    12px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   color: #97ac99;
 }
@@ -660,7 +686,7 @@
 .audio-and-source p {
   margin-top: 18px;
   color: #9fb29e;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.8;
 }
 .audio-and-source a {
@@ -675,21 +701,21 @@
 }
 .clip-provenance {
   margin-top: 18px;
-  font-size: 11px;
+  font-size: 12px;
   color: #9fb29e;
 }
 .clip-provenance code {
   display: block;
   overflow-wrap: anywhere;
   margin-top: 12px;
-  font-size: 11px;
+  font-size: 12px;
 }
 .demo-app .plot-heading {
   margin-top: 0;
 }
 .demo-app .plot-heading h3 {
   color: #b0c3ac;
-  font-size: 11px;
+  font-size: 12px;
 }
 .demo-app .plot-heading span,
 .demo-app .time-axis,
@@ -700,7 +726,7 @@
 }
 .demo-app .plot-heading span,
 .demo-app .frequency-axis {
-  font-size: 10px;
+  font-size: 12px;
 }
 .demo-app .waveform {
   background: #1b291e;
@@ -717,10 +743,10 @@
 }
 .demo-app .plot-foot,
 .demo-app .time-axis {
-  font-size: 10px;
+  font-size: 12px;
 }
 .demo-app .fine-print {
-  font-size: 11px;
+  font-size: 12px;
 }
 .inspect-section {
   padding: 38px 0 42px;
@@ -729,7 +755,7 @@
 }
 .demo-app .load-button {
   gap: 9px;
-  font-size: 11px;
+  font-size: 12px;
   min-height: 38px;
   padding: 8px 14px;
   color: var(--accent);
@@ -755,13 +781,13 @@
   color: var(--paper);
 }
 .upload-drop p {
-  font-size: 11px;
+  font-size: 12px;
   color: #93a695;
 }
 .demo-app .upload-drop button {
   margin-top: 6px;
   gap: 9px;
-  font-size: 11px;
+  font-size: 12px;
 }
 .upload-error {
   display: flex;
@@ -774,7 +800,7 @@
   border-radius: 5px;
   background: #c98a7212;
   color: #e6c3b3;
-  font-size: 11px;
+  font-size: 12px;
 }
 .demo-app .upload-error button {
   border: 0;
@@ -784,7 +810,7 @@
 }
 .upload-warning {
   margin-top: 12px;
-  font-size: 11px;
+  font-size: 12px;
   color: #d8c59a;
 }
 .inspect-section .decision-panel .quiet-button {
@@ -804,7 +830,7 @@
   gap: 9px;
   align-items: center;
   color: #b2c9a3;
-  font-size: 11px;
+  font-size: 12px;
 }
 .control-ladder {
   display: grid;
@@ -832,13 +858,14 @@
   justify-content: space-between;
   color: #b4c9a9;
   font:
-    11px ui-monospace,
+    12px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   gap: 4px;
 }
 .control-id small {
   color: #9db98b;
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.4px;
 }
 .control-card h3 {
@@ -849,7 +876,7 @@
   min-height: 32px;
 }
 .control-card > p {
-  font-size: 11px;
+  font-size: 12px;
   color: #8fa18f;
   min-height: 48px;
   line-height: 1.65;
@@ -870,22 +897,23 @@
   margin-top: 6px;
 }
 .control-card dt {
-  font-size: 10px;
+  font-size: 12px;
   color: #99ad98;
 }
 .control-card dd {
   font:
-    15px ui-monospace,
+    15px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   color: #ccd9c2;
   margin: 0;
 }
 .control-card.pending-control dd {
-  font-size: 11px;
+  font-size: 12px;
   color: #bdb497;
 }
 .evidence-caveat {
-  font-size: 11px;
+  font-size: 12px;
   color: #a2b29b;
   line-height: 1.7;
   padding: 16px 0 27px;
@@ -916,7 +944,7 @@
   display: flex;
   align-items: center;
   gap: 11px;
-  font-size: 11px;
+  font-size: 12px;
   color: #a8b9a2;
   line-height: 1.6;
   margin-top: 9px;
@@ -933,14 +961,14 @@
   align-items: center;
   border-top: 1px solid var(--line);
   padding: 25px 0 30px;
-  font-size: 11px;
+  font-size: 12px;
   color: #8f9f8e;
 }
 .demo-footer > span {
   display: flex;
   gap: 9px;
   align-items: center;
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 1px;
 }
 @media (min-width: 1500px) {
@@ -1091,20 +1119,20 @@
     gap: 6px;
   }
   .demo-topbar .load-link {
-    font-size: 11px;
+    font-size: 12px;
   }
   .map-key {
     gap: 13px;
     margin: 0 18px;
   }
   .map-key > span {
-    font-size: 10px;
+    font-size: 12px;
   }
   .panel-heading {
     padding-inline: 18px;
   }
   .status-tag {
-    font-size: 10px;
+    font-size: 12px;
   }
   .control-ladder {
     grid-template-columns: repeat(2, 1fr);
@@ -1166,11 +1194,12 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 11px;
+  font-size: 12px;
 }
 .monitor-clock {
   font:
-    12px ui-monospace,
+    12px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   letter-spacing: 1px;
   color: var(--accent);
@@ -1204,7 +1233,7 @@
   margin: 20px 0;
 }
 .monitor-summary dt {
-  font-size: 11px;
+  font-size: 12px;
   color: #93a695;
 }
 .monitor-summary dd {
@@ -1213,7 +1242,8 @@
 }
 .monitor-summary .pending-value {
   font:
-    15px ui-monospace,
+    15px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   color: #c4b997;
 }
@@ -1245,11 +1275,11 @@
 .monitor-label,
 .monitor-clip {
   display: block;
-  font-size: 11px;
+  font-size: 12px;
   color: #93a695;
 }
 .monitor-clip {
-  font-family: ui-monospace, monospace;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
   margin-top: 2px;
 }
 .monitor-waiting {
@@ -1284,19 +1314,20 @@
   padding-bottom: 8px;
 }
 .monitor-metrics dt {
-  font-size: 11px;
+  font-size: 12px;
   color: #93a695;
 }
 .monitor-metrics dd {
   margin: 2px 0 0;
   font:
-    24px ui-monospace,
+    24px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   font-variant-numeric: tabular-nums;
   color: #dfe9d8;
 }
 .monitor-metrics small {
-  font-size: 11px;
+  font-size: 12px;
   color: #93a695;
 }
 .monitor-metrics i {
@@ -1328,12 +1359,12 @@
 }
 .monitor-bands small {
   text-align: center;
-  font-size: 10px;
+  font-size: 12px;
   color: #93a695;
   padding-bottom: 4px;
 }
 .monitor-trace span {
-  font-size: 11px;
+  font-size: 12px;
   color: #93a695;
 }
 .monitor-trace svg {
@@ -1356,19 +1387,20 @@
   margin-top: auto;
   border-top: 1px solid var(--line);
   padding-top: 10px;
-  font-size: 11px;
+  font-size: 12px;
   color: #a3b49f;
 }
 .monitor-card footer .pending-value {
   font:
-    12px ui-monospace,
+    12px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   color: #c4b997;
   margin-left: 6px;
 }
 .monitor-scales {
   margin-top: 14px;
-  font-size: 11px;
+  font-size: 12px;
   color: #8fa18f;
   line-height: 1.7;
   max-width: 900px;
@@ -1467,14 +1499,20 @@
 }
 .pipe-network text {
   font:
-    500 22px ui-monospace,
+    500 15px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   fill: #dfe9d8;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
+  /* A ground-coloured halo keeps the label legible where a response ring crosses it. */
+  paint-order: stroke;
+  stroke: #101713;
+  stroke-width: 5px;
+  stroke-linejoin: round;
 }
 .pipe-network figcaption {
   margin-top: 8px;
-  font-size: 11px;
+  font-size: 12px;
   color: #8fa18f;
 }
 /* Building fullscreen point panel: illustrative point, real recording, no physical association. */
@@ -1497,7 +1535,8 @@
 }
 .point-panel-kicker {
   font:
-    10px ui-monospace,
+    12px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -1505,7 +1544,8 @@
 }
 .point-panel-id {
   font:
-    500 28px ui-monospace,
+    500 28px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   color: var(--paper);
   margin-bottom: 6px;
@@ -1517,7 +1557,8 @@
 .demo-app .point-panel-recs button {
   flex: 1;
   font:
-    12px ui-monospace,
+    12px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   min-height: 38px;
 }
@@ -1527,7 +1568,7 @@
   color: #d4e7be;
 }
 .point-panel-note {
-  font-size: 11px;
+  font-size: 12px;
   color: #d8c59a;
 }
 .point-panel-state {
@@ -1566,7 +1607,8 @@
 }
 .point-panel-tslm {
   font:
-    12px ui-monospace,
+    12px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   color: #c4b997;
 }
@@ -1576,6 +1618,20 @@
   color: var(--accent);
   border-color: #8eab8666;
   font-size: 12px;
+}
+.demo-app .point-panel-listen {
+  align-self: flex-start;
+  min-height: 0;
+  padding: 2px 0;
+  border: 0;
+  background: none;
+  color: #a8baa9;
+  font-size: 12px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.demo-app .point-panel-listen:hover {
+  color: var(--paper);
 }
 /* Monitor focus: the recording chosen from the building or a marker comes to the front. */
 .monitor-card.is-focused {
@@ -1598,7 +1654,7 @@
 }
 .map-legend {
   margin: 4px 25px 6px;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.6;
   color: #a7b8aa;
 }
@@ -1618,7 +1674,7 @@
 }
 .tslm-definition {
   margin: -8px 0 18px;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.6;
   color: #a3b49f;
 }
@@ -1670,7 +1726,8 @@
 }
 .sim-mode {
   font:
-    600 11px ui-monospace,
+    600 12px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   letter-spacing: 1.5px;
   color: #101713;
@@ -1728,7 +1785,7 @@
 }
 .sim-note {
   margin: 6px 0 0;
-  font-size: 11px;
+  font-size: 12px;
   color: #a9b6a8;
 }
 .sim-alert {
@@ -1742,7 +1799,8 @@
   margin: 6px 0 0;
   white-space: pre-wrap;
   font:
-    12px/1.55 ui-monospace,
+    12px/1.55 "IBM Plex Mono",
+    ui-monospace,
     monospace;
   color: #dfe9d8;
 }
@@ -1783,7 +1841,7 @@
   position: absolute;
   top: 10px;
   left: 12px;
-  font-size: 11px;
+  font-size: 12px;
   color: #f0c982;
   border: 1px solid #e0a84a66;
   border-radius: 3px;
@@ -1826,7 +1884,7 @@
   color: #f0c982;
 }
 .sim-manual {
-  font-size: 11px;
+  font-size: 12px;
   color: #93a695;
   display: inline-flex;
   align-items: center;
@@ -1835,7 +1893,7 @@
 }
 /* Live monitor preview: industrial time-series chart, sensor table, persistence and alert. */
 .monitor-product-note {
-  font-size: 11px;
+  font-size: 12px;
   color: #93a695;
   margin: 0 0 4px;
 }
@@ -1864,7 +1922,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 11px;
+  font-size: 12px;
   color: #93a695;
 }
 .live-dot {
@@ -1885,10 +1943,16 @@
     animation: none;
   }
 }
-.inject-button {
+/* Scoped like .demo-app .quiet-button, which otherwise strips the outline and amber colour. */
+.demo-app .inject-button {
   min-height: 40px;
+  padding: 2px 14px;
   color: #f0c982;
-  border-color: #e0a84a66;
+  border: 1px solid #e0a84a66;
+}
+.demo-app .inject-button:hover:not(:disabled) {
+  background: #e0a84a14;
+  border-color: #e0a84aaa;
 }
 .live-chart {
   width: 100%;
@@ -1921,13 +1985,14 @@
 }
 .live-legend b {
   font:
-    500 12px ui-monospace,
+    500 12px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   color: #eef3ea;
 }
 .live-legend span {
   color: #8fa18f;
-  font-size: 11px;
+  font-size: 12px;
 }
 .live-grid {
   stroke: #ffffff12;
@@ -1935,12 +2000,13 @@
 }
 .live-tick {
   font:
-    10px ui-monospace,
+    12px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   fill: #7f917f;
 }
 .live-axis-title {
-  font-size: 10px;
+  font-size: 12px;
   fill: #9cad9f;
   letter-spacing: 0.5px;
 }
@@ -1994,7 +2060,7 @@
   white-space: nowrap;
 }
 .sensor-table thead th {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 450;
   color: #8fa18f;
 }
@@ -2016,7 +2082,7 @@
   color: #ff9a7a;
 }
 .sim-panel .sim-origin {
-  font-size: 11px;
+  font-size: 12px;
   color: #b9a883;
 }
 .sim-panel.is-alert {
@@ -2079,8 +2145,16 @@
   margin: 0 0 12px;
 }
 .live-threshold-label {
-  font-size: 10px;
+  font-size: 12px;
   fill: #b5c2b3;
+}
+/* Chart labels sit over the traces: a halo in the plot colour keeps them readable. */
+.live-threshold-label,
+.live-axis-title {
+  paint-order: stroke;
+  stroke: #1a2119;
+  stroke-width: 4px;
+  stroke-linejoin: round;
 }
 .live-event .live-resolved-line,
 .live-resolved-line {
@@ -2128,7 +2202,8 @@
 }
 .incident-history time {
   font:
-    500 12px ui-monospace,
+    500 12px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   color: #eef3ea;
   margin-right: 8px;
@@ -2172,6 +2247,7 @@
   margin: 0;
   font-size: 20px;
   font-weight: 500;
+  letter-spacing: -0.2px;
   color: #eef3ea;
 }
 .monitor-status p {
@@ -2185,7 +2261,8 @@
   align-items: center;
   gap: 8px;
   font:
-    600 13px ui-monospace,
+    600 13px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   letter-spacing: 1px;
   padding: 8px 12px;
@@ -2205,7 +2282,7 @@
   gap: 2px;
 }
 .inject-control small {
-  font-size: 10px;
+  font-size: 12px;
   color: #8fa18f;
 }
 .sim-strongest {
@@ -2215,4 +2292,41 @@
 }
 .alert-state.is-pending {
   color: #93a695;
+}
+/* Sentence-case labels inside the incident panel: no tracked mono, which only suits caps. */
+.sim-panel .demo-kicker {
+  font-family: inherit;
+  font-size: 12px;
+  letter-spacing: 0;
+  color: #a7b6aa;
+}
+/* The network drawing scales with its width: on phones, larger label units keep them near 11 px. */
+@media (max-width: 760px) {
+  .pipe-network text {
+    font-size: 26px;
+  }
+}
+@media (max-width: 460px) {
+  .pipe-network text {
+    font-size: 44px;
+    stroke-width: 8px;
+  }
+}
+/* Phones: keep sensor, RMS and status in view. Crest stays in the chart legend; reception time is secondary. */
+@media (max-width: 460px) {
+  .sensor-table {
+    min-width: 0;
+  }
+  .sensor-table tr > :nth-child(3),
+  .sensor-table tr > :nth-child(5) {
+    display: none;
+  }
+}
+/* Phones: a section's side note goes under its heading instead of squeezing it into half the width. */
+@media (max-width: 460px) {
+  .demo-section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 }
