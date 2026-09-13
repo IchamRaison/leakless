@@ -2294,3 +2294,15 @@
   letter-spacing: 0;
   color: #a7b6aa;
 }
+/* The network drawing scales with its width: on phones, larger label units keep them near 11 px. */
+@media (max-width: 760px) {
+  .pipe-network text {
+    font-size: 26px;
+  }
+}
+@media (max-width: 460px) {
+  .pipe-network text {
+    font-size: 44px;
+    stroke-width: 8px;
+  }
+}
