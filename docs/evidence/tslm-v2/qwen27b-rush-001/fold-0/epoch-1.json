@@ -1,0 +1,43 @@
+{
+  "schema": "pipe-training-epoch-observation-v1",
+  "n_clips": 500,
+  "n_steps": 63,
+  "terms": {
+    "class": {
+      "n_tokens": 1779,
+      "nll_sum": 383.5698248712397,
+      "nll_mean": 0.21560979475617745
+    },
+    "first_discriminating_token": {
+      "n_tokens": 500,
+      "nll_sum": 383.3938886895776,
+      "nll_mean": 0.7667877773791552
+    },
+    "description": {
+      "n_tokens": 7033,
+      "nll_sum": 86.92428498132324,
+      "nll_mean": 0.012359488835677982
+    },
+    "eos": {
+      "n_tokens": 500,
+      "nll_sum": 0.2777595979223406,
+      "nll_mean": 0.0005555191958446813
+    },
+    "response": {
+      "n_tokens": 9312,
+      "nll_sum": 470.77186945048527,
+      "nll_mean": 0.05055539835164146
+    }
+  },
+  "original_loss_token_weighted_mean": 0.050555399052968374,
+  "max_response_reconstruction_absolute_difference": 2.3061185044914723e-08,
+  "nll_source": "Sum/count of consumed TRAIN exposures; weights evolve; not a fixed-checkpoint NLL",
+  "additive_partition": [
+    "class",
+    "description",
+    "eos"
+  ],
+  "first_discriminating_token_overlaps_class": true,
+  "binary_nll": null,
+  "extra_forward_count": 0
+}

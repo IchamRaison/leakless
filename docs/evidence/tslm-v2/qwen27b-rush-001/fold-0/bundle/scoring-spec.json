@@ -1,0 +1,31 @@
+{
+  "version": "class-continuation-logprob-sum-softmax-single-clip-v2",
+  "class_continuations": [
+    "leak;",
+    "no_leak;"
+  ],
+  "class_token_ids": [
+    [
+      273,
+      570,
+      26
+    ],
+    [
+      2083,
+      11414,
+      570,
+      26
+    ]
+  ],
+  "class_token_counts": [
+    3,
+    4
+  ],
+  "aggregation": "sum",
+  "length_normalization": false,
+  "class_terminator": ";",
+  "includes_eos": false,
+  "includes_description": false,
+  "calibration": "none",
+  "acoustic_batching": "one_clip_four_channels"
+}

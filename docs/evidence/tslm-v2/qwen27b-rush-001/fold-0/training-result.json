@@ -1,0 +1,55 @@
+{
+  "optimizer_steps": 63,
+  "presentations": 500,
+  "completed_epochs": 1,
+  "planned_epochs": 1,
+  "fit_complete": true,
+  "state_before": {
+    "encoder": "c9aa3ddd1b95d85f138a06728f65f4d81e7416a70782094fbb91e35e5485259c",
+    "projector": "c898500999416099ba6d016d911cfff5648f84e69c0a4a2e38db2a4d21df7c12",
+    "base": "21de440bca202b97c2f79278d3504ba014eb7a9ab13cae388381391e3219e6af"
+  },
+  "state_after": {
+    "encoder": "5dec4d61d0f743eb766d993b3acacd2d85eb0931c0dd79023382aba394fb581e",
+    "projector": "722d83d9dbb274c1ba9936919e6496eb1e45b47cd3434f079090c53ec104c9d8",
+    "base": "21de440bca202b97c2f79278d3504ba014eb7a9ab13cae388381391e3219e6af"
+  },
+  "runtime": {
+    "python": "3.12.3",
+    "packages": {
+      "torch": "2.8.0+cu128",
+      "transformers": "5.13.0",
+      "peft": "0.20.0",
+      "numpy": "2.5.2",
+      "scikit-learn": "1.9.1",
+      "timenet": "0.1.0",
+      "opentslm": "0.1.0"
+    },
+    "cuda": "12.8",
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "lock_sha256": "7b6429e67593cd945bb3c7d542cf160c9352064373d19112e865830327d1da2a",
+    "tf32_matmul": false,
+    "tf32_cudnn": true,
+    "deterministic": false
+  },
+  "microbatch_size": 4,
+  "seconds_per_step": 4.353660635158858,
+  "peak_reserved_bytes": 62750982144,
+  "peak_allocated_bytes": 58203271168,
+  "gpu_total_bytes": 85017493504,
+  "memory_gate_passed": true,
+  "official_validation_test_external_read": false,
+  "reload_train_ids": [
+    "c0128b879694e",
+    "c02543903a0da",
+    "c04206cc802ff",
+    "c04498a7ed239"
+  ],
+  "reload_probabilities": {
+    "c0128b879694e": 0.4073296303630383,
+    "c02543903a0da": 0.40732922748936795,
+    "c04206cc802ff": 0.3775385959056442,
+    "c04498a7ed239": 0.377537447349026
+  },
+  "bundle_sha256": "388519325854750eed7a7ada7c78369b7cb5ef72d94705a2d3f8e0e0ba1a4a20"
+}

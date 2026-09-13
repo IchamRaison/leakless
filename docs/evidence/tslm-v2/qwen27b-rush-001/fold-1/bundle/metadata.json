@@ -1,0 +1,40 @@
+{
+  "base_model": "Qwen/Qwen3.8-27B",
+  "base_revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+  "architecture": "OpenTSLM-SP-Qwen3.8-27B-LoRA",
+  "seed": 20260912,
+  "batch_size": 8,
+  "encoder_lr": 0.0002,
+  "projector_lr": 0.0001,
+  "lora_lr": 0.0001,
+  "weight_decay": 0.01,
+  "gradient_clip": 1.0,
+  "lora": {
+    "r": 8,
+    "alpha": 16,
+    "dropout": 0.0,
+    "target_modules": [
+      "q_proj",
+      "v_proj",
+      "in_proj_qkv",
+      "out_proj"
+    ]
+  },
+  "gradient_checkpointing": true,
+  "hidden_size": 5120,
+  "loss": "full_answer_and_eos",
+  "n_configs_planned": 1,
+  "preprocessing_version": "rms-f32-hann256-hop128-band4-log1p-v2",
+  "scoring_version": "class-continuation-logprob-sum-softmax-single-clip-v2",
+  "threshold_rule": "aucun seuil appliqué ; sommes complètes leak; / no_leak;, sans description, sans normalisation de longueur, scores bruts non calibrés",
+  "start_utc": "2026-09-13T07:17:26+00:00",
+  "training_stop_utc": "2026-09-13T08:02:26+00:00",
+  "deadline_utc": "2026-09-13T08:17:26+00:00",
+  "single_clip_acoustic_encoding": true,
+  "amplitude_evidence": false,
+  "max_new_tokens": 48,
+  "fold_id": 1,
+  "n_configs_compared": 1,
+  "model_version": "pipe-qwen3.8-27b-lora-dae7e221-fold1",
+  "purpose": "internal_train_prototype_not_validated"
+}

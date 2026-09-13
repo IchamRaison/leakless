@@ -1,0 +1,18 @@
+{
+  "audio": {
+    "title": "Self-supervised acoustic leakage detection for water distribution systems: A real-time diagnosis framework under data scarcity",
+    "creators": [
+      "WANG, QI",
+      "Mei, Zhongyi",
+      "Zhan, Fan",
+      "Chen, Jiongxi"
+    ],
+    "source": "https://doi.org/10.5281/zenodo.18631450",
+    "license": "CC-BY-4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "reload_example": "Aucun WAV embarqué ; contrôles sur train uniquement."
+  },
+  "transformations": "Normalisation RMS par clip, fenêtres Hann, quatre bandes d'énergie log1p ; cibles textuelles déterministes.",
+  "qwen": "https://huggingface.co/Qwen/Qwen3.8-27B ; révision dans metadata.json",
+  "opentslm": "https://github.com/OpenTSLM/OpenTSLM ; bibliothèque sous MIT, révision épinglée dans metadata.json."
+}
