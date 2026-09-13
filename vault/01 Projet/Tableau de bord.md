@@ -40,6 +40,10 @@ Icham
 - [x] A `04d53b6` et reload complet PASS, delta zéro, SHA `ed2bfdc5…`.
 - [x] C et reload PASS, delta zéro, SHA `50ec36e9…` ; séquence `98052` terminée normalement, pas de relance.
 - [x] Runner et évaluateur externe publiés `b750f5d`, 144 tests runtime passent ; aucun fit réel encore.
+- [x] Assemblage final `c13fd47`, 156 tests runtime sans skip ; campagne A/C préinscrite avant fit, SHA `5c5e0b4b…`, preuve publiée `550c7a6`.
+- [ ] Six fits TSLM et douze fits C1 sur les mêmes trois folds train ; inspection explicite après classement avant tout refit final.
+- [x] Douze fits C1 terminés ; `C=0.01` retenu sur train, moyenne AUC groupe0,948718 /clip0,891382, pas une confirmation externe.
+- [ ] A/fold0 et file C0→C1→C2 réellement en cours (handles10635/77795) ; A1→A2 à lancer après A0, deux processus ML maximum.
 - [ ] Exporteur final codé/relu, tests locaux passent ; dernière validation runtime puis préinscription/campagne à exécuter.
 - [x] Objectif final utilisateur ajouté : évolution d'événement/investigation et benchmark gabarit → Qwen sur mesures → TSLM sur séries. [[Plan V2 - fiabilité et parité des scores#7. Objectif final — démontrer la valeur du TSLM]].
 - [ ] Construire et évaluer ce benchmark final sur des événements/historiques/contextes réservés ; ne pas confondre campagne A/C et preuve d'utilité du TSLM.

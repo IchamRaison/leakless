@@ -1,5 +1,13 @@
 # Journal Icham
 
+## 13 septembre — premiers entraînements V2 et C1 réel
+
+A0 lancé sur H100, premières étapes avec pertes/gradients valides, puis C0→C1→C2 dans un second processus indépendant ; handles10635/77795, aucun redémarrage à faire sans contrôle. Pas de changement de recette ni lecture val/test. C1 a terminé ses12 fits, `C=0.01`, AUC train interne moyenne groupe0,948718 /clip0,891382. Suivre les fits puis lancer A1→A2 après A0 ; ne sélectionner/refitter qu'après les six résultats et leur inspection. [[V2 ML - exécution]].
+
+## 13 septembre — campagne A/C réellement préinscrite
+
+Dernier assemblage `c13fd47` vérifié dans le runtime H100 : 156 tests sans skip, exporteur inclus. Préinscription exécutée avant tout fit, SHA `5c5e0b4bbed6b973853e53b658350815b2d963547b68d0a08a9ade50c28b1359`, publiée avec les logs à `550c7a6`. Sources/poids/données/folds/gates/recette figés ; prochaine action A/fold0, puis les cinq autres fits et C1. Pause imposée entre classement et refit pour examiner le progrès réel, sans seuil de succès inventé après coup. Aucun score externe ni qualité V2 encore mesurés. [[V2 ML - exécution]].
+
 ## 13 septembre — deux gates A/C complets, avant les fits
 
 A et C passent chacun le gate209 puis le reload neuf, écart maximal zéro ; A SHA `ed2bfdc5…`, C SHA `50ec36e9…`, séquence98052 terminée normalement. Code de campagne/évaluation `b750f5d` testé dans le runtime : 144 tests sans skip. Exporteur final écrit et relu indépendamment, 11 tests CPU locaux passent ; dernier assemblage à vérifier puis préinscription et premiers fits train. Aucun gain de détection ni score externe annoncé. [[V2 ML - exécution]].
