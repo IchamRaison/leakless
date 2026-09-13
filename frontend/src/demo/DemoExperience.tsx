@@ -121,7 +121,7 @@ export default function DemoExperience() {
         <nav aria-label="Demo navigation">
           <a href="#signal">Explore the signal</a>
           <a href="#evidence">The evidence</a>
-          <a href="#monitor">Monitor replay</a>
+          <a href="#monitor">Live monitor</a>
           <a className="load-link" href="#inspect">
             Load a recording <Upload size={14} />
           </a>
