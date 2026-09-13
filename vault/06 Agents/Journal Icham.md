@@ -1,5 +1,11 @@
 # Journal Icham
 
+## 13 septembre — quatre H100 sur quatre machines envisagées
+
+Icham précise la topologie envisagée : quatre H100 sur quatre machines séparées. Avis : adaptée à un fit autonome par machine, par exemple les trois folds futurs simultanés ; quatrième disponible seulement pour une autre tâche indépendante déjà justifiée. Pas de synchronisation de gradients entre fits et pas de hausse automatique du nombre de configurations. Préparer le même snapshot de code, runtime, base/poids et données vérifiés, répertoires distincts, puis rapatrier les preuves. Les accès nouveaux ne sont pas encore fournis ni testés ; aucune infrastructure créée, aucune expérience lancée à cette occasion.
+
+Répartir un seul fit entre quatre machines serait différent : adaptation DDP, échanges de gradients et sensibilité à la latence du réseau. [Tutoriel primaire PyTorch multi-nœud](https://docs.pytorch.org/tutorials/intermediate/ddp_series_multinode.html). Pour la campagne envisagée, recommandation d'emplois indépendants, sans cluster distribué ni changement de recette implicite. Le gain dépend du nombre de jobs prêts et de leur durée ; ne pas promettre ×4 sur le projet ou sur un fit.
+
 ## 13 septembre — comparaison H100 et H200, sans migration
 
 Question d'Icham sur la vitesse d'entraînement. Comparaison SXM à SXM sur les fiches primaires : même pic Tensor Core BF16 annoncé, mémoire 80→141 Go et bande passante 3,35→4,8 To/s (environ +43%). [H100 NVIDIA](https://www.nvidia.com/en-sg/data-center/h100/), [H200 NVIDIA](https://www.nvidia.com/en-us/data-center/h200/). Le gain de bande passante n'est pas un gain garanti du temps d'entraînement. Exemple publié, non PIPE : MLPerf Training v4.0, LoRA Llama2 70B sur serveurs huit GPU, H200 annoncé 14% plus rapide, environ28→24,7 minutes ; ne pas extrapoler les chiffres ×2 d'inférence à l'entraînement. [Résultat NVIDIA daté du 12 juin 2024](https://developer.nvidia.com/blog/nvidia-sets-new-generative-ai-performance-and-scale-records-in-mlperf-training-v4-0/).
