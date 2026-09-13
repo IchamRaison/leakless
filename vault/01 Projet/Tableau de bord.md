@@ -23,7 +23,7 @@ Icham
 - [x] D3 implémenté `c08ff78`, relu, huit tests ciblés puis 222 tests runtime ; préinscription machine `42920f6d…`, aucun fit à ce jalon. [[Diagnostic causal - exécution#D3 — vérifications avant fit]].
 - [x] D3 : unique fit terminé au pas400 (100 époques), 32/32corrects et NLL binaire0,000826279 ; Qwen gelé/loss complète inchangés. Reçu train `5e782e54…`, reload neuf `3fe96a1a…`, écart des32scores nul. Mémorisation uniquement, aucun gain de généralisation revendiqué.
 - [x] D3 point100 historique :24/32corrects, NLL0,574984 ; preuves `b7ffdc3`, désormais remplacé comme état courant par le point400.
-- [ ] Extension demandée par Icham : observer le checkpoint D3 fixe sur les98 réservés, groupes disjoints. Code `141ff92`, préinscription `78e3b455…`, aucune inférence réservée à ce jalon. Ne pas réentraîner ni toucher au test officiel.
+- [x] Extension D3 sur98réservés terminée/vérifiée :67/98corrects,21FN/73fuites,10FP/25non-fuite-bruits ; AUC clip0,741370/groupe0,798077. Préinscription `78e3b455…` publiée `84c1890`, reçu `17f8af51…`,98observations/196forwards, zéro fit. Qualité insuffisante, test officiel/externe fermé ; définir ensuite un contraste à budget comparable.
 - [ ] Vérifier la journalisation sur un prochain fit réel : implémentation `66f390b`, neuf tests runtime de transparence réussis, preuves `306d330` ; aucun nouvel entraînement lancé.
 - [ ] Produire la matrice causes démontrées / hypothèses non soutenues dans les conditions testées / inconnues. Aucun refit ni confirmation externe automatique.
 - [x] Audit train/cibles : les trois entraînements contiennent les deux classes ;242 vrais sans-fuite concentrés dans7 groupes. Limites dans [[Diagnostic causal - exécution#Audit des populations et des cibles]].

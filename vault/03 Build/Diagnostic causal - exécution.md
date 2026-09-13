@@ -63,7 +63,7 @@ Critères détaillés : [[Diagnostic causal TSLM vs C1#Critère de complétion d
 
 ## Prochaine action
 
-**Observer les98 réservés du développement avec le checkpoint D3 terminé et rechargé**, à la demande explicite d'Icham. Protocole/code/préinscription ci-dessous ; aucun fit supplémentaire, même scoring, aucun réglage. Les runs D0–D3 sont conservés ; ne pas relancer le fit D3 (ancien handle20214 terminé).
+**Définir le prochain contraste de généralisation à budget comparable**, après l'observation demandée par Icham sur les98réservés : elle est terminée et vérifiée, résultats ci-dessous. La mémorisation est acquise mais la qualité hors groupes insuffisante ; ni LoRA ni supervision classe-seule ne sont une correction déjà démontrée. Aucun fit supplémentaire adopté dans cette évaluation. Les runs D0–D3 sont conservés ; ne pas les relancer.
 
 D0 et D1 restent scellés ; aucun score à reproduire pour récupérer les résultats. D1 : handles A 22963 / C 5435 terminés avec code zéro, respectivement 312,744 s et 339,558 s. H100 après C : 0 Mio / 0 %, instance laissée allumée. Artefacts locaux `docs/evidence/tslm-v2/causal-d1-001/`, runtime `/home/hicham/pipe-v0/artifacts/causal-d1-306d330-001/`, logs `/home/hicham/pipe-v0/quality-causal-306d330/`.
 
@@ -240,7 +240,13 @@ Reçu train `5e782e54eaa82067d91d36ee2e35c0ebedf0e578e4b7dc2ae307104bb6a5ab3a`, 
 
 Code `141ff92`, `scripts/tslm/evaluate_memorization_holdout.py` : réutilise chargement/scoring/observation/métriques/reçus existants, sans nouveau moteur ni dépendance. Self-test local et runtime réussi : couverture, ordre, fold, disjonction des IDs et groupes. Préinscription `78e3b455f1f10e94d1faeced386071180da6f6727720b92e3ba4da7e47cd0eca` dans `/home/hicham/pipe-v0/artifacts/d3-heldout-98-141ff92-001`. Un checkpoint,98 observations/196 forwards, zéro optimiseur/génération/réglage ; AUC groupe primaire, AUC clip/NLL/matrice de confusion au seuil0,5 secondaires. A0 relu sur les mêmes98 pour repère, pas contraste causal : il a appris500clips contre32pour D3. Aucun WAV/cache val/test officiel ou externe observé.
 
-Après publication de cette préinscription, commande unique depuis le snapshot D3 : `PYTHONPATH=src ../.venv-repro/bin/python scripts/tslm/evaluate_memorization_holdout.py run --output /home/hicham/pipe-v0/artifacts/d3-heldout-98-141ff92-001`. Aucun résultat réservé encore à ce jalon ; ne pas relancer un dossier incomplet.
+Préinscription publiée dans `84c1890` avant la commande unique depuis le snapshot D3 : `PYTHONPATH=src ../.venv-repro/bin/python scripts/tslm/evaluate_memorization_holdout.py run --output /home/hicham/pipe-v0/artifacts/d3-heldout-98-141ff92-001`. Run terminé normalement, handle80664 sorti0, reçu `17f8af51d2a50b6c7bec6001fd613526d584e1ca803b8a994a23577dfd0d8ef8`.98observations/196forwards, zéro optimisation, poids avant/après identiques au checkpoint D3.
+
+**Résultats vérifiés :67/98corrects**,52TP/21FN sur73fuites et15TN/10FP sur25non-fuite-bruits, seuil0,5inchangé. Rappel71,23%, fausses alertes40%, exactitude équilibrée65,62%. AUC clip0,7413698630 /groupe0,7980769231 ; NLL binaire1,419432771, Brier clip0,280533. Un classement non trivial est observé, mais les erreurs confiantes pénalisent les probabilités brutes. Le32/32ne s'étend pas hors entraînement et ne justifie pas une fiabilité produit.
+
+A0 sur les mêmes98 : AUC clip0,7095890411 /groupe0,7596153846. Différence descriptive uniquement : populations apprises et nombres d'époques différents, aucune attribution causale ni supériorité statistique démontrée. Les34groupes réservés incluent seulement8groupes négatifs et2clips de vrais tuyaux sans fuite ; aucune précision terrain déduite de ce sous-ensemble.
+
+Preuves `docs/evidence/tslm-v2/d3-heldout-98-001/` : reçu/toutes empreintes vérifiés localement,98identités/cibles/groupes et disjonction au fit contrôlés, scores et NLL recomposés depuis les log-probabilités, métriques reconstruites avec le harness strictement identiques, CSV identique aux observations. Vérification sans nouvelle inférence. Ni nouveaux poids, ni calibration, ni réglage sur les résultats. Aucun accès test officiel/externe.
 
 ## Audit des populations et des cibles
 

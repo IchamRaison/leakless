@@ -38,7 +38,7 @@ Les commandes, empreintes et limites détaillées restent dans [[V2 ML - exécut
 
 ## Questions à départager — pas six chantiers simultanés
 
-**Actualisation D3 :** mémorisation32 réussie au pas400 avec Qwen gelé/loss complète, reload neuf exact. À la demande d'Icham, observer ensuite ce checkpoint fixe sur les98 réservés du fold0, en extension séparée sans apprentissage ni réglage. Ne pas traiter LoRA comme déblocage nécessaire ni32/32 comme preuve de qualité hors entraînement. [[Diagnostic causal - exécution#D3 — résultat final et extension sur groupes réservés]].
+**Actualisation D3 :** mémorisation32 réussie au pas400 avec Qwen gelé/loss complète, reload neuf exact. Extension ensuite demandée par Icham sur98réservés :67/98corrects,21fuites manquées,10fausses alertes ; AUC clip0,741370/groupe0,798077. Même checkpoint, zéro apprentissage/réglage, qualité encore insuffisante. Ne pas traiter LoRA comme déblocage nécessaire ni32/32 comme preuve de qualité hors entraînement. Prochain contraste à budget comparable à définir, sans relance automatique. [[Diagnostic causal - exécution#D3 — résultat final et extension sur groupes réservés]].
 
 | Cause possible | Contraste contrôlé proposé | Limite d'interprétation |
 |---|---|---|
