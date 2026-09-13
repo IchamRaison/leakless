@@ -18,7 +18,6 @@ import hashlib
 import json
 import re
 import shutil
-import subprocess
 import tempfile
 import sys
 from pathlib import Path
@@ -45,13 +44,9 @@ def main() -> None:
     if not found or not re.fullmatch(r"[0-9a-f]{40}", found.group(1)):
         sys.exit("commit de génération absent, inconnu ou worktree modifié : refus")
     report_commit = found.group(1)
-    # Le rapport doit venir du commit gelé ou d'un descendant (amendement déclaré).
-    ancestry = subprocess.run(["git", "merge-base", "--is-ancestor", PROTOCOL_COMMIT, report_commit],
-                              capture_output=True, text=True, cwd=Path(__file__).resolve().parent)
-    if ancestry.returncode == 1:
-        sys.exit(f"commit {report_commit[:12]} ne descend pas de {PROTOCOL_TAG} : refus")
-    if ancestry.returncode != 0:
-        sys.exit(f"commit {report_commit[:12]} inconnu localement : git fetch origin, puis relancer")
+    # Aucun amendement de protocole accepté : exactement le commit gelé.
+    if report_commit != PROTOCOL_COMMIT:
+        sys.exit(f"commit {report_commit[:12]} ≠ {PROTOCOL_TAG} ({PROTOCOL_COMMIT[:12]}) : refus")
     metrics = json.loads((src / "metrics.json").read_text())
     tslm = metrics.get("tslm_run_id")
     if not tslm:

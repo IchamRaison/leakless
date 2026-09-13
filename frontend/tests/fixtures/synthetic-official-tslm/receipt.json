@@ -5,7 +5,7 @@
   "final_report": "GENERATED",
   "protocol_tag": "protocol-freeze-v1",
   "protocol_commit": "3e4e73ab6e1944b42b0223e9bd9b3d500f49bc65",
-  "report_commit": "deadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
+  "report_commit": "3e4e73ab6e1944b42b0223e9bd9b3d500f49bc65",
   "tslm_run_id": "SYNTHETIC-FIXTURE-tslm",
   "metrics_sha256": "09b895638ba035a170ec588ae28ea2653aee5d2a4bee601f7b44f406c0e801f8",
   "comparison_sha256": "28a8807ba406221b580c3aa4ca883765430517ef184561ec78b49e48a92c1c5a"

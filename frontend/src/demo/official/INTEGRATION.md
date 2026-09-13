@@ -43,7 +43,7 @@ Zone de dépôt : `frontend/src/demo/official/`. Vide = NOT EVALUATED YET. Trois
   "final_report": "GENERATED",
   "protocol_tag": "protocol-freeze-v1",
   "protocol_commit": "3e4e73ab6e1944b42b0223e9bd9b3d500f49bc65",
-  "report_commit": "<40 hex, lu dans FINAL_EVALUATION.md>",
+  "report_commit": "3e4e73ab6e1944b42b0223e9bd9b3d500f49bc65",
   "tslm_run_id": "<== metrics.tslm_run_id>",
   "metrics_sha256": "<sha256 du fichier copié>",
   "comparison_sha256": "<sha256 du fichier copié>"
@@ -68,9 +68,8 @@ ne correspond pas au reçu, ou si un fichier porte le marqueur synthétique. `np
 plus `official.integrity.test.ts`. Seuls les trois chemins exacts sont importés dans le bundle.
 
 Refus supplémentaires du lecteur : identifiant de run hors `[A-Za-z0-9._-]` (aucun texte libre
-affiché), identifiant égal à un contrôle quelle que soit la casse, scores TSLM identiques à ceux
-d'un contrôle, split autre que `split_v2.csv` / `7a8716a3…`, transformation de stress hors
-T1/T2/T3, run de stress sur une autre population, `report_commit` nul.
+affiché), identifiant égal à un contrôle quelle que soit la casse, split autre que `split_v2.csv` / `7a8716a3…`, transformation de stress hors
+T1/T2/T3, run de stress sur une autre population, `report_commit` différent du commit gelé `3e4e73ab…` (aucun amendement accepté pour cette soumission).
 
 ## 3. Formulations publiques (anglais)
 
@@ -106,7 +105,7 @@ Toutes dans `tslmCopy()` ; l'état absent reproduit le texte actuel au caractèr
 
 ```bash
 python3 frontend/scripts/ingest-official-tslm.py <…/artifacts/final_evaluation> --contract PASS --provenance PASS
-# refuse : commit de génération ne descendant pas de protocol-freeze-v1, commit inconnu (git fetch),
+# refuse : commit de génération différent de 3e4e73ab… (aucun amendement accepté),
 # dossier déjà rempli (sauf --replace) ; copie atomique via un dossier temporaire
 cd frontend && npm test && npm run build
 grep -rq SYNTHETIC-FIXTURE dist && echo "REFUS" || echo "dist propre"

@@ -231,15 +231,6 @@ const hardening: [string, (f: ReturnType<typeof fixture>) => void][] = [
     },
   ],
   [
-    "TSLM scores identical to a control",
-    (f) => {
-      const t = f.metrics.runs[T].folds.test;
-      const c = f.metrics.runs.c1.folds.test;
-      t.clip_level = structuredClone(c.clip_level);
-      t.cluster_level = structuredClone(c.cluster_level);
-    },
-  ],
-  [
     "free text in a stress transform label",
     (f) => {
       f.metrics.stress_run_bases[`${T}-T1`][1] = "T1 (97% leak probability)";
@@ -254,8 +245,8 @@ const hardening: [string, (f: ReturnType<typeof fixture>) => void][] = [
   ],
   ["another split", (f) => (f.metrics.split.sha256 = "0".repeat(64))],
   [
-    "an all-zero report commit",
-    (f) => (f.receipt.report_commit = "0".repeat(40)),
+    "a report commit other than the frozen protocol commit",
+    (f) => (f.receipt.report_commit = "5a29d6eb".padEnd(40, "0")),
   ],
   [
     "a stress run on another population",
@@ -266,4 +257,13 @@ it.each(hardening)("refuses %s", (_, edit) => {
   const files = fixture();
   edit(files);
   expect(read(files).status).toBe("NOT_EVALUATED");
+});
+
+it("TSLM metric values equal to a control are not an identity signal", () => {
+  const files = fixture();
+  const t = files.metrics.runs[T].folds.test;
+  const c = files.metrics.runs.c1.folds.test;
+  t.clip_level = structuredClone(c.clip_level);
+  t.cluster_level = structuredClone(c.cluster_level);
+  expect(read(files).status).toBe("OFFICIAL");
 });

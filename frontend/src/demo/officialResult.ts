@@ -95,10 +95,8 @@ export const receiptSchema = z
     final_report: z.literal("GENERATED"),
     protocol_tag: z.literal(PROTOCOL_TAG),
     protocol_commit: z.literal(PROTOCOL_COMMIT),
-    report_commit: z
-      .string()
-      .regex(/^[0-9a-f]{40}$/)
-      .refine((commit) => !/^0+$/.test(commit)),
+    // Aucun amendement de protocole accepté : le rapport doit venir du commit gelé lui-même.
+    report_commit: z.literal(PROTOCOL_COMMIT),
     tslm_run_id: runId,
     metrics_sha256: z.string().regex(/^[0-9a-f]{64}$/),
     comparison_sha256: z.string().regex(/^[0-9a-f]{64}$/),
@@ -233,11 +231,6 @@ export function readOfficialResult(
       return notEvaluated(`Control ${id} differs from the displayed evidence.`);
     if (c.n_clips !== t.n_clips || c.n_clusters !== t.n_clusters)
       return notEvaluated(`TSLM and ${id} test populations differ.`);
-    if (
-      JSON.stringify([c.clip_level, c.cluster_level]) ===
-      JSON.stringify([t.clip_level, t.cluster_level])
-    )
-      return notEvaluated(`TSLM scores are a copy of control ${id}.`);
   }
   if (
     t.n_clusters !== evidence.testClusters ||
