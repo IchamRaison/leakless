@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { ArrowDown, MessageCircle, X } from "lucide-react";
 import type { SimulatedIncident } from "./simulation";
 import { buildAlertMessage, whatsappLink } from "./whatsapp";
@@ -12,8 +13,20 @@ export function SimulationPanel({
 }) {
   const message = buildAlertMessage(incident.nearest);
   const strongest = Math.max(...incident.responses.map((r) => r.response));
+  const panel = useRef<HTMLElement>(null);
+  const { x, y } = incident.position;
+  // Bring the decision and alert preview into view after each pipe click (small screens, projectors).
+  useEffect(() => {
+    const reduced = window.matchMedia?.(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    panel.current?.scrollIntoView?.({
+      block: "nearest",
+      behavior: reduced ? "auto" : "smooth",
+    });
+  }, [x, y]);
   return (
-    <section className="sim-panel" aria-labelledby="sim-title">
+    <section className="sim-panel" aria-labelledby="sim-title" ref={panel}>
       <header>
         <span className="sim-mode">SIMULATION MODE</span>
         <h2 id="sim-title">
