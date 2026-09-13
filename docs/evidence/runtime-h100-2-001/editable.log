@@ -1,0 +1,7 @@
+Using Python 3.12.3 environment at: /home/ich/pipe-v0/.venv-repro
+Resolved 1 package in 1ms
+   Building pipe-acoustic @ file:///home/ich/pipe-v0/code-a18b22e
+      Built pipe-acoustic @ file:///home/ich/pipe-v0/code-a18b22e
+Prepared 1 package in 611ms
+Installed 1 package in 0.45ms
+ + pipe-acoustic==0.0.1 (from file:///home/ich/pipe-v0/code-a18b22e)

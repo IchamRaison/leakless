@@ -1,0 +1,13 @@
+test_first_positive_point_stops_and_exhaustion_never_extends_budget (test_diagnose_memorization.MemorizationChecks.test_first_positive_point_stops_and_exhaustion_never_extends_budget) ... ok
+test_incomplete_reload_is_preserved_before_model_loading (test_diagnose_memorization.MemorizationChecks.test_incomplete_reload_is_preserved_before_model_loading) ... ok
+test_observation_uses_only_32_and_strict_nll_and_all_decisions (test_diagnose_memorization.MemorizationChecks.test_observation_uses_only_32_and_strict_nll_and_all_decisions) ... ok
+test_preregister_no_model_or_fit_and_context_detects_changes (test_diagnose_memorization.MemorizationChecks.test_preregister_no_model_or_fit_and_context_detects_changes) ... ok
+test_recipe_is_one_attempt_original_A_and_exact_budgets (test_diagnose_memorization.MemorizationChecks.test_recipe_is_one_attempt_original_A_and_exact_budgets) ... ok
+test_reload_checks_weights_scores_decisions_criterion_and_no_optimizer (test_diagnose_memorization.MemorizationChecks.test_reload_checks_weights_scores_decisions_criterion_and_no_optimizer) ... ok
+test_initial_temporal_gradients_and_optimizer_state_must_be_empty (test_diagnose_memorization.TorchMemorizationChecks.test_initial_temporal_gradients_and_optimizer_state_must_be_empty) ... ok
+test_real_original_loss_and_logger_four_steps_without_extra_forwards (test_diagnose_memorization.TorchMemorizationChecks.test_real_original_loss_and_logger_four_steps_without_extra_forwards) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 6.530s
+
+OK
