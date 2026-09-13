@@ -33,13 +33,13 @@ def decode_pcm(data, seconds=1):
         raise ValueError("WAV PCM invalide") from exc
 
 
-def acoustic_features(signal):
+def acoustic_features(signal, *, allow_full_scale=False):
     x = np.asarray(signal, dtype=np.float64)
     if x.shape != (8000,) or not np.isfinite(x).all():
         raise ValueError("Fenêtre finie de 8000 échantillons requise")
     if np.std(x) < 1e-10:
         raise ValueError("Signal silencieux ou constant : surveillance indisponible")
-    if np.max(np.abs(x)) >= 1:
+    if np.max(np.abs(x)) > 1 or (not allow_full_scale and np.any((x <= -1) | (x >= 32767 / 32768))):
         raise ValueError("Pleine échelle : vérifier la saturation du signal")
     return v2_c1.features.c1_envelope(x)
 
@@ -58,13 +58,14 @@ class C1Detector:
             self.directory / "c1.pkl", expected_sha256=self.metadata["files"]["c1.pkl"], trusted=True)
         self.version = "c1-" + self.metadata["files"]["c1.pkl"][:12]
 
-    def score(self, signal):
-        features = acoustic_features(signal)
+    def score(self, signal, *, allow_full_scale=False):
+        features = acoustic_features(signal, allow_full_scale=allow_full_scale)
         probability = float(v2_c1.predict_probability(self.scaler, self.classifier, features[None])[0])
         return features, probability
 
-    def sequence_inputs(self, signal):
+    def sequence_inputs(self, signal, *, allow_full_scale=False):
         x = np.asarray(signal, dtype=np.float64)
         if x.shape != (240000,):
             raise ValueError("Séquence de 30 secondes requise")
-        return np.asarray([np.r_[f, p] for f, p in map(self.score, x.reshape(30, 8000))])
+        return np.asarray([np.r_[f, p] for f, p in
+            (self.score(window, allow_full_scale=allow_full_scale) for window in x.reshape(30, 8000))])

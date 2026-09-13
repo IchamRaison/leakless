@@ -8,6 +8,7 @@ import json
 import os
 from pathlib import Path
 import pickle
+import shutil
 import sys
 import time
 
@@ -55,6 +56,8 @@ def audit(args):
     groups = {}
     for record in primary:
         record["partition"] = partition(record, config)
+        signal = np.load(args.external / record["array_path"], allow_pickle=False)
+        record["full_scale_samples"] = int(((signal <= -1) | (signal >= 32767 / 32768)).sum())
         group = record["condition_group_id"]
         groups.setdefault(group, []).append(record)
     if len(groups) != 60 or any(len(g) != 2 or {r["sensor"] for r in g} != {"H1", "H2"}
@@ -90,7 +93,9 @@ def sequences(registration, fold, detector):
         x = np.load(path, allow_pickle=False)
         if x.dtype != np.dtype("<f8") or x.shape != (240000,):
             raise ValueError("Signal préparé incompatible")
-        values.append(detector.sequence_inputs(x))
+        # Protocole expérimental inclusif : aucune exclusion guidée par les scores.
+        # Le service reste strict et s'abstient sur la pleine échelle.
+        values.append(detector.sequence_inputs(x, allow_full_scale=True))
     return rows, np.asarray(values), np.asarray([int(r["label"] == "leak") for r in rows])
 
 
@@ -125,8 +130,14 @@ def train(args, registration):
         verify_audio_bytes(raw, clip.clip_id, md5)
         X.append(acoustic_features(decode_pcm(raw)))
     X, y = np.asarray(X), np.asarray([c.label for c in clips])
-    scaler, classifier = v2_c1.fit_final(X, y, config["c1_C"])
-    c1_sha = v2_c1.save_checkpoint(bundle / "c1.pkl", scaler, classifier)
+    if args.reuse_c1:
+        prior = C1Detector(args.reuse_c1, args.reuse_c1_sha256)
+        scaler, classifier = prior.scaler, prior.classifier
+        shutil.copy2(args.reuse_c1 / "c1.pkl", bundle / "c1.pkl")
+        c1_sha = digest(bundle / "c1.pkl")
+    else:
+        scaler, classifier = v2_c1.fit_final(X, y, config["c1_C"])
+        c1_sha = v2_c1.save_checkpoint(bundle / "c1.pkl", scaler, classifier)
     loaded = v2_c1.load_checkpoint(bundle / "c1.pkl", expected_sha256=c1_sha, trusted=True)
     delta = float(np.max(np.abs(v2_c1.predict_probability(*loaded, X) - v2_c1.predict_probability(scaler, classifier, X))))
     if delta != 0:
@@ -188,7 +199,8 @@ def train(args, registration):
         "sequence_train_records": len(rows), "c1_reload_max_diff": delta,
         "train_reference_ids": [r["recording_id"] for r in rows], "train_reference_scores": reference,
         "torch": torch.__version__, "numpy": np.__version__, "device": torch.cuda.get_device_name(),
-        "registration_sha256": digest(args.output / "registration.json")})
+        "registration_sha256": digest(args.output / "registration.json"),
+        "reused_c1_from": str(args.reuse_c1) if args.reuse_c1 else None})
     metadata = {"schema": "pipe.temporal-bundle.v1", "config": config,
         "registration_sha256": digest(args.output / "registration.json"),
         "files": {name: digest(bundle / name) for name in ("c1.pkl", "lstm.pt", "normalization.npz", "orderless.pkl")},
@@ -253,6 +265,8 @@ def evaluate(args, registration):
         "paired_gain_95_interval": ci, "eligible": bool(eligible), "n_recordings": len(rows),
         "n_condition_groups": len(gy), "n_nonleak_groups": int((gy == 0).sum()),
         "classification_sequence_only": True, "event_metrics": None, "n_candidate_systems": 4,
+        "full_scale_recordings_included": sum(r["full_scale_samples"] > 0 for r in rows),
+        "service_quality_policy_applied": False,
         "official_zenodo_val_test_used": False, "independent_site_confirmation": False}
     destination = args.output / fold
     destination.mkdir(exist_ok=False)
@@ -273,6 +287,8 @@ if __name__ == "__main__":
     parser.add_argument("--data-root", type=Path)
     parser.add_argument("--config", type=Path, default=ROOT / "configs/temporal/c1_lstm.json")
     parser.add_argument("--revision")
+    parser.add_argument("--reuse-c1", type=Path)
+    parser.add_argument("--reuse-c1-sha256")
     parser.add_argument("--authorize-repurpose", action="store_true")
     args = parser.parse_args()
     if args.phase == "audit":

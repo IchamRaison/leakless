@@ -1,5 +1,6 @@
 {
   "schema": "pipe.c1-temporal.v1",
+  "offline_full_scale_policy": "include_unchanged_report_quality_not_service_eligible",
   "seed": 20260913,
   "c1_C": 0.01,
   "train_topology": "BR",

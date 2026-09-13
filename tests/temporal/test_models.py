@@ -45,6 +45,11 @@ class ModelsTest(unittest.TestCase):
                 acoustic_features(invalid)
         with self.assertRaises(ValueError):
             decode_pcm(b"invalid")
+        clipped = decoded.copy(); clipped[0] = -1
+        with self.assertRaises(ValueError):
+            acoustic_features(clipped)
+        np.testing.assert_array_equal(acoustic_features(clipped, allow_full_scale=True),
+                                      v2_c1.features.c1_envelope(clipped))
 
     def test_checkpoint_and_continuous_scores(self):
         rng = np.random.default_rng(12)
