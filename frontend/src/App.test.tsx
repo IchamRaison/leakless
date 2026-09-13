@@ -16,7 +16,11 @@ it("renders LeakLess as the only experience, including for the former studio has
   location.hash = "#studio";
   render(<App />);
   expect(
-    await screen.findByRole("heading", { name: /Water damage/ }),
+    await screen.findByRole(
+      "heading",
+      { name: /Water damage/ },
+      { timeout: 5000 },
+    ),
   ).toBeInTheDocument();
   expect(
     screen.getByRole("link", { name: /Load a recording/ }),
@@ -33,6 +37,6 @@ it("opens the monitor replay on #monitor", async () => {
   location.hash = "#monitor";
   render(<App />);
   expect(
-    await screen.findByText(/Replay, not a live feed\./),
+    await screen.findByText(/Water signal · last 120 s/, {}, { timeout: 5000 }),
   ).toBeInTheDocument();
 });

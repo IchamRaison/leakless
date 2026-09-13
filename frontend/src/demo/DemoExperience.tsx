@@ -47,7 +47,7 @@ export default function DemoExperience() {
   useEffect(() => {
     const id = decodeURIComponent(location.hash.slice(1));
     const target = id && id !== "demo" ? document.getElementById(id) : null;
-    target?.scrollIntoView();
+    target?.scrollIntoView?.();
   }, []);
   useEffect(() => {
     request.current?.abort();
@@ -88,10 +88,10 @@ export default function DemoExperience() {
 
   // Points are illustrative positions, not leak locations: choosing one never picks a recording.
   const selectPoint = (id: Measurement) => setMeasurement(id);
-  const inspectRecording = async (index: number) => {
+  const openMonitor = async () => {
     if (document.fullscreenElement)
       await document.exitFullscreen().catch(() => {});
-    location.hash = `monitor/rec-0${index + 1}`;
+    location.hash = "monitor";
   };
   const reload = () => {
     cache.current.clear();
@@ -178,7 +178,7 @@ export default function DemoExperience() {
                 error={error}
                 onChoose={setRecord}
                 onRetry={reload}
-                onInspect={(index) => void inspectRecording(index)}
+                onInspect={() => void openMonitor()}
               />
             )}
             <div className="building-caption">

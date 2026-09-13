@@ -26,12 +26,16 @@ const goTo = async (hash: string) => {
 it("keeps the browser's anchor jump for in-page links and resets scroll only when leaving the monitor", async () => {
   const scrollTo = vi.spyOn(window, "scrollTo").mockImplementation(() => {});
   render(<App />);
-  await screen.findByRole("heading", { name: /Water damage/ });
+  await screen.findByRole(
+    "heading",
+    { name: /Water damage/ },
+    { timeout: 5000 },
+  );
   for (const anchor of ["#signal", "#evidence", "#inspect"]) await goTo(anchor);
   expect(scrollTo).not.toHaveBeenCalled();
   await goTo("#monitor");
   expect(
-    await screen.findByText(/Replay, not a live feed\./),
+    await screen.findByText(/Water signal · last 120 s/, {}, { timeout: 5000 }),
   ).toBeInTheDocument();
   // Entering the monitor starts it at the top; leaving restores the demo position (0 here).
   expect(scrollTo).toHaveBeenCalledTimes(1);

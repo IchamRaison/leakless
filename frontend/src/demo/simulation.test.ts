@@ -9,38 +9,34 @@ import {
   fireEvent,
   render,
   screen,
-  within,
 } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { App } from "../App";
 import { loadExample } from "./loadExample";
 import MonitorReplay from "./MonitorReplay";
-import recordings from "./recordings.json";
 import {
   HIT_STROKE,
   PIPE_PATHS,
   RESPONSE_LAMBDA,
-  SIM_SENSORS,
+  SENSORS,
   projectToPipe,
   simulateIncident,
 } from "./simulation";
-import {
-  alertRecipient,
-  assertDemoAlert,
-  buildAlertMessage,
-  whatsappLink,
-} from "./whatsapp";
+import { api } from "../api";
+import type { Incident, IncidentSnapshot } from "./incidents";
 
+vi.mock("../api", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("../api")>()),
+  api: vi.fn(),
+}));
 vi.mock("./loadExample", () => ({ loadExample: vi.fn() }));
 vi.mock("./SceneCanvas", () => ({ SceneCanvas: () => null }));
 afterEach(() => {
+  vi.useRealTimers();
   cleanup();
   vi.restoreAllMocks();
   location.hash = "";
 });
-
-const FORBIDDEN =
-  /%|probabilit|confidence|accuracy|leak detected|localization achieved|model detected/i;
 
 describe("deterministic simulation", () => {
   it("projects a click onto the nearest pipe", () => {
@@ -57,10 +53,10 @@ describe("deterministic simulation", () => {
     });
   });
 
-  it("finds the nearest simulated sensor and applies exp(-d / lambda)", () => {
+  it("finds the nearest sensor node and applies exp(-d / lambda)", () => {
     const incident = simulateIncident({ x: 505, y: 150 });
     expect(incident.position).toEqual({ x: 505, y: 160 });
-    expect(incident.nearest.name).toBe("Sim Sensor 2");
+    expect(incident.nearest.name).toBe("Sensor 2");
     for (const { sensor, distance, response } of incident.responses) {
       expect(distance).toBeCloseTo(
         Math.hypot(sensor.x - 505, sensor.y - 160),
@@ -77,13 +73,11 @@ describe("deterministic simulation", () => {
     expect(simulateIncident({ x: 870, y: 120 })).toEqual(
       simulateIncident({ x: 870, y: 120 }),
     );
-    expect(simulateIncident({ x: 870, y: 120 }).nearest.name).toBe(
-      "Sim Sensor 3",
-    );
+    expect(simulateIncident({ x: 870, y: 120 }).nearest.name).toBe("Sensor 3");
   });
 
   it("keeps sensors on the drawn pipes and hit targets large on a phone", () => {
-    for (const sensor of SIM_SENSORS)
+    for (const sensor of SENSORS)
       expect(projectToPipe(sensor).distance).toBe(0);
     // Measured in Chrome: the drawing is ~319 px wide on a 420 px screen; the hit stroke stays above 32 px.
     expect((HIT_STROKE * 319) / 1240).toBeGreaterThanOrEqual(32);
@@ -91,11 +85,7 @@ describe("deterministic simulation", () => {
   });
 
   it("simulation code never imports the official TSLM result or a model", () => {
-    for (const file of [
-      "simulation.ts",
-      "whatsapp.ts",
-      "SimulationPanel.tsx",
-    ]) {
+    for (const file of ["simulation.ts", "SimulationPanel.tsx"]) {
       const source = readFileSync(
         join(process.cwd(), "src/demo", file),
         "utf8",
@@ -107,151 +97,164 @@ describe("deterministic simulation", () => {
   });
 });
 
-describe("WhatsApp alert", () => {
-  it("builds a demo, simulated message and a wa.me link only", () => {
-    const message = buildAlertMessage(SIM_SENSORS[1]);
-    expect(message).toBe(
-      "LeakLess demo alert\nSimulated anomaly detected near Sim Sensor 2.\nLocation: Building demo network · Zone N2.\nAction: inspection recommended.",
-    );
-    expect(message).toMatch(/demo/i);
-    expect(message).toMatch(/simulated/i);
-    expect(message).not.toMatch(FORBIDDEN);
-    expect(whatsappLink(message, "")).toBe(
-      `https://wa.me/?text=${encodeURIComponent(message)}`,
-    );
-    expect(whatsappLink(message, "41790000000")).toMatch(
-      /^https:\/\/wa\.me\/41790000000\?text=/,
-    );
+/** In-memory stand-in for the backend /incidents API: the test decides every server transition. */
+function fakeServer(persistenceSeconds = 30) {
+  const server = {
+    active: null as Incident | null,
+    history: [] as Incident[],
+    now: () => Date.now() / 1000,
+    retries: 0,
+  };
+  const snapshot = (): IncidentSnapshot => ({
+    server_time: server.now(),
+    persistence_seconds: persistenceSeconds,
+    transport: { name: "telegram", configured: true },
+    active: server.active,
+    history: server.history,
+  });
+  vi.mocked(api).mockImplementation(async (path, schema, options) => {
+    if (path === "/incidents" && options?.method === "POST" && !server.active) {
+      const body = JSON.parse(String(options.body));
+      server.active = {
+        incident_id: "inc-test0001",
+        source: "injected_test",
+        strongest_sensor: body.strongest_sensor,
+        zone: `N${body.strongest_sensor}`,
+        position: body.position,
+        started_at: server.now(),
+        status: "ANOMALY_PENDING",
+        confirmed_at: null,
+        alert_sent_at: null,
+        resolved_at: null,
+        transport: null,
+        delivery_status: "not_dispatched",
+        telegram_message_id: null,
+        failure_reason: null,
+      };
+    }
+    if (path.endsWith("/retry") && server.active) {
+      server.retries += 1;
+    }
+    if (path.endsWith("/resolve") && server.active) {
+      server.history = [
+        { ...server.active, status: "RESOLVED", resolved_at: server.now() },
+        ...server.history,
+      ];
+      server.active = null;
+    }
+    return schema.parse(snapshot());
+  });
+  return server;
+}
+
+const REMOVED =
+  /SIMULATION MODE|SIM [123]\b|Sim Sensor|LeakLess demo alert|Demo rule|SIMULATED INCIDENT|TSLM not involved|Test scenario|response distribution|no leak is shown|WhatsApp|leak probability|confidence|accuracy|TSLM detected|TELEGRAM_|api\.telegram|synthetic|NO PER-RECORDING OUTPUT|Model output|not configured|\bDEMO\b|SIMULATION/i;
+
+const tick = (ms: number) =>
+  act(async () => {
+    vi.advanceTimersByTime(ms);
   });
 
-  it("refuses an alert that is not marked demo or simulated", () => {
-    expect(() => assertDemoAlert("Leak alert near sensor 2")).toThrow(
-      /demo or simulated/,
-    );
-    expect(() => whatsappLink("Inspection needed", "")).toThrow();
-  });
-
-  it("keeps only digits of the optional recipient", () => {
-    expect(alertRecipient("+41 79 000 00 00")).toBe("41790000000");
-    expect(alertRecipient("")).toBe("");
-    expect(alertRecipient(undefined)).toBe("");
-  });
-});
-
-const visualization = (level: number) => ({
-  sample_id: "a".repeat(24),
-  input_sha256: "a".repeat(64),
-  visualization_version: "test",
-  duration_seconds: 1,
-  waveform: { times: [0, 0.5], min: [-0.1, -0.2], max: [0.1, 0.2] },
-  spectrogram: {
-    times: [0.25, 0.75],
-    frequencies_hz: [100, 2000, 3900],
-    power_db: [
-      [level, level],
-      [level, level],
-      [level, level],
-    ],
-    floor_db: -120,
-    reference: "test",
-  },
-  parameters: {
-    n_fft: 2,
-    hop_samples: 1,
-    window: "hann",
-    channels: "mono",
-    resampling: false,
-    pooling: "none",
-  },
-  notice: "test",
-});
-
-describe("monitor simulation flow", () => {
-  it("adds a labelled simulation on a pipe click and clears it without touching the replay", async () => {
-    vi.mocked(loadExample).mockImplementation(async (record) => ({
-      record,
-      sample: {} as never,
-      visualization: visualization(
-        -50 - recordings.records.indexOf(record) * 5,
-      ),
-    }));
+describe("monitor incident flow (backend-owned)", () => {
+  it("observes for 30 s, recommends inspection only after server confirmation, shows SENT only after Telegram, keeps history", async () => {
+    vi.useFakeTimers({ toFake: ["setInterval", "clearInterval", "Date"] });
+    vi.setSystemTime(new Date("2026-09-13T10:57:50"));
+    const server = fakeServer();
     const { container } = render(createElement(MonitorReplay));
-    await screen.findByRole("article", {
-      name: "Dataset label Leak-associated",
-    });
-    fireEvent.click(screen.getByRole("button", { name: "Pause replay" }));
-    const recMarkers = () =>
-      [...container.querySelectorAll(".listen-point")].map(
-        (node) => node.outerHTML,
-      );
-    const cards = () =>
-      [...container.querySelectorAll(".monitor-card")].map(
-        (node) => node.textContent,
-      );
-    const beforeMarkers = recMarkers();
-    const beforeCards = cards();
-    expect(container.querySelector(".sim-panel")).toBeNull();
-
-    const hit = screen.getByRole("button", {
-      name: "Simulate an incident on pipe 6",
-    });
-    expect(hit).toHaveAttribute("stroke-width", String(HIT_STROKE));
-    fireEvent.keyDown(hit, { key: "Enter" });
-
-    expect(screen.getAllByText("SIMULATION MODE")).toHaveLength(2);
+    await tick(0);
+    const alerts = () =>
+      container.querySelector(".monitor-status .alert-state");
+    const status = () => container.querySelector(".alert-status");
+    const stage = () => container.querySelector("#sim-title")?.textContent;
+    expect(alerts()).toHaveTextContent("NORMAL");
+    expect(alerts()).toHaveClass("is-normal");
     expect(
-      screen.getByRole("heading", {
-        name: "SIMULATED INCIDENT — synthetic event and illustrative sensor responses. TSLM not involved.",
-      }),
+      screen.getByText("3 sensors online · 2 Hz · last 120 s"),
     ).toBeInTheDocument();
-    expect(container.querySelectorAll(".sim-sensor")).toHaveLength(3);
-    expect(container.querySelector(".sim-incident")).not.toBeNull();
-    expect(
-      screen.getByText("Inspection recommended near Sim Sensor 2"),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        "Demo rule: response strength is simulated from distance. Not a model output.",
-      ),
-    ).toBeInTheDocument();
-    expect(
-      screen.getAllByText(
-        "Illustrative sensor positions — not dataset channels.",
-      ),
-    ).not.toHaveLength(0);
-    const preview = screen.getByRole("figure", { name: "Alert preview" });
-    expect(
-      within(preview).getByText(/LeakLess demo alert/),
-    ).toBeInTheDocument();
-    const send = screen.getByRole("link", { name: /Send WhatsApp alert/ });
-    expect(send.getAttribute("href")).toMatch(
-      /^https:\/\/wa\.me\/\d*\?text=LeakLess%20demo%20alert/,
+    expect(screen.getAllByText("Scenario injection")).toHaveLength(1);
+    expect(container.querySelectorAll(".listen-point")).toHaveLength(3);
+    expect(container.querySelector(".live-threshold-label")).toHaveTextContent(
+      "Alert threshold · 1.6× baseline",
     );
-    expect(send).toHaveAttribute("target", "_blank");
-    const panelText = container.querySelector(".sim-panel")?.textContent ?? "";
-    expect(panelText).not.toMatch(FORBIDDEN);
+
+    fireEvent.click(screen.getByRole("button", { name: "Inject incident" }));
+    await tick(0);
+    // t = 0: observation only. No recommendation before the persistence condition.
+    expect(stage()).toBe("Anomaly under observation");
+    expect(
+      screen.getByText("Strongest response: Sensor 03"),
+    ).toBeInTheDocument();
+    expect(document.body.textContent).not.toMatch(/Inspection recommended/);
+    expect(status()).toHaveTextContent("Armed · waiting 30 s");
+    expect(alerts()).toHaveClass("is-observing");
+    expect(container.querySelectorAll(".response-ring")).toHaveLength(3);
+
+    await tick(12_000);
+    expect(alerts()).toHaveTextContent(
+      "ANOMALY UNDER OBSERVATION · 12 s / 30 s",
+    );
+    expect(
+      container.querySelector(".persistence .demo-kicker"),
+    ).toHaveTextContent("Anomaly under observation · 12 s / 30 s");
     expect(document.body.textContent).not.toMatch(
-      /\d\s*%|probability|confidence/i,
+      /Inspection recommended|Sent/,
     );
 
-    // Measured REC markers and cards are untouched by the simulation.
-    expect(recMarkers()).toEqual(beforeMarkers);
-    expect(cards()).toEqual(beforeCards);
+    // Server confirms persistence and starts the Telegram request.
+    await tick(18_000);
+    const started = server.active!.started_at;
+    server.active = {
+      ...server.active!,
+      status: "ALERT_DISPATCHING",
+      confirmed_at: started + 30,
+      transport: "telegram",
+      delivery_status: "dispatching",
+    };
+    await tick(1_000);
+    expect(stage()).toBe("Persistent anomaly confirmed");
+    expect(screen.getByText("Inspection recommended")).toBeInTheDocument();
+    expect(status()).toHaveTextContent("Dispatching");
+    expect(alerts()).toHaveClass("is-triggered");
+    expect(document.body.textContent).not.toMatch(/\bSent\b/);
 
-    fireEvent.click(screen.getByRole("button", { name: "Clear simulation" }));
+    // Telegram confirmed delivery.
+    server.active = {
+      ...server.active!,
+      status: "ALERT_SENT",
+      delivery_status: "sent",
+      alert_sent_at: started + 31,
+      telegram_message_id: "9001",
+    };
+    await tick(1_000);
+    expect(status()).toHaveTextContent("Sent · 10:58:21");
+    expect(alerts()).toHaveTextContent("ALERT SENT");
+    expect(screen.getByText("Telegram → On-call plumber")).toBeInTheDocument();
+    expect(screen.getByText("Not implemented")).toBeInTheDocument();
+    expect(document.body.textContent).not.toMatch(REMOVED);
+
+    // Resolve: nothing erased, a resolution marker and the incident history remain.
+    await tick(220_000);
+    fireEvent.click(screen.getByRole("button", { name: "Resolve incident" }));
+    await tick(0);
     expect(container.querySelector(".sim-panel")).toBeNull();
-    expect(container.querySelector(".sim-layer")).toBeNull();
-    expect(screen.queryByText("SIMULATION MODE")).toBeNull();
-    expect(recMarkers()).toEqual(beforeMarkers);
-    expect(cards()).toEqual(beforeCards);
-    expect(
-      screen.getByRole("button", { name: "Resume replay" }),
-    ).toBeInTheDocument();
+    expect(alerts()).toHaveTextContent("RESOLVED");
+    const history = screen.getByRole("region", { name: "Last incident" });
+    expect(history).toHaveTextContent(
+      /10:57:50 anomaly started.*10:58:20 persistence threshold reached.*10:58:21 alert sent · telegram.*11:02:02 resolved/,
+    );
+    expect(history).toHaveTextContent("inc-test0001");
+    expect(history).toHaveTextContent("#9001");
+    expect(history).toHaveTextContent("telegram · sent");
+    await tick(1_000);
+    expect(container.querySelector(".live-resolved-line")).not.toBeNull();
+    expect(container.querySelector(".live-event rect")).not.toBeNull();
+    expect(document.body.textContent).not.toMatch(REMOVED);
   });
 
-  it("projects a pointer click in drawing units", async () => {
-    vi.mocked(loadExample).mockReturnValue(new Promise(() => {}));
+  it("injects from a pipe click at the projected position", async () => {
+    fakeServer();
     const { container } = render(createElement(MonitorReplay));
+    await screen.findByText("NORMAL");
     const svg = container.querySelector(".pipe-network svg") as SVGSVGElement;
     vi.spyOn(svg, "getBoundingClientRect").mockReturnValue({
       left: 0,
@@ -266,33 +269,142 @@ describe("monitor simulation flow", () => {
     });
     // Screen (400, 230) is drawing (400, 260): 20 units below the first pipe.
     fireEvent.click(
-      screen.getByRole("button", { name: "Simulate an incident on pipe 1" }),
+      screen.getByRole("button", { name: "Inject incident on pipe 1" }),
       { clientX: 400, clientY: 230 },
     );
+    expect(
+      await screen.findByText(
+        "Strongest response: Sensor 03".replace("03", "01"),
+      ),
+    ).toBeInTheDocument();
     const marker = container.querySelector(".sim-incident");
     expect(marker).toHaveAttribute("cx", "400");
     expect(marker).toHaveAttribute("cy", "240");
+  });
+
+  it("frontend source holds no Telegram secret or direct Telegram call", () => {
+    for (const file of [
+      "incidents.ts",
+      "MonitorReplay.tsx",
+      "SimulationPanel.tsx",
+    ]) {
+      const source = readFileSync(
+        join(process.cwd(), "src/demo", file),
+        "utf8",
+      );
+      expect(source, file).not.toMatch(/TELEGRAM_|api\.telegram\.org|bot\d+:/);
+    }
+  });
+});
+
+describe("code review regressions", () => {
+  it("shows the persistence duration supplied by the server (single source of truth)", async () => {
+    fakeServer(12);
+    const { container } = render(createElement(MonitorReplay));
+    await screen.findByText("NORMAL");
+    fireEvent.click(screen.getByRole("button", { name: "Inject incident" }));
+    expect(await screen.findByText("Armed · waiting 12 s")).toBeInTheDocument();
     expect(
-      screen.getByText("Inspection recommended near Sim Sensor 1"),
+      container.querySelector(".monitor-status .alert-state"),
+    ).toHaveTextContent(/^ANOMALY UNDER OBSERVATION · \d+ s \/ 12 s$/);
+    expect(document.body.textContent).not.toMatch(/\b30 s\b/);
+  });
+
+  it("never lets a slow poll overwrite a newer resolve result", async () => {
+    const server = fakeServer();
+    const { container } = render(createElement(MonitorReplay));
+    await screen.findByText("NORMAL");
+    fireEvent.click(screen.getByRole("button", { name: "Inject incident" }));
+    await screen.findByText("Resolve incident");
+    // Next poll hangs and carries the pre-resolve state.
+    const staleActive = server.active;
+    let releaseStalePoll: () => void = () => {};
+    const realImpl = vi.mocked(api).getMockImplementation()!;
+    vi.mocked(api).mockImplementation((path, schema, options) => {
+      if (path === "/incidents/current")
+        return new Promise((resolve) => {
+          releaseStalePoll = () =>
+            resolve(
+              schema.parse({
+                server_time: Date.now() / 1000,
+                persistence_seconds: 30,
+                transport: { name: "telegram", configured: true },
+                active: staleActive,
+                history: [],
+              }),
+            );
+        });
+      return realImpl(path, schema, options);
+    });
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 1100));
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Resolve incident" }));
+    await screen.findByText("RESOLVED");
+    await act(async () => {
+      releaseStalePoll();
+    });
+    expect(container.querySelector(".sim-panel")).toBeNull();
+    expect(screen.queryByText("Resolve incident")).toBeNull();
+    expect(screen.getByText("RESOLVED")).toBeInTheDocument();
+  });
+
+  it("offers an explicit retry when the notification failed, and resolve frees the slot", async () => {
+    const server = fakeServer();
+    render(createElement(MonitorReplay));
+    await screen.findByText("NORMAL");
+    fireEvent.click(screen.getByRole("button", { name: "Inject incident" }));
+    await screen.findByText("Resolve incident");
+    expect(screen.queryByText("Retry notification")).toBeNull();
+    server.active = {
+      ...server.active!,
+      status: "ALERT_FAILED",
+      confirmed_at: server.active!.started_at + 30,
+      transport: "telegram",
+      delivery_status: "failed",
+      failure_reason: "Telegram rejected the message: chat not found.",
+    };
+    expect(
+      await screen.findByText(
+        "Notification failed · Telegram delivery unavailable",
+      ),
     ).toBeInTheDocument();
+    expect(document.body.textContent).not.toMatch(/chat not found|TELEGRAM_/);
+    fireEvent.click(screen.getByRole("button", { name: "Retry notification" }));
+    await vi.waitFor(() => expect(server.retries).toBe(1));
+    await vi.waitFor(() =>
+      expect(
+        screen.getByRole("button", { name: "Resolve incident" }),
+      ).not.toBeDisabled(),
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Resolve incident" }));
+    await screen.findByText("RESOLVED");
+    expect(
+      screen.getByRole("button", { name: "Inject incident" }),
+    ).not.toBeDisabled();
   });
 });
 
 describe("navigation", () => {
   it("opens Evidence at its heading when leaving the monitor", async () => {
     vi.mocked(loadExample).mockReturnValue(new Promise(() => {}));
+    fakeServer();
     const scrollTo = vi.spyOn(window, "scrollTo").mockImplementation(() => {});
     const intoView = vi.fn();
     Element.prototype.scrollIntoView = intoView;
     render(createElement(App));
-    await screen.findByRole("heading", { name: /Water damage/ });
+    await screen.findByRole(
+      "heading",
+      { name: /Water damage/ },
+      { timeout: 5000 },
+    );
     const go = (hash: string) =>
       act(async () => {
         location.hash = hash;
         window.dispatchEvent(new HashChangeEvent("hashchange"));
       });
     await go("#monitor");
-    await screen.findByText(/Replay, not a live feed\./);
+    await screen.findByText(/Water signal · last 120 s/, {}, { timeout: 5000 });
     scrollTo.mockClear();
     intoView.mockClear();
     await go("#evidence");

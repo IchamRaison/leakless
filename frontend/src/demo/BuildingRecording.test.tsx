@@ -19,6 +19,19 @@ vi.mock("./SceneCanvas", () => ({
 }));
 vi.mock("../SignalView", () => ({ SignalView: () => <div>signal view</div> }));
 vi.mock("./loadExample", () => ({ loadExample: vi.fn() }));
+vi.mock("../api", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("../api")>()),
+  api: vi.fn(
+    async (_path: string, schema: { parse: (v: unknown) => unknown }) =>
+      schema.parse({
+        server_time: Date.now() / 1000,
+        persistence_seconds: 30,
+        transport: { name: "telegram", configured: false },
+        active: null,
+        history: [],
+      }),
+  ),
+}));
 
 const visualization = {
   sample_id: "a".repeat(24),
@@ -92,29 +105,23 @@ it("lets a building point replay a chosen real recording without associating it"
   expect(panel.textContent).not.toMatch(/%|probability|detected|located/i);
 
   fireEvent.click(
-    within(panel).getByRole("button", { name: /Inspect this recording/ }),
+    within(panel).getByRole("button", { name: /Open the live monitor/ }),
   );
-  await vi.waitFor(() => expect(location.hash).toBe("#monitor/rec-02"));
+  await vi.waitFor(() => expect(location.hash).toBe("#monitor"));
 });
 
-it("opens the monitor with the requested recording in front and lets markers change it", async () => {
-  location.hash = "#monitor/rec-02";
-  render(<MonitorReplay />);
-  const leak = await screen.findByRole("article", {
-    name: "Dataset label Leak-associated",
-  });
-  expect(leak).toHaveClass("is-focused");
+it("highlights the requested sensor from the hash and lets network nodes change it", async () => {
+  location.hash = "#monitor/sensor-02";
+  const { container } = render(<MonitorReplay />);
+  const row = (n: number) =>
+    container.querySelectorAll(".sensor-table tbody tr")[n - 1];
+  expect(row(2)).toHaveClass("is-focused");
   // jsdom does not expose roles on SVG <g>; the browser QA checks the accessible button.
-  const marker = document.querySelector('[aria-label="Show REC 03 in front"]');
+  const marker = document.querySelector('[aria-label="Highlight Sensor 3"]');
   expect(marker).toHaveAttribute("role", "button");
   fireEvent.click(marker!);
-  expect(
-    await screen.findByRole("article", {
-      name: "Dataset label Environmental noise",
-    }),
-  ).toHaveClass("is-focused");
-  expect(leak).not.toHaveClass("is-focused");
-  expect(location.hash).toBe("#monitor/rec-03");
-  expect(screen.getByText("N/A · replay only")).toBeInTheDocument();
-  expect(document.querySelector(".monitor audio")).not.toHaveAttribute("src");
+  expect(row(3)).toHaveClass("is-focused");
+  expect(row(2)).not.toHaveClass("is-focused");
+  expect(location.hash).toBe("#monitor/sensor-03");
+  expect(await screen.findByText("NORMAL")).toBeInTheDocument();
 });

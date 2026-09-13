@@ -5,10 +5,17 @@ import {
   PIPE_PATHS,
   pipePolylines,
   type Point,
-  type SimulatedIncident,
+  type TestIncident,
 } from "./simulation";
 
-export type NetworkChannel = { id: string; name: string; level: number | null };
+/** name = accessible name, label = drawn label; intensity (0-1) wins over a dB level. */
+export type NetworkChannel = {
+  id: string;
+  name: string;
+  label?: string;
+  level: number | null;
+  intensity?: number;
+};
 
 const SEGMENTS = PIPE_PATHS;
 const VIEW = { x: 0, y: 30, width: 1240, height: 280 };
@@ -41,7 +48,7 @@ const JOINTS = [
   [1080, 240],
 ];
 const POINTS = [
-  [200, 240, -40, -44],
+  [200, 240, -52, 48],
   [590, 118, 34, 8],
   [880, 155, 50, 8],
 ] as const;
@@ -91,7 +98,7 @@ export function PipeNetwork({
   playing: boolean;
   focused?: string | null;
   onFocus?: (id: string) => void;
-  incident?: SimulatedIncident | null;
+  incident?: TestIncident | null;
   onIncident?: (click: Point) => void;
 }) {
   const svg = useRef<SVGSVGElement>(null);
@@ -109,17 +116,16 @@ export function PipeNetwork({
       className={[
         "pipe-network",
         playing ? "" : "paused",
-        incident ? "simulating" : "",
+        incident ? "incident-active" : "",
       ]
         .filter(Boolean)
         .join(" ")}
     >
-      {incident && <span className="sim-chip">SIMULATION MODE</span>}
       <svg
         ref={svg}
         viewBox={`${VIEW.x} ${VIEW.y} ${VIEW.width} ${VIEW.height}`}
         role="group"
-        aria-label="Illustrative pipe network with animated water. Each recording marker ripples with the measured level of its replayed recording. No leak is shown."
+        aria-label="Illustrative pipe network with three sensor nodes. Each node ripples with its live RMS."
       >
         <g className="tank">
           <rect x="40" y="150" width="90" height="120" rx="16" />
@@ -155,7 +161,7 @@ export function PipeNetwork({
                 strokeWidth={HIT_STROKE}
                 role="button"
                 tabIndex={0}
-                aria-label={`Simulate an incident on pipe ${pipe + 1}`}
+                aria-label={`Inject incident on pipe ${pipe + 1}`}
                 onClick={hit}
                 onKeyDown={(event) => hitKey(event, pipe)}
               />
@@ -163,62 +169,40 @@ export function PipeNetwork({
           </g>
         )}
         {incident && (
-          <g className="sim-layer" aria-label="Simulated sensor responses">
-            {incident.responses.map(({ sensor, response }) => (
-              <g
-                key={sensor.id}
-                className={
-                  sensor.id === incident.nearest.id
-                    ? "sim-sensor is-nearest"
-                    : "sim-sensor"
-                }
-              >
-                <circle
-                  className="sim-ripple"
-                  cx={sensor.x}
-                  cy={sensor.y}
-                  r={16 + response * 40}
-                  style={{ opacity: 0.15 + response * 0.65 }}
-                />
-                <rect
-                  className="sim-node"
-                  x={sensor.x - 9}
-                  y={sensor.y - 9}
-                  width="18"
-                  height="18"
-                  rx="3"
-                />
-                <text
-                  x={sensor.x + sensor.label[0]}
-                  y={sensor.y + sensor.label[1]}
-                >
-                  SIM {sensor.id}
-                </text>
-              </g>
-            ))}
-            <circle
-              className="sim-incident"
-              cx={incident.position.x}
-              cy={incident.position.y}
-              r="15"
-            />
-          </g>
+          <circle
+            className="sim-incident"
+            cx={incident.position.x}
+            cy={incident.position.y}
+            r="15"
+          />
         )}
         {channels.map((channel, index) => {
           const [x, y, dx, dy] = POINTS[index];
           const unit =
-            channel.level == null ? 0 : toUnit(channel.level, LEVEL_DB);
+            channel.intensity ??
+            (channel.level == null ? 0 : toUnit(channel.level, LEVEL_DB));
+          // Test incident: the existing node itself shows its distance-based response.
+          const response = incident?.responses[index];
+          const strongest =
+            !!response && incident?.nearest.id === response.sensor.id;
+          const relative = response
+            ? response.response /
+              Math.max(...incident!.responses.map((r) => r.response))
+            : 0;
           return (
             <g
-              className={
-                focused === channel.id
-                  ? "listen-point is-focused"
-                  : "listen-point"
-              }
+              className={[
+                "listen-point",
+                focused === channel.id ? "is-focused" : "",
+                response ? "is-responding" : "",
+                strongest ? "is-strongest" : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
               key={channel.id}
               role="button"
               tabIndex={0}
-              aria-label={`Show ${channel.name} in front`}
+              aria-label={`Highlight ${channel.name}`}
               aria-pressed={focused === channel.id}
               onClick={() => onFocus?.(channel.id)}
               onKeyDown={(event) => {
@@ -228,6 +212,15 @@ export function PipeNetwork({
                 }
               }}
             >
+              {response && (
+                <circle
+                  className="response-ring"
+                  cx={x}
+                  cy={y}
+                  r={20 + relative * 48}
+                  style={{ opacity: 0.2 + relative * 0.7 }}
+                />
+              )}
               <circle
                 className="ripple"
                 cx={x}
@@ -237,26 +230,15 @@ export function PipeNetwork({
               />
               <circle className="node" cx={x} cy={y} r="11" />
               <text x={x + dx} y={y + dy}>
-                {channel.name}
+                {channel.label ?? channel.name}
               </text>
             </g>
           );
         })}
       </svg>
       <figcaption>
-        Three experimental recordings replayed for demonstration. Illustrative
-        network: pipes, water motion and recording markers are drawn for the
-        demo, not measured, and no leak is shown. Ripple size = measured level
-        of each replayed recording.
-        {onIncident &&
-          !incident &&
-          " Click a pipe to run the simulated incident demo."}
-        {incident && (
-          <strong className="sim-caption">
-            {" "}
-            Illustrative sensor positions — not dataset channels.
-          </strong>
-        )}
+        Sensor layout · ripple size = live RMS of each sensor.
+        {onIncident && !incident && " Click a pipe to inject an incident."}
       </figcaption>
     </figure>
   );

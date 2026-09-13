@@ -58,7 +58,10 @@ it("monitor and point panel show no per-recording model output", async () => {
   vi.mocked(loadExample).mockReturnValue(new Promise(() => {}));
   render(<MonitorReplay />);
   expect(
-    await screen.findAllByText("TSLM · NO PER-RECORDING OUTPUT"),
-  ).not.toHaveLength(0);
-  expect(document.body.textContent).not.toMatch(/%|chance|0\.111|0\.222/i);
+    await screen.findByRole("heading", { name: "Continuous monitoring" }),
+  ).toBeInTheDocument();
+  // The operator monitor carries no model score or benchmark figure at all.
+  expect(document.body.textContent).not.toMatch(
+    /%|chance|0\.111|0\.222|TSLM|probability/i,
+  );
 });

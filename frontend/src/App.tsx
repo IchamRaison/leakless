@@ -47,7 +47,7 @@ export function App() {
     const id = decodeURIComponent(location.hash.slice(1));
     const section =
       !monitor && id && id !== "demo" ? document.getElementById(id) : null;
-    if (section) section.scrollIntoView({ block: "start" });
+    if (section) section.scrollIntoView?.({ block: "start" });
     else window.scrollTo(0, monitor ? 0 : demoScroll.current);
   }, [monitor]);
   const notes = NotesLayer && new URLSearchParams(location.search).has("notes");

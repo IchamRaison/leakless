@@ -1,163 +1,116 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import {
-  ArrowLeft,
-  AudioLines,
-  Pause,
-  Play,
-  RotateCcw,
-  Volume2,
-  VolumeX,
-} from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowLeft, AudioLines } from "lucide-react";
 import { FullscreenButton } from "./FullscreenButton";
-import { loadExample, type LoadedExample } from "./loadExample";
-import { tslm } from "./official";
 import { PipeNetwork } from "./PipeNetwork";
-import recordings from "./recordings.json";
-import {
-  BAND_DB,
-  LEVEL_DB,
-  formatClock,
-  levelHistory,
-  loopTime,
-  ringAt,
-  toUnit,
-} from "./replay";
-import { signalGeometry } from "./signalGeometry";
-import { SimulationPanel } from "./SimulationPanel";
-import { simulateIncident, type SimulatedIncident } from "./simulation";
+import { LiveSignalChart } from "./LiveSignalChart";
+import { useIncidents, type Incident } from "./incidents";
+import { SAMPLE_MS, sampleAt, sensorStates } from "./liveSignals";
+import { SensorTable } from "./SensorTable";
+import { IncidentHistory, SimulationPanel } from "./SimulationPanel";
+import { SENSORS, simulateIncident } from "./simulation";
 import "./demo.css";
 
-const TICK_MS = 100;
-// "#monitor/rec-02" opens the monitor with REC 02 in front (from the building panel).
+// "#monitor/sensor-02" (or the older "#monitor/rec-02" from the building panel) highlights Sensor 2.
 const focusFromHash = () => {
-  const match = location.hash.match(/^#monitor\/rec-0([1-9])$/);
-  return match ? (recordings.records[Number(match[1]) - 1]?.id ?? null) : null;
+  const match = location.hash.match(/^#monitor\/(?:rec|sensor)-0([1-9])$/);
+  const sensor = match ? SENSORS[Number(match[1]) - 1] : undefined;
+  return sensor ? `sensor-${sensor.id}` : null;
 };
-const bandNames = ["Low", "Mid", "High"];
+// Live RMS mapped to the drawing's ripple size.
+const rippleOf = (rms: number) => Math.max(0, Math.min(1, (rms - 8) / 32));
 
-/** Monitoring-style replay of the three real recordings. No alert, score or detection is produced. */
+// Server incident on the absolute sample clock, with its confirmation and resolution samples.
+const onClock = (incident: Incident) => ({
+  event: simulateIncident(incident.position),
+  k0: sampleAt(incident.started_at * 1000),
+  k1: incident.resolved_at ? sampleAt(incident.resolved_at * 1000) : null,
+  confirmedK: incident.confirmed_at
+    ? sampleAt(incident.confirmed_at * 1000)
+    : null,
+});
+
+/**
+ * Product monitor preview: a synthetic live sensor stream, with incident persistence and automatic
+ * Telegram alerts decided by the backend. No recording, no model output.
+ */
 export default function MonitorReplay() {
-  const [channels, setChannels] = useState<Record<string, LoadedExample>>({});
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [retry, setRetry] = useState(0);
-  const [playing, setPlaying] = useState(true);
-  const [clock, setClock] = useState(0);
-  const [listening, setListening] = useState<string | null>(null);
   const [focused, setFocused] = useState<string | null>(focusFromHash);
-  // Illustrative product simulation, independent from the replayed recordings.
-  const [incident, setIncident] = useState<SimulatedIncident | null>(null);
-  const root = useRef<HTMLDivElement>(null);
-  const audio = useRef<HTMLAudioElement>(null);
-
+  const [fromNetwork, setFromNetwork] = useState(false);
+  const incidents = useIncidents();
+  const { snapshot, offsetMs } = incidents;
+  // Live stream clock on server time: the same instant is the same sample after a reload.
+  const [nowMs, setNowMs] = useState(() => Date.now());
   useEffect(() => {
-    const controller = new AbortController();
-    setErrors({});
-    for (const record of recordings.records)
-      loadExample(record, controller.signal)
-        .then((loaded) => {
-          if (!controller.signal.aborted)
-            setChannels((current) => ({ ...current, [record.id]: loaded }));
-        })
-        .catch((err: Error) => {
-          if (!controller.signal.aborted)
-            setErrors((current) => ({ ...current, [record.id]: err.message }));
-        });
-    return () => controller.abort();
-  }, [retry]);
+    const timer = window.setInterval(() => setNowMs(Date.now()), SAMPLE_MS);
+    return () => window.clearInterval(timer);
+  }, []);
+  const serverNowMs = nowMs + offsetMs;
+  const k = sampleAt(serverNowMs);
+  const active = snapshot?.active ?? null;
+  const last = snapshot?.history[0] ?? null;
+  const recorded = [active, ...(snapshot?.history ?? [])]
+    .filter((item): item is Incident => item !== null)
+    .map(onClock);
+  const confirmed = !!active && active.status !== "ANOMALY_PENDING";
+  const sensors = sensorStates(k, recorded, confirmed);
+  // Single source of truth: the persistence duration comes from the server.
+  const persistenceS = snapshot?.persistence_seconds ?? 0;
+  const elapsedS = active ? serverNowMs / 1000 - active.started_at : 0;
+  const root = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const change = () => setFocused(focusFromHash());
     window.addEventListener("hashchange", change);
     return () => window.removeEventListener("hashchange", change);
   }, []);
-  const focusedLoaded = !!(focused && channels[focused]);
-  useEffect(() => {
-    if (!focusedLoaded || !focused) return;
-    document
-      .getElementById(`channel-card-${focused}`)
-      ?.scrollIntoView({ block: "nearest", behavior: "smooth" });
-  }, [focused, focusedLoaded]);
-  const focusRecording = (id: string) => {
+  const focusSensor = (id: string) => {
     setFocused(id);
-    const index = recordings.records.findIndex((record) => record.id === id);
-    history.replaceState(null, "", `#monitor/rec-0${index + 1}`);
+    history.replaceState(null, "", `#monitor/sensor-0${id.slice(-1)}`);
   };
-
-  useEffect(() => {
-    if (!playing) return;
-    let last = performance.now();
-    const timer = window.setInterval(() => {
-      const now = performance.now();
-      setClock((value) => value + (now - last) / 1000);
-      last = now;
-    }, TICK_MS);
-    return () => window.clearInterval(timer);
-  }, [playing]);
-
-  useEffect(() => {
-    const element = audio.current;
-    const channel = listening ? channels[listening] : null;
-    if (!element) return;
-    if (!channel || !playing) {
-      element.pause();
-      return;
-    }
-    if (!element.src.endsWith(channel.record.url))
-      element.src = channel.record.url;
-    element.currentTime = loopTime(
-      clock,
-      channel.visualization.duration_seconds,
-    );
-    void element.play().catch(() => setListening(null));
-    // Re-sync only when the listened channel or play state changes, not on every tick.
-  }, [listening, playing, channels]);
-
-  const loaded = recordings.records.filter((record) => channels[record.id]);
-  const rings = useMemo(
-    () =>
-      Object.fromEntries(
-        Object.entries(channels).map(([id, channel]) => [
-          id,
-          signalGeometry(channel.visualization),
-        ]),
-      ),
-    [channels],
-  );
-  const network = recordings.records.map((record, index) => {
-    const channel = channels[record.id];
-    const measured = rings[record.id];
-    return {
-      id: record.id,
-      name: `REC 0${index + 1}`,
-      level:
-        channel && measured?.length
-          ? ringAt(measured, channel.visualization.duration_seconds, clock)
-              .energyDb
-          : null,
-    };
-  });
+  const inject = (position: { x: number; y: number }, network: boolean) => {
+    setFromNetwork(network);
+    void incidents.inject(simulateIncident(position).nearest.id, position);
+  };
+  const network = sensors.map(({ sensor, reading }) => ({
+    id: `sensor-${sensor.id}`,
+    name: sensor.name,
+    label: sensor.code,
+    level: null,
+    intensity: rippleOf(reading.rms),
+  }));
+  const recentlyResolved =
+    !active &&
+    !!last?.resolved_at &&
+    serverNowMs / 1000 - last.resolved_at < 300;
+  const alertState = !snapshot
+    ? { tone: "pending", text: "CONNECTING" }
+    : !active
+      ? recentlyResolved
+        ? { tone: "normal", text: "RESOLVED" }
+        : { tone: "normal", text: "NORMAL" }
+      : !confirmed
+        ? {
+            tone: "observing",
+            text: `ANOMALY UNDER OBSERVATION · ${Math.min(persistenceS, Math.max(0, Math.floor(elapsedS)))} s / ${persistenceS} s`,
+          }
+        : {
+            tone: "triggered",
+            text:
+              active.delivery_status === "sent"
+                ? "ALERT SENT"
+                : "PERSISTENT ANOMALY",
+          };
   return (
     <div className="demo-app monitor" ref={root}>
       <header className="demo-topbar monitor-topbar">
         <a className="demo-brand" href="#demo">
           <AudioLines size={21} strokeWidth={1.6} /> LEAKLESS{" "}
-          <span>MONITOR REPLAY</span>
+          <span>LIVE MONITOR</span>
         </a>
         <div className="monitor-controls">
-          <span className="monitor-clock" aria-live="off">
-            REPLAY {formatClock(clock)}
-          </span>
-          <button
-            className="quiet-button"
-            onClick={() => setPlaying(!playing)}
-            aria-label={playing ? "Pause replay" : "Resume replay"}
-          >
-            {playing ? <Pause size={12} /> : <Play size={12} />}
-            {playing ? "Pause" : "Resume"}
-          </button>
           <FullscreenButton
             target={root}
-            label="monitor replay"
+            label="live monitor"
             className="quiet-button monitor-fullscreen"
           />
           <a className="monitor-back" href="#demo">
@@ -166,206 +119,72 @@ export default function MonitorReplay() {
         </div>
       </header>
       <main className="demo-main monitor-main">
-        <p className="monitor-banner" role="note">
-          <strong>Replay, not a live feed.</strong> Three recorded train clips
-          from the experimental dataset, each looped. Recordings are not
-          building locations. {tslm.monitorBanner}
-        </p>
-        <dl className="monitor-summary">
+        <section className="monitor-status" aria-labelledby="monitor-title">
           <div>
-            <dt>Recordings</dt>
-            <dd>
-              {loaded.length} / {recordings.records.length}
-            </dd>
+            <h1 id="monitor-title">Continuous monitoring</h1>
+            <p>3 sensors online · {1000 / SAMPLE_MS} Hz · last 120 s</p>
           </div>
-          <div>
-            <dt>Refresh</dt>
-            <dd>{1000 / TICK_MS} Hz</dd>
-          </div>
-          <div>
-            <dt>Alerts</dt>
-            <dd>N/A · replay only</dd>
-          </div>
-          <div>
-            <dt>Model output</dt>
-            <dd className="pending-value">{tslm.status}</dd>
-          </div>
-        </dl>
-        <PipeNetwork
-          channels={network}
-          playing={playing}
-          focused={focused}
-          onFocus={focusRecording}
-          incident={incident}
-          onIncident={(click) => setIncident(simulateIncident(click))}
-        />
-        {incident && (
+          <p className={`alert-state is-${alertState.tone}`} aria-live="polite">
+            {alertState.text}
+          </p>
+        </section>
+        {incidents.error && (
+          <p className="monitor-service-error" role="alert">
+            Alert service unreachable. Monitoring display continues; alerts are
+            decided by the server.
+          </p>
+        )}
+        <section className="live-card" aria-labelledby="live-title">
+          <header>
+            <div>
+              <h2 id="live-title">Water signal · last 120 s</h2>
+              <span>
+                <i className="live-dot" /> Live
+              </span>
+            </div>
+            <div className="inject-control">
+              <button
+                className="quiet-button inject-button"
+                disabled={!snapshot || !!active || incidents.busy}
+                onClick={() => inject({ x: 1000, y: 240 }, false)}
+              >
+                Inject incident
+              </button>
+              <small>Scenario injection</small>
+            </div>
+          </header>
+          <LiveSignalChart k={k} incidents={recorded} />
+          <SensorTable
+            sensors={sensors}
+            focused={focused}
+            receivedMs={k * SAMPLE_MS}
+          />
+        </section>
+        {active && (
           <SimulationPanel
-            incident={incident}
-            onClear={() => setIncident(null)}
+            incident={active}
+            elapsedS={elapsedS}
+            persistenceS={persistenceS}
+            busy={incidents.busy}
+            reveal={fromNetwork}
+            onResolve={() => void incidents.resolve(active.incident_id)}
+            onRetry={() => void incidents.retry(active.incident_id)}
           />
         )}
-        <section className="monitor-grid" aria-label="Replayed channels">
-          {recordings.records.map((record, index) =>
-            channels[record.id] ? (
-              <ChannelCard
-                key={record.id}
-                index={index}
-                channel={channels[record.id]}
-                clock={clock}
-                focused={focused === record.id}
-                listening={listening === record.id}
-                onListen={() =>
-                  setListening(listening === record.id ? null : record.id)
-                }
-              />
-            ) : (
-              <article className="monitor-card monitor-waiting" key={record.id}>
-                <span className="demo-kicker">REC 0{index + 1}</span>
-                {errors[record.id] ? (
-                  <div role="alert">
-                    <p>{errors[record.id]}</p>
-                    <button onClick={() => setRetry((value) => value + 1)}>
-                      <RotateCcw size={13} /> Retry
-                    </button>
-                  </div>
-                ) : (
-                  <p role="status">Reading the real recording…</p>
-                )}
-              </article>
-            ),
-          )}
-        </section>
-        <p className="monitor-scales">
-          Same fixed scales for every channel. Level: mean spectral power,{" "}
-          {LEVEL_DB[0]}…{LEVEL_DB[1]} dB, display STFT, not calibrated sound
-          pressure. Bands: three equal frequency bands, {BAND_DB[0]}…
-          {BAND_DB[1]} dB. Centroid: 0 to maximum frequency. Measured windows
-          are shown as recorded; nothing is interpolated or predicted.
-        </p>
+        {!active && last && <IncidentHistory incident={last} />}
+        <PipeNetwork
+          channels={network}
+          playing
+          focused={focused}
+          onFocus={focusSensor}
+          incident={active ? simulateIncident(active.position) : null}
+          onIncident={
+            snapshot && !active && !incidents.busy
+              ? (click) => inject(click, true)
+              : undefined
+          }
+        />
       </main>
-      <audio ref={audio} loop hidden />
     </div>
-  );
-}
-
-function ChannelCard({
-  channel,
-  index,
-  clock,
-  focused,
-  listening,
-  onListen,
-}: {
-  focused: boolean;
-  channel: LoadedExample;
-  index: number;
-  clock: number;
-  listening: boolean;
-  onListen: () => void;
-}) {
-  const { record, visualization } = channel;
-  const duration = visualization.duration_seconds;
-  const rings = useMemo(() => signalGeometry(visualization), [visualization]);
-  const scope = useMemo(() => {
-    const { times, min, max } = visualization.waveform;
-    const peak = Math.max(1e-6, ...max.map(Math.abs), ...min.map(Math.abs));
-    return times
-      .map((t, i) => {
-        const x = (t / duration) * 300;
-        return `M${x},${30 - (min[i] / peak) * 26}L${x},${30 - (max[i] / peak) * 26}`;
-      })
-      .join("");
-  }, [visualization, duration]);
-  if (!rings.length)
-    return (
-      <article className="monitor-card monitor-waiting">
-        <span className="demo-kicker">REC 0{index + 1}</span>
-        <p>PENDING — valid spectral measurements required.</p>
-      </article>
-    );
-  const now = ringAt(rings, duration, clock);
-  const history = levelHistory(rings, duration, clock);
-  const maxFrequency = Math.max(...visualization.spectrogram.frequencies_hz);
-  const trace = history
-    .map(
-      (level, i) =>
-        `${((i / (history.length - 1)) * 300).toFixed(1)},${(
-          44 -
-          toUnit(level, LEVEL_DB) * 40
-        ).toFixed(1)}`,
-    )
-    .join(" ");
-  const position = loopTime(clock, duration) / duration;
-  return (
-    <article
-      className={focused ? "monitor-card is-focused" : "monitor-card"}
-      id={`channel-card-${record.id}`}
-      aria-labelledby={`channel-${record.id}`}
-      aria-current={focused || undefined}
-    >
-      <header>
-        <span className="demo-kicker">REC 0{index + 1}</span>
-        <h2 id={`channel-${record.id}`}>
-          <span className="monitor-label">Dataset label</span> {record.title}
-        </h2>
-        <span className="monitor-clip">
-          {record.fold} · {record.clipId}
-        </span>
-      </header>
-      <svg
-        className="monitor-scope"
-        viewBox="0 0 300 60"
-        preserveAspectRatio="none"
-        role="img"
-        aria-label={`Waveform of ${record.title} with replay position`}
-      >
-        <path d={scope} />
-        <line x1={position * 300} x2={position * 300} y1="0" y2="60" />
-      </svg>
-      <dl className="monitor-metrics">
-        <div>
-          <dt>Level</dt>
-          <dd>
-            {now.energyDb.toFixed(1)} <small>dB</small>
-          </dd>
-          <i style={{ width: `${toUnit(now.energyDb, LEVEL_DB) * 100}%` }} />
-        </div>
-        <div>
-          <dt>Centroid</dt>
-          <dd>
-            {Math.round(now.centroidHz)} <small>Hz</small>
-          </dd>
-          <i style={{ width: `${(now.centroidHz / maxFrequency) * 100}%` }} />
-        </div>
-      </dl>
-      <div className="monitor-bands" aria-label="Band power">
-        {now.bandsDb.map((band, i) => (
-          <div key={bandNames[i]}>
-            <span style={{ height: `${toUnit(band, BAND_DB) * 100}%` }} />
-            <small>{bandNames[i]}</small>
-          </div>
-        ))}
-      </div>
-      <div className="monitor-trace">
-        <span>Level · last 8 s (looped clip)</span>
-        <svg viewBox="0 0 300 46" preserveAspectRatio="none" aria-hidden>
-          <polyline points={trace} />
-        </svg>
-      </div>
-      <footer>
-        <span>
-          <b className="pending-value">{tslm.status}</b>
-        </span>
-        <button
-          className="quiet-button"
-          aria-pressed={listening}
-          onClick={onListen}
-        >
-          {listening ? <VolumeX size={12} /> : <Volume2 size={12} />}
-          {listening ? "Stop" : "Listen"}
-        </button>
-      </footer>
-    </article>
   );
 }

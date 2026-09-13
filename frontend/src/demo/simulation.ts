@@ -1,4 +1,4 @@
-// Illustrative product simulation on the drawn pipe network. Deterministic geometry only:
+// Injected test incident on the drawn pipe network. Deterministic geometry only:
 // no recording, no model, no TSLM. Nothing here is measured.
 
 export type Point = { x: number; y: number };
@@ -13,34 +13,37 @@ export const PIPE_PATHS = [
   "M590,70 V160 H440 V240",
 ] as const;
 
-/** Illustrative sensor positions on the drawing. They are not dataset channels. */
-export const SIM_SENSORS = [
+/**
+ * Product sensor layout: the three sensor nodes of the drawn network. Each node replays an
+ * independent example recording (REC 01-03); the recordings were not captured together.
+ */
+export const SENSORS = [
   {
     id: 1,
-    name: "Sim Sensor 1",
+    name: "Sensor 1",
+    code: "SENSOR 01",
     zone: "Zone N1",
-    x: 330,
+    x: 200,
     y: 240,
-    label: [16, -16],
   },
   {
     id: 2,
-    name: "Sim Sensor 2",
+    name: "Sensor 2",
+    code: "SENSOR 02",
     zone: "Zone N2",
-    x: 520,
-    y: 160,
-    label: [-20, 42],
+    x: 590,
+    y: 118,
   },
   {
     id: 3,
-    name: "Sim Sensor 3",
+    name: "Sensor 3",
+    code: "SENSOR 03",
     zone: "Zone N3",
     x: 880,
-    y: 200,
-    label: [-112, 8],
+    y: 155,
   },
 ] as const;
-export type SimSensor = (typeof SIM_SENSORS)[number];
+export type Sensor = (typeof SENSORS)[number];
 
 /** Attenuation length of the demo rule, in SVG units. */
 export const RESPONSE_LAMBDA = 260;
@@ -99,17 +102,17 @@ export function projectToPipe(click: Point, polylines = POLYLINES) {
   return best;
 }
 
-export type SimulatedIncident = {
+export type TestIncident = {
   position: Point;
   pipe: number;
-  responses: { sensor: SimSensor; distance: number; response: number }[];
-  nearest: SimSensor;
+  responses: { sensor: Sensor; distance: number; response: number }[];
+  nearest: Sensor;
 };
 
-/** Demo rule: response_i = exp(-distance_i / lambda). Straight-line distance on the drawing. */
-export function simulateIncident(click: Point): SimulatedIncident {
+/** Test scenario rule: response_i = exp(-distance_i / lambda). Straight-line distance on the drawing. */
+export function simulateIncident(click: Point): TestIncident {
   const { x, y, pipe } = projectToPipe(click);
-  const responses = SIM_SENSORS.map((sensor) => {
+  const responses = SENSORS.map((sensor) => {
     const distance = Math.hypot(sensor.x - x, sensor.y - y);
     return {
       sensor,

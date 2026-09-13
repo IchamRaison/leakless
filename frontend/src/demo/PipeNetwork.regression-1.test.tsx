@@ -33,7 +33,7 @@ it("places every keyboard incident on its pipe and clear of the recording marker
   PIPE_PATHS.forEach((_, pipe) => {
     fireEvent.keyDown(
       screen.getByRole("button", {
-        name: `Simulate an incident on pipe ${pipe + 1}`,
+        name: `Inject incident on pipe ${pipe + 1}`,
       }),
       { key: "Enter" },
     );

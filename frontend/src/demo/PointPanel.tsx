@@ -25,7 +25,7 @@ export function PointPanel({
   error: string;
   onChoose: (record: Recording) => void;
   onRetry: () => void;
-  onInspect: (index: number) => void;
+  onInspect: () => void;
 }) {
   const index = record ? recordings.records.indexOf(record) : -1;
   const waveform = useMemo(() => {
@@ -85,11 +85,8 @@ export function PointPanel({
             <path d={waveform} />
           </svg>
           <span className="point-panel-tslm">{tslm.status}</span>
-          <button
-            className="point-panel-inspect"
-            onClick={() => onInspect(index)}
-          >
-            Inspect this recording <ArrowRight size={13} />
+          <button className="point-panel-inspect" onClick={onInspect}>
+            Open the live monitor <ArrowRight size={13} />
           </button>
         </div>
       ) : (

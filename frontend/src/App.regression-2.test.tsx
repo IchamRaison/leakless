@@ -41,7 +41,11 @@ it("keeps the demo state and scroll position across a monitor round trip, and pa
     .mockImplementation(() => {});
   render(<App />);
   fireEvent.click(
-    await screen.findByRole("button", { name: "Select measurement N3" }),
+    await screen.findByRole(
+      "button",
+      { name: "Select measurement N3" },
+      { timeout: 5000 },
+    ),
   );
   expect(
     screen.getByRole("heading", { name: /Selected measurement point: N3/ }),
@@ -52,7 +56,7 @@ it("keeps the demo state and scroll position across a monitor round trip, and pa
 
   await goTo("#monitor");
   expect(
-    await screen.findByText(/Replay, not a live feed\./),
+    await screen.findByText(/Water signal · last 120 s/, {}, { timeout: 5000 }),
   ).toBeInTheDocument();
   expect(document.querySelector(".demo-view")).not.toBeVisible();
   expect(pause).toHaveBeenCalled();
