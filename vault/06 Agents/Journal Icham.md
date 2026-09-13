@@ -1,5 +1,11 @@
 # Journal Icham
 
+## 13 septembre — D2 borné, distinction sonde CPU et TSLM H100
+
+Après le verdict D1, choix d'un seul HistGradientBoostingClassifier sur les 256 valeurs exactes et trois folds existants, sans recherche de paramètres. Revue indépendante favorable : AUC groupe réservée primaire face à TimeNet256 linéaire, C1 séparé, pas de comparaison fit/réservés mélangée ni de plafond absolu inféré d'un échec. Budget trois fits/200 itérations, configuration et limites consignées dans [[Diagnostic causal - exécution#D2 — sonde non linéaire, protocole avant fit]].
+
+Icham s'inquiète de l'annonce CPU : clarification, elle concerne cette petite sonde indépendante et non l'entraînement du TSLM, qui reste sur H100. Interruption sans fit ni nouveau processus de campagne ; worktrees revérifiés propres à la reprise. Runtime distant existant vérifié par inspection de signature/versions, aucun apprentissage. Implémentation confiée sur deux fichiers nouveaux uniquement ; root garde SSH/publication. Tests et préinscription précéderont tout essai réel. Recherche Entire ciblée : commits de V0/diagnostics retrouvés, aucune sonde non linéaire déjà exécutée identifiée ; pas de nouvelle campagne doublonnée.
+
 ## 13 septembre — renvoi goal unique et D1 A/C terminé
 
 Icham confirme que le prompt du `/goal` doit seulement renvoyer au vault. Point d'entrée explicite ajouté à [[Diagnostic causal TSLM vs C1]] ; les dix étapes, conditions et critères restent dans cette source, aucun second goal créé ni diagnostic déclaré fin de l'objectif.
