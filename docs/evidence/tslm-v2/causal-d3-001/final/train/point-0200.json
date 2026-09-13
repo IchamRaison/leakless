@@ -1,0 +1,128 @@
+{
+  "n_clips": 32,
+  "binary_nll_sum": 16.37868019465241,
+  "binary_nll_mean": 0.5118337560828878,
+  "loss_terms": {
+    "class": {
+      "n_tokens": 112,
+      "nll_sum": 16.333040711794297,
+      "nll_per_token": 0.1458307206410205,
+      "nll_per_clip": 0.5104075222435718
+    },
+    "first_discriminating_token": {
+      "n_tokens": 32,
+      "nll_sum": 16.32334841787815,
+      "nll_per_token": 0.5101046380586922,
+      "nll_per_clip": 0.5101046380586922
+    },
+    "description": {
+      "n_tokens": 454,
+      "nll_sum": 0.08179811453532437,
+      "nll_per_token": 0.00018017205844785103,
+      "nll_per_clip": 0.0025561910792288867
+    },
+    "eos": {
+      "n_tokens": 32,
+      "nll_sum": 0.0012510721771832323,
+      "nll_per_token": 3.909600553697601e-05,
+      "nll_per_clip": 3.909600553697601e-05
+    },
+    "response": {
+      "n_tokens": 598,
+      "nll_sum": 16.416089898506804,
+      "nll_per_token": 0.027451655348673585,
+      "nll_per_clip": 0.5130028093283376
+    }
+  },
+  "metrics": {
+    "n_clips": 32,
+    "n_clusters": 32,
+    "n_clusters_leak": 16,
+    "n_clusters_non_leak": 16,
+    "n_clips_leak": 16,
+    "n_clips_non_leak": 16,
+    "threshold": 0.5,
+    "aggregation": "median",
+    "clip_level": {
+      "roc_auc": 0.859375,
+      "pr_auc": 0.812527,
+      "macro_f1": 0.711712,
+      "balanced_accuracy": 0.71875,
+      "leak_recall": 0.875,
+      "false_positive_rate": 0.4375,
+      "brier": 0.167942,
+      "tp": 14,
+      "fp": 7,
+      "fn": 2,
+      "tn": 9
+    },
+    "cluster_level": {
+      "roc_auc": 0.859375,
+      "pr_auc": 0.812527,
+      "macro_f1": 0.711712,
+      "balanced_accuracy": 0.71875,
+      "leak_recall": 0.875,
+      "false_positive_rate": 0.4375,
+      "brier": 0.167942,
+      "tp": 14,
+      "fp": 7,
+      "fn": 2,
+      "tn": 9
+    },
+    "group_roc_auc_full": 0.859375,
+    "clip_roc_auc_full": 0.859375
+  },
+  "controls": {
+    "constant_half": {
+      "probability_leak": 0.5,
+      "fit_fold": null,
+      "binary_nll_sum": 22.18070977791825,
+      "binary_nll_mean": 0.6931471805599453,
+      "metrics": {
+        "n_clips": 32,
+        "n_clusters": 32,
+        "n_clusters_leak": 16,
+        "n_clusters_non_leak": 16,
+        "n_clips_leak": 16,
+        "n_clips_non_leak": 16,
+        "threshold": 0.5,
+        "aggregation": "median",
+        "clip_level": {
+          "roc_auc": 0.5,
+          "pr_auc": 0.5,
+          "macro_f1": 0.333333,
+          "balanced_accuracy": 0.5,
+          "leak_recall": 1.0,
+          "false_positive_rate": 1.0,
+          "brier": 0.25,
+          "tp": 16,
+          "fp": 16,
+          "fn": 0,
+          "tn": 0
+        },
+        "cluster_level": {
+          "roc_auc": 0.5,
+          "pr_auc": 0.5,
+          "macro_f1": 0.333333,
+          "balanced_accuracy": 0.5,
+          "leak_recall": 1.0,
+          "false_positive_rate": 1.0,
+          "brier": 0.25,
+          "tp": 16,
+          "fp": 16,
+          "fn": 0,
+          "tn": 0
+        },
+        "group_roc_auc_full": 0.5,
+        "clip_roc_auc_full": 0.5
+      }
+    }
+  },
+  "threshold_fitted": false,
+  "step": 200,
+  "n_correct": 23,
+  "criterion_met": false,
+  "observations": 32,
+  "llm_forwards": 64,
+  "generalization_measured": false
+}

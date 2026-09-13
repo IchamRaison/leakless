@@ -1,0 +1,14 @@
+{
+  "seed": 20260912,
+  "epochs": 250,
+  "batch_size": 8,
+  "microbatch_size": 1,
+  "encoder_lr": 0.0002,
+  "projector_lr": 0.0001,
+  "weight_decay": 0.01,
+  "gradient_clip": 1.0,
+  "max_new_tokens": 48,
+  "single_clip_acoustic_encoding": true,
+  "loss": "mean_all_supervised_answer_and_eos_tokens",
+  "initialization": "fresh_temporal_encoder_projector_frozen_qwen_base"
+}

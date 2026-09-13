@@ -1,0 +1,640 @@
+{
+  "schema": "pipe-d3-heldout-98-v1",
+  "d3_directory": "/home/hicham/pipe-v0/artifacts/causal-d3-c08ff78-001",
+  "d3_preregistration_sha256": "42920f6d5446f34f7419ea2a1c5c1f47067e2a915bb2361fa0bdee4097e93a35",
+  "train_receipt_sha256": "5e782e54eaa82067d91d36ee2e35c0ebedf0e578e4b7dc2ae307104bb6a5ab3a",
+  "reload_receipt_sha256": "3fe96a1a35e95acbfab1aca6f710636526c0421a4170ae45b2e3dc94149377e6",
+  "temporal_sha256": "3e99f7aecad16b1cf531bbec1af9c20cfb61f631cc3f0204713d323499da8148",
+  "source_sha256": "0cc8aee7deeac472d13233ab0b3dddff2c23037286d8f3bf0e3227b54e22aa85",
+  "rows": [
+    {
+      "clip_id": "c05d8158c3707",
+      "group_id": "g72971ef0cc",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c064b4d3a7013",
+      "group_id": "g5a209470f2",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c07c975f95b7e",
+      "group_id": "gd4598815b5",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c10d8db301dc4",
+      "group_id": "gd61c1fa88a",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "c112f81c56ca1",
+      "group_id": "gd37b7e3da0",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c13b609dbac9e",
+      "group_id": "g4db42c620a",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "c1683ed31e294",
+      "group_id": "g27ceee2299",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c186eb3b4bb13",
+      "group_id": "gb8ea2685b2",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c1a8f1d23de2c",
+      "group_id": "g5a209470f2",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c1e54ae43a9f6",
+      "group_id": "g94a157eb60",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c1f6f5dc288b2",
+      "group_id": "gf4ed344bc4",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c20b154e99c77",
+      "group_id": "g5de03d5dfa",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "c239d96cc7621",
+      "group_id": "gf731e64668",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c2417970779b9",
+      "group_id": "g5de03d5dfa",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "c255805e4789f",
+      "group_id": "g0bc04f27dc",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c272ce4cb0a81",
+      "group_id": "g3717c759ba",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c27615e885482",
+      "group_id": "g384d392de3",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c2c13a3c5c847",
+      "group_id": "gd7664d159c",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c30617b58ed2d",
+      "group_id": "gf731e64668",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c31dfc36d9429",
+      "group_id": "g9f1bfc309c",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c32e9ddbcf512",
+      "group_id": "g94a157eb60",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c332cd97e3344",
+      "group_id": "g9f1bfc309c",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c33b9ec7b16e8",
+      "group_id": "g72971ef0cc",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c3bd3873e11c7",
+      "group_id": "gf731e64668",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c42044c6c967e",
+      "group_id": "gdcc02653e5",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "c475678ae6ef8",
+      "group_id": "g7744cf68eb",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c4c44b6b5ad5b",
+      "group_id": "ge9f32b8c3c",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c4e7f6b33ed4c",
+      "group_id": "gf731e64668",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c4ef9953000c4",
+      "group_id": "g006526d409",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c4f0131614c87",
+      "group_id": "g9b81f0fded",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c538ffa19559f",
+      "group_id": "gf4ed344bc4",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c5405732725d3",
+      "group_id": "g104fec80fe",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c561239dda450",
+      "group_id": "g95233a69d9",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "c58521959ee09",
+      "group_id": "g72971ef0cc",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c5c25beb01fd8",
+      "group_id": "gb76766bc43",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "c63e2c213d4c3",
+      "group_id": "g3717c759ba",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c6cfb8b366b9b",
+      "group_id": "g95233a69d9",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "c6d2dba66c5bf",
+      "group_id": "gd37259d08c",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c6ed234a13629",
+      "group_id": "g5a209470f2",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c70e042ff2fb4",
+      "group_id": "gc1340893eb",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "c721366fe8a44",
+      "group_id": "g384d392de3",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c73eef6098927",
+      "group_id": "g006526d409",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c749d0ec0a4da",
+      "group_id": "gb8ea2685b2",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c74f741f43ba0",
+      "group_id": "g006630ce38",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "c75ff7781df3f",
+      "group_id": "gb8ea2685b2",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c7788ae6ad436",
+      "group_id": "gf731e64668",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c79d76b0a85c9",
+      "group_id": "g728a375c18",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c8104a15f00d7",
+      "group_id": "gdcc02653e5",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "c8289c334c228",
+      "group_id": "gb76766bc43",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "c852aee3c1dab",
+      "group_id": "g006526d409",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c86336a54b952",
+      "group_id": "g3fccbf4247",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c883d3972e62d",
+      "group_id": "g006630ce38",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "c8d19965fb166",
+      "group_id": "g4db42c620a",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "c8f1e38ca2320",
+      "group_id": "g4db42c620a",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "c8f8340030ca2",
+      "group_id": "g104fec80fe",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c95340245af0b",
+      "group_id": "g7cbbdd18a2",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c9ab733ae4c2a",
+      "group_id": "g9b81f0fded",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "c9c22a3a7bbb1",
+      "group_id": "g9f1bfc309c",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "ca231577fb9d2",
+      "group_id": "gc1340893eb",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "ca72bf20e16e1",
+      "group_id": "g23d60a5b3b",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "cab1fabf80cc0",
+      "group_id": "g4db42c620a",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "cac54aa1d814e",
+      "group_id": "gb8ea2685b2",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "cb1836abaeda9",
+      "group_id": "g006630ce38",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "cb1b6d00cc612",
+      "group_id": "gd7664d159c",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "cbc4c8ad3580b",
+      "group_id": "gd37259d08c",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "cbefbc2bfab6d",
+      "group_id": "g7744cf68eb",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "cc0bb75701548",
+      "group_id": "g5a209470f2",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "cc3ea9de7c014",
+      "group_id": "g27ceee2299",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "cc907703b5ee8",
+      "group_id": "g9b81f0fded",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "cc96f393f9909",
+      "group_id": "gd7664d159c",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "cca73bdc5fabd",
+      "group_id": "ge9f32b8c3c",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "ccaebe2671432",
+      "group_id": "gd61c1fa88a",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "cccd7093a14f3",
+      "group_id": "g104fec80fe",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "ccee26aeeb116",
+      "group_id": "g27ceee2299",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "cd1d69cf431ed",
+      "group_id": "gdcc02653e5",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "cd3e24c8fddaa",
+      "group_id": "g72971ef0cc",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "cd57a1dedb807",
+      "group_id": "g7cbbdd18a2",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "cd5c4ed20c428",
+      "group_id": "g5de03d5dfa",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "cd7dbf2e752b0",
+      "group_id": "g27ceee2299",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "cd8911748e7db",
+      "group_id": "g728a375c18",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "cdaeac1be16b4",
+      "group_id": "gf731e64668",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "cdb43ef923ce5",
+      "group_id": "gc1340893eb",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "cdbd5104a19f9",
+      "group_id": "g5de03d5dfa",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "cde2fefb4bce3",
+      "group_id": "g72971ef0cc",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "ce083251e3ac8",
+      "group_id": "gd4598815b5",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "ce552fe86d7ad",
+      "group_id": "g0bc04f27dc",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "ce5879bae43e3",
+      "group_id": "g23d60a5b3b",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "ce5db6f4b0065",
+      "group_id": "g3fccbf4247",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "ce5f08be3057b",
+      "group_id": "g4db42c620a",
+      "fold": "train",
+      "label": "no_leak"
+    },
+    {
+      "clip_id": "ce771af614f4e",
+      "group_id": "g555ea2a0fc",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "ce9e94229ff8d",
+      "group_id": "gf731e64668",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "ce9f8e682dd05",
+      "group_id": "gf4ed344bc4",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "cf0203b39f111",
+      "group_id": "g3717c759ba",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "cf63fc929563a",
+      "group_id": "gf731e64668",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "cfc0e625fbb0d",
+      "group_id": "g5a209470f2",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "cfe96ddf1bb64",
+      "group_id": "g23a48db512",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "cfea1368453c6",
+      "group_id": "gf731e64668",
+      "fold": "train",
+      "label": "leak"
+    },
+    {
+      "clip_id": "cffc7c8347bce",
+      "group_id": "gd61c1fa88a",
+      "fold": "train",
+      "label": "no_leak"
+    }
+  ],
+  "scoring_spec": {
+    "version": "class-continuation-logprob-sum-softmax-single-clip-v2",
+    "class_continuations": [
+      "leak;",
+      "no_leak;"
+    ],
+    "class_token_ids": [
+      [
+        273,
+        570,
+        26
+      ],
+      [
+        2083,
+        11414,
+        570,
+        26
+      ]
+    ],
+    "class_token_counts": [
+      3,
+      4
+    ],
+    "aggregation": "sum",
+    "length_normalization": false,
+    "class_terminator": ";",
+    "includes_eos": false,
+    "includes_description": false,
+    "calibration": "none",
+    "acoustic_batching": "one_clip_four_channels"
+  },
+  "optimizer_steps": 0,
+  "n_checkpoints_evaluated": 1,
+  "observations": 98,
+  "llm_forwards": 196,
+  "threshold": 0.5,
+  "threshold_fitted": false,
+  "primary_metric": "heldout_group_roc_auc",
+  "official_validation_test_external_observed": false,
+  "interpretation": "exploratory_development_not_independent_confirmation",
+  "comparison": "A0_same_98_but_fit_on_500_not_32_no_causal_attribution"
+}
