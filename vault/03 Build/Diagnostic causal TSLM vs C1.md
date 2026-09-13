@@ -2,9 +2,9 @@
 
 Icham — 2026-09-13
 
-## Statut et objectif proposé
+## Statut et objectif
 
-Icham propose de remplacer la recherche immédiate d'une meilleure recette par un diagnostic de l'écart à C1. Cette note cadre ce changement ; **aucune nouvelle expérience ni modification du modèle n'est lancée dans ce tour**. Le plan d'implémentation V2 est en pause : pas de refit final automatique ni de nouvelle variante.
+**Objectif d'implémentation désormais autorisé par Icham.** [[Diagnostic causal - exécution]] décrit les preuves courantes, le budget D0 fixé et les travaux réellement lancés. Le texte ci-dessous conserve le cadrage et la checklist validés ; les anciennes mentions « planification uniquement » décrivent leur rédaction initiale et ne bloquent plus l'exécution contrôlée. La suite V2 de refit/confirmation reste en pause : pas de nouvelle recette avant le diagnostic.
 
 > Expliquer l'écart de performance observé entre les pipelines TSLM et C1 sur développement. Examiner les causes plausibles — données, représentation, supervision, optimisation, utilisation du signal par Qwen et scoring — puis les départager par des expériences contrôlées. Distinguer causes démontrées, hypothèses non soutenues dans les conditions testées et inconnues avant de proposer une nouvelle recette.
 
@@ -13,7 +13,7 @@ Icham propose de remplacer la recherche immédiate d'une meilleure recette par u
 ## Acquis et limites — ne pas recommencer les preuves terminées
 
 - **Démontré :** deux causes d'écarts numériques, conversion float32 avant FFT et dépendance de l'encodage à la taille du lot. Correctifs versionnés, gates A/C sur 209 entrées et rechargements neufs à écart maximal nul (`04d53b6`). Cela démontre la parité dans les contextes vérifiés, pas la qualité du classement ni la justesse de l'objectif appris.
-- **Observé :** les trois folds A0/A1/C0 vérifiés restent derrière C1 sur les mêmes partitions de développement. Preuves `83bcbe0` et `fa1b9b4`, `docs/evidence/tslm-v2/campaign-c13fd47/`. Aucun bilan complet A/C ni progrès final revendiqué.
+- **Observé :** les six fits sont désormais vérifiés, bilan complet dans [[Diagnostic causal - exécution]], artefacts `b65042a` après `83bcbe0` / `fa1b9b4`. Moyennes AUC groupe : A=0,671474 ; C=0,562500 ; C1=0,948718 sur les mêmes folds de développement. Aucun progrès final ni refit revendiqué.
 - **Observé :** la sonde linéaire sur les 256 valeurs TimeNet exactes classe moins bien que les neuf descripteurs C1, sur les trois folds train. Cela ne prouve pas que toute information utile a disparu. Preuve `docs/evidence/tslm-v2/train-diagnostic-001/probes.json`.
 - **Observé :** Qwen est gelé, les composants acoustiques changent et leurs gradients sont non nuls. L'autopsie de huit groupes train au checkpoint V1 final n'a pas trouvé une perte dominée par la description. Elle n'écarte ni un problème en début d'apprentissage ni un mauvais signal de gradient.
 
@@ -65,10 +65,10 @@ Les trois folds groupés à l'intérieur des 598 train restent la référence de
 
 Consigner tous les essais, même abandonnés, sondes, checkpoints et variantes de scoring compris. La validation déjà utilisée ne redevient pas une confirmation indépendante. Les 194 anciens test restent historiques ; la réserve externe Aghashahi figée (`84007801…`) demeure sans score et ne sert pas à choisir les corrections.
 
-## Reprise pratique de l'ancienne campagne
+## Reprise pratique de l'ancienne campagne — historique
 
 Dernier contrôle SSH en lecture seule le 13 septembre à **03:23:29 Europe/Paris** : A2, C/fold1 et le dernier C/fold2 annoncent `completed: true` dans leurs logs ; aucun processus `run_v2_campaign.py` encore actif observé. Leurs trois reçus ne sont pas encore intégralement revérifiés/rapatriés. A0/A1/C0 sont déjà vérifiés et publiés. Aucun processus n'a été arrêté dans ce tour ; aucun nouveau fit, classement, refit, seuil ou score externe lancé. Ne pas relancer les fits pour récupérer leurs résultats.
 
 Runtime : `/home/hicham/pipe-v0/artifacts/v2-campaign-c13fd47-001`, logs `/home/hicham/pipe-v0/quality-v2-001/fit-{A,C}{0,1,2}-c13fd47.log`. Utiliser le contrôle existant `finished()` pour vérifier les reçus/empreintes, sans créer de fichier dans les dossiers scellés. Checkout local sain : `/home/animus/ehl-hackathon-zurich-v2-recovery`, branche `feat/icham-v2-reliability` ; ne pas commiter dans l'ancien dépôt Git endommagé.
 
-**Prochaine action :** convenir du premier bloc diagnostique borné à partir de cet inventaire, avant toute nouvelle recette. Les résultats manquants de la campagne existante peuvent être récupérés sans réentraîner.
+**Mise à jour :** les trois reçus manquants sont maintenant récupérés/vérifiés, sans réentraîner. Le protocole et la prochaine action du nouvel objectif sont dans [[Diagnostic causal - exécution]].

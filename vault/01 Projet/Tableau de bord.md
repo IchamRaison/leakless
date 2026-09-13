@@ -6,8 +6,9 @@ Icham
 
 - [x] Proposition d'Icham consignée : [[Diagnostic causal TSLM vs C1]], expliquer l'écart avant une nouvelle recette ; ancien enchaînement V2 en pause.
 - [x] Revue Claude intégrée : contrôles manquants ajoutés et conclusions non démontrées nuancées. [[Diagnostic causal TSLM vs C1#Checklist enrichie après la revue de Claude]]. Aucun contrôle nouvellement exécuté ni logger modifié.
-- [ ] Vérifier/rapatrier les trois reçus manquants de l'ancienne campagne sans relancer les fits. Logs A2/C/fold1/C/fold2 terminés ; aucun processus de campagne actif observé à 03:23:29 Paris.
-- [ ] Convenir du premier bloc d'expériences discriminantes et de son budget sur développement ; aucune expérience nouvelle exécutée à ce stade.
+- [x] Six fits précédents complets/vérifiés/rapatriés, derniers artefacts `b65042a`, bilan dans [[Diagnostic causal - exécution]]. Aucun réentraînement.
+- [x] Objectif de diagnostic autorisé ; premier bloc D0 borné à1516observations A0/C0, sans apprentissage, protocole fixé avant scores.
+- [ ] D0 observateur et runner en implémentation ; tester puis préinscrire les empreintes avant exécution réelle.
 - [ ] Produire la matrice causes démontrées / hypothèses non soutenues dans les conditions testées / inconnues. Aucun refit ni confirmation externe automatique.
 
 ## Prêt
@@ -25,6 +26,14 @@ Icham
 - [x] Safoan : branche `feat/safoan-app` publiée ; Entire installé et hooks Git vérifiés. Approbation des hooks Codex et capture réelle encore à faire : [[Journal Safoan]].
 
 ## En cours et à vérifier
+
+- [x] Safoan : code TSLM V2 intégré à l'API/UI sur
+  `feat/demo-temporal-building`, commit `bba67ff` ; 23 tests API, 35 frontend,
+  build et 12 tests wrapper réussis. [[Journal Safoan]].
+- [ ] Safoan/Icham : fournir les trois artefacts V2 cohérents et exécuter la
+  recette sur poids réels ; aucun checkpoint/décision/reçu final n'est dans Git.
+
+## À lancer — pas encore vérifié
 
 - [x] Plan qualité V1 complet exécuté en worktree isolé, sans modification du modèle ; [[Évaluation qualité V1 - exécution]].
 - [x] Préinscription/code `c27a43fd` publiés, 32 tests runtime cible réussis, 1 000 MD5/formats WAV et huit SHA de runs vérifiés.
@@ -49,11 +58,11 @@ Icham
 - [x] C et reload PASS, delta zéro, SHA `50ec36e9…` ; séquence `98052` terminée normalement, pas de relance.
 - [x] Runner et évaluateur externe publiés `b750f5d`, 144 tests runtime passent ; aucun fit réel encore.
 - [x] Assemblage final `c13fd47`, 156 tests runtime sans skip ; campagne A/C préinscrite avant fit, SHA `5c5e0b4b…`, preuve publiée `550c7a6`.
-- [ ] Bilan complet de l'ancienne campagne six fits TSLM /douze fits C1 ; pas de prolongation ni de refit automatique, priorité au diagnostic causal.
+- [x] Bilan complet de l'ancienne campagne six fits TSLM /douze fits C1 : A et C restent derrière C1, [[Diagnostic causal - exécution]]. Aucun refit.
 - [x] Douze fits C1 terminés ; `C=0.01` retenu sur train, moyenne AUC groupe0,948718 /clip0,891382, pas une confirmation externe.
 - [x] A0 terminé/vérifié, preuve `83bcbe0` : AUC clip/groupe0,710/0,760 sur98 clips réservés ; Qwen inchangé. Pas de conclusion A/C sur ce seul fold.
 - [x] A1 et C0 terminés/vérifiés, artefacts `fa1b9b4` ; 3/6 fits TSLM complets, résultats partiels derrière C1.
-- [ ] Vérifier les trois derniers reçus : logs A2/C/fold1/C/fold2 complets, aucun processus de campagne actif observé à 03:23:29 Paris. Ne pas relancer les fits terminés.
+- [x] Trois derniers reçus et poids distants vérifiés ; CSV/journaux rapatriés et revérifiés, `b65042a`. Ne pas relancer les fits.
 - [x] Exporteur inclus dans les156 tests runtime réussis ; audit réel sur modèle final encore à réaliser.
 - [x] Générateur Markdown V2 et compte des contradictions affichées publiés `0c99a3a`, 162 tests runtime passent ; rendu réel après comparaison complète, pas de nouveau moteur de métriques.
 - [x] Objectif final utilisateur ajouté : évolution d'événement/investigation et benchmark gabarit → Qwen sur mesures → TSLM sur séries. [[Plan V2 - fiabilité et parité des scores#7. Objectif final — démontrer la valeur du TSLM]].

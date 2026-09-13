@@ -1,5 +1,13 @@
 # Journal Icham
 
+## 13 septembre — diagnostic autorisé, inventaire complet et D0 borné
+
+Icham lance l'objectif d'implémentation du [[Diagnostic causal TSLM vs C1]]. Lecture du vault et des sources, récupération distante avant édition. Recherche Entire retrouve les commits historiques du raccordement et du scoring, aucune cause du plateau ; aucune intention supposée d'après ces titres. Ponytail conduit à réutiliser `finished`, `choose_variant`, le loader train, les captures et le harness existants.
+
+Les six fits ont passé la vérification de leurs reçus et de tous fichiers distants, poids inclus ; les trois derniers dossiers sont rapatriés sans poids et vérifiés localement, commit `b65042a`. Moyennes AUC clip/groupe : A=0,580892/0,671474 ; C=0,533075/0,562500 ; C1=0,891382/0,948718. Qwen inchangé et acoustique modifiée sur les six fits ; classement descriptif A, aucun refit. H100 libre au contrôle de03:37Paris, aucun processus relancé.
+
+[[Diagnostic causal - exécution]] préannonce D0 : A0/C0 sur598train, 500vus/98réservés séparés, 32témoins équilibrés/groupes distincts aussi observés à l'initialisation, deux mappings de donneurs et interventions séries/texte/conjoint. Budget1516observations/3032forwards prévus, aucun apprentissage. Observateur et runner en implémentation parallèle, root seul pour SSH/GPU ; tests et préinscription machine avant lancement, pas de nouveau moteur d'évaluation.
+
 ## 13 septembre — intégrer la revue Claude sans lancer une nouvelle recette
 
 À la demande d'Icham, checklist du [[Diagnostic causal TSLM vs C1]] enrichie : NLL classe complète/binaire par clip et mesure train figée, test de mémorisation précisé, tête BCE contournant Qwen, normes/gradients/mises à jour, descripteurs C1 numériques par voie entraînable. Sonde non linéaire et permutations déjà prévues, pas de doublon. Tous ces contrôles restent à exécuter après préinscription ; aucun changement de code, job ou métrique modèle dans ce tour.

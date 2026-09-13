@@ -4,6 +4,8 @@ Icham — mise à jour 2026-09-13
 
 ## État courant
 
+**Résultat suivant : les six fits sont maintenant complets, intègres et inventoriés**, artefacts `b65042a`. [[Diagnostic causal - exécution]] devient la reprise active autorisée par Icham. Moyennes AUC groupe : A=0,671474 ; C=0,562500 ; C1=0,948718 ; aucun refit ni confirmation externe. Les paragraphes ci-dessous conservent l'état antérieur au rapatriement des derniers reçus.
+
 **13 septembre : objectif d'implémentation en pause, priorité proposée au [[Diagnostic causal TSLM vs C1]].** Aucun nouveau fit, refit, seuil ou score externe lancé dans ce tour. A0/A1/C0 restent les trois fits intégralement vérifiés et publiés (`83bcbe0`, `fa1b9b4`), résultats partiels nettement derrière C1. Au dernier contrôle à **03:23:29 Paris**, logs A2/C/fold1/C/fold2 `completed: true` et **aucun processus de campagne actif observé** ; leurs trois reçus restent à revérifier/rapatrier. Aucun processus arrêté ; ne pas relancer les fits terminés. C1 a terminé ses douze fits. Aucun bilan A/C complet ni candidat sélectionné.
 
 Campagne préinscrite `c13fd47`, SHA `5c5e0b4b…` inchangé. Parité A/C et reloads PASS, écarts nuls (`04d53b6`) ; diagnostic train et compatibilité V1 terminés. Générateur de rapport `0c99a3a` testé (162 tests runtime), rendu réel non exécuté. Cap final langage/événements/investigation inchangé, non validé par ces clips. Checkout sain `/home/animus/ehl-hackathon-zurich-v2-recovery`, branche `feat/icham-v2-reliability` ; anciens dépôts Git endommagés conservés, ne pas y commiter. Le vault dédié reste la référence. Les sections suivantes retracent l'exécution antérieure ; leurs anciennes « prochaines étapes » ne valent pas relance automatique.
@@ -159,4 +161,4 @@ Le 13 septembre, le HEAD local pointait vers `0ce65624725a0c44b56334771a16c549ba
 
 ## Prochaine action concrète
 
-Vérifier/rapatrier les trois reçus manquants avec le contrôleur existant `finished()`, sans redémarrer les fits ni écrire dans leurs dossiers scellés. Préparer ensuite l'inventaire causal et convenir du premier bloc diagnostique de [[Diagnostic causal TSLM vs C1]]. **Ne pas enchaîner automatiquement `select` → `fit-final`, seuil ou externe.** Ne pas relancer gates, préparation806, sondes ou audit de recouvrement terminés. Le benchmark final à trois approches reste distinct et non validé.
+Suivre [[Diagnostic causal - exécution]] : inventaire terminé, D0 sans apprentissage en préparation. **Ne pas enchaîner automatiquement `select` → `fit-final`, seuil ou externe.** Ne pas relancer les fits, gates, préparation806, sondes ou audit de recouvrement terminés. Le benchmark final à trois approches reste distinct et non validé.

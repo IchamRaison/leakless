@@ -6,7 +6,7 @@ Icham
 
 [[Passation]] donne l'état réel. [[Évaluation qualité V1 - exécution]] donne les résultats mesurés ; [[Plan surveillance continue]] distingue l'ambition produit du prototype. [[Plan directeur agents]] conserve le plan initial et les contraintes communes. Aucune lecture du chat n'est nécessaire.
 
-**Priorité proposée le 13 septembre : [[Diagnostic causal TSLM vs C1]].** Expliquer l'écart observé avant une nouvelle recette. L'enchaînement V2 est en pause ; les corrections numériques sont prouvées, la cause du retard sur C1 reste inconnue. Aucun nouveau diagnostic exécuté par ce changement de cadrage.
+**Priorité autorisée le 13 septembre : [[Diagnostic causal TSLM vs C1]].** Expliquer l'écart observé avant une nouvelle recette. [[Diagnostic causal - exécution]] : six fits précédents vérifiés, D0 sans apprentissage en cours d'implémentation. Le refit V2 reste suspendu ; parité numérique prouvée, cause du retard sur C1 encore inconnue.
 
 PIPE vise un appareil qui écoute les canalisations en continu et produit des alertes avec preuves acoustiques consultables. V1 entraînée/rechargée, exports T0–T3 publiés et évaluation complète exécutée par Icham. Résultat : détecteur encore insuffisant, sans gain démontré face au contrôle C1 ; descriptions de bandes globalement correctes mais parfois incohérentes avec le score. [[Évaluation qualité V1 - exécution]]. Surveillance et fiabilité terrain non validées.
 
