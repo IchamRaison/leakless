@@ -359,8 +359,23 @@
 .example-label {
   margin-bottom: 9px;
 }
-.example-hint {
+.demo-app .example-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
   color: #c4b997;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.demo-app .example-hint:hover:not(:disabled) {
+  background: none;
+  color: #e0d4ad;
 }
 .outline-tag {
   border: 1px solid #71867250;

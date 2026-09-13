@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowDown,
+  ArrowUp,
   AudioLines,
   Check,
   ChevronRight,
@@ -43,6 +44,7 @@ export default function DemoExperience() {
   const request = useRef<AbortController | null>(null);
   const cache = useRef(new Map<string, Loaded>());
   const buildingPanel = useRef<HTMLDivElement>(null);
+  const pointSelector = useRef<HTMLDivElement>(null);
   // This view loads lazily, after the browser's own jump to #signal, #evidence or #inspect.
   useEffect(() => {
     const id = decodeURIComponent(location.hash.slice(1));
@@ -94,6 +96,19 @@ export default function DemoExperience() {
     location.hash = hash;
     // Setting the hash it already has does not scroll; sections of this page scroll themselves.
     document.getElementById(hash)?.scrollIntoView?.();
+  };
+  // The recordings stay locked until a point is chosen: take the viewer to the N1–N4 choice.
+  const goToPoints = () => {
+    const reduced = window.matchMedia?.(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    pointSelector.current?.scrollIntoView?.({
+      block: "center",
+      behavior: reduced ? "auto" : "smooth",
+    });
+    pointSelector.current
+      ?.querySelector("button")
+      ?.focus({ preventScroll: true });
   };
   const reload = () => {
     cache.current.clear();
@@ -198,7 +213,11 @@ export default function DemoExperience() {
                 <FullscreenButton target={buildingPanel} label="building" />
               </span>
             </div>
-            <div className="point-selector" aria-label="Measurement points">
+            <div
+              className="point-selector"
+              aria-label="Measurement points"
+              ref={pointSelector}
+            >
               {measurementPoints.map((id) => (
                 <button
                   key={id}
@@ -252,10 +271,13 @@ export default function DemoExperience() {
           <span className="example-label" id="demo-recording-label">
             Demo recording:
             {!measurement && (
-              <span className="example-hint">
+              <>
                 {" "}
-                select a measurement point first
-              </span>
+                <button className="example-hint" onClick={goToPoints}>
+                  select a measurement point first
+                  <ArrowUp size={12} aria-hidden />
+                </button>
+              </>
             )}
           </span>
           <div
