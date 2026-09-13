@@ -1,0 +1,1 @@
+{"status": "PASS", "checkpoint_step": 100, "observations": 32, "n_correct": 24, "binary_nll_mean": 0.5749842273444788, "clip_and_group_auc": 0.76953125, "tokens_scores_nll_and_aggregates_verified": true, "new_model_inference": false, "training_still_running": true}
