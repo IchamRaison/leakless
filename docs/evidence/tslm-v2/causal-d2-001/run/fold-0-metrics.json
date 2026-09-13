@@ -1,0 +1,96 @@
+{
+  "fold_id": 0,
+  "n_iter": 200,
+  "partitions": {
+    "fit": {
+      "n_clips": 500,
+      "n_clusters": 68,
+      "n_clusters_leak": 52,
+      "n_clusters_non_leak": 16,
+      "n_clips_leak": 221,
+      "n_clips_non_leak": 279,
+      "threshold": 0.5,
+      "aggregation": "median",
+      "clip_level": {
+        "roc_auc": 1.0,
+        "pr_auc": 1.0,
+        "macro_f1": 1.0,
+        "balanced_accuracy": 1.0,
+        "leak_recall": 1.0,
+        "false_positive_rate": 0.0,
+        "brier": 0.006406,
+        "tp": 221,
+        "fp": 0,
+        "fn": 0,
+        "tn": 279
+      },
+      "cluster_level": {
+        "roc_auc": 1.0,
+        "pr_auc": 1.0,
+        "macro_f1": 1.0,
+        "balanced_accuracy": 1.0,
+        "leak_recall": 1.0,
+        "false_positive_rate": 0.0,
+        "brier": 0.005093,
+        "tp": 52,
+        "fp": 0,
+        "fn": 0,
+        "tn": 16
+      },
+      "group_roc_auc_full": 1.0,
+      "clip_roc_auc_full": 1.0,
+      "binary_nll": {
+        "n_clips": 500,
+        "n_infinite": 0,
+        "mean": 0.06627162632105704,
+        "sum": 33.13581316052852,
+        "policy": "unclipped_saved_probabilities;null_mean_and_sum_mean_positive_infinity"
+      }
+    },
+    "heldout": {
+      "n_clips": 98,
+      "n_clusters": 34,
+      "n_clusters_leak": 26,
+      "n_clusters_non_leak": 8,
+      "n_clips_leak": 73,
+      "n_clips_non_leak": 25,
+      "threshold": 0.5,
+      "aggregation": "median",
+      "clip_level": {
+        "roc_auc": 0.840548,
+        "pr_auc": 0.940221,
+        "macro_f1": 0.690774,
+        "balanced_accuracy": 0.710411,
+        "leak_recall": 0.780822,
+        "false_positive_rate": 0.36,
+        "brier": 0.156251,
+        "tp": 57,
+        "fp": 9,
+        "fn": 16,
+        "tn": 16
+      },
+      "cluster_level": {
+        "roc_auc": 0.879808,
+        "pr_auc": 0.957153,
+        "macro_f1": 0.836538,
+        "balanced_accuracy": 0.836538,
+        "leak_recall": 0.923077,
+        "false_positive_rate": 0.25,
+        "brier": 0.117125,
+        "tp": 24,
+        "fp": 2,
+        "fn": 2,
+        "tn": 6
+      },
+      "group_roc_auc_full": 0.8798076923076923,
+      "clip_roc_auc_full": 0.8405479452054795,
+      "binary_nll": {
+        "n_clips": 98,
+        "n_infinite": 0,
+        "mean": 0.46178658582941545,
+        "sum": 45.255085411282714,
+        "policy": "unclipped_saved_probabilities;null_mean_and_sum_mean_positive_infinity"
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "pipe-causal-d2-nonlinear-v1",
+  "preregistration_sha256": "67ed6bd5a70caa7201d961fb692b0a0aa7eaccea53e3d41ee157fd0bc0ae8977",
+  "counts": {
+    "n_configs_compared": 1,
+    "n_fits": 3,
+    "reference_fits": 0
+  },
+  "inputs_sources_runtime_unchanged": true,
+  "completed": true,
+  "artifacts_sha256": {
+    "fold-0-metrics.json": "b8de11882bed31d5d34283509f5698e1f5001a2666a4f69b3b3247151e6f8c84",
+    "fold-0-predictions.json": "da647dd6b2def18148f3b7c2fddb22423d986b251c85ca5108e5d1c9c4a21ddd",
+    "fold-1-metrics.json": "ef7d98daf274b69f5e7c308453a82fbeeea7d6236f98af573f8e80bb9269aedd",
+    "fold-1-predictions.json": "131470ee531438a3565341f284406593682685e6b85490ca665279dbba70e206",
+    "fold-2-metrics.json": "7446a4cc373e292429c6fc769c0dbe14e333e3f4e5082a6cde57a82983692c51",
+    "fold-2-predictions.json": "43f0ed8d87070154cbc821dc8e52bdc0fc1978c770a266afbd80ff3a4b0aa808",
+    "started.json": "130324ff44580cbc08817350d07dfa33ea3f0935579793dea9b4d3c161d967d3",
+    "summary.json": "8274680a60e88926f119321c2b637112b22f32c45230dc2650f7140621049645"
+  },
+  "receipt_sha256": "48ac9de1fef8238c616207f3eef557bd3c3fc137c26535a7762250bfec126747"
+}

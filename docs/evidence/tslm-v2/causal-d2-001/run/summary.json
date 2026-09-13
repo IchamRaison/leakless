@@ -1,0 +1,671 @@
+{
+  "schema": "pipe-causal-d2-nonlinear-v1",
+  "counts": {
+    "n_configs_compared": 1,
+    "n_fits": 3,
+    "reference_fits": 0
+  },
+  "folds": [
+    {
+      "fold_id": 0,
+      "n_iter": 200,
+      "partitions": {
+        "fit": {
+          "n_clips": 500,
+          "n_clusters": 68,
+          "n_clusters_leak": 52,
+          "n_clusters_non_leak": 16,
+          "n_clips_leak": 221,
+          "n_clips_non_leak": 279,
+          "threshold": 0.5,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 1.0,
+            "pr_auc": 1.0,
+            "macro_f1": 1.0,
+            "balanced_accuracy": 1.0,
+            "leak_recall": 1.0,
+            "false_positive_rate": 0.0,
+            "brier": 0.006406,
+            "tp": 221,
+            "fp": 0,
+            "fn": 0,
+            "tn": 279
+          },
+          "cluster_level": {
+            "roc_auc": 1.0,
+            "pr_auc": 1.0,
+            "macro_f1": 1.0,
+            "balanced_accuracy": 1.0,
+            "leak_recall": 1.0,
+            "false_positive_rate": 0.0,
+            "brier": 0.005093,
+            "tp": 52,
+            "fp": 0,
+            "fn": 0,
+            "tn": 16
+          },
+          "group_roc_auc_full": 1.0,
+          "clip_roc_auc_full": 1.0,
+          "binary_nll": {
+            "n_clips": 500,
+            "n_infinite": 0,
+            "mean": 0.06627162632105704,
+            "sum": 33.13581316052852,
+            "policy": "unclipped_saved_probabilities;null_mean_and_sum_mean_positive_infinity"
+          }
+        },
+        "heldout": {
+          "n_clips": 98,
+          "n_clusters": 34,
+          "n_clusters_leak": 26,
+          "n_clusters_non_leak": 8,
+          "n_clips_leak": 73,
+          "n_clips_non_leak": 25,
+          "threshold": 0.5,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.840548,
+            "pr_auc": 0.940221,
+            "macro_f1": 0.690774,
+            "balanced_accuracy": 0.710411,
+            "leak_recall": 0.780822,
+            "false_positive_rate": 0.36,
+            "brier": 0.156251,
+            "tp": 57,
+            "fp": 9,
+            "fn": 16,
+            "tn": 16
+          },
+          "cluster_level": {
+            "roc_auc": 0.879808,
+            "pr_auc": 0.957153,
+            "macro_f1": 0.836538,
+            "balanced_accuracy": 0.836538,
+            "leak_recall": 0.923077,
+            "false_positive_rate": 0.25,
+            "brier": 0.117125,
+            "tp": 24,
+            "fp": 2,
+            "fn": 2,
+            "tn": 6
+          },
+          "group_roc_auc_full": 0.8798076923076923,
+          "clip_roc_auc_full": 0.8405479452054795,
+          "binary_nll": {
+            "n_clips": 98,
+            "n_infinite": 0,
+            "mean": 0.46178658582941545,
+            "sum": 45.255085411282714,
+            "policy": "unclipped_saved_probabilities;null_mean_and_sum_mean_positive_infinity"
+          }
+        }
+      }
+    },
+    {
+      "fold_id": 1,
+      "n_iter": 200,
+      "partitions": {
+        "fit": {
+          "n_clips": 373,
+          "n_clusters": 68,
+          "n_clusters_leak": 52,
+          "n_clusters_non_leak": 16,
+          "n_clips_leak": 205,
+          "n_clips_non_leak": 168,
+          "threshold": 0.5,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 1.0,
+            "pr_auc": 1.0,
+            "macro_f1": 1.0,
+            "balanced_accuracy": 1.0,
+            "leak_recall": 1.0,
+            "false_positive_rate": 0.0,
+            "brier": 0.002203,
+            "tp": 205,
+            "fp": 0,
+            "fn": 0,
+            "tn": 168
+          },
+          "cluster_level": {
+            "roc_auc": 1.0,
+            "pr_auc": 1.0,
+            "macro_f1": 1.0,
+            "balanced_accuracy": 1.0,
+            "leak_recall": 1.0,
+            "false_positive_rate": 0.0,
+            "brier": 0.001434,
+            "tp": 52,
+            "fp": 0,
+            "fn": 0,
+            "tn": 16
+          },
+          "group_roc_auc_full": 1.0,
+          "clip_roc_auc_full": 1.0,
+          "binary_nll": {
+            "n_clips": 373,
+            "n_infinite": 0,
+            "mean": 0.03773411706602828,
+            "sum": 14.074825665628548,
+            "policy": "unclipped_saved_probabilities;null_mean_and_sum_mean_positive_infinity"
+          }
+        },
+        "heldout": {
+          "n_clips": 225,
+          "n_clusters": 34,
+          "n_clusters_leak": 26,
+          "n_clusters_non_leak": 8,
+          "n_clips_leak": 89,
+          "n_clips_non_leak": 136,
+          "threshold": 0.5,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.811467,
+            "pr_auc": 0.641048,
+            "macro_f1": 0.724439,
+            "balanced_accuracy": 0.758468,
+            "leak_recall": 0.921348,
+            "false_positive_rate": 0.404412,
+            "brier": 0.209062,
+            "tp": 82,
+            "fp": 55,
+            "fn": 7,
+            "tn": 81
+          },
+          "cluster_level": {
+            "roc_auc": 0.774038,
+            "pr_auc": 0.873416,
+            "macro_f1": 0.762238,
+            "balanced_accuracy": 0.730769,
+            "leak_recall": 0.961538,
+            "false_positive_rate": 0.5,
+            "brier": 0.112392,
+            "tp": 25,
+            "fp": 4,
+            "fn": 1,
+            "tn": 4
+          },
+          "group_roc_auc_full": 0.7740384615384616,
+          "clip_roc_auc_full": 0.8114672835426305,
+          "binary_nll": {
+            "n_clips": 225,
+            "n_infinite": 0,
+            "mean": 0.7118708159687682,
+            "sum": 160.17093359297286,
+            "policy": "unclipped_saved_probabilities;null_mean_and_sum_mean_positive_infinity"
+          }
+        }
+      }
+    },
+    {
+      "fold_id": 2,
+      "n_iter": 200,
+      "partitions": {
+        "fit": {
+          "n_clips": 323,
+          "n_clusters": 68,
+          "n_clusters_leak": 52,
+          "n_clusters_non_leak": 16,
+          "n_clips_leak": 162,
+          "n_clips_non_leak": 161,
+          "threshold": 0.5,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 1.0,
+            "pr_auc": 1.0,
+            "macro_f1": 1.0,
+            "balanced_accuracy": 1.0,
+            "leak_recall": 1.0,
+            "false_positive_rate": 0.0,
+            "brier": 0.002181,
+            "tp": 162,
+            "fp": 0,
+            "fn": 0,
+            "tn": 161
+          },
+          "cluster_level": {
+            "roc_auc": 1.0,
+            "pr_auc": 1.0,
+            "macro_f1": 1.0,
+            "balanced_accuracy": 1.0,
+            "leak_recall": 1.0,
+            "false_positive_rate": 0.0,
+            "brier": 0.001733,
+            "tp": 52,
+            "fp": 0,
+            "fn": 0,
+            "tn": 16
+          },
+          "group_roc_auc_full": 1.0,
+          "clip_roc_auc_full": 1.0,
+          "binary_nll": {
+            "n_clips": 323,
+            "n_infinite": 0,
+            "mean": 0.03763848373450719,
+            "sum": 12.157230246245824,
+            "policy": "unclipped_saved_probabilities;null_mean_and_sum_mean_positive_infinity"
+          }
+        },
+        "heldout": {
+          "n_clips": 275,
+          "n_clusters": 34,
+          "n_clusters_leak": 26,
+          "n_clusters_non_leak": 8,
+          "n_clips_leak": 132,
+          "n_clips_non_leak": 143,
+          "threshold": 0.5,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.821731,
+            "pr_auc": 0.783433,
+            "macro_f1": 0.734489,
+            "balanced_accuracy": 0.736305,
+            "leak_recall": 0.780303,
+            "false_positive_rate": 0.307692,
+            "brier": 0.180645,
+            "tp": 103,
+            "fp": 44,
+            "fn": 29,
+            "tn": 99
+          },
+          "cluster_level": {
+            "roc_auc": 0.908654,
+            "pr_auc": 0.967458,
+            "macro_f1": 0.820106,
+            "balanced_accuracy": 0.793269,
+            "leak_recall": 0.961538,
+            "false_positive_rate": 0.375,
+            "brier": 0.096716,
+            "tp": 25,
+            "fp": 3,
+            "fn": 1,
+            "tn": 5
+          },
+          "group_roc_auc_full": 0.9086538461538461,
+          "clip_roc_auc_full": 0.8217312990040263,
+          "binary_nll": {
+            "n_clips": 275,
+            "n_infinite": 0,
+            "mean": 0.548771980301084,
+            "sum": 150.9122945827981,
+            "policy": "unclipped_saved_probabilities;null_mean_and_sum_mean_positive_infinity"
+          }
+        }
+      }
+    }
+  ],
+  "mean_auc_by_partition": {
+    "fit": {
+      "group_roc_auc_full": 1.0,
+      "clip_roc_auc_full": 1.0
+    },
+    "heldout": {
+      "group_roc_auc_full": 0.8541666666666666,
+      "clip_roc_auc_full": 0.8245821759173788
+    }
+  },
+  "references_heldout": {
+    "TimeNet256": [
+      {
+        "n_clips": 98,
+        "n_clusters": 34,
+        "n_clusters_leak": 26,
+        "n_clusters_non_leak": 8,
+        "n_clips_leak": 73,
+        "n_clips_non_leak": 25,
+        "threshold": 0.5,
+        "aggregation": "median",
+        "clip_level": {
+          "roc_auc": 0.619726,
+          "pr_auc": 0.772332,
+          "macro_f1": 0.501677,
+          "balanced_accuracy": 0.559726,
+          "leak_recall": 0.479452,
+          "false_positive_rate": 0.36,
+          "brier": 0.371981,
+          "tp": 35,
+          "fp": 9,
+          "fn": 38,
+          "tn": 16
+        },
+        "cluster_level": {
+          "roc_auc": 0.711538,
+          "pr_auc": 0.872635,
+          "macro_f1": 0.477868,
+          "balanced_accuracy": 0.543269,
+          "leak_recall": 0.461538,
+          "false_positive_rate": 0.375,
+          "brier": 0.308448,
+          "tp": 12,
+          "fp": 3,
+          "fn": 14,
+          "tn": 5
+        },
+        "group_roc_auc_full": 0.7115384615384616,
+        "clip_roc_auc_full": 0.6197260273972602,
+        "binary_nll": {
+          "n_clips": 98,
+          "n_infinite": 1,
+          "mean": null,
+          "sum": null,
+          "policy": "unclipped_saved_probabilities;null_mean_and_sum_mean_positive_infinity"
+        },
+        "fold_id": 0,
+        "n_fit_clips": 500
+      },
+      {
+        "n_clips": 225,
+        "n_clusters": 34,
+        "n_clusters_leak": 26,
+        "n_clusters_non_leak": 8,
+        "n_clips_leak": 89,
+        "n_clips_non_leak": 136,
+        "threshold": 0.5,
+        "aggregation": "median",
+        "clip_level": {
+          "roc_auc": 0.530073,
+          "pr_auc": 0.440289,
+          "macro_f1": 0.484353,
+          "balanced_accuracy": 0.503635,
+          "leak_recall": 0.595506,
+          "false_positive_rate": 0.588235,
+          "brier": 0.390572,
+          "tp": 53,
+          "fp": 80,
+          "fn": 36,
+          "tn": 56
+        },
+        "cluster_level": {
+          "roc_auc": 0.586538,
+          "pr_auc": 0.778475,
+          "macro_f1": 0.575,
+          "balanced_accuracy": 0.596154,
+          "leak_recall": 0.692308,
+          "false_positive_rate": 0.5,
+          "brier": 0.236164,
+          "tp": 18,
+          "fp": 4,
+          "fn": 8,
+          "tn": 4
+        },
+        "group_roc_auc_full": 0.5865384615384616,
+        "clip_roc_auc_full": 0.5300727032385988,
+        "binary_nll": {
+          "n_clips": 225,
+          "n_infinite": 2,
+          "mean": null,
+          "sum": null,
+          "policy": "unclipped_saved_probabilities;null_mean_and_sum_mean_positive_infinity"
+        },
+        "fold_id": 1,
+        "n_fit_clips": 373
+      },
+      {
+        "n_clips": 275,
+        "n_clusters": 34,
+        "n_clusters_leak": 26,
+        "n_clusters_non_leak": 8,
+        "n_clips_leak": 132,
+        "n_clips_non_leak": 143,
+        "threshold": 0.5,
+        "aggregation": "median",
+        "clip_level": {
+          "roc_auc": 0.533905,
+          "pr_auc": 0.503867,
+          "macro_f1": 0.48939,
+          "balanced_accuracy": 0.48951,
+          "leak_recall": 0.454545,
+          "false_positive_rate": 0.475524,
+          "brier": 0.371253,
+          "tp": 60,
+          "fp": 68,
+          "fn": 72,
+          "tn": 75
+        },
+        "cluster_level": {
+          "roc_auc": 0.610577,
+          "pr_auc": 0.824011,
+          "macro_f1": 0.453571,
+          "balanced_accuracy": 0.524038,
+          "leak_recall": 0.423077,
+          "false_positive_rate": 0.375,
+          "brier": 0.311417,
+          "tp": 11,
+          "fp": 3,
+          "fn": 15,
+          "tn": 5
+        },
+        "group_roc_auc_full": 0.6105769230769231,
+        "clip_roc_auc_full": 0.533905488450943,
+        "binary_nll": {
+          "n_clips": 275,
+          "n_infinite": 1,
+          "mean": null,
+          "sum": null,
+          "policy": "unclipped_saved_probabilities;null_mean_and_sum_mean_positive_infinity"
+        },
+        "fold_id": 2,
+        "n_fit_clips": 323
+      }
+    ],
+    "C1_fixed": [
+      {
+        "n_clips": 98,
+        "n_clusters": 34,
+        "n_clusters_leak": 26,
+        "n_clusters_non_leak": 8,
+        "n_clips_leak": 73,
+        "n_clips_non_leak": 25,
+        "threshold": 0.5,
+        "aggregation": "median",
+        "clip_level": {
+          "roc_auc": 0.85863,
+          "pr_auc": 0.944968,
+          "macro_f1": 0.806869,
+          "balanced_accuracy": 0.798904,
+          "leak_recall": 0.917808,
+          "false_positive_rate": 0.32,
+          "brier": 0.134327,
+          "tp": 67,
+          "fp": 8,
+          "fn": 6,
+          "tn": 17
+        },
+        "cluster_level": {
+          "roc_auc": 0.951923,
+          "pr_auc": 0.984948,
+          "macro_f1": 0.871698,
+          "balanced_accuracy": 0.855769,
+          "leak_recall": 0.961538,
+          "false_positive_rate": 0.25,
+          "brier": 0.086623,
+          "tp": 25,
+          "fp": 2,
+          "fn": 1,
+          "tn": 6
+        },
+        "group_roc_auc_full": 0.9519230769230769,
+        "clip_roc_auc_full": 0.8586301369863014,
+        "binary_nll": {
+          "n_clips": 98,
+          "n_infinite": 0,
+          "mean": 0.43695559333965733,
+          "sum": 42.82164814728642,
+          "policy": "unclipped_saved_probabilities;null_mean_and_sum_mean_positive_infinity"
+        },
+        "fold_id": 0,
+        "n_fit_clips": 500
+      },
+      {
+        "n_clips": 225,
+        "n_clusters": 34,
+        "n_clusters_leak": 26,
+        "n_clusters_non_leak": 8,
+        "n_clips_leak": 89,
+        "n_clips_non_leak": 136,
+        "threshold": 0.5,
+        "aggregation": "median",
+        "clip_level": {
+          "roc_auc": 0.949025,
+          "pr_auc": 0.916248,
+          "macro_f1": 0.873148,
+          "balanced_accuracy": 0.88541,
+          "leak_recall": 0.932584,
+          "false_positive_rate": 0.161765,
+          "brier": 0.100609,
+          "tp": 83,
+          "fp": 22,
+          "fn": 6,
+          "tn": 114
+        },
+        "cluster_level": {
+          "roc_auc": 0.918269,
+          "pr_auc": 0.962981,
+          "macro_f1": 0.857343,
+          "balanced_accuracy": 0.8125,
+          "leak_recall": 1.0,
+          "false_positive_rate": 0.375,
+          "brier": 0.075658,
+          "tp": 26,
+          "fp": 3,
+          "fn": 0,
+          "tn": 5
+        },
+        "group_roc_auc_full": 0.9182692307692307,
+        "clip_roc_auc_full": 0.9490251156642432,
+        "binary_nll": {
+          "n_clips": 225,
+          "n_infinite": 0,
+          "mean": 0.32761906336233715,
+          "sum": 73.71428925652586,
+          "policy": "unclipped_saved_probabilities;null_mean_and_sum_mean_positive_infinity"
+        },
+        "fold_id": 1,
+        "n_fit_clips": 373
+      },
+      {
+        "n_clips": 275,
+        "n_clusters": 34,
+        "n_clusters_leak": 26,
+        "n_clusters_non_leak": 8,
+        "n_clips_leak": 132,
+        "n_clips_non_leak": 143,
+        "threshold": 0.5,
+        "aggregation": "median",
+        "clip_level": {
+          "roc_auc": 0.882019,
+          "pr_auc": 0.844416,
+          "macro_f1": 0.810887,
+          "balanced_accuracy": 0.811772,
+          "leak_recall": 0.833333,
+          "false_positive_rate": 0.20979,
+          "brier": 0.128861,
+          "tp": 110,
+          "fp": 30,
+          "fn": 22,
+          "tn": 113
+        },
+        "cluster_level": {
+          "roc_auc": 0.942308,
+          "pr_auc": 0.977953,
+          "macro_f1": 0.957233,
+          "balanced_accuracy": 0.9375,
+          "leak_recall": 1.0,
+          "false_positive_rate": 0.125,
+          "brier": 0.099745,
+          "tp": 26,
+          "fp": 1,
+          "fn": 0,
+          "tn": 7
+        },
+        "group_roc_auc_full": 0.9423076923076923,
+        "clip_roc_auc_full": 0.8820194956558592,
+        "binary_nll": {
+          "n_clips": 275,
+          "n_infinite": 0,
+          "mean": 0.3780704336335039,
+          "sum": 103.96936924921357,
+          "policy": "unclipped_saved_probabilities;null_mean_and_sum_mean_positive_infinity"
+        },
+        "fold_id": 2,
+        "n_fit_clips": 323
+      }
+    ]
+  },
+  "comparisons_heldout": {
+    "TimeNet256": {
+      "partition": "heldout",
+      "folds": [
+        {
+          "fold_id": 0,
+          "group_auc_delta": 0.16826923076923073,
+          "clip_auc_delta": 0.22082191780821925,
+          "binary_nll_delta": null,
+          "binary_nll_delta_defined": false
+        },
+        {
+          "fold_id": 1,
+          "group_auc_delta": 0.1875,
+          "clip_auc_delta": 0.28139458030403175,
+          "binary_nll_delta": null,
+          "binary_nll_delta_defined": false
+        },
+        {
+          "fold_id": 2,
+          "group_auc_delta": 0.298076923076923,
+          "clip_auc_delta": 0.2878258105530833,
+          "binary_nll_delta": null,
+          "binary_nll_delta_defined": false
+        }
+      ],
+      "mean_group_auc_delta": 0.21794871794871792,
+      "mean_clip_auc_delta": 0.2633474362217781
+    },
+    "C1_fixed": {
+      "partition": "heldout",
+      "folds": [
+        {
+          "fold_id": 0,
+          "group_auc_delta": -0.07211538461538458,
+          "clip_auc_delta": -0.018082191780821932,
+          "binary_nll_delta": 0.02483099248975812,
+          "binary_nll_delta_defined": true
+        },
+        {
+          "fold_id": 1,
+          "group_auc_delta": -0.14423076923076916,
+          "clip_auc_delta": -0.13755783212161266,
+          "binary_nll_delta": 0.3842517526064311,
+          "binary_nll_delta_defined": true
+        },
+        {
+          "fold_id": 2,
+          "group_auc_delta": -0.033653846153846145,
+          "clip_auc_delta": -0.06028819665183294,
+          "binary_nll_delta": 0.17070154666758008,
+          "binary_nll_delta_defined": true
+        }
+      ],
+      "mean_group_auc_delta": -0.0833333333333333,
+      "mean_clip_auc_delta": -0.07197607351808917
+    },
+    "primary": {
+      "rule": "three_strictly_positive_heldout_group_auc_deltas_vs_TimeNet256",
+      "coherent_improvement_on_these_folds": true,
+      "statistical_significance_or_independent_confirmation": false
+    }
+  },
+  "limits": [
+    "Les folds train déjà étudiés ne constituent pas une confirmation indépendante.",
+    "Trois deltas positifs décrivent une cohérence, pas une significativité statistique.",
+    "L'échec de cette sonde ne prouve pas un plafond absolu d'information ; un fit faible confond capacité, régularisation et optimisation.",
+    "La pondération par clip reste commune ; les groupes sont heuristiques et non une preuve d'indépendance. La classe binaire non-leak inclut du bruit.",
+    "Aucun comparateur historique sur les clips vus n'est disponible ; comparaisons appariées réservées uniquement. Aucun seuil choisi ni politique adoptée."
+  ],
+  "selection_policy": null,
+  "pooled_auc": false,
+  "diagnostic_threshold": 0.5,
+  "official_validation_test_external_audio_or_cache_read": false,
+  "qwen_loaded": false
+}

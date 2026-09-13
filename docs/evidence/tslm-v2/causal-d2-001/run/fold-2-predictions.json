@@ -1,0 +1,3590 @@
+[
+  {
+    "clip_id": "c04206cc802ff",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.004103806368918918
+  },
+  {
+    "clip_id": "c050246533b34",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.027222013801841076
+  },
+  {
+    "clip_id": "c05d66d9aed9d",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.06419389400102708
+  },
+  {
+    "clip_id": "c05d8158c3707",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9416582080986795
+  },
+  {
+    "clip_id": "c062288ccfbf0",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9532381259042345
+  },
+  {
+    "clip_id": "c064b4d3a7013",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9487909913438469
+  },
+  {
+    "clip_id": "c06568d1b9f0f",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9668824005132927
+  },
+  {
+    "clip_id": "c07c975f95b7e",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9792651639504836
+  },
+  {
+    "clip_id": "c07e9a820a771",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.06652436944233289
+  },
+  {
+    "clip_id": "c08a67eff0015",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.10403618534228085
+  },
+  {
+    "clip_id": "c0961e1ade67e",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.024962455238315487
+  },
+  {
+    "clip_id": "c09f5a9f2c37e",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.010401099162775278
+  },
+  {
+    "clip_id": "c0cb708e68599",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.06633398636747223
+  },
+  {
+    "clip_id": "c0f537ec98725",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.010270745846571196
+  },
+  {
+    "clip_id": "c0f921fc0a408",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.0031496681374990174
+  },
+  {
+    "clip_id": "c10d8db301dc4",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.0117933858305688
+  },
+  {
+    "clip_id": "c10dbbe1fe88e",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9978709429569064
+  },
+  {
+    "clip_id": "c112f81c56ca1",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9842348716427618
+  },
+  {
+    "clip_id": "c11831df929ff",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.09487056251475424
+  },
+  {
+    "clip_id": "c122a79440158",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.022773802425680452
+  },
+  {
+    "clip_id": "c13b609dbac9e",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.07168822396712182
+  },
+  {
+    "clip_id": "c14279feb46c4",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9554552955348669
+  },
+  {
+    "clip_id": "c1683ed31e294",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9401689170070867
+  },
+  {
+    "clip_id": "c168e7b1c5768",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.011206999694764835
+  },
+  {
+    "clip_id": "c186eb3b4bb13",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9627820965138175
+  },
+  {
+    "clip_id": "c18a6a959b315",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.004330611253579184
+  },
+  {
+    "clip_id": "c18ded00027e1",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.031005935661138746
+  },
+  {
+    "clip_id": "c1a8f1d23de2c",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9734794967579359
+  },
+  {
+    "clip_id": "c1ab4f5e70960",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9757763995854942
+  },
+  {
+    "clip_id": "c1be97c617ebf",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9929906078631476
+  },
+  {
+    "clip_id": "c1d63f2fac16f",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9590928673582895
+  },
+  {
+    "clip_id": "c1dea85a5c168",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.003142067153855807
+  },
+  {
+    "clip_id": "c1e54ae43a9f6",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.8811561667747538
+  },
+  {
+    "clip_id": "c1f4f90ceab92",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.008335882002490922
+  },
+  {
+    "clip_id": "c1f6f5dc288b2",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9842214560089121
+  },
+  {
+    "clip_id": "c1fb776519059",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.01711497378875534
+  },
+  {
+    "clip_id": "c20b154e99c77",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.037315316558881394
+  },
+  {
+    "clip_id": "c211a8d93216b",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.051076798881452924
+  },
+  {
+    "clip_id": "c22636298a23e",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.05357766106074901
+  },
+  {
+    "clip_id": "c239d96cc7621",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9843072847550252
+  },
+  {
+    "clip_id": "c2417970779b9",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.022509655634630615
+  },
+  {
+    "clip_id": "c255805e4789f",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9320720969185514
+  },
+  {
+    "clip_id": "c272ce4cb0a81",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9501195083221677
+  },
+  {
+    "clip_id": "c27615e885482",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9449780525603716
+  },
+  {
+    "clip_id": "c27bcc7508126",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.980926977625989
+  },
+  {
+    "clip_id": "c299b5b4aae15",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9619840377541224
+  },
+  {
+    "clip_id": "c2a95223c7bb8",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9552775100266792
+  },
+  {
+    "clip_id": "c2b8185b115a8",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9787993317634001
+  },
+  {
+    "clip_id": "c2b9686ec0b66",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9393823789575939
+  },
+  {
+    "clip_id": "c2bae7438d26f",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.006601554850926581
+  },
+  {
+    "clip_id": "c2c0781b810b9",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.03388657190784559
+  },
+  {
+    "clip_id": "c2c13a3c5c847",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9525382757519253
+  },
+  {
+    "clip_id": "c2c5757d3818f",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.023300689341493926
+  },
+  {
+    "clip_id": "c2dfdb38d147e",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.012588086220886278
+  },
+  {
+    "clip_id": "c2f249a637ac4",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9658735853179907
+  },
+  {
+    "clip_id": "c2fe894a582ae",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.016328493973839467
+  },
+  {
+    "clip_id": "c2ffeffaf5c54",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9491279687308262
+  },
+  {
+    "clip_id": "c30025926aa4b",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9937299952253821
+  },
+  {
+    "clip_id": "c30617b58ed2d",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9764509082599012
+  },
+  {
+    "clip_id": "c31dfc36d9429",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9736654434741321
+  },
+  {
+    "clip_id": "c320c859a0212",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.006469050104498909
+  },
+  {
+    "clip_id": "c32e9ddbcf512",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9563222834682803
+  },
+  {
+    "clip_id": "c332cd97e3344",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9457333211777131
+  },
+  {
+    "clip_id": "c33454b6946ab",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.04598044817942707
+  },
+  {
+    "clip_id": "c33b9ec7b16e8",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.8779758702991654
+  },
+  {
+    "clip_id": "c341e4bf862ad",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9864567108720347
+  },
+  {
+    "clip_id": "c36eda6b94106",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.002931482665792186
+  },
+  {
+    "clip_id": "c37c7984c0c4f",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.015871018119734702
+  },
+  {
+    "clip_id": "c37f2b3fca106",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.003676890866555313
+  },
+  {
+    "clip_id": "c3a54e1228375",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.009627863823507435
+  },
+  {
+    "clip_id": "c3b228fa8030d",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9427281497793516
+  },
+  {
+    "clip_id": "c3ba3126429f6",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.06494244636596046
+  },
+  {
+    "clip_id": "c3bd3873e11c7",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9706398466686146
+  },
+  {
+    "clip_id": "c3d97dffa787c",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.049755303418911365
+  },
+  {
+    "clip_id": "c4009fed4726f",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.018336182008373902
+  },
+  {
+    "clip_id": "c404a4d0bccf9",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.018230475574980195
+  },
+  {
+    "clip_id": "c41d8f7392b73",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.972000759226491
+  },
+  {
+    "clip_id": "c42044c6c967e",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.038683372680227285
+  },
+  {
+    "clip_id": "c423c0ee36b07",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.05133735720552344
+  },
+  {
+    "clip_id": "c424eaa6fb66d",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.06309865604859442
+  },
+  {
+    "clip_id": "c43d5de714166",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9292113720321634
+  },
+  {
+    "clip_id": "c4531f3f68c3d",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.050402160291649366
+  },
+  {
+    "clip_id": "c45d6fd044845",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9112775394038256
+  },
+  {
+    "clip_id": "c46568b3af1b0",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.12814424372489921
+  },
+  {
+    "clip_id": "c475678ae6ef8",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9925769100062597
+  },
+  {
+    "clip_id": "c483b56484ea5",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.8915994403001781
+  },
+  {
+    "clip_id": "c48771c3d97f5",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9508709180199922
+  },
+  {
+    "clip_id": "c48dec7ba6c91",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9012146922644565
+  },
+  {
+    "clip_id": "c4a7854f53842",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.035972810900805105
+  },
+  {
+    "clip_id": "c4ae8944ab2a9",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9878003420928115
+  },
+  {
+    "clip_id": "c4c44b6b5ad5b",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.957750372258114
+  },
+  {
+    "clip_id": "c4ce67f4b6dcb",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.08285318044450982
+  },
+  {
+    "clip_id": "c4d60c890e072",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.026903469934381658
+  },
+  {
+    "clip_id": "c4e7f6b33ed4c",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9949471315207294
+  },
+  {
+    "clip_id": "c4ea61abbc908",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9640226013196203
+  },
+  {
+    "clip_id": "c4ebb971b1567",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.0392947451394755
+  },
+  {
+    "clip_id": "c4ef9953000c4",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9880499447146095
+  },
+  {
+    "clip_id": "c4f0131614c87",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.979819007749822
+  },
+  {
+    "clip_id": "c51bc0f90becd",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9861341297979855
+  },
+  {
+    "clip_id": "c51eb51347f21",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.00929213522571199
+  },
+  {
+    "clip_id": "c52fdf1f29a5d",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9570252748487036
+  },
+  {
+    "clip_id": "c538ffa19559f",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9545003924911358
+  },
+  {
+    "clip_id": "c53c233dacf3e",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9672079102286368
+  },
+  {
+    "clip_id": "c5405732725d3",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9940915551519447
+  },
+  {
+    "clip_id": "c5478ba2d5a89",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.0057507017547854785
+  },
+  {
+    "clip_id": "c54d3b50ef138",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.03562621162925927
+  },
+  {
+    "clip_id": "c561239dda450",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.011929321727325543
+  },
+  {
+    "clip_id": "c58521959ee09",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9612366405431424
+  },
+  {
+    "clip_id": "c5882dca3e0a9",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.006930601919805019
+  },
+  {
+    "clip_id": "c5969ebc6bfcb",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9847664991714087
+  },
+  {
+    "clip_id": "c5a4c13d780fb",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9563466328444338
+  },
+  {
+    "clip_id": "c5b4522e17477",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.010964374220087914
+  },
+  {
+    "clip_id": "c5c25beb01fd8",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.0075202821700591695
+  },
+  {
+    "clip_id": "c5c5903c1822a",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.985456047576308
+  },
+  {
+    "clip_id": "c5d3608b6230d",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.04423588118595564
+  },
+  {
+    "clip_id": "c5dbb83749d5b",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9443185336736644
+  },
+  {
+    "clip_id": "c5eb4472b1b2e",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.07083556142080848
+  },
+  {
+    "clip_id": "c5f033e45aca1",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.036012385901032395
+  },
+  {
+    "clip_id": "c5f29eeabae8a",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.02057657025115613
+  },
+  {
+    "clip_id": "c5fa0219bdd8d",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.004103806368918918
+  },
+  {
+    "clip_id": "c5ffdab287421",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9979050239005182
+  },
+  {
+    "clip_id": "c6236482dc10c",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.010638957431011632
+  },
+  {
+    "clip_id": "c63e2c213d4c3",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9668961832601962
+  },
+  {
+    "clip_id": "c6450add89e89",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.02226608444360467
+  },
+  {
+    "clip_id": "c656d7aa59416",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.022059241857095506
+  },
+  {
+    "clip_id": "c65ba20f1031b",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.022773802425680452
+  },
+  {
+    "clip_id": "c65dafe1ee595",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.017725730162409404
+  },
+  {
+    "clip_id": "c66f70dea6bb1",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.009135834305526284
+  },
+  {
+    "clip_id": "c682e47ff5af3",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9831482556282582
+  },
+  {
+    "clip_id": "c69396caf286c",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9918508749647853
+  },
+  {
+    "clip_id": "c6a98309679be",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.028944833159990375
+  },
+  {
+    "clip_id": "c6ae27e754276",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.06741801323930106
+  },
+  {
+    "clip_id": "c6bff6053fa0b",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.015871018119734702
+  },
+  {
+    "clip_id": "c6c8a300c1128",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9975609231638722
+  },
+  {
+    "clip_id": "c6cfb8b366b9b",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.024007761649775358
+  },
+  {
+    "clip_id": "c6d2716b85053",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.04616425148940021
+  },
+  {
+    "clip_id": "c6d2dba66c5bf",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9273882291433144
+  },
+  {
+    "clip_id": "c6d60068469f4",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.0047335697373890595
+  },
+  {
+    "clip_id": "c6d78327e132f",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.0047335697373890595
+  },
+  {
+    "clip_id": "c6da2e34dbe22",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.04642284268828596
+  },
+  {
+    "clip_id": "c6dde94ea69dc",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.009370966242102997
+  },
+  {
+    "clip_id": "c6df9c056c634",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9663086106698431
+  },
+  {
+    "clip_id": "c6ed234a13629",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9557162877825572
+  },
+  {
+    "clip_id": "c70e042ff2fb4",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.033161108999921585
+  },
+  {
+    "clip_id": "c7118401c58b1",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.07575197641458688
+  },
+  {
+    "clip_id": "c721366fe8a44",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9839002278470451
+  },
+  {
+    "clip_id": "c73eef6098927",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.991925518295106
+  },
+  {
+    "clip_id": "c745afb819609",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.03736077812921195
+  },
+  {
+    "clip_id": "c749d0ec0a4da",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9430024866908456
+  },
+  {
+    "clip_id": "c74f741f43ba0",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.14964842877401766
+  },
+  {
+    "clip_id": "c75ff7781df3f",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9728012195525773
+  },
+  {
+    "clip_id": "c76e9459c1403",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.012436455896774022
+  },
+  {
+    "clip_id": "c775d0e90fc9a",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.015167446529061945
+  },
+  {
+    "clip_id": "c7788ae6ad436",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.992712005152019
+  },
+  {
+    "clip_id": "c79d76b0a85c9",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9665910159164838
+  },
+  {
+    "clip_id": "c7ad362fcc94d",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.04285170815286377
+  },
+  {
+    "clip_id": "c7df0ab24b41f",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.018451714632366265
+  },
+  {
+    "clip_id": "c7e51fcee8c07",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.09779191900818036
+  },
+  {
+    "clip_id": "c7e6cce7e9114",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.059387312496261314
+  },
+  {
+    "clip_id": "c7f06e1c2f5ea",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.004123757209210785
+  },
+  {
+    "clip_id": "c7f73e03a7c75",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9752784032292032
+  },
+  {
+    "clip_id": "c80c03ca8d522",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9745940824236629
+  },
+  {
+    "clip_id": "c80de9b64db85",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9705660439532494
+  },
+  {
+    "clip_id": "c8104a15f00d7",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.04675669234066006
+  },
+  {
+    "clip_id": "c8289c334c228",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.010871785020042806
+  },
+  {
+    "clip_id": "c82b1ee194183",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.013396462381779746
+  },
+  {
+    "clip_id": "c833445fa2bb6",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.00794281663466681
+  },
+  {
+    "clip_id": "c8419de8ca9cc",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9840260405477391
+  },
+  {
+    "clip_id": "c852aee3c1dab",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9949796326501562
+  },
+  {
+    "clip_id": "c86336a54b952",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9626282276503373
+  },
+  {
+    "clip_id": "c86807311a1d3",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.033904072235158345
+  },
+  {
+    "clip_id": "c86859a40b920",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9980360205784522
+  },
+  {
+    "clip_id": "c86c33e2a1b2d",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9937332635354805
+  },
+  {
+    "clip_id": "c883d3972e62d",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.052104065461355015
+  },
+  {
+    "clip_id": "c88dfa84df965",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.909091602750372
+  },
+  {
+    "clip_id": "c89cb224bcb40",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.03354305055339744
+  },
+  {
+    "clip_id": "c8a3d82b06360",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.004173224753355029
+  },
+  {
+    "clip_id": "c8b1af5e2da91",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.05674858174035972
+  },
+  {
+    "clip_id": "c8b7ec1ee29c4",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9250144874673892
+  },
+  {
+    "clip_id": "c8d19965fb166",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.083599321405332
+  },
+  {
+    "clip_id": "c8d37b4ba189b",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.14564646394048364
+  },
+  {
+    "clip_id": "c8d535525cf9d",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9766547231691095
+  },
+  {
+    "clip_id": "c8d802984e871",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.01192798804311874
+  },
+  {
+    "clip_id": "c8e4146e3a0e9",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9395680784831582
+  },
+  {
+    "clip_id": "c8ed223ec41db",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.017305435435782092
+  },
+  {
+    "clip_id": "c8f1e38ca2320",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.024018556554561116
+  },
+  {
+    "clip_id": "c8f34320f5bde",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9921515044503733
+  },
+  {
+    "clip_id": "c8f8340030ca2",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9702586494854885
+  },
+  {
+    "clip_id": "c91fb50f4819b",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9757334673452626
+  },
+  {
+    "clip_id": "c9340312e6037",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9247417446438501
+  },
+  {
+    "clip_id": "c93f64081ea7c",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.14749989875397415
+  },
+  {
+    "clip_id": "c941c8e5932f1",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9689845499626453
+  },
+  {
+    "clip_id": "c95079e715e90",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.968132901079875
+  },
+  {
+    "clip_id": "c95340245af0b",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9707341402556207
+  },
+  {
+    "clip_id": "c954d8c15dced",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.056391743307903294
+  },
+  {
+    "clip_id": "c974636289026",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.013802995828592794
+  },
+  {
+    "clip_id": "c97e8c72149a6",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9886733153512551
+  },
+  {
+    "clip_id": "c99c85e0af482",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.07477596557813525
+  },
+  {
+    "clip_id": "c9ab733ae4c2a",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9423919548803554
+  },
+  {
+    "clip_id": "c9c22a3a7bbb1",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9575643929466772
+  },
+  {
+    "clip_id": "c9c6b1e4bb816",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.003676890866555313
+  },
+  {
+    "clip_id": "ca21b4eb5ddf2",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9728866413935824
+  },
+  {
+    "clip_id": "ca231577fb9d2",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.06526083845974075
+  },
+  {
+    "clip_id": "ca284c3204ae3",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.988496589320241
+  },
+  {
+    "clip_id": "ca2a5550fdad4",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.1539064679333726
+  },
+  {
+    "clip_id": "ca3a0d82b36b7",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9643235730205381
+  },
+  {
+    "clip_id": "ca46fdc0b22e0",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9973862772482689
+  },
+  {
+    "clip_id": "ca59a841b7f2d",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.004586313527637567
+  },
+  {
+    "clip_id": "ca69d6f75a350",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.983337756246244
+  },
+  {
+    "clip_id": "ca72bf20e16e1",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9502347876554054
+  },
+  {
+    "clip_id": "ca93fd0490325",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9575789742254673
+  },
+  {
+    "clip_id": "ca9b4ed28fea4",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.07152221417815259
+  },
+  {
+    "clip_id": "caa63a441d079",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.01589622139345292
+  },
+  {
+    "clip_id": "caac9ec800d60",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9911491870292208
+  },
+  {
+    "clip_id": "cab1fabf80cc0",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.05560333017303657
+  },
+  {
+    "clip_id": "cab28f3852b2e",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9948074276560381
+  },
+  {
+    "clip_id": "cab4e25cbfda2",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.055398124041439914
+  },
+  {
+    "clip_id": "cac54aa1d814e",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9660390446818509
+  },
+  {
+    "clip_id": "cacc67a2bbb12",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9893798486530998
+  },
+  {
+    "clip_id": "cb04fbe5f43f1",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9886125415790128
+  },
+  {
+    "clip_id": "cb08d7195d6bf",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.015473863219048025
+  },
+  {
+    "clip_id": "cb106b3ab62f1",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9573506073066101
+  },
+  {
+    "clip_id": "cb1836abaeda9",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.05817306299350132
+  },
+  {
+    "clip_id": "cb1b6d00cc612",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9830871063847693
+  },
+  {
+    "clip_id": "cb2f440b9e0e4",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9867453804618848
+  },
+  {
+    "clip_id": "cb7aba874ee7e",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.04288373119991898
+  },
+  {
+    "clip_id": "cb7bc59e020dc",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9342242299201867
+  },
+  {
+    "clip_id": "cb853e3044c69",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.977249781422292
+  },
+  {
+    "clip_id": "cb98d272d0c33",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.08138373923524066
+  },
+  {
+    "clip_id": "cba905278e156",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.027541792775527364
+  },
+  {
+    "clip_id": "cbb530c2d8793",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.046897611537370265
+  },
+  {
+    "clip_id": "cbb6672364ebd",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.01700510469530401
+  },
+  {
+    "clip_id": "cbb8d96a5e4a5",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.006601554850926581
+  },
+  {
+    "clip_id": "cbc4c8ad3580b",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9458214353864743
+  },
+  {
+    "clip_id": "cbc6e435e35e0",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.027389300960526868
+  },
+  {
+    "clip_id": "cbc8435b0f4df",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.986585876182491
+  },
+  {
+    "clip_id": "cbd3cf96abb92",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9557588668257517
+  },
+  {
+    "clip_id": "cbe3166361dfa",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.03285883369929793
+  },
+  {
+    "clip_id": "cbefbc2bfab6d",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9372734677906915
+  },
+  {
+    "clip_id": "cbf8e88236347",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9234404837829373
+  },
+  {
+    "clip_id": "cc0bb75701548",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9928276690687825
+  },
+  {
+    "clip_id": "cc1480284d1c3",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.04371820569074798
+  },
+  {
+    "clip_id": "cc19c94f8b994",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9225536582107914
+  },
+  {
+    "clip_id": "cc2ac1af869fa",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9508547900688851
+  },
+  {
+    "clip_id": "cc32544a5e4f3",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.033234771373890644
+  },
+  {
+    "clip_id": "cc3ea9de7c014",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9457711942269875
+  },
+  {
+    "clip_id": "cc41a6007b781",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.015167446529061945
+  },
+  {
+    "clip_id": "cc49c5ba7938b",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.004590481264927087
+  },
+  {
+    "clip_id": "cc5ddb79c589a",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.934566909067457
+  },
+  {
+    "clip_id": "cc6a1078eb7bc",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.908948033173523
+  },
+  {
+    "clip_id": "cc6c187a579d4",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.08330132524347458
+  },
+  {
+    "clip_id": "cc75ae24f5c96",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.981751693234696
+  },
+  {
+    "clip_id": "cc77af487b65d",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.010638957431011632
+  },
+  {
+    "clip_id": "cc8764f092ba1",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.022242203876061042
+  },
+  {
+    "clip_id": "cc907703b5ee8",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9424514647147615
+  },
+  {
+    "clip_id": "cc908db347b35",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9558458455401727
+  },
+  {
+    "clip_id": "cc96f393f9909",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9299115705344884
+  },
+  {
+    "clip_id": "cc9cff18c1a4d",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.005128111462772306
+  },
+  {
+    "clip_id": "cca3bdbd296af",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.010219861283551679
+  },
+  {
+    "clip_id": "cca73bdc5fabd",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9896567969553012
+  },
+  {
+    "clip_id": "ccad7760ce5c3",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.10918550254495471
+  },
+  {
+    "clip_id": "ccaebe2671432",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.0057909351500867534
+  },
+  {
+    "clip_id": "cccd7093a14f3",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9966759496275808
+  },
+  {
+    "clip_id": "cce35479c8094",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.0046554910459354545
+  },
+  {
+    "clip_id": "cce7aca319a5a",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9492615435480425
+  },
+  {
+    "clip_id": "ccee26aeeb116",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9763606118177874
+  },
+  {
+    "clip_id": "cd1d69cf431ed",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.031162408316260652
+  },
+  {
+    "clip_id": "cd22957c58990",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.051632598169139995
+  },
+  {
+    "clip_id": "cd2d1d38e28fe",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9872086221891012
+  },
+  {
+    "clip_id": "cd3e24c8fddaa",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9752762106238922
+  },
+  {
+    "clip_id": "cd48fd26263ca",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.06848406196645754
+  },
+  {
+    "clip_id": "cd57a1dedb807",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9770654980438633
+  },
+  {
+    "clip_id": "cd5c4ed20c428",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.13142835190056565
+  },
+  {
+    "clip_id": "cd685547804d1",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9398925257201886
+  },
+  {
+    "clip_id": "cd6dedbfd7d31",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.008659977251937402
+  },
+  {
+    "clip_id": "cd723d66f367b",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9555679285887555
+  },
+  {
+    "clip_id": "cd75f0c255d24",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9118173508435256
+  },
+  {
+    "clip_id": "cd77404571b67",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.023300689341493926
+  },
+  {
+    "clip_id": "cd7dbf2e752b0",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9563937019619537
+  },
+  {
+    "clip_id": "cd8911748e7db",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9432146814966534
+  },
+  {
+    "clip_id": "cd953dc82ace5",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9883279955101091
+  },
+  {
+    "clip_id": "cd9b94bdc892b",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.04877220960027792
+  },
+  {
+    "clip_id": "cd9b9fe203a4a",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.003517162754514002
+  },
+  {
+    "clip_id": "cdaeac1be16b4",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.983865893572194
+  },
+  {
+    "clip_id": "cdafc13bac8e8",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.028805010186579834
+  },
+  {
+    "clip_id": "cdb43ef923ce5",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.02644574837226705
+  },
+  {
+    "clip_id": "cdbd5104a19f9",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.08557388323162814
+  },
+  {
+    "clip_id": "cdda6f156a595",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9614451837504508
+  },
+  {
+    "clip_id": "cde2fefb4bce3",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9659562150711696
+  },
+  {
+    "clip_id": "cdeff059d9cc1",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9854818261485164
+  },
+  {
+    "clip_id": "ce083251e3ac8",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9614375851957212
+  },
+  {
+    "clip_id": "ce1beb3d64f57",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.03927186169620083
+  },
+  {
+    "clip_id": "ce3c1bbc4dd9c",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.03098301578597746
+  },
+  {
+    "clip_id": "ce3e303f06b4a",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.06157416070020316
+  },
+  {
+    "clip_id": "ce552fe86d7ad",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9315844980333888
+  },
+  {
+    "clip_id": "ce5812e80dc76",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.05069034744504655
+  },
+  {
+    "clip_id": "ce5879bae43e3",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9637305743222296
+  },
+  {
+    "clip_id": "ce5db6f4b0065",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9885348245896894
+  },
+  {
+    "clip_id": "ce5f08be3057b",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.06111708945722698
+  },
+  {
+    "clip_id": "ce771af614f4e",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9835729205916466
+  },
+  {
+    "clip_id": "ce8e3e604efc2",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.0705074516836182
+  },
+  {
+    "clip_id": "ce9e94229ff8d",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9836622760712506
+  },
+  {
+    "clip_id": "ce9f8e682dd05",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9292575381520319
+  },
+  {
+    "clip_id": "ceadd661714f4",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.030330750363375625
+  },
+  {
+    "clip_id": "ceae8d33d3df9",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.946938794581489
+  },
+  {
+    "clip_id": "ceb7930de201b",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9833714660720887
+  },
+  {
+    "clip_id": "cecee97a5f68b",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.01711497378875534
+  },
+  {
+    "clip_id": "cedb58b88ad47",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9866975036388094
+  },
+  {
+    "clip_id": "cf0203b39f111",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9846208479989432
+  },
+  {
+    "clip_id": "cf380ea25a6e8",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.005181443216105996
+  },
+  {
+    "clip_id": "cf4c7a3c10ff8",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9447495809490594
+  },
+  {
+    "clip_id": "cf5d0f60ed9c7",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.953611234941326
+  },
+  {
+    "clip_id": "cf63fc929563a",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9481414499080036
+  },
+  {
+    "clip_id": "cf7132f496056",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.006607616970704032
+  },
+  {
+    "clip_id": "cf9cb173ecb0c",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.0037451534520314433
+  },
+  {
+    "clip_id": "cfa176d0021b2",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.016260078887408706
+  },
+  {
+    "clip_id": "cfa95a14b4d7d",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.03235953881969278
+  },
+  {
+    "clip_id": "cfbf0b917b01c",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.11958652607459229
+  },
+  {
+    "clip_id": "cfc0e625fbb0d",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.953821143547432
+  },
+  {
+    "clip_id": "cfdc594e4e897",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.04658415069003479
+  },
+  {
+    "clip_id": "cfe96ddf1bb64",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9447168461774369
+  },
+  {
+    "clip_id": "cfea1368453c6",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.9805216376697805
+  },
+  {
+    "clip_id": "cffc7c8347bce",
+    "inner_fold": 2,
+    "partition": "fit",
+    "probability_leak": 0.030453633334484122
+  },
+  {
+    "clip_id": "c0128b879694e",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.03451917205628523
+  },
+  {
+    "clip_id": "c02543903a0da",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.3249034098089864
+  },
+  {
+    "clip_id": "c04498a7ed239",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.12243675455222981
+  },
+  {
+    "clip_id": "c04baf7fef3e6",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8394401903672323
+  },
+  {
+    "clip_id": "c05f4f069b542",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.14687902457123578
+  },
+  {
+    "clip_id": "c063306a756e0",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.005623515339258834
+  },
+  {
+    "clip_id": "c067add6c95ef",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.868607707616491
+  },
+  {
+    "clip_id": "c06ccf39a495b",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.794330585546114
+  },
+  {
+    "clip_id": "c0805b0f448be",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.6965038219977896
+  },
+  {
+    "clip_id": "c089e36733958",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8164638567010634
+  },
+  {
+    "clip_id": "c0911d89cc12e",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8072788645117481
+  },
+  {
+    "clip_id": "c0a9746b5d9ae",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.45800243275482877
+  },
+  {
+    "clip_id": "c0c6081270402",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.11195413490637023
+  },
+  {
+    "clip_id": "c0d7da724a381",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.5115697838711261
+  },
+  {
+    "clip_id": "c0e232e8abefd",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7299183959911976
+  },
+  {
+    "clip_id": "c10f28ad85eb4",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9125971301959773
+  },
+  {
+    "clip_id": "c1269b91604b3",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.18777649387380968
+  },
+  {
+    "clip_id": "c128d061d7c0f",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.01600172212581631
+  },
+  {
+    "clip_id": "c132422b849a7",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8377850033268884
+  },
+  {
+    "clip_id": "c1499c35cbab2",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.6327470501241624
+  },
+  {
+    "clip_id": "c150583d1dbbe",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.0991173780349216
+  },
+  {
+    "clip_id": "c1564ac4f839d",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.6552435262785049
+  },
+  {
+    "clip_id": "c163826f414a4",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.05146344969662421
+  },
+  {
+    "clip_id": "c172f3caf0939",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.01151362251896819
+  },
+  {
+    "clip_id": "c17c3c87dbd77",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.28092098088882445
+  },
+  {
+    "clip_id": "c189aa961829b",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.6979605150017377
+  },
+  {
+    "clip_id": "c18d59fc1c422",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.631383010664524
+  },
+  {
+    "clip_id": "c18e2198c3457",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8011859915469668
+  },
+  {
+    "clip_id": "c1a020e75d17e",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.977045801463148
+  },
+  {
+    "clip_id": "c1a8c60507b53",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.5221945144029804
+  },
+  {
+    "clip_id": "c1aa75bc3586d",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.29293040482099997
+  },
+  {
+    "clip_id": "c1d9472c3c5b1",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.009012878712403225
+  },
+  {
+    "clip_id": "c1e5a1a35b9a6",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9722952071551353
+  },
+  {
+    "clip_id": "c1ed5bae3fcd5",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.1706740183128561
+  },
+  {
+    "clip_id": "c1fc6c093dcc4",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7579430123329546
+  },
+  {
+    "clip_id": "c20c972efdcce",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.4020817971804795
+  },
+  {
+    "clip_id": "c21382c66a1e0",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.6738452810352458
+  },
+  {
+    "clip_id": "c2149f5a4bc9e",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.20793299036185237
+  },
+  {
+    "clip_id": "c21fec37cf71a",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8788091361368743
+  },
+  {
+    "clip_id": "c22b434ae486d",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9261943984046146
+  },
+  {
+    "clip_id": "c24b6690dc003",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.6832215293121919
+  },
+  {
+    "clip_id": "c24bf7667eff5",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.6167169844855594
+  },
+  {
+    "clip_id": "c265367c30825",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8213451158782511
+  },
+  {
+    "clip_id": "c277454df54af",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.36282479513948585
+  },
+  {
+    "clip_id": "c27cee2838d7a",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.26990021099501565
+  },
+  {
+    "clip_id": "c27f20596e4e6",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7730051459072109
+  },
+  {
+    "clip_id": "c29147b0882e2",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9803319552275803
+  },
+  {
+    "clip_id": "c2a910ad7f603",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.11861805218729513
+  },
+  {
+    "clip_id": "c2b209108b35d",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9550710003213178
+  },
+  {
+    "clip_id": "c2c65e7f132d3",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.995403118461378
+  },
+  {
+    "clip_id": "c2d3366744da6",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.11810643512220029
+  },
+  {
+    "clip_id": "c2d54c2c7191b",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9146579463680443
+  },
+  {
+    "clip_id": "c2e20fedcad53",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.977059417844885
+  },
+  {
+    "clip_id": "c2e7509679ef5",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.03656138279720635
+  },
+  {
+    "clip_id": "c2ebcb34181f8",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.04106958579657318
+  },
+  {
+    "clip_id": "c2f625de9294d",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7499338971279562
+  },
+  {
+    "clip_id": "c3147be2ea41d",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.1799252155585363
+  },
+  {
+    "clip_id": "c314af95e5f64",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9859081970627662
+  },
+  {
+    "clip_id": "c32debd0f41e6",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8264956354395374
+  },
+  {
+    "clip_id": "c357b15613e8b",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7585424956955039
+  },
+  {
+    "clip_id": "c357e8e39d7f0",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8972895353739914
+  },
+  {
+    "clip_id": "c362698ae79b5",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.5468843398161534
+  },
+  {
+    "clip_id": "c36359baaaf59",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.054024379425705336
+  },
+  {
+    "clip_id": "c3694d0758433",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.20793299036185237
+  },
+  {
+    "clip_id": "c3a2f1d312087",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7567260916100512
+  },
+  {
+    "clip_id": "c3a78958bcf50",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.2002379595797342
+  },
+  {
+    "clip_id": "c3babd01aea3e",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7890905771484616
+  },
+  {
+    "clip_id": "c3c559ca31f61",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.009629749122284864
+  },
+  {
+    "clip_id": "c3cd9a1ae0e6b",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.15963228800225193
+  },
+  {
+    "clip_id": "c3f4ad6feaae7",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.00192738448350775
+  },
+  {
+    "clip_id": "c405b5009dfcc",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9221071935227997
+  },
+  {
+    "clip_id": "c4194701114cb",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.18692835084215842
+  },
+  {
+    "clip_id": "c4223cfd6c9a7",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7777619245533991
+  },
+  {
+    "clip_id": "c422b4e502ef8",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9178664732020481
+  },
+  {
+    "clip_id": "c4241382283c1",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.3423060723975833
+  },
+  {
+    "clip_id": "c42980f8ee1d2",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.015329988988734776
+  },
+  {
+    "clip_id": "c45ef1394ce7d",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.08171630279318011
+  },
+  {
+    "clip_id": "c46349e666c00",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.05167763003153453
+  },
+  {
+    "clip_id": "c46a2f827cb8e",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.0047534864590200185
+  },
+  {
+    "clip_id": "c483c2ee8d383",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.506043546566791
+  },
+  {
+    "clip_id": "c48422d0520de",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.023709701013946958
+  },
+  {
+    "clip_id": "c4aa6a51658e8",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.5940138239826996
+  },
+  {
+    "clip_id": "c4ab5e59c0389",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.779746326473323
+  },
+  {
+    "clip_id": "c4b2e80648cd5",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.24609962601952592
+  },
+  {
+    "clip_id": "c4b8ccff15ae0",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.10489036068560495
+  },
+  {
+    "clip_id": "c4bf6a97e2cae",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.00808476499872468
+  },
+  {
+    "clip_id": "c4dd83943373a",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.009629749122284864
+  },
+  {
+    "clip_id": "c4e93daa7ff67",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.03224044512611683
+  },
+  {
+    "clip_id": "c4f10806e3732",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9639919877768989
+  },
+  {
+    "clip_id": "c5024ce133721",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.12854237495560544
+  },
+  {
+    "clip_id": "c51565ea58fe0",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8480640932107811
+  },
+  {
+    "clip_id": "c515a9a248c2c",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.817070052558667
+  },
+  {
+    "clip_id": "c51b7eba14bd6",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7802952951931651
+  },
+  {
+    "clip_id": "c5221e555e452",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.6386048434029605
+  },
+  {
+    "clip_id": "c5252a01e683d",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.29293040482099997
+  },
+  {
+    "clip_id": "c52ebd5ec2893",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9213548252552644
+  },
+  {
+    "clip_id": "c54cff5549618",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8386078637082313
+  },
+  {
+    "clip_id": "c55ae3a3fe08f",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9094631105861698
+  },
+  {
+    "clip_id": "c577bdb8f8808",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9089700822791347
+  },
+  {
+    "clip_id": "c5bbf50ad83e0",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8377850033268884
+  },
+  {
+    "clip_id": "c5e24e8064171",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.03144698908566465
+  },
+  {
+    "clip_id": "c611e16457512",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7370952333709475
+  },
+  {
+    "clip_id": "c64160dd826c1",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9183767922451997
+  },
+  {
+    "clip_id": "c641e51be72f8",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.6738452810352458
+  },
+  {
+    "clip_id": "c64243712bd02",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.10995662996952739
+  },
+  {
+    "clip_id": "c64539ba804e2",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.003882433358060836
+  },
+  {
+    "clip_id": "c65bf9aed92aa",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.826024313341637
+  },
+  {
+    "clip_id": "c662ad24aa34b",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.03220746363650149
+  },
+  {
+    "clip_id": "c6793f133fb84",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.06864811077643784
+  },
+  {
+    "clip_id": "c6912ec3ca658",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.5844591296868954
+  },
+  {
+    "clip_id": "c69a2a157ba8e",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.0047534864590200185
+  },
+  {
+    "clip_id": "c6a681c8dfaaf",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.5282431673610964
+  },
+  {
+    "clip_id": "c6bb81385b39c",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7650079374265655
+  },
+  {
+    "clip_id": "c6c96e4e5fca9",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8598025966048409
+  },
+  {
+    "clip_id": "c6df118b5b0dd",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.32624561462889295
+  },
+  {
+    "clip_id": "c6ecd66d0712f",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.6579498652594721
+  },
+  {
+    "clip_id": "c6eefb3ad7424",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.4985192663616424
+  },
+  {
+    "clip_id": "c6fa86dd717c5",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.6659735755328818
+  },
+  {
+    "clip_id": "c705697213775",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9826724367229647
+  },
+  {
+    "clip_id": "c71017ee629b0",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.4984695575781968
+  },
+  {
+    "clip_id": "c710479c9da31",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7695625302732737
+  },
+  {
+    "clip_id": "c722b58050aed",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.03106412459547976
+  },
+  {
+    "clip_id": "c72960a21f1bd",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.3448270026501989
+  },
+  {
+    "clip_id": "c75a6f1fb9d12",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.06929532288655947
+  },
+  {
+    "clip_id": "c760afca314ee",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.09188565932291501
+  },
+  {
+    "clip_id": "c79fef86e0ef4",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9599980670790773
+  },
+  {
+    "clip_id": "c7b06db61af9a",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9505954812130903
+  },
+  {
+    "clip_id": "c7bbbb99ecc43",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.03239123154342953
+  },
+  {
+    "clip_id": "c7c7bafde0b29",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9369466369933583
+  },
+  {
+    "clip_id": "c7d0533ff4148",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8714122831659101
+  },
+  {
+    "clip_id": "c7dc507b66608",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8683958160341617
+  },
+  {
+    "clip_id": "c7e04ab2dd189",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.14646762143863928
+  },
+  {
+    "clip_id": "c7f3f9946e92f",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9913015577027956
+  },
+  {
+    "clip_id": "c812ba0ae791b",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7578022137790853
+  },
+  {
+    "clip_id": "c82f40b6adf5c",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9732778822660478
+  },
+  {
+    "clip_id": "c83e4c9ff2b59",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.2088324770325841
+  },
+  {
+    "clip_id": "c8570a876ecbe",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.38521917737244266
+  },
+  {
+    "clip_id": "c8666274626ed",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.010017039105848844
+  },
+  {
+    "clip_id": "c8748a4c7ffc7",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.30846187848121276
+  },
+  {
+    "clip_id": "c87fec72e724a",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.940923174954354
+  },
+  {
+    "clip_id": "c8a7e32978d46",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.13113172655768196
+  },
+  {
+    "clip_id": "c8c938430e85c",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.980700669414698
+  },
+  {
+    "clip_id": "c8d48dd85a19f",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7105813713400537
+  },
+  {
+    "clip_id": "c8fd6dd25e265",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.04970840932658641
+  },
+  {
+    "clip_id": "c8febabd06638",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.6895268606934599
+  },
+  {
+    "clip_id": "c904486cd13fd",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.01475403524666439
+  },
+  {
+    "clip_id": "c9090ce314855",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.6085599744035377
+  },
+  {
+    "clip_id": "c9255e1d09808",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8656619908185456
+  },
+  {
+    "clip_id": "c929c87aa1b42",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.021785424239972935
+  },
+  {
+    "clip_id": "c945fefa7c7c7",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.006409084472327105
+  },
+  {
+    "clip_id": "c9525342ac0bb",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9954795084117392
+  },
+  {
+    "clip_id": "c977205a20157",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.0196839079307485
+  },
+  {
+    "clip_id": "c97894a44afd8",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.003217644268986278
+  },
+  {
+    "clip_id": "c97e2fbf49b5d",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.023709701013946958
+  },
+  {
+    "clip_id": "c9800a2902967",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.052029563576080254
+  },
+  {
+    "clip_id": "c9b180fd6c818",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.5958816677032426
+  },
+  {
+    "clip_id": "c9da56ced9783",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.008272469081387014
+  },
+  {
+    "clip_id": "c9e89eab2ddf2",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7321651187472697
+  },
+  {
+    "clip_id": "c9eaed9c635c2",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7689802288969465
+  },
+  {
+    "clip_id": "c9eec73b47d50",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.07158891139494668
+  },
+  {
+    "clip_id": "c9f8a8c9ec27a",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.0620720814195993
+  },
+  {
+    "clip_id": "ca060cc57486c",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.6234706509403579
+  },
+  {
+    "clip_id": "ca218cedcfb92",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.012623318885621806
+  },
+  {
+    "clip_id": "ca26346853052",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.6881359344603571
+  },
+  {
+    "clip_id": "ca41b92332b26",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.005699575374307013
+  },
+  {
+    "clip_id": "ca4405e0d5291",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7103853127176604
+  },
+  {
+    "clip_id": "ca462d40cc1f5",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.18261146490226876
+  },
+  {
+    "clip_id": "ca6c409dcee37",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9590885045492061
+  },
+  {
+    "clip_id": "ca785ee839f07",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7762637313158013
+  },
+  {
+    "clip_id": "ca78aa8b431d7",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9596663667932606
+  },
+  {
+    "clip_id": "ca7a143288c49",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.048590393354165845
+  },
+  {
+    "clip_id": "ca92e7e3c8a65",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9949537859406972
+  },
+  {
+    "clip_id": "caaa128b22094",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.0620720814195993
+  },
+  {
+    "clip_id": "cab2078e0f2fe",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.6500004533162815
+  },
+  {
+    "clip_id": "cacceda6bcc68",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7213155655841283
+  },
+  {
+    "clip_id": "caeff31a64b96",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.22916689825505587
+  },
+  {
+    "clip_id": "cb0587d80e43d",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7827569019318565
+  },
+  {
+    "clip_id": "cb17c6ebae98e",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.008803140546782657
+  },
+  {
+    "clip_id": "cb336e382f080",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9660179418407392
+  },
+  {
+    "clip_id": "cb440af43a10e",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7040107051797359
+  },
+  {
+    "clip_id": "cb446f02203f5",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.3720085572279548
+  },
+  {
+    "clip_id": "cb8afa5be487c",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.6043064135256344
+  },
+  {
+    "clip_id": "cb8c5084de71f",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.02157802868126831
+  },
+  {
+    "clip_id": "cb8ea5ba6ee8e",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9552411768904595
+  },
+  {
+    "clip_id": "cb95ebb6d026f",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.012696141824301333
+  },
+  {
+    "clip_id": "cba8f28afe0e4",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8579915394374324
+  },
+  {
+    "clip_id": "cbae7a05a27b2",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.02521503035715171
+  },
+  {
+    "clip_id": "cbaf78df6bfc2",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.2536457568387591
+  },
+  {
+    "clip_id": "cbc5cc1b6c0d8",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9758297211249195
+  },
+  {
+    "clip_id": "cbd60eac36500",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.2159943827496778
+  },
+  {
+    "clip_id": "cbecea70bcb8a",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.13113172655768196
+  },
+  {
+    "clip_id": "cc06c773ce585",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.3512496177823524
+  },
+  {
+    "clip_id": "cc0a344f25360",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.04527715042530425
+  },
+  {
+    "clip_id": "cc0e7fee58f57",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.011106791780946357
+  },
+  {
+    "clip_id": "cc2a75613d283",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9767027165134573
+  },
+  {
+    "clip_id": "cc31d113a490a",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.6647043741170301
+  },
+  {
+    "clip_id": "cc3569a105921",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8829032037081639
+  },
+  {
+    "clip_id": "cc5cb8c05644e",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8498946479677334
+  },
+  {
+    "clip_id": "cc5f3dafedb58",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.563805613419922
+  },
+  {
+    "clip_id": "cc84f37cac49e",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.003217644268986278
+  },
+  {
+    "clip_id": "cc90b947e39a9",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7171445641937919
+  },
+  {
+    "clip_id": "cc969d2b9dc97",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8513970459967196
+  },
+  {
+    "clip_id": "cca4243c89f2a",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.5282431673610964
+  },
+  {
+    "clip_id": "cca777cc24de2",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7729700834905406
+  },
+  {
+    "clip_id": "cca8472440c45",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8181623625942451
+  },
+  {
+    "clip_id": "ccb9684ea6243",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.0773403927110399
+  },
+  {
+    "clip_id": "ccbc5a8b2af49",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.01475403524666439
+  },
+  {
+    "clip_id": "ccc211654bba2",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.08875874447422448
+  },
+  {
+    "clip_id": "ccc6068b5b0a2",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8820798150304197
+  },
+  {
+    "clip_id": "cccdbbb49e736",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.986485909913218
+  },
+  {
+    "clip_id": "ccce218c0e70d",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.04527715042530425
+  },
+  {
+    "clip_id": "cce6baf614bfa",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.02056531754081835
+  },
+  {
+    "clip_id": "cce8f01ad51b8",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.686111805467415
+  },
+  {
+    "clip_id": "ccf8e76bfe498",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7575195980804295
+  },
+  {
+    "clip_id": "cd098874a6b8e",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8477676374582407
+  },
+  {
+    "clip_id": "cd11be05a39dc",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.22473897883784125
+  },
+  {
+    "clip_id": "cd2883c705292",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.4001678000212635
+  },
+  {
+    "clip_id": "cd2f212742960",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9122275303685673
+  },
+  {
+    "clip_id": "cd44051294456",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8036056236538398
+  },
+  {
+    "clip_id": "cd4d040029f85",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.53721499489264
+  },
+  {
+    "clip_id": "cd56be4657cb9",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9024622850495522
+  },
+  {
+    "clip_id": "cd6f5fae74ad6",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9427274262959989
+  },
+  {
+    "clip_id": "cd77bfd264abc",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7543791808003639
+  },
+  {
+    "clip_id": "cd7ccdb024821",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8242792249232653
+  },
+  {
+    "clip_id": "cd84219c979bd",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9784754343766472
+  },
+  {
+    "clip_id": "cd8a933a9f809",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.008472244523357954
+  },
+  {
+    "clip_id": "cd8f4f46d9cf9",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9457474770480222
+  },
+  {
+    "clip_id": "cd98d6235a267",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.024910640470866493
+  },
+  {
+    "clip_id": "cdaa3659f139a",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.013498987118522663
+  },
+  {
+    "clip_id": "cdabbb10d3783",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8320932285858748
+  },
+  {
+    "clip_id": "cdda15a414f8b",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.3423060723975833
+  },
+  {
+    "clip_id": "cdfeedc28a277",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.861516623170312
+  },
+  {
+    "clip_id": "ce05b73f8fce2",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.05634865005603129
+  },
+  {
+    "clip_id": "ce084472188f4",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.00437307775059473
+  },
+  {
+    "clip_id": "ce301c7d88abe",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.6682404092151988
+  },
+  {
+    "clip_id": "ce375fd85d539",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.33296266977262895
+  },
+  {
+    "clip_id": "ce419a5dd5696",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9652645995953675
+  },
+  {
+    "clip_id": "ce461f134c0c0",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.0626057239891951
+  },
+  {
+    "clip_id": "ce49d4559826a",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.03716029116668736
+  },
+  {
+    "clip_id": "ce542643f6982",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7155399204983653
+  },
+  {
+    "clip_id": "ce64c6fe56b6f",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.4237088495880512
+  },
+  {
+    "clip_id": "ce6e8406e4611",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.4194587155763633
+  },
+  {
+    "clip_id": "ce739a13228a2",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.798754736951006
+  },
+  {
+    "clip_id": "ce7890384071e",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9665825798674276
+  },
+  {
+    "clip_id": "ce888f1dcc998",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.34040463312028335
+  },
+  {
+    "clip_id": "ce8e858b4feb5",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.004273929722122776
+  },
+  {
+    "clip_id": "ce8ec2b9eb1e6",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.01855265799842399
+  },
+  {
+    "clip_id": "ce90e1bba068b",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.49676666570510525
+  },
+  {
+    "clip_id": "ce914b2fa714b",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.603583245842281
+  },
+  {
+    "clip_id": "ce99fd42b092c",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7954940437099496
+  },
+  {
+    "clip_id": "ce9fd92c4a590",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7270806045288644
+  },
+  {
+    "clip_id": "cea1a896ed055",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9908515321142133
+  },
+  {
+    "clip_id": "ceb33347ccde5",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.006632345218711548
+  },
+  {
+    "clip_id": "ceb7bd6af5bb2",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8880387631709591
+  },
+  {
+    "clip_id": "cece6c73e4c2c",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.03656138279720635
+  },
+  {
+    "clip_id": "cefc3c34b023a",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.08834345023999017
+  },
+  {
+    "clip_id": "cf076bc271b4d",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.09408191552802612
+  },
+  {
+    "clip_id": "cf0cec714c72c",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.030812803698108484
+  },
+  {
+    "clip_id": "cf18efa6f8140",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.0034787163817444236
+  },
+  {
+    "clip_id": "cf3c65fad2914",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.006343160410745427
+  },
+  {
+    "clip_id": "cf49b0d124b71",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9346178637030418
+  },
+  {
+    "clip_id": "cf5b0b2b7b49e",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.003001807758786854
+  },
+  {
+    "clip_id": "cf6854f88121d",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8039056523638484
+  },
+  {
+    "clip_id": "cf6ef9ac3c7d2",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9426606376563975
+  },
+  {
+    "clip_id": "cf707df74d074",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.7762637313158013
+  },
+  {
+    "clip_id": "cf7a6821aa59d",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.6136040657468409
+  },
+  {
+    "clip_id": "cf7b9a4168a3a",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8314869406974241
+  },
+  {
+    "clip_id": "cf916a496c467",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.020769571461937093
+  },
+  {
+    "clip_id": "cfb09e0398315",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9914704580047957
+  },
+  {
+    "clip_id": "cfb359dcca238",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.8735706307191494
+  },
+  {
+    "clip_id": "cfec080e3b840",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.03220746363650149
+  },
+  {
+    "clip_id": "cfee4f9fd8787",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.9342385522864631
+  },
+  {
+    "clip_id": "cff534b9287cd",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.962504810302621
+  },
+  {
+    "clip_id": "cff7b80d1e412",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.006173364919964252
+  },
+  {
+    "clip_id": "cffe7e7913ec3",
+    "inner_fold": 2,
+    "partition": "heldout",
+    "probability_leak": 0.03203253635756328
+  }
+]
