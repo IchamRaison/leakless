@@ -16,12 +16,19 @@ runs de stress T1/T2/T3 sont là — la lecture de sensibilité temporelle.
 Usage :
   python3 scripts/eval/build_final_report.py --runs <dir> [<dir> ...] \\
       [--tslm-run-id tslm-v1] [--stress-report <json>] [--out artifacts/final_evaluation]
+
+Restitution V2 (sans recalcul) :
+  python3 scripts/eval/build_final_report.py --v2-campaign <campagne> \\
+      [--v2-evaluation <json>] [--v2-audits <parent-export> ...] --out <dossier-neuf>
 """
 
 from __future__ import annotations
 
 import argparse
+import csv
+import hashlib
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -74,7 +81,7 @@ def comparison_table(comps: dict) -> str:
     return "\n".join(lines)
 
 
-def decision_table(test: dict) -> str:
+def decision_table(test: dict, threshold_caption="au seuil du run choisi sur validation") -> str:
     """Lecture des comptes existants au seuil du run ; aucune nouvelle prédiction."""
     def pct(numerator, denominator):
         return "—" if denominator == 0 else f"{100 * numerator / denominator:.1f} %"
@@ -88,7 +95,7 @@ def decision_table(test: dict) -> str:
                      f"{pct(tp, tp + fp)} | {pct(2 * tp, 2 * tp + fp + fn)} | "
                      f"{pct(tp, tp + fn)} | {pct(fp, fp + tn)} | {pct(fn, tp + fn)} |")
     lines += ["", "F1 fuite ≠ macro-F1. Pourcentages dérivés des comptes TP/FP/TN/FN "
-              "au seuil du run choisi sur validation ; — indique un dénominateur nul."]
+              f"{threshold_caption} ; — indique un dénominateur nul."]
     return "\n".join(lines)
 
 
@@ -271,19 +278,330 @@ def build_markdown(result: dict, comps: dict, tslm: str | None, stress: dict | N
     return "\n".join(parts) + "\n"
 
 
-def main() -> None:
+V2_EXTERNAL_NAME = "external_aghashahi_v1.json"
+V2_EXTERNAL_SHA256 = "840078010f4023a045a039167f079ef178f6b0cb56f7f280fd2a5760aad1616b"
+
+
+def _sha(path):
+    with Path(path).open("rb") as stream:
+        return hashlib.file_digest(stream, "sha256").hexdigest()
+
+
+def _v2_read(path, sources, *, jsonl=False):
+    path = Path(path).resolve()
+    sources[str(path)] = _sha(path)
+    with path.open() as stream:
+        return [json.loads(line) for line in stream if line.strip()] if jsonl else json.load(stream)
+
+
+def _v2_predictions(path, sources):
+    path = Path(path)
+    if not path.is_file():
+        return None
+    sources[str(path.resolve())] = _sha(path)
+    with path.open(newline="") as stream:
+        reader = csv.DictReader(stream)
+        if reader.fieldnames != ["clip_id", "probability_leak"]:
+            raise ValueError("Colonnes du run différentes du contrat")
+        values = {}
+        for row in reader:
+            score = float(row["probability_leak"])
+            if row["clip_id"] in values or not math.isfinite(score) or not 0 <= score <= 1:
+                raise ValueError("Prédiction répétée, non finie ou hors bornes")
+            values[row["clip_id"]] = score
+        return values
+
+
+def _v2_cv(campaign, sources):
+    registration = _v2_read(campaign / "preregistration.json", sources)
+    selection = _v2_read(campaign / "selection/selection.json", sources)
+    if selection.get("preregistration_sha256") != _sha(campaign / "preregistration.json"):
+        raise ValueError("Sélection et préinscription incompatibles")
+    candidates = selection["candidates"]
+    if len(candidates) != 2 or {row["variant"] for row in candidates} != {"A", "C"}:
+        raise ValueError("Deux candidats A/C requis")
+    c1 = [row for row in selection["c1_candidates"] if row["C"] == selection["selected_C1_C"]]
+    if len(c1) != 1:
+        raise ValueError("Un seul C1 au C global retenu est requis")
+    c1 = c1[0]
+    rows = [(row["variant"], row, row["fold_metrics"]) for row in candidates]
+    rows.append((f"C1 (C={c1['C']})", c1, c1["folds"]))
+    means = ["| candidat | moyenne AUC groupe | moyenne AUC clip |", "|---|---|---|"]
+    reports = {}
+    for name, candidate, folds in rows:
+        if len(folds) != 3 or (name.startswith("C1") and [b["fold_id"] for b in folds] != [0, 1, 2]):
+            raise ValueError("Trois folds train ordonnés sont requis pour chaque candidat retenu")
+        means.append(f"| {name} | {fmt(candidate['mean_group_roc_auc'], 6)} | {fmt(candidate['mean_clip_roc_auc'], 6)} |")
+        for i, block in enumerate(folds):
+            if block.get("threshold") != 0.5:
+                raise ValueError("Seuil diagnostique CV modifié")
+            reports[f"{name}-fold{i}"] = {"model_name": name, "folds": {"cv": block}}
+    return registration, selection, "\n".join(means), reports
+
+
+def _v2_evaluation(path, sources, registration):
+    if path is None:
+        return None
+    result = _v2_read(path, sources)
+    if (result.get("split", {}).get("filename") != V2_EXTERNAL_NAME
+            or result["split"].get("sha256") != V2_EXTERNAL_SHA256
+            or not result.get("runs")):
+        raise ValueError("Seule l'évaluation externe gelée peut confirmer cette V2")
+    for rid, run in result["runs"].items():
+        proof = run.get("fixed_threshold_provenance", {})
+        threshold = proof.get("threshold")
+        if (run.get("run_id") != rid or set(run.get("folds", {})) != {"external"}
+                or run.get("transform") not in ("T0", "T1", "T2", "T3")
+                or run.get("training_commit") != registration["code_revision"]
+                or proof.get("fit_fold") != "val" or type(threshold) not in (int, float)
+                or not math.isfinite(threshold) or proof.get("threshold_repr") != repr(float(threshold))
+                or proof.get("validation_split_sha256") != split_loader.FROZEN_SPLIT_SHA256
+                or run["folds"]["external"]["threshold"] != threshold):
+            raise ValueError("Run externe mélangé avec un autre entraînement, fold ou seuil")
+    return result
+
+
+def _v2_audit_partition(parent, partition, report, sources):
+    path = parent / "audit" / f"{partition}.jsonl"
+    prediction_path = (parent / "run/predictions.csv" if partition == "external"
+                       else parent / "audit/background-predictions.csv")
+    predictions = _v2_predictions(prediction_path, sources)
+    stored = report.get("partitions", {}).get(partition)
+    result = {"partition": partition, "summary_exporter": stored,
+        "expected": len(predictions) if predictions is not None else (stored or {}).get("expected"),
+        "binary_target_used": False, "status": "non vérifié", "reason": "Journal absent"}
+    if not path.is_file():
+        return result
+    rows = _v2_read(path, sources, jsonl=True)
+    ids = [row["clip_id"] for row in rows]
+    if len(set(ids)) != len(ids) or (predictions is not None and set(ids) != set(predictions)):
+        raise ValueError("Couverture/identifiants de l'audit différents des prédictions")
+    counts = {"attempted": len(rows), "errors": 0, "display_checked": 0, "invalid_display": 0,
+        "displayed_class_contradictions": 0, "displayed_description_contradictions": 0,
+        "score_disagreements": 0, "threshold_disagreements": 0, "fallback_used": 0}
+    examples = []
+    for row in rows:
+        if row.get("transform") != "T0":
+            raise ValueError("Journal d'une autre transformation que l'audit T0")
+        payload = row.get("payload")
+        failures = []
+        if row.get("error") is not None:
+            counts["errors"] += 1
+            failures.append("error")
+        elif not isinstance(payload, dict):
+            counts["invalid_display"] += 1
+            failures.append("invalid_display")
+        else:
+            score = payload.get("probability_leak")
+            if type(score) not in (int, float) or not math.isfinite(score) or not 0 <= score <= 1:
+                counts["invalid_display"] += 1
+                failures.append("invalid_display")
+            else:
+                counts["display_checked"] += 1
+                saved = predictions[row["clip_id"]] if predictions is not None else score
+                checks = {"score_disagreements": saved != score,
+                    "threshold_disagreements": payload.get("threshold") != report["threshold"],
+                    "displayed_class_contradictions": payload.get("prediction") != ("leak" if saved >= report["threshold"] else "no_leak"),
+                    "displayed_description_contradictions": payload.get("dominant_band_hz") not in
+                        ("0-1000", "1000-2000", "2000-3000", "3000-4000") or payload.get("description") !=
+                        f"Greatest mean spectral energy: {payload.get('dominant_band_hz')} Hz."}
+                for key, contradicted in checks.items():
+                    counts[key] += int(contradicted)
+                    if contradicted:
+                        failures.append(key)
+                counts["fallback_used"] += int(payload.get("fallback_used") is True)
+        if failures and len(examples) < 3:
+            examples.append({"clip_id": row["clip_id"], "failures": failures, "record": row})
+    failures = sum(counts[key] for key in ("errors", "invalid_display", "displayed_class_contradictions",
+        "displayed_description_contradictions", "score_disagreements", "threshold_disagreements"))
+    verified = (predictions is not None and len(rows) > 0 and report.get("status") == "complete"
+                and report.get("weights_unchanged") is True and failures == 0)
+    return {**result, **counts, "examples_first_in_journal_order": examples,
+        "status": "cohérence affichée vérifiée" if verified else "non vérifié ou défaut constaté",
+        "reason": None if verified else "Audit incomplet, erreurs, contradictions ou prédictions absentes",
+        "raw_and_latency_counts_from_exporter": stored}
+
+
+def _v2_audit(parent, sources, preregistration_sha256, evaluation):
+    parent = Path(parent)
+    available = [parent / "audit" / name for name in ("summary.json", "failure.json", "started.json")]
+    path = next((path for path in available if path.is_file()), None)
+    if path is None:
+        return {"parent": str(parent), "status": "non vérifié", "reason": "Aucun reçu d'audit"}
+    report = _v2_read(path, sources)
+    threshold = report.get("threshold")
+    if (report.get("schema") != "pipe-v2-external-export-v1" or report.get("model") != "tslm"
+            or report.get("transform") != "T0" or report.get("text_audit") is not True
+            or report.get("external_manifest_sha256") != V2_EXTERNAL_SHA256
+            or report.get("preregistration_sha256") != preregistration_sha256
+            or type(threshold) not in (int, float) or not math.isfinite(threshold)
+            or report.get("threshold_repr") != repr(float(threshold))):
+        raise ValueError("Audit T0 TSLM d'un autre manifeste, modèle, seuil ou campagne")
+    metadata_path = parent / "run/metadata.json"
+    if metadata_path.is_file():
+        metadata = _v2_read(metadata_path, sources)
+        if (metadata.get("split_filename") != V2_EXTERNAL_NAME or metadata.get("split_sha256") != V2_EXTERNAL_SHA256
+                or any(metadata.get(key) != report.get(key) for key in ("run_id", "model_identity", "transform",
+                    "threshold_provenance_sha256", "preregistration_sha256"))):
+            raise ValueError("Run et audit mélangés")
+        hashes = {name: _sha(parent / "run" / name) for name in ("metadata.json", "predictions.csv")}
+        if report.get("run_sha256") is not None and report["run_sha256"] != hashes:
+            raise ValueError("Run modifié depuis l'audit")
+        if evaluation is not None:
+            run = evaluation["runs"].get(report["run_id"], {})
+            proof = run.get("fixed_threshold_provenance", {})
+            if (proof.get("run_files_sha256") != hashes or proof.get("threshold") != threshold
+                    or proof.get("threshold_provenance_sha256") != report["threshold_provenance_sha256"]):
+                raise ValueError("Évaluation et audit ne décrivent pas le même run/seuil")
+    return {"parent": str(parent), "run_id": report["run_id"], "exporter_status": report.get("status"),
+            "model_load_ms": report.get("model_load_ms"),
+            "partitions": {name: _v2_audit_partition(parent, name, report, sources)
+                           for name in ("external", "background")}}
+
+
+def build_v2(args):
+    """Restituer uniquement les artefacts existants : aucun accès audio/split/moteur."""
+    out = Path(args.out)
+    if out.exists() or out.is_symlink():
+        raise FileExistsError("Le rapport V2 exige un dossier neuf")
+    campaign, sources = Path(args.v2_campaign), {}
+    registration, selection, means, cv = _v2_cv(campaign, sources)
+    evaluation = _v2_evaluation(args.v2_evaluation, sources, registration)
+    audits = [_v2_audit(path, sources, _sha(campaign / "preregistration.json"), evaluation)
+              for path in args.v2_audits or []]
+    if len({audit.get("run_id", audit["parent"]) for audit in audits}) != len(audits):
+        raise ValueError("Audit répété")
+    parts = ["# Évaluation V2 — sélection et confirmation distinctes", "",
+        "Restitution de JSON et journaux existants, sans nouvelle inférence ni recalcul de métriques.", "",
+        "## 1. Sélection sur train uniquement", "",
+        f"Candidat retenu : **{selection['selected_variant']}** ; C1 global : **C={selection['selected_C1_C']}**.", "",
+        f"Règle préinscrite : `{selection['selection_rule']}`. Moyennes des trois folds groupés, "
+        "pas une AUC OOF amalgamée. Ces résultats de sélection ne constituent pas une confirmation indépendante.", "", means,
+        "", "## 2. Trois folds internes et erreurs au seuil diagnostique", "", metric_table(cv, "cv"), ""]
+    for rid, run in cv.items():
+        parts += [f"### {rid}", "", decision_table(run["folds"]["cv"],
+            "au seuil 0,5 fixé pour le diagnostic CV, non sélectionné et non servi"), ""]
+    parts += ["## 3. Confirmation externe T0", ""]
+    if evaluation is None:
+        parts += ["Non évaluée dans ce rapport : aucun JSON d'évaluation externe fourni.", ""]
+    else:
+        runs = evaluation["runs"]
+        parts += [f"Manifeste `{V2_EXTERNAL_NAME}`, SHA `{V2_EXTERNAL_SHA256}` ; "
+            f"{evaluation['split']['n_clips']} fenêtres, {evaluation['split']['n_clusters']} groupes heuristiques.", ""]
+        t0 = {rid: run for rid, run in runs.items() if run["transform"] == "T0"}
+        if t0:
+            parts += [metric_table(t0, "external"), "", ci_table(t0, "external"), ""]
+            for rid, run in t0.items():
+                parts += [f"### Erreurs {rid}", "", decision_table(run["folds"]["external"]), ""]
+        else:
+            parts += ["Aucun run T0 fourni : confirmation principale non vérifiée.", ""]
+        parts += ["### Seuils validation gelés et provenance", "",
+            "| run | transformation | seuil plein | SHA reçu validation |", "|---|---|---|---|"]
+        for rid, run in runs.items():
+            p = run["fixed_threshold_provenance"]
+            parts.append(f"| `{rid}` | {run['transform']} | `{p['threshold_repr']}` | `{p['threshold_provenance_sha256']}` |")
+        parts += ["", "Les mêmes reçus sont conservés pour tous les stress d'un checkpoint ; "
+            "aucun seuil n'est choisi sur l'externe. Les empreintes complètes restent dans le JSON source.", ""]
+    parts += ["## 4. Sensibilité temporelle et incertitude", "",
+        "T1 inverse le temps, T2 permute des blocs de 250 échantillons (31,25 ms), T3 randomise la phase. "
+        "Les étiquettes ne sont pas présumées invariantes sous ces transformations ; leurs résultats "
+        "sondent la sensibilité, pas une amélioration ni une dégradation terrain démontrée.", ""]
+    if evaluation is not None:
+        stressed = {rid: run for rid, run in evaluation["runs"].items() if run["transform"] != "T0"}
+        if stressed:
+            parts += [metric_table(stressed, "external"), "", ci_table(stressed, "external"), ""]
+        parts += ["### Comparaisons appariées existantes", "",
+                  comparison_table(evaluation.get("paired_comparisons", {})), ""]
+        parts += [f"Bootstrap existant : {evaluation['bootstrap']['draws']} tirages, graine "
+                  f"{evaluation['bootstrap']['seed']}, unité `{evaluation['bootstrap']['unit']}`. "
+                  "Ces intervalles ne créent pas de nouvelles sessions indépendantes.", ""]
+    else:
+        parts += ["Stress et intervalles externes non vérifiés : résultats non fournis.", ""]
+    parts += ["## 5. Cohérence du texte affiché — audit T0", "",
+        "Le contrôle compare la classe affichée au score sauvegardé et au seuil plein, et la description à "
+        "la bande DSP **déclarée** dans la même sortie. Ce n'est pas une preuve acoustique indépendante : "
+        "la mesure source relève du gate et de CoherentPredictor. Les drapeaux de texte brut ne décident pas "
+        "du compteur de contradictions affichées.", ""]
+    if not audits:
+        parts += ["Non vérifié : aucun audit textuel fourni. Aucun zéro défaut ou taux de réussite n'est revendiqué.", ""]
+    for audit in audits:
+        parts += [f"### {audit.get('run_id', audit['parent'])}", ""]
+        if "partitions" not in audit:
+            parts += [f"Non vérifié : {audit['reason']}.", ""]
+            continue
+        parts += [f"Chargement du modèle, séparé des requêtes : {fmt(audit['model_load_ms'])} ms "
+                  "(— : durée non fournie).", ""]
+        for partition, result in audit["partitions"].items():
+            parts += [f"#### {'Primaire externe' if partition == 'external' else 'Bruit annexe — sans cible binaire'}", "",
+                f"État : **{result['status']}**. Dénominateur attendu : {fmt(result['expected'], 0)}.", ""]
+            if "attempted" not in result:
+                parts += [f"Non vérifié : {result['reason']}.", ""]
+                continue
+            parts += ["| tentatives | erreurs | sorties contrôlées | invalides | contradictions classe | "
+                      "contradictions description | écarts score | écarts seuil | fallback |",
+                      "|---|---|---|---|---|---|---|---|---|",
+                      "| " + " | ".join(str(result[k]) for k in ("attempted", "errors", "display_checked", "invalid_display",
+                      "displayed_class_contradictions", "displayed_description_contradictions", "score_disagreements",
+                      "threshold_disagreements", "fallback_used")) + " |", ""]
+            stored = result["raw_and_latency_counts_from_exporter"]
+            parts += (["Compteurs bruts et latences du producteur (conservés, distincts de ce contrôle) :", "",
+                      "```json", json.dumps(stored, indent=2, ensure_ascii=False), "```", ""] if stored is not None
+                      else ["Compteurs bruts et latences non vérifiés : résumé du producteur absent.", ""])
+            for example in result["examples_first_in_journal_order"]:
+                parts += [f"Premier défaut dans l'ordre du journal : `{example['clip_id']}` — "
+                          ", ".join(example["failures"]) + ".", ""]
+    parts += ["## 6. Limites de portée", "",
+        "Les groupes sont heuristiques, pas des sessions d'acquisition indépendantes démontrées. "
+        "L'externe est un montage expérimental de 47 m en PVC ; il ne valide ni tous les matériaux, "
+        "ni les capteurs, ni un bâtiment réel. Les fenêtres d'un même enregistrement sont dépendantes. "
+        "Le bruit annexe n'est jamais réétiqueté comme une classe non-fuite. Les scores ne sont pas calibrés ; "
+        "aucun résultat par clip n'établit le délai de détection ou les fausses alertes par appareil-heure.", "",
+        "## 7. Événement, contexte et utilité du TSLM — non démontrés", "",
+        "La campagne A/C reste une étude sur extraits. Elle ne démontre ni compréhension de l'évolution "
+        "d'un événement, ni comparaison à un historique, ni investigation interactive utile. Ajouter neuf "
+        "mesures au prompt ne suffit pas. Le benchmark final doit comparer, sur les mêmes événements "
+        "réservés et contextes disponibles : classifieur + DSP + gabarit ; classifieur + mesures/contexte + Qwen ; "
+        "TSLM sur séries. Il faut des références temporelles et des critères métier avant d'affirmer "
+        "que le langage ou l'accès aux séries apporte une utilité supplémentaire.", ""]
+    for path, digest in sources.items():
+        if _sha(path) != digest:
+            raise ValueError("Une source a changé pendant la génération du rapport")
+    out.mkdir(parents=True, exist_ok=False)
+    report_path = out / "FINAL_EVALUATION_V2.md"
+    report_path.write_text("\n".join(parts), encoding="utf-8")
+    provenance = {"schema": "pipe-v2-report-v1", "metrics_recalculated": False, "audio_or_split_loaded": False,
+        "code_revision": args.code_revision, "generator_sha256": _sha(__file__), "source_sha256": sources,
+        "report_sha256": _sha(report_path), "external_evaluation_provided": evaluation is not None, "audits": audits}
+    (out / "provenance.json").write_text(json.dumps(provenance, indent=2, ensure_ascii=False, allow_nan=False) + "\n")
+    print(f"écrit : {report_path}, provenance.json — aucun recalcul de métrique")
+    return provenance
+
+
+def main(argv=None) -> None:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--runs", nargs="+", required=True)
+    ap.add_argument("--runs", nargs="+")
     ap.add_argument("--manifests", default="manifests")
     ap.add_argument("--tslm-run-id", default=None)
     ap.add_argument("--stress-report", default=None)
-    ap.add_argument("--out", default="artifacts/final_evaluation")
+    ap.add_argument("--out")
     ap.add_argument("--code-revision", help="SHA Git complet du code transféré, y compris sans .git")
-    args = ap.parse_args()
+    ap.add_argument("--v2-campaign", type=Path)
+    ap.add_argument("--v2-evaluation", type=Path)
+    ap.add_argument("--v2-audits", nargs="+", type=Path)
+    args = ap.parse_args(argv)
     if args.code_revision is not None and (len(args.code_revision) != 40
             or any(c not in "0123456789abcdef" for c in args.code_revision)):
         ap.error("--code-revision doit être un SHA complet de 40 caractères hexadécimaux")
+    if args.v2_campaign is not None:
+        if args.out is None:
+            ap.error("La restitution V2 exige --out avec un dossier neuf")
+        if args.runs or args.stress_report or args.tslm_run_id:
+            ap.error("Ne pas mélanger les modes V1 et restitution V2")
+        return build_v2(args)
+    if args.v2_evaluation or args.v2_audits or not args.runs:
+        ap.error("V1 exige --runs ; le mode V2 exige --v2-campaign")
+    args.out = args.out or "artifacts/final_evaluation"
 
     split = split_loader.load_split(args.manifests)
     runs, reports = {}, {}
