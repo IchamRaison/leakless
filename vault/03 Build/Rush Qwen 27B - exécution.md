@@ -37,3 +37,9 @@ Pic réservé59460550656octets/85017493504, soit30,1% de marge ; MB4 retenu sous
 Deux processus neufs de rechargement sont lancés, un par H100, sur les mêmes poids techniques transférés (base locale identique). Aucun résultat de comparaison ou réglage d'époques d'après validation. Les51tests eval passent aussi sur H100-2 :223tests cumulés. Preuves `probe-result.json`, `probe-loading.json`, `probe-training.jsonl` et journaux dans le dossier evidence.
 
 **Reloads terminés/vérifiés avant fit :** écarts maximaux0sur les deux nœuds et entre eux, même bundle/runtime, processus distincts. Reçus `312f2324…` et `8766264c…`. MB4 retenu. À09:38Paris, budget figé à**1époque** : chemin critique H100-2 =47+41pas, coût fixe241,615s/fit (chargement/empreintes/sauvegarde inclus), temps total majoré25% =18min40s pour1époque,27min16s pour2,44min29s pour4 ; moins de24min restantes avant stop. Une seule recette, aucun résultat réservé encore consulté. `gate.json` publié avant les fits ; fold0 reste le prototype prédésigné, aucun changement de budget après résultats.
+
+## Fits et évaluation en cours
+
+À09:49Paris : fold0 etfold1 complets, respectivement63pas/500présentations et47pas/373présentations. Une époque exacte, initialisations neuves identiques au probe avant ses updates, base inchangée. Bundles `38851932…` et `ce769936…`, environ4,35s et4,17s par pas ; pic réservé62,75Go et59,49Go. Poids sauvegardés dans `rush-qwen27b-001/fold-N/bundle` ; preuves sans poids rapatriées dans `docs/evidence/tslm-v2/qwen27b-rush-001/fold-N/`.
+
+Fold2 en cours sur H100-2, même processus séquentiel30641. Évaluation fold0 puisfold1 lancée sur H100-1, handle97546, un processus neuf par checkpoint ; copie du fold1 avec même base/adapters, pas de refit. On anticipe la phase d'évaluation sur le GPU déjà libre, sans attendre minute45 ; budget d'apprentissage et recette restent figés. Aucun résultat réservé encore disponible à ce jalon, aucune moyenne partielle.

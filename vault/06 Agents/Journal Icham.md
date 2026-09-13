@@ -2,6 +2,10 @@
 
 ## 13 septembre — rush27B autorisé et téléchargement vérifié
 
+Gate ensuite terminé et publié `b70a408` : base gelée vérifiée, MB4 avec30% de marge,4,693s/pas logger inclus, deux reloads neufs exacts et parité inter-nœuds0. Budget fixe1époque retenu avec25% de marge et coûts fixes mesurés ; aucun résultat réservé utilisé. Fits lancés sur code immuable `dae7e22` : handle76771/fold0 et30641/fold1 puis2. Un audit sans modèle, `29f92c3`, prépare la revérification des batches/cibles/compteurs/predictions/métriques ; pas encore exécuté sur la campagne incomplète. Les checkpoints techniques ne sont jamais réutilisés pour les fits.
+
+À09:49Paris : folds0/1 terminés,63/47pas et500/373présentations, bundles `38851932…`/`ce769936…`, base inchangée. Fold2 a démarré ; évaluation des deux checkpoints terminés lancée dans deux processus neufs séquentiels sur H100-1 (handle97546), code/scoring inchangés. Phase d'évaluation anticipée sur GPU libre, sans changement de budget ni ajustement après résultats. Aucune qualité réservée encore mesurée à cette étape.
+
 Une heure09:17–10:17Paris, arrêt des mises à jour10:02. Préinscription complète `3e76cfc`, [[Rush Qwen 27B - exécution]] ; deux H100 indépendantes, BF16+LoRA fixe, trois folds train internes seulement. Modèle officiel `Qwen/Qwen3.8-27B` révision `1d4bf0f2…` téléchargé anonymement sur les deux nœuds ;31fichiers et reçus identiques SHA256 `66cc7253…`. Code initial `dae7e22` publié,172 tests TSLM réussis sur le second runtime. Test technique MB4 lancé sur le premier nœud ; aucun résultat27B ni budget d'époques encore fixé. Preuves dans `docs/evidence/tslm-v2/qwen27b-rush-001/`. Prochaine action : vrai backward, VRAM, reload neuf et parité des scores avant les fits.
 
 ## 13 septembre — D3 mémorise ; demande de mesure hors entraînement
