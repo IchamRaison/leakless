@@ -4,6 +4,8 @@ Icham
 
 ## Priorité actuelle — 13 septembre
 
+- [ ] Rush27B autorisé, 09:17–10:17 Paris : même base BF16 sur2H100, gate mémoire/gradients/reload/parité, fits internes bornés puis bilan. [[Rush Qwen 27B - exécution]]. Aucun fit27B à ce jalon.
+
 - [x] Nouvel accès `ich@195.242.28.46` réussi : H100 80GB HBM3, GPU inoccupé au contrôle, Python 3.12.3, environ 1,2 To libres. Deux accès H100 vérifiés avec la machine existante. [[Journal Icham#13 septembre — nouveaux essais SSH, une H100 supplémentaire accessible]].
 - [x] `iche@89.169.97.196` testé avec clé explicite puis identités normales : SSH répond, authentification refusée ; GPU non vérifié. Les deux autres refus de l'échange précédent restent historiques, sans nouvel essai.
 - [x] Deuxième runtime H100 préparé avec uv/lock existants : 132 paquets compatibles, imports, calcul/backward GPU et 214 tests sans skip. `docs/evidence/runtime-h100-2-001/`. Pas encore de poids/données ni de parité Qwen entre machines ; pas de DDP ou essai supplémentaire.

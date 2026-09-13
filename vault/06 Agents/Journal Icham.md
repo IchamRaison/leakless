@@ -1,5 +1,9 @@
 # Journal Icham
 
+## 13 septembre — rush27B autorisé et téléchargement vérifié
+
+Une heure09:17–10:17Paris, arrêt des mises à jour10:02. Préinscription complète `3e76cfc`, [[Rush Qwen 27B - exécution]] ; deux H100 indépendantes, BF16+LoRA fixe, trois folds train internes seulement. Modèle officiel `Qwen/Qwen3.8-27B` révision `1d4bf0f2…` téléchargé anonymement sur les deux nœuds ;31fichiers et reçus identiques SHA256 `66cc7253…`. Code initial `dae7e22` publié,172 tests TSLM réussis sur le second runtime. Test technique MB4 lancé sur le premier nœud ; aucun résultat27B ni budget d'époques encore fixé. Preuves dans `docs/evidence/tslm-v2/qwen27b-rush-001/`. Prochaine action : vrai backward, VRAM, reload neuf et parité des scores avant les fits.
+
 ## 13 septembre — D3 mémorise ; demande de mesure hors entraînement
 
 Le fit existant a terminé normalement au pas400, sans interruption ni changement de recette :100époques/3200présentations des mêmes32clips,32/32corrects,NLL binaire0,000826279. Qwen gelé inchangé, loss complète d'origine. Reçu train `5e782e54…` vérifié sur la H100 avec toutes les empreintes. Reload neuf ensuite exécuté : reçu `3fe96a1a…`,32scores reproduits exactement, poids avant/après identiques. Aucun nouvel entraînement. Les preuves finales sans poids sont dans `docs/evidence/tslm-v2/causal-d3-001/final/`.

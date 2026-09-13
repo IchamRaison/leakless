@@ -4,6 +4,8 @@ Icham
 
 ## Commencer ici
 
+**En cours : [[Rush Qwen 27B - exécution]]**, autorisé par Icham pour une heure, deux H100, train interne seulement. Préparation technique avant tout fit ; aucune qualité27B mesurée à ce stade.
+
 [[Passation]] donne l'état réel. [[Évaluation qualité V1 - exécution]] donne les résultats mesurés ; [[Plan surveillance continue]] distingue l'ambition produit du prototype. [[Plan directeur agents]] conserve le plan initial et les contraintes communes. Aucune lecture du chat n'est nécessaire.
 
 **Goal élargi le 13 septembre : [[Diagnostic causal TSLM vs C1#Plan global en dix étapes]].** Le prompt reste un renvoi vers cette note. Diagnostic → corrections mesurées → diversification globale si nécessaire → mesure de cet apport → gel et confirmation indépendante → intégration continue et valeur du TSLM. Le diagnostic ne termine plus le goal. [[Diagnostic causal - exécution]] : D0/D1/D2 complets ; D3 termine au pas400 avec32/32 sur ses exemples d'entraînement, puis reload neuf exact. L'extension demandée sur98réservés est terminée/vérifiée :67/98corrects,21fuites manquées,10fausses alertes ; AUC clip0,741370/groupe0,798077. Mémorisation acquise, qualité hors groupes encore insuffisante ; aucun nouveau fit ni test officiel. Deux H100 avec runtimes et socle train vérifiés ; vraie parité Qwen entre machines encore non mesurée. Étapes6à10 non lancées ; aucun gain final TSLM ni cause unique du retard démontrés.
