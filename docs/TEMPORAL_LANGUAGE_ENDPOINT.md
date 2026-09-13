@@ -1,6 +1,6 @@
 # C1 + OpenTSLM-SP + Qwen — module IA de démonstration
 
-Ce module remplace **le rôle demandé au modèle**, pas les poids C1 : l'ancien petit LSTM de classification acoustique n'est pas utilisé. Le détecteur C1 existant produit neuf mesures et un score par seconde. OpenTSLM encode leur historique ; Qwen3.5-4B gelé choisit une description temporelle parmi cinq formulations. La fin de l'entraînement et les résultats réels sont consignés dans `docs/evidence/temporal-language-001/` et le vault.
+Ce module remplace **le rôle demandé au modèle**, pas les poids C1 : l'ancien petit LSTM de classification acoustique n'est pas utilisé. Le détecteur C1 existant produit neuf mesures et un score par seconde. OpenTSLM encode leur historique ; Qwen3.5-4B avec LoRA choisit une description temporelle parmi cinq formulations. La base est gelée hors adaptateurs. Résultats : `docs/evidence/temporal-language-lora-001/` et le vault.
 
 ## Responsabilités et contrat
 
@@ -34,11 +34,19 @@ Exemple de **format**, pas résultat mesuré : «REPLAY — Nevil, un signal com
 
 ## Apprentissage et portée
 
-Une recette400pas, Qwen gelé, encodeur/projecteur entraînés ; empreintes de base, de C1, de normalisation et du checkpoint. Quarante chronologies artificielles train et25réservées, composées de mesures réelles des598clips train C1. Aucun Aghashahi ni test officiel utilisé. Les étiquettes de dynamique sont dérivées de règles, **pas d'apparitions physiques annotées**. Les scénarios réservés ne représentent pas des acquisitions indépendantes.
+Deux recettes de400pas : encodeur/projecteur seuls, puis ajout LoRA rang8 sur q_proj/v_proj (917504 paramètres). Empreintes de base, de C1, de normalisation et du checkpoint vérifiées. Quarante chronologies artificielles train et25de développement, composées de mesures réelles des598clips train C1. Aucun Aghashahi ni test officiel utilisé. Les étiquettes de dynamique sont dérivées de règles, **pas d'apparitions physiques annotées**. Les scénarios de développement ne représentent pas des acquisitions indépendantes.
+
+Résultat brut : premier modèle3/25, modèle LoRA retenu16/25 (64%),9fallbacks ; sur inversion temporelle8/25. Rechargement neuf : écart maximal0 sur les références sauvegardées. Deux configurations comparées, sélection exploratoire sur ces mêmes scénarios ; aucun réglage supplémentaire. Les règles atteignent25/25 par construction : aucun bénéfice du TSLM démontré.
 
 Comparer les sorties brutes du modèle aux règles (parfaites par construction sur cette tâche), compter les fallbacks et tester l'inversion temporelle. Un retour sûr au gabarit n'est pas un succès du modèle. Cette démonstration réalise le branchement séries/langage ; elle ne prouve pas une supériorité du TSLM, une réduction des dégâts ou une fiabilité terrain.
 
 ## Lancement isolé
+
+Service vérifié sur la première H100 : code `77c174f`, PID129483 au lancement, répertoire `/home/hicham/pipe-v0/code-language-api-004`, port8020. Version modèle `opentslm-qwen-dynamics-d29bf1227d38`. Il reste à raccorder le backend/Monitor via le tunnel ci-dessus ; ce n'est pas une URL publique.
+
+39tests passent sur le runtime GPU (3,87s). Recette HTTP réelle43fenêtres à1Hz : 3basses,35hautes,5basses, chronologie artificielle de WAV train. Aperçu à la31e haute, pas avant ; renvoi HTTP en doublon idempotent, deux aperçus prêts, zéro message externe. P95serveur8,12ms pour l'ingestion C1, **pas pour la génération asynchrone Qwen**. Qwen reconnaît la persistance ; il prédit à tort encore «persistent» à la fin, corrigé par `template_fallback` explicite. Preuve : `docs/evidence/temporal-language-lora-001/http-smoke-001/report.json`.
+
+Dans cet exemple, `high_observed_seconds:35` compte les fenêtres hautes ; `observed_seconds:40` inclut les5fenêtres basses nécessaires à la clôture. Ces compteurs ne donnent pas la durée physique de la fuite et ne sont pas produits par le LLM.
 
 Réutiliser le runtime ML et l'overlay `requirements-temporal-api.txt` ; `serve.py` ne propose que le loopback, un processus et une concurrence bornée. Fournir les empreintes publiées, pas un chemin de checkpoint arbitraire transmis par un client.
 
@@ -47,9 +55,9 @@ PYTHONPATH=/home/hicham/pipe-v0/.venv-temporal-api/lib/python3.12/site-packages:
   /home/hicham/pipe-v0/.venv-repro/bin/python scripts/temporal/serve.py \
   --bundle /home/hicham/pipe-v0/artifacts/c1-temporal-002/bundle \
   --sha256 cea924a6a0f8c3d3ff91930d8125f309a3bcded4c965a4ef53c2c566fc32ebdd \
-  --language /home/hicham/pipe-v0/artifacts/temporal-language-001 \
-  --language-sha256 EMPREINTE_PUBLIEE_DANS_LES_PREUVES \
-  --db /home/hicham/pipe-v0/artifacts/temporal-language-001/service.sqlite --port 8020
+  --language /home/hicham/pipe-v0/artifacts/temporal-language-lora-001 \
+  --language-sha256 d29bf1227d389801c35b33d47d1227b369c26a628207155d8ddc4e47ba5f3295 \
+  --db /home/hicham/pipe-v0/artifacts/temporal-language-lora-001/service.sqlite --port 8020
 ```
 
 Bearer optionnel `PIPE_TEMPORAL_TOKEN` pour les routes temporelles ; hors tunnel SSH, HTTPS et authentification sur **toutes** les routes via proxy sont requis. Aucun endpoint publiquement exposé par cette commande. Ne jamais toucher au service du placeholder pour déployer ce module.
