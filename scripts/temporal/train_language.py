@@ -1,9 +1,11 @@
 """Nouvelle tâche OpenTSLM/Qwen : dynamique C1, pas nouvelle classification de fuite."""
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
 import sys
+import shutil
 import time
 
 os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
@@ -50,6 +52,15 @@ def scenarios(bank, count, seed):
 
 def prepare(args, config):
     args.output.mkdir(parents=True, exist_ok=False)
+    if args.reuse_data:
+        prior=json.loads((args.reuse_data/"registration.json").read_text())
+        for name,sha in prior["files"].items():
+            if file_hash(args.reuse_data/name)!=sha: raise ValueError("Préparation précédente modifiée")
+            shutil.copy2(args.reuse_data/name,args.output/name)
+        prior.update(config=config,source_revision=args.revision,
+            parent_registration_sha256=file_hash(args.reuse_data/"registration.json"))
+        write(args.output/"registration.json",prior)
+        return
     detector = C1Detector(args.c1, args.c1_sha256)
     md5 = load_expected_audio_md5(ROOT / "manifests")
     split = split_loader.load_split(ROOT / "manifests")
@@ -77,10 +88,19 @@ def prepare(args, config):
         "files":{name:file_hash(args.output/name) for name in ("train.npz","development.npz","normalization.npz")}})
 
 
+def frozen_hash(model):
+    import torch
+    digest=hashlib.sha256()
+    for name,tensor in sorted(model.llm.named_parameters()):
+        if not tensor.requires_grad:
+            digest.update(name.encode())
+            digest.update(tensor.detach().contiguous().cpu().view(torch.uint8).numpy().tobytes())
+    return digest.hexdigest()
+
+
 def fit(args, config):
     import torch
     from pipe.tslm.model import AcousticQwenSP
-    from pipe.tslm.train import tensor_state_hash
     registration = json.loads((args.output / "registration.json").read_text())
     assert config == registration["config"]
     for name,sha in registration["files"].items():
@@ -92,12 +112,17 @@ def fit(args, config):
     torch.manual_seed(config["seed"]); torch.set_num_threads(2)
     torch.backends.cuda.matmul.allow_tf32 = False; torch.backends.cudnn.allow_tf32 = False
     model = AcousticQwenSP(args.base, single_clip_acoustic_encoding=True)
-    frozen = tensor_state_hash(model.llm)
+    if config.get("lora"):
+        model.enable_lora(**config["lora"])
+    frozen = frozen_hash(model)
     with np.load(args.output/"normalization.npz") as z: mean,scale=z["mean"],z["scale"]
     with np.load(args.output/"train.npz") as z: x,n,y=z["values"],z["lengths"],z["targets"]
     samples = [model_sample(v[-int(length):],mean,scale) for v,length in zip(x,n)]
-    optimizer = torch.optim.AdamW([{"params":model.encoder.parameters(),"lr":config["encoder_lr"]},
-                                  {"params":model.projector.parameters(),"lr":config["projector_lr"]}], weight_decay=.01)
+    groups=[{"params":model.encoder.parameters(),"lr":config["encoder_lr"]},
+            {"params":model.projector.parameters(),"lr":config["projector_lr"]}]
+    if config.get("lora"):
+        groups.append({"params":model.get_lora_parameters(),"lr":config["lora_lr"]})
+    optimizer = torch.optim.AdamW(groups, weight_decay=.01)
     rng = np.random.default_rng(config["seed"])
     order = rng.permutation(len(y)); started=time.monotonic()
     model.train(); model.llm.eval()
@@ -119,9 +144,12 @@ def fit(args, config):
                  "elapsed_seconds":time.monotonic()-started}
             log.write(json.dumps(row)+"\n"); log.flush()
             if step % 20 == 0: print(json.dumps(row),flush=True)
-    assert not any(p.requires_grad or p.grad is not None for p in model.llm.parameters())
-    assert tensor_state_hash(model.llm) == frozen
-    torch.save({"encoder_state":model.encoder.state_dict(),"projector_state":model.projector.state_dict()},args.output/"temporal.pt")
+    assert not any(p.grad is not None for p in model.llm.parameters() if not p.requires_grad)
+    assert frozen_hash(model) == frozen
+    weights={"encoder_state":model.encoder.state_dict(),"projector_state":model.projector.state_dict()}
+    if config.get("lora"):
+        weights.update(lora_enabled=True,lora_state={name:p.detach() for name,p in model.named_parameters() if "lora_" in name and p.requires_grad})
+    torch.save(weights,args.output/"temporal.pt")
     model.eval()
     with torch.inference_mode():
         references=[torch.softmax(decision_logits(model,s),-1).cpu().tolist() for s in samples[:5]]
@@ -166,6 +194,7 @@ if __name__ == "__main__":
     parser.add_argument("--c1-sha256")
     parser.add_argument("--data-root",type=Path)
     parser.add_argument("--revision")
+    parser.add_argument("--reuse-data",type=Path)
     parser.add_argument("--config",type=Path,default=ROOT/"configs/temporal/language.json")
     args=parser.parse_args(); config=json.loads(args.config.read_text())
     if args.phase=="prepare": prepare(args,config)

@@ -93,9 +93,14 @@ class TemporalNarrator:
             if not path.is_relative_to(base.resolve()) or file_hash(path) != sha:
                 raise ValueError("Base Qwen modifiée")
         self.model = AcousticQwenSP(base, device, single_clip_acoustic_encoding=True)
+        lora=self.metadata["config"].get("lora")
+        if lora:
+            self.model.enable_lora(**lora)
         weights = torch.load(self.directory / "temporal.pt", map_location=device, weights_only=True)
         self.model.encoder.load_state_dict(weights["encoder_state"])
         self.model.projector.load_state_dict(weights["projector_state"])
+        if lora:
+            self.model.load_lora_state_from_checkpoint(weights,allow_missing=False)
         self.model.eval()
         with np.load(self.directory / "normalization.npz", allow_pickle=False) as stats:
             self.mean, self.scale = stats["mean"], stats["scale"]
