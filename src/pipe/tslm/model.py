@@ -52,6 +52,23 @@ class AcousticQwenSP(OpenTSLMSP):
         self.lora_enabled = False
         self.original_llm = None
 
+    def configure_lora(self, spec):
+        """Adaptation explicite ; les anciens chargements restent entièrement gelés."""
+        targets = set(spec["target_modules"])
+        found = {name.rsplit(".", 1)[-1] for name, module in self.llm.named_modules()
+                 if isinstance(module, torch.nn.Linear)}
+        if not targets or not targets <= found:
+            raise ValueError(f"Cibles LoRA absentes : {targets - found}")
+        self.enable_lora(lora_r=spec["r"], lora_alpha=spec["alpha"],
+                         lora_dropout=spec["dropout"], target_modules=sorted(targets))
+        actual = {name.rsplit(".", 1)[-1] for name, module in self.llm.named_modules()
+                  if hasattr(module, "lora_A")}
+        if actual != targets or any(p.requires_grad and "lora_" not in name
+                                    for name, p in self.llm.named_parameters()):
+            raise ValueError("Modules adaptés ou gel de la base incompatibles")
+        self.llm.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
+        self.llm.config.use_cache = False
+
     def pad_and_apply_batch(self, batch):
         framed = []
         for sample in batch:

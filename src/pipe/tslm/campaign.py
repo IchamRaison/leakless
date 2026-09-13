@@ -67,7 +67,8 @@ def train_epoch(model, optimizer, samples, config, epoch):
                                         or not 1 <= microbatch_size <= config["batch_size"]):
         raise ValueError("microbatch_size doit être un entier entre 1 et batch_size")
     model.train()
-    model.llm.eval()
+    if not config.get("lora"):
+        model.llm.eval()
     for indices in epoch_batches(len(samples), config["batch_size"], config["seed"], epoch):
         if microbatch_size is None:
             # Chemin V1 inchangé, notamment aucun nouveau besoin de tokenisation.
@@ -95,8 +96,13 @@ def train_epoch(model, optimizer, samples, config, epoch):
                 weighted_loss += loss.item() * weight
                 del loss, batch  # Ne pas conserver le graphe d'un microbatch au suivant.
         gradients = {}
-        for name, module in (("encoder", model.encoder), ("projector", model.projector)):
-            parameters = list(module.parameters())
+        components = {"encoder": list(model.encoder.parameters()),
+                      "projector": list(model.projector.parameters())}
+        if config.get("lora"):
+            components["lora"] = model.get_lora_parameters()
+            if not components["lora"]:
+                raise RuntimeError("Recette LoRA sans adaptateurs entraînables")
+        for name, parameters in components.items():
             if any(p.grad is None or not torch.isfinite(p.grad).all() for p in parameters):
                 raise RuntimeError(f"Gradients invalides : {name}")
             norm = torch.sqrt(sum(p.grad.float().square().sum() for p in parameters)).item()

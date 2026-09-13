@@ -13,6 +13,7 @@ du seul forward supervisé ; l'observation D0/checkpoint reste distincte.
 """
 from contextlib import contextmanager
 import math
+from types import SimpleNamespace
 
 from causal_observations import answer_partition, nll_terms
 from diagnose_train import capture_loss_forward
@@ -108,16 +109,21 @@ def _loss_record(model, spec, sample, loss, calls):
 
 
 class _TrainingDiagnostics:
-    def __init__(self, model, optimizer, max_clips_per_step):
+    def __init__(self, model, optimizer, max_clips_per_step, allow_lora=False, allow_microbatches=False):
         import torch
         if type(max_clips_per_step) is not int or not 1 <= max_clips_per_step <= 8:
             raise ValueError("Tampon borné à entre 1 et 8 clips par step")
-        if model.single_clip_acoustic_encoding is not True or any(p.requires_grad for p in model.llm.parameters()):
+        if model.single_clip_acoustic_encoding is not True or any(
+                p.requires_grad and (not allow_lora or "lora_" not in name)
+                for name, p in model.llm.named_parameters()):
             raise ValueError("Encodage canonique et Qwen gelé requis")
         if not isinstance(optimizer, torch.optim.AdamW):
             raise ValueError("Cette observation minimale porte sur l'AdamW temporel existant")
         self.model, self.optimizer, self.limit = model, optimizer, max_clips_per_step
         self.parameters = {name: list(getattr(model, name).parameters()) for name in COMPONENTS}
+        self.allow_microbatches = allow_microbatches
+        if allow_lora:
+            self.parameters["lora"] = model.get_lora_parameters()
         temporal = [p for ps in self.parameters.values() for p in ps]
         optimized = [p for group in optimizer.param_groups for p in group["params"]]
         if (not all(self.parameters.values()) or not all(p.requires_grad for p in temporal)
@@ -139,8 +145,11 @@ class _TrainingDiagnostics:
         import torch
         if not self.active or self.completed is not None or len(self.pending) >= self.limit:
             raise RuntimeError("Consommer le step précédent ; tampon TRAIN plein ou contexte fermé")
-        if (not isinstance(batch, (list, tuple)) or len(batch) != 1
-                or set(batch[0]) != {"pre_prompt", "post_prompt", "time_series", "time_series_text", "answer"}):
+        if (not isinstance(batch, (list, tuple)) or not batch
+                or (not self.allow_microbatches and len(batch) != 1)
+                or len(self.pending) + len(batch) > self.limit
+                or any(set(sample) != {"pre_prompt", "post_prompt", "time_series", "time_series_text", "answer"}
+                       for sample in batch)):
             raise ValueError("Un seul clip collaté avec answer et quatre clés d'entrée requis")
         previous = vars(self.model.llm).get("forward", _MISSING)
         calls = []
@@ -148,7 +157,24 @@ class _TrainingDiagnostics:
             with capture_loss_forward(self.model.llm) as calls:
                 loss = original(batch)  # EXACT tenseur différentiable retourné ensuite.
             with torch.no_grad():
-                self.pending.append(_loss_record(self.model, self.spec, batch[0], loss, calls))
+                if len(batch) == 1:
+                    self.pending.append(_loss_record(self.model, self.spec, batch[0], loss, calls))
+                else:
+                    if len(calls) != 1 or calls[0][0]["labels"].shape[0] != len(batch):
+                        raise ValueError("Un seul forward du microbatch entier requis")
+                    kwargs, output = calls[0]
+                    records = []
+                    for index, sample in enumerate(batch):
+                        sliced = {key: kwargs[key][index:index + 1] for key in ("labels", "attention_mask")}
+                        records.append(_loss_record(self.model, self.spec, sample, loss,
+                            [(sliced, SimpleNamespace(logits=output.logits[index:index + 1]))]))
+                    total = sum(r["terms"]["response"]["n_tokens"] for r in records)
+                    reconstructed = sum(r["terms"]["response"]["nll_sum"] for r in records) / total
+                    for record in records:
+                        record.update(compute_loss_scope="shared_microbatch_token_mean",
+                                      microbatch_clips=len(batch),
+                                      reconstruction_absolute_difference=abs(float(loss.detach()) - reconstructed))
+                    self.pending.extend(records)
             return loss
         finally:
             calls.clear()  # Ne jamais garder les logits/graphe au microbatch suivant.
@@ -223,9 +249,10 @@ class _TrainingDiagnostics:
         ids, record, clips = list(identifiers), training_record, self.completed["clips"]
         if (len(ids) != len(clips) or not all(type(item) in (str, int) for item in ids)
                 or len(set(ids)) != len(ids)
-                or record.get("microbatch_size") != 1 or record.get("batch_samples") != len(clips)
+                or (not self.allow_microbatches and record.get("microbatch_size") != 1)
+                or record.get("batch_samples") != len(clips)
                 or record.get("supervised_tokens") != sum(c["terms"]["response"]["n_tokens"] for c in clips)
-                or set(record.get("gradient_norms", {})) != set(COMPONENTS)
+                or set(record.get("gradient_norms", {})) != set(self.parameters)
                 or any(not math.isfinite(v) or v <= 0 for v in record["gradient_norms"].values())
                 or not math.isfinite(record["loss"])):
             raise ValueError("Record train_epoch/identifiants incompatibles avec les clips observés")
@@ -250,7 +277,7 @@ class _TrainingDiagnostics:
                   "binary_nll": None, "binary_nll_reason": "Requires separate fixed-checkpoint official scoring",
                   "extra_forward_count": 0, "additive_partition": ["class", "description", "eos"],
                   "first_discriminating_token_overlaps_class": True,
-                  "update_scope": "Actual encoder/projector AdamW step, including weight decay; no epsilon in relative-update ratio"}
+                  "update_scope": "Actual " + "/".join(self.parameters) + " AdamW step, including weight decay; no epsilon in relative-update ratio"}
         self.completed = None
         return result
 
@@ -271,7 +298,8 @@ class _TrainingDiagnostics:
 
 
 @contextmanager
-def capture_training_diagnostics(model, optimizer, *, max_clips_per_step=8):
+def capture_training_diagnostics(model, optimizer, *, max_clips_per_step=8,
+                                 allow_lora=False, allow_microbatches=False):
     """Aucun changement de mode/RNG/dtype ; aucune copie des poids Qwen.
 
     La boucle demeure propriétaire de train()/eval(), backward, clipping et step.
@@ -282,7 +310,7 @@ def capture_training_diagnostics(model, optimizer, *, max_clips_per_step=8):
     """
     if getattr(model.compute_loss, "_training_observer", False):
         raise RuntimeError("Observation TRAIN déjà active")
-    audit = _TrainingDiagnostics(model, optimizer, max_clips_per_step)
+    audit = _TrainingDiagnostics(model, optimizer, max_clips_per_step, allow_lora, allow_microbatches)
     previous, original = vars(model).get("compute_loss", _MISSING), model.compute_loss
     def wrapped(batch):
         return audit._wrap_loss(original, batch)

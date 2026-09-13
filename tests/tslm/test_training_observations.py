@@ -71,8 +71,9 @@ class TorchTrainingObservationChecks(unittest.TestCase):
                 return next(text for text in ("leak;", "no_leak;") if self.table[text] == list(ids))
             def __call__(self, answers, **kwargs):
                 ids = [self.encode(answer) for answer in answers]
-                return SimpleNamespace(input_ids=torch.tensor(ids),
-                                       attention_mask=torch.ones((len(ids), len(ids[0])), dtype=torch.long))
+                width = max(map(len, ids))
+                return SimpleNamespace(input_ids=torch.tensor([x + [0]*(width-len(x)) for x in ids]),
+                    attention_mask=torch.tensor([[1]*len(x)+[0]*(width-len(x)) for x in ids]))
 
         class Decoder(torch.nn.Module):
             def __init__(self):
@@ -86,6 +87,8 @@ class TorchTrainingObservationChecks(unittest.TestCase):
                 return self.embedding
             def forward(self, *, inputs_embeds, attention_mask, labels, use_cache, return_dict):
                 self.n_calls += 1
+                if hasattr(self, "lora_adapter"):
+                    inputs_embeds = inputs_embeds + self.lora_adapter(inputs_embeds)
                 logits = self.head(self.dropout(inputs_embeds.cumsum(dim=1)))
                 loss = torch.nn.functional.cross_entropy(logits[:, :-1].reshape(-1, 7),
                                                         labels[:, 1:].reshape(-1), ignore_index=-100)
@@ -103,6 +106,10 @@ class TorchTrainingObservationChecks(unittest.TestCase):
             def get_eos_token(self):
                 return "<eos>"
             def pad_and_apply_batch(self, batch):
+                if len(batch) > 1:
+                    parts = [self.pad_and_apply_batch([sample]) for sample in batch]
+                    return (torch.nn.utils.rnn.pad_sequence([x[0] for x, _ in parts], batch_first=True),
+                            torch.nn.utils.rnn.pad_sequence([m[0] for _, m in parts], batch_first=True))
                 self.assert_batch_one = len(batch)
                 sample = batch[0]
                 projected = self.projector(self.encoder(sample["time_series"].reshape(4, 1))).reshape(1, 4, 2)
@@ -316,6 +323,41 @@ class TorchTrainingObservationChecks(unittest.TestCase):
             with self.assertRaises(RuntimeError):
                 audit.pop_step([0], training_record=record)
             self.assertEqual(audit.epoch_summary()["n_clips"], 1)
+
+    def test_opt_in_lora_and_mixed_microbatches_preserve_updates_and_count_every_clip(self):
+        import torch
+        for microbatch in (4, 2, 1):
+            torch.manual_seed(52)
+            model, samples = self.make_model()
+            model.llm.lora_adapter = torch.nn.Linear(2, 2, bias=False)
+            model.lora_enabled = True
+            reference = copy.deepcopy(model)
+            opt, refopt = self.optimizer(model), self.optimizer(reference)
+            opt.add_param_group({"params": model.get_lora_parameters()})
+            refopt.add_param_group({"params": reference.get_lora_parameters()})
+            config = {**self.config(), "microbatch_size": microbatch, "lora": {"r": 8}}
+            torch.manual_seed(83)
+            with self.collator():
+                expected = list(train_epoch(reference, refopt, samples, config, 1))
+            torch.manual_seed(83)
+            with self.collator(), observation.capture_training_diagnostics(
+                    model, opt, allow_lora=True, allow_microbatches=True) as audit:
+                actual = []
+                for record, ids in zip(train_epoch(model, opt, samples, config, 1),
+                                      epoch_batches(len(samples), 8, config["seed"], 1)):
+                    actual.append(record)
+                    result = audit.pop_step(ids, training_record=record)
+                    self.assertEqual(set(result["gradient_norms_pre_clip"]), {"encoder", "projector", "lora"})
+                    self.assertEqual(len(result["clips"]), len(ids))
+                    self.assertTrue(model.llm.training)
+                    for clip in result["clips"]:
+                        self.assertLess(clip["reconstruction_absolute_difference"], 1e-6)
+                self.assertEqual(audit.epoch_summary()["n_clips"], 9)
+            self.assertEqual(actual, expected)
+            for name, value in model.state_dict().items():
+                torch.testing.assert_close(value, reference.state_dict()[name], rtol=0, atol=0)
+            self.assertEqual(model.llm.n_calls, math.ceil(8/microbatch) + 1)
+            self.assertTrue(all(p.grad is None for name, p in model.llm.named_parameters() if "lora_" not in name))
 
 
 if __name__ == "__main__":
