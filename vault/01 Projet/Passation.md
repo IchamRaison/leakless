@@ -8,6 +8,8 @@ CLI 0.10.6 et 12 skills installés ; capture Codex locale constatée. La recherc
 
 ## Dernier échange — 2026-09-13
 
+**Ajout demandé par Icham : collecte en dernière étape conditionnelle.** Si les autres pistes et corrections n'améliorent pas suffisamment le modèle sur développement, diversifier les acquisitions de tuyaux sans fuite, idéalement comparables aux acquisitions avec fuite. [[Diagnostic causal TSLM vs C1#Dernière étape conditionnelle — diversifier les acquisitions sans fuite]]. Planifié uniquement ; aucun changement des données/splits ou lancement de collecte. Audit : entraînements à44%,55%,50% de fuites, pas « tout fuite » ;242 vrais sans-fuite mais7 groupes seulement. Détail dans [[Diagnostic causal - exécution#Audit des populations et des cibles]].
+
 **Intégration application/TSLM V2 terminée par Safoan au commit `bba67ff` sur
 `feat/demo-temporal-building` :** fusion de `feat/icham-v2-reliability`,
 adaptateur FastAPI chargé une fois, `POST /predict` réel et bouton UI explicite.
@@ -17,7 +19,7 @@ reste non exécutée et l'UI signale l'indisponibilité sans fabriquer de score.
 Prochaine action : fournir bundle/décision/reçu cohérents, puis recette réelle.
 Voir [[Journal Safoan]] et `docs/APPLICATION.md`.
 
-**Objectif de diagnostic désormais autorisé par Icham : [[Diagnostic causal - exécution]].** Six fits précédents récupérés/vérifiés, artefacts `b65042a`. Moyennes AUC clip/groupe : A=0,580892/0,671474 ; C=0,533075/0,562500 ; C1=0,891382/0,948718 ; développement uniquement, aucune adoption pour refit. D0 implémenté `733b9c6`, 181 tests runtime sans skip et préinscription publiée `3e425b4` / SHA `cd2c3916…` : A0/C0, états initial/terminal, 500 vus/98 réservés séparés et interventions sur32 ; budget1516 observations sans apprentissage. Prochaine action : observer A puis C dans `causal-d0-733b9c6-001`, résultats encore inconnus. Ancienne suite V2 et confirmation externe restent suspendues ; aucune nouvelle recette.
+**Objectif de diagnostic désormais autorisé par Icham : [[Diagnostic causal - exécution]].** Six fits précédents récupérés/vérifiés, artefacts `b65042a`. Moyennes AUC clip/groupe : A=0,580892/0,671474 ; C=0,533075/0,562500 ; C1=0,891382/0,948718 ; développement uniquement, aucune adoption pour refit. D0 implémenté `733b9c6`,181 tests runtime sans skip, préinscription `3e425b4` /SHA `cd2c3916…`. **A terminé normalement (694 observations), reçu annoncé `4810270a…`, artefacts encore à rapatrier/vérifier ; C non lancé.** Prochaine action : vérifier A puis observer C dans `causal-d0-733b9c6-001`, sans relancer A ni entraîner. Ancienne suite V2 et confirmation externe restent suspendues ; aucun verdict causal final.
 
 **Complément Claude intégré à la checklist, sans exécution :** journalisation NLL classe/binaire par clip, vrai contrôle train, mémorisation32, tête BCE sans Qwen, normes/gradients, sonde non linéaire et neuf mesures C1 par voie entraînable. Certaines pistes étaient déjà prévues ; pas de campagne doublonnée. Relecture corrige la provenance époque4 versus dernier batch époque8 et maintient scoring/optimisation parmi les hypothèses ouvertes : une loss proche de ln2 ne prouve pas un classement au hasard. [[Diagnostic causal TSLM vs C1#Checklist enrichie après la revue de Claude]].
 

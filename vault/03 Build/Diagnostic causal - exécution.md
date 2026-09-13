@@ -6,7 +6,7 @@ Icham — 2026-09-13
 
 **Objectif d'implémentation désormais autorisé par Icham : [[Diagnostic causal TSLM vs C1]].** L'ancienne suite V2 de refit/confirmation reste suspendue ; l'autorisation porte sur le diagnostic et ses expériences contrôlées, pas sur une nouvelle recette produit. Premier jalon réalisé : les six fits existants sont complets et vérifiés, derniers artefacts publiés au commit code `b65042a`. Aucun réentraînement pour les récupérer, aucun score externe.
 
-**D0 implémenté, testé et préinscrit ; observations réelles à lancer.** Code `733b9c6`, 181 tests runtime sans skip (130 TSLM +51 évaluation), preuves `3e425b4`. Préinscription du 13 septembre à03:58:45Paris, SHA `cd2c3916cbac2b61b979f463fa793dec1be3585c6e558d7743a0d4c43a7e6d1f` ; 22 sources vérifiées localement contre ce document. Aucun modèle chargé pendant la préinscription, aucun fit. Code dans `/home/animus/ehl-hackathon-zurich-v2-recovery`, branche `feat/icham-v2-reliability` ; ne pas commiter dans l'ancien dépôt Git endommagé.
+**D0 implémenté, testé et préinscrit ; A terminé, C non lancé.** Le processus A (handle30906) est sorti normalement :694 observations/1388 forwards, zéro étape d'apprentissage, reçu annoncé `4810270a…`, reload98 et échanges complets annoncés à écart nul. Rapatriement et vérification indépendante des artefacts restent à faire avant verdict ; ne pas relancer A. Code `733b9c6`, 181 tests runtime sans skip (130 TSLM +51 évaluation), preuves `3e425b4`. Préinscription du 13 septembre à03:58:45Paris, SHA `cd2c3916cbac2b61b979f463fa793dec1be3585c6e558d7743a0d4c43a7e6d1f` ;22 sources vérifiées localement contre ce document. Aucun modèle chargé pendant la préinscription, aucun fit. Code dans `/home/animus/ehl-hackathon-zurich-v2-recovery`, branche `feat/icham-v2-reliability` ; ne pas commiter dans l'ancien dépôt Git endommagé.
 
 ## Inventaire V2 complet — acquis de développement
 
@@ -40,7 +40,7 @@ D0 mesure comparaison, cohérence des objectifs/scoring et sensibilité aux entr
 
 - [x] Six fits précédents vérifiés, récupérés et inventoriés sans réentraînement.
 - [x] D0 observateur/runner testés et préinscription machine publiée avant observation ; exécution et verdict non encore acquis.
-- [ ] Données/comparaison : mappings, groupes, support des sous-populations et particularités d'acquisition examinés ; limites publiées.
+- [x] Données/comparaison : mappings/cibles et supports examinés en lecture seule ; limites de diversité et d'acquisition consignées ci-dessous. Aucune causalité ni exactitude physique des annotations démontrée par ces contrôles.
 - [ ] D0 implémenté/testé/préinscrit puis exécuté : vrais scores/NLL train, alignement causal, contrôles de reload et interventions, états initial/terminal.
 - [ ] Avant tout nouveau fit : journalisation classe/description/EOS, comptes exacts, gradients/clipping/mises à jour et résumés d'époque testés puis vérifiés réellement.
 - [ ] Test de mémorisation32 à budget préinscrit, si nécessaire ; verdict limité à la capacité observée.
@@ -48,10 +48,27 @@ D0 mesure comparaison, cohérence des objectifs/scoring et sensibilité aux entr
 - [ ] Matrice finale par hypothèse : démontrée / non soutenue dans les conditions testées / inconnue ; preuve, alternatives et portée pour chaque verdict.
 - [ ] Nouvelle recette proposée seulement après restitution causale, ou constat motivé des données manquantes. Aucun réglage sur test officiel/externe.
 - [ ] Code, commandes, tests, artefacts et passation publiés ; revue indépendante des conclusions.
+- [ ] **Après les autres pistes seulement, si l'amélioration reste insuffisante :** préparer la diversification des acquisitions sans fuite et des paires fuite/sans fuite comparables. [[Diagnostic causal TSLM vs C1#Dernière étape conditionnelle — diversifier les acquisitions sans fuite]]. Planifié, aucune collecte lancée.
 
 ## Prochaine action
 
-Exécuter les observations A puis C depuis le snapshot `code-causal-733b9c6`, dans `/home/hicham/pipe-v0/artifacts/causal-d0-733b9c6-001`. Commande : `.venv-repro/bin/python scripts/tslm/diagnose_causal.py observe --output /home/hicham/pipe-v0/artifacts/causal-d0-733b9c6-001 --variant A` (puis C), depuis le snapshot avec PYTHONPATH habituel. Ne pas démarrer de mini-entraînement avant le verdict du bloc sans apprentissage. Les contrôles constants utiliseront0,5 et la fréquence0,442 des500 clips fit, sans estimation sur les98 réservés.
+Rapatrier/vérifier A sans réinférence, puis observer C depuis le snapshot `code-causal-733b9c6`, dans `/home/hicham/pipe-v0/artifacts/causal-d0-733b9c6-001`. Commande : `.venv-repro/bin/python scripts/tslm/diagnose_causal.py observe --output /home/hicham/pipe-v0/artifacts/causal-d0-733b9c6-001 --variant C`, depuis le snapshot avec PYTHONPATH habituel. Ne pas démarrer de mini-entraînement avant le verdict du bloc sans apprentissage. Les contrôles constants utilisent0,5 et la fréquence0,442 des500 clips fit, sans estimation sur les98 réservés. La collecte conditionnelle ajoutée par Icham ne change pas cette prochaine action.
+
+## Audit des populations et des cibles
+
+Comptages de développement uniquement, revérifiés contre `manifests/split_v2.csv`, `split_v2_audit.csv`, `docs/evidence/tslm-v2/train-diagnostic-001/folds.json` et les listes `training_ids`/`heldout_ids` des six reçus `campaign-c13fd47/{A,C}/fold-{0,1,2}/complete.json`, code `06d6540`. Même couverture A/C, aucun groupe partagé fit/réservé. Pas de nouvelle inférence ni lecture de WAV pour ce recomptage.
+
+| Population | Fuite | Tuyau sans fuite | Bruit environnemental | Total |
+|---|---:|---:|---:|---:|
+| Ensemble train disponible |294|242|62|598|
+| Entraînement fold0 |221|240|39|500|
+| Entraînement fold1 |205|128|40|373|
+| Entraînement fold2 |162|116|45|323|
+| Réservé fold0 |73|2|23|98|
+
+Les entraînements ont respectivement44,2%,54,96% et50,15% de fuites : aucun n'est « tout fuite ». La classe binaire négative regroupe vrais sans-fuite et bruit. Les242 vrais sans-fuite représentent7 groupes, contre78 groupes fuite et17 bruit ; deux groupes sans-fuite totalisent197 clips (104+93). Dans le réservé fold0, les deux vrais sans-fuite n'ont qu'un groupe ; aucun hydrophone négatif, et aucune cellule appareil×matériau×région ne contient à la fois fuite et vrai sans-fuite. Pression/débit renseignés uniquement côté fuite dans les métadonnées train, sans être transmis au modèle : asymétrie de protocole observée, raccourci acoustique non démontré. Groupes heuristiques, pas sessions instrumentées indépendantes.
+
+Audit de code ciblé : `split_loader.py:119` teste exactement `label == "leak"`, `diagnose_train.py:73` conserve0/1, `run_v2_campaign.py:322` transmet la classe à `target_text` (`preprocessing.py:100`). Aucun filtre « tout fuite » trouvé ; bruit reste `no_leak`. Signal et cible sont joints par le même clip_id, avec unicité/couverture du cache et vérifications WAV/cache dans le chargeur. Cela établit la fidélité au manifeste, pas la vérité physique de chaque annotation. Le manque de diversité est une piste, pas une explication causale acquise du plateau ni de tout l'écart à C1.
 
 ## Relecture du prétraitement — preuve de code, pas résultat expérimental
 

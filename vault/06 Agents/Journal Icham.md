@@ -1,5 +1,13 @@
 # Journal Icham
 
+## 13 septembre — diversité des données et collecte conditionnelle en fin de plan
+
+Icham demande de garder l'élargissement des acquisitions pour la fin, si les autres pistes n'améliorent pas suffisamment le modèle. Ajout au [[Diagnostic causal TSLM vs C1]] : davantage de conditions sans fuite et paires fuite/sans fuite comparables, pas davantage de fenêtres des mêmes groupes ; nouveau protocole avant intégration, test et réserve externe inchangés. Planification uniquement dans ce tour, aucune collecte, recherche de dataset ou expérience lancée.
+
+Échanges précédents consolidés : recompte des598 train et des six listes de fits A/C, entraînements à44,2%,54,96%,50,15% de fuites. Aucun chemin code « tout fuite » trouvé, correspondance signal/cible par clip_id et label conservé.242 vrais sans-fuite mais7 groupes,197 clips provenant de deux groupes ; limite de diversité démontrée, effet causal sur le TSLM inconnu. [[Diagnostic causal - exécution#Audit des populations et des cibles]] fournit les sources et limites. Entire retrouve les commits Nevil du split_v2, sans que leurs titres remplacent les vérifications de fichiers.
+
+Continuité de l'expérience déjà lancée : handle30906 drainé avec sortie0 pendant l'échange précédent, A annonce694 observations/1388 forwards et reçu `4810270a…`, reload98/échanges à delta0. Pas encore rapatrié/vérifié indépendamment ; C non lancé. Prochaine action inchangée : vérifier A puis poursuivre D0 C, aucune relance A. Les mises à jour présentes ne constituent pas un résultat causal final.
+
 ## 13 septembre — D0 testé et préinscrit avant observation
 
 Observateur `07db24b`, runner `733b9c6`, 181 tests runtime réussis sans skip (130TSLM/51évaluation). Préinscription machine à03:58:45Paris, SHA `cd2c3916cbac2b61b979f463fa793dec1be3585c6e558d7743a0d4c43a7e6d1f`, rapatriée et22 sources revérifiées, preuves `3e425b4`. Aucun modèle chargé pendant cette étape. Budget1516observations, baseline constante de fréquence0,442 issue seulement des500fit. Prochaine action : A puis C à poids fixes, aucun nouveau fit.

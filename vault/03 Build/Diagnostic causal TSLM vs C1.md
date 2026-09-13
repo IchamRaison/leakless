@@ -36,6 +36,7 @@ Les commandes, empreintes et limites détaillées restent dans [[V2 ML - exécut
 2. **Premier bloc sans réentraînement :** vérifier la comparaison et l'alignement supervision/scoring, puis tester l'utilisation du signal si les vérifications précédentes ne suffisent pas. Fixer à l'avance checkpoint, groupes, interventions, graines, mesures et résultats attendus.
 3. **Un seul contraste supplémentaire à la fois :** choisir représentation, supervision ou optimisation selon les observations précédentes, pas selon la recette qu'on aimerait essayer. Annoncer avant lancement un budget numérique de runs/étapes et la condition d'arrêt ; ces budgets restent à convenir, aucune campagne n'est autorisée par cette note.
 4. **Restituer avant de corriger :** pour chaque hypothèse, preuve, alternatives encore compatibles, verdict limité aux conditions testées et prochaine expérience réellement discriminante. Si les données ne départagent pas les causes, conclure « inconnu » et préciser l'observation manquante, sans prolongation automatique.
+5. **En dernier recours, élargir les acquisitions :** si le diagnostic et les essais de correction justifiés n'améliorent pas suffisamment le modèle sur développement, activer la collecte conditionnelle décrite en fin de plan. Ce chantier vient après les autres pistes, pas en parallèle par défaut.
 
 Conserver séparément qualité du classement, décisions au seuil fixé et cohérence du texte brut/affiché. Une phrase corrigée par DSP/gabarit ne constitue pas un gain du modèle. Une cause de score incorrect n'est pas nécessairement la cause de tout l'écart à C1.
 
@@ -72,3 +73,13 @@ Dernier contrôle SSH en lecture seule le 13 septembre à **03:23:29 Europe/Pari
 Runtime : `/home/hicham/pipe-v0/artifacts/v2-campaign-c13fd47-001`, logs `/home/hicham/pipe-v0/quality-v2-001/fit-{A,C}{0,1,2}-c13fd47.log`. Utiliser le contrôle existant `finished()` pour vérifier les reçus/empreintes, sans créer de fichier dans les dossiers scellés. Checkout local sain : `/home/animus/ehl-hackathon-zurich-v2-recovery`, branche `feat/icham-v2-reliability` ; ne pas commiter dans l'ancien dépôt Git endommagé.
 
 **Mise à jour :** les trois reçus manquants sont maintenant récupérés/vérifiés, sans réentraîner. Le protocole et la prochaine action du nouvel objectif sont dans [[Diagnostic causal - exécution]].
+
+## Dernière étape conditionnelle — diversifier les acquisitions sans fuite
+
+**Ajout demandé par Icham le 13 septembre ; planifié, non lancé.** À activer seulement si les autres pistes diagnostiques et les corrections justifiées n'apportent pas une amélioration suffisante sur développement. Juger cette amélioration avec les critères de qualité annoncés avant comparaison, pas avec la seule baisse de loss ; aucun seuil de gain arbitraire ajouté ici.
+
+- Recueillir des enregistrements de **tuyaux réellement sans fuite** dans davantage de conditions distinctes : tuyaux/matériaux, capteurs, installations et états de fonctionnement. Ne pas les remplacer par davantage de bruits environnementaux.
+- Privilégier des acquisitions **fuite/sans fuite comparables**, avec conditions et sessions documentées. Chercher davantage de situations indépendantes, pas simplement davantage de fenêtres découpées dans les mêmes enregistrements.
+- Avant intégration : convenir du responsable, des moyens de collecte et du protocole ; vérifier annotations, provenance et droits, puis définir un nouveau protocole versionné avec séparation par acquisition et une réserve de confirmation intacte. Ne pas modifier rétroactivement les folds actuels ni incorporer le test officiel ou la réserve Aghashahi dans l'apprentissage.
+
+Motif vérifié : les598 clips train comptent294 fuites,242 vrais sans-fuite et62 bruits ; les242 sans-fuite ne représentent que7 groupes heuristiques, dont deux totalisent197 clips. C'est une limite de diversité des données, **pas la cause démontrée de tout l'écart TSLM–C1**. Comptages et limites : [[Diagnostic causal - exécution#Audit des populations et des cibles]]. Ce complément ne déclenche ni collecte, ni recherche de dataset, ni réentraînement maintenant.

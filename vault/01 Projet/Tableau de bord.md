@@ -9,8 +9,10 @@ Icham
 - [x] Six fits précédents complets/vérifiés/rapatriés, derniers artefacts `b65042a`, bilan dans [[Diagnostic causal - exécution]]. Aucun réentraînement.
 - [x] Objectif de diagnostic autorisé ; premier bloc D0 borné à1516observations A0/C0, sans apprentissage, protocole fixé avant scores.
 - [x] D0 implémenté `733b9c6`, 181 tests runtime sans skip ; préinscription `cd2c3916…` publiée avant observation, preuves `3e425b4`.
-- [ ] Exécuter D0 A puis C (1516 observations, zéro apprentissage) et vérifier ses reçus/contrôles avant conclusion.
+- [ ] D0 : A terminé normalement, artefacts à rapatrier/vérifier ; C non lancé. Total prévu1516 observations, zéro apprentissage ; ne pas relancer A.
 - [ ] Produire la matrice causes démontrées / hypothèses non soutenues dans les conditions testées / inconnues. Aucun refit ni confirmation externe automatique.
+- [x] Audit train/cibles : les trois entraînements contiennent les deux classes ;242 vrais sans-fuite concentrés dans7 groupes. Limites dans [[Diagnostic causal - exécution#Audit des populations et des cibles]].
+- [ ] **En dernier recours uniquement :** si les autres pistes n'améliorent pas suffisamment le modèle, diversifier les acquisitions sans fuite et les conditions fuite/sans fuite comparables. [[Diagnostic causal TSLM vs C1#Dernière étape conditionnelle — diversifier les acquisitions sans fuite]]. Aucune collecte lancée.
 
 ## Prêt
 
