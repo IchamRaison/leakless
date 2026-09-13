@@ -27,3 +27,13 @@ Icham autorise une heure totale : 09:17:26–10:17:26 Paris ; arrêt propre des 
 Téléchargements terminés sur les deux nœuds :31 fichiers chacun, reçus strictement identiques SHA256 `66cc72538886a2addb286dd3c7b553efb9da6e1328b4bbcc8733cb832103a994`, empreintes de tous les fichiers calculées. Code initial `dae7e22` publié : LoRA opt-in, mode train compatible checkpointing, logger microbatch/LoRA et chargement explicite des adaptateurs sans fusion ; runner séparant fit et évaluation. Tests TSLM sur H100-2 :172 réussis sans skip, dont transparence du logger avec microbatches4/2/1. Contrôle technique MB4 sur H100-1 lancé ; pas encore de fit de comparaison ni de qualité27B mesurée. Anciennes preuves/splits inchangés.
 
 Sources : [modèle officiel](https://huggingface.co/Qwen/Qwen3.8-27B), `configs/tslm/qwen27b_lora.json`. Historique antérieur inchangé : [[Diagnostic causal - exécution]].
+
+## Contrôle technique MB4 terminé
+
+`probe-mb4` sur H100-1 :2pas AdamW/16présentations de8clips train, poids jetables. Charge851tenseurs textuels sans aucune clé manquante/inattendue. Encodeur2110976, projecteur660736 et LoRA13238272 paramètres entraînables FP32, baseBF16 gelée. Gradients finis/non nuls et mises à jour dans les3groupes ; reconstruction des losses depuis les cibles/logits à moins de9e-9. Les deux pas prennent5,034s et4,351s, moyenne4,693s logger inclus.
+
+Pic réservé59460550656octets/85017493504, soit30,1% de marge ; MB4 retenu sous réserve du reload. Hash complet base avant/après `21de440b…` identique ; bundle `dfd6c65c…` sauvegardé sans fusion. Contrôle entier251s, dont9,385s de mises à jour ; chargement, empreintes et sauvegarde représentent un coût fixe important, à compter pour le budget des3fits.
+
+Deux processus neufs de rechargement sont lancés, un par H100, sur les mêmes poids techniques transférés (base locale identique). Aucun résultat de comparaison ou réglage d'époques d'après validation. Les51tests eval passent aussi sur H100-2 :223tests cumulés. Preuves `probe-result.json`, `probe-loading.json`, `probe-training.jsonl` et journaux dans le dossier evidence.
+
+**Reloads terminés/vérifiés avant fit :** écarts maximaux0sur les deux nœuds et entre eux, même bundle/runtime, processus distincts. Reçus `312f2324…` et `8766264c…`. MB4 retenu. À09:38Paris, budget figé à**1époque** : chemin critique H100-2 =47+41pas, coût fixe241,615s/fit (chargement/empreintes/sauvegarde inclus), temps total majoré25% =18min40s pour1époque,27min16s pour2,44min29s pour4 ; moins de24min restantes avant stop. Une seule recette, aucun résultat réservé encore consulté. `gate.json` publié avant les fits ; fold0 reste le prototype prédésigné, aucun changement de budget après résultats.
