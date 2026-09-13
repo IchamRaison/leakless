@@ -1484,11 +1484,16 @@
 }
 .pipe-network text {
   font:
-    500 22px "IBM Plex Mono",
+    500 15px "IBM Plex Mono",
     ui-monospace,
     monospace;
   fill: #dfe9d8;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
+  /* A ground-coloured halo keeps the label legible where a response ring crosses it. */
+  paint-order: stroke;
+  stroke: #101713;
+  stroke-width: 5px;
+  stroke-linejoin: round;
 }
 .pipe-network figcaption {
   margin-top: 8px;
