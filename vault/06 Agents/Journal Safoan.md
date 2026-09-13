@@ -26,6 +26,9 @@ probabilité terrain ni recommandation d'inspection.
   explicite, provenance, fallback et rejet d'une réponse d'identité incorrecte.
 - `npm --prefix frontend run build` : build réussi ; avertissement de taille du
   chunk Three.js, sans échec.
+- Recette navigateur locale : sélection N3 puis enregistrement no-leak, carte et
+  signal chargés, bouton TSLM V2 activé ; le clic renvoie les trois variables
+  d'artefacts manquantes et propose un retry, sans résultat ni score fictif.
 - Documentation et configuration : `docs/APPLICATION.md`,
   `docs/DEMO_TEMPORAL_BUILDING.md`, `.env.example`.
 
