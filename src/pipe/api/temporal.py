@@ -112,7 +112,7 @@ def health(request: Request):
     return {"available": ready is not None, "reason": request.app.state.temporal_reason,
         "model_version": ready["detector"].version if ready else None,
         "schema_version": "pipe.temporal-api.v1", "notifications": "preview_only",
-        "event_detector_validated": False, "sequence_model_status": "experimental_terminal_30s_only",
+        "event_detector_validated": False, "sequence_model_status": "prior_lstm_disabled" if ready and "narrator" in ready else "experimental_terminal_30s_only",
         "temporal_language": ready["narrator"].version if ready and "narrator" in ready else None,
         "notification_after_seconds":30 if ready and "narrator" in ready else None,
         "notification_comparison":"strictly_greater", "delivery":"preview_only"}
@@ -187,6 +187,9 @@ async def window(request: Request, session_id: str, file: Annotated[UploadFile, 
 @router.post("/sequence")
 async def sequence(request: Request, file: Annotated[UploadFile, File()]):
     value = service(request)
+    if "narrator" in value:
+        await file.close()
+        raise HTTPException(410,{"code":"prior_lstm_disabled","message":"Use the session history description; prior acoustic LSTM is not this pipeline."})
     raw = await read_upload(file, 1024 * 1024)
     if not value["lock"].acquire(blocking=False):
         raise HTTPException(409, {"code": "model_busy", "message": "Sequence inference in progress; retry later."})

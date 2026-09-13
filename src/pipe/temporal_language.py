@@ -77,6 +77,8 @@ class TemporalNarrator:
     def __init__(self, directory, expected_sha256, device="cuda"):
         import torch
         from pipe.tslm.model import AcousticQwenSP
+        torch.backends.cuda.matmul.allow_tf32 = False
+        torch.backends.cudnn.allow_tf32 = False
         self.directory = Path(directory).resolve()
         if file_hash(self.directory / "metadata.json") != expected_sha256:
             raise ValueError("Métadonnées de langage différentes du gel")
