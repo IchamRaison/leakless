@@ -2322,3 +2322,11 @@
     display: none;
   }
 }
+/* Phones: a section's side note goes under its heading instead of squeezing it into half the width. */
+@media (max-width: 460px) {
+  .demo-section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
