@@ -103,7 +103,8 @@ body:has(.notes-root.placing) {
 .notes-where {
   display: block;
   font:
-    11px ui-monospace,
+    11px "IBM Plex Mono",
+    ui-monospace,
     monospace;
   color: var(--notes-amber);
 }
