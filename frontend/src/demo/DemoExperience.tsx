@@ -130,9 +130,6 @@ export default function DemoExperience() {
       <main className="demo-main">
         <section className="demo-hero" aria-labelledby="why-heading">
           <div className="hero-copy">
-            <span className="demo-kicker">
-              <i /> THE SIGNAL BEFORE THE DECISION
-            </span>
             <h1 id="why-heading">
               Water damage <br />
               becomes visible late.
@@ -241,7 +238,7 @@ export default function DemoExperience() {
                     {measurement} — illustrative building position
                   </>
                 ) : (
-                  "A point. A recording. A closer look."
+                  "Three recordings from the dataset"
                 )}
               </h2>
               <p>
@@ -514,10 +511,7 @@ export default function DemoExperience() {
           <span>
             <AudioLines size={15} /> LEAKLESS · TEMPORAL AI
           </span>
-          <p>
-            Experimental evidence. Explicit limits. A decision worth
-            investigating.
-          </p>
+          <p>Research prototype · offline benchmark · no field validation</p>
           <a href="#demo">Back to top ↑</a>
         </footer>
       </main>
