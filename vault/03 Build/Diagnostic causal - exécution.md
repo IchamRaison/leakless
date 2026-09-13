@@ -63,7 +63,7 @@ Critères détaillés : [[Diagnostic causal TSLM vs C1#Critère de complétion d
 
 ## Prochaine action
 
-**Finaliser/tester puis préinscrire D3**, selon le protocole ci-dessous. D2 est terminé et vérifié ; ses trois fits ne sont pas à relancer. La représentation est exploitable par le lecteur non linéaire, sans que le chemin Qwen ait démontré la même capacité : prochain contrôle sur les 32 témoins déjà fixés. Un essai A neuf seulement, aucun ajout de données ni nouvelle recette produit. Tests et préinscription machine D3 restent à faire.
+**Publier la préinscription D3 puis lancer son unique fit**, selon le protocole ci-dessous ; code `c08ff78` testé et préinscription machine `42920f6d…` créée. D2 est terminé et vérifié, ne pas relancer ses fits. D3 contrôle la mémorisation des 32 témoins via Qwen, pas la généralisation ; garder son handle puis recharger le checkpoint dans un processus neuf. Aucun ajout de données ni nouvelle recette produit.
 
 D0 et D1 restent scellés ; aucun score à reproduire pour récupérer les résultats. D1 : handles A 22963 / C 5435 terminés avec code zéro, respectivement 312,744 s et 339,558 s. H100 après C : 0 Mio / 0 %, instance laissée allumée. Artefacts locaux `docs/evidence/tslm-v2/causal-d1-001/`, runtime `/home/hicham/pipe-v0/artifacts/causal-d1-306d330-001/`, logs `/home/hicham/pipe-v0/quality-causal-306d330/`.
 
@@ -194,7 +194,7 @@ Les NLL linéaires `null` représentent +∞ sur les probabilités sauvegardées
 
 ## D3 — mémorisation du chemin Qwen, protocole avant fit
 
-**Choisi après D2 ; implémentation en cours, aucun fit D3.** Tester si le chemin A existant sait apprendre une décision confiante sur un petit ensemble déjà fixé. Un seul essai sur H100 ; aucun bras supplémentaire pour occuper la seconde machine.
+**Choisi après D2 ; code testé et préinscription créée, aucun fit à ce jalon.** Tester si le chemin A existant sait apprendre une décision confiante sur un petit ensemble déjà fixé. Un seul essai sur H100 ; aucun bras supplémentaire pour occuper la seconde machine.
 
 - **Population :** les 32 `subset_ids` de D0, ordre conservé et égalité revérifiée avec les cohortes du fold 0 : 16 fuite / 16 non-fuite, 32 groupes distincts. Les manifests, caches train et anciens reçus sont lus pour leur provenance, mais aucune nouvelle observation/évaluation sur les 98 réservés, val/test officiels ou externe.
 - **Initialisation/recette :** A seul, `initialize_training(base, "A")`, seed 20260912 ; encodeur/projecteur et AdamW neufs. Qwen gelé BF16, tête originale, mêmes prompt/labels/scoring officiel/loss complète. Encodage canonique par clip, sans texte C1. Microbatch 1, batch effectif 8, LR 0,0002/0,0001, decay 0,01, clipping 1 ; aucun scheduler ni changement de supervision.
@@ -205,6 +205,20 @@ Les NLL linéaires `null` représentent +∞ sur les probabilités sauvegardées
 - **Gel/reload :** sauvegarde `temporal.pt` existante, configuration/scoring/IDs/journaux/nombre réel de pas/empreintes ; base Qwen immuable non dupliquée. Commande séparée dans un processus neuf via `initialize`/`load_terminal`, mêmes 32 observations, poids identiques, scores à 1e-6, décisions et verdict identiques. Aucun pas d'optimiseur pendant ce reload.
 
 Une réussite prouverait une capacité de mémorisation sous ce budget, pas que seul le manque de diversité explique la généralisation. Un échec laisserait ouverts optimisation, supervision et chemin Qwen/prompt/scoring ; le contournement par tête BCE serait alors à borner selon les traces. Aucun lecteur C1 entraînable ni recette FP32/LoRA décidé d'avance. Nouveaux fichiers confiés : `scripts/tslm/diagnose_memorization.py` et `tests/tslm/test_diagnose_memorization.py` ; helpers partagés conservés, tests/runtime/préinscription requis avant toute expérience.
+
+### D3 — vérifications avant fit
+
+Code `c08ff78fea94fa7dbe8834b2b92bc98fc63df437`, snapshot `/home/hicham/pipe-v0/code-causal-d3-c08ff78`. Revue indépendante favorable ; six tests locaux passent et deux sont explicitement ignorés faute de runtime ML local. Sur la première H100, huit tests ciblés passent, puis 171 tests TSLM et 51 évaluation sans skip. Le test différentiable synthétique vérifie quatre vrais pas, Qwen inchangé et zéro forward ajouté par le logger ; ce n'est pas le fit D3 réel.
+
+Préinscription créée à 07:26:23 Paris, SHA `42920f6d5446f34f7419ea2a1c5c1f47067e2a915bb2361fa0bdee4097e93a35`, dossier `/home/hicham/pipe-v0/artifacts/causal-d3-c08ff78-001`. Copie locale identique dans `docs/evidence/tslm-v2/causal-d3-001/`, 25 empreintes de sources vérifiées. Provenance D0, 32 IDs, recette, options AdamW réelles, runtime et empreintes initiales figés ; zéro modèle chargé/pas d'optimiseur à la préinscription. Première H100 libre au contrôle préalable. Commandes suivantes après publication, chacune dans son processus :
+
+```bash
+cd /home/hicham/pipe-v0/code-causal-d3-c08ff78
+../.venv-repro/bin/python scripts/tslm/diagnose_memorization.py train --output /home/hicham/pipe-v0/artifacts/causal-d3-c08ff78-001
+../.venv-repro/bin/python scripts/tslm/diagnose_memorization.py reload --output /home/hicham/pipe-v0/artifacts/causal-d3-c08ff78-001
+```
+
+Ne pas relancer un dossier incomplet, ni lancer le reload tant que le reçu train n'est pas intègre. Un résultat terminé est relu via `finished()`, jamais réentraîné pour le récupérer. Le second runtime est installé et vérifié indépendamment (`docs/evidence/runtime-h100-2-001/`), pas une seconde tentative D3 ni un fit distribué.
 
 ## Audit des populations et des cibles
 

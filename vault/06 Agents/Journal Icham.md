@@ -1,5 +1,13 @@
 # Journal Icham
 
+## 13 septembre — D3 testé et préinscrit, second runtime H100 opérationnel
+
+D3 code `c08ff78`, revue indépendante favorable. Tests locaux : six passent, deux skips explicités ; runtime d'origine : huit ciblés puis 222 tests distincts de régression passent sans skip. Préinscription machine créée à 07:26:23 Paris, SHA `42920f6d5446f34f7419ea2a1c5c1f47067e2a915bb2361fa0bdee4097e93a35` ; copie locale et 25 sources vérifiées. Un seul fit A sur les 32 témoins, critères/budgets inchangés ; aucun fit lancé à ce jalon. Prochaine action après publication : `train`, puis `reload` neuf. [[Diagnostic causal - exécution#D3 — vérifications avant fit]]. Ponytail : réutilisation de l'initialisation, boucle, logger et reçus existants ; aucune nouvelle dépendance ni moteur d'évaluation.
+
+En parallèle, second environnement installé sur `ich@195.242.28.46` : snapshot `a18b22e`, uv 0.10.9 existant copié et vérifié, `uv venv`, `uv pip sync` sur le lockfile existant, projet editable sans dépendances, puis `uv pip check`. 132 paquets compatibles, aucun sudo/Python système modifié. Imports TimeNet/OpenTSLM/Transformers/libarchive réussis, matmul/backward H100 réels et finis, puis 163 tests TSLM +51 évaluation sans skip. Handles 40659 et 19133 terminés avec sortie 0 ; logs/commandes `docs/evidence/runtime-h100-2-001/`.
+
+Deux runtimes vérifiés ne signifient pas encore deux nœuds prêts pour les fits Qwen : poids et données restent à copier/vérifier sur le second, aucune parité modèle ni accélération mesurée. Préparer seulement le socle train utile aux essais justifiés, sans dupliquer val/test/externe ni réécrire les anciennes préinscriptions à chemins absolus. Aucune campagne distribuée ni expérience ajoutée pour remplir un GPU.
+
 ## 13 septembre — D2 terminé, information exploitable et prochain contrôle D3
 
 Trois fits HGB réels terminés normalement (handle 86079, sortie 0), chacun 200 itérations, aucun Qwen. Préinscription `67ed6bd5…` publiée `3505928` avant fit ; reçu `48ac9de1…`, artefacts `160655a`. Sources/runtime/entrées inchangés, reçus/tous fichiers vérifiés localement et à distance. Revue indépendante puis reproduction locale via `verify.py` : partitions, 1 794 prédictions, métriques, NLL et critère concordants, aucun refit ; [[Diagnostic causal - exécution#D2 — résultats vérifiés et portée]].
