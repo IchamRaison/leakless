@@ -4,9 +4,13 @@ Icham
 
 ## Commencer ici
 
+**Livré/testé : [[C1 temporel - exécution]].** Endpoint C1/suivi/aperçus sur la première H100, loopback8019 via SSH ; recette avec vrais poids réussie. LSTM entraîné sur le nouveau protocole Aghashahi puis non promu après comparaison défavorable. Pas de qualité terrain démontrée, de frontend modifié ni de message WhatsApp. Repli `195.242.28.46` intact. Contrat `docs/TEMPORAL_ENDPOINT.md`, code/preuves `8baecab` ; [[Passation]] donne le raccordement restant.
+
+**Plan d'origine :** [[Plan C1 - suivi temporel et notifications]]. Qwen reste optionnel pour restituer des faits et n'a pas été ajouté au moteur d'alertes. Les calculs du [[Rush Qwen 27B - exécution]] sont terminés, audit consolidé et archivage final encore inachevés ; cette ancienne campagne reste distincte de la livraison C1.
+
 [[Passation]] donne l'état réel. [[Évaluation qualité V1 - exécution]] donne les résultats mesurés ; [[Plan surveillance continue]] distingue l'ambition produit du prototype. [[Plan directeur agents]] conserve le plan initial et les contraintes communes. Aucune lecture du chat n'est nécessaire.
 
-**Priorité proposée le 13 septembre : [[Diagnostic causal TSLM vs C1]].** Expliquer l'écart observé avant une nouvelle recette. L'enchaînement V2 est en pause ; les corrections numériques sont prouvées, la cause du retard sur C1 reste inconnue. Aucun nouveau diagnostic exécuté par ce changement de cadrage.
+**Goal élargi le 13 septembre : [[Diagnostic causal TSLM vs C1#Plan global en dix étapes]].** Le prompt reste un renvoi vers cette note. Diagnostic → corrections mesurées → diversification globale si nécessaire → mesure de cet apport → gel et confirmation indépendante → intégration continue et valeur du TSLM. Le diagnostic ne termine plus le goal. [[Diagnostic causal - exécution]] : D0/D1/D2 complets ; D3 termine au pas400 avec32/32 sur ses exemples d'entraînement, puis reload neuf exact. L'extension demandée sur98réservés est terminée/vérifiée :67/98corrects,21fuites manquées,10fausses alertes ; AUC clip0,741370/groupe0,798077. Mémorisation acquise, qualité hors groupes encore insuffisante ; aucun nouveau fit ni test officiel. Deux H100 avec runtimes et socle train vérifiés ; vraie parité Qwen entre machines encore non mesurée. Étapes6à10 non lancées ; aucun gain final TSLM ni cause unique du retard démontrés.
 
 PIPE vise un appareil qui écoute les canalisations en continu et produit des alertes avec preuves acoustiques consultables. V1 entraînée/rechargée, exports T0–T3 publiés et évaluation complète exécutée par Icham. Résultat : détecteur encore insuffisant, sans gain démontré face au contrôle C1 ; descriptions de bandes globalement correctes mais parfois incohérentes avec le score. [[Évaluation qualité V1 - exécution]]. Surveillance et fiabilité terrain non validées.
 

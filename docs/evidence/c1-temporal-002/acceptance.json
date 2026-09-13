@@ -1,0 +1,18 @@
+{
+  "code_tested": "8baecab",
+  "service_code": "5553e14",
+  "test_command": "PYTHONPATH=/home/hicham/pipe-v0/.venv-temporal-api/lib/python3.12/site-packages:src /home/hicham/pipe-v0/.venv-repro/bin/python -m pytest tests/temporal tests/api tests/replay -q",
+  "tests_passed": 35,
+  "tests_skipped": 0,
+  "deprecation_warnings": 2,
+  "test_elapsed_seconds": 3.48,
+  "independent_report_audit": "mapping, group disjointness, finite scores, pairwise clip/group AUC and selected baseline verified with scripts/temporal/verify_reports.py",
+  "listen_verified": "127.0.0.1:8019",
+  "pid_verified": 123337,
+  "health_available": true,
+  "local_bundle_hashes_verified": 5,
+  "whatsapp_messages_sent": 0,
+  "frontend_changed": false,
+  "field_event_quality_validated": false,
+  "lstm_promoted": false
+}

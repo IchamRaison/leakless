@@ -2,6 +2,20 @@
 
 Icham
 
+## 2026-09-13 — Livraison C1, LSTM non promu et endpoint GPU
+
+Icham autorise explicitement le plan C1 et la réaffectation Aghashahi, sans WhatsApp, par endpoint sur le GPU. Nouveau protocole publié avant fit : BR train/validation, LO confirmation, capteurs d'une même condition ensemble ; cible globale30s, jamais onsets inventés. Préparation/résultats historiques intacts. Les signaux à pleine échelle restent inclus dans l'expérience descriptive mais provoquent l'abstention du service, différence de couverture publiée.
+
+Critère fixé avant comparaison non atteint : LSTM AUC groupe0,375/0,590278 contre contrôle sans ordre0,8125/1,0. Ne pas promouvoir le LSTM, recalibrer sur confirmation ou prétendre avoir validé la détection d'événement. Conserver C1/persistance comme démonstration, Qwen optionnel non ajouté et notifications limitées au gabarit/aperçu. La correction TF32 restaure la précision du fit, sans modifier poids ni tolérance de reload. [[C1 temporel - exécution]] et preuves `8baecab`.
+
+Service isolé première H100, loopback8019/SSH, SQLite durable, pas de frontend modifié ni d'accès au repli195. Le raccordement Monitor reste côté application ; acceptation du cadrage hackathon et validation terrain ne sont pas revendiquées.
+
+## 2026-09-13 — Étendre le goal au-delà du diagnostic
+
+Icham demande explicitement d'ajouter les étapes 6, 7, 8, 9 et 10 au vault et au goal général, puis précise que le prompt `/goal` est un renvoi vers le vault. [[Diagnostic causal TSLM vs C1#Plan global en dix étapes]] devient donc le périmètre complet : corrections et comparaison, diversification globale si nécessaire, mesure de son apport, confirmation indépendante, intégration continue et test de valeur des trois approches. La fin du diagnostic seule n'est plus la fin du goal.
+
+Les étapes sont incluses avec leurs conditions et preuves, pas réputées exécutées. Aucune reprise automatique de l'ancienne campagne, réaffectation de la réserve Aghashahi, dépense ou action physique n'est impliquée par cet ajout. Le premier contrôle restant demeure D1 ; chaque campagne ultérieure exige un protocole et un budget annoncés avant calcul. [[Diagnostic causal - exécution]] conserve la checklist et l'état réel.
+
 ## 2026-09-13 — Diagnostiquer l'écart avant une nouvelle recette
 
 Icham propose un nouvel objectif de diagnostic causal : données, représentation, supervision, optimisation, utilisation du signal par Qwen et scoring. [[Diagnostic causal TSLM vs C1]] cadre cette proposition ; le protocole détaillé et son budget restent à convenir, aucune nouvelle expérience lancée. Préférer « expliquer l'écart observé entre les pipelines » à l'affirmation préalable « le TSLM exploite moins bien les données ». C1 n'est pas une vérité terrain ; la parité réparée ne démontre pas une amélioration de discrimination.

@@ -1,5 +1,206 @@
 # Journal Icham
 
+## 13 septembre — endpoint réel livré, LSTM non promu
+
+[[C1 temporel - exécution]] : préinscription `96bfe7c`, premier run arrêté sur pleine échelle avant LSTM ; nouveau protocole inclusif `12303e6`, C1 exact réutilisé sans deuxième fit. LSTM `472b57b` :100époques/500pas,39/40train. Reload initial bloqué avant réserves ; TF32 restauré désactivé comme au fit (`3b5d094`), écart5,3644e-7, tolérance inchangée. AUC groupe validation0,375/confirmation0,590278, contrôle sans ordre0,8125/1,0 : non-promotion, pas de réglage après confirmation. Saturation/domaine/rareté des groupes et absence d'onsets publiés.
+
+Service `5553e14` sur première H100, PID123337/loopback8019. Trente-quatre tests ciblés au premier passage ; recette HTTP réelle12fenêtres/1Hz, parité C1 exacte, un événement/deux aperçus, p95serveur11,06ms ; score LSTM HTTP/offline exact sur train. Audit indépendant des CSV/AUC par paires réussi, preuves `8baecab`. Aucun WhatsApp, frontend ou repli195 touché. Ponytail a conduit à réutiliser C1/checkpoint/replay, stdlib SQLite et gabarit déterministe plutôt qu'ajouter un LLM de notification. Raccordement Monitor et qualification terrain restent distincts du service testé.
+
+## 13 septembre — autorisation C1 temporel et réaffectation Aghashahi
+
+Icham autorise l'implémentation, la nouvelle utilisation d'Aghashahi, précise endpoint GPU et aucun test WhatsApp. [[C1 temporel - exécution]] fixe avant scores le split par topologie/condition, une recette LSTM, trois contrôles et le critère de promotion. Branche isolée basée sur l'application existante, H100 hors repli libre, préparation hydrophone retrouvée ; aucune borne d'apparition de fuite disponible. Réserve historique non réécrite, classification séquentielle distincte des essais d'alertes ; aucun fit encore à ce jalon.
+
+## 13 septembre — plan C1, LSTM candidat et notification ; endpoint de repli
+
+Icham demande de poursuivre la planification, pas d'implémenter. Il précise que son endpoint sur `195.242.28.46` est un placeholder pour mettre la V1 en repli ; aucune URL complète ni preuve de modèle déployé fournie. Aucun appel au service, SSH ou job lancé ; ne pas réutiliser la machine comme GPU libre par défaut.
+
+[[Plan C1 - suivi temporel et notifications]] distingue une boucle livrable C1/persistance/notification de test et un essai LSTM causal conditionné aux données. Lecture des helpers C1 et des branches récupérées sans fusion `feat/demo-temporal-building` (`5beb344`) et `feat/sensor-replay` (`81c987f`) : code réutilisable, Monitor actuel sans alertes modèle, ancien worktree temporaire absent. Aucun test rejoué. Entire retrouve les commits des chantiers ; Ponytail motive la réutilisation et le gabarit de première livraison, sans exclure le LSTM demandé.
+
+Page primaire Aghashahi relue : séquences de 30 secondes ; le transitoire de débit à la seconde 20 n'est pas une annotation d'apparition de fuite. Rôle de réserve intact, futur usage train soumis à décision explicite et nouvelle confirmation. Plan : scores/mesures conservés, prévention des fuites entre C1 et LSTM, contrôle sans ordre, distinction classification de séquence / détection d'événement, durée calculée hors LLM et envoi applicatif autorisé. Le brief TSLM et l'archivage du rush27B restent des sujets distincts, non achevés par ce plan.
+
+## 13 septembre — proposition acoustique, suivi temporel et notification
+
+Icham demande une discussion uniquement : C1 + LSTM + LLM, Qwen chargé de formuler une notification WhatsApp à partir des résultats, sans interprétation du signal. Proposition non adoptée, aucun code, fit, déploiement ou message externe lancé pour cette piste.
+
+- Trois responsabilités cohérentes pour le produit : mesurer/classer l'acoustique, suivre un événement causalement, communiquer des faits. C1 actuel reste neuf descripteurs et une régression logistique, pas un encodeur acoustique préentraîné. Conserver les mesures et scores continus, pas seulement la classe dure, pour un éventuel lecteur temporel.
+- Distinguer structure acoustique dans la fenêtre et évolution entre fenêtres. Un LSTM peut viser la seconde, mais ne rétablit pas automatiquement l'information éliminée dans la première. Pour compter une durée observée, horodatage/persistance suffisent ; son avantage sur ces règles reste à mesurer en fausses alertes par durée surveillée, événements manqués et délai de détection.
+- Les clips actuels ne constituent pas des séquences continues avec débuts/fins annotés. Leur concaténation ne prouverait ni une chronologie réelle ni l'apprentissage de l'apparition d'une fuite. Futur apprentissage/évaluation événementiel : vraies séquences, séparation par acquisition/installation, modèle causal sans accès au futur.
+- Début observé, durée et déclenchement calculés hors LLM ; formulation « signal compatible avec une fuite observé depuis X », pas certitude sur le début physique. Gabarit suffisant pour un message fixe ; LLM optionnel pour reformulation, service applicatif responsable de l'envoi. Aucun besoin démontré de 27B ou LoRA pour cette seule restitution.
+- [[Brief et contraintes]] demande TimeNet et entraînement/fine-tuning TSLM. Classifieur séquentiel + LLM de notification n'y répond pas automatiquement ; faire valider le cadrage ou conserver le TSLM comme expérience comparée, sans renommer le pipeline artificiellement.
+- Source primaire consultée : [R-CRNN, 2018](https://arxiv.org/abs/1808.06627), exemple de caractéristiques acoustiques avec couche récurrente et localisation d'événements ; aucune performance de cet article transposée à PIPE.
+
+État des calculs antérieurs vérifié en lecture seule : trois fits27B et évaluations terminés ; les deux GPU sont libres. Contrôle du wrapper terminé, `rush-qwen27b-001/api-check.json` sur H100-1 (`ec2587b`) : quatre scores train reproduits exactement, une génération valide, WAV invalide rejeté. Fold2 possède son `evaluation/report.json` sur H100-2. Audit indépendant uniquement fold0 à ce stade (`audit-partial-fold0.json`) ; rapatriement final, audit des trois folds et publication du bilan restent à terminer. Ne pas confondre ce travail inachevé avec une autorisation d'implémenter la proposition.
+
+## 13 septembre — rush27B autorisé et téléchargement vérifié
+
+Gate ensuite terminé et publié `b70a408` : base gelée vérifiée, MB4 avec30% de marge,4,693s/pas logger inclus, deux reloads neufs exacts et parité inter-nœuds0. Budget fixe1époque retenu avec25% de marge et coûts fixes mesurés ; aucun résultat réservé utilisé. Fits lancés sur code immuable `dae7e22` : handle76771/fold0 et30641/fold1 puis2. Un audit sans modèle, `29f92c3`, prépare la revérification des batches/cibles/compteurs/predictions/métriques ; pas encore exécuté sur la campagne incomplète. Les checkpoints techniques ne sont jamais réutilisés pour les fits.
+
+À09:49Paris : folds0/1 terminés,63/47pas et500/373présentations, bundles `38851932…`/`ce769936…`, base inchangée. Fold2 a démarré ; évaluation des deux checkpoints terminés lancée dans deux processus neufs séquentiels sur H100-1 (handle97546), code/scoring inchangés. Phase d'évaluation anticipée sur GPU libre, sans changement de budget ni ajustement après résultats. Aucune qualité réservée encore mesurée à cette étape.
+
+Une heure09:17–10:17Paris, arrêt des mises à jour10:02. Préinscription complète `3e76cfc`, [[Rush Qwen 27B - exécution]] ; deux H100 indépendantes, BF16+LoRA fixe, trois folds train internes seulement. Modèle officiel `Qwen/Qwen3.8-27B` révision `1d4bf0f2…` téléchargé anonymement sur les deux nœuds ;31fichiers et reçus identiques SHA256 `66cc7253…`. Code initial `dae7e22` publié,172 tests TSLM réussis sur le second runtime. Test technique MB4 lancé sur le premier nœud ; aucun résultat27B ni budget d'époques encore fixé. Preuves dans `docs/evidence/tslm-v2/qwen27b-rush-001/`. Prochaine action : vrai backward, VRAM, reload neuf et parité des scores avant les fits.
+
+## 13 septembre — D3 mémorise ; demande de mesure hors entraînement
+
+Le fit existant a terminé normalement au pas400, sans interruption ni changement de recette :100époques/3200présentations des mêmes32clips,32/32corrects,NLL binaire0,000826279. Qwen gelé inchangé, loss complète d'origine. Reçu train `5e782e54…` vérifié sur la H100 avec toutes les empreintes. Reload neuf ensuite exécuté : reçu `3fe96a1a…`,32scores reproduits exactement, poids avant/après identiques. Aucun nouvel entraînement. Les preuves finales sans poids sont dans `docs/evidence/tslm-v2/causal-d3-001/final/`.
+
+Icham demande de tester le reste : extension bornée aux98 réservés du fold0D0, groupes disjoints des32 ; les autres clips des mêmes groupes ne sont pas amalgamés. Code `141ff92`, self-test local/runtime réussi, préinscription `78e3b455…` publiée `84c1890` avant observation. Même checkpoint/scoring, zéro réglage, métriques du harness. **Run terminé/vérifié :67/98corrects,21FN/73fuites,10FP/25non-fuite-bruits ; AUC clip0,741370 /groupe0,798077,NLL1,419433.** Reçu `17f8af51…`,98observations/196forwards, poids inchangés ; preuves `docs/evidence/tslm-v2/d3-heldout-98-001/`, scores/NLL/métriques revérifiés localement sans nouvelle inférence. A0 :0,710/0,760, comparaison descriptive seulement (500clips appris contre32). [[Diagnostic causal - exécution#D3 — résultat final et extension sur groupes réservés]]. Ne pas confondre mémorisation acquise et qualité encore insuffisante ; prochain contraste de généralisation à budget comparable à décider, pas de LoRA/fit automatique.
+
+## 13 septembre — D3 point100 vérifié, assets du second nœud conformes
+
+D3 continue sur la première H100, même handle20214/PID100634. Point100 : NLL binaire0,5749842273444788,24/32corrects, AUC0,76953125 ; critère strict non atteint. Observations rapatriées et scores/NLL/agrégats revérifiés sans inférence, preuves `b7ffdc3`. Revue indépendante du préfixe40pas/10époques : ordre/cibles/compteurs/AdamW/clipping cohérents, aucune panne mécanique visible, pas de verdict final. [[Diagnostic causal - exécution#D3 — entraînement en cours, pas encore de verdict]].
+
+Transfert646fichiers terminé (handle26958, sortie0), vérification distante terminée (handle1166, sortie0) par script `e142f66`, empreinte locale/distante identique `5b309b60…`. Inventaire exact,43SHAQwen/5SHAprovenance/598MD5WAVtrain conformes ; agrégatassets `dc23c125…`, WAV `2bf8c8b7…`, preuves `docs/evidence/runtime-h100-2-001/verify-assets.log`. Logiciels et socle train disponibles sur les deux H100 ; aucune donnée val/test/externe transférée, aucun chargement/forward Qwen ou fit réel sur le second nœud encore. Prochain usage après justification d'essais indépendants et contrôle de parité, sans modifier D3 ni réécrire les préinscriptions historiques.
+
+## 13 septembre — unique fit D3 lancé après publication
+
+Préinscription/tests/seconde installation publiés `e5a8543`, notes source `b636b21`, miroir `fb436b3`. D3 `train` lancé une seule fois : handle20214, PID100634, première H100 ; empreinte préinscrite revérifiée avant appel. Point0 reproduit exactement D0-A initial (NLL3,244997234820116,16/32corrects), puis premiers pas réels avec logger sans forwards supplémentaires. Six époques/24pas observés à07:32:25Paris ; aucun verdict ni reload encore. [[Diagnostic causal - exécution#D3 — entraînement en cours, pas encore de verdict]].
+
+Préparation parallèle de la seconde machine : transfert ciblé de646fichiers —43fichiers de la base officielle déjà figée,598WAVtrain, deux caches train, préparation et deux reçus de parité. Aucun WAV/cache val/test/externe ni fit supplémentaire ; archive par liste explicite, chemins relatifs validés, cibles neuves et refus d'écrasement. Transfert handle26958 en cours à ce jalon, vérification des empreintes encore requise. Les JSON historiques à chemins absolus restent inchangés ; les futures préinscriptions devront désigner leurs nœuds propres.
+
+## 13 septembre — D3 testé et préinscrit, second runtime H100 opérationnel
+
+D3 code `c08ff78`, revue indépendante favorable. Tests locaux : six passent, deux skips explicités ; runtime d'origine : huit ciblés puis 222 tests distincts de régression passent sans skip. Préinscription machine créée à 07:26:23 Paris, SHA `42920f6d5446f34f7419ea2a1c5c1f47067e2a915bb2361fa0bdee4097e93a35` ; copie locale et 25 sources vérifiées. Un seul fit A sur les 32 témoins, critères/budgets inchangés ; aucun fit lancé à ce jalon. Prochaine action après publication : `train`, puis `reload` neuf. [[Diagnostic causal - exécution#D3 — vérifications avant fit]]. Ponytail : réutilisation de l'initialisation, boucle, logger et reçus existants ; aucune nouvelle dépendance ni moteur d'évaluation.
+
+En parallèle, second environnement installé sur `ich@195.242.28.46` : snapshot `a18b22e`, uv 0.10.9 existant copié et vérifié, `uv venv`, `uv pip sync` sur le lockfile existant, projet editable sans dépendances, puis `uv pip check`. 132 paquets compatibles, aucun sudo/Python système modifié. Imports TimeNet/OpenTSLM/Transformers/libarchive réussis, matmul/backward H100 réels et finis, puis 163 tests TSLM +51 évaluation sans skip. Handles 40659 et 19133 terminés avec sortie 0 ; logs/commandes `docs/evidence/runtime-h100-2-001/`.
+
+Deux runtimes vérifiés ne signifient pas encore deux nœuds prêts pour les fits Qwen : poids et données restent à copier/vérifier sur le second, aucune parité modèle ni accélération mesurée. Préparer seulement le socle train utile aux essais justifiés, sans dupliquer val/test/externe ni réécrire les anciennes préinscriptions à chemins absolus. Aucune campagne distribuée ni expérience ajoutée pour remplir un GPU.
+
+## 13 septembre — D2 terminé, information exploitable et prochain contrôle D3
+
+Trois fits HGB réels terminés normalement (handle 86079, sortie 0), chacun 200 itérations, aucun Qwen. Préinscription `67ed6bd5…` publiée `3505928` avant fit ; reçu `48ac9de1…`, artefacts `160655a`. Sources/runtime/entrées inchangés, reçus/tous fichiers vérifiés localement et à distance. Revue indépendante puis reproduction locale via `verify.py` : partitions, 1 794 prédictions, métriques, NLL et critère concordants, aucun refit ; [[Diagnostic causal - exécution#D2 — résultats vérifiés et portée]].
+
+AUC groupe réservée moyenne : D2 0,854167 contre linéaire 0,636218 et C1 fixe 0,937500. Trois gains face à la sonde linéaire, trois retards face à C1 ; sur fit AUC 1,0 et zéro erreur à 0,5 dans chaque fold. L'entrée contient une information exploitable ; ce n'est pas un nouveau score du TSLM ni une preuve de généralisation terrain. Les quatre probabilités historiques linéaires `p=1` sur des négatifs expliquent les NLL infinies sans clipping. D2 ne doit pas être relancé.
+
+Contrôle suivant D3 choisi et borné avant fit : un A neuf sur les mêmes 32 témoins, recette inchangée hors budget maximal de 1 000 pas ; observations tous les 100 pas, arrêt seulement si NLL binaire <0,1 et 32/32 décisions correctes, puis reload neuf. Implémentation confiée, pas de fit ni préinscription machine D3 encore ; pas de gain TSLM ou de cause unique annoncé.
+
+Icham rappelle les **deux H100** : répartition de futurs fits indépendants après préparation du second runtime, sans multiplier les essais ni distribuer automatiquement un fit. Inspection de `ich@195.242.28.46` : Python 3.12.3, git/tar/scp présents, GPU à 0 Mio, environ 1,2 To libres ; projet/venv/pip/ensurepip/uv absents. Le bootstrap uv + lockfile déjà documenté est réutilisable ; les anciennes préinscriptions aux chemins absolus ne seront pas réécrites pour changer de machine. Aucune installation, copie de poids ou expérience supplémentaire effectuée à ce jalon.
+
+## 13 septembre — D2 implémenté, testé et préinscrit avant fit
+
+Reprise du goal sur l'état réel : runner inachevé, aucune expérience D2 à reprendre ; H100 existante libre et aucun processus de campagne/diagnostic actif au contrôle. Recherche Entire D2 sans résultat ; source et protocole du vault utilisés. Ponytail : réutilisation des chargeurs train, partitions, métriques et reçus existants, aucune dépendance nouvelle. Code/tests `303609e`, revue indépendante sans blocage ; 11 tests ciblés réussis puis 214 tests de régression runtime sans skip. Le Python local incomplet n'est pas présenté comme une validation de la chaîne ML.
+
+Préinscription machine créée à 06:58:46 Paris, SHA `67ed6bd5a70caa7201d961fb692b0a0aa7eaccea53e3d41ee157fd0bc0ae8977`, empreinte locale/distante identique. Les 598×256 float32 sont inchangés face aux anciennes sondes ; références réservées et 16 sources revérifiées. Preuves publiées à `3505928` avant tout fit réel D2 ; [[Diagnostic causal - exécution#D2 — vérifications avant fit]]. Prochaine action : trois fits/200 itérations préinscrits, puis revue des scores/métriques et choix du contrôle suivant. Aucun nouveau dataset, fit Qwen ou résultat externe.
+
+## 13 septembre — nouveaux essais SSH, une H100 supplémentaire accessible
+
+Icham fournit `iche@89.169.97.196` et `ich@195.242.28.46`. Contrôles en lecture seule avec la clé déjà acceptée sur la machine existante :
+
+```bash
+ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -o IdentitiesOnly=yes -i /home/animus/.ssh/id_ed25519 -o ConnectTimeout=10 -o ConnectionAttempts=1 iche@89.169.97.196 'id -un && hostname && nvidia-smi --query-gpu=name,memory.total,driver_version,memory.used,utilization.gpu --format=csv,noheader && python3 --version && df -h /'
+ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -o IdentitiesOnly=yes -i /home/animus/.ssh/id_ed25519 -o ConnectTimeout=10 -o ConnectionAttempts=1 ich@195.242.28.46 'id -un && hostname && nvidia-smi --query-gpu=name,memory.total,driver_version,memory.used,utilization.gpu --format=csv,noheader && python3 --version && df -h /'
+```
+
+- `iche@89.169.97.196` : service SSH joignable, `Permission denied (publickey)`, sortie 255. Seconde tentative identique sans `-o IdentitiesOnly=yes -i /home/animus/.ssh/id_ed25519` : même refus, sortie 255. Aucun inventaire distant exécuté ; cause compte/clé non départagée.
+- `ich@195.242.28.46` : réussite dès la tentative avec clé explicite, sortie 0. Utilisateur `ich`, hostname `computeinstance-e00fgs9mdc3y0zkpk7`. Sortie GPU : `NVIDIA H100 80GB HBM3, 81559 MiB, 580.173.02, 0 MiB, 0 %`. Python 3.12.3 ; `/dev/vda1` monté sur `/`, taille 1,3 To, 18 Go utilisés, environ 1,2 To libres (2 %). GPU inoccupé à cet instant, pas une réservation ni une mesure de vitesse d'entraînement.
+
+Nouvelles clés d'hôtes acceptées selon le mécanisme de première connexion `accept-new`, aucune vérification désactivée pour une clé modifiée. Aucun fichier distant, paquet, poids, donnée ou job créé/modifié. La nouvelle H100 est accessible, mais PyTorch/CUDA applicatif, environnement du projet, code et données n'ont pas été testés/préparés. D2 et les expériences restent inchangés. Accès existant `hicham@89.169.123.193` réussi lors de l'échange précédent, non retesté ici ; deux accès H100 vérifiés au total. Les nouvelles adresses ne sont pas supposées désigner des instances additionnelles aux précédentes : correspondance aux quatre machines envisagées à préciser.
+
+## 13 septembre — vérification des deux nouveaux accès SSH
+
+Icham fournit deux adresses pour les machines supplémentaires. Vérifications de connexion uniquement, sans installation ni lancement de calcul :
+
+| Accès fourni | Résultat constaté | Inventaire matériel |
+|---|---|---|
+| `icham@89.169.102.78` | SSH répond ; `Permission denied (publickey)`, sortie 255 | Non accessible ; H100 annoncée, non vérifiée |
+| `ich@89.169.122.233` | SSH répond ; `Permission denied (publickey)`, sortie 255 | Non accessible ; H100 annoncée, non vérifiée |
+| `hicham@89.169.123.193` | Authentification réussie ; `id -un` renvoie `hicham`, sortie 0 | H100 vérifiée antérieurement, pas de nouvel inventaire ici |
+
+Première tentative : hôtes inconnus (`Host key verification failed`). Tentatives suivantes avec `StrictHostKeyChecking=accept-new` : connexion au service, puis refus de la clé. Aucun avertissement de changement de clé ni remplacement forcé de clé d'hôte. Nouvelle tentative en imposant la même identité que sur la machine existante, toujours refusée sur chacun des deux comptes fournis :
+
+```bash
+ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -o IdentitiesOnly=yes -i /home/animus/.ssh/id_ed25519 -o ConnectTimeout=10 -o ConnectionAttempts=1 icham@89.169.102.78 'id -un && hostname && nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader'
+ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -o IdentitiesOnly=yes -i /home/animus/.ssh/id_ed25519 -o ConnectTimeout=10 -o ConnectionAttempts=1 ich@89.169.122.233 'id -un && hostname && nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader'
+ssh -o BatchMode=yes -o ConnectTimeout=10 hicham@89.169.123.193 'id -un'
+```
+
+La trace SSH de la machine existante confirme l'acceptation de cette identité ; empreinte publique `SHA256:E7zTTD3+iyJJdotpJkt4VxtM6SkUR818FQpcmoodTkQ`. Ni clé privée ni jeton consigné. Cause précise non démontrée : vérifier nom de compte et autorisation de la clé publique côté instance, sans supposer lequel est incorrect. Aucune commande distante d'inventaire n'a pu s'exécuter sur les nouveaux serveurs ; GPU, mémoire, disque et runtime y restent inconnus. Quatrième accès non fourni. Aucun fichier distant, paquet ou entraînement modifié.
+
+État de travail conservé : D0/D1 terminés et scellés ; D2 sans préinscription machine ni fit. Seul nouveau runner local `scripts/tslm/diagnose_nonlinear.py` dans `/home/animus/ehl-hackathon-zurich-v2-recovery`, non commité/non revu/non testé, SHA-256 `cb44acca6b689dd209b634a3e1f2a5f394e64a4faaa3c5f82da8cb34613f88bd` ; `tests/tslm/test_diagnose_nonlinear.py` absent. Repères d'apprentissage lus sans exécution dans [[Diagnostic causal - exécution#Repères pour le contrôle d'apprentissage conditionnel]]. Aucun nouveau résultat modèle.
+
+## 13 septembre — quatre H100 sur quatre machines envisagées
+
+Icham précise la topologie envisagée : quatre H100 sur quatre machines séparées. Avis : adaptée à un fit autonome par machine, par exemple les trois folds futurs simultanés ; quatrième disponible seulement pour une autre tâche indépendante déjà justifiée. Pas de synchronisation de gradients entre fits et pas de hausse automatique du nombre de configurations. Préparer le même snapshot de code, runtime, base/poids et données vérifiés, répertoires distincts, puis rapatrier les preuves. Les accès nouveaux ne sont pas encore fournis ni testés ; aucune infrastructure créée, aucune expérience lancée à cette occasion.
+
+Répartir un seul fit entre quatre machines serait différent : adaptation DDP, échanges de gradients et sensibilité à la latence du réseau. [Tutoriel primaire PyTorch multi-nœud](https://docs.pytorch.org/tutorials/intermediate/ddp_series_multinode.html). Pour la campagne envisagée, recommandation d'emplois indépendants, sans cluster distribué ni changement de recette implicite. Le gain dépend du nombre de jobs prêts et de leur durée ; ne pas promettre ×4 sur le projet ou sur un fit.
+
+## 13 septembre — comparaison H100 et H200, sans migration
+
+Question d'Icham sur la vitesse d'entraînement. Comparaison SXM à SXM sur les fiches primaires : même pic Tensor Core BF16 annoncé, mémoire 80→141 Go et bande passante 3,35→4,8 To/s (environ +43%). [H100 NVIDIA](https://www.nvidia.com/en-sg/data-center/h100/), [H200 NVIDIA](https://www.nvidia.com/en-us/data-center/h200/). Le gain de bande passante n'est pas un gain garanti du temps d'entraînement. Exemple publié, non PIPE : MLPerf Training v4.0, LoRA Llama2 70B sur serveurs huit GPU, H200 annoncé 14% plus rapide, environ28→24,7 minutes ; ne pas extrapoler les chiffres ×2 d'inférence à l'entraînement. [Résultat NVIDIA daté du 12 juin 2024](https://developer.nvidia.com/blog/nvidia-sets-new-generative-ai-performance-and-scale-records-in-mlperf-training-v4-0/).
+
+Pour PIPE, A/fold0 a réellement terminé sur H100 avec pic PyTorch alloué 14 254 255 104 octets (`campaign-c13fd47/A/fold-0/complete.json`), mesure distincte de la mémoire totale du processus. Le modèle tient déjà sur H100 ; aucune mesure H200 ni preuve de gain ×2 sur notre recette. Pas de migration, achat ou benchmark nouveau lancé ; D2 reste non testé et sans fit.
+
+## 13 septembre — question sur trois H100 supplémentaires
+
+Icham demande si quatre H100 au total accéléreraient l'entraînement. Lecture du code : `initialize_training` place le modèle sur un seul `cuda`, batch effectif8/micro1, pas de wrapper distribué. Un seul fit ne profitera donc pas automatiquement de cartes ajoutées. L'usage le plus direct serait plusieurs fits indépendants (notamment trois folds) sur des GPU/processus isolés ; gain réel à mesurer, pas promesse ×4. Distribuer un fit exigerait une adaptation et une vérification de la pondération des gradients/batches ; [documentation primaire PyTorch2.8 DDP](https://docs.pytorch.org/docs/2.8/generated/torch.nn.parallel.DistributedDataParallel.html). Même machine/interconnexion ou serveurs séparés non précisés. Recommandation : pas de provisionnement pendant la sonde D2 CPU et les diagnostics dépendants ; envisager les GPU quand une campagne parallèle justifiée est prête. Aucune location ni nouvelle autorisation déduite de la question.
+
+État technique à cet échange : seul `scripts/tslm/diagnose_nonlinear.py` créé dans le clone sain, tests non écrits/non exécutés ; aucun fit, SSH de campagne ou métrique nouvelle par l'agent. Runner non revu/non commité, à préserver et à ne pas lancer tel quel. Finalisation des tests, revue et préinscription requises ; les dix étapes du goal restent inchangées.
+
+## 13 septembre — D2 borné, distinction sonde CPU et TSLM H100
+
+Après le verdict D1, choix d'un seul HistGradientBoostingClassifier sur les 256 valeurs exactes et trois folds existants, sans recherche de paramètres. Revue indépendante favorable : AUC groupe réservée primaire face à TimeNet256 linéaire, C1 séparé, pas de comparaison fit/réservés mélangée ni de plafond absolu inféré d'un échec. Budget trois fits/200 itérations, configuration et limites consignées dans [[Diagnostic causal - exécution#D2 — sonde non linéaire, protocole avant fit]].
+
+Icham s'inquiète de l'annonce CPU : clarification, elle concerne cette petite sonde indépendante et non l'entraînement du TSLM, qui reste sur H100. Interruption sans fit ni nouveau processus de campagne ; worktrees revérifiés propres à la reprise. Runtime distant existant vérifié par inspection de signature/versions, aucun apprentissage. Implémentation confiée sur deux fichiers nouveaux uniquement ; root garde SSH/publication. Tests et préinscription précéderont tout essai réel. Recherche Entire ciblée : commits de V0/diagnostics retrouvés, aucune sonde non linéaire déjà exécutée identifiée ; pas de nouvelle campagne doublonnée.
+
+## 13 septembre — renvoi goal unique et D1 A/C terminé
+
+Icham confirme que le prompt du `/goal` doit seulement renvoyer au vault. Point d'entrée explicite ajouté à [[Diagnostic causal TSLM vs C1]] ; les dix étapes, conditions et critères restent dans cette source, aucun second goal créé ni diagnostic déclaré fin de l'objectif.
+
+D1 A puis C terminés normalement, sans relance : 598 clips × 3 voies par modèle, 3 588 forwards, zéro fit. Artefacts scellés rapatriés et revérifiés via `finished()` local/serveur, A publié `640d29c` / reçu `f9402c5d…`, C `9c163d4` / reçu `00d8de16…`. Poids/inputs/hidden states inchangés, BF16 reproduit D0 exactement. AUC groupe des 98 réservés : A 0,759615→0,745192 en FP32, C 0,500000→0,509615. Plus de résolution, sans correction uniforme du retard ni recette promue ; détail et limites du témoin réarrondi dans [[Diagnostic causal - exécution#D1 — résultats et portée]].
+
+Revue indépendante CPU des 598 lignes A et 598 lignes C : scores, NLL, agrégats et invariants concordants. Différence BF16/réarrondi C sur une première marge et 41 scores complets explicitement conservée ; aucun blocage détecté. H100 après C : 0 Mio / 0 %, instance allumée. Prochaine action : borner/préinscrire un seul lecteur non linéaire des entrées exactes, mêmes trois folds et harness. Aucun nouveau dataset, fit Qwen, score externe ni seuil adopté. Notes distantes intégrées avant édition ; publication de la source puis rafraîchissement explicite des miroirs.
+
+## 13 septembre — D1 testé et préinscrit avant toute observation
+
+Reprise du goal élargi après publication des étapes 6 à 10 (`622eeb4`, miroir `ecfbae9`) : progrès documentaire acquis, expériences non terminées. Code D1 et ses tests lus entièrement, revue indépendante sans blocage statique. Local : neuf tests passent, quatre ignorés faute de PyTorch ; runtime ML : les 13 passent, puis 152 tests TSLM et 51 tests évaluation sans skip. Code publié `306d330`, snapshot `/home/hicham/pipe-v0/code-causal-306d330`, tests CPU sans chargement des vrais poids Qwen.
+
+Préinscription machine créée sans modèle chargé, SHA `37cfcae18aa00cc402001d15f53f2df6a1802a9c0fd1c6ec13f7ca210e00ce05`, liée aux reçus D0, checkpoints A0/C0, 23 sources et code Qwen installé (`cf085792…`). TF32 matmul désactivé, précision FP32 highest, autocast désactivé. Fichier et logs rapatriés, empreintes des sources revérifiées ; preuves publiées `1f89933` avant observation. Budget 598 clips × 3 voies × 2 modèles = 3 588 forwards, 500 fit/98 réservés séparés, aucun fit ou politique retenue. Prochaine action : A puis C et contrôle des invariants.
+
+Logger entraînement `66f390b` : neuf tests runtime de transparence terminés antérieurement, logs désormais publiés `306d330` ; aucune nouvelle trajectoire d'entraînement Qwen réelle instrumentée. H100 libre et aucun processus D0/D1/campagne actif lors du contrôle préalable. Source notes récupérée avant édition, aucune collecte ou donnée externe utilisée.
+
+## 13 septembre — goal étendu aux étapes 6 à 10 dans le document de référence
+
+À la demande explicite d'Icham, [[Diagnostic causal TSLM vs C1]] contient maintenant le plan complet en dix étapes et ses critères de complétion. Le renvoi `/goal` existant reste valable ; aucun besoin de créer un autre objectif ni de déclarer l'ancien terminé. Ajouts : corrections entraînées/évaluées, diversification globale conditionnelle, contraste avec/sans nouvelles données, gel/confirmation indépendante, intégration continue et benchmark gabarit/Qwen/TSLM. Aghashahi reste réservé tant qu'une réaffectation explicite dans un nouveau protocole n'est pas décidée.
+
+Relecture indépendante des exigences produit : intégration réelle distincte du simulateur seul, santé/événements, flux causal borné, preuve continue réservée, utilité des trois approches et limites terrain conservées. Passation, tableau de bord, décisions et checklist d'exécution alignés ; diagnostic seul insuffisant pour terminer le goal. Mise à jour documentaire uniquement, aucun fit, score externe, téléchargement ou déploiement nouveau ; D1 demeure la prochaine action expérimentale. Source distante intégrée avant édition, miroirs à rafraîchir après publication.
+
+## 13 septembre — diversité globale, revue des datasets et rôle d'Aghashahi
+
+Icham précise que l'élargissement doit viser la diversité de toutes les données, pas uniquement les sans-fuite, et demande une relecture de la shortlist attribuée à Luna. Notes et pages primaires consultées ; recherche Entire ciblée sans résultat, aucune attribution d'intention déduite de cet historique absent. Revue indépendante Hong Kong/Aghashahi en lecture seule. [[Datasets utiles pour PIPE#Revue du 13 septembre — diversité globale]] contient l'avis et ses limites : Hong Kong ajoute potentiellement du terrain, Aghashahi des facteurs expérimentaux ; les autres sources servent souvent d'autres modalités/usages. Indépendance Hong Kong non démontrée, appariement avant/après à auditer ; détail51,2kHz retiré faute de confirmation sur la page Aghashahi. README NTNU précise l'incertitude temporelle±3min ; Wessex consulté via index du domaine officiel après403 direct.
+
+Icham demande si réserver Aghashahi prive l'apprentissage de données utiles. Coût d'opportunité reconnu ; proposition non validée de réaffectation dans un futur protocole avec autre réserve exploitable, éventuellement Hong Kong après audit. Aucun transfert de rôle effectué : Aghashahi reste figé/sans score, aucune fenêtre ni modalité liée ajoutée au train. Les diagnostics restants ne sont pas épuisés : D1 demeure la prochaine action. Pas de nouvelle collecte, téléchargement de données, inférence ou apprentissage dans cette revue. Plan, passation et tableau de bord élargis à la diversité globale ; source distante intégrée avant édition et miroirs à actualiser après publication.
+
+## 13 septembre — D0 complet, hypothèses révisées et D1 numérique borné
+
+Précédent tour de goal classé progrès : ajout conditionnel de collecte publié et audit train consigné, aucun blocage. Reprise sur état réel : A vérifié via `finished()` puis rapatrié/revérifié, `f64c943`; C exécuté une seule fois, handle67983 sorti0 après397,87s,822 observations, reçu `c6d2121f…`, tous fichiers revérifiés localement/distamment et publiés `9dd5b73`. D0 total1516observations/3032forwards, zérofit, poids inchangés par état, reload98 et échanges complets àdelta0. H1000Mio/0% après C, instance allumée.
+
+Revue indépendante A694/C822 confirme IDs, cibles, masques, agrégats et isolation des interventions. A fit NLL0,675040/AUCclip0,639307/groupe0,730769 ; C fit0,577496/0,878461/0,730769, mais réservé0,573121/0,498630/0,5. La décision de classe n'est donc pas uniformément au hasard surtrain. Description54,67%/58,95% de la NLL initiale sur32 ; petite en fin sans preuve qu'elle nuit àl'optimisation. C sensible aux séries ettexte ; aucune compréhension temporelle ni utilité horsgroupes démontrée.
+
+Piste suivante choisie d'après les traces : premières marges A surunegrille de0,125, écarts token LP loss/scoring jusqu'à0,140450 A/0,223227 C malgré préfixes identiques. Pas de correction d'avance : D1 compare tête BF16 originale, recalcul linéaire FP32 et FP32 réarrondi, mêmes poids/hidden states/inputs,598clips×3×2=3588forwards maximum ; aucun fit ni réglage surtest. Code runtime Qwen lu via inspect : head nn.Linear, pas d'upcast avant sa projection. Implémentation D1 et journalisationtrain déléguées sur fichiers nouveaux distincts, root seul SSH/GPU ; tests et préinscription avant exécution. [[Diagnostic causal - exécution]] contient résultats, matrice provisoire et protocole.
+
+## 13 septembre — diversité des données et collecte conditionnelle en fin de plan
+
+Icham demande de garder l'élargissement des acquisitions pour la fin, si les autres pistes n'améliorent pas suffisamment le modèle. Ajout au [[Diagnostic causal TSLM vs C1]] : davantage de conditions sans fuite et paires fuite/sans fuite comparables, pas davantage de fenêtres des mêmes groupes ; nouveau protocole avant intégration, test et réserve externe inchangés. Planification uniquement dans ce tour, aucune collecte, recherche de dataset ou expérience lancée.
+
+Échanges précédents consolidés : recompte des598 train et des six listes de fits A/C, entraînements à44,2%,54,96%,50,15% de fuites. Aucun chemin code « tout fuite » trouvé, correspondance signal/cible par clip_id et label conservé.242 vrais sans-fuite mais7 groupes,197 clips provenant de deux groupes ; limite de diversité démontrée, effet causal sur le TSLM inconnu. [[Diagnostic causal - exécution#Audit des populations et des cibles]] fournit les sources et limites. Entire retrouve les commits Nevil du split_v2, sans que leurs titres remplacent les vérifications de fichiers.
+
+Continuité de l'expérience déjà lancée : handle30906 drainé avec sortie0 pendant l'échange précédent, A annonce694 observations/1388 forwards et reçu `4810270a…`, reload98/échanges à delta0. Pas encore rapatrié/vérifié indépendamment ; C non lancé. Prochaine action inchangée : vérifier A puis poursuivre D0 C, aucune relance A. Les mises à jour présentes ne constituent pas un résultat causal final.
+
+## 13 septembre — D0 testé et préinscrit avant observation
+
+Observateur `07db24b`, runner `733b9c6`, 181 tests runtime réussis sans skip (130TSLM/51évaluation). Préinscription machine à03:58:45Paris, SHA `cd2c3916cbac2b61b979f463fa793dec1be3585c6e558d7743a0d4c43a7e6d1f`, rapatriée et22 sources revérifiées, preuves `3e425b4`. Aucun modèle chargé pendant cette étape. Budget1516observations, baseline constante de fréquence0,442 issue seulement des500fit. Prochaine action : A puis C à poids fixes, aucun nouveau fit.
+
+Relecture indépendante : représentation4bandes destructive mais enveloppe grossière conservée, C1 et TSLM tous deux normalisés en RMS, sonde linéaire fixe ≠ plafond d'information. C expose les mêmes définitions C1 via un chemin numérique différent et texte6chiffres ; effet sur la qualité inconnu. Détail/preuves dans [[Diagnostic causal - exécution]]. Initialisation D0 comparable aux fits par construction ; hashes réels et reload98 restent à vérifier pendant l'observation. Les NLL eval ne reproduisent pas les losses train avec dropout.
+
+Continuité : push notes initial refusé car Safoan avait publié entre-temps ; ses quatre commits jusqu'à `ef1e706` lus puis rebasés, conflit Passation résolu en conservant son intégration API/UI et notre nouveau cap. Vault `3121453` publié, neuf notes copiées explicitement dans les deux miroirs, commit code `733b9c6`. Aucun écrasement des travaux Safoan ni fusion de code application ; les poids/décision/reçu finaux demandés par l'UI ne sont pas encore disponibles.
+
+## 13 septembre — diagnostic autorisé, inventaire complet et D0 borné
+
+Icham lance l'objectif d'implémentation du [[Diagnostic causal TSLM vs C1]]. Lecture du vault et des sources, récupération distante avant édition. Recherche Entire retrouve les commits historiques du raccordement et du scoring, aucune cause du plateau ; aucune intention supposée d'après ces titres. Ponytail conduit à réutiliser `finished`, `choose_variant`, le loader train, les captures et le harness existants.
+
+Les six fits ont passé la vérification de leurs reçus et de tous fichiers distants, poids inclus ; les trois derniers dossiers sont rapatriés sans poids et vérifiés localement, commit `b65042a`. Moyennes AUC clip/groupe : A=0,580892/0,671474 ; C=0,533075/0,562500 ; C1=0,891382/0,948718. Qwen inchangé et acoustique modifiée sur les six fits ; classement descriptif A, aucun refit. H100 libre au contrôle de03:37Paris, aucun processus relancé.
+
+[[Diagnostic causal - exécution]] préannonce D0 : A0/C0 sur598train, 500vus/98réservés séparés, 32témoins équilibrés/groupes distincts aussi observés à l'initialisation, deux mappings de donneurs et interventions séries/texte/conjoint. Budget1516observations/3032forwards prévus, aucun apprentissage. Observateur et runner en implémentation parallèle, root seul pour SSH/GPU ; tests et préinscription machine avant lancement, pas de nouveau moteur d'évaluation.
+
 ## 13 septembre — intégrer la revue Claude sans lancer une nouvelle recette
 
 À la demande d'Icham, checklist du [[Diagnostic causal TSLM vs C1]] enrichie : NLL classe complète/binaire par clip et mesure train figée, test de mémorisation précisé, tête BCE contournant Qwen, normes/gradients/mises à jour, descripteurs C1 numériques par voie entraînable. Sonde non linéaire et permutations déjà prévues, pas de doublon. Tous ces contrôles restent à exécuter après préinscription ; aucun changement de code, job ou métrique modèle dans ce tour.

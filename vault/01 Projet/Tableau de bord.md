@@ -4,11 +4,52 @@ Icham
 
 ## Priorité actuelle — 13 septembre
 
+- [x] Icham autorise [[C1 temporel - exécution]] et la réaffectation Aghashahi ; endpoint GPU demandé, WhatsApp exclu.
+- [x] Audit/protocole publiés avant fit ; C1 unique598train, LSTM H100100époques/500pas, reload corrigé FP32 et comparaisons validation/confirmation terminées. LSTM non promu ; [[C1 temporel - exécution]].
+- [x] Suivi causal SQLite, santé/coupures/doublons/redémarrage, aperçus seuls et endpoint isolé implémentés/testés. Replay HTTP réel12fenêtres à1Hz : scores/mesures exacts, événement+deux aperçus, p95serveur11,06ms sur ce court essai ; preuves `8baecab`.
+- [ ] Raccordement du Monitor par le propriétaire applicatif au tunnel/contrat livré ; aucune modification frontend dans cette livraison. Qualité terrain, seuils métier et événements réels restent à valider avec données adaptées, pas avec la confirmation désormais observée.
+
+- [x] Rush27B : même base BF16 sur2H100 vérifiée,223tests, gate mémoire/gradients/reload/parité réussi ; MB4/1époque figés avant comparaison. [[Rush Qwen 27B - exécution]].
+- [x] Rush27B : trois fits internes et leurs évaluations terminés, reloads exacts ; contrôle du wrapper sur train réussi. Aucun job restant au dernier contrôle, deux GPU inoccupés. [[Rush Qwen 27B - exécution]].
+- [ ] Rush27B : terminer l'audit consolidé et l'archivage/bilan des trois folds ; seul fold0 a été revérifié indépendamment à ce stade. Aucun refit ni nouveau réglage.
+- [x] [[Plan C1 - suivi temporel et notifications]] rédigé à la demande d'Icham : M1 sans dépendance au LSTM, puis comparaison M2 conditionnée aux séquences et à leur rôle autorisé. Plan seulement, aucune exécution.
+- [ ] Faire valider interfaces, corpus séquentiel, critères événementiels, notification et cadrage hackathon avant de lancer M1/M2. Endpoint placeholder `195.242.28.46` réservé à la V1 de repli, à ne pas écraser ; déploiement V1 non vérifié.
+
+- [x] Nouvel accès `ich@195.242.28.46` réussi : H100 80GB HBM3, GPU inoccupé au contrôle, Python 3.12.3, environ 1,2 To libres. Deux accès H100 vérifiés avec la machine existante. [[Journal Icham#13 septembre — nouveaux essais SSH, une H100 supplémentaire accessible]].
+- [x] `iche@89.169.97.196` testé avec clé explicite puis identités normales : SSH répond, authentification refusée ; GPU non vérifié. Les deux autres refus de l'échange précédent restent historiques, sans nouvel essai.
+- [x] Deuxième runtime H100 préparé avec uv/lock existants : 132 paquets compatibles, imports, calcul/backward GPU et 214 tests sans skip. `docs/evidence/runtime-h100-2-001/`. Pas encore de poids/données ni de parité Qwen entre machines ; pas de DDP ou essai supplémentaire.
+- [x] Socle train ensuite transféré et vérifié sur H100-2 :646fichiers exacts,43SHAQwen/5SHAprovenance/598MD5WAV conformes, aucun val/test/externe. Script `e142f66`, `verify-assets.log` ; vraie parité Qwen entre nœuds encore non mesurée.
+- [x] Périmètre du goal étendu aux étapes 6 à 10 à la demande d'Icham ; [[Diagnostic causal TSLM vs C1#Plan global en dix étapes]]. Ajout documentaire, pas exécution.
 - [x] Proposition d'Icham consignée : [[Diagnostic causal TSLM vs C1]], expliquer l'écart avant une nouvelle recette ; ancien enchaînement V2 en pause.
 - [x] Revue Claude intégrée : contrôles manquants ajoutés et conclusions non démontrées nuancées. [[Diagnostic causal TSLM vs C1#Checklist enrichie après la revue de Claude]]. Aucun contrôle nouvellement exécuté ni logger modifié.
-- [ ] Vérifier/rapatrier les trois reçus manquants de l'ancienne campagne sans relancer les fits. Logs A2/C/fold1/C/fold2 terminés ; aucun processus de campagne actif observé à 03:23:29 Paris.
-- [ ] Convenir du premier bloc d'expériences discriminantes et de son budget sur développement ; aucune expérience nouvelle exécutée à ce stade.
+- [x] Six fits précédents complets/vérifiés/rapatriés, derniers artefacts `b65042a`, bilan dans [[Diagnostic causal - exécution]]. Aucun réentraînement.
+- [x] Objectif de diagnostic autorisé ; premier bloc D0 borné à1516observations A0/C0, sans apprentissage, protocole fixé avant scores.
+- [x] D0 implémenté `733b9c6`, 181 tests runtime sans skip ; préinscription `cd2c3916…` publiée avant observation, preuves `3e425b4`.
+- [x] D0 A/C :1516 observations vérifiées et revues, preuves `f64c943` / `9dd5b73`, zéro apprentissage. Reload et échanges complets exacts, aucune relance.
+- [x] D1 implémenté/testé/préinscrit : code `306d330`, 203 tests runtime sans skip, préinscription `37cfcae1…` et preuves `1f89933` avant observation.
+- [x] D1 A/C exécutés : 3 588 forwards sans fit, artefacts `640d29c` / `9c163d4`, poids/entrées inchangés et reproduction D0 exacte ; [[Diagnostic causal - exécution#D1 — résultats et portée]]. Pas de politique FP32 adoptée ni correction uniforme de l'écart à C1.
+- [x] D2 borné : une configuration d'arbres boostés, mêmes 256 valeurs/folds, comparateurs réservés existants, AUC groupe primaire ; revue méthodologique favorable. [[Diagnostic causal - exécution#D2 — sonde non linéaire, protocole avant fit]].
+- [x] D2 implémenté `303609e`, revue sans blocage, 11 tests ciblés et 214 tests runtime sans skip ; préinscription `67ed6bd5…` publiée `3505928` avant les fits. Identité exacte des séries/caches vérifiée.
+- [x] D2 : trois fits/200 itérations terminés, reçus et résultats revérifiés indépendamment, artefacts `160655a`. AUC groupe réservée moyenne 0,854167, trois gains vs sonde linéaire, encore derrière C1 fixe. [[Diagnostic causal - exécution#D2 — résultats vérifiés et portée]].
+- [x] D3 implémenté `c08ff78`, relu, huit tests ciblés puis 222 tests runtime ; préinscription machine `42920f6d…`, aucun fit à ce jalon. [[Diagnostic causal - exécution#D3 — vérifications avant fit]].
+- [x] D3 : unique fit terminé au pas400 (100 époques), 32/32corrects et NLL binaire0,000826279 ; Qwen gelé/loss complète inchangés. Reçu train `5e782e54…`, reload neuf `3fe96a1a…`, écart des32scores nul. Mémorisation uniquement, aucun gain de généralisation revendiqué.
+- [x] D3 point100 historique :24/32corrects, NLL0,574984 ; preuves `b7ffdc3`, désormais remplacé comme état courant par le point400.
+- [x] Extension D3 sur98réservés terminée/vérifiée :67/98corrects,21FN/73fuites,10FP/25non-fuite-bruits ; AUC clip0,741370/groupe0,798077. Préinscription `78e3b455…` publiée `84c1890`, reçu `17f8af51…`,98observations/196forwards, zéro fit. Qualité insuffisante, test officiel/externe fermé ; définir ensuite un contraste à budget comparable.
+- [ ] Vérifier la journalisation sur un prochain fit réel : implémentation `66f390b`, neuf tests runtime de transparence réussis, preuves `306d330` ; aucun nouvel entraînement lancé.
 - [ ] Produire la matrice causes démontrées / hypothèses non soutenues dans les conditions testées / inconnues. Aucun refit ni confirmation externe automatique.
+- [x] Audit train/cibles : les trois entraînements contiennent les deux classes ;242 vrais sans-fuite concentrés dans7 groupes. Limites dans [[Diagnostic causal - exécution#Audit des populations et des cibles]].
+- [x] Shortlist relue sur les sources : [[Datasets utiles pour PIPE#Revue du 13 septembre — diversité globale]]. Diversité de l'ensemble des données visée ; Hong Kong candidat à auditer, Aghashahi déjà réservé. Aucun nouveau téléchargement de données ni entraînement.
+- [ ] **En dernier recours uniquement :** si les autres pistes n'améliorent pas suffisamment le modèle, diversifier les données acoustiques des deux classes, sites/capteurs/matériaux/conditions. [[Diagnostic causal TSLM vs C1#Dernière étape conditionnelle — diversifier les données acoustiques]]. Les diagnostics restants ne sont pas omis ; aucune collecte supplémentaire lancée.
+
+## Suite incluse dans le goal — après le diagnostic
+
+- [ ] **6.** Corrections justifiées, nouvelle version entraînée et comparaison sur développement avec les références et C1.
+- [ ] **7.** Si progrès insuffisant : diversification globale, audit des sources et séparation train/développement/confirmation avant intégration ; sinon omission motivée.
+- [ ] **8.** Si ajout de données : comparaison même recette avec/sans ajout, apport réellement mesuré.
+- [ ] **9.** Gel complet, reload neuf et évaluation sur réserve indépendante ; aucun réglage sur ses résultats.
+- [ ] **10.** Intégration sur poids réels, surveillance/événements/santé testés, replay distinct du terrain et benchmark gabarit/Qwen/TSLM sur événements réservés.
+
+[[Diagnostic causal TSLM vs C1#Critère de complétion du goal élargi]] et [[Diagnostic causal - exécution]] portent les critères et preuves. Une étape prévue n'est pas une étape terminée.
 
 ## Prêt
 
@@ -57,11 +98,11 @@ Icham
 - [x] C et reload PASS, delta zéro, SHA `50ec36e9…` ; séquence `98052` terminée normalement, pas de relance.
 - [x] Runner et évaluateur externe publiés `b750f5d`, 144 tests runtime passent ; aucun fit réel encore.
 - [x] Assemblage final `c13fd47`, 156 tests runtime sans skip ; campagne A/C préinscrite avant fit, SHA `5c5e0b4b…`, preuve publiée `550c7a6`.
-- [ ] Bilan complet de l'ancienne campagne six fits TSLM /douze fits C1 ; pas de prolongation ni de refit automatique, priorité au diagnostic causal.
+- [x] Bilan complet de l'ancienne campagne six fits TSLM /douze fits C1 : A et C restent derrière C1, [[Diagnostic causal - exécution]]. Aucun refit.
 - [x] Douze fits C1 terminés ; `C=0.01` retenu sur train, moyenne AUC groupe0,948718 /clip0,891382, pas une confirmation externe.
 - [x] A0 terminé/vérifié, preuve `83bcbe0` : AUC clip/groupe0,710/0,760 sur98 clips réservés ; Qwen inchangé. Pas de conclusion A/C sur ce seul fold.
 - [x] A1 et C0 terminés/vérifiés, artefacts `fa1b9b4` ; 3/6 fits TSLM complets, résultats partiels derrière C1.
-- [ ] Vérifier les trois derniers reçus : logs A2/C/fold1/C/fold2 complets, aucun processus de campagne actif observé à 03:23:29 Paris. Ne pas relancer les fits terminés.
+- [x] Trois derniers reçus et poids distants vérifiés ; CSV/journaux rapatriés et revérifiés, `b65042a`. Ne pas relancer les fits.
 - [x] Exporteur inclus dans les156 tests runtime réussis ; audit réel sur modèle final encore à réaliser.
 - [x] Générateur Markdown V2 et compte des contradictions affichées publiés `0c99a3a`, 162 tests runtime passent ; rendu réel après comparaison complète, pas de nouveau moteur de métriques.
 - [x] Objectif final utilisateur ajouté : évolution d'événement/investigation et benchmark gabarit → Qwen sur mesures → TSLM sur séries. [[Plan V2 - fiabilité et parité des scores#7. Objectif final — démontrer la valeur du TSLM]].

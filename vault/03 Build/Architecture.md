@@ -2,6 +2,12 @@
 
 Icham
 
+## Livraison actuelle — C1 temporel isolé, 13 septembre
+
+[[C1 temporel - exécution]] : WAV1s/8kHz → neuf descripteurs C1 + score continu → suivi causal SQLite (événement et santé séparés) → aperçu déterministe, **aucun envoi WhatsApp**. API `/temporal` sur première H100/loopback8019, via tunnel SSH ; Monitor à raccorder séparément. Code/service `5553e14`, preuves `8baecab`, `docs/TEMPORAL_ENDPOINT.md`. Repli195 inchangé.
+
+LSTM10→32→1 entraîné sur Aghashahi autorisé, mais gain réservé insuffisant : endpoint expérimental30secondes uniquement, aucun branchement sur le moteur d'alertes. Pas de LLM de notification ajouté faute de besoin au-delà du gabarit. Les architectures TSLM ci-dessous restent des branches expérimentales distinctes ; cette livraison ne démontre ni fiabilité terrain ni valeur d'un TSLM.
+
 Statut : chaîne ML V0 implémentée et testée avec TimeNet/OpenTSLM-SP/Qwen 3.5-4B ; application/baseline finale restent des chantiers séparés. [[V0 ML - exécution]] décrit ce qui est réellement vérifié ; le reste de cette note reste l'architecture cible.
 
 ## Nouvelle cible proposée — surveillance continue
