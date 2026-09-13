@@ -189,13 +189,19 @@ def replay(scenario_path, output, clock=None, receiver=None):
             record('error', error=str(exc))
             raise
         finally:
-            if receiver:
-                receiver.end()
-            for envelope in (active, pending):
-                if envelope is not None:
-                    record('lost', envelope, reason=status)
-            record('finished', status=status, unprocessed_positions=len(events) - index,
-                   counters=dict(counts))
+            try:
+                if receiver:
+                    receiver.end()
+            except Exception as exc:
+                status = 'failed'
+                record('error', error=str(exc), phase='end_session')
+                raise
+            finally:
+                for envelope in (active, pending):
+                    if envelope is not None:
+                        record('lost', envelope, reason=status)
+                record('finished', status=status, unprocessed_positions=len(events) - index,
+                       counters=dict(counts))
     return dict(session_id=session, status=status, counters=dict(counts))
 
 

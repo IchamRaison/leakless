@@ -42,6 +42,36 @@ def fixture(directory):
 
 
 class ReplayTest(unittest.TestCase):
+    def test_receiver_and_failure_are_recorded(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            path = fixture(base)
+            data = json.loads(path.read_text()); data['incidents'] = []
+            path.write_text(json.dumps(data))
+            class Receiver:
+                def start(self, mode):
+                    self.windows = []; self.ended = False
+                    return 'server-session'
+                def window(self, envelope):
+                    assert isinstance(envelope['payload'], bytes)
+                    self.windows.append(envelope['sequence'])
+                    return {'test_only': True}
+                def end(self):
+                    self.ended = True
+            receiver = Receiver()
+            result = sensor.replay(path, base / 'http', FakeClock(), receiver)
+            self.assertEqual(receiver.windows, list(range(8)))
+            self.assertTrue(receiver.ended)
+            self.assertEqual(result['session_id'], 'server-session')
+            class FailedReceiver(Receiver):
+                def end(self):
+                    raise RuntimeError('simulated transport failure')
+            with self.assertRaises(RuntimeError):
+                sensor.replay(path, base / 'failure', FakeClock(), FailedReceiver())
+            rows = [json.loads(line) for line in (base / 'failure/events.jsonl').read_text().splitlines()]
+            self.assertEqual(rows[-1]['event'], 'finished')
+            self.assertEqual(rows[-1]['status'], 'failed')
+
     def test_transport_and_boundaries(self):
         with tempfile.TemporaryDirectory() as tmp:
             base = Path(tmp)

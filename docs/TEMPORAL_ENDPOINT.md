@@ -23,6 +23,8 @@ PYTHONPATH=/home/hicham/pipe-v0/.venv-temporal-api/lib/python3.12/site-packages:
 
 Le lanceur écoute uniquement en loopback. `PIPE_TEMPORAL_TOKEN` ajoute un Bearer privé à toutes les routes `/temporal` ; ne jamais le mettre dans Git. Pour un accès hors tunnel, prévoir HTTPS et authentification au reverse proxy **sur toutes les routes**, pas une ouverture directe d'Uvicorn. L'API existante reste présente et ses autres routes n'utilisent pas ce Bearer. Aucun environnement TSLM ne doit être configuré dans ce service isolé.
 
+Environnement API séparé épinglé dans `requirements-temporal-api.txt`, chargé en overlay du runtime ML existant. Ne pas installer le lock API général à sa place : il utilise une autre version de NumPy, incompatible avec l'identité enregistrée du checkpoint C1. Aucun paquet du runtime ML initial n'a été remplacé.
+
 Un processus, huit requêtes concurrentes maximum, backlog huit ; surplus refusé, aucune queue audio illimitée. La séquence GPU utilise un verrou et retourne409 si occupée. SQLite garde32sessions/1000événements au maximum ; à saturation, archiver la base et créer une nouvelle campagne, sans effacement automatique. Permissions privées au lancement. Un changement de modèle/politique exige une nouvelle base. Redémarrer sur la même base conserve événements et déduplication, mais signale l'interruption d'observation.
 
 ## Contrat de raccordement
@@ -63,3 +65,13 @@ PYTHONPATH=src python -m pytest tests/temporal tests/api tests/replay -q
 Chronologie de concaténation explicitement artificielle ; un replay réussi ne valide pas la détection terrain. Ne pas utiliser les réserves pour construire/régler une démonstration.
 
 En cas de repli, arrêter uniquement le PID vérifié de ce service isolé et retirer son tunnel/raccordement. Ne jamais arrêter/modifier le placeholder ; son activation reste une décision distincte du propriétaire.
+
+## Résultat livré et preuves
+
+`docs/evidence/c1-temporal-002/` conserve préinscription, journal du fit, empreintes, prédictions/rapports validation et confirmation. Unique LSTM :100époques/500pas sur H100,39/40 corrects train. Il **n'est pas promu** : AUC groupe0,375 en validation et0,590278 en confirmation, contre0,8125 puis1,0 pour le contrôle sans ordre retenu. Pas de changement de seuil/recette après ces résultats. La réserve confirmation a désormais été observée et ne peut plus servir à choisir une nouvelle recette.
+
+L'AUC parfaite de certains contrôles après agrégation de deux hydrophones ne prouve pas une décision fiable : C1 médiane au seuil0,5 classe tous les enregistrements confirmation «fuite». Confirmation sur le même banc, seulement six groupes négatifs ; validation seulement deux. C1 reste une démonstration de chaîne, pas une solution terrain qualifiée.
+
+Recette `http-smoke-001` :12fenêtres à1Hz, une ouverture/fermeture et deux aperçus ; parité C1 HTTP/offline exacte (neuf mesures et scores), parité LSTM HTTP/offline exacte sur une séquence train sans pleine échelle. Latence serveur fenêtre p95≈11,06ms/max12,63ms sur ce court essai ; appel séquence≈0,316s, initialisation comprise. Scénario choisi **exprès aux extrêmes des scores train**, répétitions explicites, chronologie artificielle : ce n'est pas une mesure de qualité du modèle ni un benchmark de charge. Aucun envoi WhatsApp.
+
+Audit indépendant, sans modèle : `python3 scripts/temporal/verify_reports.py docs/evidence/c1-temporal-002` vérifie mapping, séparation des groupes, scores finis, AUC par comparaisons par paires et référence choisie. `service-launch.json` identifie le processus lancé et sa révision ; vérifier le PID courant avant toute opération.
