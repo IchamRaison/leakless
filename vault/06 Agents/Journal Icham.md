@@ -1,5 +1,11 @@
 # Journal Icham
 
+## 13 septembre — D2 implémenté, testé et préinscrit avant fit
+
+Reprise du goal sur l'état réel : runner inachevé, aucune expérience D2 à reprendre ; H100 existante libre et aucun processus de campagne/diagnostic actif au contrôle. Recherche Entire D2 sans résultat ; source et protocole du vault utilisés. Ponytail : réutilisation des chargeurs train, partitions, métriques et reçus existants, aucune dépendance nouvelle. Code/tests `303609e`, revue indépendante sans blocage ; 11 tests ciblés réussis puis 214 tests de régression runtime sans skip. Le Python local incomplet n'est pas présenté comme une validation de la chaîne ML.
+
+Préinscription machine créée à 06:58:46 Paris, SHA `67ed6bd5a70caa7201d961fb692b0a0aa7eaccea53e3d41ee157fd0bc0ae8977`, empreinte locale/distante identique. Les 598×256 float32 sont inchangés face aux anciennes sondes ; références réservées et 16 sources revérifiées. Preuves publiées à `3505928` avant tout fit réel D2 ; [[Diagnostic causal - exécution#D2 — vérifications avant fit]]. Prochaine action : trois fits/200 itérations préinscrits, puis revue des scores/métriques et choix du contrôle suivant. Aucun nouveau dataset, fit Qwen ou résultat externe.
+
 ## 13 septembre — nouveaux essais SSH, une H100 supplémentaire accessible
 
 Icham fournit `iche@89.169.97.196` et `ich@195.242.28.46`. Contrôles en lecture seule avec la clé déjà acceptée sur la machine existante :

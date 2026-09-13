@@ -17,7 +17,8 @@ Icham
 - [x] D1 implémenté/testé/préinscrit : code `306d330`, 203 tests runtime sans skip, préinscription `37cfcae1…` et preuves `1f89933` avant observation.
 - [x] D1 A/C exécutés : 3 588 forwards sans fit, artefacts `640d29c` / `9c163d4`, poids/entrées inchangés et reproduction D0 exacte ; [[Diagnostic causal - exécution#D1 — résultats et portée]]. Pas de politique FP32 adoptée ni correction uniforme de l'écart à C1.
 - [x] D2 borné : une configuration d'arbres boostés, mêmes 256 valeurs/folds, comparateurs réservés existants, AUC groupe primaire ; revue méthodologique favorable. [[Diagnostic causal - exécution#D2 — sonde non linéaire, protocole avant fit]].
-- [ ] D2 : runner local non commité/non revu, tests non créés ; finalisation/tests puis préinscription et trois fits CPU du contrôle séparé. Aucun fit réel encore, apprentissages TSLM toujours sur H100.
+- [x] D2 implémenté `303609e`, revue sans blocage, 11 tests ciblés et 214 tests runtime sans skip ; préinscription `67ed6bd5…` publiée `3505928` avant les fits. Identité exacte des séries/caches vérifiée.
+- [ ] D2 : trois fits CPU/200 itérations du contrôle séparé, vérification des reçus/prédictions/comparaisons puis interprétation. Aucun fit réel encore, apprentissages TSLM toujours sur H100.
 - [ ] Vérifier la journalisation sur un prochain fit réel : implémentation `66f390b`, neuf tests runtime de transparence réussis, preuves `306d330` ; aucun nouvel entraînement lancé.
 - [ ] Produire la matrice causes démontrées / hypothèses non soutenues dans les conditions testées / inconnues. Aucun refit ni confirmation externe automatique.
 - [x] Audit train/cibles : les trois entraînements contiennent les deux classes ;242 vrais sans-fuite concentrés dans7 groupes. Limites dans [[Diagnostic causal - exécution#Audit des populations et des cibles]].

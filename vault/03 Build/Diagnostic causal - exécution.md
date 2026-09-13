@@ -63,7 +63,7 @@ Critères détaillés : [[Diagnostic causal TSLM vs C1#Critère de complétion d
 
 ## Prochaine action
 
-**Finaliser/tester puis préinscrire D2 avant ses trois fits**, selon le protocole fixé ci-dessous. Seul `scripts/tslm/diagnose_nonlinear.py` existe dans le clone sain, non commité/non revu/non testé ; `tests/tslm/test_diagnose_nonlinear.py` n'est pas encore créé. Aucune préinscription machine ni fit réel D2. D1 ne résout pas le retard ; la sonde linéaire faible ne départage pas représentation et capacité de lecture. Réutiliser les métriques/agrégations et les comparateurs réservés existants, sans retuning. Aucun ajout de données ou nouvelle recette Qwen à ce stade.
+**Exécuter D2 une fois puis vérifier ses trois fits**, selon le protocole fixé ci-dessous. Runner et 11 tests publiés `303609e` ; 214 tests runtime sans skip. Préinscription machine `67ed6bd5…` publiée avec les logs à `3505928`, avant tout fit réel D2. D1 ne résout pas le retard ; la sonde linéaire faible ne départage pas représentation et capacité de lecture. Réutiliser les métriques/agrégations et les comparateurs réservés existants, sans retuning. Aucun ajout de données ou nouvelle recette Qwen à ce stade.
 
 D0 et D1 restent scellés ; aucun score à reproduire pour récupérer les résultats. D1 : handles A 22963 / C 5435 terminés avec code zéro, respectivement 312,744 s et 339,558 s. H100 après C : 0 Mio / 0 %, instance laissée allumée. Artefacts locaux `docs/evidence/tslm-v2/causal-d1-001/`, runtime `/home/hicham/pipe-v0/artifacts/causal-d1-306d330-001/`, logs `/home/hicham/pipe-v0/quality-causal-306d330/`.
 
@@ -152,7 +152,7 @@ Le seul changement de première marge C concerne le clip fit `c51eb51347f21` : �
 
 ## D2 — sonde non linéaire, protocole avant fit
 
-**Décision après D1 ; implémentation en cours, pas de résultat D2.** Vérifier si une autre capacité de lecture exploite mieux les mêmes entrées que la sonde linéaire. C'est un contrôle séparé du TSLM : seuls ses trois petits fits utilisent le CPU de la machine existante ; les apprentissages du TSLM restent sur H100. Aucun basculement de Qwen sur CPU, aucune bibliothèque/GPU à installer ou provisionner.
+**Décision après D1 ; implémentation/test/préinscription terminés, pas encore de résultat D2.** Vérifier si une autre capacité de lecture exploite mieux les mêmes entrées que la sonde linéaire. C'est un contrôle séparé du TSLM : seuls ses trois petits fits utilisent le CPU de la machine existante ; les apprentissages du TSLM restent sur H100. Aucun basculement de Qwen sur CPU, aucune bibliothèque/GPU à installer ou provisionner.
 
 - **Entrée exacte :** les 598 train / 102 groupes, quatre séries TimeNet de 64 valeurs aplaties en 256, padding inclus. Cache courant `prepared-v2-ac-04d53b6`, SHA train `9b7b14e1…` ; vérifier son égalité des séries avec l'ancien cache `prepared-v2-aaab4af` (`8bf27c0a…`) utilisé par les sondes. Les NPZ enrichis diffèrent, pas nécessairement leurs séries. Aucun descripteur C1, label ou métadonnée ajouté aux features.
 - **Partitions :** réutiliser strictement `folds.json`, SHA `5c2bea733f8f2a2dc525b9738a5aa40ae3ce220cf6d76d712cab984afb4d5efb`. Trois fits ne voyant chacun que le train du fold ; chaque clip est réservé une fois, groupes disjoints. Aucun split automatique d'early stopping.
@@ -165,6 +165,14 @@ Le seul changement de première marge C concerne le clip fit `c51eb51347f21` : �
 - **Limites :** sept feuilles, minimum dix observations et régularisation limitent cette sonde. Un fit faible confond information disponible et capacité/optimisation de ce lecteur ; un résultat négatif ne démontre aucun plafond non linéaire absolu. Un résultat positif ne valide ni l'exploitation par Qwen, ni la compréhension temporelle, ni une nouvelle recette TSLM. Les gros groupes gardent plus de poids à l'apprentissage, même si l'AUC groupe réduit leur poids à l'évaluation.
 
 Revue méthodologique indépendante favorable sous ces limites. Pas de validation officielle, test ou réserve externe consultés ; D0/D1 ne sont pas relancés. Reçus scellés et dossiers neufs, échec conservé sans remplacement silencieux. Root seul responsable de l'exécution distante et des publications ; agent propriétaire des deux nouveaux fichiers, helpers partagés conservés.
+
+### D2 — vérifications avant fit
+
+Code `303609edd5e48367390ebe332c92cb777da920b9`, snapshot `/home/hicham/pipe-v0/code-causal-d2-303609e`. Revue statique indépendante sans blocage ; ajout des moyennes absolues des trois AUC, séparées fit/réservés, sans AUC regroupée. Syntaxe locale validée ; environnement local sans TimeNet/sklearn non utilisé comme preuve de validation. Runtime réel : 11 tests ciblés passent, puis 163 tests TSLM et 51 évaluation sans skip. Les fits de tests sont synthétiques, pas les trois fits D2.
+
+Préinscription créée à 06:58:46 Paris, SHA-256 `67ed6bd5a70caa7201d961fb692b0a0aa7eaccea53e3d41ee157fd0bc0ae8977`, publiée avec les logs à `3505928` avant fit. Comparateurs recalculés à l'identique, séries anciennes/courantes identiques, 16 sources revérifiées contre le snapshot ; paramètres complets/interpréteur/bibliothèques liés au JSON. Dossier distant `/home/hicham/pipe-v0/artifacts/causal-d2-303609e-001`, copie locale `docs/evidence/tslm-v2/causal-d2-001/`. Dossier `run/` encore absent au contrôle préalable.
+
+Commande d'exécution prévue, depuis le snapshot : `PYTHONPATH=src /home/hicham/pipe-v0/.venv-repro/bin/python scripts/tslm/diagnose_nonlinear.py run --output /home/hicham/pipe-v0/artifacts/causal-d2-303609e-001`. Ne pas recréer une préinscription ni relancer silencieusement un dossier incomplet. Les chemins et la commande `preregister` sont reconstructibles depuis les champs `paths` du JSON ; aucune base Qwen chargée.
 
 ## Audit des populations et des cibles
 
