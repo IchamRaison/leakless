@@ -1,0 +1,828 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:59,  7.11it/s]Loading weights:  10%|▉         | 42/426 [00:00<00:01, 208.84it/s]Loading weights:  19%|█▉        | 81/426 [00:00<00:01, 284.17it/s]Loading weights:  30%|███       | 128/426 [00:00<00:00, 343.47it/s]Loading weights:  40%|███▉      | 170/426 [00:00<00:00, 367.13it/s]Loading weights:  49%|████▉     | 208/426 [00:00<00:00, 358.20it/s]Loading weights:  59%|█████▉    | 253/426 [00:00<00:00, 381.05it/s]Loading weights:  69%|██████▉   | 293/426 [00:00<00:00, 382.61it/s]Loading weights:  79%|███████▉  | 337/426 [00:00<00:00, 392.10it/s]Loading weights:  90%|████████▉ | 382/426 [00:01<00:00, 398.73it/s]Loading weights:  99%|█████████▉| 423/426 [00:01<00:00, 393.38it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 354.67it/s]
+{"variant": "C", "observations": 20, "expected": 822, "stage": "initial"}
+{"variant": "C", "observations": 40, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 60, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 80, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 100, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 120, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 140, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 160, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 180, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 200, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 220, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 240, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 260, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 280, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 300, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 320, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 340, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 360, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 380, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 400, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 420, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 440, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 460, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 480, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 500, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 520, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 540, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 560, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 580, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 600, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 620, "expected": 822, "stage": "terminal"}
+{"variant": "C", "observations": 640, "expected": 822, "stage": "within_class_cycle"}
+{"variant": "C", "observations": 660, "expected": 822, "stage": "within_class_cycle"}
+{"variant": "C", "observations": 680, "expected": 822, "stage": "within_class_cycle"}
+{"variant": "C", "observations": 700, "expected": 822, "stage": "within_class_cycle"}
+{"variant": "C", "observations": 720, "expected": 822, "stage": "within_class_cycle"}
+{"variant": "C", "observations": 740, "expected": 822, "stage": "cross_class_pairs"}
+{"variant": "C", "observations": 760, "expected": 822, "stage": "cross_class_pairs"}
+{"variant": "C", "observations": 780, "expected": 822, "stage": "cross_class_pairs"}
+{"variant": "C", "observations": 800, "expected": 822, "stage": "cross_class_pairs"}
+{"variant": "C", "observations": 820, "expected": 822, "stage": "cross_class_pairs"}
+{
+  "schema": "pipe-causal-d0-v1",
+  "variant": "C",
+  "preregistration_sha256": "cd2c3916cbac2b61b979f463fa793dec1be3585c6e558d7743a0d4c43a7e6d1f",
+  "observations": 822,
+  "llm_forwards": 1644,
+  "optimizer_steps": 0,
+  "state_sha256": {
+    "initial_before": {
+      "encoder": "c9aa3ddd1b95d85f138a06728f65f4d81e7416a70782094fbb91e35e5485259c",
+      "projector": "7cc647a7a993648002038443dcf4180e53bf7dcc7664c6ed00b299ba39cb8715",
+      "llm": "c1b469d8d93ec5ffebd6fdd102296f1b2689d5966bc4fe3077e2f699b887267e"
+    },
+    "initial_after": {
+      "encoder": "c9aa3ddd1b95d85f138a06728f65f4d81e7416a70782094fbb91e35e5485259c",
+      "projector": "7cc647a7a993648002038443dcf4180e53bf7dcc7664c6ed00b299ba39cb8715",
+      "llm": "c1b469d8d93ec5ffebd6fdd102296f1b2689d5966bc4fe3077e2f699b887267e"
+    },
+    "terminal_before": {
+      "encoder": "d94f05d92d3dd4ac66796ba4300549850b9bdb4452a508ba8c584acecf28ad43",
+      "projector": "26919a3fd74c1eca9bd0441d12070e3abed59617ce985e6256bc83d70a7ab63e",
+      "llm": "c1b469d8d93ec5ffebd6fdd102296f1b2689d5966bc4fe3077e2f699b887267e"
+    },
+    "terminal_after": {
+      "encoder": "d94f05d92d3dd4ac66796ba4300549850b9bdb4452a508ba8c584acecf28ad43",
+      "projector": "26919a3fd74c1eca9bd0441d12070e3abed59617ce985e6256bc83d70a7ab63e",
+      "llm": "c1b469d8d93ec5ffebd6fdd102296f1b2689d5966bc4fe3077e2f699b887267e"
+    }
+  },
+  "weights_unchanged_within_each_state": true,
+  "reload": {
+    "n_clips": 98,
+    "atol": 1e-06,
+    "max_abs_difference": 0.0,
+    "mismatch_ids": [],
+    "passed": true
+  },
+  "initial_subset_32_fit": {
+    "n_clips": 32,
+    "binary_nll_sum": 60.38709664210622,
+    "binary_nll_mean": 1.8870967700658194,
+    "loss_terms": {
+      "class": {
+        "n_tokens": 112,
+        "nll_sum": 108.82967299364282,
+        "nll_per_token": 0.9716935088718108,
+        "nll_per_clip": 3.400927281051338
+      },
+      "first_discriminating_token": {
+        "n_tokens": 32,
+        "nll_sum": 105.28406751155853,
+        "nll_per_token": 3.290127109736204,
+        "nll_per_clip": 3.290127109736204
+      },
+      "description": {
+        "n_tokens": 454,
+        "nll_sum": 160.15414568612618,
+        "nll_per_token": 0.352762435431996,
+        "nll_per_clip": 5.004817052691443
+      },
+      "eos": {
+        "n_tokens": 32,
+        "nll_sum": 2.7091816663742065,
+        "nll_per_token": 0.08466192707419395,
+        "nll_per_clip": 0.08466192707419395
+      },
+      "response": {
+        "n_tokens": 598,
+        "nll_sum": 271.6930003461432,
+        "nll_per_token": 0.45433612098017256,
+        "nll_per_clip": 8.490406260816975
+      }
+    },
+    "metrics": {
+      "n_clips": 32,
+      "n_clusters": 32,
+      "n_clusters_leak": 16,
+      "n_clusters_non_leak": 16,
+      "n_clips_leak": 16,
+      "n_clips_non_leak": 16,
+      "threshold": 0.5,
+      "aggregation": "median",
+      "clip_level": {
+        "roc_auc": 0.367188,
+        "pr_auc": 0.424027,
+        "macro_f1": 0.333333,
+        "balanced_accuracy": 0.5,
+        "leak_recall": 0.0,
+        "false_positive_rate": 0.0,
+        "brier": 0.475948,
+        "tp": 0,
+        "fp": 0,
+        "fn": 16,
+        "tn": 16
+      },
+      "cluster_level": {
+        "roc_auc": 0.367188,
+        "pr_auc": 0.424027,
+        "macro_f1": 0.333333,
+        "balanced_accuracy": 0.5,
+        "leak_recall": 0.0,
+        "false_positive_rate": 0.0,
+        "brier": 0.475948,
+        "tp": 0,
+        "fp": 0,
+        "fn": 16,
+        "tn": 16
+      },
+      "group_roc_auc_full": 0.3671875,
+      "clip_roc_auc_full": 0.3671875
+    },
+    "controls": {
+      "constant_half": {
+        "probability_leak": 0.5,
+        "fit_fold": null,
+        "binary_nll_sum": 22.18070977791825,
+        "binary_nll_mean": 0.6931471805599453,
+        "metrics": {
+          "n_clips": 32,
+          "n_clusters": 32,
+          "n_clusters_leak": 16,
+          "n_clusters_non_leak": 16,
+          "n_clips_leak": 16,
+          "n_clips_non_leak": 16,
+          "threshold": 0.5,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.5,
+            "pr_auc": 0.5,
+            "macro_f1": 0.333333,
+            "balanced_accuracy": 0.5,
+            "leak_recall": 1.0,
+            "false_positive_rate": 1.0,
+            "brier": 0.25,
+            "tp": 16,
+            "fp": 16,
+            "fn": 0,
+            "tn": 0
+          },
+          "cluster_level": {
+            "roc_auc": 0.5,
+            "pr_auc": 0.5,
+            "macro_f1": 0.333333,
+            "balanced_accuracy": 0.5,
+            "leak_recall": 1.0,
+            "false_positive_rate": 1.0,
+            "brier": 0.25,
+            "tp": 16,
+            "fp": 16,
+            "fn": 0,
+            "tn": 0
+          },
+          "group_roc_auc_full": 0.5,
+          "clip_roc_auc_full": 0.5
+        }
+      },
+      "clip_frequency_from_500_fit_only": {
+        "probability_leak": 0.442,
+        "fit_fold": "inner_fit_500",
+        "binary_nll_sum": 22.39746741608424,
+        "binary_nll_mean": 0.6999208567526325,
+        "metrics": {
+          "n_clips": 32,
+          "n_clusters": 32,
+          "n_clusters_leak": 16,
+          "n_clusters_non_leak": 16,
+          "n_clips_leak": 16,
+          "n_clips_non_leak": 16,
+          "threshold": 0.5,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.5,
+            "pr_auc": 0.5,
+            "macro_f1": 0.333333,
+            "balanced_accuracy": 0.5,
+            "leak_recall": 0.0,
+            "false_positive_rate": 0.0,
+            "brier": 0.253364,
+            "tp": 0,
+            "fp": 0,
+            "fn": 16,
+            "tn": 16
+          },
+          "cluster_level": {
+            "roc_auc": 0.5,
+            "pr_auc": 0.5,
+            "macro_f1": 0.333333,
+            "balanced_accuracy": 0.5,
+            "leak_recall": 0.0,
+            "false_positive_rate": 0.0,
+            "brier": 0.253364,
+            "tp": 0,
+            "fp": 0,
+            "fn": 16,
+            "tn": 16
+          },
+          "group_roc_auc_full": 0.5,
+          "clip_roc_auc_full": 0.5
+        }
+      }
+    },
+    "threshold_fitted": false
+  },
+  "terminal_subset_32_fit": {
+    "n_clips": 32,
+    "binary_nll_sum": 21.885853519742827,
+    "binary_nll_mean": 0.6839329224919634,
+    "loss_terms": {
+      "class": {
+        "n_tokens": 112,
+        "nll_sum": 21.974183387292953,
+        "nll_per_token": 0.1961980659579728,
+        "nll_per_clip": 0.6866932308529048
+      },
+      "first_discriminating_token": {
+        "n_tokens": 32,
+        "nll_sum": 21.95184661448002,
+        "nll_per_token": 0.6859952067025006,
+        "nll_per_clip": 0.6859952067025006
+      },
+      "description": {
+        "n_tokens": 454,
+        "nll_sum": 0.1903104911268514,
+        "nll_per_token": 0.00041918610380363745,
+        "nll_per_clip": 0.005947202847714106
+      },
+      "eos": {
+        "n_tokens": 32,
+        "nll_sum": 0.001732173466734821,
+        "nll_per_token": 5.4130420835463156e-05,
+        "nll_per_clip": 5.4130420835463156e-05
+      },
+      "response": {
+        "n_tokens": 598,
+        "nll_sum": 22.16622605188654,
+        "nll_per_token": 0.037067267645295214,
+        "nll_per_clip": 0.6926945641214544
+      }
+    },
+    "metrics": {
+      "n_clips": 32,
+      "n_clusters": 32,
+      "n_clusters_leak": 16,
+      "n_clusters_non_leak": 16,
+      "n_clips_leak": 16,
+      "n_clips_non_leak": 16,
+      "threshold": 0.5,
+      "aggregation": "median",
+      "clip_level": {
+        "roc_auc": 0.714844,
+        "pr_auc": 0.685788,
+        "macro_f1": 0.694592,
+        "balanced_accuracy": 0.71875,
+        "leak_recall": 1.0,
+        "false_positive_rate": 0.5625,
+        "brier": 0.226055,
+        "tp": 16,
+        "fp": 9,
+        "fn": 0,
+        "tn": 7
+      },
+      "cluster_level": {
+        "roc_auc": 0.714844,
+        "pr_auc": 0.685788,
+        "macro_f1": 0.694592,
+        "balanced_accuracy": 0.71875,
+        "leak_recall": 1.0,
+        "false_positive_rate": 0.5625,
+        "brier": 0.226055,
+        "tp": 16,
+        "fp": 9,
+        "fn": 0,
+        "tn": 7
+      },
+      "group_roc_auc_full": 0.71484375,
+      "clip_roc_auc_full": 0.71484375
+    },
+    "controls": {
+      "constant_half": {
+        "probability_leak": 0.5,
+        "fit_fold": null,
+        "binary_nll_sum": 22.18070977791825,
+        "binary_nll_mean": 0.6931471805599453,
+        "metrics": {
+          "n_clips": 32,
+          "n_clusters": 32,
+          "n_clusters_leak": 16,
+          "n_clusters_non_leak": 16,
+          "n_clips_leak": 16,
+          "n_clips_non_leak": 16,
+          "threshold": 0.5,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.5,
+            "pr_auc": 0.5,
+            "macro_f1": 0.333333,
+            "balanced_accuracy": 0.5,
+            "leak_recall": 1.0,
+            "false_positive_rate": 1.0,
+            "brier": 0.25,
+            "tp": 16,
+            "fp": 16,
+            "fn": 0,
+            "tn": 0
+          },
+          "cluster_level": {
+            "roc_auc": 0.5,
+            "pr_auc": 0.5,
+            "macro_f1": 0.333333,
+            "balanced_accuracy": 0.5,
+            "leak_recall": 1.0,
+            "false_positive_rate": 1.0,
+            "brier": 0.25,
+            "tp": 16,
+            "fp": 16,
+            "fn": 0,
+            "tn": 0
+          },
+          "group_roc_auc_full": 0.5,
+          "clip_roc_auc_full": 0.5
+        }
+      },
+      "clip_frequency_from_500_fit_only": {
+        "probability_leak": 0.442,
+        "fit_fold": "inner_fit_500",
+        "binary_nll_sum": 22.39746741608424,
+        "binary_nll_mean": 0.6999208567526325,
+        "metrics": {
+          "n_clips": 32,
+          "n_clusters": 32,
+          "n_clusters_leak": 16,
+          "n_clusters_non_leak": 16,
+          "n_clips_leak": 16,
+          "n_clips_non_leak": 16,
+          "threshold": 0.5,
+          "aggregation": "median",
+          "clip_level": {
+            "roc_auc": 0.5,
+            "pr_auc": 0.5,
+            "macro_f1": 0.333333,
+            "balanced_accuracy": 0.5,
+            "leak_recall": 0.0,
+            "false_positive_rate": 0.0,
+            "brier": 0.253364,
+            "tp": 0,
+            "fp": 0,
+            "fn": 16,
+            "tn": 16
+          },
+          "cluster_level": {
+            "roc_auc": 0.5,
+            "pr_auc": 0.5,
+            "macro_f1": 0.333333,
+            "balanced_accuracy": 0.5,
+            "leak_recall": 0.0,
+            "false_positive_rate": 0.0,
+            "brier": 0.253364,
+            "tp": 0,
+            "fp": 0,
+            "fn": 16,
+            "tn": 16
+          },
+          "group_roc_auc_full": 0.5,
+          "clip_roc_auc_full": 0.5
+        }
+      }
+    },
+    "threshold_fitted": false
+  },
+  "terminal_partitions": {
+    "fit": {
+      "n_clips": 500,
+      "binary_nll_sum": 288.7479248603234,
+      "binary_nll_mean": 0.5774958497206468,
+      "loss_terms": {
+        "class": {
+          "n_tokens": 1779,
+          "nll_sum": 290.9086489429706,
+          "nll_per_token": 0.16352369249183282,
+          "nll_per_clip": 0.5818172978859413
+        },
+        "first_discriminating_token": {
+          "n_tokens": 500,
+          "nll_sum": 290.5678365416825,
+          "nll_per_token": 0.581135673083365,
+          "nll_per_clip": 0.581135673083365
+        },
+        "description": {
+          "n_tokens": 7033,
+          "nll_sum": 2.221503283098315,
+          "nll_per_token": 0.0003158685174318662,
+          "nll_per_clip": 0.00444300656619663
+        },
+        "eos": {
+          "n_tokens": 500,
+          "nll_sum": 0.0235965588108229,
+          "nll_per_token": 4.7193117621645795e-05,
+          "nll_per_clip": 4.7193117621645795e-05
+        },
+        "response": {
+          "n_tokens": 9312,
+          "nll_sum": 293.1537487848798,
+          "nll_per_token": 0.03148128745542094,
+          "nll_per_clip": 0.5863074975697595
+        }
+      },
+      "metrics": {
+        "n_clips": 500,
+        "n_clusters": 68,
+        "n_clusters_leak": 52,
+        "n_clusters_non_leak": 16,
+        "n_clips_leak": 221,
+        "n_clips_non_leak": 279,
+        "threshold": 0.5,
+        "aggregation": "median",
+        "clip_level": {
+          "roc_auc": 0.878461,
+          "pr_auc": 0.811905,
+          "macro_f1": 0.680211,
+          "balanced_accuracy": 0.724014,
+          "leak_recall": 1.0,
+          "false_positive_rate": 0.551971,
+          "brier": 0.195775,
+          "tp": 221,
+          "fp": 154,
+          "fn": 0,
+          "tn": 125
+        },
+        "cluster_level": {
+          "roc_auc": 0.730769,
+          "pr_auc": 0.875779,
+          "macro_f1": 0.690269,
+          "balanced_accuracy": 0.65625,
+          "leak_recall": 1.0,
+          "false_positive_rate": 0.6875,
+          "brier": 0.124825,
+          "tp": 52,
+          "fp": 11,
+          "fn": 0,
+          "tn": 5
+        },
+        "group_roc_auc_full": 0.7307692307692307,
+        "clip_roc_auc_full": 0.8784605653675862
+      },
+      "controls": {
+        "constant_half": {
+          "probability_leak": 0.5,
+          "fit_fold": null,
+          "binary_nll_sum": 346.5735902799726,
+          "binary_nll_mean": 0.6931471805599453,
+          "metrics": {
+            "n_clips": 500,
+            "n_clusters": 68,
+            "n_clusters_leak": 52,
+            "n_clusters_non_leak": 16,
+            "n_clips_leak": 221,
+            "n_clips_non_leak": 279,
+            "threshold": 0.5,
+            "aggregation": "median",
+            "clip_level": {
+              "roc_auc": 0.5,
+              "pr_auc": 0.442,
+              "macro_f1": 0.306519,
+              "balanced_accuracy": 0.5,
+              "leak_recall": 1.0,
+              "false_positive_rate": 1.0,
+              "brier": 0.25,
+              "tp": 221,
+              "fp": 279,
+              "fn": 0,
+              "tn": 0
+            },
+            "cluster_level": {
+              "roc_auc": 0.5,
+              "pr_auc": 0.764706,
+              "macro_f1": 0.433333,
+              "balanced_accuracy": 0.5,
+              "leak_recall": 1.0,
+              "false_positive_rate": 1.0,
+              "brier": 0.25,
+              "tp": 52,
+              "fp": 16,
+              "fn": 0,
+              "tn": 0
+            },
+            "group_roc_auc_full": 0.5,
+            "clip_roc_auc_full": 0.5
+          }
+        },
+        "clip_frequency_from_500_fit_only": {
+          "probability_leak": 0.442,
+          "fit_fold": "inner_fit_500",
+          "binary_nll_sum": 343.2020050475115,
+          "binary_nll_mean": 0.6864040100950229,
+          "metrics": {
+            "n_clips": 500,
+            "n_clusters": 68,
+            "n_clusters_leak": 52,
+            "n_clusters_non_leak": 16,
+            "n_clips_leak": 221,
+            "n_clips_non_leak": 279,
+            "threshold": 0.5,
+            "aggregation": "median",
+            "clip_level": {
+              "roc_auc": 0.5,
+              "pr_auc": 0.442,
+              "macro_f1": 0.358151,
+              "balanced_accuracy": 0.5,
+              "leak_recall": 0.0,
+              "false_positive_rate": 0.0,
+              "brier": 0.246636,
+              "tp": 0,
+              "fp": 0,
+              "fn": 221,
+              "tn": 279
+            },
+            "cluster_level": {
+              "roc_auc": 0.5,
+              "pr_auc": 0.764706,
+              "macro_f1": 0.190476,
+              "balanced_accuracy": 0.5,
+              "leak_recall": 0.0,
+              "false_positive_rate": 0.0,
+              "brier": 0.28407,
+              "tp": 0,
+              "fp": 0,
+              "fn": 52,
+              "tn": 16
+            },
+            "group_roc_auc_full": 0.5,
+            "clip_roc_auc_full": 0.5
+          }
+        }
+      },
+      "threshold_fitted": false
+    },
+    "heldout": {
+      "n_clips": 98,
+      "binary_nll_sum": 56.165884519962404,
+      "binary_nll_mean": 0.5731212706118612,
+      "loss_terms": {
+        "class": {
+          "n_tokens": 319,
+          "nll_sum": 56.05113340606067,
+          "nll_per_token": 0.1757088821506604,
+          "nll_per_clip": 0.5719503408781701
+        },
+        "first_discriminating_token": {
+          "n_tokens": 98,
+          "nll_sum": 56.00133381783962,
+          "nll_per_token": 0.57144218181469,
+          "nll_per_clip": 0.57144218181469
+        },
+        "description": {
+          "n_tokens": 1378,
+          "nll_sum": 1.2111631785997687,
+          "nll_per_token": 0.0008789282863568713,
+          "nll_per_clip": 0.012358807944895599
+        },
+        "eos": {
+          "n_tokens": 98,
+          "nll_sum": 0.00656228157276928,
+          "nll_per_token": 6.696205686499265e-05,
+          "nll_per_clip": 6.696205686499265e-05
+        },
+        "response": {
+          "n_tokens": 1795,
+          "nll_sum": 57.26885886623321,
+          "nll_per_token": 0.03190465674999064,
+          "nll_per_clip": 0.5843761108799307
+        }
+      },
+      "metrics": {
+        "n_clips": 98,
+        "n_clusters": 34,
+        "n_clusters_leak": 26,
+        "n_clusters_non_leak": 8,
+        "n_clips_leak": 73,
+        "n_clips_non_leak": 25,
+        "threshold": 0.5,
+        "aggregation": "median",
+        "clip_level": {
+          "roc_auc": 0.49863,
+          "pr_auc": 0.734466,
+          "macro_f1": 0.575057,
+          "balanced_accuracy": 0.58,
+          "leak_recall": 1.0,
+          "false_positive_rate": 0.84,
+          "brier": 0.183871,
+          "tp": 73,
+          "fp": 21,
+          "fn": 0,
+          "tn": 4
+        },
+        "cluster_level": {
+          "roc_auc": 0.5,
+          "pr_auc": 0.739967,
+          "macro_f1": 0.648276,
+          "balanced_accuracy": 0.625,
+          "leak_recall": 1.0,
+          "false_positive_rate": 0.75,
+          "brier": 0.165221,
+          "tp": 26,
+          "fp": 6,
+          "fn": 0,
+          "tn": 2
+        },
+        "group_roc_auc_full": 0.5,
+        "clip_roc_auc_full": 0.4986301369863014
+      },
+      "controls": {
+        "constant_half": {
+          "probability_leak": 0.5,
+          "fit_fold": null,
+          "binary_nll_sum": 67.92842369487464,
+          "binary_nll_mean": 0.6931471805599453,
+          "metrics": {
+            "n_clips": 98,
+            "n_clusters": 34,
+            "n_clusters_leak": 26,
+            "n_clusters_non_leak": 8,
+            "n_clips_leak": 73,
+            "n_clips_non_leak": 25,
+            "threshold": 0.5,
+            "aggregation": "median",
+            "clip_level": {
+              "roc_auc": 0.5,
+              "pr_auc": 0.744898,
+              "macro_f1": 0.426901,
+              "balanced_accuracy": 0.5,
+              "leak_recall": 1.0,
+              "false_positive_rate": 1.0,
+              "brier": 0.25,
+              "tp": 73,
+              "fp": 25,
+              "fn": 0,
+              "tn": 0
+            },
+            "cluster_level": {
+              "roc_auc": 0.5,
+              "pr_auc": 0.764706,
+              "macro_f1": 0.433333,
+              "balanced_accuracy": 0.5,
+              "leak_recall": 1.0,
+              "false_positive_rate": 1.0,
+              "brier": 0.25,
+              "tp": 26,
+              "fp": 8,
+              "fn": 0,
+              "tn": 0
+            },
+            "group_roc_auc_full": 0.5,
+            "clip_roc_auc_full": 0.5
+          }
+        },
+        "clip_frequency_from_500_fit_only": {
+          "probability_leak": 0.442,
+          "fit_fold": "inner_fit_500",
+          "binary_nll_sum": 74.18542188904469,
+          "binary_nll_mean": 0.7569941009086193,
+          "metrics": {
+            "n_clips": 98,
+            "n_clusters": 34,
+            "n_clusters_leak": 26,
+            "n_clusters_non_leak": 8,
+            "n_clips_leak": 73,
+            "n_clips_non_leak": 25,
+            "threshold": 0.5,
+            "aggregation": "median",
+            "clip_level": {
+              "roc_auc": 0.5,
+              "pr_auc": 0.744898,
+              "macro_f1": 0.203252,
+              "balanced_accuracy": 0.5,
+              "leak_recall": 0.0,
+              "false_positive_rate": 0.0,
+              "brier": 0.281772,
+              "tp": 0,
+              "fp": 0,
+              "fn": 73,
+              "tn": 25
+            },
+            "cluster_level": {
+              "roc_auc": 0.5,
+              "pr_auc": 0.764706,
+              "macro_f1": 0.190476,
+              "balanced_accuracy": 0.5,
+              "leak_recall": 0.0,
+              "false_positive_rate": 0.0,
+              "brier": 0.28407,
+              "tp": 0,
+              "fp": 0,
+              "fn": 26,
+              "tn": 8
+            },
+            "group_roc_auc_full": 0.5,
+            "clip_roc_auc_full": 0.5
+          }
+        }
+      },
+      "threshold_fitted": false
+    }
+  },
+  "interventions": {
+    "within_class_cycle-series": {
+      "n_clips": 32,
+      "mean_signed_score_change": 0.010155660497042836,
+      "mean_abs_score_change": 0.10619745201373931,
+      "max_abs_score_change": 0.6848145180593137,
+      "quality_metrics_calculated": false
+    },
+    "within_class_cycle-amplitude": {
+      "n_clips": 32,
+      "mean_signed_score_change": 0.013752207937898442,
+      "mean_abs_score_change": 0.17334346484160665,
+      "max_abs_score_change": 0.6595501098387824,
+      "quality_metrics_calculated": false
+    },
+    "within_class_cycle-both": {
+      "n_clips": 32,
+      "mean_signed_score_change": -3.469446951953614e-18,
+      "mean_abs_score_change": 0.23507274344232146,
+      "max_abs_score_change": 0.7191479092956269,
+      "quality_metrics_calculated": false,
+      "donor_reproduction": {
+        "n_clips": 32,
+        "atol": 1e-06,
+        "max_abs_difference": 0.0,
+        "mismatch_ids": [],
+        "passed": true
+      }
+    },
+    "cross_class_pairs-series": {
+      "n_clips": 32,
+      "mean_signed_score_change": 0.01445407510227325,
+      "mean_abs_score_change": 0.12631074265394582,
+      "max_abs_score_change": 0.6653772398123764,
+      "quality_metrics_calculated": false
+    },
+    "cross_class_pairs-amplitude": {
+      "n_clips": 32,
+      "mean_signed_score_change": 0.014454075102273253,
+      "mean_abs_score_change": 0.20745155990848507,
+      "max_abs_score_change": 0.6652563886227276,
+      "quality_metrics_calculated": false
+    },
+    "cross_class_pairs-both": {
+      "n_clips": 32,
+      "mean_signed_score_change": 1.734723475976807e-18,
+      "mean_abs_score_change": 0.32795286161127485,
+      "max_abs_score_change": 0.7030283040385008,
+      "quality_metrics_calculated": false,
+      "donor_reproduction": {
+        "n_clips": 32,
+        "atol": 1e-06,
+        "max_abs_difference": 0.0,
+        "mismatch_ids": [],
+        "passed": true
+      }
+    }
+  },
+  "pooled_598_performance_calculated": false,
+  "validation_test_external_read": false,
+  "elapsed_seconds": 397.8736931710009,
+  "limitations": [
+    "Les 98 réservés sont du développement déjà consulté, pas un nouveau holdout.",
+    "Les 32 témoins sont équilibrés : tous les 16 groupes fit non-fuite, 16/52 groupes fuite.",
+    "Les entrées séries/texte désaccordées peuvent être hors distribution ; sensibilité n'est pas utilité.",
+    "Les gradients/mises à jour ne sont pas mesurés ici ; aucune cause d'optimisation n'est prouvée."
+  ],
+  "artifacts_sha256": {
+    "cross_class_pairs-amplitude.jsonl": "d9933de097892cfb40c0abd71d2f8c8b7673fbc0033539f9c374b633a867d62f",
+    "cross_class_pairs-both.jsonl": "0b735ced89cad7627a05d90c0664dbb296b7a4f862e9fdec7c4aac2bdfad0fc9",
+    "cross_class_pairs-series.jsonl": "e98091a22295b07c7a30d5df0ebc8759264748cefe411090e9fabb8f509328b9",
+    "initial.jsonl": "7d40937c9f11e980f14137f6c0d0961116e797e1498831d2c45d318874335815",
+    "reload.json": "1be6a1fad067dc7bc446c4467ac92573db52a3d873035fc3b04ad8b82696bf0e",
+    "started.json": "46884469ed5ecf410b283b2d0e2fb709f39156d0aa2c4bb0900adb3c7290389b",
+    "summary.json": "4652635fd9a645d791aaeabe3722b72a624d73375908d8285c4d7c3e19318903",
+    "terminal.jsonl": "c0eadac068a5ce2b3d72e3603fe0014a75fe666c92a652988cf9f2f403488bd0",
+    "within_class_cycle-amplitude.jsonl": "d35576ed8205a9fecf69786097acce9a0c7746407894cbde8a68c98e41f72aa8",
+    "within_class_cycle-both.jsonl": "9d42f49cb33057ef710431105c1cdac1392421605518276b19a694261dd5c6d6",
+    "within_class_cycle-series.jsonl": "658145ad97e6f60402215e35541122c7065cba7a613527687e1f1679a6ed9da0"
+  },
+  "receipt_sha256": "c6d2121f1d01daeda1e0fe1aca629a99677d34cff961fac1ad1be82360e2ad04"
+}
