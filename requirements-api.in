@@ -1,0 +1,9 @@
+# Environnement CPU Safoan ; ne remplace pas le futur pyproject/lock ML d'Icham.
+fastapi>=0.115,<1
+uvicorn>=0.30,<1
+python-multipart>=0.0.20,<1
+numpy>=2,<3
+scipy>=1.14,<2
+soundfile>=0.13,<1
+httpx>=0.28,<1
+pytest>=8,<10

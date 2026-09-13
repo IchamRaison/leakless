@@ -11,6 +11,10 @@ build/
 venv/
 __pycache__/
 *.pyc
+.pytest_cache/
+data/
+frontend/test-results/
+frontend/playwright-report/
 .DS_Store
 
 # Obsidian per-device state and local plugins
