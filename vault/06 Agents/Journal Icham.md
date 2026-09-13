@@ -1,5 +1,11 @@
 # Journal Icham
 
+## 13 septembre — comparaison H100 et H200, sans migration
+
+Question d'Icham sur la vitesse d'entraînement. Comparaison SXM à SXM sur les fiches primaires : même pic Tensor Core BF16 annoncé, mémoire 80→141 Go et bande passante 3,35→4,8 To/s (environ +43%). [H100 NVIDIA](https://www.nvidia.com/en-sg/data-center/h100/), [H200 NVIDIA](https://www.nvidia.com/en-us/data-center/h200/). Le gain de bande passante n'est pas un gain garanti du temps d'entraînement. Exemple publié, non PIPE : MLPerf Training v4.0, LoRA Llama2 70B sur serveurs huit GPU, H200 annoncé 14% plus rapide, environ28→24,7 minutes ; ne pas extrapoler les chiffres ×2 d'inférence à l'entraînement. [Résultat NVIDIA daté du 12 juin 2024](https://developer.nvidia.com/blog/nvidia-sets-new-generative-ai-performance-and-scale-records-in-mlperf-training-v4-0/).
+
+Pour PIPE, A/fold0 a réellement terminé sur H100 avec pic PyTorch alloué 14 254 255 104 octets (`campaign-c13fd47/A/fold-0/complete.json`), mesure distincte de la mémoire totale du processus. Le modèle tient déjà sur H100 ; aucune mesure H200 ni preuve de gain ×2 sur notre recette. Pas de migration, achat ou benchmark nouveau lancé ; D2 reste non testé et sans fit.
+
 ## 13 septembre — question sur trois H100 supplémentaires
 
 Icham demande si quatre H100 au total accéléreraient l'entraînement. Lecture du code : `initialize_training` place le modèle sur un seul `cuda`, batch effectif8/micro1, pas de wrapper distribué. Un seul fit ne profitera donc pas automatiquement de cartes ajoutées. L'usage le plus direct serait plusieurs fits indépendants (notamment trois folds) sur des GPU/processus isolés ; gain réel à mesurer, pas promesse ×4. Distribuer un fit exigerait une adaptation et une vérification de la pondération des gradients/batches ; [documentation primaire PyTorch2.8 DDP](https://docs.pytorch.org/docs/2.8/generated/torch.nn.parallel.DistributedDataParallel.html). Même machine/interconnexion ou serveurs séparés non précisés. Recommandation : pas de provisionnement pendant la sonde D2 CPU et les diagnostics dépendants ; envisager les GPU quand une campagne parallèle justifiée est prête. Aucune location ni nouvelle autorisation déduite de la question.
