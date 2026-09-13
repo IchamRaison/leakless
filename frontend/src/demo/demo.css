@@ -2127,6 +2127,14 @@
   font-size: 12px;
   fill: #b5c2b3;
 }
+/* Chart labels sit over the traces: a halo in the plot colour keeps them readable. */
+.live-threshold-label,
+.live-axis-title {
+  paint-order: stroke;
+  stroke: #1a2119;
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
 .live-event .live-resolved-line,
 .live-resolved-line {
   stroke: #8fd18a;

@@ -99,10 +99,6 @@ export function LiveSignalChart({
             role="img"
             aria-label={`${panel.title} of the three sensors, last 120 seconds`}
           >
-            <text className="live-axis-title" x={PAD.left} y={PAD.top + 2}>
-              {panel.title}
-              {panel.unit && ` (${panel.unit})`}
-            </text>
             {panel.ticks.map((tick) => (
               <g key={tick}>
                 <line
@@ -136,7 +132,10 @@ export function LiveSignalChart({
                     className="live-tick"
                     x={x(j)}
                     y={PANEL_HEIGHT - 6}
-                    textAnchor="middle"
+                    // The newest tick sits at the right edge: anchor it inside the chart.
+                    textAnchor={
+                      x(j) > width - PAD.right - 30 ? "end" : "middle"
+                    }
                   >
                     {clock(j * SAMPLE_MS)}
                   </text>
@@ -197,6 +196,24 @@ export function LiveSignalChart({
                   style={{ stroke: SENSOR_COLORS[s] }}
                 />
               ))}
+            {series.map((values, s) => (
+              <polyline
+                key={s}
+                className="live-line"
+                style={{ stroke: SENSOR_COLORS[s] }}
+                points={values
+                  .map(
+                    (value, i) =>
+                      `${x(first + i).toFixed(1)},${y(value[panel.key]).toFixed(1)}`,
+                  )
+                  .join(" ")}
+              />
+            ))}
+            {/* Labels last, so their halo sits above the traces. */}
+            <text className="live-axis-title" x={PAD.left} y={PAD.top + 2}>
+              {panel.title}
+              {panel.unit && ` (${panel.unit})`}
+            </text>
             {panel.key === "rms" && (
               <text
                 className="live-threshold-label"
@@ -212,19 +229,6 @@ export function LiveSignalChart({
                 Alert threshold · {RMS_FACTOR}× baseline
               </text>
             )}
-            {series.map((values, s) => (
-              <polyline
-                key={s}
-                className="live-line"
-                style={{ stroke: SENSOR_COLORS[s] }}
-                points={values
-                  .map(
-                    (value, i) =>
-                      `${x(first + i).toFixed(1)},${y(value[panel.key]).toFixed(1)}`,
-                  )
-                  .join(" ")}
-              />
-            ))}
           </svg>
         );
       })}
