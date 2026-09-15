@@ -1,0 +1,108 @@
+{
+  "status": "passed",
+  "n_windows": 43,
+  "notification_first_sequence": 33,
+  "high_windows_at_notification": 31,
+  "duplicate_verified": true,
+  "external_messages_sent": 0,
+  "model_version": "opentslm-qwen-dynamics-d29bf1227d38",
+  "previews": [
+    {
+      "event_id": "384252e4ea1242dd899b45ab33cf2662",
+      "kind": "ended",
+      "message": "REPLAY — Retour durable sous le seuil observé après 40 secondes surveillées. Cela ne confirme pas une réparation. Un retour durable sous le seuil est observé après une activité élevée.",
+      "delivery": "preview_only",
+      "description_source": "template_fallback",
+      "sent": false,
+      "recipient": "Nevil",
+      "status": "ready",
+      "duration_source": "source_timestamps_and_valid_window_counts",
+      "facts": {
+        "first_observed_at": "2026-09-13T09:37:59.755147+00:00",
+        "confirmed_at": "2026-09-13T09:38:02.755147+00:00",
+        "last_observed_at": "2026-09-13T09:38:39.755147+00:00",
+        "observed_seconds": 40,
+        "current_high_seconds": 0,
+        "high_observed_seconds": 35,
+        "coverage_interrupted": false
+      },
+      "temporal_description": {
+        "model_version": "opentslm-qwen-dynamics-d29bf1227d38",
+        "model_pattern": "persistent",
+        "model_phrase": "Un niveau élevé persiste dans les observations récentes.",
+        "candidate_scores": {
+          "quiet": 4.785048531630309e-06,
+          "brief": 5.422170033853035e-06,
+          "intermittent": 5.043403916715761e-07,
+          "persistent": 0.9999855756759644,
+          "ended": 3.726599516085116e-06
+        },
+        "facts": {
+          "pattern": "ended",
+          "history_seconds": 43,
+          "high_seconds": 35,
+          "current_high_seconds": 0,
+          "longest_high_seconds": 35,
+          "high_runs": 1
+        },
+        "description": "Un retour durable sous le seuil est observé après une activité élevée.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      }
+    },
+    {
+      "event_id": "384252e4ea1242dd899b45ab33cf2662",
+      "kind": "persistent",
+      "message": "REPLAY — Nevil, un signal compatible avec une fuite est observé à niveau élevé depuis 31 secondes consécutives. Une vérification est recommandée. Un niveau élevé persiste dans les observations récentes.",
+      "delivery": "preview_only",
+      "description_source": "opentslm_qwen_constrained",
+      "sent": false,
+      "recipient": "Nevil",
+      "status": "ready",
+      "duration_source": "source_timestamps_and_valid_window_counts",
+      "facts": {
+        "first_observed_at": "2026-09-13T09:37:59.755147+00:00",
+        "confirmed_at": "2026-09-13T09:38:02.755147+00:00",
+        "last_observed_at": "2026-09-13T09:38:30.755147+00:00",
+        "observed_seconds": 31,
+        "current_high_seconds": 31,
+        "high_observed_seconds": 31,
+        "coverage_interrupted": false
+      },
+      "temporal_description": {
+        "model_version": "opentslm-qwen-dynamics-d29bf1227d38",
+        "model_pattern": "persistent",
+        "model_phrase": "Un niveau élevé persiste dans les observations récentes.",
+        "candidate_scores": {
+          "quiet": 2.9022946819168283e-06,
+          "brief": 5.422199592430843e-06,
+          "intermittent": 2.535996657115902e-07,
+          "persistent": 0.9999910593032837,
+          "ended": 3.6898532584928034e-07
+        },
+        "facts": {
+          "pattern": "persistent",
+          "history_seconds": 34,
+          "high_seconds": 31,
+          "current_high_seconds": 31,
+          "longest_high_seconds": 31,
+          "high_runs": 1
+        },
+        "description": "Un niveau élevé persiste dans les observations récentes.",
+        "description_source": "opentslm_qwen_constrained",
+        "fallback_used": false,
+        "fallback_reason": null,
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      }
+    }
+  ],
+  "server_latency_p95_ms": 8.119304399588145,
+  "artificial_chronology": true,
+  "quality_evaluation": false
+}

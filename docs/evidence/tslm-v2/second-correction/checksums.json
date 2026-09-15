@@ -1,0 +1,21 @@
+{
+  "PROVENANCE.json": "566b90fd3963eb3a5224f40a21f0bc6f5158a56d901cbf983492cb7526303cf7",
+  "QWEN-LICENSE": "bbedc3fda3305820b977265f01b8619d87570a6739de3a5582c3464840f1e57a",
+  "QWEN-MODEL-CARD.md": "1406be1b6b8fd8a6545870da516912804756593628a1d0fb0a7965211e82a7bb",
+  "base/chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+  "base/config.json": "b65089b5c32d7bdb3479ca0c8ed835c86a90592ce0590dc9851acf650fa20be2",
+  "base/generation_config.json": "8e29eeb222454c2a417b17547a84aee206c110a033418b7c0342cd75e75d92a0",
+  "base/model-00001-of-00003.safetensors": "51ef7ae8b7247cd50f31a9613620dd2e388c20a772fa4ea56000ff571a5fc77b",
+  "base/model-00002-of-00003.safetensors": "27313c75a3a92d5f575860fda796c075439888d3d2434e36742513dd702564bc",
+  "base/model-00003-of-00003.safetensors": "acca2e05d349267bb098412b7cf15c461e59e794d025d19edf2fb8caefe25397",
+  "base/model.safetensors.index.json": "532c625a499b88fb2adb26d7f63e6b75f2662b4923404c3be1a1ace1c2bac7ab",
+  "base/tokenizer.json": "9b3fd089e5954a2c59e16bcc34d25302e0090f6b9ca3b526d2ce8fc691681e37",
+  "base/tokenizer_config.json": "ef127185cc4e669d1e4e4cb54b0a4736480067fd3936057cf22c3fe62d58c004",
+  "config.json": "42a3730d896913f5ad6387bae6cbf7d80310edd1ff82efb6b00fe71736e302a6",
+  "metadata.json": "e8dbdc50b83da7f52f00f43d24431514e9a83f64eaab493a1075b243997a5c0d",
+  "requirements-ml.lock": "7b6429e67593cd945bb3c7d542cf160c9352064373d19112e865830327d1da2a",
+  "scoring_spec.json": "509c5bdf724efcff6877ae044a7fbcbb92b6e1e89acbb99eaea52c94449f0c07",
+  "source-v1-metadata.json": "a12becda4089d4a06785ea05c186d46926921853912b9f5a310716f010c4571e",
+  "source-v1-training-report.json": "9034bc89a62fd4edd3234d4707334b5e5844fd76530b3f028de2f671292fde01",
+  "temporal.pt": "183a1b1c29facf0e27f27efc7adab8c1bb13556cede06abc7f735672cbe7eb82"
+}

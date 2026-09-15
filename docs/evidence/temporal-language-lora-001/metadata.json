@@ -1,0 +1,94 @@
+{
+  "config": {
+    "schema": "pipe.temporal-language.v1",
+    "base_model": "Qwen/Qwen3.5-4B",
+    "base_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "opentslm_revision": "2968f4b891baab4307f7e9d0043e87677b593a30",
+    "seed": 20260913,
+    "development_seed": 20270101,
+    "train_per_pattern": 8,
+    "development_per_pattern": 5,
+    "max_steps": 400,
+    "encoder_lr": 0.0003,
+    "projector_lr": 0.0003,
+    "lora": {
+      "lora_r": 8,
+      "lora_alpha": 16,
+      "lora_dropout": 0.0,
+      "target_modules": [
+        "q_proj",
+        "v_proj"
+      ]
+    },
+    "lora_lr": 0.0001,
+    "gradient_clip": 1.0,
+    "checkpoint_selection": "terminal_step_400_no_search",
+    "n_configs_compared": 2,
+    "loss": "cross_entropy_over_five_Qwen_continuation_tokens",
+    "alert_after_seconds": 30,
+    "strictly_greater": true,
+    "history_seconds": 64,
+    "supervision": "artificial_chronology_of_C1_train_measurements_rule_derived_targets",
+    "purpose": "software_demonstration_not_leak_generalization",
+    "rule_baseline_perfect_by_construction": true
+  },
+  "base": "/home/hicham/pipe-v0/artifacts/base-qwen3.5-4b",
+  "base_files": {
+    "config.json": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+    "download-receipt.json": "ce754a6cfca57c855ca2f961716e73b72af28a12aa962af4936dbed2cc6ef6ef",
+    "model.safetensors-00001-of-00002.safetensors": "26a93f066e1916adb13453dae5a0c707c0fbc71299ed98779571a907b8e74c61",
+    "model.safetensors-00002-of-00002.safetensors": "cb544bd9bfae93dc59b0f22b292f5933573854a7f9b97835c67060d7d910e188",
+    "model.safetensors.index.json": "cf3f798ee02ba45f9622aa8892a47369ab667d0afbf154ee7c2212de42e6302d",
+    "preprocessor_config.json": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516",
+    "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+    "tokenizer_config.json": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8",
+    "video_preprocessor_config.json": "7768af27c1fafa9cc9011c1dc20067e03f8915e03b63504550e11d5066986d13",
+    "vocab.json": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003"
+  },
+  "registration_sha256": "ba819827c9e06fa3a7c9e68c5c68b4df0fe3adf74cb9ebaf6677e31b6e1b7dbe",
+  "files": {
+    "temporal.pt": "45c263d4964d5706cc208012c36e037c925a3bf52a3a57489d9779894d247e7c",
+    "normalization.npz": "41cfb5f0eb1c67f8e59e9f89818c5ebe2c30ae7468419b0d89ea679164769f52"
+  },
+  "c1_bundle_sha256": "cea924a6a0f8c3d3ff91930d8125f309a3bcded4c965a4ef53c2c566fc32ebdd",
+  "frozen_llm_tensor_sha256": "fedcb230952446424e8adf2f28c12526843ffb495b7627eff2ca493e845dfda2",
+  "reference_scores": [
+    [
+      0.36862969398498535,
+      0.049888599663972855,
+      0.044026538729667664,
+      0.0011021827813237906,
+      0.5363530516624451
+    ],
+    [
+      0.4043491780757904,
+      0.04261809214949608,
+      0.033191002905368805,
+      0.000647121574729681,
+      0.5191946625709534
+    ],
+    [
+      0.3812413513660431,
+      0.07507087290287018,
+      0.051595401018857956,
+      0.00256878393702209,
+      0.4895235598087311
+    ],
+    [
+      0.38912367820739746,
+      0.02487584389746189,
+      0.019373327493667603,
+      0.0004556169733405113,
+      0.5661715865135193
+    ],
+    [
+      0.39035922288894653,
+      0.05986353009939194,
+      0.046621762216091156,
+      0.001924309995956719,
+      0.5012311935424805
+    ]
+  ],
+  "supervision": "rule-derived artificial chronology",
+  "field_validated": false
+}

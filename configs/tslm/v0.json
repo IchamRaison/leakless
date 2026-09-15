@@ -1,0 +1,18 @@
+{
+  "base_model": "Qwen/Qwen3.5-4B",
+  "base_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "architecture": "OpenTSLM-SP-Qwen3.5-text",
+  "opentslm_revision": "2968f4b891baab4307f7e9d0043e87677b593a30",
+  "timenet_revision": "c39ca32b64ad0c89ea54093dbcb285c1a93eb006",
+  "protocol": "split_v2_binary_with_noise_v0",
+  "preprocessing_version": "rms-hann256-hop128-band4-log1p-v1",
+  "seed": 20260912,
+  "batch_size": 2,
+  "debug_train_samples": 8,
+  "max_steps": 40,
+  "encoder_lr": 0.0002,
+  "projector_lr": 0.0001,
+  "weight_decay": 0.01,
+  "gradient_clip": 1.0,
+  "max_new_tokens": 48
+}

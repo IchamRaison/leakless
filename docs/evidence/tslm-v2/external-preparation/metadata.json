@@ -1,0 +1,68 @@
+{
+  "archive_bytes": 63994754,
+  "archive_sha256": "d070b62306e1146072bc6929c64203af95e2a1df21a52ce6d93fe1a75395a38d",
+  "archive_url": "https://data.mendeley.com/public-files/datasets/tbrnp6vrnj/files/db8d1475-7cb4-4c60-b9e2-7d47a7d95971/file_downloaded",
+  "authors": [
+    "Mohsen Aghashahi",
+    "Lina Sela",
+    "M. Katherine Banks"
+  ],
+  "code_revision": "aaab4afd263eec0d89f5c2468daf7ac5f8f091a6",
+  "continuous_leak_onsets_available": false,
+  "converter_sha256": "3dd30f364804d4bfe0bea70ab057cbe5fba73083dcaf2dab3328208c63c0af02",
+  "converter_url": "https://data.mendeley.com/public-files/datasets/tbrnp6vrnj/files/dc9d459b-ec6d-4a64-ab69-d2bac7396a5c/file_downloaded",
+  "cross_corpus_duplicate_audit": "pending; do not claim verified independence from development",
+  "dataset_doi": "10.17632/tbrnp6vrnj.1",
+  "dataset_url": "https://data.mendeley.com/datasets/tbrnp6vrnj/1",
+  "dataset_version": 1,
+  "decoder": {
+    "channels": 1,
+    "clipping": "none",
+    "crop_samples": 240000,
+    "crop_source": "author_converter.py head(240000)",
+    "crop_start_sample": 0,
+    "dtype": "<f8",
+    "endianness": "little",
+    "format": "RAW",
+    "model_preprocessing_applied": false,
+    "pcm16_requantization": false,
+    "resampling": "none",
+    "sample_rate": 8000,
+    "scale": "signed_int32 / 2147483648",
+    "stride_samples": 8000,
+    "subtype": "PCM_32",
+    "window_samples": 8000
+  },
+  "excluded_duplicate_doi": "10.17632/xw44wv2g88.2",
+  "grouping": "topology + leak_type + demand/noise condition; H1/H2 and all windows together",
+  "input_contract": "Only inputs.csv and arrays; targets/recordings are evaluator-only",
+  "license": "CC-BY-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "model_scoring_performed": false,
+  "numpy_version": "2.5.2",
+  "real_session_ids_available": false,
+  "role": "external_holdout_only",
+  "schema": "pipe.external-holdout.v1",
+  "script_sha256": "ef07cb3e0d6b843a224f1595cb89686a011ff369f1a65138ec779da94cb2916f",
+  "subsets": {
+    "background": {
+      "heuristic_condition_groups": 1,
+      "recordings": 2,
+      "window_labels": {
+        "environmental_noise": 60
+      },
+      "windows": 60
+    },
+    "primary": {
+      "heuristic_condition_groups": 60,
+      "recordings": 120,
+      "window_labels": {
+        "leak": 2880,
+        "no_leak": 720
+      },
+      "windows": 3600
+    }
+  },
+  "threshold_fitting_permitted": false,
+  "training_permitted": false
+}

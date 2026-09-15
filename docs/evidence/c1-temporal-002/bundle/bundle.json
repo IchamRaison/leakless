@@ -1,0 +1,49 @@
+{
+  "schema": "pipe.temporal-bundle.v1",
+  "config": {
+    "schema": "pipe.c1-temporal.v1",
+    "offline_full_scale_policy": "include_unchanged_report_quality_not_service_eligible",
+    "seed": 20260913,
+    "c1_C": 0.01,
+    "train_topology": "BR",
+    "validation_conditions": [
+      "0.47 LPS_N",
+      "Transient_N"
+    ],
+    "confirmation_topology": "LO",
+    "sequence_seconds": 30,
+    "hidden_size": 32,
+    "epochs": 100,
+    "batch_size": 8,
+    "learning_rate": 0.001,
+    "weight_decay": 0.01,
+    "gradient_clip": 1.0,
+    "loss": "sequence_terminal_bce_train_pos_weight",
+    "checkpoint_selection": "terminal_epoch_100",
+    "ewma_alpha": 0.2,
+    "orderless_C": 0.01,
+    "bootstrap_draws": 2000,
+    "minimum_auc_gain": 0.03,
+    "promotion": "validation_gain_ge_minimum_then_confirmation_paired_95_lower_gt_zero_and_gain_ge_minimum",
+    "policy": {
+      "open_threshold": 0.8,
+      "close_threshold": 0.4,
+      "open_seconds": 3,
+      "close_seconds": 5,
+      "max_gap_seconds": 2
+    },
+    "policy_status": "software_demo_only_not_field_validated",
+    "notifications": "preview_only",
+    "continuous_onsets_available": false
+  },
+  "registration_sha256": "80cfeb7012babe5c45fe8f179f02741873e62c869ca17a3b036e1bd054774151",
+  "files": {
+    "c1.pkl": "15b1fa3511e6fe4f71d6fe645e8cab5480818c769a71fefa982c1ba2933edfe8",
+    "lstm.pt": "9e0b2d57f8ffee8f7b3f11bead6376f2bd882b7f87f2b6fa672df969d23a766c",
+    "normalization.npz": "a82be99355e95e095f0d902c1a10f58fd17665154817b0b9c4b7d483b87129bf",
+    "orderless.pkl": "c5bf42f9c19db8229e47dc101ba8336097770b90f1bf4a140895a36eeab53f04"
+  },
+  "default_detector": "c1",
+  "event_detector_validated": false,
+  "sequence_supervision": "terminal_only"
+}

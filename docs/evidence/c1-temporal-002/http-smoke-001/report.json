@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "real_checkpoint": true,
+  "n_windows": 12,
+  "artificial_chronology": true,
+  "scientific_quality_evaluation": false,
+  "train_only": true,
+  "c1_http_max_diff": 0.0,
+  "window_server_latency_p95_ms": 11.05952955476823,
+  "window_server_latency_max_ms": 12.630615005036816,
+  "n_events": 1,
+  "n_previews": 2,
+  "external_messages_sent": 0,
+  "sequence_http_max_diff": 0.0,
+  "sequence_http_seconds_including_warmup": 0.3160306909994688,
+  "sequence_train_recording": "recording_04845311ce8ae10c55c19f124f43bc26db29019bab9b8b0e067d0479c6fe39b6",
+  "bundle_sha256": "cea924a6a0f8c3d3ff91930d8125f309a3bcded4c965a4ef53c2c566fc32ebdd",
+  "session_id": "0c00ae1868df4cea86eca0494a4431d2"
+}

@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "device_id": "smoke-c1",
+  "source_mode": "replay",
+  "entries": [
+    {
+      "path": "/home/hicham/pipe-v0/data/extracted/no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_22.wav",
+      "audio_sha256": "be9bb96681f3f132c0f5ce0c4dbd6c347b36fc2df17928730b87245621ad3f22",
+      "provenance": "train",
+      "source_offset_samples": 0
+    },
+    {
+      "path": "/home/hicham/pipe-v0/data/extracted/no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_22.wav",
+      "audio_sha256": "be9bb96681f3f132c0f5ce0c4dbd6c347b36fc2df17928730b87245621ad3f22",
+      "provenance": "train",
+      "source_offset_samples": 8000
+    },
+    {
+      "path": "/home/hicham/pipe-v0/data/extracted/no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_22.wav",
+      "audio_sha256": "be9bb96681f3f132c0f5ce0c4dbd6c347b36fc2df17928730b87245621ad3f22",
+      "provenance": "train",
+      "source_offset_samples": 16000
+    },
+    {
+      "path": "/home/hicham/pipe-v0/data/extracted/leak acoustic data/ductile iron-zone 2-0.3249 MPa-1.33 ms-hydrophone-0-1.wav",
+      "audio_sha256": "219eeef6132d38cfa3acd0907ee7830238056f5a9923cbb12d957c90c6b5d9de",
+      "provenance": "train",
+      "source_offset_samples": 24000
+    },
+    {
+      "path": "/home/hicham/pipe-v0/data/extracted/leak acoustic data/ductile iron-zone 2-0.3249 MPa-1.33 ms-hydrophone-0-1.wav",
+      "audio_sha256": "219eeef6132d38cfa3acd0907ee7830238056f5a9923cbb12d957c90c6b5d9de",
+      "provenance": "train",
+      "source_offset_samples": 32000
+    },
+    {
+      "path": "/home/hicham/pipe-v0/data/extracted/leak acoustic data/ductile iron-zone 2-0.3249 MPa-1.33 ms-hydrophone-0-1.wav",
+      "audio_sha256": "219eeef6132d38cfa3acd0907ee7830238056f5a9923cbb12d957c90c6b5d9de",
+      "provenance": "train",
+      "source_offset_samples": 40000
+    },
+    {
+      "path": "/home/hicham/pipe-v0/data/extracted/leak acoustic data/ductile iron-zone 2-0.3249 MPa-1.33 ms-hydrophone-0-1.wav",
+      "audio_sha256": "219eeef6132d38cfa3acd0907ee7830238056f5a9923cbb12d957c90c6b5d9de",
+      "provenance": "train",
+      "source_offset_samples": 48000
+    },
+    {
+      "path": "/home/hicham/pipe-v0/data/extracted/no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_22.wav",
+      "audio_sha256": "be9bb96681f3f132c0f5ce0c4dbd6c347b36fc2df17928730b87245621ad3f22",
+      "provenance": "train",
+      "source_offset_samples": 56000
+    },
+    {
+      "path": "/home/hicham/pipe-v0/data/extracted/no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_22.wav",
+      "audio_sha256": "be9bb96681f3f132c0f5ce0c4dbd6c347b36fc2df17928730b87245621ad3f22",
+      "provenance": "train",
+      "source_offset_samples": 64000
+    },
+    {
+      "path": "/home/hicham/pipe-v0/data/extracted/no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_22.wav",
+      "audio_sha256": "be9bb96681f3f132c0f5ce0c4dbd6c347b36fc2df17928730b87245621ad3f22",
+      "provenance": "train",
+      "source_offset_samples": 72000
+    },
+    {
+      "path": "/home/hicham/pipe-v0/data/extracted/no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_22.wav",
+      "audio_sha256": "be9bb96681f3f132c0f5ce0c4dbd6c347b36fc2df17928730b87245621ad3f22",
+      "provenance": "train",
+      "source_offset_samples": 80000
+    },
+    {
+      "path": "/home/hicham/pipe-v0/data/extracted/no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_22.wav",
+      "audio_sha256": "be9bb96681f3f132c0f5ce0c4dbd6c347b36fc2df17928730b87245621ad3f22",
+      "provenance": "train",
+      "source_offset_samples": 88000
+    }
+  ],
+  "incidents": [],
+  "consumer_seconds": 0,
+  "selection": "train score extrema repeated; artificial chronology; software check only"
+}

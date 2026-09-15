@@ -625,6 +625,12 @@
   background: #c4a977;
   border-radius: 50%;
 }
+.live-dot {
+  height: 5px;
+  width: 5px;
+  background: #8fc982;
+  border-radius: 50%;
+}
 .model-readout .pending-value {
   font:
     17px "IBM Plex Mono",
@@ -632,6 +638,44 @@
     monospace;
   letter-spacing: 1px;
   color: #c4b997;
+}
+.model-readout .prediction-value {
+  font: 15px ui-monospace, monospace;
+  letter-spacing: 0.5px;
+  color: #c6dfa9;
+}
+.model-run {
+  width: 100%;
+  margin: 0 0 12px;
+  border-color: #9fbd8877 !important;
+  background: #9fbd8814 !important;
+  color: #d5e7c3 !important;
+}
+.model-result {
+  display: grid;
+  gap: 7px;
+  padding: 0 0 16px;
+  color: #d7e4d2;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.model-result small,
+.model-caveat {
+  color: #94a68f;
+  font-size: 10px;
+  line-height: 1.6;
+}
+.model-error {
+  margin: 0 0 12px;
+  padding: 9px 10px;
+  border: 1px solid #c98a7255;
+  border-radius: 5px;
+  background: #c98a7212;
+  color: #e6c3b3;
+  font-size: 11px;
+}
+.model-caveat {
+  margin-top: 8px;
 }
 .decision-note {
   display: flex;

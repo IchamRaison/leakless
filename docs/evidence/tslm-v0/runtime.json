@@ -1,0 +1,13 @@
+{
+  "python": "3.12.3",
+  "torch": "2.8.0+cu128",
+  "cuda": "12.8",
+  "gpu": "NVIDIA H100 80GB HBM3",
+  "compute_capability": [
+    9,
+    0
+  ],
+  "loss": 249.75106811523438,
+  "gradient_norm": 8.807761192321777,
+  "allocated_bytes": 67372032
+}

@@ -2,7 +2,13 @@
 
 Icham
 
-Plan cible, application et modèle non encore exécutés. Durée officielle à confirmer. Propriétaire technique Safoan, défense ML Icham/Nevil, baseline Vincent. Le pitch reste partagé.
+Plan cible ; V0 ML exécutée/rechargée, application non intégrée. Durée officielle à confirmer. Propriétaire technique Safoan, défense ML Icham/Nevil, baseline Vincent. Le pitch reste partagé.
+
+## Nouveau scénario proposé — surveillance automatique
+
+[[Plan surveillance continue]] remplace l'import manuel comme parcours principal : un canal est surveillé, un événement apparaît, l'alerte s'ouvre avec preuves audio/spectrogramme, puis sa persistance/fin et une panne de flux sont visibles. Utiliser un replay déclaré et une inférence réellement exécutée ; une séquence assemblée est un scénario artificiel, pas une capture terrain. Les règles d'alerte ne doivent jamais lire le label caché ou l'horloge d'un scénario pour fabriquer une détection. Le texte peut arriver après l'alerte et reste distinct des mesures.
+
+Montrer séparément résultats de classification et démonstration de fonctionnement continu ; pas de délai réel ni fausses alertes/jour sans acquisitions adaptées. En cas de résultat faible ou d'absence d'alerte, le montrer. Le parcours d'import ci-dessous reste disponible pour investigation et comparaison, pas comme justification du nouveau cas d'usage.
 
 ## Histoire
 

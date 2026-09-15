@@ -372,7 +372,7 @@ export default function DemoExperience() {
                 signal deserve <br />
                 <em>inspection?</em>
               </h2>
-              <ModelReadout />
+              <ModelReadout sample={active?.sample ?? null} />
               <p className="tslm-definition">{tslm.definition}</p>
               <div className="decision-note">
                 <span className="small-rule" />

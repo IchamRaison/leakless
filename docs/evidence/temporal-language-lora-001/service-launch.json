@@ -1,0 +1,23 @@
+{
+  "pid": 129483,
+  "code_revision": "77c174f",
+  "command": [
+    "/home/hicham/pipe-v0/.venv-repro/bin/python",
+    "scripts/temporal/serve.py",
+    "--bundle",
+    "/home/hicham/pipe-v0/artifacts/c1-temporal-002/bundle",
+    "--sha256",
+    "cea924a6a0f8c3d3ff91930d8125f309a3bcded4c965a4ef53c2c566fc32ebdd",
+    "--language",
+    "/home/hicham/pipe-v0/artifacts/temporal-language-lora-001",
+    "--language-sha256",
+    "d29bf1227d389801c35b33d47d1227b369c26a628207155d8ddc4e47ba5f3295",
+    "--db",
+    "/home/hicham/pipe-v0/artifacts/temporal-language-lora-001/service.sqlite",
+    "--port",
+    "8020"
+  ],
+  "listen": "127.0.0.1:8020",
+  "notifications": "preview_only",
+  "selection": "best raw description count on synthetic development; 16 vs 3 out of25; exploratory"
+}

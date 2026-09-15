@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/IchamRaison/ehl-hackathon-zurich/schemas/prediction_run.schema.json",
+  "title": "Prediction run — metadata.json",
+  "description": "Contrat d'un run de prédiction évaluable. Vaut pour les contrôles C0-C3 comme pour le TSLM : il n'y a pas de chemin d'évaluation privilégié. Le fichier predictions.csv qui l'accompagne porte exactement deux colonnes, clip_id et probability_leak.",
+  "type": "object",
+  "required": [
+    "run_id", "model_name", "checkpoint", "training_commit",
+    "split_filename", "split_sha256", "timestamp", "threshold_rule",
+    "test_labels_not_used_for_tuning"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "run_id": {
+      "type": "string", "minLength": 1, "pattern": "^[A-Za-z0-9._-]+$",
+      "description": "Identifiant court et stable. Sert de clé dans le rapport final."
+    },
+    "model_name": { "type": "string", "minLength": 1 },
+    "checkpoint": {
+      "type": ["string", "null"],
+      "description": "Identifiant du checkpoint : chemin, URI, ou hash. null si sans objet."
+    },
+    "training_commit": {
+      "type": ["string", "null"],
+      "description": "SHA du commit qui a produit le modèle."
+    },
+    "config_hash": { "type": ["string", "null"], "description": "Facultatif." },
+    "split_filename": {
+      "const": "split_v2.csv",
+      "description": "Seule valeur acceptée. split_v1 est INVALIDE (docs/SPLIT_V2_AUDIT.md)."
+    },
+    "split_sha256": {
+      "const": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+      "description": "SHA256 du split gelé. Un écart fait échouer l'évaluation."
+    },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "threshold_rule": {
+      "type": "string",
+      "description": "Décrit ce que le producteur a fait. Reporté pour information : le moteur recalcule toujours le seuil sur la validation."
+    },
+    "test_labels_not_used_for_tuning": {
+      "const": true,
+      "description": "Déclaration explicite. Un run qui ne l'affirme pas est refusé."
+    }
+  },
+  "$comment": "Colonnes INTERDITES dans predictions.csv : pressure, pressure_mpa, flow, flow_ms, device, path, filename, material, region, noise_category, md5, window, rep, fold, label, label_3c, y, target, group_id. Les deux premières familles sont des métadonnées d'acquisition qui fuiteraient l'étiquette ; les dernières appartiennent au manifeste et ne peuvent pas être redéfinies par un modèle."
+}

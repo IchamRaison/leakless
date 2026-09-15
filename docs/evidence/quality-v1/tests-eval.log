@@ -1,0 +1,12 @@
+test_ap_matches_sklearn_on_synthetic_arrays_when_available (test_harness_quality.HarnessQualityChecks.test_ap_matches_sklearn_on_synthetic_arrays_when_available) ... ok
+test_ap_ties_are_permutation_invariant (test_harness_quality.HarnessQualityChecks.test_ap_ties_are_permutation_invariant) ... ok
+test_decision_table_uses_existing_counts_and_handles_zero_denominators (test_harness_quality.HarnessQualityChecks.test_decision_table_uses_existing_counts_and_handles_zero_denominators) ... ok
+test_existing_threshold_auc_and_verdict_rules (test_harness_quality.HarnessQualityChecks.test_existing_threshold_auc_and_verdict_rules) ... ok
+test_explicit_archive_revision_is_validated_and_does_not_call_git (test_harness_quality.HarnessQualityChecks.test_explicit_archive_revision_is_validated_and_does_not_call_git) ... ok
+test_markdown_does_not_invent_control_superiority_or_inconclusiveness (test_harness_quality.HarnessQualityChecks.test_markdown_does_not_invent_control_superiority_or_inconclusiveness) ... ok
+test_unchanged_official_files (test_harness_quality.HarnessQualityChecks.test_unchanged_official_files) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 1.017s
+
+OK

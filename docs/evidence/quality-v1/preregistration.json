@@ -1,0 +1,73 @@
+{
+  "purpose": "evaluation_qualite_complete_v1_sans_reentrainement_tslm",
+  "registered_at_utc": "2026-09-12T20:43:23Z",
+  "tslm_final_metrics_computed_before_registration": false,
+  "model_version": "pipe-qwen3.5-4b-v1-1199789f-e4",
+  "model_training_commit": "1199789f471acf79f7e82604e2a15acd45e0b2f7",
+  "model_export_commit": "5a29d6eb9ceca39fdce829eb22dbbfd67b25589b",
+  "checkpoint_checksums_sha256": "b95569c50f5e1bbf3533bddc92530b5f285eb25dec999f83999f60ffd912d1ae",
+  "temporal_sha256": "183a1b1c29facf0e27f27efc7adab8c1bb13556cede06abc7f735672cbe7eb82",
+  "split_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+  "audit_mapping_sha256": "1a3bd3c18ad6d886d42ecc85ba3a5cceaa45a9084102fc112b53e66782e29d61",
+  "n_configs_compared": 3,
+  "selected_epoch": 4,
+  "scoring": "class-continuation-logprob-sum-softmax-v1",
+  "calibration": "none",
+  "frozen_runs": {
+    "tslm-v1": {
+      "metadata_sha256": "0d8ed4919540987235a3fe98eb2d1cdd30fbe3482f9b2786eb50603f03fb795f",
+      "predictions_sha256": "0c4dfb3f06c379fe48ce4f7456d38c67d165c80d5e083fbb3f350e0b2732d7b8"
+    },
+    "tslm-v1-T1": {
+      "metadata_sha256": "15b1335a930d4303a080c68e5440f17083f87f1b54c57151699c74947658b9af",
+      "predictions_sha256": "d510328b660e4247372f2b0bb32c08bcde0f675d02d63f90576f3e563f5aae16"
+    },
+    "tslm-v1-T2": {
+      "metadata_sha256": "ad749f43a99c11f14b0a0c2145e39665bf2f3abd2ffc9e34bb844a05af7f89b2",
+      "predictions_sha256": "9ec9af9256e05a4f61a8a9dd8c184ce890565ca88688dd63fea0db1524d5e5df"
+    },
+    "tslm-v1-T3": {
+      "metadata_sha256": "2b40216cedd3a609e7f729a3bfb52193e2dad200468dacf0c15d6fd296c34483",
+      "predictions_sha256": "65676758ee5109dcceb5e8828bbde1cd05cd72d72461c99d1082b17fc74c3fd5"
+    }
+  },
+  "evaluation": {
+    "harness_source_commit": "6dfdf63580bc15ce6a1cf0817b9da3569553aca1",
+    "primary_metric": "test_cluster_roc_auc",
+    "aggregation": "median",
+    "threshold_rule": "argmax_val_cluster_macro_f1; tie_smallest_threshold; score_greater_or_equal",
+    "threshold_precision": "full_float; rounded_display_not_used_for_decisions",
+    "bootstrap_draws": 2000,
+    "bootstrap_seed": 20260912,
+    "bootstrap_unit": "heuristic_dependency_group",
+    "confidence_intervals": ["clip_roc_auc", "cluster_roc_auc", "clip_macro_f1", "cluster_macro_f1"],
+    "average_precision": "equal_score_thresholds_grouped_before_integration; prospective_tie_fix_before_real_metrics",
+    "average_precision_toy_evidence": "scores=[0.5,0.5], labels=[1,0] or [0,1]: expected AP=0.5 for both; legacy implementation returned 1.0 or 0.5",
+    "comparison_pairs": ["tslm-v1:c0", "tslm-v1:c1", "tslm-v1:c2", "tslm-v1:c2b", "tslm-v1:c3", "tslm-v1:tslm-v1-T1", "tslm-v1:tslm-v1-T2", "tslm-v1:tslm-v1-T3"],
+    "controls": "reproduce_existing_fixed_features_and_C_grid_[0.01,0.1,1,10]; scaler_and_fit_on_train_only; select_C_on_validation_cluster_macro_f1; no_new_search",
+    "vincent_baseline": "include_only_if_original_compatible_402_row_export_becomes_accessible; no_retraining_or_metadata_bypass",
+    "stress_thresholds": "each_run_selected_on_its_own_validation; not_fixed_T0_threshold_robustness"
+  },
+  "text_audit": {
+    "fold_order": ["val", "test"],
+    "expected_counts": {"val": 208, "test": 194},
+    "order_within_fold": "clip_id_ascending",
+    "input": "original_WAV_bytes_only; no_labels_ids_or_acquisition_metadata_to_model",
+    "warmup": "bundle_reload_example_once_after_load; excluded_from_audit_counts",
+    "reference": "DSP_greatest_mean_spectral_energy_band_over_61_real_frames",
+    "metrics": ["format_validity", "band_correctness_all_clips", "abstentions", "generation_vs_saved_score_threshold_disagreement", "response_latency"],
+    "errors": "retain_raw_generated_text_API_payload_and_every_failed_clip; no_fallback_predictions",
+    "summary": "validation_and_test_separate; no_pooled_quality_metric"
+  },
+  "constraints": [
+    "No_weight_preprocessing_prompt_label_scoring_or_calibration_change_after_test",
+    "No_retraining_or_regeneration_of_TSLM_T0_T1_T2_T3",
+    "No_cherry_picking_or_test_driven_exclusion",
+    "Validation_model_selection_score_is_not_an_independent_final_estimate",
+    "Historical_Nevil_control_test_results_have_been_seen_but_do_not_motivate_model_changes",
+    "Group_bootstrap_does_not_cover_training_or_threshold_selection_uncertainty",
+    "Stress_sensitivity_is_not_causal_explanation_or_field_reliability",
+    "Dominant_frequency_band_text_is_not_a_causal_leak_explanation",
+    "Audit_hardcoded_report_prose_before_publication"
+  ]
+}

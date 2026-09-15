@@ -1,0 +1,1001 @@
+clip_id,path,device,material,region,pressure_mpa,flow_ms,noise_category,window,rep,md5,group_id,fold
+c003cd25f5a5f,leak acoustic data/ductile iron-NA-0.3234 MPa-0.31 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3234 MPa,0.31 ms,NA,0,,dcc6253fe973753e5a7f7a719f77fba7,gc9b93e189b,test
+c00c343da6afa,leak acoustic data/pe-NA-0.3280 MPa-1.46 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.3280 MPa,1.46 ms,NA,0,1,f9aece8230337782df23e3ee3d6bc01a,g097831ac4c,val
+c0128b879694e,no leak acoustic data/ductile iron-zone 1-NA-NA-noise logger_1-2.wav,noise logger,ductile iron,zone 1,NA,NA,NA,1,,528d81ba7cc332f3f89cb1c06de37799,gd2da168526,train
+c02543903a0da,leak acoustic data/pe-NA-0.2742 MPa-4.18 ms-noise logger-0-1.wav,noise logger,pe,NA,0.2742 MPa,4.18 ms,NA,0,,44a7f5d4ed12b0a6916c16df163c3c9d,gbcf550a5ee,train
+c033723905116,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_3-4_6.wav,noise logger,ductile iron,zone 2,NA,NA,NA,3,6,fb09c184e8e4cd3529a304730f812feb,ga4d5f79c1b,test
+c034866574cf1,leak acoustic data/ductile iron-zone 1-0.32 MPa-NA-noise logger-0-1_1.wav,noise logger,ductile iron,zone 1,0.32 MPa,NA,NA,0,1,385bc4a29854b99a9f8728fa3ad68548,gc1728a6abf,val
+c040f9dc9b422,leak acoustic data/pe-NA-0.3153 MPa-0.57 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3153 MPa,0.57 ms,NA,0,,f59219eeb76f06f350fe8b86bd219778,ge8f0f4a3da,val
+c04206cc802ff,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_0-1_14.wav,noise logger,ductile iron,NA,NA,NA,NA,0,14,f875b168e74983f17852dfa654e38dff,g07ac25f1e0,train
+c04498a7ed239,leak acoustic data/ductile iron-NA-0.2349 MPa-4.10 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.2349 MPa,4.10 ms,NA,0,,4b5e1f434b4dfcd71692aaf1c62ea40e,gdc4d4d1b74,train
+c04baf7fef3e6,no leak acoustic data/NA-NA-NA-NA-noise logger_2-3.wav,noise logger,NA,NA,NA,NA,NA,2,,045bd0bf8ecfadd2353a27d1d18fd673,g60e6ee291d,train
+c050246533b34,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_4-5.wav,noise logger,ductile iron,NA,NA,NA,NA,4,,68c8257775aef06f742e4bdcb6aaa880,g07ac25f1e0,train
+c050cf56bc553,no leak acoustic data/pe-zone 2-NA-NA-noise logger_3-4_4.wav,noise logger,pe,zone 2,NA,NA,NA,3,4,2eae862b51282ecd93c12279101485d1,g3aa9a8f111,val
+c05d66d9aed9d,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_2-3_1.wav,hydrophone,ductile iron,NA,NA,NA,NA,2,1,49ba493b20340ef4aa0abe7ca4ab16cb,g07ac25f1e0,train
+c05d8158c3707,leak acoustic data/pe-NA-0.1892 MPa-3.59 ms-noise logger-0-1.wav,noise logger,pe,NA,0.1892 MPa,3.59 ms,NA,0,,36a1d62515b8aa7b1a816c08e856028b,g72971ef0cc,train
+c05da778ba8ec,no leak acoustic data/pe-zone 2-NA-NA-noise logger_2-3_3.wav,noise logger,pe,zone 2,NA,NA,NA,2,3,c1c66462ea3047e9c5d3b508f6130c9b,g3aa9a8f111,val
+c05f4f069b542,no leak acoustic data/pe-NA-NA-NA-noise logger_2-3_11.wav,noise logger,pe,NA,NA,NA,NA,2,11,5b03efd873490230a0f417a98e4c52c9,g46286703fa,train
+c062288ccfbf0,leak acoustic data/ductile iron-NA-0.3441 MPa-0.22 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3441 MPa,0.22 ms,NA,0,1,cc48581925f93e6d4cf7468a5ad4d887,g71c7290dc4,train
+c063306a756e0,no leak acoustic data/pe-NA-NA-NA-noise logger_3-4_6.wav,noise logger,pe,NA,NA,NA,NA,3,6,8a1afec32d62cf3f730b87aabe01bb9e,g46286703fa,train
+c064b4d3a7013,leak acoustic data/pe-NA-0.2425 MPa-3.97 ms-noise logger-0-1.wav,noise logger,pe,NA,0.2425 MPa,3.97 ms,NA,0,,e287c980b0d06e3ddc557c089d0b9f0d,g5a209470f2,train
+c06568d1b9f0f,leak acoustic data/pe-zone 2-0.3172 MPa-0.95 ms-noise logger-0-1_1.wav,noise logger,pe,zone 2,0.3172 MPa,0.95 ms,NA,0,1,a583588d6eba0c869c4a2a69aaae71c1,ga7bab1b774,train
+c067add6c95ef,no leak acoustic data/NA-NA-NA-NA-hydrophone_0-1.wav,hydrophone,NA,NA,NA,NA,NA,0,,73b63d56891749fb444de19dd817fe4f,g60e6ee291d,train
+c06ccf39a495b,leak acoustic data/ductile iron-NA-0.3231 MPa-0.10 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3231 MPa,0.10 ms,NA,0,1,ab8a2a66bfc2ed3817e6dd18225b8aba,g0a0ca7697a,train
+c0733c4c950d5,no leak acoustic data/pe-zone 2-NA-NA-noise logger_1-2_4.wav,noise logger,pe,zone 2,NA,NA,NA,1,4,71ae3a44df80b17ce3489313245afa3a,g3aa9a8f111,val
+c07be70f98513,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_2-3.wav,hydrophone,pe,zone 2,NA,NA,NA,2,,bdeae1247ce0df9591f6311195884aef,g3aa9a8f111,val
+c07c975f95b7e,leak acoustic data/pe-NA-0.3302 MPa-1.44 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.3302 MPa,1.44 ms,NA,0,1,988974709ccf402e39077016824a1384,gd4598815b5,train
+c07e9a820a771,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_3-4_1.wav,hydrophone,ductile iron,NA,NA,NA,NA,3,1,da678aa996c9f4be36cc3f08cc2d506d,g07ac25f1e0,train
+c07f1a9a23449,no leak acoustic data/pe-zone 2-NA-NA-noise logger_3-4_2.wav,noise logger,pe,zone 2,NA,NA,NA,3,2,e66c44ebdd5b79cf1adbea3b3509f34a,g3aa9a8f111,val
+c0805b0f448be,no leak acoustic data/NA-NA-NA-NA-hydrophone_0-1_1.wav,hydrophone,NA,NA,NA,NA,NA,0,1,0f5b7bd524aa9f616fa24c92aab81a1b,g60e6ee291d,train
+c089e36733958,leak acoustic data/pe-zone 2-0.3245 MPa-1.68 ms-noise logger-0-1.wav,noise logger,pe,zone 2,0.3245 MPa,1.68 ms,NA,0,,3317cf871ed404c164f6ee116f8f2494,gab37cb9a8d,train
+c08a67eff0015,no leak acoustic data/steel-zone 1-NA-NA-noise logger_3-4.wav,noise logger,steel,zone 1,NA,NA,NA,3,,87e3532f3cfd4e4ba395e0d06bda4758,ge9b5969de0,train
+c0911d89cc12e,leak acoustic data/ductile iron-NA-0.2755 MPa-4.38 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.2755 MPa,4.38 ms,NA,0,,dbc9ea19374537bbfd0610dc8ba5961f,gf05d2e1f49,train
+c0939263c9853,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_3-4_3.wav,hydrophone,pe,zone 2,NA,NA,NA,3,3,de759f839ebd6715871d67dee94b758c,g3aa9a8f111,val
+c0961e1ade67e,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_0-1_4.wav,noise logger,ductile iron,NA,NA,NA,NA,0,4,9fa8f753fc8333e4478462a36c67b5cd,g07ac25f1e0,train
+c09845d7bb23e,leak acoustic data/ductile iron-zone 1-0.32 MPa-NA-noise logger-0-1_2.wav,noise logger,ductile iron,zone 1,0.32 MPa,NA,NA,0,2,282f2cd293830826efd523082f0329c0,gc1728a6abf,val
+c09d46248c4c7,environmental noise/dog_5-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,dog_5,0,,bb758b3ac1e3ce2335ff7a67a4d5f290,gabeb318a09,val
+c09f5a9f2c37e,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_0-1_3.wav,noise logger,ductile iron,NA,NA,NA,NA,0,3,e4a90d075a4b62e35d70ccf7b403d263,g07ac25f1e0,train
+c0a700e9fe637,leak acoustic data/ductile iron-NA-0.3137 MPa-0.42 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3137 MPa,0.42 ms,NA,0,,f9241052b2c225a7b266ffea0ae6672e,g52f27520ea,test
+c0a9746b5d9ae,leak acoustic data/ductile iron-NA-0.2742 MPa-4.18 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.2742 MPa,4.18 ms,NA,0,,bde1c58e68c7b3773852f86cd534f481,gbcf550a5ee,train
+c0c6081270402,leak acoustic data/ductile iron-NA-0.1545 MPa-3.36 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.1545 MPa,3.36 ms,NA,0,,f303bef99c6803a6edbbddc64f94f556,gdc4d4d1b74,train
+c0c71a8a9cb3b,no leak acoustic data/ductile iron-zone 2-NA-NA-hydrophone_4-5_2.wav,hydrophone,ductile iron,zone 2,NA,NA,NA,4,2,1cb780dfc695ed4f65649daaa7a96b26,ga4d5f79c1b,test
+c0c964c407cd9,no leak acoustic data/ductile iron-zone 2-NA-NA-hydrophone_0-1_2.wav,hydrophone,ductile iron,zone 2,NA,NA,NA,0,2,bbacc6ebf78af1df92537327a5fcfb90,ga4d5f79c1b,test
+c0cb708e68599,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_1-2_1.wav,hydrophone,ductile iron,NA,NA,NA,NA,1,1,94c147136c98984c0eebf46484be7a4a,g07ac25f1e0,train
+c0d7da724a381,leak acoustic data/pe-NA-0.2349 MPa-4.10 ms-noise logger-0-1.wav,noise logger,pe,NA,0.2349 MPa,4.10 ms,NA,0,,e072ed287185957dfa68173264dcaaec,gdc4d4d1b74,train
+c0da64783fe68,no leak acoustic data/ductile iron-zone 2-NA-NA-hydrophone_2-3_1.wav,hydrophone,ductile iron,zone 2,NA,NA,NA,2,1,8569587281898150329104570550b109,ga4d5f79c1b,test
+c0dda64d44b22,no leak acoustic data/pe-zone 2-NA-NA-noise logger_0-1_7.wav,noise logger,pe,zone 2,NA,NA,NA,0,7,6809b40802e61de19debba8ee57b2c2b,g3aa9a8f111,val
+c0e1ae9059e5f,leak acoustic data/ductile iron-zone 2-0.312 MPa-0.9 ms-noise logger-0-1_2.wav,noise logger,ductile iron,zone 2,0.312 MPa,0.9 ms,NA,0,2,58d2322f3bf7e615e21a2af71484ac0c,gbd8e42847a,val
+c0e232e8abefd,no leak acoustic data/pe-NA-NA-NA-noise logger_1-2_5.wav,noise logger,pe,NA,NA,NA,NA,1,5,c93f625379f700db99930d8f5e66640f,g46286703fa,train
+c0e40d3aab938,leak acoustic data/ductile iron-NA-0.2377 MPa-3.95 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.2377 MPa,3.95 ms,NA,0,,d61406b8fbbfb6bad5771964eea91146,gcdfe50e5af,test
+c0f537ec98725,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_0-1_10.wav,noise logger,ductile iron,NA,NA,NA,NA,0,10,b7b7a28a27557c60ccb90ef8a1c43258,g07ac25f1e0,train
+c0f88d4e5d2f8,leak acoustic data/pe-NA-0.3210 MPa-0.2 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3210 MPa,0.2 ms,NA,0,,50fabd9d56753fc16201158d9c8440ed,gdd92357c7e,val
+c0f921fc0a408,environmental noise/drilling_8-NA-noise logger_2-3.wav,noise logger,NA,NA,NA,NA,drilling_8,2,,2cf45aa28b23a94de991920023b123ea,g9ab0cbcb70,train
+c0fe8fba2c03f,leak acoustic data/ductile iron-zone 2-NA-NA-hydrophone-0-1.wav,hydrophone,ductile iron,zone 2,NA,NA,NA,0,,d84e576d113d16877600420b508dc7ca,g65d97e5de6,test
+c10273d0a0209,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_0-1.wav,hydrophone,pe,zone 2,NA,NA,NA,0,,e7a5494582417853d49bab6b2379d62d,g3aa9a8f111,val
+c103ffc107587,leak acoustic data/pe-zone 2-0.305 MPa-1.6 ms-noise logger-0-1_1.wav,noise logger,pe,zone 2,0.305 MPa,1.6 ms,NA,0,1,c014e8ae46c1edd39ffe867affae9b3c,gbd8e42847a,val
+c10c1667ab97e,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_2-3_3.wav,noise logger,ductile iron,zone 2,NA,NA,NA,2,3,a0268cf791cffc742e0be244ede91945,ga4d5f79c1b,test
+c10c680f7a935,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_4-5.wav,noise logger,ductile iron,zone 2,NA,NA,NA,4,,f61eb459c89758ae4fe55555d345b24b,ga4d5f79c1b,test
+c10cb1f471566,environmental noise/dog_4-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,dog_4,0,,5f14f75143d2f6e532f5e88f9bf8967d,gdb331c1860,val
+c10d8db301dc4,environmental noise/drum-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,drum,0,,9e78d6fa8aef69ffb28f697a750432d6,gd61c1fa88a,train
+c10dbbe1fe88e,leak acoustic data/ductile iron-zone 2-0.315 MPa-1.34 ms-noise logger-0-1_4.wav,noise logger,ductile iron,zone 2,0.315 MPa,1.34 ms,NA,0,4,0b448801ba9aec5ef4f7594c42a48280,g411f1c3a8a,train
+c10f28ad85eb4,leak acoustic data/ductile iron-NA-0.1803 MPa-3.68 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.1803 MPa,3.68 ms,NA,0,1,416369c285a0b726dd268aa2ad9a5946,gb6e25e47de,train
+c112f81c56ca1,leak acoustic data/pe-NA-0.3202 MPa-0.60 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3202 MPa,0.60 ms,NA,0,,d1584be5a5d05bc1649204fac4ea0cb8,gd37b7e3da0,train
+c115e653341a1,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_4-5_5.wav,noise logger,ductile iron,zone 2,NA,NA,NA,4,5,3451f89ab4c3f587e2aab791f155fdbd,ga4d5f79c1b,test
+c116a00f4fb3f,leak acoustic data/ductile iron-NA-0.2339 MPa-4.20 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.2339 MPa,4.20 ms,NA,0,1,0546e1063a9f968563906efc524f559f,g31f494f9af,val
+c11831df929ff,no leak acoustic data/steel-zone 1-NA-NA-noise logger_2-3.wav,noise logger,steel,zone 1,NA,NA,NA,2,,a7d41923f08bbd6f110b4081ace1b97e,ge9b5969de0,train
+c11e7827033dd,leak acoustic data/pe-NA-0.2437 MPa-3.98 ms-noise logger-0-1.wav,noise logger,pe,NA,0.2437 MPa,3.98 ms,NA,0,,a2dbfa80034cfdcdd3a420e9a5c7189d,g809b43e6f0,test
+c122a79440158,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_0-1_11.wav,noise logger,ductile iron,NA,NA,NA,NA,0,11,a4893d5ea7de684781f779cb281f0633,g07ac25f1e0,train
+c1269b91604b3,leak acoustic data/ductile iron-NA-0.1771 MPa-3.62 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.1771 MPa,3.62 ms,NA,0,,056a85d8267a2e2b9f11aadfdd13d36f,gdc4d4d1b74,train
+c128d061d7c0f,no leak acoustic data/pe-NA-NA-NA-noise logger_4-5_4.wav,noise logger,pe,NA,NA,NA,NA,4,4,62966b4717d829b08e2fb62f64503ab4,g46286703fa,train
+c132422b849a7,environmental noise/hydrant_normal-NA-noise logger_1-2.wav,noise logger,NA,NA,NA,NA,hydrant_normal,1,,a592c9fb0fc27550358d5dc3662c1427,g03a8c8e492,train
+c13b609dbac9e,environmental noise/rain-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,rain,0,,84f4ac0f81450135ba1e6a265f005395,g4db42c620a,train
+c14279feb46c4,leak acoustic data/ductile iron-NA-0.2242 MPa-3.90 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.2242 MPa,3.90 ms,NA,0,1,f932f77b06101b2505eb024dca7fd1ed,gf98db9952c,train
+c144c81ae2879,leak acoustic data/ductile iron-zone 2-0.3132 MPa-0.8 ms-noise logger-0-1.wav,noise logger,ductile iron,zone 2,0.3132 MPa,0.8 ms,NA,0,,d647a42cd5006a38962cf3f38d1d53f0,gfe15fdf3e1,test
+c14884d921cc1,environmental noise/dog_5-NA-noise logger_3-4.wav,noise logger,NA,NA,NA,NA,dog_5,3,,4173baae6c7f2750a64fa3e9351b7836,gabeb318a09,val
+c1499c35cbab2,leak acoustic data/ductile iron-NA-0.3212 MPa-1.23 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.3212 MPa,1.23 ms,NA,0,,46573a3c79d3a004906c3d43c2e70657,g50b627059e,train
+c15011e08795d,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_1-2_2.wav,noise logger,ductile iron,zone 2,NA,NA,NA,1,2,9499a0ff67c7778ae99a70302d820489,ga4d5f79c1b,test
+c150583d1dbbe,leak acoustic data/ductile iron-NA-0.2233 MPa-3.77 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.2233 MPa,3.77 ms,NA,0,,20c77a15bc6a8b31a9805981752d5682,gb577968cb1,train
+c1534fe458cda,leak acoustic data/pe-zone 2-NA-NA-noise logger-0-1_6.wav,noise logger,pe,zone 2,NA,NA,NA,0,6,fa4bf34a8c2468c7acf473c2049df5fa,gd2cdf4b672,test
+c1564ac4f839d,leak acoustic data/ductile iron-NA-0.1545 MPa-3.40 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.1545 MPa,3.40 ms,NA,0,1,70c23d11c17200cace23050ecd98aeb3,gdc4d4d1b74,train
+c15d5da067761,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_2-3_1.wav,hydrophone,pe,zone 2,NA,NA,NA,2,1,5ebf454e3e59a7b713fc4a2981ac9f64,g3aa9a8f111,val
+c163826f414a4,no leak acoustic data/pe-NA-NA-NA-noise logger_2-3_7.wav,noise logger,pe,NA,NA,NA,NA,2,7,c0be5e0761abaf1518ff651ef2503056,g46286703fa,train
+c1683ed31e294,leak acoustic data/pe-NA-0.2761 MPa-4.42 ms-noise logger-0-1.wav,noise logger,pe,NA,0.2761 MPa,4.42 ms,NA,0,,cd354dcb29e30b6c1e06ae8355ae178e,g27ceee2299,train
+c168af95e2156,environmental noise/dog_4-NA-noise logger_2-3.wav,noise logger,NA,NA,NA,NA,dog_4,2,,149b6fd283851fdef14af5455455eca1,gdb331c1860,val
+c168e7b1c5768,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_4-5_7.wav,noise logger,ductile iron,NA,NA,NA,NA,4,7,dd584c9594b2aeb3d882a905669d41ea,g07ac25f1e0,train
+c172f3caf0939,no leak acoustic data/NA-zone 2-NA-NA-noise logger_4-5_2.wav,noise logger,NA,zone 2,NA,NA,NA,4,2,09f271c441c25ecb4528ebdde191a0a5,g4a6d62802d,train
+c17c3c87dbd77,environmental noise/drilling_4-NA-noise logger_2-3.wav,noise logger,NA,NA,NA,NA,drilling_4,2,,b3d93d3bbba448a94163a2d77bb53097,g8d6b13227b,train
+c186eb3b4bb13,leak acoustic data/pe-NA-0.3091 MPa-4.64 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.3091 MPa,4.64 ms,NA,0,1,8867a4ca667720cc2c6b5fd421feba34,gb8ea2685b2,train
+c189aa961829b,leak acoustic data/pe-NA-0.2349 MPa-4.10 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.2349 MPa,4.10 ms,NA,0,1,f69582bc1547398a01d774568269fa4c,gdc4d4d1b74,train
+c18a6a959b315,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_3-4_11.wav,noise logger,ductile iron,NA,NA,NA,NA,3,11,a97c7f6809d398795e6e6521d4b16bc4,g07ac25f1e0,train
+c18d59fc1c422,leak acoustic data/ductile iron-NA-0.2742 MPa-4.18 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.2742 MPa,4.18 ms,NA,0,,c3c8034662c5b9962196928d50ea3fda,gbcf550a5ee,train
+c18de6d16a39f,environmental noise/engine_2-NA-noise logger_1-2.wav,noise logger,NA,NA,NA,NA,engine_2,1,,55e96775d94a36404cf53022cbd628d8,gc6ab9b7692,val
+c18ded00027e1,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_2-3_8.wav,noise logger,ductile iron,NA,NA,NA,NA,2,8,1eec65ecd61b793bfe891c6a09dcd0df,g07ac25f1e0,train
+c18e2198c3457,leak acoustic data/ductile iron-NA-0.2688 MPa-4.21 ms-noise logger-0-1_2.wav,noise logger,ductile iron,NA,0.2688 MPa,4.21 ms,NA,0,2,3cde23523743e204f5ed5d6293ce3a28,g88c7bfd6e1,train
+c1a020e75d17e,no leak acoustic data/pe-NA-NA-NA-noise logger_2-3_10.wav,noise logger,pe,NA,NA,NA,NA,2,10,c7c3d2867e2450a4ed02c94d328e67dd,g46286703fa,train
+c1a51d58f9912,leak acoustic data/pe-NA-0.3249 MPa-1.72 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3249 MPa,1.72 ms,NA,0,,37dd94c976068cf7f44f94157a3d65b7,g9cd3d9a990,val
+c1a75063384b0,leak acoustic data/ductile iron-NA-0.3225 MPa-0.57 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3225 MPa,0.57 ms,NA,0,,0d7e29944fe4b6a9d4a19a5d681961e3,gc76b064140,test
+c1a8c60507b53,no leak acoustic data/pe-NA-NA-NA-noise logger_4-5_2.wav,noise logger,pe,NA,NA,NA,NA,4,2,2346416185e9ea4a616ca16aed9b283d,g46286703fa,train
+c1a8f1d23de2c,leak acoustic data/ductile iron-NA-0.2425 MPa-3.97 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.2425 MPa,3.97 ms,NA,0,,36171a1e90e01c92c4dfb0f9eaa1cc6c,g5a209470f2,train
+c1aa75bc3586d,environmental noise/hydrant-NA-noise logger_2-3.wav,noise logger,NA,NA,NA,NA,hydrant,2,,d3ef07177106c854c05ae30622df989a,g03a8c8e492,train
+c1ab4f5e70960,leak acoustic data/ductile iron-NA-0.3227 MPa-1.13 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.3227 MPa,1.13 ms,NA,0,,cb375102783d1d6688b862c657d3772f,g31a30cc499,train
+c1b4b1aa0251e,leak acoustic data/steel-zone 1-0.25 MPa-NA-noise logger-0-1_3.wav,noise logger,steel,zone 1,0.25 MPa,NA,NA,0,3,0fa963294bf080c50edb88b7c4882508,g889c1c063a,test
+c1be97c617ebf,leak acoustic data/ductile iron-zone 2-0.315 MPa-1.34 ms-noise logger-0-1_1.wav,noise logger,ductile iron,zone 2,0.315 MPa,1.34 ms,NA,0,1,58d7266adfad4968b61016ce396fcec8,g411f1c3a8a,train
+c1c028b713d91,leak acoustic data/pe-NA-0.3265 MPa-1.62 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3265 MPa,1.62 ms,NA,0,,84607108c262ce2644c15f27f62b2676,gaff98a88ce,test
+c1c2fe8506dad,leak acoustic data/ductile iron-zone 2-0.31 MPa-1.16 ms-noise logger-0-1_5.wav,noise logger,ductile iron,zone 2,0.31 MPa,1.16 ms,NA,0,5,031f6da4c5ab6a89b4eb721b8e3124f1,gb8b74c622f,test
+c1d12c9544383,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_4-5_3.wav,noise logger,ductile iron,zone 2,NA,NA,NA,4,3,083cb7c0e2fc97bbe6a08739346c539e,ga4d5f79c1b,test
+c1d63f2fac16f,leak acoustic data/ductile iron-zone 2-0.3249 MPa-1.33 ms-hydrophone-0-1.wav,hydrophone,ductile iron,zone 2,0.3249 MPa,1.33 ms,NA,0,,940ef13a9ed24cc11a326f4161a58f11,g358b38eba1,train
+c1d7389b5e3dc,leak acoustic data/ductile iron-NA-0.32 MPa-NA-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.32 MPa,NA,NA,0,1,0b3f9695cd8cf923061f02f3e7ac6496,gbc971f304e,val
+c1d9472c3c5b1,environmental noise/drilling_1-NA-noise logger_1-2.wav,noise logger,NA,NA,NA,NA,drilling_1,1,,e44bd6e14adf60587948eb55fc581fa4,g7318b6ee2e,train
+c1dea85a5c168,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_3-4_1.wav,noise logger,ductile iron,NA,NA,NA,NA,3,1,f75cb131f1ba6c7e3240719fe8723092,g07ac25f1e0,train
+c1e54ae43a9f6,leak acoustic data/ductile iron-NA-0.3249 MPa-0.01 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3249 MPa,0.01 ms,NA,0,,caa8c20c7692fe37b5653c48271eeaf1,g94a157eb60,train
+c1e5a1a35b9a6,leak acoustic data/pe-NA-0.1949 MPa-2.02 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.1949 MPa,2.02 ms,NA,0,1,dc47ac3c51722e8276c2b42e77d46255,gc88aa3442a,train
+c1ed5bae3fcd5,no leak acoustic data/NA-zone 2-NA-NA-noise logger_3-4.wav,noise logger,NA,zone 2,NA,NA,NA,3,,087d369ca746b01763ffe03c8cc36eb1,g4a6d62802d,train
+c1ed6145e08e7,leak acoustic data/pe-zone 2-0.3171 MPa-0.57 ms-noise logger-0-1_1.wav,noise logger,pe,zone 2,0.3171 MPa,0.57 ms,NA,0,1,fecd1da0abd70b242ce405ac34314930,g63ca5c18d8,test
+c1edfd0896ce2,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_0-1_12.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,12,7c6249bf7f019e9d93b21ecd43ddcf25,ga4d5f79c1b,test
+c1f4f90ceab92,environmental noise/dog_7-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,dog_7,0,,3009ac1db2102fd16c894483cb29ca0d,g04172cba2e,train
+c1f52dff62176,no leak acoustic data/ductile iron-zone 2-NA-NA-hydrophone_0-1_3.wav,hydrophone,ductile iron,zone 2,NA,NA,NA,0,3,d3c92a117c95973a2a10e03a078085c0,ga4d5f79c1b,test
+c1f6d90ff3109,leak acoustic data/ductile iron-NA-0.3218 MPa-1.15 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.3218 MPa,1.15 ms,NA,0,,ffa818aeb55689be2eb6289d9b5db3ca,gbd2ed3f884,val
+c1f6f5dc288b2,leak acoustic data/ductile iron-zone 2-0.3237 MPa-1.35 ms-noise logger-0-1.wav,noise logger,ductile iron,zone 2,0.3237 MPa,1.35 ms,NA,0,,6314459b8adacc09fba8233234ddcf0d,gf4ed344bc4,train
+c1f8778882df2,leak acoustic data/ductile iron-NA-0.1767 MPa-3.50 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.1767 MPa,3.50 ms,NA,0,1,1377774e1e56b521980da35ea0d14294,g11974daa56,val
+c1fb776519059,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_3-4_6.wav,noise logger,ductile iron,NA,NA,NA,NA,3,6,cb1479f710b9327b9f89f2f30ff5970c,g07ac25f1e0,train
+c1fc6c093dcc4,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_20.wav,noise logger,pe,NA,NA,NA,NA,0,20,f22c0e342b4b5d4d0376b973a42a0866,g46286703fa,train
+c1fee47f9b4f5,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_0-1_10.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,10,b788364827ef37ee5391aa683a8a9a04,ga4d5f79c1b,test
+c205da3820a47,leak acoustic data/ductile iron-zone 2-0.3132 MPa-0.8 ms-noise logger-0-1_1.wav,noise logger,ductile iron,zone 2,0.3132 MPa,0.8 ms,NA,0,1,9f8f491b2b6cdc0af8ef6f5136e0eb68,gfe15fdf3e1,test
+c20b154e99c77,environmental noise/fan motor-NA-noise logger_4-5.wav,noise logger,NA,NA,NA,NA,fan motor,4,,59ec06556a735dd9ff67c500f961343c,g5de03d5dfa,train
+c20c972efdcce,no leak acoustic data/pe-NA-NA-NA-hydrophone_2-3_2.wav,hydrophone,pe,NA,NA,NA,NA,2,2,4a1d7fa00f5dba80acd84ff15b5d3440,g46286703fa,train
+c211a8d93216b,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_0-1_6.wav,noise logger,ductile iron,NA,NA,NA,NA,0,6,95b1f8f217d99d5f84407df318974c28,g07ac25f1e0,train
+c21382c66a1e0,no leak acoustic data/pe-NA-NA-NA-noise logger_1-2_3.wav,noise logger,pe,NA,NA,NA,NA,1,3,a575957d044856f69bc2b4d3660c52f5,g46286703fa,train
+c213d953c93c7,environmental noise/grass noise-zone 2-noise logger_3-4_1.wav,noise logger,NA,zone 2,NA,NA,grass noise,3,1,5e3148a8574cdf8f4707cedd42a94f19,g5ac5d63683,test
+c2149f5a4bc9e,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_17.wav,noise logger,pe,NA,NA,NA,NA,0,17,7d899476c873f99827d5810236a37550,g46286703fa,train
+c218cadc2240b,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_2-3_5.wav,noise logger,ductile iron,zone 2,NA,NA,NA,2,5,487bc211ed29542150b1dbf015c22aeb,ga4d5f79c1b,test
+c21d17c5364a6,leak acoustic data/steel-zone 1-0.32 MPa-NA-noise logger-0-1_2.wav,noise logger,steel,zone 1,0.32 MPa,NA,NA,0,2,4465e6641a73c82b15e16dcbda46dedf,g9d6e9c58a4,val
+c21fec37cf71a,leak acoustic data/ductile iron-NA-0.2672 MPa-4.07 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.2672 MPa,4.07 ms,NA,0,,758fb9c339c49533cd9fde00d0e34b86,g08e2845ae9,train
+c22636298a23e,environmental noise/drilling_5-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,drilling_5,0,,7f37a608680a08c63788cb6b351cb1ab,gf3aff34474,train
+c229af2fd57d6,leak acoustic data/ductile iron-NA-0.3234 MPa-0.31 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3234 MPa,0.31 ms,NA,0,1,c20fc020bce7b82cc466f9e00c90dae1,gc9b93e189b,test
+c22b434ae486d,leak acoustic data/ductile iron-NA-0.1630 MPa-3.45 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.1630 MPa,3.45 ms,NA,0,1,fb3b0584ea38978f762fe5e04c9e5159,gdc4d4d1b74,train
+c239d96cc7621,leak acoustic data/ductile iron-zone 2-NA-NA-noise logger-0-1_4.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,4,e9ac1c9d4380ecb765273f3177fca60e,gf731e64668,train
+c2417970779b9,environmental noise/fan motor-NA-noise logger_1-2.wav,noise logger,NA,NA,NA,NA,fan motor,1,,9df6efe4b8574407e210da1e2452d901,g5de03d5dfa,train
+c2466a0762a38,leak acoustic data/ductile iron-NA-0.3179 MPa-0.51 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3179 MPa,0.51 ms,NA,0,1,719177c3f15ae1d45d694b339ce08246,gfe9a7ba473,val
+c24b6690dc003,leak acoustic data/pe-zone 1-0.25 MPa-NA-noise logger-0-1_1.wav,noise logger,pe,zone 1,0.25 MPa,NA,NA,0,1,3e65389e5803f75032fe1b11bf32aba6,ga2766ef0b5,train
+c24bf7667eff5,environmental noise/rain_2-NA-noise logger_2-3.wav,noise logger,NA,NA,NA,NA,rain_2,2,,4a4aed088a9f9bab4376e36f82df1f26,gaeb474d6be,train
+c24c62e755fb2,leak acoustic data/steel-zone 1-0.25 MPa-NA-hydrophone-0-1.wav,hydrophone,steel,zone 1,0.25 MPa,NA,NA,0,,dc11b0ef6eb595355fc2df6b88ed63c0,g5de312a0b1,test
+c252a911dacef,leak acoustic data/pe-NA-0.1767 MPa-3.50 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.1767 MPa,3.50 ms,NA,0,1,aa988f66bc8e9cbce4f577ee7dc837a6,g11974daa56,val
+c255805e4789f,leak acoustic data/pe-NA-0.3003 MPa-4.65 ms-hydrophone-0-1.wav,hydrophone,pe,NA,0.3003 MPa,4.65 ms,NA,0,,656cd776d40996a55fa14198e6c5932f,g0bc04f27dc,train
+c25f1d27f19ab,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_0-1_5.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,5,b42ecff35bebbf4c80651d62c4361f4d,ga4d5f79c1b,test
+c260be2fa2319,leak acoustic data/pe-NA-0.2464 MPa-4.30 ms-hydrophone-0-1.wav,hydrophone,pe,NA,0.2464 MPa,4.30 ms,NA,0,,eefb6521ae4881c73036868a06520664,g5fcdfb219d,test
+c265367c30825,no leak acoustic data/NA-NA-NA-NA-hydrophone_4-5.wav,hydrophone,NA,NA,NA,NA,NA,4,,388272cf416261805bcbc0e4e04f749b,g60e6ee291d,train
+c26b98ad14b71,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_3-4_2.wav,hydrophone,pe,zone 2,NA,NA,NA,3,2,c5154f229f6bc10b6fcc260a64d8187d,g3aa9a8f111,val
+c272ce4cb0a81,leak acoustic data/pe-NA-0.3024 MPa-4.58 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3024 MPa,4.58 ms,NA,0,,d0a1fd7a204fa35493b6ca6e9c056276,g3717c759ba,train
+c27365e6220c2,leak acoustic data/pe-NA-0.2866 MPa-4.50 ms-noise logger-0-1.wav,noise logger,pe,NA,0.2866 MPa,4.50 ms,NA,0,,7870ebe6680209b8c43c6adf05b1b10b,ge4eb0c7012,val
+c27615e885482,leak acoustic data/pe-NA-0.1527 MPa-3.40 ms-hydrophone-0-1.wav,hydrophone,pe,NA,0.1527 MPa,3.40 ms,NA,0,,68b0bcfccfcbacfeb0c5f0df2e401bbe,g384d392de3,train
+c277454df54af,leak acoustic data/ductile iron-NA-0.2688 MPa-4.21 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.2688 MPa,4.21 ms,NA,0,,f4cc8666654ba53cdb93b9361aec8f81,g88c7bfd6e1,train
+c27bcc7508126,leak acoustic data/ductile iron-zone 2-0.3249 MPa-1.33 ms-noise logger-0-1_1.wav,noise logger,ductile iron,zone 2,0.3249 MPa,1.33 ms,NA,0,1,23666c016b5dca9036a186b67073d0cc,g358b38eba1,train
+c27cee2838d7a,leak acoustic data/ductile iron-NA-0.1545 MPa-3.36 ms-noise logger-0-1_3.wav,noise logger,ductile iron,NA,0.1545 MPa,3.36 ms,NA,0,3,a1dc1a742bb70837f23d28fd16e1ea1d,gdc4d4d1b74,train
+c27f20596e4e6,no leak acoustic data/pe-NA-NA-NA-noise logger_2-3_5.wav,noise logger,pe,NA,NA,NA,NA,2,5,59c3d2caebf507c663e852f3ead2199d,g46286703fa,train
+c283bca91f35e,no leak acoustic data/pe-zone 2-NA-NA-noise logger_0-1_11.wav,noise logger,pe,zone 2,NA,NA,NA,0,11,890f8caecb2970babd71608e2ee6d2ee,g3aa9a8f111,val
+c284910639b81,environmental noise/dog_1-NA-noise logger_3-4.wav,noise logger,NA,NA,NA,NA,dog_1,3,,01a66e9759e496b3ac4c36e1c81b59be,ge2dbda8d9a,test
+c285e347060a7,leak acoustic data/pe-NA-0.1507 MPa-3.30 ms-noise logger-0-1.wav,noise logger,pe,NA,0.1507 MPa,3.30 ms,NA,0,,a1680d41931bccbec074445916968a78,g23ae8baa16,test
+c29147b0882e2,leak acoustic data/ductile iron-NA-0.3105 MPa-0.44 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3105 MPa,0.44 ms,NA,0,,43a5631ab6fa2c21039188c517cf5a14,ge48828f323,train
+c299b5b4aae15,leak acoustic data/pe-NA-0.1192 MPa-2.95 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.1192 MPa,2.95 ms,NA,0,1,26266ac0ad0979f6ff97797e05087ddf,gf3773ae361,train
+c29d2d1cdd85f,environmental noise/engine_1-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,engine_1,0,,a2c1e50bf8371dc789111f9f1c4ef4fe,g525a02db13,val
+c2a910ad7f603,no leak acoustic data/pe-NA-NA-NA-noise logger_1-2_8.wav,noise logger,pe,NA,NA,NA,NA,1,8,072f50cb8846549b0fe163baa51b40c6,g46286703fa,train
+c2a95223c7bb8,leak acoustic data/ductile iron-NA-0.3234 MPa-1.20 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.3234 MPa,1.20 ms,NA,0,,29383c593183b35579dd4015cd0db4ce,g1441d18838,train
+c2adb1fc69ff8,leak acoustic data/ductile iron-zone 2-0.31 MPa-1.16 ms-noise logger-0-1_3.wav,noise logger,ductile iron,zone 2,0.31 MPa,1.16 ms,NA,0,3,0df7bcf131d2e35d41b483ad9f878876,gb8b74c622f,test
+c2b209108b35d,leak acoustic data/pe-NA-0.3235 MPa-0.81 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.3235 MPa,0.81 ms,NA,0,1,d9c62d6ebc49994f88d089180d597f8b,g9bc6bf58a3,train
+c2b5b840613ec,leak acoustic data/ductile iron-NA-0.2405 MPa-4.00 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.2405 MPa,4.00 ms,NA,0,1,00e5c9eba97a15afa37cdea7b8594f0a,gfb07c776d5,test
+c2b5d9d0953cd,leak acoustic data/pe-zone 2-NA-NA-noise logger-0-1_4.wav,noise logger,pe,zone 2,NA,NA,NA,0,4,04d362e27205dc700c116fee88baf81f,gd2cdf4b672,test
+c2b8185b115a8,leak acoustic data/pe-NA-0.3267 MPa-0.95 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3267 MPa,0.95 ms,NA,0,,0f1cd232690c13b6038cf71142a6e2e6,g33178462bd,train
+c2b9686ec0b66,leak acoustic data/pe-zone 1-0.32 MPa-NA-noise logger-0-1_1.wav,noise logger,pe,zone 1,0.32 MPa,NA,NA,0,1,4d7294d193950c7ea9b869837f55b8f6,gf656471109,train
+c2bae7438d26f,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_1-2_12.wav,noise logger,ductile iron,NA,NA,NA,NA,1,12,96b324d08b31e6ffb23c73b7416bd0ca,g07ac25f1e0,train
+c2bbf06b85c39,no leak acoustic data/pe-zone 2-NA-NA-noise logger_0-1_12.wav,noise logger,pe,zone 2,NA,NA,NA,0,12,3cbf630a095c1ab9f4ca3a423914443e,g3aa9a8f111,val
+c2c0781b810b9,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_1-2_3.wav,hydrophone,ductile iron,NA,NA,NA,NA,1,3,d5fcc13e9dfff313c8b3d9475df1c023,g07ac25f1e0,train
+c2c13a3c5c847,leak acoustic data/ductile iron-NA-0.3286 MPa-1.34 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.3286 MPa,1.34 ms,NA,0,,106ef2c82ae799fc319194ca531c1582,gd7664d159c,train
+c2c2b62f65cd0,no leak acoustic data/pe-zone 2-NA-NA-noise logger_2-3_12.wav,noise logger,pe,zone 2,NA,NA,NA,2,12,8784df2c6bab187bc6c5f9e3bef2f1d2,g3aa9a8f111,val
+c2c5757d3818f,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_4-5.wav,hydrophone,ductile iron,NA,NA,NA,NA,4,,2b4077e0031fd40c3afdcae52c74ffe1,g07ac25f1e0,train
+c2c65e7f132d3,leak acoustic data/pe-zone 2-0.3034 MPa-1.55 ms-noise logger-0-1_3.wav,noise logger,pe,zone 2,0.3034 MPa,1.55 ms,NA,0,3,5c3d9cc3107d9f9fe1a7b9a7b1121faa,g38477c0f25,train
+c2d3366744da6,no leak acoustic data/pe-NA-NA-NA-hydrophone_1-2_3.wav,hydrophone,pe,NA,NA,NA,NA,1,3,51d02ac45bd38f0d64402b1fe1b48528,g46286703fa,train
+c2d54c2c7191b,leak acoustic data/ductile iron-NA-0.2630 MPa-4.11 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.2630 MPa,4.11 ms,NA,0,,5d0c4b6ea031133e3e3e56eb5bf73e03,g2e6d88fb97,train
+c2d6485f4f337,leak acoustic data/ductile iron-NA-0.2339 MPa-4.20 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.2339 MPa,4.20 ms,NA,0,,5c6a5203dc0e2b0a4a8f836ad7dbe51f,g31f494f9af,val
+c2dd36ac4ea38,no leak acoustic data/pe-zone 2-NA-NA-noise logger_0-1_9.wav,noise logger,pe,zone 2,NA,NA,NA,0,9,05abc81d46f21fb72bb4c40e9649b347,g3aa9a8f111,val
+c2dfdb38d147e,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_4-5_2.wav,noise logger,ductile iron,NA,NA,NA,NA,4,2,0404367f6fd108f1522b361d79ea8b8c,g07ac25f1e0,train
+c2e1175a2b262,leak acoustic data/pe-NA-0.2095 MPa-3.70 ms-noise logger-0-1.wav,noise logger,pe,NA,0.2095 MPa,3.70 ms,NA,0,,4b1ff58d0210e7e9b540efa07c75e49a,gfb8be03274,test
+c2e1f4b029952,leak acoustic data/ductile iron-NA-0.2405 MPa-4.00 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.2405 MPa,4.00 ms,NA,0,,32f5ac9e7d9aa098d128efc3329e36d3,gfb07c776d5,test
+c2e20fedcad53,leak acoustic data/ductile iron-NA-0.3286 MPa-1.40 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3286 MPa,1.40 ms,NA,0,1,f415f9c83734f2d802a775fd9ec4045a,gbcefe1b7d2,train
+c2e3e909174c4,environmental noise/drilling_2-NA-noise logger_1-2.wav,noise logger,NA,NA,NA,NA,drilling_2,1,,4d2251a61544ba165342746ba7f83446,g43a5b2e02e,val
+c2e7509679ef5,no leak acoustic data/pe-NA-NA-NA-noise logger_3-4_4.wav,noise logger,pe,NA,NA,NA,NA,3,4,3b70eb233a188802d162ace0d6016da9,g46286703fa,train
+c2ebcb34181f8,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1.wav,noise logger,pe,NA,NA,NA,NA,0,,da83464cdd08128507a66cc83349dfe1,g46286703fa,train
+c2ec1a9453559,leak acoustic data/ductile iron-NA-0.2428 MPa-3.92 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.2428 MPa,3.92 ms,NA,0,1,d6ed79513981a4b95257384aa59dc9e0,gebc8b2a613,val
+c2ecd0fa43d40,no leak acoustic data/ductile iron-zone 2-NA-NA-hydrophone_2-3.wav,hydrophone,ductile iron,zone 2,NA,NA,NA,2,,8bb3b0be88986863f2a884f4fd0bc73c,ga4d5f79c1b,test
+c2f249a637ac4,leak acoustic data/ductile iron-zone 2-0.3172 MPa-0.95 ms-noise logger-0-1.wav,noise logger,ductile iron,zone 2,0.3172 MPa,0.95 ms,NA,0,,2a0e46268cc2697f16a017b920c2439f,ga7bab1b774,train
+c2f625de9294d,leak acoustic data/pe-NA-0.1545 MPa-3.40 ms-noise logger-0-1.wav,noise logger,pe,NA,0.1545 MPa,3.40 ms,NA,0,,5e1d395b2c25c999b9a58649d69c6a6b,gdc4d4d1b74,train
+c2f88dd642dc9,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_2-3_2.wav,noise logger,ductile iron,zone 2,NA,NA,NA,2,2,aad24525c465711962983a84fb196c47,ga4d5f79c1b,test
+c2fa3d2c64396,no leak acoustic data/ductile iron-zone 2-NA-NA-hydrophone_1-2.wav,hydrophone,ductile iron,zone 2,NA,NA,NA,1,,eaf07b9e72a4f8f2741b5f64b3f6e2eb,ga4d5f79c1b,test
+c2fc07cf00173,leak acoustic data/ductile iron-NA-0.3189 MPa-0.35 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3189 MPa,0.35 ms,NA,0,1,d3f9eab6491a2c9048f4f877e20ddf75,g4d92d91f74,val
+c2fe894a582ae,environmental noise/drilling_3-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,drilling_3,0,,ebab88db50726752c7dddd0a1ae25798,g537fced124,train
+c2ffeffaf5c54,leak acoustic data/pe-zone 1-0.32 MPa-NA-noise logger-0-1_2.wav,noise logger,pe,zone 1,0.32 MPa,NA,NA,0,2,677c0339b237349252778ccb821399aa,gf656471109,train
+c30025926aa4b,leak acoustic data/ductile iron-NA-0.3227 MPa-1.13 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3227 MPa,1.13 ms,NA,0,1,89b01b8ba340e055a2a58a11dfcee071,g31a30cc499,train
+c302c6711a801,leak acoustic data/ductile iron-NA-0.3302 MPa-0.13 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3302 MPa,0.13 ms,NA,0,,5e644e20b25648bffa0db8ae9335c355,g022b4e9138,test
+c3053a1cff2b1,leak acoustic data/ductile iron-NA-0.2464 MPa-4.30 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.2464 MPa,4.30 ms,NA,0,,24e41c8461d7f811849e927d7fa4e70e,g5fcdfb219d,test
+c30617b58ed2d,leak acoustic data/ductile iron-zone 2-NA-NA-noise logger-0-1_1.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,1,67c3502409479e5843ded3318cab2e0c,gf731e64668,train
+c30be90df9034,environmental noise/flowing water-NA-noise logger_4-5.wav,noise logger,NA,NA,NA,NA,flowing water,4,,adaa2365e0c42be72f1209d2cf103bc7,gcfd9b54efb,val
+c3147be2ea41d,no leak acoustic data/pe-NA-NA-NA-noise logger_3-4_7.wav,noise logger,pe,NA,NA,NA,NA,3,7,a62c6ffda7e000579f66856f8c90c2d1,g46286703fa,train
+c314af95e5f64,leak acoustic data/ductile iron-NA-0.3105 MPa-0.44 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.3105 MPa,0.44 ms,NA,0,,a55f5d55a63420ca0312456ac8563568,ge48828f323,train
+c31664f156265,leak acoustic data/ductile iron-NA-0.1446 MPa-3.26 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.1446 MPa,3.26 ms,NA,0,1,d9207b6aa397ade66a3849d9551c6cb6,g34d77cd7db,val
+c319fbeb58840,leak acoustic data/ductile iron-NA-0.3295 MPa-0.95 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3295 MPa,0.95 ms,NA,0,,209d0b4166ff800060abb67d2911a95b,gc8581b2bc5,test
+c31a88363a2b6,environmental noise/engine_2-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,engine_2,0,,d7e7bc6a9be7ae00eff7ff998de2d95d,gc6ab9b7692,val
+c31dfc36d9429,leak acoustic data/ductile iron-zone 2-0.3202 MPa-0.15 ms-noise logger-0-1_1.wav,noise logger,ductile iron,zone 2,0.3202 MPa,0.15 ms,NA,0,1,5f7ccef997b2fe98cadf3e70827f91e3,g9f1bfc309c,train
+c31ea3142c163,leak acoustic data/steel-zone 1-0.25 MPa-NA-noise logger-0-1.wav,noise logger,steel,zone 1,0.25 MPa,NA,NA,0,,f7845b4d0e450e8954986ad9a507d3bf,g889c1c063a,test
+c320c859a0212,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_1-2_13.wav,noise logger,ductile iron,NA,NA,NA,NA,1,13,6de8a39086f4d7902f450067b11dbecd,g07ac25f1e0,train
+c324732bf50e7,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_3-4_5.wav,hydrophone,pe,zone 2,NA,NA,NA,3,5,d849960657e3d31bb3555e9fee066332,g3aa9a8f111,val
+c327fafdf06d1,leak acoustic data/pe-zone 2-0.326 MPa-0.18 ms-noise logger-0-1_1.wav,noise logger,pe,zone 2,0.326 MPa,0.18 ms,NA,0,1,202ca25a06e80a29e40b126aa6fdd604,g2dbaa049ec,test
+c32debd0f41e6,leak acoustic data/pe-NA-0.3244 MPa-0.22 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.3244 MPa,0.22 ms,NA,0,1,85b45a3d81c5c9f20f9894466dd72729,g5606243767,train
+c32e9ddbcf512,leak acoustic data/ductile iron-NA-0.3249 MPa-0.01 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3249 MPa,0.01 ms,NA,0,1,55243b8fe9ac76075128ea552768b809,g94a157eb60,train
+c3304359734ea,leak acoustic data/ductile iron-NA-0.1692 MPa-3.55 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.1692 MPa,3.55 ms,NA,0,,ade9f65307ffe7b3dcdd0f44f7b47e2c,gb7e2e03764,val
+c332cd97e3344,leak acoustic data/ductile iron-zone 2-0.3202 MPa-0.15 ms-hydrophone-0-1.wav,hydrophone,ductile iron,zone 2,0.3202 MPa,0.15 ms,NA,0,,41209a6497609d5bd9afdc21f89be387,g9f1bfc309c,train
+c33454b6946ab,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_0-1_10.wav,hydrophone,ductile iron,NA,NA,NA,NA,0,10,8fcd75a5d0c7d27c379ed9eb7bd03dc9,g07ac25f1e0,train
+c33b9ec7b16e8,leak acoustic data/ductile iron-NA-0.1892 MPa-3.59 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.1892 MPa,3.59 ms,NA,0,1,7e409940442855432b29b4d380dc280b,g72971ef0cc,train
+c341e4bf862ad,leak acoustic data/ductile iron-NA-0.3236 MPa-0.66 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3236 MPa,0.66 ms,NA,0,1,1f57aec2abf6f6878f558cbb2e62cbf3,g7f2d312099,train
+c344f46167aa8,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_1-2_1.wav,noise logger,ductile iron,zone 2,NA,NA,NA,1,1,ace45590e64ef7f6d2b12ce26e6385de,ga4d5f79c1b,test
+c349962db1de6,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_3-4_2.wav,noise logger,ductile iron,zone 2,NA,NA,NA,3,2,4c7e42446c13994fe52ef5b1cce1dd3c,ga4d5f79c1b,test
+c34c03a8f4d12,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_0-1_3.wav,hydrophone,pe,zone 2,NA,NA,NA,0,3,e04acfaf338e057a7b573f361aea5bf6,g3aa9a8f111,val
+c3557ad92637c,environmental noise/dog_1-NA-noise logger_1-2.wav,noise logger,NA,NA,NA,NA,dog_1,1,,ebced077d5d71f119524ce96981ffc1d,ge2dbda8d9a,test
+c357b15613e8b,leak acoustic data/NA-NA-0.1545 MPa-3.36 ms-hydrophone-0-1.wav,hydrophone,NA,NA,0.1545 MPa,3.36 ms,NA,0,,fe2928f766cc801b8b7ecbb84e2e8594,gdc4d4d1b74,train
+c357e8e39d7f0,leak acoustic data/ductile iron-NA-0.2688 MPa-4.21 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.2688 MPa,4.21 ms,NA,0,1,de863ea0d3c8be20186e9542465c1fe1,g88c7bfd6e1,train
+c359805e182ff,no leak acoustic data/pe-zone 2-NA-NA-noise logger_2-3_1.wav,noise logger,pe,zone 2,NA,NA,NA,2,1,2f6ccbf6292a547dc02bda160fa4cf02,g3aa9a8f111,val
+c360f9c34e370,leak acoustic data/ductile iron-NA-0.2283 MPa-3.80 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.2283 MPa,3.80 ms,NA,0,1,8acc3f50bc57f5817f281f4b208485be,g8a87b14a43,val
+c36185eaa50d7,no leak acoustic data/pe-zone 2-NA-NA-noise logger_3-4_1.wav,noise logger,pe,zone 2,NA,NA,NA,3,1,b20138a3fccdb69f90b3e3b4135d173f,g3aa9a8f111,val
+c362698ae79b5,leak acoustic data/ductile iron-NA-0.2755 MPa-4.38 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.2755 MPa,4.38 ms,NA,0,1,8043d4c12512abb94e3c081f641f3c13,gf05d2e1f49,train
+c36359baaaf59,no leak acoustic data/pe-NA-NA-NA-noise logger_1-2_4.wav,noise logger,pe,NA,NA,NA,NA,1,4,c208e8a08b5a4670f30ab3e5851e57a4,g46286703fa,train
+c3694d0758433,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_10.wav,noise logger,pe,NA,NA,NA,NA,0,10,7d899476c873f99827d5810236a37550,g46286703fa,train
+c36eda6b94106,environmental noise/drilling_8-NA-noise logger_3-4.wav,noise logger,NA,NA,NA,NA,drilling_8,3,,a8ba63a75afde5b30205638581d05e4a,g9ab0cbcb70,train
+c37c7984c0c4f,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_3-4_7.wav,noise logger,ductile iron,NA,NA,NA,NA,3,7,e54355165e9ad51ba61b7897f842235f,g07ac25f1e0,train
+c37f2b3fca106,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_4-5_13.wav,noise logger,ductile iron,NA,NA,NA,NA,4,13,db09027c86e18c4ab55dcafe5b4e69b0,g07ac25f1e0,train
+c3919fdf6a141,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_0-1_2.wav,hydrophone,pe,zone 2,NA,NA,NA,0,2,5c56b0bd018a736db87ad5f7d664ff60,g3aa9a8f111,val
+c3a2f1d312087,no leak acoustic data/pe-NA-NA-NA-hydrophone_0-1.wav,hydrophone,pe,NA,NA,NA,NA,0,,32c7b6aac695807faea778121b0a8dee,g46286703fa,train
+c3a54e1228375,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_4-5_6.wav,noise logger,ductile iron,NA,NA,NA,NA,4,6,467eb206246de9c78d99827acf3d5517,g07ac25f1e0,train
+c3a78958bcf50,leak acoustic data/pe-NA-0.2233 MPa-3.77 ms-noise logger-0-1.wav,noise logger,pe,NA,0.2233 MPa,3.77 ms,NA,0,,40105bebbc239c3e21dcf0f514fde529,gb577968cb1,train
+c3b228fa8030d,leak acoustic data/ductile iron-NA-0.3238 MPa-0.45 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3238 MPa,0.45 ms,NA,0,1,4e908ab9a56682e789f89ee5514021d5,gf46d1a8b5c,train
+c3b34b6d95497,leak acoustic data/ductile iron-NA-0.2320 MPa-3.78 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.2320 MPa,3.78 ms,NA,0,,bdfa04da833682913718d32ebe4ad16d,g04801441ef,val
+c3b743c669721,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_3-4_3.wav,noise logger,ductile iron,zone 2,NA,NA,NA,3,3,edc11b663593ca59ffd5c7dcd764379b,ga4d5f79c1b,test
+c3ba3126429f6,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_2-3_3.wav,hydrophone,ductile iron,NA,NA,NA,NA,2,3,b2070c581bfb1131d4ba4c2edee0e787,g07ac25f1e0,train
+c3babd01aea3e,leak acoustic data/pe-NA-0.1869 MPa-3.77 ms-hydrophone-0-1.wav,hydrophone,pe,NA,0.1869 MPa,3.77 ms,NA,0,,cf7ab205d91d52decc5d6ac4a91db025,gdc4d4d1b74,train
+c3bd3873e11c7,leak acoustic data/ductile iron-zone 2-NA-NA-noise logger-0-1_8.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,8,4b2dd979dfcc5f6240b9f3d9d5b19c48,gf731e64668,train
+c3c173dc615a2,no leak acoustic data/ductile iron-zone 2-NA-NA-hydrophone_4-5.wav,hydrophone,ductile iron,zone 2,NA,NA,NA,4,,3389342c3fe4a8409ad9d04d22d7ea54,ga4d5f79c1b,test
+c3c559ca31f61,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_16.wav,noise logger,pe,NA,NA,NA,NA,0,16,ed9293524b708aae9fdb38a1ba63a019,g46286703fa,train
+c3cd9a1ae0e6b,no leak acoustic data/NA-zone 2-NA-NA-noise logger_4-5.wav,noise logger,NA,zone 2,NA,NA,NA,4,,73e5312d16b5603b9e83da505621aeac,g4a6d62802d,train
+c3d88ef161d0d,leak acoustic data/pe-NA-0.1648 MPa-3.40 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.1648 MPa,3.40 ms,NA,0,1,38539883520d540ab894f3d0333d89ca,g4041b6d26e,val
+c3d97dffa787c,environmental noise/gas pipe-NA-noise logger_3-4.wav,noise logger,NA,NA,NA,NA,gas pipe,3,,a88e5295a6325a694c5ce982247f471f,ge4ed52c56a,train
+c3d9f0115f159,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_0-1_4.wav,hydrophone,pe,zone 2,NA,NA,NA,0,4,cd15c9701a2b89a61e519779075567be,g3aa9a8f111,val
+c3e3923c46a6a,leak acoustic data/ductile iron-NA-0.3218 MPa-1.15 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3218 MPa,1.15 ms,NA,0,,2b1709ab8cb09e6179cc32a1502a17fa,gbd2ed3f884,val
+c3f4ad6feaae7,no leak acoustic data/ductile iron-zone 1-NA-NA-noise logger_1-2_1.wav,noise logger,ductile iron,zone 1,NA,NA,NA,1,1,205a820cff82a89050cd719104edc162,gd2da168526,train
+c3f55dc63fc06,leak acoustic data/pe-NA-0.1648 MPa-3.40 ms-noise logger-0-1.wav,noise logger,pe,NA,0.1648 MPa,3.40 ms,NA,0,,ec189891e0514373626609fa665ad1e1,g4041b6d26e,val
+c3f681c16daf0,leak acoustic data/pe-NA-0.306 MPa-0.68 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.306 MPa,0.68 ms,NA,0,1,effb1e759a52892cf89569de2855e9c0,g0d80ac505a,val
+c4009fed4726f,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_0-1_17.wav,noise logger,ductile iron,NA,NA,NA,NA,0,17,9dccc258c2c6eeb20476fd9c8b768068,g07ac25f1e0,train
+c404a4d0bccf9,environmental noise/drilling_3-NA-noise logger_3-4.wav,noise logger,NA,NA,NA,NA,drilling_3,3,,b4c58520bb3c7cd5d9274f19af90e79c,g537fced124,train
+c404c110f5014,leak acoustic data/ductile iron-zone 1-0.32 MPa-NA-noise logger-0-1.wav,noise logger,ductile iron,zone 1,0.32 MPa,NA,NA,0,,e1814eefe80d0c86e35ac1ae9bca5d76,gc1728a6abf,val
+c405b5009dfcc,leak acoustic data/pe-zone 1-0.25 MPa-NA-noise logger-0-1.wav,noise logger,pe,zone 1,0.25 MPa,NA,NA,0,,8b16bcffbef3daad4259be2ae7f27434,ga2766ef0b5,train
+c4065022ff781,environmental noise/grass noise-zone 2-noise logger_2-3_1.wav,noise logger,NA,zone 2,NA,NA,grass noise,2,1,79751732c94506629df21e5f3acb2d99,g5ac5d63683,test
+c4123c493a2e2,environmental noise/fan_1-NA-noise logger_3-4.wav,noise logger,NA,NA,NA,NA,fan_1,3,,e68491102c39371fe139964f5862f1a4,ga837d3d43e,test
+c4194701114cb,no leak acoustic data/pe-NA-NA-NA-hydrophone_0-1_1.wav,hydrophone,pe,NA,NA,NA,NA,0,1,823554e865db31c452c9289053a1c213,g46286703fa,train
+c41d8f7392b73,leak acoustic data/pe-NA-0.3217 MPa-0.90 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3217 MPa,0.90 ms,NA,0,,b0be5102ff169bb3a22191c1fe12ed30,g49a570ad3d,train
+c42044c6c967e,environmental noise/rain_3-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,rain_3,0,,531348762b96eeadb36fd7abdfb48097,gdcc02653e5,train
+c4223cfd6c9a7,leak acoustic data/pe-NA-0.1545 MPa-3.40 ms-hydrophone-0-1.wav,hydrophone,pe,NA,0.1545 MPa,3.40 ms,NA,0,,77fc64c0361c7e6ac44a275c54f369ef,gdc4d4d1b74,train
+c422b4e502ef8,leak acoustic data/ductile iron-zone 2-0.3235 MPa-0.5 ms-noise logger-0-1.wav,noise logger,ductile iron,zone 2,0.3235 MPa,0.5 ms,NA,0,,030f6f7f304ab151b04bccb3f9f09f7d,gda6e22d87f,train
+c423c0ee36b07,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_3-4_8.wav,noise logger,ductile iron,NA,NA,NA,NA,3,8,352ce10d12a2937ef4f456021ce1b828,g07ac25f1e0,train
+c4241382283c1,leak acoustic data/ductile iron-NA-0.1545 MPa-3.36 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.1545 MPa,3.36 ms,NA,0,1,1dd62c286010e58ac4d58383bbdee5b9,gdc4d4d1b74,train
+c424eaa6fb66d,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_2-3.wav,noise logger,ductile iron,NA,NA,NA,NA,2,,d701c9f22c1d03b0aefaf45a08029574,g07ac25f1e0,train
+c426e0dfd687a,leak acoustic data/pe-NA-0.2580 MPa-4.35 ms-hydrophone-0-1.wav,hydrophone,pe,NA,0.2580 MPa,4.35 ms,NA,0,,c0554d24155453e6360fbd26360e1e98,g5fcdfb219d,test
+c42980f8ee1d2,no leak acoustic data/ductile iron-zone 1-NA-NA-noise logger_1-2_2.wav,noise logger,ductile iron,zone 1,NA,NA,NA,1,2,52dfd7415ecfd4088f448c0dac144db4,gd2da168526,train
+c43b01676d4a6,leak acoustic data/ductile iron-NA-0.3225 MPa-0.57 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3225 MPa,0.57 ms,NA,0,1,59de1efb1630317f3bd85ddc49f98b59,gc76b064140,test
+c43d1d3739c55,environmental noise/engine_3-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,engine_3,0,,c9d8244e1d68b862bf11b2da651885b9,g6a01c96440,test
+c43d5de714166,leak acoustic data/pe-NA-0.1192 MPa-2.95 ms-noise logger-0-1.wav,noise logger,pe,NA,0.1192 MPa,2.95 ms,NA,0,,a04033852a300c18ec6c0caeb115a1bb,gf3773ae361,train
+c446014999134,no leak acoustic data/pe-zone 2-NA-NA-noise logger_2-3_4.wav,noise logger,pe,zone 2,NA,NA,NA,2,4,0fcd711951d2e5ad08e5a6ae8f3a991b,g3aa9a8f111,val
+c44a5700b25a9,leak acoustic data/ductile iron-NA-0.2428 MPa-3.92 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.2428 MPa,3.92 ms,NA,0,,aafe3520c9d7d0684c18beb6c86cee9c,gebc8b2a613,val
+c44e7e333e49c,environmental noise/engine_3-NA-noise logger_4-5.wav,noise logger,NA,NA,NA,NA,engine_3,4,,f3fa361d407419b0a1225a1e82de80d9,g6a01c96440,test
+c451dc9a7aee5,leak acoustic data/ductile iron-NA-0.2283 MPa-3.80 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.2283 MPa,3.80 ms,NA,0,,c80da49e4209914f362ef2f9af4ce886,g8a87b14a43,val
+c4531f3f68c3d,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_2-3_13.wav,noise logger,ductile iron,NA,NA,NA,NA,2,13,90b751214abb041c63305ade75662b7e,g07ac25f1e0,train
+c45d529556769,no leak acoustic data/pvc-zone 1-NA-NA-noise logger_2-3.wav,noise logger,pvc,zone 1,NA,NA,NA,2,,fb383baa952c37bee17897819ec964de,g676914d208,test
+c45d6fd044845,leak acoustic data/NA-NA-NA-NA-noise logger-0-1_1.wav,noise logger,NA,NA,NA,NA,NA,0,1,6cc8cbaa7453df68b90124284d772cf6,g1e688c389c,train
+c45ef1394ce7d,no leak acoustic data/pe-NA-NA-NA-hydrophone_3-4_1.wav,hydrophone,pe,NA,NA,NA,NA,3,1,cc711b2d9a505b5b6ad97e68807908b6,g46286703fa,train
+c45faafac76b4,no leak acoustic data/ductile iron-zone 2-NA-NA-hydrophone_4-5_1.wav,hydrophone,ductile iron,zone 2,NA,NA,NA,4,1,dca6f146ef6750e7d76165e4153c7bb0,ga4d5f79c1b,test
+c46047f8f11e7,leak acoustic data/pe-NA-0.1446 MPa-3.26 ms-noise logger-0-1.wav,noise logger,pe,NA,0.1446 MPa,3.26 ms,NA,0,,824943b3069665fac2950fb9f1fc3db6,g34d77cd7db,val
+c46349e666c00,no leak acoustic data/pe-NA-NA-NA-noise logger_4-5.wav,noise logger,pe,NA,NA,NA,NA,4,,2b6fd1c8b731412ab7e3ddd1acc61416,g46286703fa,train
+c46568b3af1b0,no leak acoustic data/steel-zone 1-NA-NA-noise logger_0-1.wav,noise logger,steel,zone 1,NA,NA,NA,0,,bc1b004037025cf939a4352c87d74695,ge9b5969de0,train
+c46a2f827cb8e,no leak acoustic data/pe-NA-NA-NA-noise logger_1-2_9.wav,noise logger,pe,NA,NA,NA,NA,1,9,b611c0452ce6fb35201497df2807200b,g46286703fa,train
+c46bb2eb3f09b,leak acoustic data/pe-zone 2-0.305 MPa-1.6 ms-noise logger-0-1_2.wav,noise logger,pe,zone 2,0.305 MPa,1.6 ms,NA,0,2,c366d87339018257c0b7a7f8a19a5d07,gbd8e42847a,val
+c475678ae6ef8,leak acoustic data/ductile iron-NA-0.1217 MPa-3.00 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.1217 MPa,3.00 ms,NA,0,,11d03c852d30f96a4f588ae237857291,g7744cf68eb,train
+c4797d1d717aa,no leak acoustic data/pe-zone 2-NA-NA-noise logger_3-4_3.wav,noise logger,pe,zone 2,NA,NA,NA,3,3,6baec23fb2cab712dde8f81f651cd827,g3aa9a8f111,val
+c481e6c9d4b12,leak acoustic data/ductile iron-NA-0.3189 MPa-0.35 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3189 MPa,0.35 ms,NA,0,,b533195295d4459ab70d77dbbce28b8c,g4d92d91f74,val
+c483b56484ea5,leak acoustic data/pvc-zone 1-0.32 MPa-NA-noise logger-0-1_2.wav,noise logger,pvc,zone 1,0.32 MPa,NA,NA,0,2,9ce7ae995a7145704486b39fc48d9ed3,ge5a09394ed,train
+c483c2ee8d383,leak acoustic data/ductile iron-zone 2-0.3111 MPa-0.15 ms-noise logger-0-1_1.wav,noise logger,ductile iron,zone 2,0.3111 MPa,0.15 ms,NA,0,1,f95f5364c6250728e115254278454a2f,g0a0ca7697a,train
+c48422d0520de,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_5.wav,noise logger,pe,NA,NA,NA,NA,0,5,c1abf1807503c25da508ad291a1b7c81,g46286703fa,train
+c48604ce69cc7,environmental noise/drilling_2-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,drilling_2,0,,ebf103ea7ad7efb4be36e9f295095c5a,g43a5b2e02e,val
+c48771c3d97f5,leak acoustic data/ductile iron-NA-0.2269 MPa-3.95 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.2269 MPa,3.95 ms,NA,0,,06a3e3aec014612ab8b4760c2feb576a,gf98db9952c,train
+c48dec7ba6c91,leak acoustic data/ductile iron-NA-0.3238 MPa-0.45 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.3238 MPa,0.45 ms,NA,0,,435a82c7961a0521eee91d99db4e5db6,gf46d1a8b5c,train
+c4a7854f53842,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_1-2_6.wav,noise logger,ductile iron,NA,NA,NA,NA,1,6,61344823bc45f0363b50fff5655bb890,g07ac25f1e0,train
+c4aa009466bd9,leak acoustic data/pe-NA-0.2339 MPa-4.20 ms-noise logger-0-1.wav,noise logger,pe,NA,0.2339 MPa,4.20 ms,NA,0,,42e49cf356ae16f3cd4070c8dca86d97,g31f494f9af,val
+c4aa6a51658e8,leak acoustic data/ductile iron-NA-0.3286 MPa-1.40 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.3286 MPa,1.40 ms,NA,0,,9ccaaf443fa41e08ba035e786559f7e2,gbcefe1b7d2,train
+c4ab5e59c0389,no leak acoustic data/pe-NA-NA-NA-hydrophone_2-3_4.wav,hydrophone,pe,NA,NA,NA,NA,2,4,6646fe9e80c049089be006881e86f61b,g46286703fa,train
+c4ae8944ab2a9,leak acoustic data/pe-NA-0.0717 MPa-2.09 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.0717 MPa,2.09 ms,NA,0,1,76144dfd3d3dff66714fc39cf113db05,g687b1c097c,train
+c4b2e80648cd5,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_2.wav,noise logger,pe,NA,NA,NA,NA,0,2,10c660517514079de39b993fc47e512f,g46286703fa,train
+c4b8ccff15ae0,leak acoustic data/ductile iron-NA-0.1803 MPa-3.68 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.1803 MPa,3.68 ms,NA,0,,767e1197a2a484e42c10ce99896ce012,gb6e25e47de,train
+c4bf6a97e2cae,environmental noise/drilling_1-NA-noise logger_4-5.wav,noise logger,NA,NA,NA,NA,drilling_1,4,,4d63adf5e06839d564da67c2c30d1316,g7318b6ee2e,train
+c4bfadb83d3a1,environmental noise/dog_3-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,dog_3,0,,cb23fbf783695ecaec29c7c236f731ec,g9c6563d2be,test
+c4c1da453683a,leak acoustic data/ductile iron-NA-0.2437 MPa-3.98 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.2437 MPa,3.98 ms,NA,0,,eb703553dd9d367f06f01715aa68cee5,g809b43e6f0,test
+c4c44b6b5ad5b,leak acoustic data/pe-zone 2-0.32 MPa-1.26 ms-noise logger-0-1_1.wav,noise logger,pe,zone 2,0.32 MPa,1.26 ms,NA,0,1,f822d8ebac59f5622853400046f49134,ge9f32b8c3c,train
+c4ce67f4b6dcb,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_4-5_4.wav,hydrophone,ductile iron,NA,NA,NA,NA,4,4,7bf59a012eb7e7fe483258a5783e0474,g07ac25f1e0,train
+c4cebd98eb883,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_4-5_4.wav,hydrophone,pe,zone 2,NA,NA,NA,4,4,2ac1ff863241a5327fc43ce3e997752d,g3aa9a8f111,val
+c4d60c890e072,no leak acoustic data/steel-zone 1-NA-NA-noise logger_1-2.wav,noise logger,steel,zone 1,NA,NA,NA,1,,6944b30ec8ab9efced11f23c9950a451,ge9b5969de0,train
+c4dd83943373a,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_11.wav,noise logger,pe,NA,NA,NA,NA,0,11,ed9293524b708aae9fdb38a1ba63a019,g46286703fa,train
+c4e7f6b33ed4c,leak acoustic data/ductile iron-zone 2-NA-NA-noise logger-0-1_3.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,3,aec89c9eec6a992fbd376513f1513062,gf731e64668,train
+c4e8a21a3dbd8,leak acoustic data/pe-NA-0.3047 MPa-0.73 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3047 MPa,0.73 ms,NA,0,,eedd287fc99d91a0ec7e1eee1cf96bf5,gba26dba9df,test
+c4e93daa7ff67,no leak acoustic data/ductile iron-zone 1-NA-NA-noise logger_0-1.wav,noise logger,ductile iron,zone 1,NA,NA,NA,0,,766b2d570c702d040a2064b04e818705,gd2da168526,train
+c4ea61abbc908,leak acoustic data/pe-NA-0.3272 MPa-1.12 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3272 MPa,1.12 ms,NA,0,,a85f0c6a9c4d0d9f9897adae3a918192,g89fe9a38dd,train
+c4ebb971b1567,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_1-2_7.wav,noise logger,ductile iron,NA,NA,NA,NA,1,7,18b89b56c3fae1b7464633c8299d1735,g07ac25f1e0,train
+c4ee01a96314b,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_0-1_2.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,2,76f1d16e795a21e9d536d969fe2dfa02,ga4d5f79c1b,test
+c4ef9953000c4,leak acoustic data/ductile iron-zone 2-0.326 MPa-1.08 ms-hydrophone-0-1.wav,hydrophone,ductile iron,zone 2,0.326 MPa,1.08 ms,NA,0,,5416aa3f7ecd93e6c09a023ae09e6cf0,g006526d409,train
+c4f0131614c87,leak acoustic data/ductile iron-zone 2-0.3251 MPa-1.26 ms-noise logger-0-1_1.wav,noise logger,ductile iron,zone 2,0.3251 MPa,1.26 ms,NA,0,1,6de37a5aee4595f2d00968fea45e4e81,g9b81f0fded,train
+c4f10806e3732,leak acoustic data/pe-NA-0.2630 MPa-4.11 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.2630 MPa,4.11 ms,NA,0,1,4cb9bd0fa075083fed38fffc7b7f135d,g2e6d88fb97,train
+c4fb944f67bb2,no leak acoustic data/pe-zone 2-NA-NA-noise logger_1-2.wav,noise logger,pe,zone 2,NA,NA,NA,1,,ea9ef069ffc4f22c60793b584c7431cc,g3aa9a8f111,val
+c5024ce133721,no leak acoustic data/pe-NA-NA-NA-hydrophone_2-3.wav,hydrophone,pe,NA,NA,NA,NA,2,,4908fdb9e3740dbb8a7ca37aecc5b289,g46286703fa,train
+c50b87f7091de,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_1-2_3.wav,noise logger,ductile iron,zone 2,NA,NA,NA,1,3,400e04c8d99b17ceab65456c9a9bb447,ga4d5f79c1b,test
+c50c4f2d91963,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_1-2.wav,hydrophone,pe,zone 2,NA,NA,NA,1,,d555dba46ebc9d02f4de00f636d150ce,g3aa9a8f111,val
+c50cd33c4f25e,leak acoustic data/pe-zone 2-NA-NA-hydrophone-0-1_1.wav,hydrophone,pe,zone 2,NA,NA,NA,0,1,1ecccf20cda963413c105f8ae4b816ab,gcff12db88b,val
+c511119b56f0a,environmental noise/engine_6-NA-noise logger_4-5.wav,noise logger,NA,NA,NA,NA,engine_6,4,,699a6323f915bdc5c81e3af13d24069e,g23dfe47d1a,test
+c51565ea58fe0,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_8.wav,noise logger,pe,NA,NA,NA,NA,0,8,c0edf2ddf3fc103c3774aff3e3776550,g46286703fa,train
+c515a9a248c2c,leak acoustic data/pe-NA-0.1726 MPa-3.58 ms-hydrophone-0-1.wav,hydrophone,pe,NA,0.1726 MPa,3.58 ms,NA,0,,399d1286bc0427d442e25e3b885f293a,gdc4d4d1b74,train
+c515e5a91852d,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_3-4_1.wav,noise logger,ductile iron,zone 2,NA,NA,NA,3,1,2b325d51b6411a7d8771c9c2a40a46a3,ga4d5f79c1b,test
+c51941b2ae81a,leak acoustic data/pe-NA-0.3126 MPa-4.85 ms-hydrophone-0-1.wav,hydrophone,pe,NA,0.3126 MPa,4.85 ms,NA,0,,99c26fefd2ed6f72aaa50690968836d5,g221d81070a,val
+c51b7eba14bd6,leak acoustic data/pe-NA-0.2495 MPa-4.33 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.2495 MPa,4.33 ms,NA,0,1,160039ce16aa735c2a876804a086776a,gdc4d4d1b74,train
+c51bc0f90becd,leak acoustic data/ductile iron-NA-0.3137 MPa-0.4 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3137 MPa,0.4 ms,NA,0,1,29a7b5bb1490a853e78243189009c349,g6cad5007b8,train
+c51eb51347f21,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_0-1_1.wav,noise logger,ductile iron,NA,NA,NA,NA,0,1,fb9eec53b43edfc588afbc1a78f97d2a,g07ac25f1e0,train
+c5221e555e452,leak acoustic data/ductile iron-NA-0.2688 MPa-4.21 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.2688 MPa,4.21 ms,NA,0,,2d1e9ef484a89953f1b0d786190a389a,g88c7bfd6e1,train
+c52262f16cdaa,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_2-3_7.wav,noise logger,ductile iron,zone 2,NA,NA,NA,2,7,ee375a03139882d5f1a4bc8da89d842b,ga4d5f79c1b,test
+c5252a01e683d,environmental noise/hydrant_normal-NA-noise logger_2-3.wav,noise logger,NA,NA,NA,NA,hydrant_normal,2,,d3ef07177106c854c05ae30622df989a,g03a8c8e492,train
+c52a7051e7040,leak acoustic data/ductile iron-zone 2-0.31 MPa-1.16 ms-noise logger-0-1_4.wav,noise logger,ductile iron,zone 2,0.31 MPa,1.16 ms,NA,0,4,93d9590ee50c52ca6d742bf913568c32,gb8b74c622f,test
+c52ac42cd3a00,no leak acoustic data/pe-zone 2-NA-NA-noise logger_0-1_6.wav,noise logger,pe,zone 2,NA,NA,NA,0,6,2d09a7c13e16628a472b549da87f4686,g3aa9a8f111,val
+c52d40bdeea80,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_4-5_4.wav,noise logger,ductile iron,zone 2,NA,NA,NA,4,4,f61eb459c89758ae4fe55555d345b24b,ga4d5f79c1b,test
+c52ebd5ec2893,leak acoustic data/pe-NA-0.1726 MPa-3.58 ms-noise logger-0-1.wav,noise logger,pe,NA,0.1726 MPa,3.58 ms,NA,0,,c962b524585a729e01c8bfc8eeed6850,gdc4d4d1b74,train
+c52fdf1f29a5d,leak acoustic data/pe-zone 2-0.3172 MPa-0.95 ms-noise logger-0-1.wav,noise logger,pe,zone 2,0.3172 MPa,0.95 ms,NA,0,,6bdf3ea982632a8f47d22abd73b75d18,ga7bab1b774,train
+c53160ce4a15e,leak acoustic data/ductile iron-zone 2-0.3132 MPa-0.8 ms-hydrophone-0-1.wav,hydrophone,ductile iron,zone 2,0.3132 MPa,0.8 ms,NA,0,,1b35be9db5cce029412bbca0d11c738d,gfe15fdf3e1,test
+c538ffa19559f,leak acoustic data/ductile iron-zone 2-0.3237 MPa-1.35 ms-noise logger-0-1_1.wav,noise logger,ductile iron,zone 2,0.3237 MPa,1.35 ms,NA,0,1,1b7ce9098689023eb26e3abcb319aa4c,gf4ed344bc4,train
+c53c233dacf3e,leak acoustic data/ductile iron-NA-0.2269 MPa-3.95 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.2269 MPa,3.95 ms,NA,0,,00b69da710373fc7f3260d36065178c9,gf98db9952c,train
+c53ec11e3e7c7,leak acoustic data/pe-NA-0.2283 MPa-3.80 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.2283 MPa,3.80 ms,NA,0,1,01d118441a8a16e4aba2c603f4f4c784,g8a87b14a43,val
+c5405732725d3,leak acoustic data/ductile iron-zone 2-0.3177 MPa-1.15 ms-noise logger-0-1_1.wav,noise logger,ductile iron,zone 2,0.3177 MPa,1.15 ms,NA,0,1,0b4bd50ce47dfd95628911f7a675b8e3,g104fec80fe,train
+c5417777b1bbd,leak acoustic data/pe-NA-0.2377 MPa-3.95 ms-noise logger-0-1.wav,noise logger,pe,NA,0.2377 MPa,3.95 ms,NA,0,,362643bfcdb1e2a4139a84a85c8cc382,gcdfe50e5af,test
+c5478ba2d5a89,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_1-2_3.wav,noise logger,ductile iron,NA,NA,NA,NA,1,3,8937ab308774052d588c16d002af8c8a,g07ac25f1e0,train
+c548a3727526c,leak acoustic data/ductile iron-NA-0.2095 MPa-3.70 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.2095 MPa,3.70 ms,NA,0,1,9993cdfac339b080ad7714eb6c9a3951,gfb8be03274,test
+c54cff5549618,no leak acoustic data/NA-NA-NA-NA-hydrophone_2-3.wav,hydrophone,NA,NA,NA,NA,NA,2,,f48d358b8b4bd9e670a2c7224eacb83a,g60e6ee291d,train
+c54d3b50ef138,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_0-1_3.wav,hydrophone,ductile iron,NA,NA,NA,NA,0,3,933e5c81b59d75a9a43a0f8c3660182e,g07ac25f1e0,train
+c54ea8cbe7c5a,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_0-1_14.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,14,37d395910e0b938330ce08faab7864c8,ga4d5f79c1b,test
+c550fe5319c3d,no leak acoustic data/pe-zone 2-NA-NA-noise logger_0-1_2.wav,noise logger,pe,zone 2,NA,NA,NA,0,2,c65dd8f7ce57491d62ed0df4645b02b9,g3aa9a8f111,val
+c5518d26c178b,leak acoustic data/ductile iron-NA-0.32 MPa-NA-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.32 MPa,NA,NA,0,,28bc84b4f37fc0680f79411347521dbf,g0b43380775,val
+c55ae3a3fe08f,leak acoustic data/ductile iron-zone 2-0.3111 MPa-0.15 ms-noise logger-0-1.wav,noise logger,ductile iron,zone 2,0.3111 MPa,0.15 ms,NA,0,,5fef1674f6315f7a6324ce16f98b3fd3,g0a0ca7697a,train
+c561239dda450,environmental noise/music_1-NA-noise logger_3-4.wav,noise logger,NA,NA,NA,NA,music_1,3,,19dec90ec5a7b55c43821af0cf5b5f5e,g95233a69d9,train
+c568c11597717,leak acoustic data/ductile iron-zone 2-0.312 MPa-0.9 ms-hydrophone-0-1_1.wav,hydrophone,ductile iron,zone 2,0.312 MPa,0.9 ms,NA,0,1,e06bb5f06ed6cede96c6a464c5cc6183,gbd8e42847a,val
+c56a2c6ca0892,leak acoustic data/ductile iron-NA-0.2437 MPa-3.98 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.2437 MPa,3.98 ms,NA,0,,51b8716ee0f1afb6272ad4e87c43f696,g809b43e6f0,test
+c576f9df6e162,environmental noise/engine_6-NA-noise logger_2-3.wav,noise logger,NA,NA,NA,NA,engine_6,2,,71f037934d86f402b5ba34158ffcbfaf,g23dfe47d1a,test
+c577bdb8f8808,no leak acoustic data/pe-NA-NA-NA-noise logger_4-5_12.wav,noise logger,pe,NA,NA,NA,NA,4,12,f0340c4a61f83f8cfeefc00723820121,g46286703fa,train
+c58521959ee09,leak acoustic data/pe-NA-0.1892 MPa-3.59 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.1892 MPa,3.59 ms,NA,0,1,2b3bcd3abdbd97595df50a5032ab608a,g72971ef0cc,train
+c5882dca3e0a9,environmental noise/drilling_3-NA-noise logger_2-3.wav,noise logger,NA,NA,NA,NA,drilling_3,2,,ac7c4c1e5337d3bff7db0a30a77136e3,g537fced124,train
+c59310f45faab,leak acoustic data/pe-zone 2-NA-NA-noise logger-0-1_3.wav,noise logger,pe,zone 2,NA,NA,NA,0,3,84214b42164a926ae484ce14afff58a2,gd2cdf4b672,test
+c59494c4e233c,environmental noise/dog_1-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,dog_1,0,,a8b085d5b67ac259c882da495de6b4b3,ge2dbda8d9a,test
+c5969ebc6bfcb,leak acoustic data/ductile iron-NA-0.3234 MPa-1.20 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3234 MPa,1.20 ms,NA,0,1,f958a706e7d193709480c49597d2f9e4,g1441d18838,train
+c5a4c13d780fb,leak acoustic data/ductile iron-NA-0.2242 MPa-3.90 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.2242 MPa,3.90 ms,NA,0,,47969faa0dc750292c738d5d40296eaf,gf98db9952c,train
+c5adf62854458,leak acoustic data/ductile iron-zone 2-0.3269 MPa-1.40 ms-hydrophone-0-1.wav,hydrophone,ductile iron,zone 2,0.3269 MPa,1.40 ms,NA,0,,5d2826cc7caa93a240ef4e54bd13555d,gd7836f4d3a,test
+c5b4522e17477,environmental noise/dog_7-NA-noise logger_3-4.wav,noise logger,NA,NA,NA,NA,dog_7,3,,76d034b2a01e85c98e9cc14e7fc700f8,g04172cba2e,train
+c5bba62a4a052,environmental noise/engine_1-NA-noise logger_3-4.wav,noise logger,NA,NA,NA,NA,engine_1,3,,228b53ffb34923d70808f453f8f1016d,g525a02db13,val
+c5bbf50ad83e0,environmental noise/hydrant-NA-noise logger_1-2.wav,noise logger,NA,NA,NA,NA,hydrant,1,,a592c9fb0fc27550358d5dc3662c1427,g03a8c8e492,train
+c5c25beb01fd8,no leak acoustic data/pe-zone 1-NA-NA-noise logger_3-4.wav,noise logger,pe,zone 1,NA,NA,NA,3,,fd4d006b631b472da73daf716c35184a,gb76766bc43,train
+c5c5903c1822a,leak acoustic data/ductile iron-NA-0.1192 MPa-2.95 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.1192 MPa,2.95 ms,NA,0,1,3e69f480352ee5e6bce63ee249aae089,gf3773ae361,train
+c5c60005e5f43,leak acoustic data/ductile iron-zone 2-0.31 MPa-1.16 ms-noise logger-0-1.wav,noise logger,ductile iron,zone 2,0.31 MPa,1.16 ms,NA,0,,f5225af37f1863060293fd15510778cb,gb8b74c622f,test
+c5c89efaa36f3,no leak acoustic data/pe-zone 2-NA-NA-noise logger_0-1_1.wav,noise logger,pe,zone 2,NA,NA,NA,0,1,3cbf630a095c1ab9f4ca3a423914443e,g3aa9a8f111,val
+c5c8f9d3d19da,no leak acoustic data/pe-zone 2-NA-NA-noise logger_1-2_2.wav,noise logger,pe,zone 2,NA,NA,NA,1,2,8f9499330f32d1cff7996eba2bdbc40e,g3aa9a8f111,val
+c5d3608b6230d,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_3-4.wav,noise logger,ductile iron,NA,NA,NA,NA,3,,e3ee3a1fa82f3c489e4f836be42bbad6,g07ac25f1e0,train
+c5dbb83749d5b,leak acoustic data/pe-NA-0.0717 MPa-2.09 ms-noise logger-0-1.wav,noise logger,pe,NA,0.0717 MPa,2.09 ms,NA,0,,df3d187b338812daa14c0eb0cc64f44f,g687b1c097c,train
+c5e24e8064171,no leak acoustic data/pe-NA-NA-NA-noise logger_3-4.wav,noise logger,pe,NA,NA,NA,NA,3,,d39fccfe87816c54e165c26f57108917,g46286703fa,train
+c5eb4472b1b2e,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_4-5_3.wav,noise logger,ductile iron,NA,NA,NA,NA,4,3,93509c5f48cc8f8e139bb3a7899a254f,g07ac25f1e0,train
+c5f033e45aca1,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_1-2_4.wav,noise logger,ductile iron,NA,NA,NA,NA,1,4,031bbf80a94f09487a8a7cfba2643495,g07ac25f1e0,train
+c5f29eeabae8a,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_3-4_2.wav,noise logger,ductile iron,NA,NA,NA,NA,3,2,47467b0ef62e22153afbada376e77a9f,g07ac25f1e0,train
+c5fa0219bdd8d,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_0-1_16.wav,noise logger,ductile iron,NA,NA,NA,NA,0,16,f875b168e74983f17852dfa654e38dff,g07ac25f1e0,train
+c5fa80d40409a,leak acoustic data/ductile iron-zone 2-0.312 MPa-0.9 ms-noise logger-0-1_1.wav,noise logger,ductile iron,zone 2,0.312 MPa,0.9 ms,NA,0,1,8ac328874e62b794bfccfb097e8fbe8c,gbd8e42847a,val
+c5ffdab287421,leak acoustic data/ductile iron-zone 2-0.315 MPa-1.34 ms-noise logger-0-1_3.wav,noise logger,ductile iron,zone 2,0.315 MPa,1.34 ms,NA,0,3,5bdae83b72440edcb955ca4171f03f7e,g411f1c3a8a,train
+c604d2bdf8a54,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_4-5_1.wav,hydrophone,pe,zone 2,NA,NA,NA,4,1,d4f29d3d58ce2da3bcf49d6fec1421a9,g3aa9a8f111,val
+c609cf09670e6,leak acoustic data/ductile iron-NA-0.2866 MPa-4.50 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.2866 MPa,4.50 ms,NA,0,1,695708608253e9f0b8b3559759e7121f,ge4eb0c7012,val
+c611e16457512,leak acoustic data/ductile iron-NA-0.2425 MPa-4.01 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.2425 MPa,4.01 ms,NA,0,1,d38745387af8212f4a94e216e41ff196,gd5a38bc872,train
+c61500fa08d75,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_2-3_6.wav,noise logger,ductile iron,zone 2,NA,NA,NA,2,6,8c3534616e2201627c8d92eddfd743a1,ga4d5f79c1b,test
+c61b37cbd2848,environmental noise/alarm_1-NA-noise logger_4-5.wav,noise logger,NA,NA,NA,NA,alarm_1,4,,9a4a2e9eae4ddc59d760477027f1a7d1,gd4dd0ea349,val
+c61d6fddd9454,leak acoustic data/ductile iron-zone 2-0.31 MPa-1.16 ms-noise logger-0-1_2.wav,noise logger,ductile iron,zone 2,0.31 MPa,1.16 ms,NA,0,2,4558402696d346bca4d675dd3801659b,gb8b74c622f,test
+c620fa5ef58ff,no leak acoustic data/pe-zone 2-NA-NA-noise logger_4-5_4.wav,noise logger,pe,zone 2,NA,NA,NA,4,4,edbdb4407356ab41cf377a2fff3ef452,g3aa9a8f111,val
+c6236482dc10c,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_2-3_6.wav,noise logger,ductile iron,NA,NA,NA,NA,2,6,819c2fb3bf7c5b664102e6eab3d59450,g07ac25f1e0,train
+c62aba77a5a76,leak acoustic data/ductile iron-zone 2-0.312 MPa-0.9 ms-noise logger-0-1_3.wav,noise logger,ductile iron,zone 2,0.312 MPa,0.9 ms,NA,0,3,9359924e73c0fc9d8fd3bc6d9f380d42,gbd8e42847a,val
+c6319dfab0223,environmental noise/dog_1-NA-noise logger_4-5.wav,noise logger,NA,NA,NA,NA,dog_1,4,,527cc11f7ad3d67f32dfa5d8d33b6caf,ge2dbda8d9a,test
+c633861a18148,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_4-5.wav,hydrophone,pe,zone 2,NA,NA,NA,4,,a2eedd0dbf448098119a87d2a9637d7c,g3aa9a8f111,val
+c63e2c213d4c3,leak acoustic data/ductile iron-NA-0.3024 MPa-4.58 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3024 MPa,4.58 ms,NA,0,1,1e41d8ff06e69fc9defed91021f3473e,g3717c759ba,train
+c64160dd826c1,leak acoustic data/pe-NA-0.2233 MPa-3.77 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.2233 MPa,3.77 ms,NA,0,1,0db0c63c521853f4fdc9be45ae3d8ea9,gb577968cb1,train
+c641e51be72f8,no leak acoustic data/pe-NA-NA-NA-noise logger_1-2_1.wav,noise logger,pe,NA,NA,NA,NA,1,1,a575957d044856f69bc2b4d3660c52f5,g46286703fa,train
+c64243712bd02,no leak acoustic data/pe-NA-NA-NA-noise logger_1-2.wav,noise logger,pe,NA,NA,NA,NA,1,,7319b1e027b08eef86e055545b9400e3,g46286703fa,train
+c6450add89e89,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_4-5_9.wav,noise logger,ductile iron,NA,NA,NA,NA,4,9,edf03ec09b3c36265b8faa619ee3a017,g07ac25f1e0,train
+c64539ba804e2,no leak acoustic data/pe-NA-NA-NA-noise logger_4-5_13.wav,noise logger,pe,NA,NA,NA,NA,4,13,e07079e034767a0d7a514f8c6d0198f6,g46286703fa,train
+c65266e74bed5,environmental noise/engine_2-NA-noise logger_3-4.wav,noise logger,NA,NA,NA,NA,engine_2,3,,2e716299b93c8c655b121455854203bd,gc6ab9b7692,val
+c652f52c7f1d2,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_3-4.wav,noise logger,ductile iron,zone 2,NA,NA,NA,3,,08e4f61040ff6e0ce7f72bf58494de1c,ga4d5f79c1b,test
+c656d7aa59416,environmental noise/hydrant_89-NA-noise logger_3-4.wav,noise logger,NA,NA,NA,NA,hydrant_89,3,,4834e2521312b98303e5daaccde8566d,g3f429d8026,train
+c65ba20f1031b,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_0-1_7.wav,noise logger,ductile iron,NA,NA,NA,NA,0,7,a4893d5ea7de684781f779cb281f0633,g07ac25f1e0,train
+c65bf9aed92aa,leak acoustic data/pe-NA-0.2630 MPa-4.11 ms-noise logger-0-1.wav,noise logger,pe,NA,0.2630 MPa,4.11 ms,NA,0,,df123f0535d88e710e66c0c4d2146168,g2e6d88fb97,train
+c65dafe1ee595,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_1-2_2.wav,noise logger,ductile iron,NA,NA,NA,NA,1,2,9177016b70a4f20fa7411973012c6b1c,g07ac25f1e0,train
+c6626248f43db,leak acoustic data/pe-NA-0.2339 MPa-4.20 ms-hydrophone-2-3.wav,hydrophone,pe,NA,0.2339 MPa,4.20 ms,NA,2,,337691ecd2f94874d7c277dcea87ca4f,g31f494f9af,val
+c662ad24aa34b,no leak acoustic data/pe-NA-NA-NA-noise logger_4-5_8.wav,noise logger,pe,NA,NA,NA,NA,4,8,314d1fb318fe43e4ddd2828a463c1a99,g46286703fa,train
+c669a4ff99d0c,leak acoustic data/NA-NA-0.3137 MPa-0.42 ms-noise logger-0-1.wav,noise logger,NA,NA,0.3137 MPa,0.42 ms,NA,0,,3bc77560d97d19329c128bb74022f8ea,g52f27520ea,test
+c66e1773fcc5c,environmental noise/grass noise-zone 2-noise logger_1-2.wav,noise logger,NA,zone 2,NA,NA,grass noise,1,,02b3f7c3416d3d6500de48b2fea3f3e3,g5ac5d63683,test
+c66f70dea6bb1,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_0-1_12.wav,noise logger,ductile iron,NA,NA,NA,NA,0,12,86933112837360f9b981babf3a205e41,g07ac25f1e0,train
+c671edf2683e3,no leak acoustic data/pe-zone 2-NA-NA-noise logger_3-4.wav,noise logger,pe,zone 2,NA,NA,NA,3,,8fb8a6547a5635918d50bb60a03937d4,g3aa9a8f111,val
+c673101756e34,leak acoustic data/steel-zone 1-0.32 MPa-NA-hydrophone-0-1_1.wav,hydrophone,steel,zone 1,0.32 MPa,NA,NA,0,1,4cec568d0b24fcf9f4b5beb1aec18920,g65d54c7887,val
+c6775ffd42d51,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_3-4_4.wav,hydrophone,pe,zone 2,NA,NA,NA,3,4,4be33a6d461149461a2cfeeb9ce49986,g3aa9a8f111,val
+c6793f133fb84,no leak acoustic data/pe-NA-NA-NA-hydrophone_3-4_3.wav,hydrophone,pe,NA,NA,NA,NA,3,3,6c17f40193c53d3dc5b7a4bb74700e6a,g46286703fa,train
+c682e47ff5af3,leak acoustic data/ductile iron-NA-0.3137 MPa-0.4 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3137 MPa,0.4 ms,NA,0,,8d3cf9375701cafb085c4fd8ad86616e,g6cad5007b8,train
+c6912ec3ca658,leak acoustic data/pe-NA-0.1869 MPa-3.77 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.1869 MPa,3.77 ms,NA,0,1,d3eff1f0033f554a99802994b3eb85d0,gdc4d4d1b74,train
+c6920a1e92415,leak acoustic data/ductile iron-NA-0.2405 MPa-4.00 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.2405 MPa,4.00 ms,NA,0,,7c5ba2b3eb7f3b3deff600163310bbd6,gfb07c776d5,test
+c69396caf286c,leak acoustic data/pe-NA-0.2269 MPa-3.95 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.2269 MPa,3.95 ms,NA,0,1,946cea70418ea723b336058d63f678ac,gf98db9952c,train
+c69a2a157ba8e,no leak acoustic data/pe-NA-NA-NA-noise logger_1-2_6.wav,noise logger,pe,NA,NA,NA,NA,1,6,b611c0452ce6fb35201497df2807200b,g46286703fa,train
+c69b2475fc45a,no leak acoustic data/ductile iron-zone 2-NA-NA-hydrophone_0-1_5.wav,hydrophone,ductile iron,zone 2,NA,NA,NA,0,5,99a62649043a98bd95cfbf12e54c7cc3,ga4d5f79c1b,test
+c6a681c8dfaaf,no leak acoustic data/pe-NA-NA-NA-noise logger_2-3_2.wav,noise logger,pe,NA,NA,NA,NA,2,2,fd2b38c295480614e7089b0326a70977,g46286703fa,train
+c6a98309679be,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_0-1_4.wav,hydrophone,ductile iron,NA,NA,NA,NA,0,4,7a8c31f58c982df0a0b4f1bad8fa596e,g07ac25f1e0,train
+c6ae27e754276,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_2-3_4.wav,hydrophone,ductile iron,NA,NA,NA,NA,2,4,065bdb630dbc50b49c33557c4b89bcea,g07ac25f1e0,train
+c6bb81385b39c,leak acoustic data/ductile iron-NA-0.3105 MPa-0.44 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3105 MPa,0.44 ms,NA,0,1,3787b612ac2ff52a6cffe5b864f40188,ge48828f323,train
+c6bff6053fa0b,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_3-4_5.wav,noise logger,ductile iron,NA,NA,NA,NA,3,5,e54355165e9ad51ba61b7897f842235f,g07ac25f1e0,train
+c6c2f8ee41ebe,environmental noise/unknown_noise-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,unknown_noise,0,,00dde586bdcfbf5834cea2b0db9650bc,gc7f1538dab,test
+c6c8a300c1128,leak acoustic data/ductile iron-zone 2-0.3106 MPa-0.77 ms-noise logger-0-1_2.wav,noise logger,ductile iron,zone 2,0.3106 MPa,0.77 ms,NA,0,2,36ed22aacf4c3fbbd86377e30d7afb67,g35d2ca7b03,train
+c6c96e4e5fca9,no leak acoustic data/pe-NA-NA-NA-hydrophone_2-3_3.wav,hydrophone,pe,NA,NA,NA,NA,2,3,9ce6f9816917f0da7ceb0c4d9b2022b0,g46286703fa,train
+c6cb431993387,leak acoustic data/pe-NA-0.2866 MPa-4.50 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.2866 MPa,4.50 ms,NA,0,1,eca37ec9622716d0efbf5a5eb5a144c2,ge4eb0c7012,val
+c6cfb8b366b9b,environmental noise/music_1-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,music_1,0,,edc507cc9f4497bedb36150f7e2f3d6a,g95233a69d9,train
+c6d2716b85053,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_3-4.wav,hydrophone,ductile iron,NA,NA,NA,NA,3,,2817c533071f5fcd9a05ff71e924a3ec,g07ac25f1e0,train
+c6d2dba66c5bf,leak acoustic data/pe-NA-0.3334 MPa-0.82 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.3334 MPa,0.82 ms,NA,0,1,c0bb0a7eaf015b0600f65f331fdbdfaa,gd37259d08c,train
+c6d60068469f4,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_2-3_10.wav,noise logger,ductile iron,NA,NA,NA,NA,2,10,da85cdf1c2d0e848e7c8f4aa3f4b0e73,g07ac25f1e0,train
+c6d78327e132f,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_2-3_11.wav,noise logger,ductile iron,NA,NA,NA,NA,2,11,da85cdf1c2d0e848e7c8f4aa3f4b0e73,g07ac25f1e0,train
+c6da2e34dbe22,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_2-3_7.wav,noise logger,ductile iron,NA,NA,NA,NA,2,7,a9ef06353c27a6ff48b33b24c62d7935,g07ac25f1e0,train
+c6db0cf1a75d1,leak acoustic data/ductile iron-NA-0.3248 MPa-1.05 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.3248 MPa,1.05 ms,NA,0,,36cb79548e79df85a75972b72a202d61,g1052d23d66,val
+c6dcf45de59a3,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_0-1_1.wav,hydrophone,pe,zone 2,NA,NA,NA,0,1,38706702e0970e400d35aa8f6ff8f285,g3aa9a8f111,val
+c6dde94ea69dc,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_0-1_15.wav,noise logger,ductile iron,NA,NA,NA,NA,0,15,29909fb795a92967e405a7aea9a68385,g07ac25f1e0,train
+c6df118b5b0dd,leak acoustic data/pe-zone 1-0.25 MPa-NA-noise logger-0-1_2.wav,noise logger,pe,zone 1,0.25 MPa,NA,NA,0,2,20a0b329020459877aa3975103d1e061,ga2766ef0b5,train
+c6df9c056c634,leak acoustic data/pe-zone 1-0.32 MPa-NA-noise logger-0-1_3.wav,noise logger,pe,zone 1,0.32 MPa,NA,NA,0,3,5bcd13a4f4b384e0498c28a86f8aa2a0,gf656471109,train
+c6e13730ecfe8,leak acoustic data/pe-zone 2-0.3194 MPa-1.64 ms-noise logger-0-1_1.wav,noise logger,pe,zone 2,0.3194 MPa,1.64 ms,NA,0,1,a35a9f1915add7a297f6c1aa74546279,g6f951867fc,test
+c6ecd66d0712f,leak acoustic data/pe-zone 2-0.3034 MPa-1.55 ms-noise logger-0-1.wav,noise logger,pe,zone 2,0.3034 MPa,1.55 ms,NA,0,,0340f2c7334d755468f04e74dfe0f3ec,g38477c0f25,train
+c6ed234a13629,leak acoustic data/pe-NA-0.2425 MPa-3.97 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.2425 MPa,3.97 ms,NA,0,1,26e0f40adebfa5ec9e0fcf761bd49acf,g5a209470f2,train
+c6eefb3ad7424,leak acoustic data/pe-NA-0.1869 MPa-3.77 ms-noise logger-0-1.wav,noise logger,pe,NA,0.1869 MPa,3.77 ms,NA,0,,6400aa9d2d27fe1570727d585cdddbf0,gdc4d4d1b74,train
+c6f404058ca4b,leak acoustic data/pe-NA-0.2428 MPa-3.92 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.2428 MPa,3.92 ms,NA,0,1,40c8f43c3dbd4c15e37571f65e814f00,gebc8b2a613,val
+c6f4ebe093b36,leak acoustic data/steel-zone 1-0.25 MPa-NA-noise logger-0-1_2.wav,noise logger,steel,zone 1,0.25 MPa,NA,NA,0,2,04af53693bf105f65344c1b5cf7835c3,g889c1c063a,test
+c6f616860ac37,no leak acoustic data/pe-zone 2-NA-NA-noise logger_0-1_8.wav,noise logger,pe,zone 2,NA,NA,NA,0,8,689695a374639e52607cd61d99f6acb1,g3aa9a8f111,val
+c6fa86dd717c5,leak acoustic data/ductile iron-NA-NA-NA-noise logger-0-1.wav,noise logger,ductile iron,NA,NA,NA,NA,0,,a3f89ce1182c122f8955919ef8bb18be,g9ce7aed153,train
+c6fb5ca298fa4,leak acoustic data/pe-NA-0.3249 MPa-1.72 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.3249 MPa,1.72 ms,NA,0,1,e5bd19c544d5db4b3f29f70c623de115,g9cd3d9a990,val
+c702f4e2fcd2a,leak acoustic data/pe-zone 2-NA-NA-hydrophone-0-1.wav,hydrophone,pe,zone 2,NA,NA,NA,0,,538eebc76e9931f71630695df8d3a607,gcff12db88b,val
+c705697213775,leak acoustic data/ductile iron-zone 2-0.3235 MPa-0.5 ms-hydrophone-0-1.wav,hydrophone,ductile iron,zone 2,0.3235 MPa,0.5 ms,NA,0,,a03246490a72d53d88bf5881a2a3cd24,gda6e22d87f,train
+c70e042ff2fb4,environmental noise/dog_2-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,dog_2,0,,6a9bf5c9c11a75ec1c2bfad1fa393fb2,gc1340893eb,train
+c71017ee629b0,no leak acoustic data/pe-NA-NA-NA-noise logger_2-3_1.wav,noise logger,pe,NA,NA,NA,NA,2,1,d2efb8649b90fa180fea83438d31db50,g46286703fa,train
+c710479c9da31,leak acoustic data/ductile iron-NA-0.1771 MPa-3.62 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.1771 MPa,3.62 ms,NA,0,1,6f1545ebf04aa8d1db2b84f2871e7bed,gdc4d4d1b74,train
+c7118401c58b1,no leak acoustic data/steel-zone 1-NA-NA-noise logger_4-5.wav,noise logger,steel,zone 1,NA,NA,NA,4,,b871089d0e6283ccad7e229248d289e7,ge9b5969de0,train
+c71d685142803,leak acoustic data/ductile iron-NA-0.2580 MPa-4.35 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.2580 MPa,4.35 ms,NA,0,,00c095e9820bd2fbbd43bfd0464a7ea3,g5fcdfb219d,test
+c71f36c055a0d,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_2-3_6.wav,hydrophone,pe,zone 2,NA,NA,NA,2,6,0ff96119a618427ce2c9cfe7e0c29fc1,g3aa9a8f111,val
+c721366fe8a44,leak acoustic data/ductile iron-NA-0.1527 MPa-3.40 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.1527 MPa,3.40 ms,NA,0,,4b06ba7a7ae8356e2f989d5e52d5cb2b,g384d392de3,train
+c722b58050aed,environmental noise/drilling_1-NA-noise logger_3-4.wav,noise logger,NA,NA,NA,NA,drilling_1,3,,880b8790406c23a8314b37dc8dbc8e2d,g7318b6ee2e,train
+c7273b64f3c4e,leak acoustic data/ductile iron-NA-0.3295 MPa-0.95 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.3295 MPa,0.95 ms,NA,0,,e1a4456108f80b0fc9d136150b520286,gc8581b2bc5,test
+c72960a21f1bd,leak acoustic data/pe-NA-0.1545 MPa-3.36 ms-hydrophone-0-1.wav,hydrophone,pe,NA,0.1545 MPa,3.36 ms,NA,0,,573c499a06db754d524b6c0238a3bc3f,gdc4d4d1b74,train
+c72cd7b4c5a2f,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_2-3_2.wav,hydrophone,pe,zone 2,NA,NA,NA,2,2,6efc8c3c4ef8a08e814307610be135d3,g3aa9a8f111,val
+c73c67806ac52,leak acoustic data/pe-zone 2-NA-NA-hydrophone-0-1_2.wav,hydrophone,pe,zone 2,NA,NA,NA,0,2,b2823ababc26977ee1e0496a8f4a4c39,gcff12db88b,val
+c73e11e689b21,leak acoustic data/ductile iron-NA-0.1687 MPa-3.5 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.1687 MPa,3.5 ms,NA,0,1,02b027da3d84ca78f8acb9ce7cf71198,gb06646d0cf,test
+c73eef6098927,leak acoustic data/ductile iron-zone 2-0.326 MPa-1.08 ms-noise logger-0-1_1.wav,noise logger,ductile iron,zone 2,0.326 MPa,1.08 ms,NA,0,1,1890f89aa7362b99a1c33b071dbc1ab4,g006526d409,train
+c7445a9366cc5,leak acoustic data/pe-zone 2-0.305 MPa-1.6 ms-noise logger-0-1.wav,noise logger,pe,zone 2,0.305 MPa,1.6 ms,NA,0,,e06bb5f06ed6cede96c6a464c5cc6183,gbd8e42847a,val
+c745afb819609,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_3-4_3.wav,noise logger,ductile iron,NA,NA,NA,NA,3,3,a0777c59c58b704f01c93dc9ef00e5aa,g07ac25f1e0,train
+c7483213409d0,environmental noise/fan_1-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,fan_1,0,,20d12d1430de1d33754fda5e260b19fe,ga837d3d43e,test
+c749d0ec0a4da,leak acoustic data/ductile iron-NA-0.3091 MPa-4.64 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3091 MPa,4.64 ms,NA,0,1,e3576fe89d6a134b002058e7d3489e6b,gb8ea2685b2,train
+c74f741f43ba0,environmental noise/wind-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,wind,0,,ab70f4562f743c758d3c4b796c0e340b,g006630ce38,train
+c75a6f1fb9d12,no leak acoustic data/pe-NA-NA-NA-noise logger_3-4_1.wav,noise logger,pe,NA,NA,NA,NA,3,1,5df632d48e20ba02ef646ce5b4c34f9e,g46286703fa,train
+c75b1e79f113e,environmental noise/grass noise-zone 2-noise logger_4-5_1.wav,noise logger,NA,zone 2,NA,NA,grass noise,4,1,5dfd0745a4cd47b725723afffee7891a,g5ac5d63683,test
+c75ff7781df3f,leak acoustic data/pe-NA-0.3091 MPa-4.64 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3091 MPa,4.64 ms,NA,0,,a6f2be73976062f42d5478cba5411235,gb8ea2685b2,train
+c760afca314ee,no leak acoustic data/pe-NA-NA-NA-hydrophone_0-1_2.wav,hydrophone,pe,NA,NA,NA,NA,0,2,af25931f02172b96e16c0c3185c94674,g46286703fa,train
+c76e21dd1d63c,no leak acoustic data/pe-zone 2-NA-NA-noise logger_3-4_5.wav,noise logger,pe,zone 2,NA,NA,NA,3,5,b3eab1f51e06e857452852de969c48ec,g3aa9a8f111,val
+c76e9459c1403,environmental noise/dog_7-NA-noise logger_2-3.wav,noise logger,NA,NA,NA,NA,dog_7,2,,9ee29b26f09b12b6c33603947532f796,g04172cba2e,train
+c76f22457e9bb,leak acoustic data/ductile iron-NA-0.3181 MPa-0.83 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3181 MPa,0.83 ms,NA,0,,a54d0f5fb3a00aa13e1ade377fb1cd39,ga1018a2cf2,test
+c7720a2ec7f2b,leak acoustic data/ductile iron-NA-0.3218 MPa-1.15 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3218 MPa,1.15 ms,NA,0,1,852df0fae15f5184ef0c63d5ec751f7e,gbd2ed3f884,val
+c77262b5c12fa,leak acoustic data/ductile iron-zone 2-0.31 MPa-1.16 ms-hydrophone-0-1_1.wav,hydrophone,ductile iron,zone 2,0.31 MPa,1.16 ms,NA,0,1,62aaaa9671abc66a1d72066fe968be3d,gb8b74c622f,test
+c775d0e90fc9a,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_0-1_1.wav,hydrophone,ductile iron,NA,NA,NA,NA,0,1,2e3524e14f928987787adb163ee63c4d,g07ac25f1e0,train
+c7788ae6ad436,leak acoustic data/ductile iron-zone 2-NA-NA-noise logger-0-1_6.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,6,0a96a6a776f1c01bad1c8672fa4ff861,gf731e64668,train
+c77973a5795a4,no leak acoustic data/pe-zone 2-NA-NA-noise logger_2-3_6.wav,noise logger,pe,zone 2,NA,NA,NA,2,6,da403bbaeb7bfb44bfc4d582af32800b,g3aa9a8f111,val
+c78ceb69df9e6,leak acoustic data/ductile iron-zone 2-0.31 MPa-1.16 ms-noise logger-0-1_1.wav,noise logger,ductile iron,zone 2,0.31 MPa,1.16 ms,NA,0,1,bd3983585e7681821c2d44f6a0e4a1a5,gb8b74c622f,test
+c7969746958c1,leak acoustic data/pvc-zone 1-0.25 MPa-NA-noise logger-0-1_1.wav,noise logger,pvc,zone 1,0.25 MPa,NA,NA,0,1,401e9dbb1150ed58787b0378a85b8cfa,gf5e9dbcfbb,test
+c79ae22d51d84,leak acoustic data/ductile iron-zone 1-0.25 MPa-NA-noise logger-0-1_1.wav,noise logger,ductile iron,zone 1,0.25 MPa,NA,NA,0,1,69df010d2b5e34bbdb84a4fc72c94d70,ge9bff57254,val
+c79d76b0a85c9,leak acoustic data/pe-NA-0.3256 MPa-0.52 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3256 MPa,0.52 ms,NA,0,,f8e84a59e019de96366747ee9bb4fa47,g728a375c18,train
+c79fef86e0ef4,leak acoustic data/pe-NA-0.1803 MPa-3.68 ms-noise logger-0-1.wav,noise logger,pe,NA,0.1803 MPa,3.68 ms,NA,0,,c8d25e07d63e237ed66c8619f050d7eb,gb6e25e47de,train
+c7a04b26ecb1d,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_0-1_7.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,7,3d3a2c9bf0563b61c4882fcd32d11a69,ga4d5f79c1b,test
+c7ad362fcc94d,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_1-2_9.wav,noise logger,ductile iron,NA,NA,NA,NA,1,9,4aab9ef5bc0bcc61b9e1bb8ffb0a0534,g07ac25f1e0,train
+c7af8599a5170,leak acoustic data/ductile iron-zone 2-0.31 MPa-1.16 ms-hydrophone-0-1.wav,hydrophone,ductile iron,zone 2,0.31 MPa,1.16 ms,NA,0,,b41d80c8fb11f847a7486ed22a6c9eab,gb8b74c622f,test
+c7b06db61af9a,leak acoustic data/ductile iron-NA-0.2425 MPa-4.01 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.2425 MPa,4.01 ms,NA,0,,8ec9d586413978920ef8d205f8aa32f6,gd5a38bc872,train
+c7bbbb99ecc43,no leak acoustic data/ductile iron-zone 1-NA-NA-noise logger_2-3.wav,noise logger,ductile iron,zone 1,NA,NA,NA,2,,6a95b953d68fd8555c21f4734c0f145c,gd2da168526,train
+c7bf1b22c280e,leak acoustic data/ductile iron-NA-0.2817 MPa-4.52 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.2817 MPa,4.52 ms,NA,0,,c01f2bbe0af36e703c9542ff41a3950e,g5fcdfb219d,test
+c7c7bafde0b29,leak acoustic data/ductile iron-NA-0.3231 MPa-0.10 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3231 MPa,0.10 ms,NA,0,,94a8a471f8aecdbbc47c6071e6dca66c,g0a0ca7697a,train
+c7cc01e6ae14a,leak acoustic data/pe-NA-0.306 MPa-0.68 ms-noise logger-0-1.wav,noise logger,pe,NA,0.306 MPa,0.68 ms,NA,0,,e1d9bf6fb7d929d335a67f38c62e6365,g0d80ac505a,val
+c7d0533ff4148,leak acoustic data/pe-NA-0.1545 MPa-3.36 ms-noise logger-0-1.wav,noise logger,pe,NA,0.1545 MPa,3.36 ms,NA,0,,db71f923a24bf8534daaf0ebdec4fa06,gdc4d4d1b74,train
+c7d0ede0bde8f,leak acoustic data/ductile iron-NA-0.1648 MPa-3.40 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.1648 MPa,3.40 ms,NA,0,1,ad70938d8433ea52f43ee155ddf0b222,g4041b6d26e,val
+c7d1d905cef1f,leak acoustic data/ductile iron-NA-0.1507 MPa-3.30 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.1507 MPa,3.30 ms,NA,0,,f02db72152fb19f25247a2bea5a9f493,g23ae8baa16,test
+c7dc507b66608,leak acoustic data/pe-NA-0.1771 MPa-3.62 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.1771 MPa,3.62 ms,NA,0,1,2633e79b0db3aebfa0fa6a67ed8aae15,gdc4d4d1b74,train
+c7dc9dded05bf,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_4-5_2.wav,noise logger,ductile iron,zone 2,NA,NA,NA,4,2,406d0eae579edba5d39bd62ad64dc036,ga4d5f79c1b,test
+c7dead5147aff,environmental noise/dog_3-NA-noise logger_4-5.wav,noise logger,NA,NA,NA,NA,dog_3,4,,2f94f8257d2460d139780cb621c84568,g9c6563d2be,test
+c7df0ab24b41f,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_0-1_8.wav,noise logger,ductile iron,NA,NA,NA,NA,0,8,bc97a5b3549e2f7390923df43222cd21,g07ac25f1e0,train
+c7e04ab2dd189,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_1.wav,noise logger,pe,NA,NA,NA,NA,0,1,89553a76758a3a88e8b15491e222d2b8,g46286703fa,train
+c7e51fcee8c07,environmental noise/hydrant_89-NA-noise logger_2-3.wav,noise logger,NA,NA,NA,NA,hydrant_89,2,,4b04625afb7448e3b1278d1c7a7f3c9c,g3f429d8026,train
+c7e6cce7e9114,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_2-3.wav,hydrophone,ductile iron,NA,NA,NA,NA,2,,930cea7e0d218526b508401f0ac6ba19,g07ac25f1e0,train
+c7f06e1c2f5ea,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_4-5_8.wav,noise logger,ductile iron,NA,NA,NA,NA,4,8,62e3cc8d7333f58e5fa72b809db3a0fc,g07ac25f1e0,train
+c7f3f9946e92f,leak acoustic data/pe-zone 2-0.3034 MPa-1.55 ms-noise logger-0-1_2.wav,noise logger,pe,zone 2,0.3034 MPa,1.55 ms,NA,0,2,4f7a18007780b97f6fb8d5ef0e644561,g38477c0f25,train
+c7f73e03a7c75,leak acoustic data/ductile iron-zone 2-0.315 MPa-1.34 ms-hydrophone-0-1.wav,hydrophone,ductile iron,zone 2,0.315 MPa,1.34 ms,NA,0,,15073554b33dc4680b275d6e436c8ea7,g411f1c3a8a,train
+c802f3b37642a,environmental noise/dog_4-NA-noise logger_1-2.wav,noise logger,NA,NA,NA,NA,dog_4,1,,5c107b3e0ad7ab4ccaecbe78a7d88d66,gdb331c1860,val
+c80c03ca8d522,leak acoustic data/ductile iron-zone 2-0.3106 MPa-0.77 ms-hydrophone-0-1.wav,hydrophone,ductile iron,zone 2,0.3106 MPa,0.77 ms,NA,0,,f70a58dd38a385479c404f41ed97c7ce,g35d2ca7b03,train
+c80de9b64db85,leak acoustic data/ductile iron-zone 2-0.3106 MPa-0.77 ms-noise logger-0-1_1.wav,noise logger,ductile iron,zone 2,0.3106 MPa,0.77 ms,NA,0,1,4966b17266f920020ea2c80afda0b7e7,g35d2ca7b03,train
+c8104a15f00d7,environmental noise/rain_3-NA-noise logger_4-5.wav,noise logger,NA,NA,NA,NA,rain_3,4,,1b8afb4740e231ad3f391f38b1a00424,gdcc02653e5,train
+c812ba0ae791b,leak acoustic data/ductile iron-zone 2-0.3235 MPa-0.5 ms-noise logger-0-1_1.wav,noise logger,ductile iron,zone 2,0.3235 MPa,0.5 ms,NA,0,1,c71824c986bffcf833d4bb1e39c6921e,gda6e22d87f,train
+c815e30cd14f6,leak acoustic data/pvc-zone 1-0.25 MPa-NA-noise logger-0-1_2.wav,noise logger,pvc,zone 1,0.25 MPa,NA,NA,0,2,2f0cf5aa12777305bc8d7a3fc6bf1e54,gf5e9dbcfbb,test
+c8289c334c228,no leak acoustic data/pe-zone 1-NA-NA-noise logger_0-1.wav,noise logger,pe,zone 1,NA,NA,NA,0,,5dffc1ab1c0f020a9a3ca215d0953623,gb76766bc43,train
+c8298ae5fb0b7,leak acoustic data/ductile iron-NA-0.2339 MPa-4.20 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.2339 MPa,4.20 ms,NA,0,,063981c8b5571e57b6f0d6deb49455a6,g31f494f9af,val
+c82b1ee194183,no leak acoustic data/steel-zone 1-NA-NA-hydrophone_0-1.wav,hydrophone,steel,zone 1,NA,NA,NA,0,,2523e9576ce5d561d02da6ddc5b983fe,ge9b5969de0,train
+c82f40b6adf5c,leak acoustic data/pe-NA-0.1630 MPa-3.45 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.1630 MPa,3.45 ms,NA,0,1,aa194b677d0be933cf9bc419a8b9f8b1,gdc4d4d1b74,train
+c833445fa2bb6,no leak acoustic data/steel-zone 1-NA-NA-noise logger_3-4_1.wav,noise logger,steel,zone 1,NA,NA,NA,3,1,425810731ab78a29462c771fa69a151f,ge9b5969de0,train
+c83389fc19c95,leak acoustic data/pe-NA-0.1692 MPa-3.55 ms-hydrophone-0-1.wav,hydrophone,pe,NA,0.1692 MPa,3.55 ms,NA,0,,4554bb586dd2b0e9668f8bb5f1d8e2de,gb7e2e03764,val
+c83bea801ae35,leak acoustic data/ductile iron-NA-0.0650 MPa-2.46 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.0650 MPa,2.46 ms,NA,0,1,925bea38e94549911a4898be30c59993,geba21b61e4,test
+c83c93eac34e3,no leak acoustic data/pe-zone 2-NA-NA-noise logger_1-2_3.wav,noise logger,pe,zone 2,NA,NA,NA,1,3,c02f6ee974f74805d1e52d59e6bc3e2e,g3aa9a8f111,val
+c83e4c9ff2b59,leak acoustic data/pe-NA-0.3334 MPa-0.94 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3334 MPa,0.94 ms,NA,0,,e54d373a6d0bc6e13f20048ae350625b,ga699d0eafd,train
+c8419de8ca9cc,leak acoustic data/pe-NA-0.2242 MPa-3.90 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.2242 MPa,3.90 ms,NA,0,1,ee71ba0504dbc1e2459255e8357c37ef,gf98db9952c,train
+c844af851eeb1,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_0-1_13.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,13,f98e159509b8759c1d7f64bd94876d60,ga4d5f79c1b,test
+c852aee3c1dab,leak acoustic data/ductile iron-zone 2-0.326 MPa-1.08 ms-noise logger-0-1.wav,noise logger,ductile iron,zone 2,0.326 MPa,1.08 ms,NA,0,,be140cd12b8a5ca92210fda6089e5f4a,g006526d409,train
+c8570a876ecbe,leak acoustic data/pe-NA-0.1545 MPa-3.36 ms-noise logger-0-1_2.wav,noise logger,pe,NA,0.1545 MPa,3.36 ms,NA,0,2,48af08653706a01bdc5a8edaab9ac74a,gdc4d4d1b74,train
+c85a853783a42,leak acoustic data/pe-NA-0.3110 MPa-0.5 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3110 MPa,0.5 ms,NA,0,,6546023076ddd45eb27c0b5b74747465,ge2fad8cda7,test
+c85aa27f9face,leak acoustic data/ductile iron-NA-0.2866 MPa-4.50 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.2866 MPa,4.50 ms,NA,0,,39d28a6a0847e054297525806fe814f0,ge4eb0c7012,val
+c85be469ebf1e,leak acoustic data/ductile iron-NA-0.3179 MPa-0.51 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3179 MPa,0.51 ms,NA,0,,94f4e1d42bfabb62abefcb4ca8b93b51,gfe9a7ba473,val
+c860f8bb28ec5,leak acoustic data/pe-NA-0.3265 MPa-1.62 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.3265 MPa,1.62 ms,NA,0,1,2d30bedf7f1f8d236b25173d450cf821,gaff98a88ce,test
+c86336a54b952,leak acoustic data/ductile iron-NA-0.3303 MPa-0.25 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3303 MPa,0.25 ms,NA,0,1,ff7e9318567cdabab0fa909bc3d8b3b2,g3fccbf4247,train
+c8666274626ed,no leak acoustic data/pe-NA-NA-NA-noise logger_3-4_8.wav,noise logger,pe,NA,NA,NA,NA,3,8,b9582675da4d4d5b5216a81d867026bd,g46286703fa,train
+c86807311a1d3,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_0-1_5.wav,hydrophone,ductile iron,NA,NA,NA,NA,0,5,4fdfbddff5551e06412a35c9bd90d5f0,g07ac25f1e0,train
+c86859a40b920,leak acoustic data/ductile iron-NA-0.3181 MPa-0.94 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3181 MPa,0.94 ms,NA,0,1,8b138238987b2557f3f5df9d18bebedf,g1e056ca4d1,train
+c86c33e2a1b2d,leak acoustic data/ductile iron-zone 2-0.3106 MPa-0.77 ms-noise logger-0-1_5.wav,noise logger,ductile iron,zone 2,0.3106 MPa,0.77 ms,NA,0,5,c0ea17f7779af9b04b1105bd1e19eeec,g35d2ca7b03,train
+c8748a4c7ffc7,leak acoustic data/pe-zone 2-0.3034 MPa-1.55 ms-noise logger-0-1_1.wav,noise logger,pe,zone 2,0.3034 MPa,1.55 ms,NA,0,1,96e36e17fd1967a39e9f39236cd048e4,g38477c0f25,train
+c87fa36a32946,no leak acoustic data/pe-zone 2-NA-NA-noise logger_0-1_13.wav,noise logger,pe,zone 2,NA,NA,NA,0,13,6c7ec52768d75090808a82623578ceee,g3aa9a8f111,val
+c87fec72e724a,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_19.wav,noise logger,pe,NA,NA,NA,NA,0,19,9746ee8fd1eb75205f8e05efe0acd59f,g46286703fa,train
+c88183e8e712f,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_0-1_6.wav,hydrophone,pe,zone 2,NA,NA,NA,0,6,04aec5f0f67c6383333a91cd264a3499,g3aa9a8f111,val
+c883d3972e62d,environmental noise/wind-NA-noise logger_4-5.wav,noise logger,NA,NA,NA,NA,wind,4,,394aaa42ccb268661c6e49918aef2e2e,g006630ce38,train
+c88dfa84df965,leak acoustic data/pe-NA-0.2269 MPa-3.95 ms-noise logger-0-1.wav,noise logger,pe,NA,0.2269 MPa,3.95 ms,NA,0,,66c9f7e2a27c333769586fa72a006dd3,gf98db9952c,train
+c89cb224bcb40,environmental noise/drilling_5-NA-noise logger_4-5.wav,noise logger,NA,NA,NA,NA,drilling_5,4,,69654cd89be4c2d8a48e5cf30a626d8e,gf3aff34474,train
+c89f076f1c7aa,leak acoustic data/ductile iron-zone 2-0.3269 MPa-1.40 ms-noise logger-0-1_1.wav,noise logger,ductile iron,zone 2,0.3269 MPa,1.40 ms,NA,0,1,39986d4a8ad24892dc2e92e489c480d2,gd7836f4d3a,test
+c8a3d82b06360,environmental noise/drilling_8-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,drilling_8,0,,4f801c84a4809d8a9e81155ca5a8cd7c,g9ab0cbcb70,train
+c8a65c39db3c5,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_0-1_6.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,6,d784e65311c6f313fbeb11dc035b33c7,ga4d5f79c1b,test
+c8a7e32978d46,no leak acoustic data/pe-NA-NA-NA-noise logger_2-3_8.wav,noise logger,pe,NA,NA,NA,NA,2,8,e4f93511ad04f75eeaaa29a07e175b94,g46286703fa,train
+c8b1af5e2da91,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_0-1.wav,noise logger,ductile iron,NA,NA,NA,NA,0,,d9f8b3a26fd57cdccda8568074891234,g07ac25f1e0,train
+c8b448b044428,leak acoustic data/ductile iron-zone 1-0.25 MPa-NA-noise logger-0-1_2.wav,noise logger,ductile iron,zone 1,0.25 MPa,NA,NA,0,2,93de6da578ebd8cb19a1e608eeb80eb2,ge9bff57254,val
+c8b7ec1ee29c4,leak acoustic data/pe-NA-0.3138 MPa-0.69 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.3138 MPa,0.69 ms,NA,0,1,19ad690c871cbe38387cf58f7e72a783,g0fdfb0d43f,train
+c8c938430e85c,leak acoustic data/pe-NA-0.3223 MPa-1.00 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3223 MPa,1.00 ms,NA,0,,6e285ccd9b25e4f95cc80a9529b9e48b,ge188dad1c5,train
+c8cf03902087e,leak acoustic data/ductile iron-NA-0.1507 MPa-3.30 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.1507 MPa,3.30 ms,NA,0,1,4d54ba8e3c17268cc63c3e9e1e2e83b9,g23ae8baa16,test
+c8d05c1cdb97b,leak acoustic data/ductile iron-NA-0.32 MPa-NA-noise logger-0-1.wav,noise logger,ductile iron,NA,0.32 MPa,NA,NA,0,,531c390b703de0b8732dfbe6659270e2,gbc971f304e,val
+c8d0d0afd62a3,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_1-2.wav,noise logger,ductile iron,zone 2,NA,NA,NA,1,,400e04c8d99b17ceab65456c9a9bb447,ga4d5f79c1b,test
+c8d19965fb166,environmental noise/rain-NA-noise logger_3-4.wav,noise logger,NA,NA,NA,NA,rain,3,,d93de9e67b8c8a76c32e174401f2a2f5,g4db42c620a,train
+c8d37b4ba189b,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_4-5_5.wav,hydrophone,ductile iron,NA,NA,NA,NA,4,5,0c9ec333a6a7917f1e1af13df344ead1,g07ac25f1e0,train
+c8d48dd85a19f,leak acoustic data/pe-NA-0.2495 MPa-4.33 ms-noise logger-0-1.wav,noise logger,pe,NA,0.2495 MPa,4.33 ms,NA,0,,808ed3b12a194da6b0a2b82740ad3fd9,gdc4d4d1b74,train
+c8d535525cf9d,leak acoustic data/ductile iron-NA-0.3272 MPa-0.59 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.3272 MPa,0.59 ms,NA,0,,9fe7412ff507ee70b3b9ac032bde614d,g8666d97f53,train
+c8d802984e871,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_4-5_14.wav,noise logger,ductile iron,NA,NA,NA,NA,4,14,88b7fb6fbfee6c8d650afe390bc5a66e,g07ac25f1e0,train
+c8dcd2918af81,no leak acoustic data/pe-zone 2-NA-NA-noise logger_2-3.wav,noise logger,pe,zone 2,NA,NA,NA,2,,a5942c45675d7435b3bd59762ed9ded3,g3aa9a8f111,val
+c8dce039c2d7a,leak acoustic data/ductile iron-NA-0.3181 MPa-0.83 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.3181 MPa,0.83 ms,NA,0,,c9ebbfeb0c4494bf67e882af5ecad4e6,ga1018a2cf2,test
+c8e4146e3a0e9,leak acoustic data/pe-zone 2-0.3053 MPa-1.6 ms-noise logger-0-1.wav,noise logger,pe,zone 2,0.3053 MPa,1.6 ms,NA,0,,42207256799c40375964158dee90a9e4,ga8902ae579,train
+c8e9314d827ea,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_1-2_5.wav,noise logger,ductile iron,zone 2,NA,NA,NA,1,5,aa155c26ae611f4aa64d65f273087a83,ga4d5f79c1b,test
+c8ed223ec41db,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_0-1_13.wav,noise logger,ductile iron,NA,NA,NA,NA,0,13,50649a040d3134df2ecaa22043b63ab2,g07ac25f1e0,train
+c8f1e38ca2320,environmental noise/rain-NA-noise logger_4-5.wav,noise logger,NA,NA,NA,NA,rain,4,,18fcbd85807cc70da92d3f49d0428591,g4db42c620a,train
+c8f34320f5bde,leak acoustic data/ductile iron-zone 2-0.3106 MPa-0.77 ms-noise logger-0-1.wav,noise logger,ductile iron,zone 2,0.3106 MPa,0.77 ms,NA,0,,6ea8f5f16e0fcc5cb3b10ed4071a16c6,g35d2ca7b03,train
+c8f382e0e7dde,leak acoustic data/steel-zone 1-0.32 MPa-NA-noise logger-0-1.wav,noise logger,steel,zone 1,0.32 MPa,NA,NA,0,,d928147112d1fc1642f3dddf0251a459,g9d6e9c58a4,val
+c8f48aa5f2ed9,no leak acoustic data/pe-zone 2-NA-NA-noise logger_4-5_2.wav,noise logger,pe,zone 2,NA,NA,NA,4,2,43e785b030089a149be75a7bdf9c1e54,g3aa9a8f111,val
+c8f8340030ca2,leak acoustic data/ductile iron-zone 2-0.3177 MPa-1.15 ms-hydrophone-0-1.wav,hydrophone,ductile iron,zone 2,0.3177 MPa,1.15 ms,NA,0,,06012aadb8b781cf897302770b314f78,g104fec80fe,train
+c8fd6dd25e265,no leak acoustic data/pe-NA-NA-NA-hydrophone_4-5.wav,hydrophone,pe,NA,NA,NA,NA,4,,24fac591e51c5b4bf607f19b5f43afc1,g46286703fa,train
+c8febabd06638,leak acoustic data/pe-NA-0.32 MPa-NA-noise logger-0-1.wav,noise logger,pe,NA,0.32 MPa,NA,NA,0,,342438dd05962e42a7c39de43039f2c0,g6b91da5261,train
+c904486cd13fd,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_18.wav,noise logger,pe,NA,NA,NA,NA,0,18,62b7ad57446a5e0c2b9809341b426302,g46286703fa,train
+c908e3b026c1f,environmental noise/drilling_6-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,drilling_6,0,,27253553c92549413261387b6de07961,gbc0afdae0e,test
+c9090ce314855,leak acoustic data/pe-NA-0.1630 MPa-3.45 ms-hydrophone-0-1.wav,hydrophone,pe,NA,0.1630 MPa,3.45 ms,NA,0,,57badf97fa2f1f3321fc48c51bf7232c,gdc4d4d1b74,train
+c90a13e339fd7,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_0-1_11.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,11,030eda0f7641c76cd73d0a99cf7bcd87,ga4d5f79c1b,test
+c90d82de37d23,no leak acoustic data/pe-zone 2-NA-NA-noise logger_2-3_5.wav,noise logger,pe,zone 2,NA,NA,NA,2,5,a295be76dc12e0e1119523f2b7bf6f83,g3aa9a8f111,val
+c90f39c899ec2,leak acoustic data/ductile iron-NA-0.3248 MPa-1.05 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3248 MPa,1.05 ms,NA,0,,67f495d5ffac328db1a41be5f4cdf657,g1052d23d66,val
+c91c3356799ef,environmental noise/dog_6-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,dog_6,0,,9f40da03ae1c1811438f78338b6da985,g92623985c2,test
+c91fb50f4819b,leak acoustic data/ductile iron-NA-0.3238 MPa-0.45 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3238 MPa,0.45 ms,NA,0,,ebac71cea8aec0feb4c300f629c1219f,gf46d1a8b5c,train
+c921405b9265a,no leak acoustic data/pe-zone 2-NA-NA-noise logger_2-3_2.wav,noise logger,pe,zone 2,NA,NA,NA,2,2,4bad2eb9edf79bee37235ecf3e86b2d5,g3aa9a8f111,val
+c9255e1d09808,leak acoustic data/pe-NA-0.2742 MPa-4.18 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.2742 MPa,4.18 ms,NA,0,1,d34e9aa137aa4a4670d6be313187c5cc,gbcf550a5ee,train
+c929c87aa1b42,leak acoustic data/ductile iron-NA-0.1545 MPa-3.40 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.1545 MPa,3.40 ms,NA,0,,356ad079f093b6b16bd807454febbf5f,gdc4d4d1b74,train
+c932622897519,no leak acoustic data/pe-zone 2-NA-NA-noise logger_4-5_5.wav,noise logger,pe,zone 2,NA,NA,NA,4,5,602758a982c2402f46fb033583d94c01,g3aa9a8f111,val
+c9340312e6037,leak acoustic data/ductile iron-NA-0.0717 MPa-2.09 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.0717 MPa,2.09 ms,NA,0,,d2882abf5c5d0a2ef24d6387289ae4de,g687b1c097c,train
+c93f64081ea7c,environmental noise/hydrant_89-NA-noise logger_4-5.wav,noise logger,NA,NA,NA,NA,hydrant_89,4,,3a31a2d12cf13c2fc21a5bb857dea2a3,g3f429d8026,train
+c941c8e5932f1,leak acoustic data/ductile iron-NA-0.2242 MPa-3.90 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.2242 MPa,3.90 ms,NA,0,,88de50b5d0b6f3a38682210e479c6949,gf98db9952c,train
+c945fefa7c7c7,no leak acoustic data/pe-NA-NA-NA-noise logger_4-5_3.wav,noise logger,pe,NA,NA,NA,NA,4,3,303a67eb39498324aa8783f48f7bbbfc,g46286703fa,train
+c94994b56ea72,leak acoustic data/pvc-zone 1-0.25 MPa-NA-noise logger-0-1.wav,noise logger,pvc,zone 1,0.25 MPa,NA,NA,0,,3c8cbdcce351ebe33ccbd652bcdeb596,gf5e9dbcfbb,test
+c94d772aedd3d,leak acoustic data/pe-zone 2-NA-NA-noise logger-0-1_1.wav,noise logger,pe,zone 2,NA,NA,NA,0,1,76d3176c71ee1fc76197ca175504730c,gd2cdf4b672,test
+c95079e715e90,leak acoustic data/ductile iron-NA-0.3441 MPa-0.22 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3441 MPa,0.22 ms,NA,0,,fb971da841b02bdd0f32b68154f71cad,g71c7290dc4,train
+c9525342ac0bb,leak acoustic data/ductile iron-NA-0.1949 MPa-2.02 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.1949 MPa,2.02 ms,NA,0,1,02a86d46d09ba33916e1223efebdf69b,gc88aa3442a,train
+c95340245af0b,leak acoustic data/pe-NA-0.3130 MPa-0.38 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3130 MPa,0.38 ms,NA,0,,2ebc4f9a69b79b635508a3daa302cb31,g7cbbdd18a2,train
+c954d8c15dced,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_0-1_8.wav,hydrophone,ductile iron,NA,NA,NA,NA,0,8,cd0cd03a8a72beba3ff41075412fa00c,g07ac25f1e0,train
+c9579263ee8c5,leak acoustic data/pe-NA-0.1648 MPa-3.40 ms-hydrophone-0-1.wav,hydrophone,pe,NA,0.1648 MPa,3.40 ms,NA,0,,9c47c89735e3fe35e2b8a11e02e1e421,g4041b6d26e,val
+c95aeeb894813,leak acoustic data/ductile iron-NA-0.2428 MPa-3.92 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.2428 MPa,3.92 ms,NA,0,,9b8bc60260e8655b72d46cc5107733a6,gebc8b2a613,val
+c95f22e51a977,leak acoustic data/steel-zone 1-0.25 MPa-NA-noise logger-0-1_1.wav,noise logger,steel,zone 1,0.25 MPa,NA,NA,0,1,df309580a9875ff0fa68d51ab853b397,g889c1c063a,test
+c966d58c8fbbc,no leak acoustic data/pe-zone 2-NA-NA-noise logger_2-3_10.wav,noise logger,pe,zone 2,NA,NA,NA,2,10,cf857278b19ce5bb328d4577214dd299,g3aa9a8f111,val
+c970bd9df6a66,leak acoustic data/pe-NA-0.2320 MPa-3.78 ms-noise logger-0-1.wav,noise logger,pe,NA,0.2320 MPa,3.78 ms,NA,0,,e945b7b3fee48bdb2ecf74ca0d557d1c,g04801441ef,val
+c974636289026,no leak acoustic data/steel-zone 1-NA-NA-noise logger_0-1_2.wav,noise logger,steel,zone 1,NA,NA,NA,0,2,dcdd5001031577b999c25479d9ee739b,ge9b5969de0,train
+c977205a20157,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_13.wav,noise logger,pe,NA,NA,NA,NA,0,13,d6a183205c18481bcece35f89a63612d,g46286703fa,train
+c97894a44afd8,no leak acoustic data/pe-NA-NA-NA-noise logger_4-5_10.wav,noise logger,pe,NA,NA,NA,NA,4,10,dec649d52a949300fbf7d02f92846af3,g46286703fa,train
+c97e2fbf49b5d,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_7.wav,noise logger,pe,NA,NA,NA,NA,0,7,c1abf1807503c25da508ad291a1b7c81,g46286703fa,train
+c97e8c72149a6,leak acoustic data/ductile iron-zone 2-0.315 MPa-1.34 ms-hydrophone-0-1_1.wav,hydrophone,ductile iron,zone 2,0.315 MPa,1.34 ms,NA,0,1,6ee79b682d961afc900debab5611813f,g411f1c3a8a,train
+c9800a2902967,no leak acoustic data/pe-NA-NA-NA-noise logger_1-2_7.wav,noise logger,pe,NA,NA,NA,NA,1,7,642c19989ceecb9a551ec0dc41bfe09e,g46286703fa,train
+c99c85e0af482,no leak acoustic data/steel-zone 1-NA-NA-noise logger_0-1_1.wav,noise logger,steel,zone 1,NA,NA,NA,0,1,27559e5a8ee009349d9083ba96ade8d5,ge9b5969de0,train
+c9a1df55e1ecd,leak acoustic data/pe-NA-0.1767 MPa-3.50 ms-noise logger-0-1.wav,noise logger,pe,NA,0.1767 MPa,3.50 ms,NA,0,,2fdcb97b24491c0428e1403cbde69241,g11974daa56,val
+c9ab733ae4c2a,leak acoustic data/ductile iron-zone 2-0.3251 MPa-1.26 ms-hydrophone-0-1.wav,hydrophone,ductile iron,zone 2,0.3251 MPa,1.26 ms,NA,0,,d34955499e87771bd342027cb1f7b20c,g9b81f0fded,train
+c9b03c607dbd2,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_0-1_4.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,4,36aef28d3153c29c06605f0e9a0c36f4,ga4d5f79c1b,test
+c9b180fd6c818,leak acoustic data/pe-NA-0.2425 MPa-4.01 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.2425 MPa,4.01 ms,NA,0,1,9e6069a11c6ceb427dccf1c5f0a448e7,gd5a38bc872,train
+c9c22a3a7bbb1,leak acoustic data/ductile iron-zone 2-0.3202 MPa-0.15 ms-noise logger-0-1.wav,noise logger,ductile iron,zone 2,0.3202 MPa,0.15 ms,NA,0,,7c67cbce6efafe731073e883c646e1df,g9f1bfc309c,train
+c9c315e1f2ebe,no leak acoustic data/ductile iron-zone 2-NA-NA-hydrophone_4-5_3.wav,hydrophone,ductile iron,zone 2,NA,NA,NA,4,3,0ccfe83c6a0ec96d91914ad1c90038b7,ga4d5f79c1b,test
+c9c3e92124764,environmental noise/grass noise-zone 2-noise logger_0-1_1.wav,noise logger,NA,zone 2,NA,NA,grass noise,0,1,e25aa081ebb184b58ca43a214ac5e134,g5ac5d63683,test
+c9c6b1e4bb816,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_4-5_12.wav,noise logger,ductile iron,NA,NA,NA,NA,4,12,db09027c86e18c4ab55dcafe5b4e69b0,g07ac25f1e0,train
+c9da56ced9783,no leak acoustic data/ductile iron-zone 1-NA-NA-noise logger_0-1_3.wav,noise logger,ductile iron,zone 1,NA,NA,NA,0,3,07ec8c7850349c9b750dee3efc7f753b,gd2da168526,train
+c9e80dc5945f0,environmental noise/alarm_1-NA-noise logger_1-2.wav,noise logger,NA,NA,NA,NA,alarm_1,1,,f6f2cbcd8f9beec8c636f69f4689e3f1,gd4dd0ea349,val
+c9e89eab2ddf2,leak acoustic data/ductile iron-NA-0.3286 MPa-1.40 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3286 MPa,1.40 ms,NA,0,,e1b22a4a8a79425849e32821597a8a56,gbcefe1b7d2,train
+c9e904ad56dd0,leak acoustic data/ductile iron-NA-0.3248 MPa-1.05 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3248 MPa,1.05 ms,NA,0,1,62cd9b9e74e1665792f762285caac478,g1052d23d66,val
+c9eaed9c635c2,leak acoustic data/ductile iron-zone 1-0.32 MPa-NA-hydrophone-0-1.wav,hydrophone,ductile iron,zone 1,0.32 MPa,NA,NA,0,,e922788eae3428e467cc91d07731c958,g3e25888c07,train
+c9eec73b47d50,no leak acoustic data/pe-NA-NA-NA-hydrophone_1-2_2.wav,hydrophone,pe,NA,NA,NA,NA,1,2,93e48978291e651f4a3c578891e5db24,g46286703fa,train
+c9f12c265e22e,leak acoustic data/steel-zone 1-0.32 MPa-NA-hydrophone-0-1.wav,hydrophone,steel,zone 1,0.32 MPa,NA,NA,0,,4465ef7d872246b98f315729f94d9be0,g65d54c7887,val
+c9f80419ffb2c,environmental noise/engine_6-NA-noise logger_3-4.wav,noise logger,NA,NA,NA,NA,engine_6,3,,6dc38592f6553cde3fe4928c67ac3fcf,g23dfe47d1a,test
+c9f8a8c9ec27a,no leak acoustic data/pe-NA-NA-NA-noise logger_4-5_9.wav,noise logger,pe,NA,NA,NA,NA,4,9,c9e150dde55415f643d45f53a68ff403,g46286703fa,train
+c9f921094631f,no leak acoustic data/pe-zone 2-NA-NA-noise logger_0-1_5.wav,noise logger,pe,zone 2,NA,NA,NA,0,5,0d95f0dae02ea803affe9116cbb48250,g3aa9a8f111,val
+c9f9ff446d3f2,no leak acoustic data/pe-zone 2-NA-NA-noise logger_2-3_7.wav,noise logger,pe,zone 2,NA,NA,NA,2,7,823e14a8c4053a3245a58247d0c972ae,g3aa9a8f111,val
+c9fdeab004cad,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_2-3_4.wav,noise logger,ductile iron,zone 2,NA,NA,NA,2,4,ffddf3477b7c062855a46190a336b696,ga4d5f79c1b,test
+ca04a5b102f58,leak acoustic data/pe-NA-0.2405 MPa-4.00 ms-noise logger-0-1.wav,noise logger,pe,NA,0.2405 MPa,4.00 ms,NA,0,,f7f5c7b1bab196ad11917ddc6c5ca12d,gfb07c776d5,test
+ca060cc57486c,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_3.wav,noise logger,pe,NA,NA,NA,NA,0,3,5e12832c5a062ed3e9ba888ca7eb874a,g46286703fa,train
+ca072be8edf7e,leak acoustic data/ductile iron-zone 1-0.25 MPa-NA-hydrophone-0-1_1.wav,hydrophone,ductile iron,zone 1,0.25 MPa,NA,NA,0,1,cddb6500cfbf73a2be8fb85445c68fc4,g137a73d92f,val
+ca0aae95c01f0,leak acoustic data/pe-zone 2-0.326 MPa-0.18 ms-noise logger-0-1.wav,noise logger,pe,zone 2,0.326 MPa,0.18 ms,NA,0,,084578dcd084cd7fe66047dd20aa5239,g2dbaa049ec,test
+ca100aebb6d89,no leak acoustic data/ductile iron-zone 2-NA-NA-hydrophone_2-3_3.wav,hydrophone,ductile iron,zone 2,NA,NA,NA,2,3,9885ef2f9bfaa936234d91661011232c,ga4d5f79c1b,test
+ca218cedcfb92,no leak acoustic data/pe-NA-NA-NA-noise logger_3-4_3.wav,noise logger,pe,NA,NA,NA,NA,3,3,aa898f69147ae04217a7c512ffecd5aa,g46286703fa,train
+ca21b4eb5ddf2,leak acoustic data/ductile iron-NA-0.1192 MPa-2.95 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.1192 MPa,2.95 ms,NA,0,,235e3de76568620918496066e7191c42,gf3773ae361,train
+ca231577fb9d2,environmental noise/dog_2-NA-noise logger_3-4.wav,noise logger,NA,NA,NA,NA,dog_2,3,,e1fa6c7f0321b13bd466b4ba528ca2da,gc1340893eb,train
+ca2407744778e,no leak acoustic data/ductile iron-zone 2-NA-NA-hydrophone_1-2_1.wav,hydrophone,ductile iron,zone 2,NA,NA,NA,1,1,f2e75c13a07826b417a6d981357319c5,ga4d5f79c1b,test
+ca26346853052,no leak acoustic data/pe-NA-NA-NA-hydrophone_1-2.wav,hydrophone,pe,NA,NA,NA,NA,1,,b8fa676d7dba659b52d1620ec33d1a22,g46286703fa,train
+ca284c3204ae3,leak acoustic data/pvc-zone 1-0.32 MPa-NA-noise logger-0-1_3.wav,noise logger,pvc,zone 1,0.32 MPa,NA,NA,0,3,9b304ea9452da56b839595d1c3d1b7b6,ge5a09394ed,train
+ca2a5550fdad4,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_2-3_5.wav,noise logger,ductile iron,NA,NA,NA,NA,2,5,d292f889a6cf11ad80cca3012396bd46,g07ac25f1e0,train
+ca3a0d82b36b7,leak acoustic data/pe-NA-0.3267 MPa-0.95 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.3267 MPa,0.95 ms,NA,0,1,f53a71b9c81672b8d65a08d4995c0127,g33178462bd,train
+ca3d8a55830c5,environmental noise/drilling_2-NA-noise logger_2-3.wav,noise logger,NA,NA,NA,NA,drilling_2,2,,d267b476c937d289f720d8547c6d0931,g43a5b2e02e,val
+ca41b92332b26,environmental noise/drilling_1-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,drilling_1,0,,abdef27d07b5b3196272970aa92720a1,g7318b6ee2e,train
+ca43e784d4e6d,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_1-2_2.wav,hydrophone,pe,zone 2,NA,NA,NA,1,2,8836022386471da583f1046830b8ab64,g3aa9a8f111,val
+ca4405e0d5291,leak acoustic data/pe-NA-0.2425 MPa-4.01 ms-noise logger-0-1.wav,noise logger,pe,NA,0.2425 MPa,4.01 ms,NA,0,,2368049baeec3d4ad69300b0a6cd1da7,gd5a38bc872,train
+ca462d40cc1f5,no leak acoustic data/NA-zone 2-NA-NA-noise logger_2-3.wav,noise logger,NA,zone 2,NA,NA,NA,2,,afe0e1b26deb034f06d5497fe9d5fa2c,g4a6d62802d,train
+ca46fdc0b22e0,leak acoustic data/ductile iron-zone 2-0.315 MPa-1.34 ms-noise logger-0-1.wav,noise logger,ductile iron,zone 2,0.315 MPa,1.34 ms,NA,0,,59055c0bdd2814540df1c1d6bf625ece,g411f1c3a8a,train
+ca520a01f2166,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_4-5_3.wav,hydrophone,pe,zone 2,NA,NA,NA,4,3,4197c64a4d2ada659c85562ce88eeea3,g3aa9a8f111,val
+ca59a841b7f2d,environmental noise/drilling_8-NA-noise logger_1-2.wav,noise logger,NA,NA,NA,NA,drilling_8,1,,3c0c8234b4b1979ca299e877e1e8636f,g9ab0cbcb70,train
+ca5b800086916,leak acoustic data/pe-NA-0.322 MPa-0.11 ms-hydrophone-0-1.wav,hydrophone,pe,NA,0.322 MPa,0.11 ms,NA,0,,6ff4f970ea753fd51107588c162612b9,g1226a5d9ec,val
+ca5f5336b1525,no leak acoustic data/pe-zone 2-NA-NA-noise logger_1-2_5.wav,noise logger,pe,zone 2,NA,NA,NA,1,5,3c5a16f94782752025d8da87fdde3c95,g3aa9a8f111,val
+ca69cd7fb29cb,leak acoustic data/ductile iron-NA-0.2095 MPa-3.70 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.2095 MPa,3.70 ms,NA,0,,f962702f6aeea66718ebaeee0779951f,gfb8be03274,test
+ca69d6f75a350,leak acoustic data/pe-zone 2-0.3172 MPa-0.95 ms-hydrophone-0-1.wav,hydrophone,pe,zone 2,0.3172 MPa,0.95 ms,NA,0,,3d4c36172c2da9598f6feeaca9ed55e2,ga7bab1b774,train
+ca6c409dcee37,leak acoustic data/pe-NA-0.1771 MPa-3.62 ms-noise logger-0-1.wav,noise logger,pe,NA,0.1771 MPa,3.62 ms,NA,0,,56623ad478b22815529c97a907a212b6,gdc4d4d1b74,train
+ca6e1f5ebe3ea,leak acoustic data/ductile iron-NA-0.3179 MPa-0.51 ms-hydrophone-4-5.wav,hydrophone,ductile iron,NA,0.3179 MPa,0.51 ms,NA,4,,ad074d6c9424d47b3b1b039741918696,gfe9a7ba473,val
+ca6e9d0396efb,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_3-4_1.wav,hydrophone,pe,zone 2,NA,NA,NA,3,1,41bd5b4749d4f6df05da081f726e3fc1,g3aa9a8f111,val
+ca72bf20e16e1,leak acoustic data/pe-NA-0.3249 MPa-1.68 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3249 MPa,1.68 ms,NA,0,,c820602e813d06e8bd4c92842e301a97,g23d60a5b3b,train
+ca785ee839f07,leak acoustic data/pe-NA-0.1545 MPa-3.36 ms-noise logger-0-1_3.wav,noise logger,pe,NA,0.1545 MPa,3.36 ms,NA,0,3,633f976f745743ee973cc07d7b0aa8fd,gdc4d4d1b74,train
+ca78aa8b431d7,leak acoustic data/pe-NA-0.2755 MPa-4.38 ms-noise logger-0-1.wav,noise logger,pe,NA,0.2755 MPa,4.38 ms,NA,0,,ef1dc654aed991dc064b68bc495ab420,gf05d2e1f49,train
+ca7a143288c49,no leak acoustic data/ductile iron-zone 1-NA-NA-noise logger_2-3_1.wav,noise logger,ductile iron,zone 1,NA,NA,NA,2,1,40645dfcb5ded04092948d5b73fee3ea,gd2da168526,train
+ca8096a64f8ae,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_0-1_3.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,3,3ed58f09666623dc003dd8776e02720c,ga4d5f79c1b,test
+ca8ba0300e053,environmental noise/engine_6-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,engine_6,0,,a6a327873c55050921cd9e69d0e13b14,g23dfe47d1a,test
+ca92e7e3c8a65,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_23.wav,noise logger,pe,NA,NA,NA,NA,0,23,783c902d6bad494c5217f3274810ad9a,g46286703fa,train
+ca93fd0490325,leak acoustic data/pe-NA-0.3223 MPa-1.15 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3223 MPa,1.15 ms,NA,0,,e314c5f8d9c7fda2d22367a8327e7451,gc7043341f6,train
+ca9b4ed28fea4,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_1-2.wav,noise logger,ductile iron,NA,NA,NA,NA,1,,558a508a42916677966357ed593bd72b,g07ac25f1e0,train
+caa63a441d079,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_0-1_18.wav,noise logger,ductile iron,NA,NA,NA,NA,0,18,f8c02f21024e11d675d5c653ce559cbd,g07ac25f1e0,train
+caaa128b22094,no leak acoustic data/pe-NA-NA-NA-noise logger_4-5_11.wav,noise logger,pe,NA,NA,NA,NA,4,11,c9e150dde55415f643d45f53a68ff403,g46286703fa,train
+caac9ec800d60,leak acoustic data/ductile iron-zone 2-0.3172 MPa-0.95 ms-noise logger-0-1_1.wav,noise logger,ductile iron,zone 2,0.3172 MPa,0.95 ms,NA,0,1,fbf6ba4e464dd9d6175087d852812423,ga7bab1b774,train
+cab1fabf80cc0,environmental noise/rain-NA-noise logger_2-3.wav,noise logger,NA,NA,NA,NA,rain,2,,e9c6a854efcf49bb33c350bde2d51ebc,g4db42c620a,train
+cab2078e0f2fe,leak acoustic data/ductile iron-NA-0.2672 MPa-4.07 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.2672 MPa,4.07 ms,NA,0,1,841ad2b1dec48dee1ad5abe33dfa6e36,g08e2845ae9,train
+cab28f3852b2e,leak acoustic data/ductile iron-zone 2-0.315 MPa-1.34 ms-noise logger-0-1_2.wav,noise logger,ductile iron,zone 2,0.315 MPa,1.34 ms,NA,0,2,36871438c04b78dafac440a1f635b890,g411f1c3a8a,train
+cab4e25cbfda2,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_4-5_3.wav,hydrophone,ductile iron,NA,NA,NA,NA,4,3,93f8d8ef1c04fe3346e954b3e27b07f3,g07ac25f1e0,train
+cab52ca040acd,environmental noise/flowing water-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,flowing water,0,,cc004dccc386fa412031e59043ad87b5,gcfd9b54efb,val
+cabb3131f7306,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_2-3_3.wav,hydrophone,pe,zone 2,NA,NA,NA,2,3,bdeae1247ce0df9591f6311195884aef,g3aa9a8f111,val
+cac265c2092b0,leak acoustic data/ductile iron-NA-0.1767 MPa-3.50 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.1767 MPa,3.50 ms,NA,0,,11ddc8fb164eae4548c7456c4a07e976,g11974daa56,val
+cac54aa1d814e,leak acoustic data/ductile iron-NA-0.3091 MPa-4.64 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3091 MPa,4.64 ms,NA,0,,2dc9559892f837cad50b2d7c275bf0c9,gb8ea2685b2,train
+cacb3ed0d3ca1,no leak acoustic data/pe-zone 2-NA-NA-noise logger_0-1.wav,noise logger,pe,zone 2,NA,NA,NA,0,,6c330f25e18bd37ea275f163fa8757e2,g3aa9a8f111,val
+cacc67a2bbb12,leak acoustic data/ductile iron-zone 2-0.3106 MPa-0.77 ms-noise logger-0-1_4.wav,noise logger,ductile iron,zone 2,0.3106 MPa,0.77 ms,NA,0,4,be4caa88b81c36a6ce62d0b6af03fb43,g35d2ca7b03,train
+cacceda6bcc68,no leak acoustic data/pe-NA-NA-NA-hydrophone_3-4_4.wav,hydrophone,pe,NA,NA,NA,NA,3,4,ce2c0b1fe782bf3216e38a81eb18454e,g46286703fa,train
+cae55374f40a9,leak acoustic data/steel-zone 1-0.32 MPa-NA-noise logger-0-1_3.wav,noise logger,steel,zone 1,0.32 MPa,NA,NA,0,3,7d134453392c87e48b659fea7af83af9,g9d6e9c58a4,val
+caefb3f318735,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_3-4_6.wav,hydrophone,pe,zone 2,NA,NA,NA,3,6,687a2825b47abd6140ba632c2d050af9,g3aa9a8f111,val
+caeff31a64b96,leak acoustic data/ductile iron-NA-0.1869 MPa-3.77 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.1869 MPa,3.77 ms,NA,0,,aa3fc9255a745bbcf2148d89807be949,gdc4d4d1b74,train
+cafa29c82aa5f,leak acoustic data/pe-NA-0.3110 MPa-0.5 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.3110 MPa,0.5 ms,NA,0,1,413f2c3a42fe787a878d5337bccc9e42,ge2fad8cda7,test
+cb04fbe5f43f1,leak acoustic data/pe-zone 2-0.3053 MPa-1.6 ms-noise logger-0-1_1.wav,noise logger,pe,zone 2,0.3053 MPa,1.6 ms,NA,0,1,21cf789eef8a97bef8580a21642f204a,ga8902ae579,train
+cb0587d80e43d,no leak acoustic data/pe-NA-NA-NA-noise logger_2-3_9.wav,noise logger,pe,NA,NA,NA,NA,2,9,0a3a769e0b058088e00f9824684fcd00,g46286703fa,train
+cb08d7195d6bf,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_2-3_2.wav,noise logger,ductile iron,NA,NA,NA,NA,2,2,c1d1bc4effc55c3a54c4bd7884ae1db8,g07ac25f1e0,train
+cb0ab48dfa307,no leak acoustic data/pe-zone 2-NA-NA-noise logger_0-1_14.wav,noise logger,pe,zone 2,NA,NA,NA,0,14,07eeeead0f5cc64b1fab0c3bd663f2e6,g3aa9a8f111,val
+cb106b3ab62f1,leak acoustic data/pe-zone 1-0.32 MPa-NA-noise logger-0-1.wav,noise logger,pe,zone 1,0.32 MPa,NA,NA,0,,bd66d84e027adb6494bbd2c1579842e9,gf656471109,train
+cb17603e80a4f,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_3-4.wav,hydrophone,pe,zone 2,NA,NA,NA,3,,b3366413500851d05d67757eb3d9f3e3,g3aa9a8f111,val
+cb17c6ebae98e,no leak acoustic data/pe-NA-NA-NA-noise logger_4-5_6.wav,noise logger,pe,NA,NA,NA,NA,4,6,8a7d596b5c359389338bbef8409afd4c,g46286703fa,train
+cb1836abaeda9,environmental noise/wind-NA-noise logger_1-2.wav,noise logger,NA,NA,NA,NA,wind,1,,6c162f6ae57a133bc4384ce5e2709df4,g006630ce38,train
+cb1b6d00cc612,leak acoustic data/ductile iron-NA-0.3286 MPa-1.34 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3286 MPa,1.34 ms,NA,0,1,9102d137870cda90ab853cac2f80a5d5,gd7664d159c,train
+cb26c1b8b6768,environmental noise/dog_6-NA-noise logger_2-3.wav,noise logger,NA,NA,NA,NA,dog_6,2,,d4741fa982f840ba6b0a8f3239bd6799,g92623985c2,test
+cb2c10f9fbfae,leak acoustic data/ductile iron-zone 1-0.25 MPa-NA-noise logger-0-1.wav,noise logger,ductile iron,zone 1,0.25 MPa,NA,NA,0,,dff8963c90ac099994db2ffcdfb9795e,ge9bff57254,val
+cb2f440b9e0e4,leak acoustic data/ductile iron-NA-0.3272 MPa-0.59 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3272 MPa,0.59 ms,NA,0,1,078ab4dd82f713f04fbab8b5cf0a7889,g8666d97f53,train
+cb336e382f080,leak acoustic data/pe-NA-0.3334 MPa-0.94 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.3334 MPa,0.94 ms,NA,0,1,a171ff80d067320ea1a77b41b25f3ebf,ga699d0eafd,train
+cb3377f524d63,leak acoustic data/ductile iron-NA-0.3362 MPa-0.7 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3362 MPa,0.7 ms,NA,0,1,cca214f79267ff62055fc396f9b3501b,g96e60487d1,val
+cb440af43a10e,leak acoustic data/pe-NA-0.1803 MPa-3.68 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.1803 MPa,3.68 ms,NA,0,1,537bf95f16a80dd12ca205c80dcefa90,gb6e25e47de,train
+cb446f02203f5,leak acoustic data/ductile iron-NA-0.2233 MPa-3.77 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.2233 MPa,3.77 ms,NA,0,,a01ee0afbe68be2d5acd82ad248743af,gb577968cb1,train
+cb4e587798890,leak acoustic data/ductile iron-NA-0.3270 MPa-0.05 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3270 MPa,0.05 ms,NA,0,,b042c223344f69965e619e70a98a0c97,gc8f3a8a3e1,val
+cb4ea849ad8c2,leak acoustic data/pe-zone 2-0.3221 MPa-0.08 ms-noise logger-0-1.wav,noise logger,pe,zone 2,0.3221 MPa,0.08 ms,NA,0,,040005560b5119303fe14c4412ae5546,gbe87f33dfd,val
+cb58da4a10dd4,no leak acoustic data/ductile iron-zone 2-NA-NA-hydrophone_2-3_2.wav,hydrophone,ductile iron,zone 2,NA,NA,NA,2,2,4ab0336d40bce4126bc475e86d3d0e86,ga4d5f79c1b,test
+cb69d5090607e,leak acoustic data/pe-NA-0.2817 MPa-4.52 ms-hydrophone-0-1.wav,hydrophone,pe,NA,0.2817 MPa,4.52 ms,NA,0,,227b678568f00ba50282cd10d1dca4b8,g5fcdfb219d,test
+cb6b9765d2d8f,leak acoustic data/pe-NA-0.2320 MPa-3.78 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.2320 MPa,3.78 ms,NA,0,1,2ba84a0b41b6dd3cdd557d1195b1bc29,g04801441ef,val
+cb73a749efbb3,leak acoustic data/pe-NA-0.2095 MPa-3.70 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.2095 MPa,3.70 ms,NA,0,1,222ecc11662fc5ca3571b311874289c0,gfb8be03274,test
+cb7aba874ee7e,no leak acoustic data/steel-zone 1-NA-NA-hydrophone_3-4.wav,hydrophone,steel,zone 1,NA,NA,NA,3,,bfc0288da9b37f77370d510f7e278d09,ge9b5969de0,train
+cb7bc59e020dc,leak acoustic data/NA-NA-NA-NA-noise logger-0-1_2.wav,noise logger,NA,NA,NA,NA,NA,0,2,da760ba82bd18c6abe2e97ac6f3ae2c5,g1e688c389c,train
+cb81e80e263f5,leak acoustic data/ductile iron-zone 2-0.3269 MPa-1.40 ms-noise logger-0-1.wav,noise logger,ductile iron,zone 2,0.3269 MPa,1.40 ms,NA,0,,05ab2f612ddba734c6ae6c828a077578,gd7836f4d3a,test
+cb8323080e428,no leak acoustic data/pe-zone 2-NA-NA-noise logger_2-3_9.wav,noise logger,pe,zone 2,NA,NA,NA,2,9,11ee1871947e72ea24e88a3ce34064cc,g3aa9a8f111,val
+cb853e3044c69,leak acoustic data/pe-NA-0.3223 MPa-1.15 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.3223 MPa,1.15 ms,NA,0,1,dd67d756de478afe29f9824867f64d57,gc7043341f6,train
+cb8afa5be487c,environmental noise/hydrant_normal-NA-noise logger_4-5.wav,noise logger,NA,NA,NA,NA,hydrant_normal,4,,0e018483d98ea201ebdf1b8e848e5446,g03a8c8e492,train
+cb8c5084de71f,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_4.wav,noise logger,pe,NA,NA,NA,NA,0,4,97e493189f9c009fe0d950443239abbf,g46286703fa,train
+cb8ea5ba6ee8e,leak acoustic data/ductile iron-NA-0.1630 MPa-3.45 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.1630 MPa,3.45 ms,NA,0,,54093da9e6d2a79b3c4ceabd309f2e5e,gdc4d4d1b74,train
+cb95ebb6d026f,leak acoustic data/ductile iron-NA-0.2495 MPa-4.33 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.2495 MPa,4.33 ms,NA,0,,60d3731eecd62f6b2c2eb5b9ab995bea,gdc4d4d1b74,train
+cb98d272d0c33,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_4-5_2.wav,hydrophone,ductile iron,NA,NA,NA,NA,4,2,0603a653920296c3908142b171a846ba,g07ac25f1e0,train
+cba8f28afe0e4,leak acoustic data/pe-NA-0.2688 MPa-4.21 ms-noise logger-0-1.wav,noise logger,pe,NA,0.2688 MPa,4.21 ms,NA,0,,d09cb10402f07f1a2373d99449c5baf0,g88c7bfd6e1,train
+cba905278e156,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_0-1_9.wav,noise logger,ductile iron,NA,NA,NA,NA,0,9,f9bcba2ffad456aed3e9a08e81c441cd,g07ac25f1e0,train
+cbae7a05a27b2,environmental noise/rain_2-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,rain_2,0,,f0810aa85a234b72e0789b5260855feb,gaeb474d6be,train
+cbaf6f54ba4c2,leak acoustic data/ductile iron-NA-0.32 MPa-NA-noise logger-0-1_2.wav,noise logger,ductile iron,NA,0.32 MPa,NA,NA,0,2,bb96a78026a5abedeac5fdf5d007fddf,gbc971f304e,val
+cbaf78df6bfc2,leak acoustic data/ductile iron-zone 1-0.32 MPa-NA-hydrophone-0-1_1.wav,hydrophone,ductile iron,zone 1,0.32 MPa,NA,NA,0,1,f2a3cc3043153cff8878bef6e54bd6e8,g3e25888c07,train
+cbb530c2d8793,environmental noise/gas pipe-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,gas pipe,0,,19cf5afe7a70754908b2255ecde6c8fd,ge4ed52c56a,train
+cbb6672364ebd,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_4-5_4.wav,noise logger,ductile iron,NA,NA,NA,NA,4,4,661ff8cad6f8ee652cb97c7de0d1b393,g07ac25f1e0,train
+cbb8d96a5e4a5,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_1-2_8.wav,noise logger,ductile iron,NA,NA,NA,NA,1,8,96b324d08b31e6ffb23c73b7416bd0ca,g07ac25f1e0,train
+cbc197bbdf153,leak acoustic data/ductile iron-NA-0.2377 MPa-3.95 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.2377 MPa,3.95 ms,NA,0,,7f34cf9d44c5888735812d4c76689e02,gcdfe50e5af,test
+cbc2b165981dd,leak acoustic data/pe-NA-0.3162 MPa-0.5 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3162 MPa,0.5 ms,NA,0,,5d7a30173be8890bbc8472b13c012fbc,g2ec0b1c497,test
+cbc4c8ad3580b,leak acoustic data/pe-NA-0.3334 MPa-0.82 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3334 MPa,0.82 ms,NA,0,,5728061fdcaed7c7516378117e220506,gd37259d08c,train
+cbc5cc1b6c0d8,leak acoustic data/pe-NA-0.1545 MPa-3.40 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.1545 MPa,3.40 ms,NA,0,1,6d06bec8b40ea2dd0ae765a3ed08eaba,gdc4d4d1b74,train
+cbc6e435e35e0,environmental noise/drilling_3-NA-noise logger_1-2.wav,noise logger,NA,NA,NA,NA,drilling_3,1,,d92a3139c3291410451486a30510fb97,g537fced124,train
+cbc8435b0f4df,leak acoustic data/pe-NA-0.3272 MPa-1.12 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.3272 MPa,1.12 ms,NA,0,1,c1ba741bfe3a8043c50579fa595170e7,g89fe9a38dd,train
+cbc9e37c84f5b,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_2-3_5.wav,hydrophone,pe,zone 2,NA,NA,NA,2,5,a6d04d5d7f80d95335e8490016d7deba,g3aa9a8f111,val
+cbd14979ae77d,no leak acoustic data/pe-zone 2-NA-NA-noise logger_2-3_8.wav,noise logger,pe,zone 2,NA,NA,NA,2,8,a96fe0687141b4dfea69c1b7cf32ab50,g3aa9a8f111,val
+cbd37f7e97b59,environmental noise/flowing water-NA-noise logger_2-3.wav,noise logger,NA,NA,NA,NA,flowing water,2,,77b6ee82510bdbe99584c7dfe87a68fc,gcfd9b54efb,val
+cbd3cf96abb92,leak acoustic data/ductile iron-NA-0.3181 MPa-0.94 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.3181 MPa,0.94 ms,NA,0,,2e4149ffb2614a315687f1ec8c3b02d9,g1e056ca4d1,train
+cbd5973a265f9,environmental noise/fan_1-NA-noise logger_4-5.wav,noise logger,NA,NA,NA,NA,fan_1,4,,91db975a65fe050f96596aca1583a46f,ga837d3d43e,test
+cbd60eac36500,no leak acoustic data/NA-zone 2-NA-NA-noise logger_0-1.wav,noise logger,NA,zone 2,NA,NA,NA,0,,aedfdfed92bf7624a684fac641d80628,g4a6d62802d,train
+cbe1a44c2a80c,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_0-1_9.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,9,b9733816e046f274bd76ede23e4f4d30,ga4d5f79c1b,test
+cbe3166361dfa,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_4-5_5.wav,noise logger,ductile iron,NA,NA,NA,NA,4,5,8cc75650bc86571b7e8317fc12a6fc7a,g07ac25f1e0,train
+cbecd4d949964,leak acoustic data/ductile iron-NA-0.2320 MPa-3.78 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.2320 MPa,3.78 ms,NA,0,,84284da1e26a2791844f3eeebca2f8b0,g04801441ef,val
+cbecea70bcb8a,no leak acoustic data/pe-NA-NA-NA-noise logger_2-3_6.wav,noise logger,pe,NA,NA,NA,NA,2,6,e4f93511ad04f75eeaaa29a07e175b94,g46286703fa,train
+cbefbc2bfab6d,leak acoustic data/pe-NA-0.1217 MPa-3.00 ms-hydrophone-0-1.wav,hydrophone,pe,NA,0.1217 MPa,3.00 ms,NA,0,,86007f780d82f8f7fc4110055ce0ff92,g7744cf68eb,train
+cbf8e88236347,leak acoustic data/pvc-zone 1-0.32 MPa-NA-noise logger-0-1_1.wav,noise logger,pvc,zone 1,0.32 MPa,NA,NA,0,1,a540d94bf03d3dac6b515e84581bf722,ge5a09394ed,train
+cc04192429cf0,leak acoustic data/ductile iron-NA-0.3362 MPa-0.7 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.3362 MPa,0.7 ms,NA,0,,73beec46832e86827c73983b0123cd5b,g96e60487d1,val
+cc06c773ce585,leak acoustic data/pe-NA-0.1726 MPa-3.58 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.1726 MPa,3.58 ms,NA,0,1,2046d55b8e412494cdbe7df213a9b54e,gdc4d4d1b74,train
+cc071994963f2,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_1-2_1.wav,hydrophone,pe,zone 2,NA,NA,NA,1,1,8a7e7bd3795544ee8b8a497aea5f1d72,g3aa9a8f111,val
+cc07d1d974f51,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_0-1_1.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,1,7c6249bf7f019e9d93b21ecd43ddcf25,ga4d5f79c1b,test
+cc0a344f25360,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_9.wav,noise logger,pe,NA,NA,NA,NA,0,9,9be7a20ba8316e2719b4a19dab36011a,g46286703fa,train
+cc0b49732e823,no leak acoustic data/pe-zone 2-NA-NA-noise logger_0-1_15.wav,noise logger,pe,zone 2,NA,NA,NA,0,15,e6c019dd57800e125c3c7d8659ca3539,g3aa9a8f111,val
+cc0bb75701548,leak acoustic data/ductile iron-NA-0.2425 MPa-3.97 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.2425 MPa,3.97 ms,NA,0,1,1936c39c6c9381e07ac9d63f133dab56,g5a209470f2,train
+cc0e7fee58f57,no leak acoustic data/pe-NA-NA-NA-noise logger_3-4_9.wav,noise logger,pe,NA,NA,NA,NA,3,9,c7c20c588960b02f10feb6c14d4ba623,g46286703fa,train
+cc1480284d1c3,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_0-1_2.wav,hydrophone,ductile iron,NA,NA,NA,NA,0,2,89d85aa65f6dfc728ee1d06379b92917,g07ac25f1e0,train
+cc19c94f8b994,leak acoustic data/ductile iron-NA-0.3181 MPa-0.94 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3181 MPa,0.94 ms,NA,0,,939e320ad36dc94b9e8ee34c855fef2e,g1e056ca4d1,train
+cc1b3db7831c5,leak acoustic data/ductile iron-NA-0.3126 MPa-4.85 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.3126 MPa,4.85 ms,NA,0,,67ed26b246c4baf6924fb9dcca636c24,g221d81070a,val
+cc24346905726,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_2-3.wav,noise logger,ductile iron,zone 2,NA,NA,NA,2,,b0f19789982dd64fc9723493ee52a08f,ga4d5f79c1b,test
+cc2a75613d283,leak acoustic data/ductile iron-NA-0.3212 MPa-1.23 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3212 MPa,1.23 ms,NA,0,1,1ebf5a2b2ecadd6b7f8c801f1f5a0c9f,g50b627059e,train
+cc2ac1af869fa,leak acoustic data/pe-zone 2-0.322 MPa-1.55 ms-noise logger-0-1.wav,noise logger,pe,zone 2,0.322 MPa,1.55 ms,NA,0,,babdbae13c79ee3e33a57dc8c427b34d,g6be8286ae3,train
+cc31d113a490a,leak acoustic data/pe-NA-0.2349 MPa-4.10 ms-hydrophone-0-1.wav,hydrophone,pe,NA,0.2349 MPa,4.10 ms,NA,0,,908feb97dd5175304f8bd984d4d54705,gdc4d4d1b74,train
+cc32544a5e4f3,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_0-1_6.wav,hydrophone,ductile iron,NA,NA,NA,NA,0,6,b6f739286dbae9f34d6f32df5b7f8e80,g07ac25f1e0,train
+cc3569a105921,leak acoustic data/ductile iron-NA-0.3212 MPa-1.23 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3212 MPa,1.23 ms,NA,0,,79528e8759ebcbf3a9f841546e8bc44e,g50b627059e,train
+cc3ea9de7c014,leak acoustic data/ductile iron-NA-0.2761 MPa-4.42 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.2761 MPa,4.42 ms,NA,0,,0a8c63e6b3004fba667cfbb0ba24dcd4,g27ceee2299,train
+cc41a6007b781,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_0-1.wav,hydrophone,ductile iron,NA,NA,NA,NA,0,,2e3524e14f928987787adb163ee63c4d,g07ac25f1e0,train
+cc422d7e489ae,leak acoustic data/ductile iron-zone 2-0.312 MPa-0.9 ms-noise logger-0-1_5.wav,noise logger,ductile iron,zone 2,0.312 MPa,0.9 ms,NA,0,5,5ccd64130fdb6b8c69bd1ca4f63205c3,gbd8e42847a,val
+cc49c5ba7938b,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_1-2_10.wav,noise logger,ductile iron,NA,NA,NA,NA,1,10,384207973628a8fc0d07be1847a6467f,g07ac25f1e0,train
+cc4b0abd0e8be,leak acoustic data/ductile iron-NA-0.3179 MPa-0.51 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.3179 MPa,0.51 ms,NA,0,,e297eeb646783d6c1f12f7ca8ae9df7d,gfe9a7ba473,val
+cc4e8b8aad494,leak acoustic data/ductile iron-NA-0.0650 MPa-2.46 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.0650 MPa,2.46 ms,NA,0,,2340249ac7a603b148b8bab1d3460979,geba21b61e4,test
+cc53ed0c8e038,no leak acoustic data/pe-zone 2-NA-NA-noise logger_3-4_6.wav,noise logger,pe,zone 2,NA,NA,NA,3,6,ed995072d3391201e70951ae43a84bca,g3aa9a8f111,val
+cc54d15182411,leak acoustic data/ductile iron-NA-NA-NA-NA-0-1_1.wav,NA,ductile iron,NA,NA,NA,NA,0,1,2d4477a9a7c0fa73481df45dc3c422c9,gc89e33d79b,val
+cc5cb8c05644e,no leak acoustic data/pe-NA-NA-NA-hydrophone_3-4.wav,hydrophone,pe,NA,NA,NA,NA,3,,003a646b639b4931f81cdf32df219ef8,g46286703fa,train
+cc5ddb79c589a,leak acoustic data/pvc-zone 1-0.32 MPa-NA-noise logger-0-1.wav,noise logger,pvc,zone 1,0.32 MPa,NA,NA,0,,681a907be09fb5cbe63c43282d78eb4d,ge5a09394ed,train
+cc5f3dafedb58,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_6.wav,noise logger,pe,NA,NA,NA,NA,0,6,176267629a0da6493eebbbd9e16ca7d8,g46286703fa,train
+cc5fd818faa54,leak acoustic data/ductile iron-NA-0.3302 MPa-1.27 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.3302 MPa,1.27 ms,NA,0,,79c6a53f4aaf92cad0f0bd44ccdeadc8,g00c9612215,test
+cc61178e3438c,environmental noise/engine_3-NA-noise logger_1-2.wav,noise logger,NA,NA,NA,NA,engine_3,1,,2a874d2925a17b43ec865be1487e5d7c,g6a01c96440,test
+cc6522c9ed17f,environmental noise/drilling_6-NA-noise logger_4-5.wav,noise logger,NA,NA,NA,NA,drilling_6,4,,7d1f89565c9cf019ab244179d387c199,gbc0afdae0e,test
+cc66d7b4832d0,environmental noise/unknown_noise-NA-noise logger_2-3.wav,noise logger,NA,NA,NA,NA,unknown_noise,2,,c865a7c4e261141d815ba90d59b0b109,gc7f1538dab,test
+cc6a1078eb7bc,leak acoustic data/ductile iron-zone 2-0.3106 MPa-0.77 ms-noise logger-0-1_3.wav,noise logger,ductile iron,zone 2,0.3106 MPa,0.77 ms,NA,0,3,f663c023a19d143550e057347df37576,g35d2ca7b03,train
+cc6c187a579d4,environmental noise/hydrant_89-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,hydrant_89,0,,a4f4cad6de4db64d9d27913de14ce252,g3f429d8026,train
+cc6ea88466244,leak acoustic data/pe-NA-0.322 MPa-0.11 ms-noise logger-0-1.wav,noise logger,pe,NA,0.322 MPa,0.11 ms,NA,0,,2845c55065f9041ba1c2ed24ceee6aec,g1226a5d9ec,val
+cc75ae24f5c96,leak acoustic data/NA-NA-NA-NA-noise logger-0-1.wav,noise logger,NA,NA,NA,NA,NA,0,,69a8327f0d604ede1f1fc9a977cbc3a8,g1e688c389c,train
+cc77af487b65d,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_2-3_9.wav,noise logger,ductile iron,NA,NA,NA,NA,2,9,819c2fb3bf7c5b664102e6eab3d59450,g07ac25f1e0,train
+cc7d2c8649c8a,no leak acoustic data/ductile iron-zone 2-NA-NA-hydrophone_0-1_4.wav,hydrophone,ductile iron,zone 2,NA,NA,NA,0,4,d484461646bdc762bd902933dde7b6de,ga4d5f79c1b,test
+cc802e0de4b2b,leak acoustic data/pe-zone 2-NA-NA-noise logger-0-1_2.wav,noise logger,pe,zone 2,NA,NA,NA,0,2,3ab0899297536f4a2dfb468fae62be54,gd2cdf4b672,test
+cc84f37cac49e,no leak acoustic data/pe-NA-NA-NA-noise logger_4-5_7.wav,noise logger,pe,NA,NA,NA,NA,4,7,dec649d52a949300fbf7d02f92846af3,g46286703fa,train
+cc8764f092ba1,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_4-5_11.wav,noise logger,ductile iron,NA,NA,NA,NA,4,11,e3694938284b003a1c1fb10b2be45596,g07ac25f1e0,train
+cc907703b5ee8,leak acoustic data/ductile iron-zone 2-0.3251 MPa-1.26 ms-noise logger-0-1.wav,noise logger,ductile iron,zone 2,0.3251 MPa,1.26 ms,NA,0,,4c1f9932a9d3ffb68db62273685fdae3,g9b81f0fded,train
+cc908db347b35,leak acoustic data/pe-NA-0.3138 MPa-0.69 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3138 MPa,0.69 ms,NA,0,,e0c2801a03ea39914d4b8740b1849240,g0fdfb0d43f,train
+cc90b947e39a9,no leak acoustic data/pe-NA-NA-NA-noise logger_1-2_10.wav,noise logger,pe,NA,NA,NA,NA,1,10,44070bd791aa4cceb7199775b4a913b8,g46286703fa,train
+cc91fab564d64,leak acoustic data/ductile iron-zone 1-0.25 MPa-NA-hydrophone-0-1.wav,hydrophone,ductile iron,zone 1,0.25 MPa,NA,NA,0,,0870f745ad7e2dc40e8c77f57521b75b,g137a73d92f,val
+cc95eac27c6c5,leak acoustic data/ductile iron-zone 2-0.312 MPa-0.9 ms-noise logger-0-1_4.wav,noise logger,ductile iron,zone 2,0.312 MPa,0.9 ms,NA,0,4,32e19b522182813827614f1ab68c642e,gbd8e42847a,val
+cc969d2b9dc97,environmental noise/hydrant_normal-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,hydrant_normal,0,,2f3d1339e4dde97a0a96e4132018ef66,g03a8c8e492,train
+cc96f393f9909,leak acoustic data/ductile iron-NA-0.3286 MPa-1.34 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3286 MPa,1.34 ms,NA,0,,5dd2664f3e855cd2641d59fca5a1d29f,gd7664d159c,train
+cc9ae42b590ac,leak acoustic data/ductile iron-NA-0.3302 MPa-1.27 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3302 MPa,1.27 ms,NA,0,,7756cfb5fab45be9e8c6b74e2a42b4a5,g00c9612215,test
+cc9cff18c1a4d,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_3-4_10.wav,noise logger,ductile iron,NA,NA,NA,NA,3,10,d4f126e193d725fea7af9846fc00d7be,g07ac25f1e0,train
+cc9e4556bc69a,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_1-2_4.wav,noise logger,ductile iron,zone 2,NA,NA,NA,1,4,fc76ee7befc2f823fffdbbe8fd4be3f9,ga4d5f79c1b,test
+cca1d22ac8510,leak acoustic data/steel-zone 1-0.25 MPa-NA-hydrophone-0-1_1.wav,hydrophone,steel,zone 1,0.25 MPa,NA,NA,0,1,02f1287f06d402dea48240852fe048f1,g5de312a0b1,test
+cca3bdbd296af,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_0-1_2.wav,noise logger,ductile iron,NA,NA,NA,NA,0,2,8156b0aa9acd2ea98c433101413230ee,g07ac25f1e0,train
+cca4243c89f2a,no leak acoustic data/pe-NA-NA-NA-noise logger_2-3_4.wav,noise logger,pe,NA,NA,NA,NA,2,4,fd2b38c295480614e7089b0326a70977,g46286703fa,train
+cca73bdc5fabd,leak acoustic data/pe-zone 2-0.32 MPa-1.26 ms-noise logger-0-1.wav,noise logger,pe,zone 2,0.32 MPa,1.26 ms,NA,0,,19d0f58cdc3c43383c43e483f83341a1,ge9f32b8c3c,train
+cca777cc24de2,no leak acoustic data/pe-NA-NA-NA-hydrophone_0-1_3.wav,hydrophone,pe,NA,NA,NA,NA,0,3,092302522bff264df8738582d56fb7e1,g46286703fa,train
+cca8472440c45,leak acoustic data/ductile iron-NA-0.2630 MPa-4.11 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.2630 MPa,4.11 ms,NA,0,1,61d959b70ca0fd2782bc21a26d2cac15,g2e6d88fb97,train
+ccad7760ce5c3,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_0-1_11.wav,hydrophone,ductile iron,NA,NA,NA,NA,0,11,b483142a4273b3214e30d2697289603b,g07ac25f1e0,train
+ccaebe2671432,environmental noise/drum-NA-noise logger_4-5.wav,noise logger,NA,NA,NA,NA,drum,4,,39af8357f9e1735948fcf25afb3f144e,gd61c1fa88a,train
+ccb5c0a338061,no leak acoustic data/ductile iron-zone 2-NA-NA-hydrophone_0-1_1.wav,hydrophone,ductile iron,zone 2,NA,NA,NA,0,1,58e8f1bccc5d1a1711bb77ea672040af,ga4d5f79c1b,test
+ccb9684ea6243,no leak acoustic data/pe-NA-NA-NA-noise logger_2-3_3.wav,noise logger,pe,NA,NA,NA,NA,2,3,cc1b2266065bd52e673fd5ffa7ef1688,g46286703fa,train
+ccbc5a8b2af49,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_14.wav,noise logger,pe,NA,NA,NA,NA,0,14,62b7ad57446a5e0c2b9809341b426302,g46286703fa,train
+ccbd90dfdc70b,leak acoustic data/ductile iron-zone 2-0.312 MPa-0.9 ms-hydrophone-0-1.wav,hydrophone,ductile iron,zone 2,0.312 MPa,0.9 ms,NA,0,,a086a8a42ddc1cf22b521004a4c1e77b,gbd8e42847a,val
+ccc16539f43d7,no leak acoustic data/pe-zone 2-NA-NA-noise logger_4-5_6.wav,noise logger,pe,zone 2,NA,NA,NA,4,6,cdf1ba7c997fb4183d6c307854117918,g3aa9a8f111,val
+ccc211654bba2,environmental noise/drilling_4-NA-noise logger_3-4.wav,noise logger,NA,NA,NA,NA,drilling_4,3,,9caaead36e0016467eda0363c4370f55,g8d6b13227b,train
+ccc6068b5b0a2,leak acoustic data/pe-NA-0.3244 MPa-0.22 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3244 MPa,0.22 ms,NA,0,,1f8c759ccfcface277c7f3652ef3179a,g5606243767,train
+ccc833de2040a,leak acoustic data/ductile iron-NA-0.3302 MPa-0.13 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3302 MPa,0.13 ms,NA,0,1,99f909b551b5849ffbd4ab0bba698516,g022b4e9138,test
+cccd7093a14f3,leak acoustic data/ductile iron-zone 2-0.3177 MPa-1.15 ms-noise logger-0-1.wav,noise logger,ductile iron,zone 2,0.3177 MPa,1.15 ms,NA,0,,cc9bc2107a5379b9add6d8819f9d7c56,g104fec80fe,train
+cccdbbb49e736,leak acoustic data/ductile iron-zone 2-0.3111 MPa-0.15 ms-hydrophone-0-1.wav,hydrophone,ductile iron,zone 2,0.3111 MPa,0.15 ms,NA,0,,946b804f29e2bdbb407001c80a1cc8dc,g0a0ca7697a,train
+ccce218c0e70d,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_12.wav,noise logger,pe,NA,NA,NA,NA,0,12,9be7a20ba8316e2719b4a19dab36011a,g46286703fa,train
+cccf024969790,leak acoustic data/ductile iron-zone 2-NA-NA-hydrophone-0-1_1.wav,hydrophone,ductile iron,zone 2,NA,NA,NA,0,1,a1b969919d6b2723baa44a3237405999,g65d97e5de6,test
+cce06e41b3d68,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_2-3_1.wav,noise logger,ductile iron,zone 2,NA,NA,NA,2,1,cf530484b2403e2a6846466e0c550b65,ga4d5f79c1b,test
+cce2f181ac223,leak acoustic data/pe-NA-0.2405 MPa-4.00 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.2405 MPa,4.00 ms,NA,0,1,d6736d3d2a8bec2bf32aec8cbcb20355,gfb07c776d5,test
+cce35479c8094,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_0-1_5.wav,noise logger,ductile iron,NA,NA,NA,NA,0,5,c81aa33b7034a56d4087d54cab0ce179,g07ac25f1e0,train
+cce6baf614bfa,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_22.wav,noise logger,pe,NA,NA,NA,NA,0,22,092c4179ce040be192a51edded9a38e3,g46286703fa,train
+cce7aca319a5a,leak acoustic data/ductile iron-NA-0.3227 MPa-1.13 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3227 MPa,1.13 ms,NA,0,,32b183acecb4ad073b997a31b7cf96de,g31a30cc499,train
+cce8f01ad51b8,no leak acoustic data/NA-NA-NA-NA-hydrophone_2-3_1.wav,hydrophone,NA,NA,NA,NA,NA,2,1,f122ba6cec6dccacce2e21f2b333e4ca,g60e6ee291d,train
+ccee26aeeb116,leak acoustic data/pe-NA-0.2761 MPa-4.42 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.2761 MPa,4.42 ms,NA,0,1,f62358d4a7f9f6443200a9fef1239db5,g27ceee2299,train
+ccf0590a21392,leak acoustic data/pe-NA-0.2283 MPa-3.80 ms-noise logger-0-1.wav,noise logger,pe,NA,0.2283 MPa,3.80 ms,NA,0,,d6317bee31e699e21888f6b2b441253b,g8a87b14a43,val
+ccf8e76bfe498,leak acoustic data/ductile iron-NA-0.2233 MPa-3.77 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.2233 MPa,3.77 ms,NA,0,1,69555e7b49abdb522d467be33a14a664,gb577968cb1,train
+cd098874a6b8e,leak acoustic data/pe-NA-0.3235 MPa-0.81 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3235 MPa,0.81 ms,NA,0,,028d85b30bc441e8e3a8f912090913d0,g9bc6bf58a3,train
+cd11be05a39dc,leak acoustic data/ductile iron-NA-0.1949 MPa-2.02 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.1949 MPa,2.02 ms,NA,0,,e63cfeccecc62f1f63c908f585bf1cd7,gc88aa3442a,train
+cd1d69cf431ed,environmental noise/rain_3-NA-noise logger_2-3.wav,noise logger,NA,NA,NA,NA,rain_3,2,,94c771873fc87c0941e91cc97abaa237,gdcc02653e5,train
+cd1df441a7130,leak acoustic data/pe-NA-0.3047 MPa-0.73 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.3047 MPa,0.73 ms,NA,0,1,e298aa2ab84b4ea58843e0622d486354,gba26dba9df,test
+cd22957c58990,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_2-3_3.wav,noise logger,ductile iron,NA,NA,NA,NA,2,3,e8f866bc67025494785779bae97cdf10,g07ac25f1e0,train
+cd2883c705292,no leak acoustic data/pe-NA-NA-NA-hydrophone_3-4_2.wav,hydrophone,pe,NA,NA,NA,NA,3,2,b20901226cb3200ca1b0d2d59f6926c1,g46286703fa,train
+cd2d1d38e28fe,leak acoustic data/ductile iron-NA-0.0717 MPa-2.09 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.0717 MPa,2.09 ms,NA,0,1,7340c7fb83ce9abbb849eef018ff97fe,g687b1c097c,train
+cd2f212742960,leak acoustic data/ductile iron-NA-0.2495 MPa-4.33 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.2495 MPa,4.33 ms,NA,0,1,40cfaf4c058ca2fd75a9111876245ebb,gdc4d4d1b74,train
+cd2f8146af74c,leak acoustic data/pe-NA-0.3280 MPa-1.46 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3280 MPa,1.46 ms,NA,0,,56a539ef8070cb259118b06739446f44,g097831ac4c,val
+cd32e1938288c,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_4-5_2.wav,hydrophone,pe,zone 2,NA,NA,NA,4,2,c26ead1fa6cc04e4cfee055b8954aa62,g3aa9a8f111,val
+cd3517112b773,leak acoustic data/ductile iron-NA-0.2320 MPa-3.78 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.2320 MPa,3.78 ms,NA,0,1,2b617d30119cccc2920f02b225742888,g04801441ef,val
+cd3b54567e82a,leak acoustic data/pe-NA-0.1687 MPa-3.5 ms-noise logger-0-1.wav,noise logger,pe,NA,0.1687 MPa,3.5 ms,NA,0,,3fc69f71b02072273acf528e36e61173,gb06646d0cf,test
+cd3e24c8fddaa,leak acoustic data/ductile iron-NA-0.1892 MPa-3.59 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.1892 MPa,3.59 ms,NA,0,,2f3028ca98d0c036ccafc431a5d69d56,g72971ef0cc,train
+cd4394bd6f020,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_0-1_8.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,8,cea01d8319e92a7a85d9d8dfc4a07abf,ga4d5f79c1b,test
+cd44051294456,leak acoustic data/pe-NA-0.1803 MPa-3.68 ms-hydrophone-0-1.wav,hydrophone,pe,NA,0.1803 MPa,3.68 ms,NA,0,,b5b6872395fc3ecd41dc447fefc9960b,gb6e25e47de,train
+cd48fd26263ca,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_2-3_2.wav,hydrophone,ductile iron,NA,NA,NA,NA,2,2,5fb863e6df23f061fbd544db8df2e8ff,g07ac25f1e0,train
+cd4d040029f85,no leak acoustic data/pe-NA-NA-NA-noise logger_3-4_5.wav,noise logger,pe,NA,NA,NA,NA,3,5,86bc5ac155afdd23a96a0dc22ca8d629,g46286703fa,train
+cd4e6c5882254,no leak acoustic data/pe-zone 2-NA-NA-noise logger_0-1_3.wav,noise logger,pe,zone 2,NA,NA,NA,0,3,d01c8e9141ef1271acd1aac30e0b0912,g3aa9a8f111,val
+cd506b1e2f735,leak acoustic data/pe-NA-0.2428 MPa-3.92 ms-noise logger-0-1.wav,noise logger,pe,NA,0.2428 MPa,3.92 ms,NA,0,,cee5fa09a8b4f1e76f17b60226dca6b0,gebc8b2a613,val
+cd56be4657cb9,no leak acoustic data/ductile iron-zone 1-NA-NA-hydrophone_2-3.wav,hydrophone,ductile iron,zone 1,NA,NA,NA,2,,cce3117754bbfb33af20fa5993dd8ceb,gd2da168526,train
+cd57a1dedb807,leak acoustic data/pe-NA-0.3130 MPa-0.38 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.3130 MPa,0.38 ms,NA,0,1,2a36122c6e538ad5ef904d136121f5fb,g7cbbdd18a2,train
+cd57a79d880d6,leak acoustic data/pe-zone 2-NA-NA-noise logger-0-1.wav,noise logger,pe,zone 2,NA,NA,NA,0,,bf29971213031e62f4adc1ddfb4a1782,gd2cdf4b672,test
+cd5c4ed20c428,environmental noise/fan motor-NA-noise logger_3-4.wav,noise logger,NA,NA,NA,NA,fan motor,3,,ff55bb5258cc106f8a40102fa4648311,g5de03d5dfa,train
+cd60d692b90b1,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_0-1.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,,b42ecff35bebbf4c80651d62c4361f4d,ga4d5f79c1b,test
+cd685547804d1,leak acoustic data/ductile iron-NA-0.3236 MPa-0.66 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3236 MPa,0.66 ms,NA,0,,9336ac6f9c54d0c56ca1925b16f8c20b,g7f2d312099,train
+cd6dedbfd7d31,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_1-2_1.wav,noise logger,ductile iron,NA,NA,NA,NA,1,1,018e41654f72be733c8a2aaa04a13dff,g07ac25f1e0,train
+cd6f5fae74ad6,leak acoustic data/ductile iron-NA-0.1869 MPa-3.77 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.1869 MPa,3.77 ms,NA,0,1,b8789031c6031a3aa061cda589246825,gdc4d4d1b74,train
+cd723d66f367b,leak acoustic data/ductile iron-zone 2-0.3249 MPa-1.33 ms-noise logger-0-1.wav,noise logger,ductile iron,zone 2,0.3249 MPa,1.33 ms,NA,0,,64b629d314633507b5bc2fb8efa22c8d,g358b38eba1,train
+cd75f0c255d24,leak acoustic data/pe-zone 2-0.322 MPa-1.55 ms-noise logger-0-1_1.wav,noise logger,pe,zone 2,0.322 MPa,1.55 ms,NA,0,1,697ae144af700269c62f0e2e74431c21,g6be8286ae3,train
+cd77404571b67,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_4-5_1.wav,hydrophone,ductile iron,NA,NA,NA,NA,4,1,2b4077e0031fd40c3afdcae52c74ffe1,g07ac25f1e0,train
+cd77bfd264abc,leak acoustic data/ductile iron-NA-0.2672 MPa-4.07 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.2672 MPa,4.07 ms,NA,0,,2efb4f89d51f63b8092a15d055cff349,g08e2845ae9,train
+cd7ccdb024821,no leak acoustic data/NA-NA-NA-NA-hydrophone_1-2.wav,hydrophone,NA,NA,NA,NA,NA,1,,d7ce3481e278c9f846c2cb793676c573,g60e6ee291d,train
+cd7dbf2e752b0,leak acoustic data/ductile iron-NA-0.2761 MPa-4.42 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.2761 MPa,4.42 ms,NA,0,1,004e8c4fb10dd5de56b67b5a157835f7,g27ceee2299,train
+cd7f4d236ef5e,leak acoustic data/ductile iron-NA-0.3362 MPa-0.7 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3362 MPa,0.7 ms,NA,0,,4c4c18aac0b6ef989bdf953087b0d6d9,g96e60487d1,val
+cd84219c979bd,leak acoustic data/ductile iron-NA-0.1726 MPa-3.58 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.1726 MPa,3.58 ms,NA,0,1,50d8215fbf3fb81a34f3d6b3f5c44b24,gdc4d4d1b74,train
+cd8911748e7db,leak acoustic data/pe-NA-0.3256 MPa-0.52 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.3256 MPa,0.52 ms,NA,0,1,01c1ee02e38b26e456186657f5f3ccd9,g728a375c18,train
+cd8a933a9f809,no leak acoustic data/pe-NA-NA-NA-noise logger_1-2_2.wav,noise logger,pe,NA,NA,NA,NA,1,2,a97e36595792e1fb3a11cfc1343f81cb,g46286703fa,train
+cd8de83616f9f,leak acoustic data/ductile iron-zone 2-NA-NA-hydrophone-0-1_2.wav,hydrophone,ductile iron,zone 2,NA,NA,NA,0,2,08aa781b9c63636c105a4067837e2186,g65d97e5de6,test
+cd8f4f46d9cf9,leak acoustic data/ductile iron-NA-0.2349 MPa-4.10 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.2349 MPa,4.10 ms,NA,0,1,851d05819980d92533ba6bc21870075d,gdc4d4d1b74,train
+cd953dc82ace5,leak acoustic data/ductile iron-NA-0.2269 MPa-3.95 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.2269 MPa,3.95 ms,NA,0,1,6d5bb10adb02c3f30a770cfbdcd9cfb2,gf98db9952c,train
+cd98d6235a267,no leak acoustic data/NA-zone 2-NA-NA-noise logger_0-1_2.wav,noise logger,NA,zone 2,NA,NA,NA,0,2,0d1f26852e70ff3f54db533cd014a131,g4a6d62802d,train
+cd9b94bdc892b,environmental noise/gas pipe-NA-noise logger_1-2.wav,noise logger,NA,NA,NA,NA,gas pipe,1,,1b8140881e8b47cdc562722920bd1faf,ge4ed52c56a,train
+cd9b9fe203a4a,environmental noise/drilling_3-NA-noise logger_4-5.wav,noise logger,NA,NA,NA,NA,drilling_3,4,,1dfe295e3b29bb54d9a94cc1a7960fbb,g537fced124,train
+cda270054399d,leak acoustic data/pe-NA-0.0650 MPa-2.46 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.0650 MPa,2.46 ms,NA,0,1,307519affe616709aa4770ff495824e5,geba21b61e4,test
+cda365df41e88,environmental noise/dog_1-NA-noise logger_2-3.wav,noise logger,NA,NA,NA,NA,dog_1,2,,d106b56b099f4b952c92cbe030d450d8,ge2dbda8d9a,test
+cdaa3659f139a,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_21.wav,noise logger,pe,NA,NA,NA,NA,0,21,ab9e6afaedafe3901ba5784935c451eb,g46286703fa,train
+cdabbb10d3783,leak acoustic data/pe-NA-0.2672 MPa-4.07 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.2672 MPa,4.07 ms,NA,0,1,c97542b55b1f919f925f77b31d47a2aa,g08e2845ae9,train
+cdaeac1be16b4,leak acoustic data/ductile iron-zone 2-NA-NA-noise logger-0-1_7.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,7,a40b2c7b282324934d8083cec9a7e1f7,gf731e64668,train
+cdafc13bac8e8,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_0-1_7.wav,hydrophone,ductile iron,NA,NA,NA,NA,0,7,854e2532393c85dfaa3ac0ceee7b2a56,g07ac25f1e0,train
+cdb43ef923ce5,environmental noise/dog_2-NA-noise logger_1-2.wav,noise logger,NA,NA,NA,NA,dog_2,1,,944da0530cb0ab04ef4c3221fd2fc35d,gc1340893eb,train
+cdbd5104a19f9,environmental noise/fan motor-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,fan motor,0,,b401cb868ec789b0cbe1975355743596,g5de03d5dfa,train
+cdd8e897e34b9,no leak acoustic data/pe-zone 2-NA-NA-noise logger_2-3_11.wav,noise logger,pe,zone 2,NA,NA,NA,2,11,22c41346ea9640c6b90e0ca06742fa88,g3aa9a8f111,val
+cdda15a414f8b,leak acoustic data/ductile iron-NA-0.1630 MPa-3.45 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.1630 MPa,3.45 ms,NA,0,,1dd62c286010e58ac4d58383bbdee5b9,gdc4d4d1b74,train
+cdda6f156a595,leak acoustic data/ductile iron-NA-0.3234 MPa-1.20 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3234 MPa,1.20 ms,NA,0,,0641d5714096ff05e274c7f3ea61c62d,g1441d18838,train
+cddc46af1f80d,leak acoustic data/ductile iron-zone 2-0.312 MPa-0.9 ms-noise logger-0-1.wav,noise logger,ductile iron,zone 2,0.312 MPa,0.9 ms,NA,0,,322424e13e16cc52450f8f05eb1e684a,gbd8e42847a,val
+cde2fefb4bce3,leak acoustic data/ductile iron-NA-0.1892 MPa-3.59 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.1892 MPa,3.59 ms,NA,0,,a16de9227493a4321c3ef24ccd37c25f,g72971ef0cc,train
+cdeff059d9cc1,leak acoustic data/ductile iron-NA-0.3236 MPa-0.66 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.3236 MPa,0.66 ms,NA,0,,9822d41fc935d351bf7bd6dc72cf6aa5,g7f2d312099,train
+cdf620e3977e0,leak acoustic data/pe-zone 2-0.3194 MPa-1.64 ms-noise logger-0-1.wav,noise logger,pe,zone 2,0.3194 MPa,1.64 ms,NA,0,,b853c6eed6db305a455c87c047c5d1c7,g6f951867fc,test
+cdf7a625f4253,no leak acoustic data/pe-zone 2-NA-NA-noise logger_1-2_6.wav,noise logger,pe,zone 2,NA,NA,NA,1,6,a623246619c86fc2877e7fd3f9e8e159,g3aa9a8f111,val
+cdfb6c59a814e,environmental noise/engine_2-NA-noise logger_4-5.wav,noise logger,NA,NA,NA,NA,engine_2,4,,d381788221c8b5d659e85dd7c540801d,gc6ab9b7692,val
+cdfbb65196371,no leak acoustic data/pe-zone 2-NA-NA-noise logger_0-1_16.wav,noise logger,pe,zone 2,NA,NA,NA,0,16,612e832073569728e74685738192c9e5,g3aa9a8f111,val
+cdfc3f3d41888,leak acoustic data/ductile iron-NA-0.1446 MPa-3.26 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.1446 MPa,3.26 ms,NA,0,,277dbe325a87f9c6b0b429ed35b6a9fe,g34d77cd7db,val
+cdfeedc28a277,environmental noise/rain_2-NA-noise logger_3-4.wav,noise logger,NA,NA,NA,NA,rain_2,3,,03469f882094451a3c62f78d3a151d9e,gaeb474d6be,train
+ce0594e503562,leak acoustic data/ductile iron-NA-0.1648 MPa-3.40 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.1648 MPa,3.40 ms,NA,0,,9e799fbbaeca1c85c7bc41b7d1594ab2,g4041b6d26e,val
+ce05b73f8fce2,leak acoustic data/ductile iron-NA-0.2495 MPa-4.33 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.2495 MPa,4.33 ms,NA,0,,e832f8d78870195a966cbb82c17a7c80,gdc4d4d1b74,train
+ce083251e3ac8,leak acoustic data/pe-NA-0.3302 MPa-1.44 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3302 MPa,1.44 ms,NA,0,,53cab8063f2a9fb68a27aa1b5f600c8f,gd4598815b5,train
+ce084472188f4,no leak acoustic data/NA-NA-NA-NA-noise logger_3-4.wav,noise logger,NA,NA,NA,NA,NA,3,,a3cd580b7522fe8f4384d59c9aaef95f,g60e6ee291d,train
+ce1aac6216062,leak acoustic data/ductile iron-NA-0.3295 MPa-0.95 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3295 MPa,0.95 ms,NA,0,1,8f4ad46ac099f461d1ee7951213e497f,gc8581b2bc5,test
+ce1b790795b5b,no leak acoustic data/pe-zone 2-NA-NA-noise logger_0-1_4.wav,noise logger,pe,zone 2,NA,NA,NA,0,4,6c330f25e18bd37ea275f163fa8757e2,g3aa9a8f111,val
+ce1beb3d64f57,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_1-2_5.wav,noise logger,ductile iron,NA,NA,NA,NA,1,5,d65be5747beb2709fca42d7ac249b4fe,g07ac25f1e0,train
+ce23a06d25d3f,leak acoustic data/pe-zone 2-NA-NA-noise logger-0-1_5.wav,noise logger,pe,zone 2,NA,NA,NA,0,5,594da0c27196d0f87d969206af2797a2,gd2cdf4b672,test
+ce301c7d88abe,leak acoustic data/pe-zone 2-0.3245 MPa-1.68 ms-noise logger-0-1_1.wav,noise logger,pe,zone 2,0.3245 MPa,1.68 ms,NA,0,1,0cb90b6039321e21b50dcf173d609a9a,gab37cb9a8d,train
+ce354143df772,no leak acoustic data/pe-zone 2-NA-NA-noise logger_4-5_3.wav,noise logger,pe,zone 2,NA,NA,NA,4,3,8f31cc1c16a979a1ec9f4d1bf4a38871,g3aa9a8f111,val
+ce375fd85d539,no leak acoustic data/pe-NA-NA-NA-hydrophone_2-3_1.wav,hydrophone,pe,NA,NA,NA,NA,2,1,a8f9a07235b0b6048843f2b3dcd00a2d,g46286703fa,train
+ce3c1bbc4dd9c,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_1-2.wav,hydrophone,ductile iron,NA,NA,NA,NA,1,,147a525e39931ae20f33679f3754c642,g07ac25f1e0,train
+ce3e303f06b4a,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_2-3_1.wav,noise logger,ductile iron,NA,NA,NA,NA,2,1,7641e332c603286ba6dbcfc2140d4577,g07ac25f1e0,train
+ce419a5dd5696,leak acoustic data/ductile iron-NA-0.1545 MPa-3.36 ms-noise logger-0-1_2.wav,noise logger,ductile iron,NA,0.1545 MPa,3.36 ms,NA,0,2,996943f8c7fd5206ea5c5e393209615c,gdc4d4d1b74,train
+ce461f134c0c0,environmental noise/drilling_4-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,drilling_4,0,,e7299029fab15c3c02ca85b936744604,g8d6b13227b,train
+ce49d4559826a,leak acoustic data/ductile iron-NA-0.1726 MPa-3.58 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.1726 MPa,3.58 ms,NA,0,,54a87760de1517a9c0408e4fc150577d,gdc4d4d1b74,train
+ce50f51d5c4ed,leak acoustic data/pe-NA-0.0650 MPa-2.46 ms-noise logger-0-1.wav,noise logger,pe,NA,0.0650 MPa,2.46 ms,NA,0,,b5db0bbb38114fbe12b25e8ccda3932e,geba21b61e4,test
+ce542643f6982,leak acoustic data/ductile iron-NA-0.2630 MPa-4.11 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.2630 MPa,4.11 ms,NA,0,,4197c0d0babbb5383b6ca5e9092c6b79,g2e6d88fb97,train
+ce552fe86d7ad,leak acoustic data/ductile iron-NA-0.3003 MPa-4.65 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.3003 MPa,4.65 ms,NA,0,,ccceb86359da76d66434df35961e1fc5,g0bc04f27dc,train
+ce5812e80dc76,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_2-3_4.wav,noise logger,ductile iron,NA,NA,NA,NA,2,4,b5e4690de84010af52d62b17ff8a1a8c,g07ac25f1e0,train
+ce5879bae43e3,leak acoustic data/pe-NA-0.3249 MPa-1.68 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.3249 MPa,1.68 ms,NA,0,1,8e1dcf7f3b7b170c685809de7f6f8e9a,g23d60a5b3b,train
+ce5db6f4b0065,leak acoustic data/ductile iron-NA-0.3303 MPa-0.25 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3303 MPa,0.25 ms,NA,0,,212b798ecfd7ab72e32d2a566fce2fd8,g3fccbf4247,train
+ce5f08be3057b,environmental noise/rain-NA-noise logger_1-2.wav,noise logger,NA,NA,NA,NA,rain,1,,0e322fbcd4aaa5a668efe5d51d5e4c62,g4db42c620a,train
+ce64c6fe56b6f,leak acoustic data/pe-NA-0.2672 MPa-4.07 ms-noise logger-0-1.wav,noise logger,pe,NA,0.2672 MPa,4.07 ms,NA,0,,e6741ac8530cbceeed4a7cc83822db6f,g08e2845ae9,train
+ce6b09ac87525,leak acoustic data/steel-zone 1-0.32 MPa-NA-noise logger-0-1_1.wav,noise logger,steel,zone 1,0.32 MPa,NA,NA,0,1,7c0b1a63780aa4aaf95593de79ef9f86,g9d6e9c58a4,val
+ce6e8406e4611,no leak acoustic data/ductile iron-zone 1-NA-NA-noise logger_2-3_2.wav,noise logger,ductile iron,zone 1,NA,NA,NA,2,2,91246262bca5bf396953c6a8ebbb0a77,gd2da168526,train
+ce739a13228a2,no leak acoustic data/pe-NA-NA-NA-noise logger_4-5_14.wav,noise logger,pe,NA,NA,NA,NA,4,14,c00064ccf37b179afaf20e1cf075eecb,g46286703fa,train
+ce771af614f4e,leak acoustic data/pe-NA-0.3202 MPa-0.75 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3202 MPa,0.75 ms,NA,0,,61e2bf6054e5323aed2ed86db4be6d12,g555ea2a0fc,train
+ce7890384071e,leak acoustic data/pe-NA-0.1545 MPa-3.36 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.1545 MPa,3.36 ms,NA,0,1,58675540d6ab4da619216b39a18a6960,gdc4d4d1b74,train
+ce7ade7ead403,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_3-4_4.wav,noise logger,ductile iron,zone 2,NA,NA,NA,3,4,90c5d03bc22e8cbe31aab1348605d063,ga4d5f79c1b,test
+ce888f1dcc998,environmental noise/hydrant_normal-NA-noise logger_3-4.wav,noise logger,NA,NA,NA,NA,hydrant_normal,3,,011c1a528747670db8d3be68c5f0464d,g03a8c8e492,train
+ce8e3e604efc2,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_0-1_9.wav,hydrophone,ductile iron,NA,NA,NA,NA,0,9,664734fa5a6ecdfa3b08f0e2cb9a0c19,g07ac25f1e0,train
+ce8e858b4feb5,no leak acoustic data/ductile iron-zone 1-NA-NA-noise logger_0-1_1.wav,noise logger,ductile iron,zone 1,NA,NA,NA,0,1,9c0d07558796dd0f2a6df9d4bdf810ad,gd2da168526,train
+ce8ec2b9eb1e6,no leak acoustic data/pe-NA-NA-NA-noise logger_0-1_15.wav,noise logger,pe,NA,NA,NA,NA,0,15,35220dccfa8e97230057830138ef61ea,g46286703fa,train
+ce90e1bba068b,leak acoustic data/pe-NA-0.3302 MPa-1.14 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3302 MPa,1.14 ms,NA,0,,266393f22da9522cc80e2032e93f249c,ga4f09a8eac,train
+ce914b2fa714b,leak acoustic data/pe-NA-0.1771 MPa-3.62 ms-hydrophone-0-1.wav,hydrophone,pe,NA,0.1771 MPa,3.62 ms,NA,0,,01ef2a997448dd63396689b1a7daedc3,gdc4d4d1b74,train
+ce9306276d909,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_2-3_4.wav,hydrophone,pe,zone 2,NA,NA,NA,2,4,1e51cb6712177dc29bebcbbaea299644,g3aa9a8f111,val
+ce99fd42b092c,no leak acoustic data/NA-zone 2-NA-NA-hydrophone_2-3.wav,hydrophone,NA,zone 2,NA,NA,NA,2,,8dcd40897c93d5cb8c3646500cf43de7,g4a6d62802d,train
+ce9e41f1fb94c,leak acoustic data/pe-zone 2-0.313 MPa-0.52 ms-noise logger-0-1.wav,noise logger,pe,zone 2,0.313 MPa,0.52 ms,NA,0,,338559509dacb6826b0187ccf7658642,g838b97a3b5,val
+ce9e94229ff8d,leak acoustic data/ductile iron-zone 2-NA-NA-noise logger-0-1.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,,f2b6dcc3cca445ab1b1b6b6b48007c10,gf731e64668,train
+ce9f8e682dd05,leak acoustic data/ductile iron-zone 2-0.3237 MPa-1.35 ms-hydrophone-0-1.wav,hydrophone,ductile iron,zone 2,0.3237 MPa,1.35 ms,NA,0,,948b6074654349ff6725475b73dc7c61,gf4ed344bc4,train
+ce9fd92c4a590,no leak acoustic data/NA-zone 2-NA-NA-hydrophone_0-1.wav,hydrophone,NA,zone 2,NA,NA,NA,0,,d007fd5153dc54e89c86b1d49cb8b769,g4a6d62802d,train
+cea1a896ed055,leak acoustic data/pe-NA-0.2755 MPa-4.38 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.2755 MPa,4.38 ms,NA,0,1,fb7eeb4acba218774951aa4f9d1a701f,gf05d2e1f49,train
+ceadd661714f4,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_3-4_4.wav,noise logger,ductile iron,NA,NA,NA,NA,3,4,39983e187dfac09b45e6b702d38783af,g07ac25f1e0,train
+ceae8d33d3df9,leak acoustic data/pe-NA-0.2242 MPa-3.90 ms-noise logger-0-1.wav,noise logger,pe,NA,0.2242 MPa,3.90 ms,NA,0,,84a13e856766fd629a221d40afbb2ca1,gf98db9952c,train
+ceb33347ccde5,no leak acoustic data/NA-zone 2-NA-NA-noise logger_3-4_2.wav,noise logger,NA,zone 2,NA,NA,NA,3,2,f30e939f1239a211c5d5d96a162ca083,g4a6d62802d,train
+ceb6b92f7014f,leak acoustic data/pe-NA-NA-NA-noise logger-0-1.wav,noise logger,pe,NA,NA,NA,NA,0,,6546023076ddd45eb27c0b5b74747465,ge2fad8cda7,test
+ceb7930de201b,leak acoustic data/pe-NA-0.3244 MPa-0.35 ms-noise logger-0-1.wav,noise logger,pe,NA,0.3244 MPa,0.35 ms,NA,0,,05db55b961bda64c25374fa36f5b74ae,gb0b7d3c2cb,train
+ceb7bd6af5bb2,leak acoustic data/pe-NA-0.2495 MPa-4.33 ms-hydrophone-0-1.wav,hydrophone,pe,NA,0.2495 MPa,4.33 ms,NA,0,,7bd99f2359633ffbc9c5ff9a31dbde2b,gdc4d4d1b74,train
+cebff776d825f,leak acoustic data/pe-NA-0.2339 MPa-4.20 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.2339 MPa,4.20 ms,NA,0,1,680c5689e443f79179eff4f868b52046,g31f494f9af,val
+cec6eb5d6bb6d,no leak acoustic data/pe-zone 2-NA-NA-noise logger_0-1_10.wav,noise logger,pe,zone 2,NA,NA,NA,0,10,fbfb42db802e24bfa0cff96628be5d95,g3aa9a8f111,val
+cec900513d460,environmental noise/dog_6-NA-noise logger_3-4.wav,noise logger,NA,NA,NA,NA,dog_6,3,,2c25d7b2d24278b1909e4d7b183f57b5,g92623985c2,test
+cece6c73e4c2c,no leak acoustic data/pe-NA-NA-NA-noise logger_3-4_2.wav,noise logger,pe,NA,NA,NA,NA,3,2,3b70eb233a188802d162ace0d6016da9,g46286703fa,train
+cecee97a5f68b,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_3-4_9.wav,noise logger,ductile iron,NA,NA,NA,NA,3,9,cb1479f710b9327b9f89f2f30ff5970c,g07ac25f1e0,train
+ced14aac5bc4b,leak acoustic data/pe-zone 2-NA-NA-hydrophone-0-1_3.wav,hydrophone,pe,zone 2,NA,NA,NA,0,3,f6ff4573ec5a03779262462e426aa162,gcff12db88b,val
+ced788f1801c0,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_1-2_6.wav,noise logger,ductile iron,zone 2,NA,NA,NA,1,6,f9783cbccc9e012f82e4f4e82b4f4fbd,ga4d5f79c1b,test
+cedb58b88ad47,leak acoustic data/ductile iron-zone 2-0.3172 MPa-0.95 ms-hydrophone-0-1.wav,hydrophone,ductile iron,zone 2,0.3172 MPa,0.95 ms,NA,0,,1a27881c444b51697e532269d60ef8c0,ga7bab1b774,train
+cee953e2d677e,no leak acoustic data/pe-zone 2-NA-NA-noise logger_4-5_1.wav,noise logger,pe,zone 2,NA,NA,NA,4,1,554ab2c4e57c56848d1f498a544f1429,g3aa9a8f111,val
+cef064422669b,environmental noise/unknown_noise-NA-noise logger_4-5.wav,noise logger,NA,NA,NA,NA,unknown_noise,4,,8f2d5b78390864c9d8752cc800764326,gc7f1538dab,test
+cef72ea94f31b,leak acoustic data/ductile iron-zone 1-0.25 MPa-NA-noise logger-0-1_3.wav,noise logger,ductile iron,zone 1,0.25 MPa,NA,NA,0,3,13b09c50415a7e2f0a57aa42db630803,ge9bff57254,val
+cefc3c34b023a,no leak acoustic data/pe-NA-NA-NA-noise logger_4-5_1.wav,noise logger,pe,NA,NA,NA,NA,4,1,52100819172565a7831e6c51f64e9d3c,g46286703fa,train
+cefce163453ec,no leak acoustic data/pvc-zone 1-NA-NA-noise logger_0-1.wav,noise logger,pvc,zone 1,NA,NA,NA,0,,4f4c3b2d5d86db7b8d09b3e8f92d5e07,g676914d208,test
+cf0203b39f111,leak acoustic data/ductile iron-NA-0.3024 MPa-4.58 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3024 MPa,4.58 ms,NA,0,,f2912d3ad3e8a73fd4a84a901c71a934,g3717c759ba,train
+cf076bc271b4d,no leak acoustic data/pe-NA-NA-NA-hydrophone_1-2_1.wav,hydrophone,pe,NA,NA,NA,NA,1,1,d184ca95cbc3aa9de717b2ddfed88969,g46286703fa,train
+cf0cec714c72c,no leak acoustic data/pe-NA-NA-NA-noise logger_3-4_10.wav,noise logger,pe,NA,NA,NA,NA,3,10,5094678e417b658494c76d2d76b252df,g46286703fa,train
+cf13ae03abca4,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_3-4_5.wav,noise logger,ductile iron,zone 2,NA,NA,NA,3,5,1e2a77edea283b78636745b0ae16c0e6,ga4d5f79c1b,test
+cf1416fbfa060,no leak acoustic data/ductile iron-zone 2-NA-NA-hydrophone_0-1.wav,hydrophone,ductile iron,zone 2,NA,NA,NA,0,,6c0327fa7f95a8019e9f28b01dfb8957,ga4d5f79c1b,test
+cf18efa6f8140,no leak acoustic data/ductile iron-zone 1-NA-NA-noise logger_1-2_3.wav,noise logger,ductile iron,zone 1,NA,NA,NA,1,3,586fd81aeeb7df5099846edc420c3aa8,gd2da168526,train
+cf20eb94343c1,environmental noise/alarm_1-NA-noise logger_0-1.wav,noise logger,NA,NA,NA,NA,alarm_1,0,,ac67e0e64753c52d5c78a675d60ff70d,gd4dd0ea349,val
+cf30a5cc20f8f,leak acoustic data/ductile iron-NA-0.1648 MPa-3.40 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.1648 MPa,3.40 ms,NA,0,,62196ffbccb87f40ed6d20783f2f42af,g4041b6d26e,val
+cf3139a61a039,leak acoustic data/ductile iron-NA-0.3181 MPa-0.83 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3181 MPa,0.83 ms,NA,0,1,59bd38f51f35c29f2ed03d6e5f55c17b,ga1018a2cf2,test
+cf326419a4fd1,environmental noise/drilling_6-NA-noise logger_3-4.wav,noise logger,NA,NA,NA,NA,drilling_6,3,,59a4dee53819bf8225e96a0d0b74d71f,gbc0afdae0e,test
+cf380ea25a6e8,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_4-5_10.wav,noise logger,ductile iron,NA,NA,NA,NA,4,10,1ec4bf5c204306d47e99840b52b79a97,g07ac25f1e0,train
+cf3aa514d44bd,no leak acoustic data/pvc-zone 1-NA-NA-noise logger_4-5.wav,noise logger,pvc,zone 1,NA,NA,NA,4,,4d53a2010946a18e0b402592dd568da4,g676914d208,test
+cf3c65fad2914,no leak acoustic data/NA-zone 2-NA-NA-noise logger_1-2_1.wav,noise logger,NA,zone 2,NA,NA,NA,1,1,41b20367e7b9f9af3fce39b6eb5d71dc,g4a6d62802d,train
+cf4479d3a94a4,environmental noise/drilling_6-NA-noise logger_1-2.wav,noise logger,NA,NA,NA,NA,drilling_6,1,,8f791b98e2da2dc1bfa16bd0958eb611,gbc0afdae0e,test
+cf49b0d124b71,leak acoustic data/ductile iron-NA-0.3231 MPa-0.10 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.3231 MPa,0.10 ms,NA,0,,7811d9404b25bee296d78099f0ffc2ef,g0a0ca7697a,train
+cf4c7a3c10ff8,leak acoustic data/ductile iron-zone 2-0.3106 MPa-0.77 ms-hydrophone-0-1_1.wav,hydrophone,ductile iron,zone 2,0.3106 MPa,0.77 ms,NA,0,1,837d4417b836568da5ee6b4cf1e8f274,g35d2ca7b03,train
+cf4d3f55a31db,leak acoustic data/pe-NA-0.1687 MPa-3.5 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.1687 MPa,3.5 ms,NA,0,1,b61716357a19c7fa2452f53064987373,gb06646d0cf,test
+cf5098eb05e07,no leak acoustic data/ductile iron-zone 2-NA-NA-hydrophone_3-4.wav,hydrophone,ductile iron,zone 2,NA,NA,NA,3,,023a39c53842a247264cf51f03d375fe,ga4d5f79c1b,test
+cf591447e4f2d,leak acoustic data/ductile iron-NA-0.2283 MPa-3.80 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.2283 MPa,3.80 ms,NA,0,,002e1da329e21b4ad842b7947f8fcc3f,g8a87b14a43,val
+cf5b0b2b7b49e,no leak acoustic data/ductile iron-zone 1-NA-NA-noise logger_4-5.wav,noise logger,ductile iron,zone 1,NA,NA,NA,4,,5724bbe6ac124d2df55e3325754070f2,gd2da168526,train
+cf5d0f60ed9c7,leak acoustic data/ductile iron-NA-0.3272 MPa-0.59 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.3272 MPa,0.59 ms,NA,0,,7791e961efd3726cbefadd6cb91b95bb,g8666d97f53,train
+cf5ecd8ea527c,leak acoustic data/ductile iron-NA-0.3302 MPa-1.27 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.3302 MPa,1.27 ms,NA,0,1,820ec5ee9d9ab6a4d7f1d1d09565fed0,g00c9612215,test
+cf63fc929563a,leak acoustic data/ductile iron-zone 2-NA-NA-noise logger-0-1_2.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,2,832e7a20a0d19960532109e93fa2ba7e,gf731e64668,train
+cf67383e28a59,leak acoustic data/pe-zone 2-0.313 MPa-0.52 ms-noise logger-0-1_1.wav,noise logger,pe,zone 2,0.313 MPa,0.52 ms,NA,0,1,4e8d3f2c9e78fa4d9f0bdcdca5da7bf8,g838b97a3b5,val
+cf6854f88121d,leak acoustic data/pe-NA-0.3302 MPa-1.14 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.3302 MPa,1.14 ms,NA,0,1,179990197b339b8b421fe10cc09b8cf9,ga4f09a8eac,train
+cf6ef9ac3c7d2,leak acoustic data/pe-NA-0.1949 MPa-2.02 ms-noise logger-0-1.wav,noise logger,pe,NA,0.1949 MPa,2.02 ms,NA,0,,a7d9c1a01e2ccf1347b0ff0b73447684,gc88aa3442a,train
+cf707df74d074,leak acoustic data/pe-NA-0.1630 MPa-3.45 ms-noise logger-0-1.wav,noise logger,pe,NA,0.1630 MPa,3.45 ms,NA,0,,633f976f745743ee973cc07d7b0aa8fd,gdc4d4d1b74,train
+cf7132f496056,environmental noise/dog_7-NA-noise logger_1-2.wav,noise logger,NA,NA,NA,NA,dog_7,1,,cdbd6d56755742bf817ddf5f05c9b7c9,g04172cba2e,train
+cf73f96cf1612,leak acoustic data/ductile iron-NA-0.1507 MPa-3.30 ms-hydrophone-0-1.wav,hydrophone,ductile iron,NA,0.1507 MPa,3.30 ms,NA,0,,43834d733ff6e0ceb00a8f236d3b7676,g23ae8baa16,test
+cf77a652c5c7e,leak acoustic data/ductile iron-zone 1-0.32 MPa-NA-noise logger-0-1_3.wav,noise logger,ductile iron,zone 1,0.32 MPa,NA,NA,0,3,c15c00df04c625cbc81b04d3262aff83,gc1728a6abf,val
+cf7a6821aa59d,leak acoustic data/ductile iron-NA-0.2349 MPa-4.10 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.2349 MPa,4.10 ms,NA,0,,01bddb6929fef5e1925aa2d33408f0e9,gdc4d4d1b74,train
+cf7b9a4168a3a,no leak acoustic data/pe-NA-NA-NA-noise logger_2-3_12.wav,noise logger,pe,NA,NA,NA,NA,2,12,8ef3db91a9981cc16101211e6d3585c7,g46286703fa,train
+cf7be2e3090ec,no leak acoustic data/pe-zone 2-NA-NA-hydrophone_0-1_5.wav,hydrophone,pe,zone 2,NA,NA,NA,0,5,187e4fa9b828077797c9a53e33046430,g3aa9a8f111,val
+cf832e40b0d24,leak acoustic data/pe-zone 2-0.3171 MPa-0.57 ms-noise logger-0-1.wav,noise logger,pe,zone 2,0.3171 MPa,0.57 ms,NA,0,,cadab13a18b193f64d6eb3800b0793df,g63ca5c18d8,test
+cf916a496c467,no leak acoustic data/ductile iron-zone 1-NA-NA-noise logger_0-1_2.wav,noise logger,ductile iron,zone 1,NA,NA,NA,0,2,e46a9705f2ba98cff9f2167e69a43402,gd2da168526,train
+cf9cb173ecb0c,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_1-2_11.wav,noise logger,ductile iron,NA,NA,NA,NA,1,11,6420b681808d8a1a4c062124bfd66617,g07ac25f1e0,train
+cfa176d0021b2,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_4-5_1.wav,noise logger,ductile iron,NA,NA,NA,NA,4,1,1f9f859300eda13ac5b2c86968f5a775,g07ac25f1e0,train
+cfa95a14b4d7d,no leak acoustic data/ductile iron-NA-NA-NA-noise logger_2-3_12.wav,noise logger,ductile iron,NA,NA,NA,NA,2,12,6184da1a94957482ed2b1d4bbfef699d,g07ac25f1e0,train
+cfa97c90a7351,no leak acoustic data/ductile iron-zone 2-NA-NA-hydrophone_3-4_1.wav,hydrophone,ductile iron,zone 2,NA,NA,NA,3,1,036d640add18ead3eb925b7f43e25b80,ga4d5f79c1b,test
+cfb09e0398315,leak acoustic data/pe-NA-0.3223 MPa-1.00 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.3223 MPa,1.00 ms,NA,0,1,02f8bbfbc782f5a75133515d90df86a3,ge188dad1c5,train
+cfb359dcca238,leak acoustic data/ductile iron-NA-0.2742 MPa-4.18 ms-noise logger-0-1_1.wav,noise logger,ductile iron,NA,0.2742 MPa,4.18 ms,NA,0,1,22e7beae6d4416261ecb53edceb6a7da,gbcf550a5ee,train
+cfbf0b917b01c,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_2-3_5.wav,hydrophone,ductile iron,NA,NA,NA,NA,2,5,c5e3a16a773f9a0cc305988d7b16c13c,g07ac25f1e0,train
+cfc0e625fbb0d,leak acoustic data/ductile iron-NA-0.2425 MPa-3.97 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.2425 MPa,3.97 ms,NA,0,,61a2cbdb7b5148571574001300b93b88,g5a209470f2,train
+cfca7d097adda,leak acoustic data/pe-NA-0.1507 MPa-3.30 ms-noise logger-0-1_1.wav,noise logger,pe,NA,0.1507 MPa,3.30 ms,NA,0,1,109c4d33e0b55ef7d55e12a309ac6d1a,g23ae8baa16,test
+cfcca8941c20e,no leak acoustic data/pe-zone 2-NA-NA-noise logger_4-5.wav,noise logger,pe,zone 2,NA,NA,NA,4,,af8af949a2dd33df647ded9bf5ce7b45,g3aa9a8f111,val
+cfd344e8d3d03,no leak acoustic data/pe-zone 2-NA-NA-noise logger_1-2_1.wav,noise logger,pe,zone 2,NA,NA,NA,1,1,571f6976ed29d4bb539bafe7f2628344,g3aa9a8f111,val
+cfdc594e4e897,no leak acoustic data/ductile iron-NA-NA-NA-hydrophone_1-2_2.wav,hydrophone,ductile iron,NA,NA,NA,NA,1,2,8638bb905a3a0e5d65d78e4ab0a719fb,g07ac25f1e0,train
+cfe91097f0a9f,leak acoustic data/ductile iron-NA-NA-NA-NA-0-1.wav,NA,ductile iron,NA,NA,NA,NA,0,,3a01243a64dc990d4f6ff5e83679a34c,gc89e33d79b,val
+cfe96ddf1bb64,leak acoustic data/NA-NA-NA-NA-hydrophone-0-1.wav,hydrophone,NA,NA,NA,NA,NA,0,,e518c3f0e13857e62b40a1f497e357b1,g23a48db512,train
+cfea1368453c6,leak acoustic data/ductile iron-zone 2-NA-NA-noise logger-0-1_5.wav,noise logger,ductile iron,zone 2,NA,NA,NA,0,5,25cada2f4fd55a44fddd6c047d7d178d,gf731e64668,train
+cfec080e3b840,no leak acoustic data/pe-NA-NA-NA-noise logger_4-5_5.wav,noise logger,pe,NA,NA,NA,NA,4,5,314d1fb318fe43e4ddd2828a463c1a99,g46286703fa,train
+cfee4f9fd8787,no leak acoustic data/pe-NA-NA-NA-noise logger_2-3.wav,noise logger,pe,NA,NA,NA,NA,2,,ea9e84759f4cd25934c3705b12ae0ed1,g46286703fa,train
+cfef34587304a,leak acoustic data/ductile iron-NA-0.1687 MPa-3.5 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.1687 MPa,3.5 ms,NA,0,,5fbdab21bf4a0b580724cd2a9364802a,gb06646d0cf,test
+cff534b9287cd,leak acoustic data/ductile iron-NA-0.2425 MPa-4.01 ms-noise logger-0-1.wav,noise logger,ductile iron,NA,0.2425 MPa,4.01 ms,NA,0,,ede911fdfbaf507a65af2ddf73c42681,gd5a38bc872,train
+cff7b80d1e412,no leak acoustic data/NA-NA-NA-NA-noise logger_4-5.wav,noise logger,NA,NA,NA,NA,NA,4,,309d4753b83c5985218cccab37cdd473,g60e6ee291d,train
+cffc7c8347bce,environmental noise/drum-NA-noise logger_1-2.wav,noise logger,NA,NA,NA,NA,drum,1,,ecc21f95c89373244eb6e4e6a5ac4cf7,gd61c1fa88a,train
+cffe7e7913ec3,no leak acoustic data/NA-NA-NA-NA-noise logger_2-3_1.wav,noise logger,NA,NA,NA,NA,NA,2,1,6c01af7477f3c3efbe7f11f6ef7fad27,g60e6ee291d,train
+cfffab6130809,no leak acoustic data/ductile iron-zone 2-NA-NA-noise logger_4-5_1.wav,noise logger,ductile iron,zone 2,NA,NA,NA,4,1,dc428fa7d1b5979265e4daad20b4bcf7,ga4d5f79c1b,test

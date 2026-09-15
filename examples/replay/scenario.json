@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "device_id": "demo-sensor-01",
+  "source_mode": "development_fixture",
+  "consumer_seconds": 0,
+  "entries": [
+    {
+      "path": "constant.wav",
+      "audio_sha256": "REPLACE_WITH_SHA256",
+      "provenance": "synthetic",
+      "source_offset_samples": 0
+    },
+    {
+      "path": "constant.wav",
+      "audio_sha256": "REPLACE_WITH_SHA256",
+      "provenance": "synthetic",
+      "source_offset_samples": 8000
+    },
+    {
+      "path": "constant.wav",
+      "audio_sha256": "REPLACE_WITH_SHA256",
+      "provenance": "synthetic",
+      "source_offset_samples": 16000
+    },
+    {
+      "path": "constant.wav",
+      "audio_sha256": "REPLACE_WITH_SHA256",
+      "provenance": "synthetic",
+      "source_offset_samples": 24000
+    },
+    {
+      "path": "constant.wav",
+      "audio_sha256": "REPLACE_WITH_SHA256",
+      "provenance": "synthetic",
+      "source_offset_samples": 32000
+    },
+    {
+      "path": "constant.wav",
+      "audio_sha256": "REPLACE_WITH_SHA256",
+      "provenance": "synthetic",
+      "source_offset_samples": 40000
+    },
+    {
+      "path": "constant.wav",
+      "audio_sha256": "REPLACE_WITH_SHA256",
+      "provenance": "synthetic",
+      "source_offset_samples": 48000
+    },
+    {
+      "path": "constant.wav",
+      "audio_sha256": "REPLACE_WITH_SHA256",
+      "provenance": "synthetic",
+      "source_offset_samples": 56000
+    }
+  ],
+  "incidents": [
+    {
+      "sequence": 1,
+      "kind": "drop"
+    },
+    {
+      "sequence": 2,
+      "kind": "drop"
+    },
+    {
+      "sequence": 3,
+      "kind": "drop"
+    },
+    {
+      "sequence": 5,
+      "kind": "delay",
+      "seconds": 0.5
+    },
+    {
+      "sequence": 6,
+      "kind": "duplicate"
+    }
+  ]
+}

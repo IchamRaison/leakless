@@ -1,0 +1,838 @@
+{
+  "n": 25,
+  "raw_model_correct": 3,
+  "rule_baseline_correct": 25,
+  "safe_output_correct": 25,
+  "fallback_count": 22,
+  "reload_max_diff": 0.0,
+  "reversal_correct": 0,
+  "artificial_chronology": true,
+  "field_validated": false,
+  "results": [
+    {
+      "id": 0,
+      "expected": "quiet",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "brief",
+        "model_phrase": "Une activit\u00e9 \u00e9lev\u00e9e br\u00e8ve ou encore r\u00e9cente est observ\u00e9e.",
+        "candidate_scores": {
+          "quiet": 0.24088802933692932,
+          "brief": 0.29056641459465027,
+          "intermittent": 0.12112610787153244,
+          "persistent": 0.22629335522651672,
+          "ended": 0.12112610787153244
+        },
+        "facts": {
+          "pattern": "quiet",
+          "history_seconds": 46,
+          "high_seconds": 0,
+          "current_high_seconds": 0,
+          "longest_high_seconds": 0,
+          "high_runs": 0
+        },
+        "description": "Aucun niveau \u00e9lev\u00e9 persistant n'est observ\u00e9 dans cet historique.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "quiet",
+      "reversal_actual": "brief"
+    },
+    {
+      "id": 1,
+      "expected": "quiet",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "brief",
+        "model_phrase": "Une activit\u00e9 \u00e9lev\u00e9e br\u00e8ve ou encore r\u00e9cente est observ\u00e9e.",
+        "candidate_scores": {
+          "quiet": 0.22202759981155396,
+          "brief": 0.34388306736946106,
+          "intermittent": 0.12650752067565918,
+          "persistent": 0.1729152649641037,
+          "ended": 0.1346665471792221
+        },
+        "facts": {
+          "pattern": "quiet",
+          "history_seconds": 50,
+          "high_seconds": 0,
+          "current_high_seconds": 0,
+          "longest_high_seconds": 0,
+          "high_runs": 0
+        },
+        "description": "Aucun niveau \u00e9lev\u00e9 persistant n'est observ\u00e9 dans cet historique.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "quiet",
+      "reversal_actual": "persistent"
+    },
+    {
+      "id": 2,
+      "expected": "quiet",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "brief",
+        "model_phrase": "Une activit\u00e9 \u00e9lev\u00e9e br\u00e8ve ou encore r\u00e9cente est observ\u00e9e.",
+        "candidate_scores": {
+          "quiet": 0.25132307410240173,
+          "brief": 0.3227052092552185,
+          "intermittent": 0.13452354073524475,
+          "persistent": 0.1727316528558731,
+          "ended": 0.11871661990880966
+        },
+        "facts": {
+          "pattern": "quiet",
+          "history_seconds": 59,
+          "high_seconds": 0,
+          "current_high_seconds": 0,
+          "longest_high_seconds": 0,
+          "high_runs": 0
+        },
+        "description": "Aucun niveau \u00e9lev\u00e9 persistant n'est observ\u00e9 dans cet historique.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "quiet",
+      "reversal_actual": "brief"
+    },
+    {
+      "id": 3,
+      "expected": "quiet",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "brief",
+        "model_phrase": "Une activit\u00e9 \u00e9lev\u00e9e br\u00e8ve ou encore r\u00e9cente est observ\u00e9e.",
+        "candidate_scores": {
+          "quiet": 0.26053476333618164,
+          "brief": 0.27733781933784485,
+          "intermittent": 0.14844824373722076,
+          "persistent": 0.1906113177537918,
+          "ended": 0.12306790798902512
+        },
+        "facts": {
+          "pattern": "quiet",
+          "history_seconds": 58,
+          "high_seconds": 0,
+          "current_high_seconds": 0,
+          "longest_high_seconds": 0,
+          "high_runs": 0
+        },
+        "description": "Aucun niveau \u00e9lev\u00e9 persistant n'est observ\u00e9 dans cet historique.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "quiet",
+      "reversal_actual": "brief"
+    },
+    {
+      "id": 4,
+      "expected": "quiet",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "brief",
+        "model_phrase": "Une activit\u00e9 \u00e9lev\u00e9e br\u00e8ve ou encore r\u00e9cente est observ\u00e9e.",
+        "candidate_scores": {
+          "quiet": 0.2450866550207138,
+          "brief": 0.2777195870876312,
+          "intermittent": 0.13118544220924377,
+          "persistent": 0.23023761808872223,
+          "ended": 0.11577074229717255
+        },
+        "facts": {
+          "pattern": "quiet",
+          "history_seconds": 33,
+          "high_seconds": 0,
+          "current_high_seconds": 0,
+          "longest_high_seconds": 0,
+          "high_runs": 0
+        },
+        "description": "Aucun niveau \u00e9lev\u00e9 persistant n'est observ\u00e9 dans cet historique.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "quiet",
+      "reversal_actual": "brief"
+    },
+    {
+      "id": 5,
+      "expected": "brief",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "quiet",
+        "model_phrase": "Aucun niveau \u00e9lev\u00e9 persistant n'est observ\u00e9 dans cet historique.",
+        "candidate_scores": {
+          "quiet": 0.2666122317314148,
+          "brief": 0.22102929651737213,
+          "intermittent": 0.18323972821235657,
+          "persistent": 0.19505766034126282,
+          "ended": 0.1340610384941101
+        },
+        "facts": {
+          "pattern": "brief",
+          "history_seconds": 36,
+          "high_seconds": 5,
+          "current_high_seconds": 5,
+          "longest_high_seconds": 5,
+          "high_runs": 1
+        },
+        "description": "Une activit\u00e9 \u00e9lev\u00e9e br\u00e8ve ou encore r\u00e9cente est observ\u00e9e.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "ended",
+      "reversal_actual": "persistent"
+    },
+    {
+      "id": 6,
+      "expected": "brief",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "quiet",
+        "model_phrase": "Aucun niveau \u00e9lev\u00e9 persistant n'est observ\u00e9 dans cet historique.",
+        "candidate_scores": {
+          "quiet": 0.2679712474346161,
+          "brief": 0.2517356872558594,
+          "intermittent": 0.15268540382385254,
+          "persistent": 0.20869620144367218,
+          "ended": 0.118911512196064
+        },
+        "facts": {
+          "pattern": "brief",
+          "history_seconds": 53,
+          "high_seconds": 8,
+          "current_high_seconds": 8,
+          "longest_high_seconds": 8,
+          "high_runs": 1
+        },
+        "description": "Une activit\u00e9 \u00e9lev\u00e9e br\u00e8ve ou encore r\u00e9cente est observ\u00e9e.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "ended",
+      "reversal_actual": "quiet"
+    },
+    {
+      "id": 7,
+      "expected": "brief",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "brief",
+        "model_phrase": "Une activit\u00e9 \u00e9lev\u00e9e br\u00e8ve ou encore r\u00e9cente est observ\u00e9e.",
+        "candidate_scores": {
+          "quiet": 0.22674645483493805,
+          "brief": 0.2735084295272827,
+          "intermittent": 0.16589124500751495,
+          "persistent": 0.22674645483493805,
+          "ended": 0.10710743814706802
+        },
+        "facts": {
+          "pattern": "brief",
+          "history_seconds": 32,
+          "high_seconds": 3,
+          "current_high_seconds": 3,
+          "longest_high_seconds": 3,
+          "high_runs": 1
+        },
+        "description": "Une activit\u00e9 \u00e9lev\u00e9e br\u00e8ve ou encore r\u00e9cente est observ\u00e9e.",
+        "description_source": "opentslm_qwen_constrained",
+        "fallback_used": false,
+        "fallback_reason": null,
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "ended",
+      "reversal_actual": "brief"
+    },
+    {
+      "id": 8,
+      "expected": "brief",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "quiet",
+        "model_phrase": "Aucun niveau \u00e9lev\u00e9 persistant n'est observ\u00e9 dans cet historique.",
+        "candidate_scores": {
+          "quiet": 0.33368295431137085,
+          "brief": 0.16778632998466492,
+          "intermittent": 0.2023889422416687,
+          "persistent": 0.14807091653347015,
+          "ended": 0.14807091653347015
+        },
+        "facts": {
+          "pattern": "brief",
+          "history_seconds": 39,
+          "high_seconds": 11,
+          "current_high_seconds": 11,
+          "longest_high_seconds": 11,
+          "high_runs": 1
+        },
+        "description": "Une activit\u00e9 \u00e9lev\u00e9e br\u00e8ve ou encore r\u00e9cente est observ\u00e9e.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "ended",
+      "reversal_actual": "quiet"
+    },
+    {
+      "id": 9,
+      "expected": "brief",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "quiet",
+        "model_phrase": "Aucun niveau \u00e9lev\u00e9 persistant n'est observ\u00e9 dans cet historique.",
+        "candidate_scores": {
+          "quiet": 0.3333909511566162,
+          "brief": 0.16763950884342194,
+          "intermittent": 0.18996043503284454,
+          "persistent": 0.1784513294696808,
+          "ended": 0.13055777549743652
+        },
+        "facts": {
+          "pattern": "brief",
+          "history_seconds": 38,
+          "high_seconds": 9,
+          "current_high_seconds": 9,
+          "longest_high_seconds": 9,
+          "high_runs": 1
+        },
+        "description": "Une activit\u00e9 \u00e9lev\u00e9e br\u00e8ve ou encore r\u00e9cente est observ\u00e9e.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "ended",
+      "reversal_actual": "quiet"
+    },
+    {
+      "id": 10,
+      "expected": "intermittent",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "quiet",
+        "model_phrase": "Aucun niveau \u00e9lev\u00e9 persistant n'est observ\u00e9 dans cet historique.",
+        "candidate_scores": {
+          "quiet": 0.2990601062774658,
+          "brief": 0.15037687122821808,
+          "intermittent": 0.21879704296588898,
+          "persistent": 0.15037687122821808,
+          "ended": 0.18138912320137024
+        },
+        "facts": {
+          "pattern": "intermittent",
+          "history_seconds": 34,
+          "high_seconds": 8,
+          "current_high_seconds": 3,
+          "longest_high_seconds": 5,
+          "high_runs": 2
+        },
+        "description": "L'activit\u00e9 \u00e9lev\u00e9e appara\u00eet de fa\u00e7on intermittente dans cet historique.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "intermittent",
+      "reversal_actual": "quiet"
+    },
+    {
+      "id": 11,
+      "expected": "intermittent",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "quiet",
+        "model_phrase": "Aucun niveau \u00e9lev\u00e9 persistant n'est observ\u00e9 dans cet historique.",
+        "candidate_scores": {
+          "quiet": 0.32102468609809875,
+          "brief": 0.16142134368419647,
+          "intermittent": 0.19471131265163422,
+          "persistent": 0.16142134368419647,
+          "ended": 0.16142134368419647
+        },
+        "facts": {
+          "pattern": "intermittent",
+          "history_seconds": 42,
+          "high_seconds": 15,
+          "current_high_seconds": 10,
+          "longest_high_seconds": 10,
+          "high_runs": 2
+        },
+        "description": "L'activit\u00e9 \u00e9lev\u00e9e appara\u00eet de fa\u00e7on intermittente dans cet historique.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "intermittent",
+      "reversal_actual": "quiet"
+    },
+    {
+      "id": 12,
+      "expected": "intermittent",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "quiet",
+        "model_phrase": "Aucun niveau \u00e9lev\u00e9 persistant n'est observ\u00e9 dans cet historique.",
+        "candidate_scores": {
+          "quiet": 0.3233705759048462,
+          "brief": 0.18425099551677704,
+          "intermittent": 0.19613417983055115,
+          "persistent": 0.1527494490146637,
+          "ended": 0.14349482953548431
+        },
+        "facts": {
+          "pattern": "intermittent",
+          "history_seconds": 43,
+          "high_seconds": 14,
+          "current_high_seconds": 9,
+          "longest_high_seconds": 9,
+          "high_runs": 2
+        },
+        "description": "L'activit\u00e9 \u00e9lev\u00e9e appara\u00eet de fa\u00e7on intermittente dans cet historique.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "intermittent",
+      "reversal_actual": "quiet"
+    },
+    {
+      "id": 13,
+      "expected": "intermittent",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "quiet",
+        "model_phrase": "Aucun niveau \u00e9lev\u00e9 persistant n'est observ\u00e9 dans cet historique.",
+        "candidate_scores": {
+          "quiet": 0.30969709157943726,
+          "brief": 0.19995547831058502,
+          "intermittent": 0.17646007239818573,
+          "persistent": 0.17646007239818573,
+          "ended": 0.13742725551128387
+        },
+        "facts": {
+          "pattern": "intermittent",
+          "history_seconds": 38,
+          "high_seconds": 6,
+          "current_high_seconds": 1,
+          "longest_high_seconds": 5,
+          "high_runs": 2
+        },
+        "description": "L'activit\u00e9 \u00e9lev\u00e9e appara\u00eet de fa\u00e7on intermittente dans cet historique.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "intermittent",
+      "reversal_actual": "quiet"
+    },
+    {
+      "id": 14,
+      "expected": "intermittent",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "quiet",
+        "model_phrase": "Aucun niveau \u00e9lev\u00e9 persistant n'est observ\u00e9 dans cet historique.",
+        "candidate_scores": {
+          "quiet": 0.25023746490478516,
+          "brief": 0.1830776184797287,
+          "intermittent": 0.2074541449546814,
+          "persistent": 0.2074541449546814,
+          "ended": 0.15177668631076813
+        },
+        "facts": {
+          "pattern": "intermittent",
+          "history_seconds": 35,
+          "high_seconds": 6,
+          "current_high_seconds": 1,
+          "longest_high_seconds": 5,
+          "high_runs": 2
+        },
+        "description": "L'activit\u00e9 \u00e9lev\u00e9e appara\u00eet de fa\u00e7on intermittente dans cet historique.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "intermittent",
+      "reversal_actual": "quiet"
+    },
+    {
+      "id": 15,
+      "expected": "persistent",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "quiet",
+        "model_phrase": "Aucun niveau \u00e9lev\u00e9 persistant n'est observ\u00e9 dans cet historique.",
+        "candidate_scores": {
+          "quiet": 0.3240296542644501,
+          "brief": 0.15306077897548676,
+          "intermittent": 0.2686300277709961,
+          "persistent": 0.11920385807752609,
+          "ended": 0.1350756585597992
+        },
+        "facts": {
+          "pattern": "persistent",
+          "history_seconds": 62,
+          "high_seconds": 31,
+          "current_high_seconds": 31,
+          "longest_high_seconds": 31,
+          "high_runs": 1
+        },
+        "description": "Un niveau \u00e9lev\u00e9 persiste dans les observations r\u00e9centes.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "ended",
+      "reversal_actual": "quiet"
+    },
+    {
+      "id": 16,
+      "expected": "persistent",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "intermittent",
+        "model_phrase": "L'activit\u00e9 \u00e9lev\u00e9e appara\u00eet de fa\u00e7on intermittente dans cet historique.",
+        "candidate_scores": {
+          "quiet": 0.1862105280160904,
+          "brief": 0.039031848311424255,
+          "intermittent": 0.37032386660575867,
+          "persistent": 0.3268096446990967,
+          "ended": 0.07762409746646881
+        },
+        "facts": {
+          "pattern": "persistent",
+          "history_seconds": 45,
+          "high_seconds": 35,
+          "current_high_seconds": 35,
+          "longest_high_seconds": 35,
+          "high_runs": 1
+        },
+        "description": "Un niveau \u00e9lev\u00e9 persiste dans les observations r\u00e9centes.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "ended",
+      "reversal_actual": "intermittent"
+    },
+    {
+      "id": 17,
+      "expected": "persistent",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "persistent",
+        "model_phrase": "Un niveau \u00e9lev\u00e9 persiste dans les observations r\u00e9centes.",
+        "candidate_scores": {
+          "quiet": 0.12830586731433868,
+          "brief": 0.026894373819231987,
+          "intermittent": 0.07782144844532013,
+          "persistent": 0.7383493781089783,
+          "ended": 0.028628911823034286
+        },
+        "facts": {
+          "pattern": "persistent",
+          "history_seconds": 45,
+          "high_seconds": 41,
+          "current_high_seconds": 41,
+          "longest_high_seconds": 41,
+          "high_runs": 1
+        },
+        "description": "Un niveau \u00e9lev\u00e9 persiste dans les observations r\u00e9centes.",
+        "description_source": "opentslm_qwen_constrained",
+        "fallback_used": false,
+        "fallback_reason": null,
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "brief",
+      "reversal_actual": "persistent"
+    },
+    {
+      "id": 18,
+      "expected": "persistent",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "persistent",
+        "model_phrase": "Un niveau \u00e9lev\u00e9 persiste dans les observations r\u00e9centes.",
+        "candidate_scores": {
+          "quiet": 0.1648520827293396,
+          "brief": 0.03246130049228668,
+          "intermittent": 0.1366671770811081,
+          "persistent": 0.6124997735023499,
+          "ended": 0.053519632667303085
+        },
+        "facts": {
+          "pattern": "persistent",
+          "history_seconds": 44,
+          "high_seconds": 36,
+          "current_high_seconds": 36,
+          "longest_high_seconds": 36,
+          "high_runs": 1
+        },
+        "description": "Un niveau \u00e9lev\u00e9 persiste dans les observations r\u00e9centes.",
+        "description_source": "opentslm_qwen_constrained",
+        "fallback_used": false,
+        "fallback_reason": null,
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "ended",
+      "reversal_actual": "intermittent"
+    },
+    {
+      "id": 19,
+      "expected": "persistent",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "quiet",
+        "model_phrase": "Aucun niveau \u00e9lev\u00e9 persistant n'est observ\u00e9 dans cet historique.",
+        "candidate_scores": {
+          "quiet": 0.31070247292518616,
+          "brief": 0.13787338137626648,
+          "intermittent": 0.29187795519828796,
+          "persistent": 0.12167283147573471,
+          "ended": 0.13787338137626648
+        },
+        "facts": {
+          "pattern": "persistent",
+          "history_seconds": 53,
+          "high_seconds": 36,
+          "current_high_seconds": 36,
+          "longest_high_seconds": 36,
+          "high_runs": 1
+        },
+        "description": "Un niveau \u00e9lev\u00e9 persiste dans les observations r\u00e9centes.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "ended",
+      "reversal_actual": "quiet"
+    },
+    {
+      "id": 20,
+      "expected": "ended",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "quiet",
+        "model_phrase": "Aucun niveau \u00e9lev\u00e9 persistant n'est observ\u00e9 dans cet historique.",
+        "candidate_scores": {
+          "quiet": 0.2965620160102844,
+          "brief": 0.23096272349357605,
+          "intermittent": 0.16897593438625336,
+          "persistent": 0.17987394332885742,
+          "ended": 0.12362543493509293
+        },
+        "facts": {
+          "pattern": "ended",
+          "history_seconds": 50,
+          "high_seconds": 9,
+          "current_high_seconds": 0,
+          "longest_high_seconds": 9,
+          "high_runs": 1
+        },
+        "description": "Un retour durable sous le seuil est observ\u00e9 apr\u00e8s une activit\u00e9 \u00e9lev\u00e9e.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "ended",
+      "reversal_actual": "quiet"
+    },
+    {
+      "id": 21,
+      "expected": "ended",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "brief",
+        "model_phrase": "Une activit\u00e9 \u00e9lev\u00e9e br\u00e8ve ou encore r\u00e9cente est observ\u00e9e.",
+        "candidate_scores": {
+          "quiet": 0.22448042035102844,
+          "brief": 0.3068283796310425,
+          "intermittent": 0.1449354737997055,
+          "persistent": 0.2108798623085022,
+          "ended": 0.11287586390972137
+        },
+        "facts": {
+          "pattern": "ended",
+          "history_seconds": 50,
+          "high_seconds": 7,
+          "current_high_seconds": 0,
+          "longest_high_seconds": 7,
+          "high_runs": 1
+        },
+        "description": "Un retour durable sous le seuil est observ\u00e9 apr\u00e8s une activit\u00e9 \u00e9lev\u00e9e.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "ended",
+      "reversal_actual": "brief"
+    },
+    {
+      "id": 22,
+      "expected": "ended",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "quiet",
+        "model_phrase": "Aucun niveau \u00e9lev\u00e9 persistant n'est observ\u00e9 dans cet historique.",
+        "candidate_scores": {
+          "quiet": 0.2377391755580902,
+          "brief": 0.22333529591560364,
+          "intermittent": 0.1739336997270584,
+          "persistent": 0.2377391755580902,
+          "ended": 0.12725262343883514
+        },
+        "facts": {
+          "pattern": "ended",
+          "history_seconds": 42,
+          "high_seconds": 7,
+          "current_high_seconds": 0,
+          "longest_high_seconds": 7,
+          "high_runs": 1
+        },
+        "description": "Un retour durable sous le seuil est observ\u00e9 apr\u00e8s une activit\u00e9 \u00e9lev\u00e9e.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "ended",
+      "reversal_actual": "quiet"
+    },
+    {
+      "id": 23,
+      "expected": "ended",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "quiet",
+        "model_phrase": "Aucun niveau \u00e9lev\u00e9 persistant n'est observ\u00e9 dans cet historique.",
+        "candidate_scores": {
+          "quiet": 0.24841547012329102,
+          "brief": 0.20594367384910583,
+          "intermittent": 0.17073330283164978,
+          "persistent": 0.2333647459745407,
+          "ended": 0.14154286682605743
+        },
+        "facts": {
+          "pattern": "ended",
+          "history_seconds": 40,
+          "high_seconds": 4,
+          "current_high_seconds": 0,
+          "longest_high_seconds": 4,
+          "high_runs": 1
+        },
+        "description": "Un retour durable sous le seuil est observ\u00e9 apr\u00e8s une activit\u00e9 \u00e9lev\u00e9e.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "ended",
+      "reversal_actual": "quiet"
+    },
+    {
+      "id": 24,
+      "expected": "ended",
+      "actual": {
+        "model_version": "opentslm-qwen-dynamics-e6b045e83431",
+        "model_pattern": "brief",
+        "model_phrase": "Une activit\u00e9 \u00e9lev\u00e9e br\u00e8ve ou encore r\u00e9cente est observ\u00e9e.",
+        "candidate_scores": {
+          "quiet": 0.24306319653987885,
+          "brief": 0.2931901514530182,
+          "intermittent": 0.14742527902126312,
+          "persistent": 0.20150646567344666,
+          "ended": 0.11481491476297379
+        },
+        "facts": {
+          "pattern": "ended",
+          "history_seconds": 61,
+          "high_seconds": 5,
+          "current_high_seconds": 0,
+          "longest_high_seconds": 5,
+          "high_runs": 1
+        },
+        "description": "Un retour durable sous le seuil est observ\u00e9 apr\u00e8s une activit\u00e9 \u00e9lev\u00e9e.",
+        "description_source": "template_fallback",
+        "fallback_used": true,
+        "fallback_reason": "model_disagrees_with_measured_pattern",
+        "field_validated": false,
+        "calibration": "none",
+        "generation": "closed_vocabulary"
+      },
+      "reversal_expected": "ended",
+      "reversal_actual": "brief"
+    }
+  ]
+}

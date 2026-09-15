@@ -22,7 +22,7 @@ Licence déclarée : CC BY 4.0.
 
 La description annonce 1 000 clips d'une seconde : 500 fuite, 386 sans fuite, 114 bruits environnementaux. Les deux premières catégories viennent d'une base extérieure de formation à la détection de fuites à Dongguan. Certains bruits environnementaux proviennent d'un autre site public. Ce sont des mesures physiques sur une base expérimentale, pas une validation chez des clients.
 
-Archive fuite téléchargée et listée par l'agent principal : 500 WAV, noms encodant matériau, région, pression, vitesse d'écoulement et appareil. Nombreux suffixes _1/_2 et captures hydrophone/logger sous mêmes conditions : risque de dépendance évident. Archives sans fuite et bruit encore à auditer directement avant split.
+Au premier relevé, seule l'archive fuite avait été téléchargée/listée par l'agent principal (500 WAV). Mise à jour : l'audit de Nevil, retrouvé sur `nevil/setup` (`3efa08f`), confirme les trois archives et 1 000 WAV mono, 8 kHz, PCM 16 bits, une seconde. Ses scripts et le manifeste `split_v2` sont publiés ; `split_v1` est invalide. Les groupes restent heuristiques et la conversion TimeNet n'est pas encore livrée. L'agent principal a vérifié la présence et le hash du manifeste, pas réexécuté l'audit. Preuves et réserves dans [[Journal Icham]].
 
 Fichiers :
 - https://zenodo.org/api/records/18631450/files/leak%20acoustic%20data.rar/content

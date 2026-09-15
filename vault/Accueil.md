@@ -4,9 +4,19 @@ Icham
 
 ## Commencer ici
 
-[[Passation]] donne l'état réel. [[Plan directeur agents]] explique le projet entier et l'ordre de travail. Aucune lecture du chat n'est nécessaire.
+**Livré : [[C1 OpenTSLM Qwen - exécution]].** C1 détecte, OpenTSLM-SP/Qwen3.5-4B + LoRA décrit l'historique ; message proposé à Nevil après31secondes hautes consécutives. Service GPU loopback8020,39tests et recette HTTP43s réussis ; code/preuves `2318dee`. Modèle brut16/25 sur scénarios artificiels,9fallbacks : pas de qualité terrain ni d'utilité supérieure aux règles démontrée. Durées déterministes, aucun WhatsApp/frontend. Prochaine action : raccordement backend/Monitor au contrat `docs/TEMPORAL_LANGUAGE_ENDPOINT.md`, pas de nouveau fit.
 
-PIPE : analyser de courts signaux acoustiques de canalisations avec un TSLM entraîné, montrer son résultat sur un studio audio/spectrogramme et le comparer à une baseline. Faisabilité scientifique encore à valider ; aucune performance n'est annoncée.
+**Livré/testé : [[C1 temporel - exécution]].** Endpoint C1/suivi/aperçus sur la première H100, loopback8019 via SSH ; recette avec vrais poids réussie. LSTM entraîné sur le nouveau protocole Aghashahi puis non promu après comparaison défavorable. Pas de qualité terrain démontrée, de frontend modifié ni de message WhatsApp. Repli `195.242.28.46` intact. Contrat `docs/TEMPORAL_ENDPOINT.md`, code/preuves `8baecab` ; [[Passation]] donne le raccordement restant.
+
+**Plan d'origine :** [[Plan C1 - suivi temporel et notifications]]. Qwen était optionnel et absent du premier endpoint8019 ; la correction explicite d'Icham a conduit au nouveau8020 ci-dessus. Les calculs du [[Rush Qwen 27B - exécution]] sont terminés, audit consolidé et archivage final encore inachevés ; cette ancienne campagne reste distincte de la livraison C1.
+
+[[Passation]] donne l'état réel. [[Évaluation qualité V1 - exécution]] donne les résultats mesurés ; [[Plan surveillance continue]] distingue l'ambition produit du prototype. [[Plan directeur agents]] conserve le plan initial et les contraintes communes. Aucune lecture du chat n'est nécessaire.
+
+**Goal élargi le 13 septembre : [[Diagnostic causal TSLM vs C1#Plan global en dix étapes]].** Le prompt reste un renvoi vers cette note. Diagnostic → corrections mesurées → diversification globale si nécessaire → mesure de cet apport → gel et confirmation indépendante → intégration continue et valeur du TSLM. Le diagnostic ne termine plus le goal. [[Diagnostic causal - exécution]] : D0/D1/D2 complets ; D3 termine au pas400 avec32/32 sur ses exemples d'entraînement, puis reload neuf exact. L'extension demandée sur98réservés est terminée/vérifiée :67/98corrects,21fuites manquées,10fausses alertes ; AUC clip0,741370/groupe0,798077. Mémorisation acquise, qualité hors groupes encore insuffisante ; aucun nouveau fit ni test officiel. Deux H100 avec runtimes et socle train vérifiés ; vraie parité Qwen entre machines encore non mesurée. Étapes6à10 non lancées ; aucun gain final TSLM ni cause unique du retard démontrés.
+
+PIPE vise un appareil qui écoute les canalisations en continu et produit des alertes avec preuves acoustiques consultables. V1 entraînée/rechargée, exports T0–T3 publiés et évaluation complète exécutée par Icham. Résultat : détecteur encore insuffisant, sans gain démontré face au contrôle C1 ; descriptions de bandes globalement correctes mais parfois incohérentes avec le score. [[Évaluation qualité V1 - exécution]]. Surveillance et fiabilité terrain non validées.
+
+**Objectif final précisé par Icham le 13 septembre :** aider à comprendre et investiguer l'évolution d'un événement, au-delà de « fuite ou pas fuite ». Démontrer séparément l'apport du langage et celui de l'accès aux séries, en comparant classifieur + DSP + gabarit, classifieur + mesures/contexte + Qwen, et TSLM. Ce sont des capacités à construire et tester, pas des résultats actuels. [[Plan V2 - fiabilité et parité des scores#7. Objectif final — démontrer la valeur du TSLM]].
 
 ## Votre mission
 

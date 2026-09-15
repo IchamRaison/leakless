@@ -52,7 +52,7 @@ Crédit non activé ni vérifié sur un compte. GPU disponible, quotas, coût ho
 
 ## Direction de travail et choix encore ouverts
 
-Direction courante : PIPE, aide à l'analyse acoustique de fuites pour un technicien, classification fuite/non-fuite et observations mesurables. Dataset candidat Zenodo 18631450, à valider par l'audit G0. Répartition, architecture cible et métriques sont décrites dans [[Plan directeur agents]] et [[Protocole évaluation]] ; versions, modèle de base et faisabilité restent à vérifier. LeakLess est un nom proposé, sans validation finale enregistrée. Santé, industrie et énergie restent des exemples du brief.
+Direction précisée par Icham : PIPE, appareil surveillant automatiquement les canalisations en continu et émettant des alertes. [[Plan surveillance continue]] décrit le nouveau plan proposé, distinct des exigences organisateurs. Zenodo 18631450 et la V0 Qwen/TimeNet ont été vérifiés pour des extraits ; cela ne valide pas la surveillance continue. Matériel réel, objectifs opérationnels et acceptation d'une démo en replay restent à confirmer. LeakLess est un nom proposé, sans renommage global acté. Santé, industrie et énergie restent des exemples du brief.
 
 ## Conséquences pour notre plan
 

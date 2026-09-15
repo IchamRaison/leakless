@@ -11,7 +11,6 @@ import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { api } from "../api";
 import DemoExperience from "./DemoExperience";
 import recordings from "./recordings.json";
-import { tslm } from "./official";
 
 vi.mock("./SceneCanvas", () => ({
   SceneCanvas: () => <div>3D test host</div>,
@@ -94,7 +93,7 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
-it("loads a real-example identity through the existing API and never requests a fake prediction", async () => {
+it("loads a real-example identity and waits for an explicit model request", async () => {
   render(<DemoExperience />);
   expect(screen.getByRole("button", { name: /No-leak/ })).toBeDisabled();
   expect(api).not.toHaveBeenCalled();
@@ -112,9 +111,9 @@ it("loads a real-example identity through the existing API and never requests a 
   expect(
     await screen.findByText(`Waveform ${sample(0).sample_id}`),
   ).toBeInTheDocument();
-  expect(
-    screen.getAllByText("Probability leak")[0].nextElementSibling,
-  ).toHaveTextContent(tslm.probability);
+  expect(screen.getByText("Decision").nextElementSibling).toHaveTextContent(
+    "NOT RUN",
+  );
   expect(vi.mocked(api).mock.calls.some(([path]) => path === "/predict")).toBe(
     false,
   );

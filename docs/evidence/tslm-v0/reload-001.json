@@ -1,0 +1,34 @@
+{
+  "fresh_process_reload": true,
+  "deterministic_output_match": true,
+  "invalid_audio_rejected": true,
+  "prediction": {
+    "schema_version": "0.1",
+    "sample_id": "daf17dc8d90df21bb484e9b0",
+    "input_sha256": "daf17dc8d90df21bb484e9b05a3f2585c4201f9426b33e5bb8f1f130d9e34f35",
+    "model_name": "tslm",
+    "model_version": "pipe-qwen3.5-4b-v0-a968405f",
+    "preprocessing_version": "rms-hann256-hop128-band4-log1p-v1",
+    "prediction": "no_leak",
+    "class_scores": null,
+    "score_type": "none",
+    "abstained": false,
+    "abstention_reason": null,
+    "observations": [
+      {
+        "name": "greatest_mean_spectral_energy_band",
+        "value": "0-1000",
+        "unit": "Hz",
+        "method": "DSP:rms-hann256-hop128-band4-log1p-v1"
+      }
+    ],
+    "description": "Greatest mean spectral energy: 0-1000 Hz.",
+    "latency_ms": 1304.7153320003417,
+    "warnings": [
+      "V0 m\u00e9canique, qualit\u00e9 non \u00e9valu\u00e9e ; aucune confiance calibr\u00e9e.",
+      "Domaine exp\u00e9rimental ; ni localisation, ni validation terrain."
+    ],
+    "execution_mode": "live"
+  },
+  "checkpoint_checksums_sha256": "5a84da98a1d5473f74e6c5e854882a4931eb03845f3173978c057fe12d9e3ecc"
+}

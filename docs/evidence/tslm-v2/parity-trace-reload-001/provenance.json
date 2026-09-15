@@ -1,0 +1,34 @@
+{
+  "purpose": "parity_diagnosis_no_training_no_quality_metrics",
+  "mode": "trace",
+  "created_at": "2026-09-12T21:49:59.832845+00:00",
+  "pid": 48122,
+  "hostname": "computeinstance-e00g3ykxy51wgxcw1p",
+  "python": "3.12.3",
+  "numpy": "2.5.2",
+  "clip_ids": [
+    "c00c343da6afa",
+    "ce0594e503562",
+    "c50c4f2d91963",
+    "c0128b879694e"
+  ],
+  "test_audio_or_cache_opened": false,
+  "frozen_manifest_contains_test_metadata": true,
+  "checkpoint_checksums_sha256": "b95569c50f5e1bbf3533bddc92530b5f285eb25dec999f83999f60ffd912d1ae",
+  "temporal_sha256": "183a1b1c29facf0e27f27efc7adab8c1bb13556cede06abc7f735672cbe7eb82",
+  "manifest_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+  "cache_sha256": {
+    "train": "7f87d024f7b627d50e641e19bbf552c568ac23122ef93f4a2308c3f8b8fb61b8",
+    "val": "06ef43ec2f0f4d27af8aaf097cf2f71098899f81c8abd021cf7941be14416a6c"
+  },
+  "timef_manifest_sha256": "ace99698290d2f1f53a5bc469b6fc84977e3644c3092524109f53f358d72120a",
+  "historical_preprocessing_version": "rms-hann256-hop128-band4-log1p-v1",
+  "current_preprocessing_version": "rms-hann256-hop128-band4-log1p-v1",
+  "score_atol": 1e-06,
+  "repeats_fixed_cases": 3,
+  "source_sha256": {
+    "diagnose_parity.py": "cb5670cfa04768beb1d65bfb5738e1f15f2756867b533072c2f662f677065ec1",
+    "preprocessing.py": "b9630f473af9c0f2514d3a8e408a79476368f306a2b15370826ac140c64036cd",
+    "connector.py": "670db629b62102cdfb4d6a98aaaa3a52807b4b37b6055a8705a0f4fe0fde94e4"
+  }
+}

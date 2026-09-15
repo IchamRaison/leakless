@@ -1,0 +1,21 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:59,  7.17it/s]Loading weights:   9%|▉         | 40/426 [00:00<00:01, 199.86it/s]Loading weights:  19%|█▉        | 80/426 [00:00<00:01, 279.78it/s]Loading weights:  28%|██▊       | 121/426 [00:00<00:00, 327.94it/s]Loading weights:  37%|███▋      | 156/426 [00:00<00:00, 335.07it/s]Loading weights:  47%|████▋     | 201/426 [00:00<00:00, 368.71it/s]Loading weights:  58%|█████▊    | 247/426 [00:00<00:00, 392.58it/s]Loading weights:  68%|██████▊   | 290/426 [00:00<00:00, 402.42it/s]Loading weights:  78%|███████▊  | 331/426 [00:00<00:00, 394.25it/s]Loading weights:  87%|████████▋ | 371/426 [00:01<00:00, 389.64it/s]Loading weights:  97%|█████████▋| 412/426 [00:01<00:00, 388.44it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 353.14it/s]
+{
+  "clip_id": "c0128b879694e",
+  "fold": "train",
+  "loss": 0.2475649118423462,
+  "gradient_norms": {
+    "encoder": 4.988867282867432,
+    "projector": 4.321654796600342
+  },
+  "llm_frozen": true,
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "trainable_parameters": 2441472,
+  "elapsed_seconds": 3.5515047399985633,
+  "peak_memory_bytes": 14139866112
+}

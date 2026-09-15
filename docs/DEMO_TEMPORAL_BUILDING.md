@@ -25,8 +25,9 @@ vault, ni un flux capteur, une alerte automatique ou une localisation de fuite.
   « Load a recording » → section `06 / INSPECT YOUR OWN SIGNAL`
   (`frontend/src/demo/InspectRecording.tsx`). Un upload valide affiche, dans la
   même page : métadonnées, Temporal Signal Map, waveform, spectrogramme, lecteur
-  et TSLM `PENDING` (`ModelReadout.tsx`, partagé avec la section 04). Aucun appel
-  `/predict`, aucune probabilité. Nom de fichier neutre `recording.wav` envoyé ;
+  et TSLM `NOT RUN` (`ModelReadout.tsx`, partagé avec la section 04). Un clic
+  explicite appelle `/predict`; sans artefacts V2, l'indisponibilité est affichée.
+  Nom de fichier neutre `recording.wav` envoyé ;
   l'upload précédent est libéré côté serveur (DELETE) quand il est remplacé ou
   retiré. Aucun backend ML ajouté.
 - Textes visibles en anglais uniquement, y compris les messages d'erreur de
@@ -84,9 +85,9 @@ de mesure fabriquée. `vite preview` seul ne fournit pas l'API.
 - Ces mesures viennent de la STFT d'affichage Safoan, distincte du DSP ML. Une
   ellipse et la rotation sont des conventions de présentation. Pas de mapping
   flatness/irrégularité non justifié. Méthode et première mesure consultables.
-- Matériau neutre, état modèle PENDING : aucune couleur de classe déduite du
-  label d'exemple. Pas de score inventé, pas d'appel `/predict` factice, pas de
-  recommandation produite en l'absence de modèle évalué.
+- Matériau neutre avant exécution : aucune couleur de classe déduite du label
+  d'exemple. Le bouton TSLM V2 déclenche une vraie requête pour le signal déjà
+  importé. Pas de score inventé ni de recommandation terrain.
 - ResizeObserver, arrêt de rotation, respect de reduced-motion, nettoyage des
   renderers/géométries/matériaux et sélection accessible en HTML. Repli explicite
   lorsque WebGL n'est pas disponible.
@@ -96,13 +97,14 @@ de mesure fabriquée. `vite preview` seul ne fournit pas l'API.
 Commandes : `npm --prefix frontend run build`, `npm --prefix frontend test`,
 `.venv/bin/python -m pytest -q`.
 
-Résultats (consolidation LeakLess unique, 2026-09-12) : build TypeScript/Vite
-réussi ; 13 tests frontend (4 fichiers) et 19 tests API réussis ; Prettier et
-`tsc` propres. Tests de déterminisme/mesures, identité incorrecte, réponse
+Résultats après intégration V2, 2026-09-13 : build TypeScript/Vite réussi ;
+35 tests frontend (15 fichiers), 23 tests API et les 12 tests unitaires du
+wrapper cohérent réussis. Tests de déterminisme/mesures, identité incorrecte, réponse
 tardive, retry, indépendance point/enregistrement, upload (type, taille, erreur
-serveur, API injoignable, identité incohérente, métadonnées + carte + PENDING,
-libération au remplacement/retrait) et absence d'appel de prédiction fictive.
-Résultats scientifiques inchangés. Aucun test de performance TSLM réalisé ici.
+serveur, API injoignable, identité incohérente, métadonnées + carte + NOT RUN,
+libération au remplacement/retrait), appel explicite V2, provenance et rejet
+d'une réponse modèle obsolète. Résultats scientifiques inchangés. Aucun test de
+performance ou d'inférence sur poids réels réalisé ici.
 
 Recette navigateur (agent-browser headless, API réelle sur 8028, Vite 5178) :
 bâtiment 3D rendu, N2/N3 → exemple no-leak, waveform/spectrogramme en anglais,
@@ -117,8 +119,8 @@ Limites techniques : le bundle 3D déclenche un avertissement Vite >500 Ko
 minifié (environ 178 Ko gzip pour la vue démo, zod/API désormais inclus dans ce chunk). Les tests API hérités émettent
 deux avertissements de dépréciation Starlette/AnyIO. Ce ne sont pas des échecs
 de build ni des erreurs console de la démo. Matériel WebGL nécessaire à la 3D.
-TSLM, probabilité réelle, intégration à un flux et validation terrain restent
-hors de cette livraison.
+L'adaptateur TSLM V2 est intégré. L'inférence réelle attend encore les trois
+artefacts validés non versionnés ; la validation terrain reste hors livraison.
 
 Prochaine action : revue de l'UI et du diff par Nevil avant tout push ; puis
 intégration d'une sortie modèle réelle au contrat applicatif convenu, sans
@@ -134,5 +136,5 @@ seulement), toutes marquées résolues après traitement :
 3. Pitch de 5 min, slides + démo rapide → `docs/pitch/` (deck HTML, minutage,
    pré-vol, parcours démo 90 s, replis).
 4. Dashboard pour la démo → `#monitor` : replay des trois vrais WAV train,
-   niveau/centroïde/bandes mesurés, aucune alerte générée, TSLM PENDING,
+   niveau/centroïde/bandes mesurés, aucune alerte générée, TSLM non exécuté,
    canaux distincts des positions du bâtiment.

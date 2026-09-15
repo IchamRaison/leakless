@@ -1,0 +1,33 @@
+{
+  "run_id": "c2b",
+  "model_name": "C2b — structure temporelle peu profonde — enveloppe, modulation, flux",
+  "checkpoint": "logreg(C=0.1)",
+  "training_commit": "c27a43fdd4de73ccc09f5f4bc02acd87c89f58f6",
+  "config_hash": null,
+  "split_filename": "split_v2.csv",
+  "split_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+  "timestamp": "2026-09-12T20:51:36+00:00",
+  "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
+  "test_labels_not_used_for_tuning": true,
+  "control_level": "C2b",
+  "audio": "normalised",
+  "features": [
+    "env_ac_peak",
+    "mod_peak_hz_log",
+    "mod_1_4",
+    "mod_4_16",
+    "mod_16_64",
+    "spectral_flux"
+  ],
+  "feature_weights": {
+    "env_ac_peak": -1.191941,
+    "mod_peak_hz_log": -0.209304,
+    "mod_1_4": -0.398339,
+    "mod_4_16": 0.672123,
+    "mod_16_64": -0.19081,
+    "spectral_flux": -0.710058
+  },
+  "selected_C": 0.1,
+  "threshold": 0.495914,
+  "negative_control_shuffled_labels": false
+}

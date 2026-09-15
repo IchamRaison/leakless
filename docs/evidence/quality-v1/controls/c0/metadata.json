@@ -1,0 +1,23 @@
+{
+  "run_id": "c0",
+  "model_name": "C0 — niveau RMS absolu, signal brut — raccourci d'acquisition",
+  "checkpoint": "logreg(C=0.01)",
+  "training_commit": "c27a43fdd4de73ccc09f5f4bc02acd87c89f58f6",
+  "config_hash": null,
+  "split_filename": "split_v2.csv",
+  "split_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+  "timestamp": "2026-09-12T20:51:24+00:00",
+  "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
+  "test_labels_not_used_for_tuning": true,
+  "control_level": "C0",
+  "audio": "raw",
+  "features": [
+    "rms_dbfs"
+  ],
+  "feature_weights": {
+    "rms_dbfs": 0.874477
+  },
+  "selected_C": 0.01,
+  "threshold": 0.536921,
+  "negative_control_shuffled_labels": false
+}

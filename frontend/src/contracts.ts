@@ -89,3 +89,18 @@ export const predictionSchema = z
   })
   .strict();
 export type Prediction = z.infer<typeof predictionSchema>;
+
+export const predictResponseSchema = predictionSchema.extend({
+  request_id: z.string().min(1),
+  decision_version: z.string().nullable(),
+  decision_artifact_sha256: z.string().regex(/^[0-9a-f]{64}$/).nullable(),
+  threshold: z.number().nullable(),
+  calibration: z.literal("none"),
+  description_source: z
+    .enum(["llm_checked_against_dsp", "dsp_template_fallback"])
+    .nullable(),
+  fallback_used: z.boolean(),
+  fallback_reasons: z.array(z.string()),
+  model_input_sha256: z.string().regex(/^[0-9a-f]{64}$/).nullable(),
+});
+export type PredictResponse = z.infer<typeof predictResponseSchema>;

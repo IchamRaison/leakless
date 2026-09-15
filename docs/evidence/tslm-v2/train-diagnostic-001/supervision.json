@@ -1,0 +1,139 @@
+{
+  "purpose": "mechanical_trained_v1_autopsy_not_heldout_generalization",
+  "fold": "train",
+  "mode": "eval_with_gradients_no_optimizer",
+  "input_preprocessing_version": "rms-f32-hann256-hop128-band4-log1p-v2",
+  "checkpoint_preprocessing_version": "rms-f32-hann256-hop128-band4-log1p-v2",
+  "checkpoint_checksums_sha256": "ca72fb80a23d6e799edc6824246e69a0a36eaa88360854b694a4b93d5aa52ff4",
+  "temporal_sha256": "183a1b1c29facf0e27f27efc7adab8c1bb13556cede06abc7f735672cbe7eb82",
+  "scoring_spec": {
+    "version": "class-continuation-logprob-sum-softmax-single-clip-v2",
+    "class_continuations": [
+      "leak;",
+      "no_leak;"
+    ],
+    "class_token_ids": [
+      [
+        273,
+        570,
+        26
+      ],
+      [
+        2083,
+        11414,
+        570,
+        26
+      ]
+    ],
+    "class_token_counts": [
+      3,
+      4
+    ],
+    "aggregation": "sum",
+    "length_normalization": false,
+    "class_terminator": ";",
+    "includes_eos": false,
+    "includes_description": false,
+    "calibration": "none",
+    "acoustic_batching": "one_clip_four_channels"
+  },
+  "samples": [
+    {
+      "clip_id": "c02543903a0da",
+      "group_id": "gbcf550a5ee",
+      "class_tokens": 3,
+      "description_tokens": 14,
+      "eos_tokens": 1,
+      "padding_tokens": 1
+    },
+    {
+      "clip_id": "c04498a7ed239",
+      "group_id": "gdc4d4d1b74",
+      "class_tokens": 3,
+      "description_tokens": 14,
+      "eos_tokens": 1,
+      "padding_tokens": 1
+    },
+    {
+      "clip_id": "c05d8158c3707",
+      "group_id": "g72971ef0cc",
+      "class_tokens": 3,
+      "description_tokens": 14,
+      "eos_tokens": 1,
+      "padding_tokens": 1
+    },
+    {
+      "clip_id": "c062288ccfbf0",
+      "group_id": "g71c7290dc4",
+      "class_tokens": 3,
+      "description_tokens": 14,
+      "eos_tokens": 1,
+      "padding_tokens": 1
+    },
+    {
+      "clip_id": "c0128b879694e",
+      "group_id": "gd2da168526",
+      "class_tokens": 4,
+      "description_tokens": 14,
+      "eos_tokens": 1,
+      "padding_tokens": 0
+    },
+    {
+      "clip_id": "c04206cc802ff",
+      "group_id": "g07ac25f1e0",
+      "class_tokens": 4,
+      "description_tokens": 14,
+      "eos_tokens": 1,
+      "padding_tokens": 0
+    },
+    {
+      "clip_id": "c04baf7fef3e6",
+      "group_id": "g60e6ee291d",
+      "class_tokens": 4,
+      "description_tokens": 14,
+      "eos_tokens": 1,
+      "padding_tokens": 0
+    },
+    {
+      "clip_id": "c05f4f069b542",
+      "group_id": "g46286703fa",
+      "class_tokens": 4,
+      "description_tokens": 14,
+      "eos_tokens": 1,
+      "padding_tokens": 0
+    }
+  ],
+  "class_fraction_of_supervised_tokens": 0.1891891891891892,
+  "loss_full": 0.036805879324674606,
+  "loss_reconstructed": 0.03680587559938431,
+  "loss_contributions_same_total_token_denominator": {
+    "class": 0.03673922270536423,
+    "description_including_eos": 6.665408000117168e-05
+  },
+  "gradient_norms": {
+    "class": {
+      "encoder": 0.016638923436403275,
+      "projector": 0.020331796258687973
+    },
+    "description_including_eos": {
+      "encoder": 0.002279426669701934,
+      "projector": 0.0029777991585433483
+    },
+    "full": {
+      "encoder": 0.016851527616381645,
+      "projector": 0.02082422748208046
+    }
+  },
+  "state_sha256_before": {
+    "encoder": "6379afb5c1e676e5922e61634ee03a9f0165e9075506b1e3574b273fa3509c7b",
+    "projector": "7aea2c763aa619cd2a1680a9e8932b6f9b44d658ba88cc47276c7182295e9abd",
+    "llm": "c1b469d8d93ec5ffebd6fdd102296f1b2689d5966bc4fe3077e2f699b887267e"
+  },
+  "state_sha256_after": {
+    "encoder": "6379afb5c1e676e5922e61634ee03a9f0165e9075506b1e3574b273fa3509c7b",
+    "projector": "7aea2c763aa619cd2a1680a9e8932b6f9b44d658ba88cc47276c7182295e9abd",
+    "llm": "c1b469d8d93ec5ffebd6fdd102296f1b2689d5966bc4fe3077e2f699b887267e"
+  },
+  "weights_unchanged": true,
+  "optimizer_steps": 0
+}

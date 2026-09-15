@@ -1,0 +1,37 @@
+{
+  "run_id": "c2",
+  "model_name": "C2 — spectre agrégé, invariant à l'ordre, sans phase",
+  "checkpoint": "logreg(C=0.1)",
+  "training_commit": "c27a43fdd4de73ccc09f5f4bc02acd87c89f58f6",
+  "config_hash": null,
+  "split_filename": "split_v2.csv",
+  "split_sha256": "7a8716a35284434292314c10da58663e9f848be60edf18db0f98ef9d63d17896",
+  "timestamp": "2026-09-12T20:51:26+00:00",
+  "threshold_rule": "argmax du macro-F1 cluster-level sur la validation ; le test n'intervient dans aucun choix",
+  "test_labels_not_used_for_tuning": true,
+  "control_level": "C2",
+  "audio": "normalised",
+  "features": [
+    "centroide_hz",
+    "ecart_type_spectral_hz",
+    "platitude",
+    "bande_0_250",
+    "bande_250_500",
+    "bande_500_1000",
+    "bande_1000_2000",
+    "bande_2000_4000"
+  ],
+  "feature_weights": {
+    "centroide_hz": 0.449008,
+    "ecart_type_spectral_hz": -1.269914,
+    "platitude": 0.096902,
+    "bande_0_250": -0.652675,
+    "bande_250_500": 0.287714,
+    "bande_500_1000": 0.440193,
+    "bande_1000_2000": 0.130932,
+    "bande_2000_4000": -0.177341
+  },
+  "selected_C": 0.1,
+  "threshold": 0.386458,
+  "negative_control_shuffled_labels": false
+}
