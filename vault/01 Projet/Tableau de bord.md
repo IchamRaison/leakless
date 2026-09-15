@@ -2,7 +2,14 @@
 
 Icham
 
-## Priorité actuelle — 13 septembre
+## Consolidation vérifiée — 15 septembre 2026
+
+- [x] `main` réunit la démo et C1/OpenTSLM/Qwen, fusion `ac4c80c` publiée ; PR #2 et #3 MERGED.
+- [x] 13 anciennes branches retirées, 13 tags d'archives aux SHA exacts vérifiés ; seule branche distante restante : `main`. Sept pointes intégrées, six divergentes archivées, dont les essais V2/27B. Registre : `docs/BRANCH_CONSOLIDATION.md`.
+- [x] 228 tests Python / 105 sous-tests, 99 tests frontend séquentiels et build de production réussis ; garde-fou de coexistence alertes/modèles ajouté.
+- [ ] Raccordement du Monitor au service temporel réel et validation sur poids : inchangés par ce nettoyage ; aucun redéploiement H100.
+
+## Priorités précédentes — 13 septembre
 
 - [x] Correction de périmètre : [[C1 OpenTSLM Qwen - exécution]], pas un LSTM acoustique supplémentaire ; durée31s, Nevil destinataire logique, IA seulement.
 - [x] Historique/description/jobs durables et garde-fous implémentés,39tests réussis ; premier fit/reload terminé,3/25descriptions brutes,22fallbacks sur scénarios artificiels.

@@ -1,5 +1,11 @@
 # Journal Icham
 
+## 15 septembre — consolidation LeakLess et archivage sans perte
+
+Demande d'Icham : nettoyer les nombreuses branches et fusionner le modèle. Clone neuf `/home/animus/leakless`, fusion normale `ac4c80c` de `812f925` et `48d7a07`, sans squash ni force-push de main. Coexistence démo/alertes et API modèle, UI V2 sur demande, rapport officiel gelé préservé. README pointe maintenant vers main. Les 13 anciennes branches ont été retirées dans un push atomique qui a publié la fusion et leurs 13 tags `archive/2026-09-15/...`. Les suppressions étaient protégées par les SHA attendus ; lecture distante confirme chaque tag exact et main seule. Sept pointes intégrées, six divergentes archivées sans promotion, notamment V2/27B. PR #2 et #3 MERGED, aucune PR ouverte. Registre : `docs/BRANCH_CONSOLIDATION.md`.
+
+Recette locale CPU : 228 tests Python /105 sous-tests, 99 tests frontend avec un seul worker et build de production réussis ; aucun appel Telegram réel. Une exécution frontend parallèle a dépassé 5 s dans le test de retour du Monitor ; aucune augmentation artificielle du timeout, suite séquentielle complète verte. Avertissement Vite de taille de chunk conservé. Pas de fit, de modification des checkpoints ou de redéploiement GPU. Vault source distant intégré depuis un clone séparé pour préserver les notes locales non commitées ; miroir code actualisé explicitement. Prochaine action produit inchangée : raccordement réel du Monitor et recette sur poids, non prétendus terminés par la fusion.
+
 ## 13 septembre — README évaluateurs et publication rapide
 
 Icham limite la distribution complète au push immédiat et au README. Guide racine : chaîne C1/OpenTSLM/Qwen, tunnel8020, replay43s sans fit, routes et prérequis d'accès. Pas de release de poids, d'installation ou de changement de visibilité ; code privé `IchamRaison/leakless`, branche `feat/c1-opentslm-qwen`. Preuves et limites conservées. [[C1 OpenTSLM Qwen - exécution]].

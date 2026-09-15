@@ -2,6 +2,12 @@
 
 Icham
 
+## Consolidation du dépôt — 15 septembre 2026
+
+Fusion publiée et vérifiée : `ac4c80c52524d0b2ecab620c26a5fe000727315e` réunit `feat/c1-opentslm-qwen` (`48d7a07`, incluant C1 temporel et l'intégration V2) et `main` (`812f925`, démo et alertes). GitHub n'a plus qu'une branche, `main`. Les 13 anciennes pointes sont conservées sous les tags `archive/2026-09-15/<ancienne-branche>`, empreintes distantes vérifiées avant de conclure. Sept sont intégrées, six restent des archives divergentes, dont la suite expérimentale V2/27B. PR #2 et #3 vérifiées MERGED. Registre et reprise : `docs/BRANCH_CONSOLIDATION.md` sur `main`.
+
+Vérification locale : 228 tests Python et 105 sous-tests ; 99 tests frontend en séquentiel ; TypeScript, cinq tests d'intégrité du rapport officiel et build Vite réussis. Un essai frontend parallèle a dépassé le timeout de 5 s, puis la suite complète passe avec `--maxWorkers=1`, sans modifier le timeout. Zéro appel Telegram des tests. Runtime CPU, pas de validation GPU ni de redéploiement H100. Prochaine action : travailler depuis `main` ; le raccordement réel du Monitor au service temporel et les poids restent distincts de cette consolidation. Les références de branches dans les journaux ci-dessous sont historiques. Le checkout de code est `/home/animus/leakless` ; les modifications locales non commitées du vault habituel ont été préservées en travaillant dans un clone séparé.
+
 ## Entire — état vérifié sur Linux
 
 CLI 0.10.6 et 12 skills installés ; capture Codex locale constatée. La recherche distante de commits fonctionne désormais (audit/splits de Nevil retrouvés), contrairement au contrôle initial non authentifié. Cela ne prouve pas la publication des transcriptions. Trois hooks Codex restent signalés à approuver via `/hooks`. État initial : [[Entire - installation et vérification]] ; nouvelle preuve dans [[Journal Icham]].
